@@ -1,5 +1,4 @@
 .App {
-  text-align: center;
 }
 
 .App-logo {
@@ -9,18 +8,19 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  width: 100%;
+  background-color: #FFF;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  /* justify-content: center; */
+  font-size: calc(10px + 1vmin);
   color: white;
 }
 
 .App-link {
-  color: #61dafb;
+  color: #FFF;
+  text-align: left;
 }
 
 @keyframes App-logo-spin {
@@ -30,4 +30,118 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.Dashboard-Links {
+  width: 100%;
+}
+
+.text {
+  text-align: center;
+  vertical-align: middle;
+  /* background: rgba(0, 0, 0, 0.8); */
+  position:relative;
+  height: 100%;
+  width: 100%;
+}
+
+.text p {
+  position: relative;
+  top: 40%;
+  transform: translateY(-50%);
+  color: #FFF;
+  margin: 0;
+  font-size: 1.75em;
+}
+
+.route-link {
+  background: #4e4e4e !important;
+  max-width: 400px;
+  width: 100%;
+  height: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+@media only screen and (max-height: 700px) {
+  .route-link {
+    background: #4e4e4e !important;
+    max-width: 400px;
+    width: 100%;
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .dashboard-options-header {
+    font-size: 1rem !important;
+  }
+
+  .dashboard-link-title {
+    color: white !important;
+    font-size: 1rem !important;
+  }
+}
+
+dashboard-options-header {
+  font-size: 1rem !important;
+  margin-top: 100px;
+}
+
+.dashboard-link-title {
+  color: white !important;
+}
+
+.route-link:hover {
+  background: #2699fb !important;
+}
+
+.branding-image {
+  max-height: 80px;
+}
+.branding-image2 {
+  max-height: 130px;
+}
+
+@media only screen and (max-width: 600px) {
+  .branding-image {
+    max-height: 40px;
+  }
+  .branding-image2 {
+    max-height: 65px;
+  }
+}
+
+
+.branding-div{
+  text-align: center;
+}
+
+.branding-container{
+  margin-top: 50px !important;
+}
+
+.branding-container-top{
+  background: rgba(255, 255, 255, 0.8);
+  margin-top: 0px !important;
+}
+
+.view-dash-button{
+  position: absolute !important;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.download{
+  right: 0;
+  position: absolute !important;
+}
+
+.top-bar-logo{
+  max-height: 38px;
+  padding: 5px;
 }
