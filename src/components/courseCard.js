@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
@@ -7,6 +8,8 @@ import Grid from '@material-ui/core/Grid';
 import WatchLaterIcon from '@material-ui/icons/WatchLater';
 import CalendarIcon from '@material-ui/icons/CalendarToday';
 import MoneyIcon from '@material-ui/icons/AttachMoney';
+import Box from '@material-ui/core/Box';
+import { withRouter } from 'react-router-dom';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -17,38 +20,48 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const CourseCard = props => {
-  const classes = useStyles();
-  const titleCase = str => {
-    return str
-      .replace(/[a-z]/i, function(letter) {
-        return letter.toUpperCase();
-      })
-      .trim();
-  };
+const titleCase = str => {
+  if (str === null) return '';
+  return str
+    .replace(/[a-z]/i, function(letter) {
+      return letter.toUpperCase();
+    })
+    .trim();
+};
 
+const Card = withRouter(({ history, ...data }) => {
   return (
-    <Grid container className={classes.gridRoot} spacing={0}>
+    <Grid
+      container
+      className={data.classes.gridRoot}
+      spacing={0}
+      onClick={() =>
+        history.push({
+          pathname: data.routingURL,
+          state: { uuid: data.props.uuid, provider: data.props.provider },
+        })
+      }
+    >
       <Grid item xs={1}></Grid>
       <Grid item xs={7}>
-        <Paper className={classes.root}>
+        <Paper className={data.classes.root}>
           <Grid container>
             <Grid xs={7}>
-              <Typography variant="h5" component="h3">
-                {props.university}
+              <Typography
+                variant="subtitle1"
+                component="h6"
+                color="textSecondary"
+              >
+                {data.props.university}
               </Typography>
-              <Typography component="p">{props.courseName}</Typography>
-              <Typography component="p">via {props.provider}</Typography>
+              <Typography variant="body1">
+                <Box fontWeight="fontWeightBold">{data.props.courseName} </Box>
+              </Typography>
+              <Typography component="p" color="textSecondary">
+                <Box fontStyle="oblique">via {data.props.provider}</Box>
+              </Typography>
               <div>
-                <StarRatings
-                  rating={props.rating}
-                  starRatedColor="#f1bd50"
-                  numberOfStars={5}
-                  name="rating"
-                  starDimension="20px"
-                  starSpacing="1px"
-                />
-                <Typography component="p">{props.rating}</Typography>
+                <Typography component="p">{data.props.rating}</Typography>
               </div>
             </Grid>
             <Grid xs={4} container spacing={2}>
@@ -60,8 +73,8 @@ const CourseCard = props => {
                   }}
                 >
                   <WatchLaterIcon />
-                  <Typography spacing={1}>
-                    {titleCase(props.duration)}
+                  <Typography spacing={1} variant="body2" color="textSecondary">
+                    {titleCase(data.props.duration)}
                   </Typography>
                 </div>
               </Grid>
@@ -73,7 +86,12 @@ const CourseCard = props => {
                   }}
                 >
                   <CalendarIcon />
-                  <Typography>{titleCase(props.startingOn)}</Typography>
+                  <Typography variant="body2" color="textSecondary">
+                    <Box fontWeight="fontWeightLight">
+                      {' '}
+                      {titleCase(data.props.startingOn)}{' '}
+                    </Box>
+                  </Typography>
                 </div>
               </Grid>
               <Grid xs={12}>
@@ -84,7 +102,9 @@ const CourseCard = props => {
                   }}
                 >
                   <MoneyIcon />
-                  <Typography>{titleCase(props.price)}</Typography>
+                  <Typography variant="body2" color="textSecondary">
+                    {titleCase(data.props.price)}
+                  </Typography>
                 </div>
               </Grid>
             </Grid>
@@ -94,6 +114,12 @@ const CourseCard = props => {
       </Grid>
     </Grid>
   );
+});
+
+const CourseCard = props => {
+  const classes = useStyles();
+
+  return <Card classes={classes} props={props} routingURL={'/course'} />;
 };
 
 export default CourseCard;
