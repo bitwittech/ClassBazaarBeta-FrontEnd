@@ -63,8 +63,7 @@ class HomePage extends Component {
       page * this.state.perPage,
       (page + 1) * this.state.perPage,
     ]);
-    var url = `http://localhost:8080/api/courses/?range=${range}`;
-    // var url = `http://167.71.231.7:8080/api/courses/`;
+    var url = `http://167.71.231.7:8080/api/courses/?range=${range}`;
     return fetch(url)
       .then(response => response.json())
       .then(json => {
