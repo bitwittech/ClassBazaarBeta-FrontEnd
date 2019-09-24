@@ -10,6 +10,8 @@ import CalendarIcon from '@material-ui/icons/CalendarToday';
 import MoneyIcon from '@material-ui/icons/AttachMoney';
 import Box from '@material-ui/core/Box';
 import { withRouter } from 'react-router-dom';
+import formatDate from './../utils/dateUtils';
+import { titleCase } from './../utils/utils';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -20,13 +22,13 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const titleCase = str => {
-  if (str === null) return '';
-  return str
-    .replace(/[a-z]/i, function(letter) {
-      return letter.toUpperCase();
-    })
-    .trim();
+const styles = {
+  icons: {
+    paddingRight: 10,
+  },
+  paper: {
+    background: '#00000005',
+  },
 };
 
 const Card = withRouter(({ history, ...data }) => {
@@ -38,13 +40,17 @@ const Card = withRouter(({ history, ...data }) => {
       onClick={() =>
         history.push({
           pathname: data.routingURL,
-          state: { uuid: data.props.uuid, provider: data.props.provider },
+          state: {
+            uuid: data.props.uuid,
+            provider: data.props.provider,
+            ...data.props,
+          },
         })
       }
     >
       <Grid item xs={1}></Grid>
       <Grid item xs={11}>
-        <Paper className={data.classes.root}>
+        <Paper className={data.classes.root} style={styles.paper}>
           <Grid container>
             <Grid xs={7}>
               <Typography
@@ -72,7 +78,7 @@ const Card = withRouter(({ history, ...data }) => {
                     alignItems: 'center',
                   }}
                 >
-                  <WatchLaterIcon />
+                  <WatchLaterIcon style={styles.icons} color="primary" />
                   <Typography spacing={1} variant="body2" color="textSecondary">
                     {titleCase(data.props.duration)}
                   </Typography>
@@ -85,11 +91,14 @@ const Card = withRouter(({ history, ...data }) => {
                     alignItems: 'center',
                   }}
                 >
-                  <CalendarIcon />
+                  <CalendarIcon style={styles.icons} color="primary" />
                   <Typography variant="body2" color="textSecondary">
                     <Box fontWeight="fontWeightLight">
                       {' '}
-                      {titleCase(data.props.startingOn)}{' '}
+                      {formatDate(
+                        new Date(data.props.startingOn),
+                        'MMMM d, yyyy'
+                      )}{' '}
                     </Box>
                   </Typography>
                 </div>
@@ -101,7 +110,7 @@ const Card = withRouter(({ history, ...data }) => {
                     alignItems: 'center',
                   }}
                 >
-                  <MoneyIcon />
+                  <MoneyIcon style={styles.icons} color="primary" />
                   <Typography variant="body2" color="textSecondary">
                     {titleCase(data.props.price)}
                   </Typography>

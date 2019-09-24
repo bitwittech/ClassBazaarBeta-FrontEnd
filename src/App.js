@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import TopAppBar from './components/appBar';
 import HomePage from './components/homePage';
 import CoursePage from './components/coursePage';
 import logo from './logo.svg';
@@ -12,7 +11,7 @@ import { BrowserRouter, Route, Switch, withRouter } from 'react-router-dom';
 const theme = createMuiTheme({
   palette: {
     primary: {
-      main: '#2699fb',
+      main: '#FFA502',
       contrastText: '#fff',
     },
     secondary: {
@@ -44,7 +43,6 @@ function App() {
     <BrowserRouter>
       <MuiThemeProvider theme={theme}>
         <div className="App">
-          <TopAppBar />
           <AppWithRouter />
         </div>
       </MuiThemeProvider>

@@ -14,6 +14,7 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
+import TopAppBar from './appBar';
 
 const styles = {
   dashboardLink: {
@@ -27,6 +28,9 @@ const styles = {
     bottom: '20%',
     color: 'white',
     fontSize: '1rem',
+  },
+  filter: {
+    background: '#00000005',
   },
 };
 
@@ -50,20 +54,26 @@ class HomePage extends Component {
       end: perPage,
       perPage: perPage,
       filterValue: 'all',
+      q: '',
+      filter: '',
     };
     this.getUniversityForUdemy = this.getUniversityForUdemy.bind(this);
     this.handlePageChange = this.handlePageChange.bind(this);
     this.updateData = this.updateData.bind(this);
     this.onFilterChange = this.onFilterChange.bind(this);
+    this.onSearchChange = this.onSearchChange.bind(this);
   }
 
   updateData() {
     const page = this.state.page;
+    const query = this.state.q;
+    const filter = this.state.filter;
     const range = JSON.stringify([
       page * this.state.perPage,
       (page + 1) * this.state.perPage,
     ]);
-    var url = `http://167.71.231.7:8080/api/courses/?range=${range}`;
+    var url = `http://localhost:8080/api/courses/?range=${range}&q=${query}&filter=${filter}`;
+    // var url = `http://167.71.231.7:8080/api/courses/?range=${range}&q=${query}`;
     return fetch(url)
       .then(response => response.json())
       .then(json => {
@@ -92,78 +102,92 @@ class HomePage extends Component {
     });
   }
 
+  onSearchChange(query) {
+    console.log('onSearchChange', { q: query.target.value });
+    this.setState({ q: query.target.value }, () => {
+      this.updateData();
+    });
+  }
+
   render() {
     return (
-      <Grid container>
-        <Grid item xs={8}>
-          {this.state.data.length > 0 &&
-            this.state.data.map((obj, index) => {
-              return (
-                <CourseCard
-                  key={obj.title}
-                  isInstructor={true}
-                  university={obj.university}
-                  courseName={obj.title}
-                  provider={obj.provider}
-                  duration={obj.commitment}
-                  startingOn={obj.start_date}
-                  price={obj.price}
-                  rating={obj.rating}
-                  uuid={obj.uuid}
-                ></CourseCard>
-              );
-            })}
-        </Grid>
-        <Grid item xs={4}>
-          <Box border={1} {...defaultProps}>
-            <FormControl component="fieldset">
-              <FormLabel component="legend">Filters</FormLabel>
-              <RadioGroup
-                aria-label="filter"
-                name="filter"
-                value={this.state.filterValue}
-                onChange={this.onFilterChange}
-              >
-                <FormControlLabel
-                  value="free"
-                  control={<Radio />}
-                  label="Free Courses"
-                />
-                <FormControlLabel
-                  value="flexible"
-                  control={<Radio />}
-                  label="Start Date/Flexible"
-                />
-                <FormControlLabel
-                  value="paid"
-                  control={<Radio />}
-                  label="Paid Certificates"
-                />
-                <FormControlLabel value="all" control={<Radio />} label="All" />
-              </RadioGroup>
-            </FormControl>
-          </Box>
-        </Grid>
-        {this.state.data.length > 0 && (
-          <Grid container spacing={16}>
-            <Grid item xs={4} />
-            <Grid item xs={4}>
-              <Pagination
-                classes={{ colorInherit: { color: black } }}
-                currentPageColor={'inherit'}
-                limit={this.state.perPage}
-                offset={this.state.page * this.state.perPage}
-                total={this.state.total}
-                nextPageLabel={<ArrowForward fontSize="inherit" />}
-                previousPageLabel={<ArrowBack fontSize="inherit" />}
-                onClick={(e, offset, page) => this.handlePageChange(page - 1)}
-              />
-            </Grid>
-            <Grid item xs={4} />
+      <div>
+        <TopAppBar onChange={this.onSearchChange} />
+        <Grid container>
+          <Grid item xs={8}>
+            {this.state.data.length > 0 &&
+              this.state.data.map((obj, index) => {
+                return (
+                  <CourseCard
+                    key={obj.title}
+                    isInstructor={true}
+                    university={obj.university}
+                    courseName={obj.title}
+                    provider={obj.provider}
+                    duration={obj.commitment}
+                    startingOn={obj.start_date}
+                    price={obj.price}
+                    rating={obj.rating}
+                    uuid={obj.uuid}
+                  ></CourseCard>
+                );
+              })}
           </Grid>
-        )}
-        <Grid container spacing={16} />
-      </Grid>
+          <Grid item xs={4}>
+            <Box border={1} {...defaultProps} style={styles.filter}>
+              <FormControl component="fieldset">
+                <FormLabel component="legend">Filters</FormLabel>
+                <RadioGroup
+                  aria-label="filter"
+                  name="filter"
+                  value={this.state.filterValue}
+                  onChange={this.onFilterChange}
+                >
+                  <FormControlLabel
+                    value="free"
+                    control={<Radio />}
+                    label="Free Courses"
+                  />
+                  <FormControlLabel
+                    value="flexible"
+                    control={<Radio />}
+                    label="Start Date/Flexible"
+                  />
+                  <FormControlLabel
+                    value="paid"
+                    control={<Radio />}
+                    label="Paid Certificates"
+                  />
+                  <FormControlLabel
+                    value="all"
+                    control={<Radio />}
+                    label="All"
+                  />
+                </RadioGroup>
+              </FormControl>
+            </Box>
+          </Grid>
+          {this.state.data.length > 0 && (
+            <Grid container spacing={16}>
+              <Grid item xs={3} />
+              <Grid item xs={6}>
+                <Pagination
+                  classes={{ colorInherit: { color: black } }}
+                  currentPageColor={'inherit'}
+                  limit={this.state.perPage}
+                  offset={this.state.page * this.state.perPage}
+                  total={this.state.total}
+                  nextPageLabel={<ArrowForward fontSize="inherit" />}
+                  previousPageLabel={<ArrowBack fontSize="inherit" />}
+                  onClick={(e, offset, page) => this.handlePageChange(page - 1)}
+                />
+              </Grid>
+              <Grid item xs={3} />
+            </Grid>
+          )}
+          <Grid container spacing={16} />
+        </Grid>
+      </div>
     );
   }
 }
