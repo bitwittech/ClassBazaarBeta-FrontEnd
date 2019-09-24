@@ -15,7 +15,6 @@ import formatDate from './../utils/dateUtils';
 import Button from '@material-ui/core/Button';
 import TopAppBar from './appBar';
 import Fab from '@material-ui/core/Fab';
-import Fab from '@material-ui/core/Fab';
 
 const styles = theme => {
   return {
