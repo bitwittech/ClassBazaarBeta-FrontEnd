@@ -14,6 +14,8 @@ import { titleCase } from './../utils/utils';
 import formatDate from './../utils/dateUtils';
 import Button from '@material-ui/core/Button';
 import TopAppBar from './appBar';
+import Fab from '@material-ui/core/Fab';
+import Fab from '@material-ui/core/Fab';
 
 const styles = theme => {
   return {
@@ -103,9 +105,15 @@ class CoursePage extends Component {
         <br></br>
         <Grid>
           {getHeader('Reviews')}
-          <Grid container>
-            <Grid item xs={4}></Grid>
-            <Grid item xs={8}>
+          <Grid container style={{ padding: 20, background: '#00000015' }}>
+            <Grid item xs={3}>
+              <Grid item xs={12}>
+                <Fab color="primary" aria-label="add" className={classes.fab}>
+                  <AddIcon />
+                </Fab>
+              </Grid>
+            </Grid>
+            <Grid item xs={9}>
               <Box style={{ padding: 30 }}>
                 Natus error sit voluptartem accusantium doloremque laudantium,
                 totam rem aperiam, eaque ipsa quae ab illo inventore.
