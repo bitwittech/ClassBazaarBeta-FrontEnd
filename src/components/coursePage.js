@@ -107,9 +107,9 @@ class CoursePage extends Component {
           <Grid container style={{ padding: 20, background: '#00000015' }}>
             <Grid item xs={3}>
               <Grid item xs={12}>
-                <Fab color="primary" aria-label="add" className={classes.fab}>
+                {/* <Fab color="primary" aria-label="add" className={classes.fab}>
                   <AddIcon />
-                </Fab>
+                </Fab> */}
               </Grid>
             </Grid>
             <Grid item xs={9}>
