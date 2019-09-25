@@ -121,20 +121,23 @@ export default function TopBar(props) {
         }}
       >
         <Toolbar>
-          <div className={classes.search}>
-            <div className={classes.searchIcon}>
-              <SearchIcon />
+          {props.isSearchIncluded && (
+            <div className={classes.search}>
+              <div className={classes.searchIcon}>
+                <SearchIcon />
+              </div>
+              <InputBase
+                placeholder="Search for a course"
+                defaultValue={props.initialSearchValue}
+                onChange={props.onChange}
+                classes={{
+                  root: classes.inputRoot,
+                  input: classes.inputInput,
+                }}
+                inputProps={{ 'aria-label': 'search' }}
+              />
             </div>
-            <InputBase
-              placeholder="Search for a course"
-              onChange={props.onChange}
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput,
-              }}
-              inputProps={{ 'aria-label': 'search' }}
-            />
-          </div>
+          )}
           <ImageWithRouter image={Logo} routingURL={'/'} />
 
           <div className={classes.grow} />

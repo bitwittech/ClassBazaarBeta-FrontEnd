@@ -56,6 +56,7 @@ class HomePage extends Component {
       filterValue: 'all',
       q: '',
       filter: '',
+      isStateUpdatedFromProp: false,
     };
     this.getUniversityForUdemy = this.getUniversityForUdemy.bind(this);
     this.handlePageChange = this.handlePageChange.bind(this);
@@ -72,8 +73,8 @@ class HomePage extends Component {
       page * this.state.perPage,
       (page + 1) * this.state.perPage,
     ]);
-    // var url = `http://localhost:8080/api/courses/?range=${range}&q=${query}&filter=${filter}`;
-    var url = `http://167.71.231.7:8080/api/courses/?range=${range}&q=${query}`;
+    var url = `http://localhost:8080/api/courses/?range=${range}&q=${query}&filter=${filter}`;
+    // var url = `http://167.71.231.7:8080/api/courses/?range=${range}&q=${query}`;
     return fetch(url)
       .then(response => response.json())
       .then(json => {
@@ -88,7 +89,17 @@ class HomePage extends Component {
   }
 
   componentDidMount() {
-    this.updateData();
+    console.log(this.state);
+    if (!this.state.isStateUpdatedFromProp) {
+      this.setState(
+        { q: this.props.location.state.query, isStateUpdatedFromProp: true },
+        () => {
+          this.updateData();
+        }
+      );
+    } else {
+      this.updateData();
+    }
   }
 
   getUniversityForUdemy(obj) {
@@ -112,7 +123,11 @@ class HomePage extends Component {
   render() {
     return (
       <div>
-        <TopAppBar onChange={this.onSearchChange} />
+        <TopAppBar
+          onChange={this.onSearchChange}
+          isSearchIncluded={true}
+          initialSearchValue={this.state.q}
+        />
         <Grid container>
           <Grid item xs={8}>
             {this.state.data.length > 0 &&

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import HomePage from './components/homePage';
+import LandingPage from './components/landingPage';
 import CoursePage from './components/coursePage';
 import logo from './logo.svg';
 import withAnalytics, { initAnalytics } from 'react-with-analytics';
@@ -31,7 +32,8 @@ const theme = createMuiTheme({
 
 const Root = () => (
   <Switch>
-    <Route exact path="/" component={HomePage} />
+    <Route exact path="/" component={LandingPage} />
+    <Route exact path="/listing" component={HomePage} />
     <Route exact path="/course" component={CoursePage} />
   </Switch>
 );
