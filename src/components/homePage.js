@@ -68,12 +68,17 @@ class HomePage extends Component {
   updateData() {
     const page = this.state.page;
     const query = this.state.q;
-    const filter = this.state.filter;
+    const filter = this.state.filterValue;
+    let parsedFilter = '';
+    if (filter === 'free') parsedFilter = 'price:free';
+    if (filter === 'flexible') parsedFilter = 'start:flexible';
+    if (filter === 'paid') parsedFilter = 'certificates';
     const range = JSON.stringify([
       page * this.state.perPage,
       (page + 1) * this.state.perPage,
     ]);
-    var url = `http://localhost:8080/api/courses/?range=${range}&q=${query}&filter=${filter}`;
+    // var url = `http://localhost:8080/api/courses/?range=${range}&q=${query}&filter=${parsedFilter}`;
+    var url = `http://167.71.231.7:8080/api/courses/?range=${range}&q=${query}&filter=${parsedFilter}`;
     // var url = `http://167.71.231.7:8080/api/courses/?range=${range}&q=${query}`;
     return fetch(url)
       .then(response => response.json())
@@ -84,7 +89,11 @@ class HomePage extends Component {
   }
 
   onFilterChange(event) {
-    this.setState({ filterValue: event.target.value });
+    const value = event.target.value;
+    this.setState({ filterValue: value }, () => {
+      console.log('Filter changed to', value);
+      this.updateData();
+    });
     // Call api after this.
   }
 

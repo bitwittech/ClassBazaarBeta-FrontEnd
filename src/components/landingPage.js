@@ -83,6 +83,11 @@ const styles = theme => ({
     height: '10vh',
     width: '10vh',
   },
+  imgCricularUniversity: {
+    borderRadius: '50%',
+    height: 80,
+    width: 80,
+  },
   subjectCardContainer: {
     padding: 20,
   },
@@ -146,6 +151,33 @@ const subjectsData = [
     name: 'Math',
     code: 'M',
     content: '',
+  },
+];
+
+const degreeData = [
+  {
+    name: 'Name of Degree',
+    university: 'University Name',
+  },
+  {
+    name: 'Name of Degree',
+    university: 'University Name',
+  },
+  {
+    name: 'Name of Degree',
+    university: 'University Name',
+  },
+  {
+    name: 'Name of Degree',
+    university: 'University Name',
+  },
+  {
+    name: 'Name of Degree',
+    university: 'University Name',
+  },
+  {
+    name: 'Name of Degree',
+    university: 'University Name',
   },
 ];
 
@@ -239,7 +271,7 @@ class LandingPage extends Component {
         <Grid item xs={5}>
           <img className={classes.imgCricular} src={CS} alt="Avatar"></img>
         </Grid>
-        <Grid item xs={7}>
+        <Grid item xs={7} justify="center" style={{ margin: 'auto' }}>
           <Typography variant="body2" component="p" align="center">
             Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
             eiusmod tempor …
@@ -253,6 +285,42 @@ class LandingPage extends Component {
     return this.state.q;
   }
 
+  getDegreeCard(name, university, classes) {
+    return (
+      <Grid item xs={6} style={{ width: '100%', padding: 20 }}>
+        <Grid container>
+          <Grid item xs={1}></Grid>
+          <Grid item xs={10}>
+            <Box
+              display="flex"
+              border={1}
+              style={{ height: '100px', margin: '30' }}
+            >
+              <Grid item xs={3} justify="center" style={{ margin: 'auto' }}>
+                <img
+                  className={classes.imgCricularUniversity}
+                  src={CS}
+                  alt="Avatar"
+                ></img>
+              </Grid>
+              <Grid item xs={1}></Grid>
+              <Grid item xs={6} justify="center" style={{ margin: 'auto' }}>
+                <Typography variant="body2" component="p" align="center">
+                  {name}
+                </Typography>
+                <Typography variant="body2" component="p" align="center">
+                  {university}
+                </Typography>
+              </Grid>
+            </Box>
+          </Grid>
+          <Grid item xs={1}></Grid>
+        </Grid>
+        {/* </Box> */}
+      </Grid>
+    );
+  }
+
   render() {
     const { classes, theme } = this.props;
     return (
@@ -264,7 +332,7 @@ class LandingPage extends Component {
           direction="column"
           alignItems="center"
           justify="center"
-          style={{ minHeight: '50vh', background: '#F1F8FE' }}
+          style={{ minHeight: '30vh', background: '#F1F8FE' }}
         >
           <Grid item xs={12}>
             <Search
@@ -316,6 +384,31 @@ class LandingPage extends Component {
             </Button>
           </Grid>
         </Grid>
+
+        <Box
+          border={1}
+          style={{ minHeight: '60vh', width: '100%', margin: 10 }}
+        >
+          <Grid container spacing={0} direction="column" alignItems="center">
+            <Grid item xs={12} spacing={3} style={{ paddingTop: 30 }}>
+              <Typography variant="h5" component="h2">
+                Earn a Degree
+              </Typography>
+            </Grid>
+            <Grid item xs={12}>
+              <Typography variant="body2" component="p" align="center">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+                eiusmod tempor incididunt ut ero labore et dolore magna aliqua.
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco.
+              </Typography>
+            </Grid>
+            <Grid container>
+              {degreeData.map(degree =>
+                this.getDegreeCard(degree.name, degree.university, classes)
+              )}
+            </Grid>
+          </Grid>
+        </Box>
       </div>
     );
   }
