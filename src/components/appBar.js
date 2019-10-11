@@ -95,12 +95,24 @@ const useStyles = makeStyles(theme => ({
       display: 'none',
     },
   },
+  logo: {
+    margin: 'auto',
+    textAlign: 'center',
+    maxHeight: 38,
+    padding: 5,
+  },
+  logoHorizontallyCenter: {
+    position: 'absolute',
+    left: '50%',
+    top: '50%',
+    transform: 'translate(-50%, -50%)',
+  },
 }));
 
 const ImageWithRouter = withRouter(({ history, ...props }) => (
   <img
     style={{ align: 'center' }}
-    className="top-bar-logo"
+    className={props.clazzNames}
     src={props.image}
     alt="samarthLogo"
     onClick={() => {
@@ -111,6 +123,7 @@ const ImageWithRouter = withRouter(({ history, ...props }) => (
 
 export default function TopBar(props) {
   const classes = useStyles();
+  console.log('Topbar props', props);
   return (
     <div className={classes.grow}>
       <AppBar
@@ -121,6 +134,14 @@ export default function TopBar(props) {
         }}
       >
         <Toolbar>
+          <div className={classes.logoHorizontallyCenter}>
+            <ImageWithRouter
+              image={Logo}
+              routingURL={'/'}
+              clazzNames={classes.logo}
+              alt="logo"
+            />
+          </div>
           {props.isSearchIncluded && (
             <div className={classes.search}>
               <div className={classes.searchIcon}>
@@ -138,7 +159,6 @@ export default function TopBar(props) {
               />
             </div>
           )}
-          <ImageWithRouter image={Logo} routingURL={'/'} />
 
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}></div>
@@ -147,3 +167,5 @@ export default function TopBar(props) {
     </div>
   );
 }
+
+// Add a padding to the

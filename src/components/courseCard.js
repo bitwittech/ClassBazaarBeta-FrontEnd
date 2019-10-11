@@ -11,7 +11,7 @@ import MoneyIcon from '@material-ui/icons/AttachMoney';
 import Box from '@material-ui/core/Box';
 import { withRouter } from 'react-router-dom';
 import formatDate from './../utils/dateUtils';
-import { titleCase } from './../utils/utils';
+import { titleCase, formatPrice } from './../utils/utils';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -112,7 +112,7 @@ const Card = withRouter(({ history, ...data }) => {
                 >
                   <MoneyIcon style={styles.icons} color="primary" />
                   <Typography variant="body2" color="textSecondary">
-                    {titleCase(data.props.price)}
+                    {formatPrice(data.props.price)}
                   </Typography>
                 </div>
               </Grid>

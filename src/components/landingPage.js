@@ -18,7 +18,18 @@ import TopAppBar from './appBar';
 import SearchIcon from '@material-ui/icons/Search';
 import InputBase from '@material-ui/core/InputBase';
 import { fade, makeStyles } from '@material-ui/core/styles';
-import CS from './../assets/CS-image.jpg';
+import CS from './../assets/CS.png';
+import A from './../assets/A.png';
+import B from './../assets/B.png';
+import DA from './../assets/DA.png';
+import DEV from './../assets/DEV.png';
+import HL from './../assets/HL.png';
+import M from './../assets/M.png';
+import O from './../assets/O.png';
+import SENG from './../assets/SENG.png';
+import SO from './../assets/SO.png';
+import SearchBG1 from './../assets/Search-option1.jpg';
+import SearchBG2 from './../assets/Search-option2.jpg';
 import Button from '@material-ui/core/Button';
 import { withRouter } from 'react-router-dom';
 
@@ -106,78 +117,136 @@ const subjectsData = [
     name: 'Computer Science',
     code: 'CS',
     content: '',
+    image: CS,
   },
   {
     name: 'Business',
     code: 'B',
     content: '',
+    image: B,
   },
   {
     name: 'Arts & Design',
     code: 'A',
     content: '',
+    image: A,
   },
   {
     name: 'Data Science',
     code: 'DA',
     content: '',
+    image: DA,
   },
   {
     name: 'Health & Lifestyle',
     code: 'HL',
     content: '',
+    image: HL,
   },
   {
     name: 'Science & Engineering',
     code: 'SENG',
     content: '',
+    image: SENG,
   },
   {
     name: 'Social Studies',
     code: 'SO',
     content: '',
+    image: SO,
   },
   {
     name: 'Developers/Programming',
     code: 'DEV',
     content: '',
+    image: DEV,
   },
   {
     name: 'Others',
     code: 'O',
     content: '',
+    image: O,
   },
   {
     name: 'Math',
     code: 'M',
     content: '',
+    image: M,
   },
 ];
 
 const degreeData = [
   {
-    name: 'Name of Degree',
-    university: 'University Name',
+    name:
+      'Banking & Financial Intermediation: Concepts, Risks, Capital & Regulation',
+    university: 'Indian Institute of Management, Bangalore',
   },
   {
-    name: 'Name of Degree',
-    university: 'University Name',
+    name: 'PG Program in Big Data Engineering',
+    university: 'BITS, Pilani',
   },
   {
-    name: 'Name of Degree',
-    university: 'University Name',
+    name: 'Master of Science in Machine Learning & AI',
+    university: 'Liverpool John Moores University and IIIT, Bangalore',
   },
   {
-    name: 'Name of Degree',
-    university: 'University Name',
+    name: 'PMP Certification',
+    university: 'Project Management Institute, Simplilearn',
   },
   {
-    name: 'Name of Degree',
-    university: 'University Name',
+    name: 'Agile Development Specialization',
+    university: 'University of Virginia',
   },
   {
-    name: 'Name of Degree',
-    university: 'University Name',
+    name: 'Certified AWS Solutions Architect',
+    university: 'AWS by Udemy',
+  },
+];
+
+const trendingData = [
+  {
+    name: 'Learning Python for Data Analysis and Visualization',
+    university: 'Udemy',
+  },
+  {
+    name: 'Machine Learning course by Stanford Univeristy',
+    university: 'Coursera',
+  },
+  {
+    name:
+      'Strategic Business Analytics Specialization by ESSEC Business School',
+    university: 'Coursera',
+  },
+  {
+    name: 'Microsoft Excel: Beginner to AdvancedPMP Certification',
+    university: 'Coursera',
+  },
+  {
+    name: 'Data Science Specialization by Duke Univerisity',
+    university: 'University of Virginia',
+  },
+];
+
+const freeCourses = [
+  {
+    name: 'Machine Learning with Python: A Practical Introduction by IBM',
+    university: 'edX',
+  },
+  {
+    name: "CS50's Introduction to Computer Science",
+    university: 'edX',
+  },
+  {
+    name: 'Intro to JavaScript',
+    university: 'Udacity',
+  },
+  {
+    name: 'Behavioral Investing',
+    university: 'Coursera',
+  },
+  {
+    name: 'Natural Language Processing',
+    university: 'Swayam',
   },
 ];
 
@@ -265,18 +334,18 @@ class LandingPage extends Component {
       });
   }
 
-  getSubjectCard(courseName, classes) {
+  getSubjectCard(courseName, image, classes) {
     return (
       <Grid container>
-        <Grid item xs={5}>
-          <img className={classes.imgCricular} src={CS} alt="Avatar"></img>
+        <Grid item xs={3}>
+          <img className={classes.imgCricular} src={image} alt="Avatar"></img>
         </Grid>
         <Grid item xs={7} justify="center" style={{ margin: 'auto' }}>
-          <Typography variant="body2" component="p" align="center">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-            eiusmod tempor …
+          <Typography variant="body1" component="p" align="left">
+            {courseName}
           </Typography>
         </Grid>
+        <Grid item xs={3}></Grid>
       </Grid>
     );
   }
@@ -305,8 +374,8 @@ class LandingPage extends Component {
               </Grid>
               <Grid item xs={1}></Grid>
               <Grid item xs={6} justify="center" style={{ margin: 'auto' }}>
-                <Typography variant="body2" component="p" align="center">
-                  {name}
+                <Typography variant="body1" component="p" align="center">
+                  <Box fontWeight="fontWeightBold">{name}</Box>
                 </Typography>
                 <Typography variant="body2" component="p" align="center">
                   {university}
@@ -321,10 +390,46 @@ class LandingPage extends Component {
     );
   }
 
+  getTopTrendingCoursesCard(name, provider, classes) {
+    return (
+      <Grid item xs={12} style={{ width: '100%', padding: 10 }}>
+        <Grid container>
+          <Grid item xs={1}></Grid>
+          <Grid item xs={10}>
+            <Box
+              display="flex"
+              border={1}
+              style={{ height: '100px', margin: '30' }}
+            >
+              <Grid
+                item
+                xs={9}
+                justify="center"
+                style={{ margin: 'auto', paddingLeft: 30 }}
+              >
+                <Typography variant="body2" component="p" align="left">
+                  <Box fontWeight="fontWeightBold">{name}</Box>
+                </Typography>
+                <Typography variant="body2" component="p" align="left">
+                  {provider}
+                </Typography>
+              </Grid>
+              <Grid
+                item
+                xs={3}
+                style={{ background: '#BCE0FD', height: '100%' }}
+              ></Grid>
+            </Box>
+          </Grid>
+        </Grid>
+      </Grid>
+    );
+  }
+
   render() {
     const { classes, theme } = this.props;
     return (
-      <div>
+      <Grid conatiner style={{ margin: 0, width: '99%' }}>
         <TopAppBar onChange={this.onSearchChange} isSearchIncluded={false} />
         <Grid
           container
@@ -332,7 +437,11 @@ class LandingPage extends Component {
           direction="column"
           alignItems="center"
           justify="center"
-          style={{ minHeight: '30vh', background: '#F1F8FE' }}
+          style={{
+            minHeight: '60vh',
+            background: 'url(' + SearchBG1 + ')',
+            backgroundSize: 'cover',
+          }}
         >
           <Grid item xs={12}>
             <Search
@@ -350,7 +459,7 @@ class LandingPage extends Component {
           direction="column"
           alignItems="center"
           //   justify="center"
-          style={{ minHeight: '40vh' }}
+          style={{ minHeight: '20vh', margin: 0, width: '100%' }}
         >
           <Grid item xs={12} spacing={3} style={{ paddingTop: 30 }}>
             <Typography variant="h5" component="h2">
@@ -368,12 +477,12 @@ class LandingPage extends Component {
             {this.state.subjects.map(subject => {
               return (
                 <Grid item xs={4} style={{ padding: 30 }}>
-                  {this.getSubjectCard(subject.name, classes)}
+                  {this.getSubjectCard(subject.name, subject.image, classes)}
                 </Grid>
               );
             })}
           </Grid>
-          <Grid item xs={12}>
+          <Grid item xs={12} style={{ margin: 30 }}>
             <Button
               variant="contained"
               color="primary"
@@ -387,7 +496,7 @@ class LandingPage extends Component {
 
         <Box
           border={1}
-          style={{ minHeight: '60vh', width: '100%', margin: 10 }}
+          style={{ minHeight: '30vh', width: '100%', margin: 10 }}
         >
           <Grid container spacing={0} direction="column" alignItems="center">
             <Grid item xs={12} spacing={3} style={{ paddingTop: 30 }}>
@@ -407,9 +516,94 @@ class LandingPage extends Component {
                 this.getDegreeCard(degree.name, degree.university, classes)
               )}
             </Grid>
+            <Grid item xs={12} style={{ margin: 30 }}>
+              <Button
+                variant="contained"
+                color="primary"
+                className={classes.button}
+              >
+                Show More
+              </Button>
+            </Grid>
           </Grid>
         </Box>
-      </div>
+        <Grid container>
+          <Grid item xs={6}>
+            <Box
+              border={1}
+              style={{ minHeight: '60vh', width: '96%', margin: 10 }}
+            >
+              <Grid
+                container
+                spacing={0}
+                direction="column"
+                alignItems="center"
+              >
+                <Grid item xs={12} spacing={3} style={{ paddingTop: 30 }}>
+                  <Typography variant="h5" component="h2">
+                    Top Trending Courses
+                  </Typography>
+                </Grid>
+                <Grid container>
+                  {trendingData.map(degree =>
+                    this.getTopTrendingCoursesCard(
+                      degree.name,
+                      degree.university,
+                      classes
+                    )
+                  )}
+                </Grid>
+                <Grid item xs={12} style={{ margin: 30 }}>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    className={classes.button}
+                  >
+                    Show More
+                  </Button>
+                </Grid>
+              </Grid>
+            </Box>
+          </Grid>
+          <Grid item xs={6}>
+            <Box
+              border={1}
+              style={{ minHeight: '60vh', width: '95%', margin: 10 }}
+            >
+              <Grid
+                container
+                spacing={0}
+                direction="column"
+                alignItems="center"
+              >
+                <Grid item xs={12} spacing={3} style={{ paddingTop: 30 }}>
+                  <Typography variant="h5" component="h2">
+                    Learn for Free
+                  </Typography>
+                </Grid>
+                <Grid container>
+                  {freeCourses.map(degree =>
+                    this.getTopTrendingCoursesCard(
+                      degree.name,
+                      degree.university,
+                      classes
+                    )
+                  )}
+                </Grid>
+                <Grid item xs={12} style={{ margin: 30 }}>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    className={classes.button}
+                  >
+                    Show More
+                  </Button>
+                </Grid>
+              </Grid>
+            </Box>
+          </Grid>
+        </Grid>
+      </Grid>
     );
   }
 }

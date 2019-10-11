@@ -6,3 +6,8 @@ export const titleCase = str => {
     })
     .trim();
 };
+
+export const formatPrice = price => {
+  if (price === null) return 'Free Course';
+  else return price;
+};

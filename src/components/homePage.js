@@ -99,13 +99,14 @@ class HomePage extends Component {
 
   componentDidMount() {
     console.log(this.state);
+    const query =
+      this.props.location.state !== undefined
+        ? this.props.location.state.query
+        : '';
     if (!this.state.isStateUpdatedFromProp) {
-      this.setState(
-        { q: this.props.location.state.query, isStateUpdatedFromProp: true },
-        () => {
-          this.updateData();
-        }
-      );
+      this.setState({ q: query, isStateUpdatedFromProp: true }, () => {
+        this.updateData();
+      });
     } else {
       this.updateData();
     }
