@@ -98,7 +98,7 @@ class HomePage extends Component {
   }
 
   componentDidMount() {
-    console.log(this.state);
+    console.log(this.state, this.props);
     const query =
       this.props.location.state !== undefined
         ? this.props.location.state.query
