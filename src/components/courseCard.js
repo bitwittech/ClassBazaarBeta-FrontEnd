@@ -48,8 +48,8 @@ const Card = withRouter(({ history, ...data }) => {
         })
       }
     >
-      {/* <Grid item xs={1}></Grid> */}
-      <Grid item xs={12}>
+      <Grid item xs={1}></Grid>
+      <Grid item xs={10}>
         <Paper className={data.classes.root} style={styles.paper}>
           <Grid container>
             <Grid xs={7}>

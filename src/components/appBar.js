@@ -8,16 +8,7 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import { withRouter } from 'react-router-dom';
-import Drawer from '@material-ui/core/Drawer';
-import List from '@material-ui/core/List';
-import Divider from '@material-ui/core/Divider';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import DashboardIcon from '@material-ui/icons/Dashboard';
-import AccountBoxIcon from '@material-ui/icons/AccountBox';
-import HomeIcon from '@material-ui/icons/Home';
-import Hidden from '@material-ui/core/Hidden';
+import ProfileIcon from '@material-ui/icons/Person';
 import Logo from './../assets/logo.png';
 import { trackPage, trackUser, trackEvent } from 'react-with-analytics';
 import SearchIcon from '@material-ui/icons/Search';
@@ -25,9 +16,6 @@ import InputBase from '@material-ui/core/InputBase';
 import { fade, makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
-  grow: {
-    flexGrow: 1,
-  },
   title: {
     display: 'none',
     [theme.breakpoints.up('sm')]: {
@@ -102,10 +90,16 @@ const useStyles = makeStyles(theme => ({
     padding: 5,
   },
   logoHorizontallyCenter: {
+    flex: 1,
     position: 'absolute',
     left: '50%',
     top: '50%',
     transform: 'translate(-50%, -50%)',
+  },
+
+  rightLogin: {
+    marginLeft: 'auto',
+    marginRight: -12,
   },
 }));
 
@@ -121,50 +115,71 @@ const ImageWithRouter = withRouter(({ history, ...props }) => (
   ></img>
 ));
 
+const IconWithRouter = withRouter(({ history, ...props }) => (
+  <IconButton
+    color="inherit"
+    aria-label="More Options"
+    onClick={() => {
+      history.push(props.routingURL);
+    }}
+  >
+    <ProfileIcon color="primary" />
+  </IconButton>
+));
+
 export default function TopBar(props) {
   const classes = useStyles();
   console.log('Topbar props', props);
   return (
-    <div className={classes.grow}>
-      <AppBar
-        position="static"
-        color="inherit"
-        style={{
-          background: '#00000005',
-        }}
-      >
-        <Toolbar>
-          <div className={classes.logoHorizontallyCenter}>
-            <ImageWithRouter
-              image={Logo}
-              routingURL={'/'}
-              clazzNames={classes.logo}
-              alt="logo"
+    <AppBar
+      position="static"
+      color="inherit"
+      style={{
+        background: '#00000005',
+      }}
+    >
+      <Toolbar>
+        <div className={classes.logoHorizontallyCenter}>
+          <ImageWithRouter
+            image={Logo}
+            routingURL={'/'}
+            clazzNames={classes.logo}
+            alt="logo"
+          />
+        </div>
+        {props.isSearchIncluded && (
+          <div className={classes.search}>
+            <div className={classes.searchIcon}>
+              <SearchIcon />
+            </div>
+            <InputBase
+              placeholder="Search for a course"
+              value={props.initialSearchValue}
+              onChange={props.onChange}
+              classes={{
+                root: classes.inputRoot,
+                input: classes.inputInput,
+              }}
+              inputProps={{ 'aria-label': 'search' }}
             />
           </div>
-          {props.isSearchIncluded && (
-            <div className={classes.search}>
-              <div className={classes.searchIcon}>
-                <SearchIcon />
-              </div>
-              <InputBase
-                placeholder="Search for a course"
-                defaultValue={props.initialSearchValue}
-                onChange={props.onChange}
-                classes={{
-                  root: classes.inputRoot,
-                  input: classes.inputInput,
-                }}
-                inputProps={{ 'aria-label': 'search' }}
-              />
-            </div>
-          )}
+        )}
 
-          <div className={classes.grow} />
-          <div className={classes.sectionDesktop}></div>
-        </Toolbar>
-      </AppBar>
-    </div>
+        <div className={classes.rightLogin}>
+          <Button
+            variant="outlined"
+            color="primary"
+            className={classes.button}
+            onClick={props.onLoginClick}
+          >
+            Login / Sign Up
+          </Button>
+          <IconWithRouter routingURL={'/profile'} />
+        </div>
+        <div className={classes.grow} />
+        <div className={classes.sectionDesktop}></div>
+      </Toolbar>
+    </AppBar>
   );
 }
 

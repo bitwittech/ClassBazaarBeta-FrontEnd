@@ -32,6 +32,7 @@ import SearchBG1 from './../assets/Search-option1.jpg';
 import SearchBG2 from './../assets/Search-option2.jpg';
 import Button from '@material-ui/core/Button';
 import { withRouter } from 'react-router-dom';
+import SignUp from './signup';
 
 const styles = theme => ({
   dashboardLink: {
@@ -294,6 +295,9 @@ class LandingPage extends Component {
       filter: '',
       subjects: subjectsData.slice(0, 3),
       showMoreButtonText: 'Show More',
+      showSignUp: false,
+      showLogin: false,
+      showNewsLetter: false,
     };
 
     this.handlePageChange = this.handlePageChange.bind(this);
@@ -301,6 +305,7 @@ class LandingPage extends Component {
     this.onSearchChange = this.onSearchChange.bind(this);
     this.showMore = this.showMore.bind(this);
     this.getQuery = this.getQuery.bind(this);
+    this.onLoginClick = this.onLoginClick.bind(this);
   }
 
   onFilterChange(event) {
@@ -352,6 +357,11 @@ class LandingPage extends Component {
 
   getQuery() {
     return this.state.q;
+  }
+
+  onLoginClick() {
+    console.log('Login Clicked');
+    this.setState({ showSignUp: true });
   }
 
   getDegreeCard(name, university, classes) {
@@ -430,7 +440,12 @@ class LandingPage extends Component {
     const { classes, theme } = this.props;
     return (
       <Grid conatiner style={{ margin: 0, width: '99%' }}>
-        <TopAppBar onChange={this.onSearchChange} isSearchIncluded={false} />
+        <TopAppBar
+          onChange={this.onSearchChange}
+          isSearchIncluded={false}
+          onLoginClick={this.onLoginClick}
+        />
+        {this.state.showSignUp && <SignUp open={true} />}
         <Grid
           container
           spacing={0}
