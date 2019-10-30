@@ -15,6 +15,10 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import TopAppBar from './appBar';
+import NestedMenu from './nestedCheckbox';
+import { subjectsData } from './../utils/data';
+
+const providerData = ['EDx', 'FutureLearn'];
 
 const styles = {
   dashboardLink: {
@@ -48,6 +52,7 @@ class HomePage extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      providerData,
       data: [],
       page: 0,
       start: 0,
@@ -57,12 +62,18 @@ class HomePage extends Component {
       q: '',
       filter: '',
       isStateUpdatedFromProp: false,
+      subjects: 'all',
+      providers: 'all',
+      fee: 'all',
     };
     this.getUniversityForUdemy = this.getUniversityForUdemy.bind(this);
     this.handlePageChange = this.handlePageChange.bind(this);
     this.updateData = this.updateData.bind(this);
     this.onFilterChange = this.onFilterChange.bind(this);
     this.onSearchChange = this.onSearchChange.bind(this);
+    this.onSubjectFilterChange = this.onSubjectFilterChange.bind(this);
+    this.onFeeFilterChange = this.onFeeFilterChange.bind(this);
+    this.onProviderFilterChange = this.onProviderFilterChange.bind(this);
   }
 
   updateData() {
@@ -77,9 +88,8 @@ class HomePage extends Component {
       page * this.state.perPage,
       (page + 1) * this.state.perPage,
     ]);
-    // var url = `http://localhost:8080/api/courses/?range=${range}&q=${query}&filter=${parsedFilter}`;
-    var url = `http://167.71.231.7:8080/api/courses/?range=${range}&q=${query}&filter=${parsedFilter}`;
-    // var url = `http://167.71.231.7:8080/api/courses/?range=${range}&q=${query}`;
+    // var url = `http://localhost:8080/api/courses/?range=${range}&q=${query}&filter=${parsedFilter}&subjects=${this.state.subjects}&provider=${this.state.providers}`;
+    var url = `http://167.71.231.7:8080/api/courses/?range=${range}&q=${query}&filter=${parsedFilter}&subjects=${this.state.subjects}&provider=${this.state.providers}`;
     return fetch(url)
       .then(response => response.json())
       .then(json => {
@@ -87,6 +97,36 @@ class HomePage extends Component {
         this.setState({ data: json.data, total: json.total });
       });
   }
+
+  onSubjectFilterChange = subjectList => {
+    let subjectFilter = '';
+    subjectsData.forEach((obj, index) => {
+      if (subjectList[index]) {
+        subjectFilter += obj.name + '::';
+      }
+    });
+    subjectFilter = subjectFilter.substring(0, subjectFilter.length - 2);
+    if (subjectFilter === '') subjectFilter = 'all';
+    this.setState({ subjects: subjectFilter }, () => {
+      this.updateData();
+    });
+  };
+
+  onFeeFilterChange = type => {};
+
+  onProviderFilterChange = providerList => {
+    let providerFilter = '';
+    this.state.providerData.forEach((obj, index) => {
+      if (providerList[index]) {
+        providerFilter += obj + '::';
+      }
+    });
+    providerFilter = providerFilter.substring(0, providerFilter.length - 2);
+    if (providerFilter === '') providerFilter = 'all';
+    this.setState({ providers: providerFilter }, () => {
+      this.updateData();
+    });
+  };
 
   onFilterChange(event) {
     const value = event.target.value;
@@ -168,25 +208,29 @@ class HomePage extends Component {
                   value={this.state.filterValue}
                   onChange={this.onFilterChange}
                 >
-                  <FormControlLabel
-                    value="free"
-                    control={<Radio />}
-                    label="Free Courses"
+                  <NestedMenu
+                    isOnlyOneAllowed={true}
+                    level1Name={'Providers'}
+                    level2List={this.state.providerData}
+                    onChangeOptions={s => this.onProviderFilterChange(s)}
                   />
-                  <FormControlLabel
-                    value="flexible"
-                    control={<Radio />}
-                    label="Start Date/Flexible"
+                  <NestedMenu
+                    isOnlyOneAllowed={true}
+                    level1Name={'Fees'}
+                    level2List={['Free', 'Paid']}
+                    onChangeOptions={s => this.onFeeFilterChange(s)}
                   />
-                  <FormControlLabel
-                    value="paid"
-                    control={<Radio />}
-                    label="Paid Certificates"
+                  <NestedMenu
+                    isOnlyOneAllowed={true}
+                    level1Name={'Start Date'}
+                    level2List={['Now', 'Later']}
+                    onChangeOptions={s => this.onFeeFilterChange(s)}
                   />
-                  <FormControlLabel
-                    value="all"
-                    control={<Radio />}
-                    label="All"
+                  <NestedMenu
+                    isOnlyOneAllowed={false}
+                    level1Name={'Subject'}
+                    level2List={subjectsData.map(s => s.name)}
+                    onChangeOptions={s => this.onSubjectFilterChange(s)}
                   />
                 </RadioGroup>
               </FormControl>

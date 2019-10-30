@@ -49,6 +49,10 @@ const styles = theme => ({
     margin: theme.spacing(2),
     color: '#FFF',
   },
+  button: {
+    margin: theme.spacing(3),
+    textTransform: 'none',
+  },
 });
 
 class SignUp extends Component {
@@ -64,18 +68,27 @@ class SignUp extends Component {
       open: true,
       showFullName: true,
       showEmail: true,
-      showPassword: true,
-      showSubscribeButton: false,
+      showPassword: props.showSubcriptionDialog ? false : true,
+      showSubscribeButton: props.showSubcriptionDialog ? true : false,
+      showBottomTwoRows: props.showSubcriptionDialog ? false : true,
+      fullName: '',
+      email: '',
+      password: '',
     };
 
     this.dismissDialog = this.dismissDialog.bind(this);
     this.setupLoginDialog = this.setupLoginDialog.bind(this);
     this.setupSignUpDialog = this.setupSignUpDialog.bind(this);
     this.switchDialog = this.switchDialog.bind(this);
+    this.setupSubscribeDialog = this.setupSubscribeDialog.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
     this.setState({ open: true });
+    console.log({ nextProps });
+    if (nextProps.showSubcriptionDialog) {
+      this.setupSubscribeDialog();
+    }
   }
 
   dismissDialog() {
@@ -91,6 +104,7 @@ class SignUp extends Component {
       showEmail: true,
       showPassword: true,
       showSubscribeButton: false,
+      showBottomTwoRows: true,
     });
   }
 
@@ -103,6 +117,7 @@ class SignUp extends Component {
       showEmail: true,
       showPassword: true,
       showSubscribeButton: false,
+      showBottomTwoRows: true,
     });
   }
 
@@ -110,11 +125,12 @@ class SignUp extends Component {
     this.setState({
       prefixText: '',
       linkText: '',
-      buttonText: 'Login',
-      showFullName: false,
+      buttonText: '',
+      showFullName: true,
       showEmail: true,
       showPassword: false,
       showSubscribeButton: true,
+      showBottomTwoRows: false,
     });
   }
 
@@ -126,6 +142,10 @@ class SignUp extends Component {
       this.setupLoginDialog();
     }
   }
+
+  handleChange = name => event => {
+    this.setState({ [name]: event.target.value });
+  };
 
   render() {
     const { classes } = this.props;
@@ -180,6 +200,8 @@ class SignUp extends Component {
                   className={clsx(classes.textField, classes.dense)}
                   margin="dense"
                   variant="outlined"
+                  value={this.state.fullName}
+                  onChange={this.handleChange('fullName')}
                 />
               </Grid>
             )}
@@ -209,6 +231,8 @@ class SignUp extends Component {
                   className={clsx(classes.textField, classes.dense)}
                   margin="dense"
                   variant="outlined"
+                  value={this.state.email}
+                  onChange={this.handleChange('email')}
                 />
               </Grid>
             )}
@@ -235,107 +259,134 @@ class SignUp extends Component {
                   fullWidth
                   id="outlined-dense"
                   label="Password"
+                  type="password"
                   className={clsx(classes.textField, classes.dense)}
                   margin="dense"
                   variant="outlined"
+                  value={this.state.password}
+                  onChange={this.handleChange('password')}
                 />
               </Grid>
             )}
             {this.state.showPassword && <Grid item xs={1}></Grid>}
-            <Grid item xs={1}></Grid>
-            <Grid item xs={4} className={classes.padding}>
-              <Button
-                fullWidth
-                size="large"
-                variant="outlined"
-                color="primary"
-                className={classes.buttonStyle}
-                onClick={this.props.onSignupClick}
-              >
-                <b>{this.state.buttonText}</b>
-              </Button>
-            </Grid>
-            <Grid item xs={3} className={classes.padding}>
-              <Grid
-                container
-                justify="center"
-                alignItems="center"
-                style={{ height: '100%' }}
-              >
-                <Typography variant="body2" color="primary">
-                  <Box height="100%" fontWeight="fontWeightBold">
-                    or with
-                  </Box>
-                </Typography>
+            {this.state.showBottomTwoRows && (
+              <Grid container>
+                <Grid item xs={1}></Grid>
+                <Grid item xs={4} className={classes.padding}>
+                  <Button
+                    fullWidth
+                    size="large"
+                    variant="outlined"
+                    color="primary"
+                    className={classes.buttonStyle}
+                    onClick={() => this.props.onLoginOrSignupClick(this.state)}
+                  >
+                    <b>{this.state.buttonText}</b>
+                  </Button>
+                </Grid>
+                <Grid item xs={3} className={classes.padding}>
+                  <Grid
+                    container
+                    justify="center"
+                    alignItems="center"
+                    style={{ height: '100%' }}
+                  >
+                    <Typography variant="body2" color="primary">
+                      <Box height="100%" fontWeight="fontWeightBold">
+                        or with
+                      </Box>
+                    </Typography>
+                  </Grid>
+                </Grid>
+                <Grid item xs={2}>
+                  <Grid
+                    container
+                    justify="center"
+                    alignItems="center"
+                    style={{ height: '100%' }}
+                  >
+                    <Icon
+                      onClick={() =>
+                        this.props.onLoginOrSignupGoogle(this.state)
+                      }
+                      className="fa fa-google-plus"
+                      style={{ color: 'white', width: '100%' }}
+                      fullWidth
+                    />
+                  </Grid>
+                </Grid>
+                <Grid item xs={2}>
+                  <Grid
+                    container
+                    justify="center"
+                    alignItems="center"
+                    style={{ height: '100%' }}
+                  >
+                    <Icon
+                      onClick={() =>
+                        this.props.onLoginOrSignupFacebook(this.state)
+                      }
+                      className="fa fa-facebook"
+                      style={{ color: 'white', width: '100%' }}
+                      fullWidth
+                    />
+                  </Grid>
+                </Grid>
+                <Grid item xs={1}></Grid>
+                <Grid item xs={12} style={{ padding: 20 }}>
+                  <Grid
+                    container
+                    justify="center"
+                    alignItems="center"
+                    style={{
+                      height: '100%',
+                    }}
+                  >
+                    <Typography
+                      variant="body2"
+                      color="primary"
+                      style={{
+                        color: 'white',
+                        verticalAlign: 'middle',
+                        display: 'inline-flex',
+                      }}
+                    >
+                      <Box
+                        height="100%"
+                        fontWeight="fontWeightlight"
+                        fontStyle="italic"
+                      >
+                        {this.state.prefixText}
+                      </Box>
+                      <Box
+                        style={{ color: 'white', textDecoration: 'underline' }}
+                        onClick={this.switchDialog}
+                        height="100%"
+                        fontWeight="fontWeightlight"
+                        fontStyle="italic"
+                        underline="always"
+                      >
+                        {this.state.linkText}
+                      </Box>
+                    </Typography>
+                  </Grid>
+                  <Grid></Grid>
+                </Grid>
               </Grid>
-            </Grid>
-            <Grid item xs={2}>
-              <Grid
-                container
-                justify="center"
-                alignItems="center"
-                style={{ height: '100%' }}
-              >
-                <Icon
-                  className="fa fa-google-plus"
-                  style={{ color: 'white', width: '100%' }}
-                  fullWidth
-                />
-              </Grid>
-            </Grid>
-            <Grid item xs={2}>
-              <Grid
-                container
-                justify="center"
-                alignItems="center"
-                style={{ height: '100%' }}
-              >
-                <Icon
-                  className="fa fa-facebook"
-                  style={{ color: 'white', width: '100%' }}
-                  fullWidth
-                />
-              </Grid>
-            </Grid>
-            <Grid item xs={1}></Grid>
-            <Grid item xs={12} style={{ padding: 20 }}>
-              <Grid
-                container
-                justify="center"
-                alignItems="center"
-                style={{
-                  height: '100%',
-                }}
-              >
-                <Typography
-                  variant="body2"
+            )}
+            {!this.state.showBottomTwoRows && (
+              <Grid container justify="center" alignItems="center">
+                <Button
+                  onClick={this.props.onSubscribeClick}
+                  variant="contained"
                   color="primary"
-                  style={{
-                    color: 'white',
-                    verticalAlign: 'middle',
-                    display: 'inline-flex',
-                  }}
+                  size="large"
+                  className={classes.button}
                 >
-                  <Box
-                    height="100%"
-                    fontWeight="fontWeightlight"
-                    fontStyle="italic"
-                  >
-                    {this.state.prefixText}
-                  </Box>
-                  <Box
-                    style={{ color: 'white', textDecoration: 'underline' }}
-                    onClick={this.switchDialog}
-                    height="100%"
-                    fontWeight="fontWeightlight"
-                    fontStyle="italic"
-                    underline="always"
-                  >
-                    {this.state.linkText}
-                  </Box>
-                </Typography>
+                  Stay Updated on Newest Courses and Certificates
+                </Button>
               </Grid>
-            </Grid>
+            )}
           </Grid>
         </form>
       </Dialog>

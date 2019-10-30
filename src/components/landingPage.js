@@ -33,6 +33,9 @@ import SearchBG2 from './../assets/Search-option2.jpg';
 import Button from '@material-ui/core/Button';
 import { withRouter } from 'react-router-dom';
 import SignUp from './signup';
+import Snackbar from '@material-ui/core/Snackbar';
+import SnackbarWrapper from './snackbarWrapper';
+import { promises } from 'dns';
 
 const styles = theme => ({
   dashboardLink: {
@@ -298,6 +301,9 @@ class LandingPage extends Component {
       showSignUp: false,
       showLogin: false,
       showNewsLetter: false,
+      snackbarVariant: 'success',
+      snackbarMessage: '',
+      openSnackbaar: false,
     };
 
     this.handlePageChange = this.handlePageChange.bind(this);
@@ -306,6 +312,16 @@ class LandingPage extends Component {
     this.showMore = this.showMore.bind(this);
     this.getQuery = this.getQuery.bind(this);
     this.onLoginClick = this.onLoginClick.bind(this);
+    this.onLoginOrSignupClick = this.onLoginOrSignupClick.bind(this);
+    this.onLoginOrSignupGoogle = this.onLoginOrSignupGoogle.bind(this);
+    this.onLoginOrSignupFacebook = this.onLoginOrSignupFacebook.bind(this);
+    this.onSubscribeClick = this.onSubscribeClick.bind(this);
+    this.handleCloseSnackbar = this.handleCloseSnackbar.bind(this);
+  }
+
+  handleCloseSnackbar() {
+    console.log('On snackbar close');
+    this.setState({ openSnackbaar: false });
   }
 
   onFilterChange(event) {
@@ -345,7 +361,7 @@ class LandingPage extends Component {
         <Grid item xs={3}>
           <img className={classes.imgCricular} src={image} alt="Avatar"></img>
         </Grid>
-        <Grid item xs={7} justify="center" style={{ margin: 'auto' }}>
+        <Grid item xs={7} style={{ margin: 'auto' }}>
           <Typography variant="body1" component="p" align="left">
             {courseName}
           </Typography>
@@ -364,6 +380,52 @@ class LandingPage extends Component {
     this.setState({ showSignUp: true });
   }
 
+  login(username, password) {
+    const postData = { password, username };
+    const body = Object.keys(postData)
+      .map(key => {
+        return (
+          encodeURIComponent(key) + '=' + encodeURIComponent(postData[key])
+        );
+      })
+      .join('&');
+
+    var url = `http://localhost:8080/login`;
+    return fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body,
+    }).then(response => {
+      if (response.status === 200) Promise.resolve();
+      else Promise.reject();
+    });
+  }
+
+  onLoginOrSignupClick(state) {
+    console.log('Sign up clicked', state);
+    this.login(state.email, state.password)
+      .then(s => {
+        console.log('Logged In');
+      })
+      .catch(s => {
+        console.log('Error logging in');
+      });
+  }
+
+  onLoginOrSignupFacebook(state) {
+    console.log('Facebook clicked');
+  }
+
+  onLoginOrSignupGoogle(state) {
+    console.log('Google Clicked');
+  }
+
+  onSubscribeClick(state) {
+    console.log('On Subscribe click');
+  }
+
   getDegreeCard(name, university, classes) {
     return (
       <Grid item xs={6} style={{ width: '100%', padding: 20 }}>
@@ -375,7 +437,7 @@ class LandingPage extends Component {
               border={1}
               style={{ height: '100px', margin: '30' }}
             >
-              <Grid item xs={3} justify="center" style={{ margin: 'auto' }}>
+              <Grid item xs={3} style={{ margin: 'auto' }}>
                 <img
                   className={classes.imgCricularUniversity}
                   src={CS}
@@ -383,11 +445,11 @@ class LandingPage extends Component {
                 ></img>
               </Grid>
               <Grid item xs={1}></Grid>
-              <Grid item xs={6} justify="center" style={{ margin: 'auto' }}>
-                <Typography variant="body1" component="p" align="center">
+              <Grid item xs={6} style={{ margin: 'auto' }}>
+                <Typography variant="body1" align="center">
                   <Box fontWeight="fontWeightBold">{name}</Box>
                 </Typography>
-                <Typography variant="body2" component="p" align="center">
+                <Typography variant="body2" align="center">
                   {university}
                 </Typography>
               </Grid>
@@ -411,16 +473,11 @@ class LandingPage extends Component {
               border={1}
               style={{ height: '100px', margin: '30' }}
             >
-              <Grid
-                item
-                xs={9}
-                justify="center"
-                style={{ margin: 'auto', paddingLeft: 30 }}
-              >
-                <Typography variant="body2" component="p" align="left">
+              <Grid item xs={9} style={{ margin: 'auto', paddingLeft: 30 }}>
+                <Typography variant="body2" align="left">
                   <Box fontWeight="fontWeightBold">{name}</Box>
                 </Typography>
-                <Typography variant="body2" component="p" align="left">
+                <Typography variant="body2" align="left">
                   {provider}
                 </Typography>
               </Grid>
@@ -436,16 +493,45 @@ class LandingPage extends Component {
     );
   }
 
+  renderSnackbar() {
+    return (
+      <Snackbar
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'left',
+        }}
+        open={this.state.openSnackbaar}
+        autoHideDuration={6000}
+        onClose={this.handleCloseSnackbar}
+      >
+        <SnackbarWrapper
+          onClose={this.handleCloseSnackbar}
+          variant={this.state.snackbarVariant}
+          message={this.state.snackbarMessage}
+        />
+      </Snackbar>
+    );
+  }
+
   render() {
     const { classes, theme } = this.props;
     return (
-      <Grid conatiner style={{ margin: 0, width: '99%' }}>
+      <Grid style={{ margin: 0, width: '100%' }}>
         <TopAppBar
           onChange={this.onSearchChange}
           isSearchIncluded={false}
           onLoginClick={this.onLoginClick}
         />
-        {this.state.showSignUp && <SignUp open={true} />}
+        {this.state.showSignUp && (
+          <SignUp
+            open={true}
+            onSubscribeClick={this.onSubscribeClick}
+            onLoginOrSignupClick={this.onLoginOrSignupClick}
+            showSubcriptionDialog={false}
+            onLoginOrSignupGoogle={this.onLoginOrSignupGoogle}
+            onLoginOrSignupFacebook={this.onLoginOrSignupFacebook}
+          />
+        )}
         <Grid
           container
           spacing={0}
@@ -473,10 +559,9 @@ class LandingPage extends Component {
           spacing={0}
           direction="column"
           alignItems="center"
-          //   justify="center"
           style={{ minHeight: '20vh', margin: 0, width: '100%' }}
         >
-          <Grid item xs={12} spacing={3} style={{ paddingTop: 30 }}>
+          <Grid item xs={12} style={{ paddingTop: 30 }}>
             <Typography variant="h5" component="h2">
               Browse by Subject
             </Typography>
@@ -514,7 +599,7 @@ class LandingPage extends Component {
           style={{ minHeight: '30vh', width: '100%', margin: 10 }}
         >
           <Grid container spacing={0} direction="column" alignItems="center">
-            <Grid item xs={12} spacing={3} style={{ paddingTop: 30 }}>
+            <Grid item xs={12} style={{ paddingTop: 30 }}>
               <Typography variant="h5" component="h2">
                 Earn a Degree
               </Typography>
@@ -554,7 +639,7 @@ class LandingPage extends Component {
                 direction="column"
                 alignItems="center"
               >
-                <Grid item xs={12} spacing={3} style={{ paddingTop: 30 }}>
+                <Grid item xs={12} style={{ paddingTop: 30 }}>
                   <Typography variant="h5" component="h2">
                     Top Trending Courses
                   </Typography>
@@ -591,7 +676,7 @@ class LandingPage extends Component {
                 direction="column"
                 alignItems="center"
               >
-                <Grid item xs={12} spacing={3} style={{ paddingTop: 30 }}>
+                <Grid item xs={12} style={{ paddingTop: 30 }}>
                   <Typography variant="h5" component="h2">
                     Learn for Free
                   </Typography>
