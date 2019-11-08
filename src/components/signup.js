@@ -10,8 +10,6 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import Icon from '@material-ui/core/Icon';
-import SvgIcon from '@material-ui/core/SvgIcon';
-import Link from '@material-ui/core/Link';
 
 const styles = theme => ({
   container: {

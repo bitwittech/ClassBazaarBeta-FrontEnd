@@ -1,41 +1,26 @@
 import React, { Component } from 'react';
-import { withStyles } from '@material-ui/core/styles';
-import CourseCard from './courseCard';
-import Pagination from 'material-ui-flat-pagination';
-import { black } from 'material-ui/styles/colors';
-import ArrowBack from '@material-ui/icons/ArrowBack';
-import ArrowForward from '@material-ui/icons/ArrowForward';
-import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
-import Typography from '@material-ui/core/Typography';
-import Radio from '@material-ui/core/Radio';
-import RadioGroup from '@material-ui/core/RadioGroup';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormControl from '@material-ui/core/FormControl';
-import FormLabel from '@material-ui/core/FormLabel';
-import TopAppBar from './appBar';
-import SearchIcon from '@material-ui/icons/Search';
-import InputBase from '@material-ui/core/InputBase';
+import {
+  degreeData,
+  freeCourses,
+  subjectsData,
+  trendingData,
+} from './../utils/data';
 import { fade, makeStyles } from '@material-ui/core/styles';
-import CS from './../assets/CS.png';
-import A from './../assets/A.png';
-import B from './../assets/B.png';
-import DA from './../assets/DA.png';
-import DEV from './../assets/DEV.png';
-import HL from './../assets/HL.png';
-import M from './../assets/M.png';
-import O from './../assets/O.png';
-import SENG from './../assets/SENG.png';
-import SO from './../assets/SO.png';
-import SearchBG1 from './../assets/Search-option1.jpg';
-import SearchBG2 from './../assets/Search-option2.jpg';
+
+import AuthProvider from './authProvider';
+import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
-import { withRouter } from 'react-router-dom';
-import SignUp from './signup';
+import CS from './../assets/CS.png';
+import Grid from '@material-ui/core/Grid';
+import InputBase from '@material-ui/core/InputBase';
+import SearchBG1 from './../assets/Search-option1.jpg';
+import SearchIcon from '@material-ui/icons/Search';
 import Snackbar from '@material-ui/core/Snackbar';
 import SnackbarWrapper from './snackbarWrapper';
-import { promises } from 'dns';
+import TopAppBar from './appBar';
+import Typography from '@material-ui/core/Typography';
+import { withRouter } from 'react-router-dom';
+import { withStyles } from '@material-ui/core/styles';
 
 const styles = theme => ({
   dashboardLink: {
@@ -116,144 +101,6 @@ const defaultProps = {
   borderColor: 'text.primary',
 };
 
-const subjectsData = [
-  {
-    name: 'Computer Science',
-    code: 'CS',
-    content: '',
-    image: CS,
-  },
-  {
-    name: 'Business',
-    code: 'B',
-    content: '',
-    image: B,
-  },
-  {
-    name: 'Arts & Design',
-    code: 'A',
-    content: '',
-    image: A,
-  },
-  {
-    name: 'Data Science',
-    code: 'DA',
-    content: '',
-    image: DA,
-  },
-  {
-    name: 'Health & Lifestyle',
-    code: 'HL',
-    content: '',
-    image: HL,
-  },
-  {
-    name: 'Science & Engineering',
-    code: 'SENG',
-    content: '',
-    image: SENG,
-  },
-  {
-    name: 'Social Studies',
-    code: 'SO',
-    content: '',
-    image: SO,
-  },
-  {
-    name: 'Developers/Programming',
-    code: 'DEV',
-    content: '',
-    image: DEV,
-  },
-  {
-    name: 'Others',
-    code: 'O',
-    content: '',
-    image: O,
-  },
-  {
-    name: 'Math',
-    code: 'M',
-    content: '',
-    image: M,
-  },
-];
-
-const degreeData = [
-  {
-    name:
-      'Banking & Financial Intermediation: Concepts, Risks, Capital & Regulation',
-    university: 'Indian Institute of Management, Bangalore',
-  },
-  {
-    name: 'PG Program in Big Data Engineering',
-    university: 'BITS, Pilani',
-  },
-  {
-    name: 'Master of Science in Machine Learning & AI',
-    university: 'Liverpool John Moores University and IIIT, Bangalore',
-  },
-  {
-    name: 'PMP Certification',
-    university: 'Project Management Institute, Simplilearn',
-  },
-  {
-    name: 'Agile Development Specialization',
-    university: 'University of Virginia',
-  },
-  {
-    name: 'Certified AWS Solutions Architect',
-    university: 'AWS by Udemy',
-  },
-];
-
-const trendingData = [
-  {
-    name: 'Learning Python for Data Analysis and Visualization',
-    university: 'Udemy',
-  },
-  {
-    name: 'Machine Learning course by Stanford Univeristy',
-    university: 'Coursera',
-  },
-  {
-    name:
-      'Strategic Business Analytics Specialization by ESSEC Business School',
-    university: 'Coursera',
-  },
-  {
-    name: 'Microsoft Excel: Beginner to AdvancedPMP Certification',
-    university: 'Coursera',
-  },
-  {
-    name: 'Data Science Specialization by Duke Univerisity',
-    university: 'University of Virginia',
-  },
-];
-
-const freeCourses = [
-  {
-    name: 'Machine Learning with Python: A Practical Introduction by IBM',
-    university: 'edX',
-  },
-  {
-    name: "CS50's Introduction to Computer Science",
-    university: 'edX',
-  },
-  {
-    name: 'Intro to JavaScript',
-    university: 'Udacity',
-  },
-  {
-    name: 'Behavioral Investing',
-    university: 'Coursera',
-  },
-  {
-    name: 'Natural Language Processing',
-    university: 'Swayam',
-  },
-];
-
 const Search = withRouter(({ history, ...data }) => {
   const classes = data.classes;
   return (
@@ -298,12 +145,6 @@ class LandingPage extends Component {
       filter: '',
       subjects: subjectsData.slice(0, 3),
       showMoreButtonText: 'Show More',
-      showSignUp: false,
-      showLogin: false,
-      showNewsLetter: false,
-      snackbarVariant: 'success',
-      snackbarMessage: '',
-      openSnackbaar: false,
     };
 
     this.handlePageChange = this.handlePageChange.bind(this);
@@ -311,17 +152,6 @@ class LandingPage extends Component {
     this.onSearchChange = this.onSearchChange.bind(this);
     this.showMore = this.showMore.bind(this);
     this.getQuery = this.getQuery.bind(this);
-    this.onLoginClick = this.onLoginClick.bind(this);
-    this.onLoginOrSignupClick = this.onLoginOrSignupClick.bind(this);
-    this.onLoginOrSignupGoogle = this.onLoginOrSignupGoogle.bind(this);
-    this.onLoginOrSignupFacebook = this.onLoginOrSignupFacebook.bind(this);
-    this.onSubscribeClick = this.onSubscribeClick.bind(this);
-    this.handleCloseSnackbar = this.handleCloseSnackbar.bind(this);
-  }
-
-  handleCloseSnackbar() {
-    console.log('On snackbar close');
-    this.setState({ openSnackbaar: false });
   }
 
   onFilterChange(event) {
@@ -373,57 +203,6 @@ class LandingPage extends Component {
 
   getQuery() {
     return this.state.q;
-  }
-
-  onLoginClick() {
-    console.log('Login Clicked');
-    this.setState({ showSignUp: true });
-  }
-
-  login(username, password) {
-    const postData = { password, username };
-    const body = Object.keys(postData)
-      .map(key => {
-        return (
-          encodeURIComponent(key) + '=' + encodeURIComponent(postData[key])
-        );
-      })
-      .join('&');
-
-    var url = `http://localhost:8080/login`;
-    return fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      body,
-    }).then(response => {
-      if (response.status === 200) Promise.resolve();
-      else Promise.reject();
-    });
-  }
-
-  onLoginOrSignupClick(state) {
-    console.log('Sign up clicked', state);
-    this.login(state.email, state.password)
-      .then(s => {
-        console.log('Logged In');
-      })
-      .catch(s => {
-        console.log('Error logging in');
-      });
-  }
-
-  onLoginOrSignupFacebook(state) {
-    console.log('Facebook clicked');
-  }
-
-  onLoginOrSignupGoogle(state) {
-    console.log('Google Clicked');
-  }
-
-  onSubscribeClick(state) {
-    console.log('On Subscribe click');
   }
 
   getDegreeCard(name, university, classes) {
@@ -522,16 +301,7 @@ class LandingPage extends Component {
           isSearchIncluded={false}
           onLoginClick={this.onLoginClick}
         />
-        {this.state.showSignUp && (
-          <SignUp
-            open={true}
-            onSubscribeClick={this.onSubscribeClick}
-            onLoginOrSignupClick={this.onLoginOrSignupClick}
-            showSubcriptionDialog={false}
-            onLoginOrSignupGoogle={this.onLoginOrSignupGoogle}
-            onLoginOrSignupFacebook={this.onLoginOrSignupFacebook}
-          />
-        )}
+        <AuthProvider />
         <Grid
           container
           spacing={0}
