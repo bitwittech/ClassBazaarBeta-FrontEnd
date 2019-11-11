@@ -53,14 +53,14 @@ const ProfileCourseCard = () => {
         <br />
         <div>
           <div className={styles.root}>
-            <Grid container spacing={10}>
-              <Grid item xs={3}>
+            <Grid container spacing={2}>
+              <Grid item sm={3}>
                 <WatchLaterIcon /> 1 month
               </Grid>
-              <Grid item xs={3}>
+              <Grid item sm={3}>
                 <CalendarIcon /> Flexible
               </Grid>
-              <Grid item xs={3}>
+              <Grid item sm={3}>
                 <MoneyIcon /> Subscriptions
               </Grid>
             </Grid>

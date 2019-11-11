@@ -137,8 +137,6 @@ class ProfilePage extends Component {
                                 alt="profile-img"
                                 className="profile-img"
                               />
-                            </div>
-                            <div>
                               <Typography
                                 align="center"
                                 variant="h6"
@@ -155,6 +153,7 @@ class ProfilePage extends Component {
                                 Los Angeles, California
                               </Typography>
                             </div>
+                            <div></div>
                           </Grid>
                           <Grid item xs={12}>
                             <Typography variant="body1" gutterBottom>
