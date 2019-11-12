@@ -9,8 +9,7 @@ import O from './../assets/O.png';
 import SENG from './../assets/SENG.png';
 import SO from './../assets/SO.png';
 
-export const subjectsData = [
-  {
+export const subjectsData = [{
     name: 'Computer Science',
     code: 'CS',
     content: '',
@@ -72,10 +71,8 @@ export const subjectsData = [
   },
 ];
 
-export const degreeData = [
-  {
-    name:
-      'Banking & Financial Intermediation: Concepts, Risks, Capital & Regulation',
+export const degreeData = [{
+    name: 'Banking & Financial Intermediation: Concepts, Risks, Capital & Regulation',
     university: 'Indian Institute of Management, Bangalore',
   },
   {
@@ -100,8 +97,7 @@ export const degreeData = [
   },
 ];
 
-export const trendingData = [
-  {
+export const trendingData = [{
     name: 'Learning Python for Data Analysis and Visualization',
     university: 'Udemy',
   },
@@ -110,8 +106,7 @@ export const trendingData = [
     university: 'Coursera',
   },
   {
-    name:
-      'Strategic Business Analytics Specialization by ESSEC Business School',
+    name: 'Strategic Business Analytics Specialization by ESSEC Business School',
     university: 'Coursera',
   },
   {
@@ -124,8 +119,7 @@ export const trendingData = [
   },
 ];
 
-export const freeCourses = [
-  {
+export const freeCourses = [{
     name: 'Machine Learning with Python: A Practical Introduction by IBM',
     university: 'edX',
   },
