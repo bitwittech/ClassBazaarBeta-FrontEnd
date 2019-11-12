@@ -5,6 +5,7 @@ import LandingPage from './components/landingPage';
 import CoursePage from './components/coursePage';
 import About from './components/About';
 import ProfilePage from './components/profilePage';
+import PrivacyPolicy from './components/PrivacyPolicy';
 import logo from './logo.svg';
 import withAnalytics, { initAnalytics } from 'react-with-analytics';
 import './App.css';
@@ -39,6 +40,7 @@ const Root = () => (
     <Route exact path="/course" component={CoursePage} />
     <Route exact path="/profile" component={ProfilePage} />
     <Route exact path="/about" component={About} />
+    <Route exact path="/privacypolicy" component={PrivacyPolicy} />
   </Switch>
 );
 
