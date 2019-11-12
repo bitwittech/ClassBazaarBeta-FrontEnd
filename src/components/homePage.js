@@ -17,6 +17,8 @@ import FormLabel from '@material-ui/core/FormLabel';
 import TopAppBar from './appBar';
 import NestedMenu from './nestedCheckbox';
 import { subjectsData } from './../utils/data';
+import ProfileCourseCard from './ProfileCourseCard';
+import { Container } from '@material-ui/core';
 
 const providerData = ['EDx', 'FutureLearn'];
 
@@ -181,10 +183,16 @@ class HomePage extends Component {
         />
         <Grid container>
           <Grid item xs={8}>
+            <br />
             {this.state.data.length > 0 &&
               this.state.data.map((obj, index) => {
                 return (
-                  <CourseCard
+                  <>
+                    <Container>
+                      <ProfileCourseCard />
+                    </Container>
+                  </>
+                  /* <CourseCard
                     key={obj.title}
                     isInstructor={true}
                     university={obj.university}
@@ -195,7 +203,7 @@ class HomePage extends Component {
                     price={obj.price}
                     rating={obj.rating}
                     uuid={obj.uuid}
-                  ></CourseCard>
+                  ></CourseCard> */
                 );
               })}
           </Grid>
