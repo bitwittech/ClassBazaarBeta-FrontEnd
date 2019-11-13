@@ -52,7 +52,6 @@ const AppWithRouter = withRouter(withAnalytics(Root));
 function App() {
   const initialState = useContext(Store);
   const [state, dispatch] = useReducer(Reducer, initialState);
-  console.log(state);
   return (
     <BrowserRouter>
       <MuiThemeProvider theme={theme}>

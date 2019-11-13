@@ -17,6 +17,18 @@
   color: white;
 }
 
+.text-field {
+  padding: 12px 30px;
+  width: 45%;
+  border: 1px solid #E3E8F0;
+  background: #F0F2F7;
+  border-radius: 6px;
+  color: "#B9BED1" !important;
+  text-align: center !important;
+  font-weight: '600' !important;
+
+}
+
 .App-link {
   color: #FFF;
   text-align: left;
@@ -34,6 +46,16 @@
 
 .Dashboard-Links {
   width: 100%;
+}
+
+.link-button {
+  text-decoration: underline;
+  margin-top: 15px;
+}
+
+.link-button:hover {
+
+  cursor: pointer;
 }
 
 .text {
