@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useContext, useReducer } from 'react';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import HomePage from './components/homePage';
 import LandingPage from './components/landingPage';
@@ -6,7 +6,8 @@ import CoursePage from './components/coursePage';
 import About from './components/About';
 import ProfilePage from './components/profilePage';
 import PrivacyPolicy from './components/PrivacyPolicy';
-import logo from './logo.svg';
+import Store from './store/Context';
+import Reducer from './store/Reducer';
 import withAnalytics, { initAnalytics } from 'react-with-analytics';
 import './App.css';
 
@@ -33,16 +34,23 @@ const theme = createMuiTheme({
   },
 });
 
-const Root = () => (
-  <Switch>
-    <Route exact path="/" component={LandingPage} />
-    <Route exact path="/listing" component={HomePage} />
-    <Route exact path="/course" component={CoursePage} />
-    <Route exact path="/profile" component={ProfilePage} />
-    <Route exact path="/about" component={About} />
-    <Route exact path="/privacypolicy" component={PrivacyPolicy} />
-  </Switch>
-);
+const Root = () => {
+  const initialState = useContext(Store);
+  const [state, dispatch] = useReducer(Reducer, initialState);
+  console.log(state);
+  return (
+    <Store.Provider value={{ state, dispatch }}>
+      <Switch>
+        <Route exact path="/" component={LandingPage} />
+        <Route exact path="/listing" component={HomePage} />
+        <Route exact path="/course" component={CoursePage} />
+        <Route exact path="/profile" component={ProfilePage} />
+        <Route exact path="/about" component={About} />
+        <Route exact path="/privacypolicy" component={PrivacyPolicy} />
+      </Switch>
+    </Store.Provider>
+  );
+};
 
 const AppWithRouter = withRouter(withAnalytics(Root));
 
