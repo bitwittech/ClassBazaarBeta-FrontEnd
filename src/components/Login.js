@@ -52,6 +52,12 @@ const Login = () => {
   const classes = useStyles();
   const [modal, setModal] = useState({
     state: 0, //0 - Login 1-Signup
+    formData: {
+      username: '',
+      password: '',
+      phone: '',
+      email: '',
+    },
   });
   const handleClose = () => {
     dispatch({
@@ -178,13 +184,24 @@ const Login = () => {
                 >
                   Forgot password?
                 </Typography>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  className={classes.loginButton}
-                >
-                  Login
-                </Button>
+                {modal.state === 0 ? (
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    className={classes.loginButton}
+                  >
+                    Login
+                  </Button>
+                ) : null}
+                {modal.state === 1 ? (
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    className={classes.loginButton}
+                  >
+                    Register
+                  </Button>
+                ) : null}
 
                 <Grid style={{ marginTop: '20px' }} container spacing={3}>
                   <Grid item xs={12} sm={6} style={{ textAlign: 'right' }}>

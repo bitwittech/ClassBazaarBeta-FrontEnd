@@ -58,6 +58,10 @@
   cursor: pointer;
 }
 
+.mb {
+  margin-bottom: -5px;
+}
+
 .text {
   text-align: center;
   vertical-align: middle;
