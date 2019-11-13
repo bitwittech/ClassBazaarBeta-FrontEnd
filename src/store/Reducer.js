@@ -1,3 +1,7 @@
+import {
+    LOGIN_MODAL
+} from './Types'
+
 export default function reducer(state, action) {
 
     const {
@@ -6,8 +10,13 @@ export default function reducer(state, action) {
     } = action;
 
     switch (type) {
-        default:
-            return state;
+        case LOGIN_MODAL:
+            return {
+                ...state,
+                loginModal: payload
+            }
+            default:
+                return state;
     }
 
 }

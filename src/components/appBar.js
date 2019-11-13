@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -10,7 +10,8 @@ import MenuIcon from '@material-ui/icons/Menu';
 import { withRouter } from 'react-router-dom';
 import ProfileIcon from '@material-ui/icons/Person';
 import Logo from './../assets/logo.png';
-import { trackPage, trackUser, trackEvent } from 'react-with-analytics';
+import Store from '../store/Context';
+import { LOGIN_MODAL } from '../store/Types';
 import SearchIcon from '@material-ui/icons/Search';
 import InputBase from '@material-ui/core/InputBase';
 import { fade, makeStyles } from '@material-ui/core/styles';
@@ -128,8 +129,15 @@ const IconWithRouter = withRouter(({ history, ...props }) => (
 ));
 
 export default function TopBar(props) {
+  const { dispatch } = useContext(Store);
   const classes = useStyles();
-  console.log('Topbar props', props);
+  const handleLoginModal = () => {
+    dispatch({
+      type: LOGIN_MODAL,
+      payload: true,
+    });
+  };
+
   return (
     <AppBar
       position="static"
@@ -170,7 +178,7 @@ export default function TopBar(props) {
             variant="outlined"
             color="primary"
             className={classes.button}
-            onClick={props.onLoginClick}
+            onClick={handleLoginModal}
           >
             Login / Sign Up
           </Button>

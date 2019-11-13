@@ -10,7 +10,7 @@ import Store from './store/Context';
 import Reducer from './store/Reducer';
 import withAnalytics, { initAnalytics } from 'react-with-analytics';
 import './App.css';
-
+import Login from './components/Login';
 import { BrowserRouter, Route, Switch, withRouter } from 'react-router-dom';
 
 const theme = createMuiTheme({
@@ -35,32 +35,33 @@ const theme = createMuiTheme({
 });
 
 const Root = () => {
-  const initialState = useContext(Store);
-  const [state, dispatch] = useReducer(Reducer, initialState);
-  console.log(state);
   return (
-    <Store.Provider value={{ state, dispatch }}>
-      <Switch>
-        <Route exact path="/" component={LandingPage} />
-        <Route exact path="/listing" component={HomePage} />
-        <Route exact path="/course" component={CoursePage} />
-        <Route exact path="/profile" component={ProfilePage} />
-        <Route exact path="/about" component={About} />
-        <Route exact path="/privacypolicy" component={PrivacyPolicy} />
-      </Switch>
-    </Store.Provider>
+    <Switch>
+      <Route exact path="/" component={LandingPage} />
+      <Route exact path="/listing" component={HomePage} />
+      <Route exact path="/course" component={CoursePage} />
+      <Route exact path="/profile" component={ProfilePage} />
+      <Route exact path="/about" component={About} />
+      <Route exact path="/privacypolicy" component={PrivacyPolicy} />
+    </Switch>
   );
 };
 
 const AppWithRouter = withRouter(withAnalytics(Root));
 
 function App() {
+  const initialState = useContext(Store);
+  const [state, dispatch] = useReducer(Reducer, initialState);
+  console.log(state);
   return (
     <BrowserRouter>
       <MuiThemeProvider theme={theme}>
-        <div className="App">
-          <AppWithRouter />
-        </div>
+        <Store.Provider value={{ state, dispatch }}>
+          <div className="App">
+            <Login />
+            <AppWithRouter />
+          </div>
+        </Store.Provider>
       </MuiThemeProvider>
     </BrowserRouter>
   );
