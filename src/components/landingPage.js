@@ -10,6 +10,7 @@ import { fade, makeStyles } from '@material-ui/core/styles';
 import AuthProvider from './authProvider';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
+import Container from '@material-ui/core/Container';
 import CS from './../assets/CS.png';
 import Grid from '@material-ui/core/Grid';
 import InputBase from '@material-ui/core/InputBase';
@@ -187,15 +188,18 @@ class LandingPage extends Component {
   getSubjectCard(courseName, image, classes) {
     return (
       <Grid container>
-        <Grid item xs={3}>
+        <Grid align="center" justify="center" alignContent="center" item xs={9}>
           <img className={classes.imgCricular} src={image} alt="Avatar"></img>
-        </Grid>
-        <Grid item xs={7} style={{ margin: 'auto' }}>
-          <Typography variant="body1" component="p" align="left">
+          <Typography
+            color="primary"
+            style={{ fontWeight: '600' }}
+            align="center"
+            variant="body1"
+            component="p"
+          >
             {courseName}
           </Typography>
         </Grid>
-        <Grid item xs={3}></Grid>
       </Grid>
     );
   }
@@ -325,7 +329,12 @@ class LandingPage extends Component {
           style={{ minHeight: '20vh', margin: 0, width: '100%' }}
         >
           <Grid item xs={12} style={{ paddingTop: 30 }}>
-            <Typography variant="h5" component="h2">
+            <Typography
+              variant="h5"
+              color="primary"
+              style={{ fontWeight: '600' }}
+              component="h2"
+            >
               Browse by Subject
             </Typography>
           </Grid>
@@ -336,15 +345,17 @@ class LandingPage extends Component {
               enim ad minim veniam, quis nostrud exercitation ullamco.
             </Typography>
           </Grid>
-          <Grid container>
-            {this.state.subjects.map(subject => {
-              return (
-                <Grid item xs={4} style={{ padding: 30 }}>
-                  {this.getSubjectCard(subject.name, subject.image, classes)}
-                </Grid>
-              );
-            })}
-          </Grid>
+          <Container maxWidth={'md'}>
+            <Grid justify="center" container>
+              {this.state.subjects.map(subject => {
+                return (
+                  <Grid item xs={4} style={{ padding: 30 }}>
+                    {this.getSubjectCard(subject.name, subject.image, classes)}
+                  </Grid>
+                );
+              })}
+            </Grid>
+          </Container>
           <Grid item xs={12} style={{ margin: 30 }}>
             <Button
               variant="contained"
@@ -363,7 +374,12 @@ class LandingPage extends Component {
         >
           <Grid container spacing={0} direction="column" alignItems="center">
             <Grid item xs={12} style={{ paddingTop: 30 }}>
-              <Typography variant="h5" component="h2">
+              <Typography
+                variant="h5"
+                color="primary"
+                style={{ fontWeight: '600' }}
+                component="h2"
+              >
                 Earn a Degree
               </Typography>
             </Grid>
