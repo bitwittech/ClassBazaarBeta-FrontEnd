@@ -16,7 +16,6 @@ import InputBase from '@material-ui/core/InputBase';
 import SearchBG1 from './../assets/Search-option1.jpg';
 import SearchIcon from '@material-ui/icons/Search';
 import Snackbar from '@material-ui/core/Snackbar';
-import SnackbarWrapper from './snackbarWrapper';
 import TopAppBar from './appBar';
 import Typography from '@material-ui/core/Typography';
 import { withRouter } from 'react-router-dom';
@@ -282,13 +281,7 @@ class LandingPage extends Component {
         open={this.state.openSnackbaar}
         autoHideDuration={6000}
         onClose={this.handleCloseSnackbar}
-      >
-        <SnackbarWrapper
-          onClose={this.handleCloseSnackbar}
-          variant={this.state.snackbarVariant}
-          message={this.state.snackbarMessage}
-        />
-      </Snackbar>
+      ></Snackbar>
     );
   }
 

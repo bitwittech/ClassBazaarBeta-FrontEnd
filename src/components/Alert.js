@@ -1,12 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
+import Button from '@material-ui/core/Button';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import ErrorIcon from '@material-ui/icons/Error';
 import InfoIcon from '@material-ui/icons/Info';
 import CloseIcon from '@material-ui/icons/Close';
 import { amber, green } from '@material-ui/core/colors';
 import IconButton from '@material-ui/core/IconButton';
+import Snackbar from '@material-ui/core/Snackbar';
 import SnackbarContent from '@material-ui/core/SnackbarContent';
 import WarningIcon from '@material-ui/icons/Warning';
 import { makeStyles } from '@material-ui/core/styles';
@@ -44,13 +46,14 @@ const useStyles1 = makeStyles(theme => ({
   },
 }));
 
-function SnackbarWrapper(props) {
+function MySnackbarContentWrapper(props) {
   const classes = useStyles1();
   const { className, message, onClose, variant, ...other } = props;
   const Icon = variantIcon[variant];
 
   return (
     <SnackbarContent
+      style={{ zIndex: '10' }}
       className={clsx(classes[variant], className)}
       aria-describedby="client-snackbar"
       message={
@@ -59,26 +62,43 @@ function SnackbarWrapper(props) {
           {message}
         </span>
       }
-      action={[
-        <IconButton
-          key="close"
-          aria-label="close"
-          color="inherit"
-          onClick={onClose}
-        >
-          <CloseIcon className={classes.icon} />
-        </IconButton>,
-      ]}
       {...other}
     />
   );
 }
 
-SnackbarWrapper.propTypes = {
+MySnackbarContentWrapper.propTypes = {
   className: PropTypes.string,
   message: PropTypes.string,
   onClose: PropTypes.func,
   variant: PropTypes.oneOf(['error', 'info', 'success', 'warning']).isRequired,
 };
 
-export default SnackbarWrapper;
+const useStyles2 = makeStyles(theme => ({
+  margin: {
+    margin: theme.spacing(1),
+  },
+}));
+
+const Alert = ({ index, data }) => {
+  const handleClose = () => {
+    console.log('snackbarclosed');
+  };
+  return (
+    <div key={index}>
+      <Snackbar
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'left',
+        }}
+        open={true}
+        autoHideDuration={6000}
+        onClose={handleClose}
+      >
+        <MySnackbarContentWrapper variant="success" message="hey" />
+      </Snackbar>
+    </div>
+  );
+};
+
+export default Alert;

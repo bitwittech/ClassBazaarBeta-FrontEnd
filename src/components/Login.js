@@ -7,9 +7,11 @@ import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 import Store from '../store/Context';
 import { LOGIN_MODAL } from '../store/Types';
+import { register, signin } from '../actions/actions';
 
 const useStyles = makeStyles(theme => ({
   modal: {
@@ -59,10 +61,42 @@ const Login = () => {
       email: '',
     },
   });
+
   const handleClose = () => {
     dispatch({
       type: LOGIN_MODAL,
       payload: false,
+    });
+  };
+
+  const handleChange = e => {
+    setModal({
+      ...modal,
+      formData: {
+        ...modal.formData,
+        [e.target.name]: e.target.value,
+      },
+    });
+  };
+
+  const handleSubmit = e => {
+    e.preventDefault();
+
+    if (modal.state === 0) {
+      signin(modal.formData, dispatch);
+    }
+    if (modal.state === 1) {
+      register(modal.formData, dispatch);
+    }
+
+    setModal({
+      ...modal,
+      formData: {
+        username: '',
+        password: '',
+        phone: '',
+        email: '',
+      },
     });
   };
 
@@ -114,94 +148,118 @@ const Login = () => {
                 >
                   User Name
                 </Typography>
-                <input
-                  type="text"
-                  className="text-field"
-                  placeholder="Enter your name"
-                />
-                {modal.state === 1 ? (
-                  <>
-                    {' '}
-                    <Typography
-                      style={{
-                        fontWeight: '900',
-                        fontSize: '12px',
-                        marginTop: '20px',
-                      }}
-                      color="primary"
-                      variant="subtitle1"
-                      gutterBottom
-                    >
-                      Email ID*
-                    </Typography>
-                    <input
-                      type="text"
-                      className="text-field"
-                      placeholder="Enter your Email ID"
-                    />
-                    <Typography
-                      style={{
-                        fontWeight: '900',
-                        fontSize: '12px',
-                        marginTop: '20px',
-                      }}
-                      color="primary"
-                      variant="subtitle1"
-                      gutterBottom
-                    >
-                      Mobile Number*
-                    </Typography>
-                    <input
-                      type="text"
-                      className="text-field"
-                      placeholder="Enter your number"
-                    />
-                  </>
-                ) : null}
+                <form onSubmit={handleSubmit}>
+                  <input
+                    type="text"
+                    name="username"
+                    value={modal.formData.username}
+                    onChange={handleChange}
+                    className="text-field"
+                    placeholder="Enter your User name"
+                  />
+                  {modal.state === 1 ? (
+                    <>
+                      {' '}
+                      <Typography
+                        style={{
+                          fontWeight: '900',
+                          fontSize: '12px',
+                          marginTop: '20px',
+                        }}
+                        color="primary"
+                        variant="subtitle1"
+                        gutterBottom
+                      >
+                        Email ID*
+                      </Typography>
+                      <input
+                        onChange={handleChange}
+                        name="email"
+                        value={modal.formData.email}
+                        type="text"
+                        className="text-field"
+                        placeholder="Enter your Email ID"
+                      />
+                      <Typography
+                        style={{
+                          fontWeight: '900',
+                          fontSize: '12px',
+                          marginTop: '20px',
+                        }}
+                        color="primary"
+                        variant="subtitle1"
+                        gutterBottom
+                      >
+                        Mobile Number*
+                      </Typography>
+                      <input
+                        type="text"
+                        name="phone"
+                        value={modal.formData.phone}
+                        onChange={handleChange}
+                        className="text-field"
+                        placeholder="Enter your number"
+                      />
+                    </>
+                  ) : null}
 
-                <Typography
-                  style={{
-                    fontWeight: '900',
-                    fontSize: '12px',
-                    marginTop: '20px',
-                  }}
-                  color="primary"
-                  variant="subtitle1"
-                  gutterBottom
-                >
-                  Password
-                </Typography>
-                <input
-                  type="password"
-                  className="text-field"
-                  placeholder="Enter your password"
-                />
-                <Typography
-                  className="link-button"
-                  variant="body2"
-                  gutterBottom
-                  style={{ marginTop: '10px' }}
-                >
-                  Forgot password?
-                </Typography>
-                {modal.state === 0 ? (
-                  <Button
-                    variant="contained"
+                  <Typography
+                    style={{
+                      fontWeight: '900',
+                      fontSize: '12px',
+                      marginTop: '20px',
+                    }}
                     color="primary"
-                    className={classes.loginButton}
+                    variant="subtitle1"
+                    gutterBottom
                   >
-                    Login
-                  </Button>
-                ) : null}
-                {modal.state === 1 ? (
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    className={classes.loginButton}
+                    Password
+                  </Typography>
+                  <input
+                    name="password"
+                    value={modal.formData.password}
+                    type="password"
+                    className="text-field"
+                    onChange={handleChange}
+                    placeholder="Enter your password"
+                  />
+                  <Typography
+                    className="link-button"
+                    variant="body2"
+                    gutterBottom
+                    style={{ marginTop: '10px' }}
                   >
-                    Register
-                  </Button>
-                ) : null}
+                    Forgot password?
+                  </Typography>
+                  {modal.state === 0 ? (
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      type="submit"
+                      className={classes.loginButton}
+                    >
+                      {!state.loading ? (
+                        'Login'
+                      ) : (
+                        <CircularProgress color="white" size={'1.5rem'} />
+                      )}
+                    </Button>
+                  ) : null}
+                  {modal.state === 1 ? (
+                    <Button
+                      variant="contained"
+                      type="submit"
+                      color="primary"
+                      className={classes.loginButton}
+                    >
+                      {!state.loading ? (
+                        'Register'
+                      ) : (
+                        <CircularProgress color="white" size={'1.5rem'} />
+                      )}
+                    </Button>
+                  ) : null}
+                </form>
 
                 <Grid style={{ marginTop: '20px' }} container spacing={3}>
                   <Grid item xs={12} sm={6} style={{ textAlign: 'right' }}>

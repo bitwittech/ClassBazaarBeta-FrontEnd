@@ -12,6 +12,7 @@ import withAnalytics, { initAnalytics } from 'react-with-analytics';
 import './App.css';
 import Login from './components/Login';
 import { BrowserRouter, Route, Switch, withRouter } from 'react-router-dom';
+import Snackbar from './components/Snackbar';
 
 const theme = createMuiTheme({
   palette: {
@@ -57,6 +58,7 @@ function App() {
       <MuiThemeProvider theme={theme}>
         <Store.Provider value={{ state, dispatch }}>
           <div className="App">
+            <Snackbar />
             <Login />
             <AppWithRouter />
           </div>

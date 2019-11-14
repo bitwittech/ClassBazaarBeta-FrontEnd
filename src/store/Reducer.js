@@ -1,5 +1,7 @@
 import {
-    LOGIN_MODAL
+    LOGIN_MODAL,
+    LOADING,
+    ALERT
 } from './Types'
 
 export default function reducer(state, action) {
@@ -15,8 +17,18 @@ export default function reducer(state, action) {
                 ...state,
                 loginModal: payload
             }
-            default:
-                return state;
+            case LOADING:
+                return {
+                    ...state,
+                    loading: payload
+                }
+                case ALERT:
+                    return {
+                        ...state,
+                        alerts: state.alerts.push(payload)
+                    }
+                    default:
+                        return state;
     }
 
 }
