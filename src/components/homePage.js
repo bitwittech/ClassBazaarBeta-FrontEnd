@@ -1,25 +1,27 @@
 import React, { Component } from 'react';
-import { withStyles } from '@material-ui/core/styles';
-import CourseCard from './courseCard';
-import Pagination from 'material-ui-flat-pagination';
-import { black } from 'material-ui/styles/colors';
+
 import ArrowBack from '@material-ui/icons/ArrowBack';
 import ArrowForward from '@material-ui/icons/ArrowForward';
-import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
-import Typography from '@material-ui/core/Typography';
+import { Container } from '@material-ui/core';
+import CourseCard from './ProfileCourseCard';
+// import CourseCard from './courseCard';
+import Footer from './Footer';
+import FormControl from '@material-ui/core/FormControl';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormLabel from '@material-ui/core/FormLabel';
+import Grid from '@material-ui/core/Grid';
+import NestedMenu from './nestedCheckbox';
+import Pagination from 'material-ui-flat-pagination';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormControl from '@material-ui/core/FormControl';
-import FormLabel from '@material-ui/core/FormLabel';
 import TopAppBar from './appBar';
-import NestedMenu from './nestedCheckbox';
+import Typography from '@material-ui/core/Typography';
+import { black } from 'material-ui/styles/colors';
 import { subjectsData } from './../utils/data';
-import ProfileCourseCard from './ProfileCourseCard';
-import { Container } from '@material-ui/core';
-import Footer from './Footer';
+import { withStyles } from '@material-ui/core/styles';
+
 const providerData = ['EDx', 'FutureLearn'];
 
 const styles = {
@@ -183,31 +185,6 @@ class HomePage extends Component {
             initialSearchValue={this.state.q}
           />
           <Grid container>
-            <Grid item xs={8}>
-              <br />
-              {this.state.data.length > 0 &&
-                this.state.data.map((obj, index) => {
-                  return (
-                    <>
-                      <Container>
-                        <ProfileCourseCard />
-                      </Container>
-                    </>
-                    /* <CourseCard
-                    key={obj.title}
-                    isInstructor={true}
-                    university={obj.university}
-                    courseName={obj.title}
-                    provider={obj.provider}
-                    duration={obj.commitment}
-                    startingOn={obj.start_date}
-                    price={obj.price}
-                    rating={obj.rating}
-                    uuid={obj.uuid}
-                  ></CourseCard> */
-                  );
-                })}
-            </Grid>
             <Grid item xs={4}>
               <Box border={1} {...defaultProps} style={styles.filter}>
                 <FormControl component="fieldset">
@@ -246,6 +223,43 @@ class HomePage extends Component {
                 </FormControl>
               </Box>
             </Grid>
+            <Grid item xs={8}>
+              <br />
+              {this.state.data.length > 0 &&
+                this.state.data.map((obj, index) => {
+                  return (
+                    <>
+                      <Container>
+                        <CourseCard
+                          key={obj.title}
+                          isInstructor={true}
+                          university={obj.university}
+                          courseName={obj.title}
+                          provider={obj.provider}
+                          duration={obj.commitment}
+                          startingOn={obj.start_date}
+                          price={obj.price}
+                          rating={obj.rating}
+                          uuid={obj.uuid}
+                        />
+                      </Container>
+                    </>
+                    /* <CourseCard
+                    key={obj.title}
+                    isInstructor={true}
+                    university={obj.university}
+                    courseName={obj.title}
+                    provider={obj.provider}
+                    duration={obj.commitment}
+                    startingOn={obj.start_date}
+                    price={obj.price}
+                    rating={obj.rating}
+                    uuid={obj.uuid}
+                  ></CourseCard>*/
+                  );
+                })}
+            </Grid>
+
             {this.state.data.length > 0 && (
               <Grid container spacing={16}>
                 <Grid item xs={3} />
