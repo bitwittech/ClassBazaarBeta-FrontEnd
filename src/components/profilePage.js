@@ -23,6 +23,7 @@ import Button from '@material-ui/core/Button';
 import Divider from '@material-ui/core/Divider';
 import TopAppBar from './appBar';
 import Fab from '@material-ui/core/Fab';
+import Footer from './Footer';
 
 const styles = {
   grid: {
@@ -263,6 +264,10 @@ class ProfilePage extends Component {
             </div>
           </Container>
         </div>
+        <br />
+        <br />
+        <br />
+        <Footer />
       </>
     );
   }
