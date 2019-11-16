@@ -11,8 +11,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 
 import Store from '../store/Context';
 import { LOGIN_MODAL } from '../store/Types';
-import { register, signin } from '../actions/actions';
-
+import { register, signin } from '../actions/ContextActions';
 const useStyles = makeStyles(theme => ({
   modal: {
     display: 'flex',
@@ -61,7 +60,6 @@ const Login = () => {
       email: '',
     },
   });
-
   const handleClose = () => {
     dispatch({
       type: LOGIN_MODAL,
@@ -99,7 +97,7 @@ const Login = () => {
       },
     });
   };
-
+  console.log(modal);
   return (
     <>
       <Modal
