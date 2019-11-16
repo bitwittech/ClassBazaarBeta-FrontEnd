@@ -23,6 +23,7 @@ import Button from '@material-ui/core/Button';
 import Divider from '@material-ui/core/Divider';
 import TopAppBar from './appBar';
 import Fab from '@material-ui/core/Fab';
+import Footer from './Footer';
 
 const styles = {
   grid: {
@@ -142,6 +143,7 @@ class ProfilePage extends Component {
                                 variant="h6"
                                 gutterBottom
                                 className="profile-subtext"
+                                style={{ color: '#274E5D', fontWeight: '600' }}
                               >
                                 Clayton Allen
                               </Typography>
@@ -156,7 +158,11 @@ class ProfilePage extends Component {
                             <div></div>
                           </Grid>
                           <Grid item xs={12}>
-                            <Typography variant="body1" gutterBottom>
+                            <Typography
+                              style={{ color: '#274E5D', fontWeight: '600' }}
+                              variant="body1"
+                              gutterBottom
+                            >
                               Phone No
                             </Typography>
                             <Typography variant="body2" gutterBottom>
@@ -164,7 +170,11 @@ class ProfilePage extends Component {
                             </Typography>
                             <Divider variant="left" />
                             <br />
-                            <Typography variant="body1" gutterBottom>
+                            <Typography
+                              style={{ color: '#274E5D', fontWeight: '600' }}
+                              variant="body1"
+                              gutterBottom
+                            >
                               Email ID{' '}
                             </Typography>
                             <Typography variant="body2" gutterBottom>
@@ -179,7 +189,11 @@ class ProfilePage extends Component {
                             <Divider variant="left" />
                             <br />
                             <br />
-                            <Typography variant="body1" gutterBottom>
+                            <Typography
+                              style={{ color: '#274E5D', fontWeight: '600' }}
+                              variant="body1"
+                              gutterBottom
+                            >
                               Settings{' '}
                             </Typography>
                             <Typography variant="body2" gutterBottom>
@@ -250,6 +264,10 @@ class ProfilePage extends Component {
             </div>
           </Container>
         </div>
+        <br />
+        <br />
+        <br />
+        <Footer />
       </>
     );
   }

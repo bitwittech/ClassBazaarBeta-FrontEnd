@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useContext, useReducer } from 'react';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import HomePage from './components/homePage';
 import LandingPage from './components/landingPage';
@@ -6,11 +6,13 @@ import CoursePage from './components/coursePage';
 import About from './components/About';
 import ProfilePage from './components/profilePage';
 import PrivacyPolicy from './components/PrivacyPolicy';
-import logo from './logo.svg';
+import Store from './store/Context';
+import Reducer from './store/Reducer';
 import withAnalytics, { initAnalytics } from 'react-with-analytics';
 import './App.css';
-
+import Login from './components/Login';
 import { BrowserRouter, Route, Switch, withRouter } from 'react-router-dom';
+import Snackbar from './components/Snackbar';
 
 const theme = createMuiTheme({
   palette: {
@@ -33,26 +35,34 @@ const theme = createMuiTheme({
   },
 });
 
-const Root = () => (
-  <Switch>
-    <Route exact path="/" component={LandingPage} />
-    <Route exact path="/listing" component={HomePage} />
-    <Route exact path="/course" component={CoursePage} />
-    <Route exact path="/profile" component={ProfilePage} />
-    <Route exact path="/about" component={About} />
-    <Route exact path="/privacypolicy" component={PrivacyPolicy} />
-  </Switch>
-);
+const Root = () => {
+  return (
+    <Switch>
+      <Route exact path="/" component={LandingPage} />
+      <Route exact path="/listing" component={HomePage} />
+      <Route exact path="/course" component={CoursePage} />
+      <Route exact path="/profile" component={ProfilePage} />
+      <Route exact path="/about" component={About} />
+      <Route exact path="/privacypolicy" component={PrivacyPolicy} />
+    </Switch>
+  );
+};
 
 const AppWithRouter = withRouter(withAnalytics(Root));
 
 function App() {
+  const initialState = useContext(Store);
+  const [state, dispatch] = useReducer(Reducer, initialState);
   return (
     <BrowserRouter>
       <MuiThemeProvider theme={theme}>
-        <div className="App">
-          <AppWithRouter />
-        </div>
+        <Store.Provider value={{ state, dispatch }}>
+          <div className="App">
+            <Snackbar />
+            <Login />
+            <AppWithRouter />
+          </div>
+        </Store.Provider>
       </MuiThemeProvider>
     </BrowserRouter>
   );

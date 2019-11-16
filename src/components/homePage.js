@@ -17,7 +17,9 @@ import FormLabel from '@material-ui/core/FormLabel';
 import TopAppBar from './appBar';
 import NestedMenu from './nestedCheckbox';
 import { subjectsData } from './../utils/data';
-
+import ProfileCourseCard from './ProfileCourseCard';
+import { Container } from '@material-ui/core';
+import Footer from './Footer';
 const providerData = ['EDx', 'FutureLearn'];
 
 const styles = {
@@ -173,18 +175,25 @@ class HomePage extends Component {
   render() {
     console.log(this.state);
     return (
-      <div>
-        <TopAppBar
-          onChange={this.onSearchChange}
-          isSearchIncluded={true}
-          initialSearchValue={this.state.q}
-        />
-        <Grid container>
-          <Grid item xs={8}>
-            {this.state.data.length > 0 &&
-              this.state.data.map((obj, index) => {
-                return (
-                  <CourseCard
+      <>
+        <div>
+          <TopAppBar
+            onChange={this.onSearchChange}
+            isSearchIncluded={true}
+            initialSearchValue={this.state.q}
+          />
+          <Grid container>
+            <Grid item xs={8}>
+              <br />
+              {this.state.data.length > 0 &&
+                this.state.data.map((obj, index) => {
+                  return (
+                    <>
+                      <Container>
+                        <ProfileCourseCard />
+                      </Container>
+                    </>
+                    /* <CourseCard
                     key={obj.title}
                     isInstructor={true}
                     university={obj.university}
@@ -195,69 +204,73 @@ class HomePage extends Component {
                     price={obj.price}
                     rating={obj.rating}
                     uuid={obj.uuid}
-                  ></CourseCard>
-                );
-              })}
-          </Grid>
-          <Grid item xs={4}>
-            <Box border={1} {...defaultProps} style={styles.filter}>
-              <FormControl component="fieldset">
-                <FormLabel component="legend">Filters</FormLabel>
-                <RadioGroup
-                  aria-label="filter"
-                  name="filter"
-                  value={this.state.filterValue}
-                  onChange={this.onFilterChange}
-                >
-                  <NestedMenu
-                    isOnlyOneAllowed={true}
-                    level1Name={'Providers'}
-                    level2List={this.state.providerData}
-                    onChangeOptions={s => this.onProviderFilterChange(s)}
-                  />
-                  <NestedMenu
-                    isOnlyOneAllowed={true}
-                    level1Name={'Fees'}
-                    level2List={['Free', 'Paid']}
-                    onChangeOptions={s => this.onFeeFilterChange(s)}
-                  />
-                  <NestedMenu
-                    isOnlyOneAllowed={true}
-                    level1Name={'Start Date'}
-                    level2List={['Now', 'Later']}
-                    onChangeOptions={s => this.onFeeFilterChange(s)}
-                  />
-                  <NestedMenu
-                    isOnlyOneAllowed={false}
-                    level1Name={'Subject'}
-                    level2List={subjectsData.map(s => s.name)}
-                    onChangeOptions={s => this.onSubjectFilterChange(s)}
-                  />
-                </RadioGroup>
-              </FormControl>
-            </Box>
-          </Grid>
-          {this.state.data.length > 0 && (
-            <Grid container spacing={16}>
-              <Grid item xs={3} />
-              <Grid item xs={6}>
-                <Pagination
-                  classes={{ colorInherit: { color: black } }}
-                  currentPageColor={'inherit'}
-                  limit={this.state.perPage}
-                  offset={this.state.page * this.state.perPage}
-                  total={this.state.total}
-                  nextPageLabel={<ArrowForward fontSize="inherit" />}
-                  previousPageLabel={<ArrowBack fontSize="inherit" />}
-                  onClick={(e, offset, page) => this.handlePageChange(page - 1)}
-                />
-              </Grid>
-              <Grid item xs={3} />
+                  ></CourseCard> */
+                  );
+                })}
             </Grid>
-          )}
-          <Grid container spacing={16} />
-        </Grid>
-      </div>
+            <Grid item xs={4}>
+              <Box border={1} {...defaultProps} style={styles.filter}>
+                <FormControl component="fieldset">
+                  <FormLabel component="legend">Filters</FormLabel>
+                  <RadioGroup
+                    aria-label="filter"
+                    name="filter"
+                    value={this.state.filterValue}
+                    onChange={this.onFilterChange}
+                  >
+                    <NestedMenu
+                      isOnlyOneAllowed={true}
+                      level1Name={'Providers'}
+                      level2List={this.state.providerData}
+                      onChangeOptions={s => this.onProviderFilterChange(s)}
+                    />
+                    <NestedMenu
+                      isOnlyOneAllowed={true}
+                      level1Name={'Fees'}
+                      level2List={['Free', 'Paid']}
+                      onChangeOptions={s => this.onFeeFilterChange(s)}
+                    />
+                    <NestedMenu
+                      isOnlyOneAllowed={true}
+                      level1Name={'Start Date'}
+                      level2List={['Now', 'Later']}
+                      onChangeOptions={s => this.onFeeFilterChange(s)}
+                    />
+                    <NestedMenu
+                      isOnlyOneAllowed={false}
+                      level1Name={'Subject'}
+                      level2List={subjectsData.map(s => s.name)}
+                      onChangeOptions={s => this.onSubjectFilterChange(s)}
+                    />
+                  </RadioGroup>
+                </FormControl>
+              </Box>
+            </Grid>
+            {this.state.data.length > 0 && (
+              <Grid container spacing={16}>
+                <Grid item xs={3} />
+                <Grid item xs={6}>
+                  <Pagination
+                    classes={{ colorInherit: { color: black } }}
+                    currentPageColor={'inherit'}
+                    limit={this.state.perPage}
+                    offset={this.state.page * this.state.perPage}
+                    total={this.state.total}
+                    nextPageLabel={<ArrowForward fontSize="inherit" />}
+                    previousPageLabel={<ArrowBack fontSize="inherit" />}
+                    onClick={(e, offset, page) =>
+                      this.handlePageChange(page - 1)
+                    }
+                  />
+                </Grid>
+                <Grid item xs={3} />
+              </Grid>
+            )}
+            <Grid container spacing={16} />
+          </Grid>
+        </div>
+        <Footer />
+      </>
     );
   }
 }

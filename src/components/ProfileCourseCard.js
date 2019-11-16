@@ -34,10 +34,19 @@ const ProfileCourseCard = () => {
   return (
     <>
       <Paper style={{ padding: '15px' }}>
-        <Typography variant="subtitle1" gutterBottom>
+        <Typography
+          color="primary"
+          style={{ fontWeight: '600' }}
+          variant="subtitle1"
+          gutterBottom
+        >
           University Name
         </Typography>
-        <Typography variant="h6" gutterBottom>
+        <Typography
+          variant="h5"
+          style={{ color: '#3C3C3C', fontWeight: '500' }}
+          gutterBottom
+        >
           Introduction to Computer Science : CS101
         </Typography>
         <Typography variant="caption" display="block" gutterBottom>
@@ -55,13 +64,14 @@ const ProfileCourseCard = () => {
           <div className={styles.root}>
             <Grid container spacing={2}>
               <Grid item sm={3}>
-                <WatchLaterIcon /> 1 month
+                <WatchLaterIcon className="mb" color="primary" /> 1 month
               </Grid>
               <Grid item sm={3}>
-                <CalendarIcon /> Flexible
+                <CalendarIcon className="mb" color="primary" /> Flexible
               </Grid>
               <Grid item sm={3}>
-                <MoneyIcon /> Subscriptions
+                <MoneyIcon className="mb" color="primary" />
+                Subscriptions
               </Grid>
             </Grid>
           </div>
