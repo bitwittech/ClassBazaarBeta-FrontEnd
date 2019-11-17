@@ -44,6 +44,7 @@ const ProfileCourseCard = withRouter(({ history, ...data }) => {
             state: {
               uuid: data.props.uuid,
               provider: data.props.provider,
+              ...data.props,
             },
           })
         }
@@ -72,7 +73,12 @@ const ProfileCourseCard = withRouter(({ history, ...data }) => {
             <Grid container spacing={2}>
               <Grid item sm={3}>
                 <WatchLaterIcon className="mb" color="primary" />{' '}
-                {formatDate(new Date(data.props.startingOn), 'MMMM d, yyyy')}{' '}
+                {data.props.startingOn == null
+                  ? 'NA'
+                  : formatDate(
+                      new Date(data.props.startingOn),
+                      'MMMM d, yyyy'
+                    )}{' '}
               </Grid>
               <Grid item sm={3}>
                 <CalendarIcon className="mb" color="primary" />{' '}

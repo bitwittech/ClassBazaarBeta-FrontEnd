@@ -22,7 +22,7 @@ import { black } from 'material-ui/styles/colors';
 import { subjectsData } from './../utils/data';
 import { withStyles } from '@material-ui/core/styles';
 
-const providerData = ['EDx', 'FutureLearn'];
+const providerData = ['EDx', 'FutureLearn', 'SimpliLearn', 'Udemy'];
 
 const styles = {
   dashboardLink: {
@@ -241,6 +241,7 @@ class HomePage extends Component {
                           price={obj.price}
                           rating={obj.rating}
                           uuid={obj.uuid}
+                          url={obj.url}
                         />
                       </Container>
                     </>

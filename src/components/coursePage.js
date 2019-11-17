@@ -1,20 +1,21 @@
 import React, { Component } from 'react';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
-import ReactHtmlParser from 'react-html-parser';
-import getClosestNextRun from './../utils/edxUtils';
-import WatchLaterIcon from '@material-ui/icons/WatchLater';
-import CalendarIcon from '@material-ui/icons/CalendarToday';
-import MoneyIcon from '@material-ui/icons/AttachMoney';
-import ProviderIcon from '@material-ui/icons/Assignment';
-import PlusIcon from '@material-ui/icons/Add';
+
 import ArrowForward from '@material-ui/icons/ArrowForward';
-import { titleCase } from './../utils/utils';
-import formatDate from './../utils/dateUtils';
+import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
-import TopAppBar from './appBar';
+import CalendarIcon from '@material-ui/icons/CalendarToday';
 import Fab from '@material-ui/core/Fab';
+import Grid from '@material-ui/core/Grid';
+import MoneyIcon from '@material-ui/icons/AttachMoney';
+import PlusIcon from '@material-ui/icons/Add';
+import ProviderIcon from '@material-ui/icons/Assignment';
+import ReactHtmlParser from 'react-html-parser';
+import TopAppBar from './appBar';
+import Typography from '@material-ui/core/Typography';
+import WatchLaterIcon from '@material-ui/icons/WatchLater';
+import formatDate from './../utils/dateUtils';
+import getClosestNextRun from './../utils/edxUtils';
+import { titleCase } from './../utils/utils';
 
 const styles = theme => {
   return {
@@ -195,10 +196,12 @@ class CoursePage extends Component {
             }}
           >
             <PlusIcon style={summaryStyles.iconBig} color="primary" />
-            <Button variant="contained" color="primary">
-              <Box>Enroll Now</Box>
-              <ArrowForward />
-            </Button>
+            <a href={this.props.location.state.url}>
+              <Button variant="contained" color="primary">
+                <Box>Enroll Now</Box>
+                <ArrowForward />
+              </Button>
+            </a>
           </div>
         </Grid>
       </Grid>
@@ -350,10 +353,18 @@ class CoursePage extends Component {
     );
   }
 
+  renderComingSoon() {
+    return <div>Coming Soon</div>;
+  }
+
   render() {
     if (this.props.location.state.provider === 'EDx') return this.renderEdx();
     if (this.props.location.state.provider === 'FutureLearn')
       return this.renderFL();
+    if (this.props.location.state.provider === 'SimpliLearn')
+      return this.renderComingSoon();
+    if (this.props.location.state.provider === 'Udemy')
+      return this.renderComingSoon();
   }
 }
 
