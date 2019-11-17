@@ -93,7 +93,7 @@ class HomePage extends Component {
       (page + 1) * this.state.perPage,
     ]);
     // var url = `http://localhost:8080/api/courses/?range=${range}&q=${query}&filter=${parsedFilter}&subjects=${this.state.subjects}&provider=${this.state.providers}`;
-    var url = `http://api.classbazaar.in/api/courses/?range=${range}&q=${query}&filter=${parsedFilter}&subjects=${this.state.subjects}&provider=${this.state.providers}`;
+    var url = `https://api.classbazaar.in/api/courses/?range=${range}&q=${query}&filter=${parsedFilter}&subjects=${this.state.subjects}&provider=${this.state.providers}`;
     return fetch(url)
       .then(response => response.json())
       .then(json => {

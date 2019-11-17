@@ -86,7 +86,7 @@ class CoursePage extends Component {
     console.log(this.props.location.state);
     const uuid = this.props.location.state.uuid;
     const provider = this.props.location.state.provider;
-    var url = `http://api.classbazaar.in/api/course?uuid=${uuid}&provider=${provider}`;
+    var url = `https://api.classbazaar.in/api/course?uuid=${uuid}&provider=${provider}`;
     fetch(url)
       .then(response => response.json())
       .then(json => {
