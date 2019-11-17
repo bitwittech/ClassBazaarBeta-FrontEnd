@@ -86,7 +86,7 @@ class CoursePage extends Component {
     console.log(this.props.location.state);
     const uuid = this.props.location.state.uuid;
     const provider = this.props.location.state.provider;
-    var url = `http://167.71.231.7:8080/api/course?uuid=${uuid}&provider=${provider}`;
+    var url = `http://api.classbazaar.in/api/course?uuid=${uuid}&provider=${provider}`;
     fetch(url)
       .then(response => response.json())
       .then(json => {
@@ -271,6 +271,89 @@ class CoursePage extends Component {
   }
 
   renderEdx() {
+    return (
+      <div>
+        <TopAppBar onChange={this.onSearchChange} />
+        {this.state.data !== undefined && (
+          <Grid container spacing={2} style={{ margin: 20 }}>
+            <Grid item xs={8}>
+              <Typography variant="title" component="h2">
+                {this.state.data.title}
+              </Typography>
+              <Typography variant="body2">
+                <Box display="inline" fontWeight="fontWeightBold">
+                  {this.state.data.owners[0].name}{' '}
+                </Box>
+                <Box display="inline" fontStyle="oblique">
+                  via {this.props.location.state.provider}
+                </Box>
+              </Typography>
+              <br></br>
+              {getHeader('Course Overview')}
+              <Typography variant="body2">
+                <Box>
+                  {ReactHtmlParser(this.state.data.full_description, {
+                    transform: node => {
+                      if (node.name === 'h2' || node.name === 'h3') {
+                        // console.log({ node });
+                        return <Box>{node.children[0].children[0].data}</Box>;
+                      }
+                      if (node.name === 'br') {
+                        return null;
+                      }
+                      if (node.name === 'strong') {
+                        console.log({ node });
+                        return <Box>{node.children[0].data}</Box>;
+                      }
+                    },
+                  })}
+                </Box>
+              </Typography>
+              {this.state.data.outcome !== '' && (
+                <div>
+                  {getHeader('What will you learn?')}
+                  <Typography variant="body2">
+                    <Box>
+                      {ReactHtmlParser(this.state.data.outcome, {
+                        transform: node => {
+                          // console.log({ node });
+                          if (node.name === 'h2') {
+                            return <Box>{node.children[0].data}</Box>;
+                          }
+                        },
+                      })}
+                    </Box>
+                  </Typography>
+                </div>
+              )}
+              {this.state.data.prerequisites_raw !== '' && (
+                <div>
+                  {getHeader('Prerequisites')}
+                  <Typography variant="body2">
+                    <Box>{this.state.data.prerequisites_raw}</Box>
+                  </Typography>
+                </div>
+              )}
+              {this.state.closestRun !== undefined && (
+                <div>
+                  {getHeader('Professor')}
+                  {this.state.closestRun.staff.map((obj, index) => (
+                    <Typography variant="body2">
+                      <Box>{`${obj.given_name}`}</Box>
+                    </Typography>
+                  ))}
+                </div>
+              )}
+              {this.getReviews()}
+            </Grid>
+            {this.getSummary()}
+          </Grid>
+        )}
+      </div>
+    );
+  }
+
+  renderUdemy() {
     return (
       <div>
         <TopAppBar onChange={this.onSearchChange} />

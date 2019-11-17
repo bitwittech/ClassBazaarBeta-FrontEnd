@@ -1,29 +1,30 @@
 import React, { Component } from 'react';
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-import { Container } from '@material-ui/core';
-import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
-import ReactHtmlParser from 'react-html-parser';
-import getClosestNextRun from './../utils/edxUtils';
-import WatchLaterIcon from '@material-ui/icons/WatchLater';
-import CalendarIcon from '@material-ui/icons/CalendarToday';
-import DateRangeIcon from '@material-ui/icons/DateRange';
-import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
-import MoneyIcon from '@material-ui/icons/AttachMoney';
-import CourseCard from './courseCard';
-import ProviderIcon from '@material-ui/icons/Assignment';
-import PlusIcon from '@material-ui/icons/Add';
-import ArrowForward from '@material-ui/icons/ArrowForward';
-import { titleCase } from './../utils/utils';
-import formatDate from './../utils/dateUtils';
+
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
-import ProfileCourseCard from './ProfileCourseCard';
+import ArrowForward from '@material-ui/icons/ArrowForward';
+import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
+import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
+import CalendarIcon from '@material-ui/icons/CalendarToday';
+import { Container } from '@material-ui/core';
+import CourseCard from './courseCard';
+import DateRangeIcon from '@material-ui/icons/DateRange';
 import Divider from '@material-ui/core/Divider';
-import TopAppBar from './appBar';
 import Fab from '@material-ui/core/Fab';
 import Footer from './Footer';
+import Grid from '@material-ui/core/Grid';
+import MoneyIcon from '@material-ui/icons/AttachMoney';
+import Paper from '@material-ui/core/Paper';
+import PlusIcon from '@material-ui/icons/Add';
+import ProfileCourseCard from './ProfileCourseCard';
+import ProviderIcon from '@material-ui/icons/Assignment';
+import ReactHtmlParser from 'react-html-parser';
+import TopAppBar from './appBar';
+import Typography from '@material-ui/core/Typography';
+import WatchLaterIcon from '@material-ui/icons/WatchLater';
+import formatDate from './../utils/dateUtils';
+import getClosestNextRun from './../utils/edxUtils';
+import { titleCase } from './../utils/utils';
 
 const styles = {
   grid: {
@@ -83,7 +84,7 @@ class ProfilePage extends Component {
       (page + 1) * this.state.perPage,
     ]);
     // var url = `http://localhost:8080/api/courses/?range=${range}&q=${query}&filter=${parsedFilter}&subjects=${this.state.subjects}&provider=${this.state.providers}`;
-    var url = `http://167.71.231.7:8080/api/courses/?range=${range}&q=${query}&filter=${parsedFilter}&subjects=${this.state.subjects}&provider=${this.state.providers}`;
+    var url = `http://api.classbazaar.in/api/courses/?range=${range}&q=${query}&filter=${parsedFilter}&subjects=${this.state.subjects}&provider=${this.state.providers}`;
     return fetch(url)
       .then(response => response.json())
       .then(json => {
