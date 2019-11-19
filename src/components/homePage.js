@@ -263,6 +263,26 @@ class HomePage extends Component {
                   <CircularProgress />
                 </Grid>
               )}
+              {this.state.data.length > 0 && (
+                <Grid container spacing={10}>
+                  <Grid item xs={3} />
+                  <Grid item xs={6}>
+                    <Pagination
+                      classes={{ colorInherit: { color: black } }}
+                      currentPageColor={'inherit'}
+                      limit={this.state.perPage}
+                      offset={this.state.page * this.state.perPage}
+                      total={this.state.total}
+                      nextPageLabel={<ArrowForward fontSize="inherit" />}
+                      previousPageLabel={<ArrowBack fontSize="inherit" />}
+                      onClick={(e, offset, page) =>
+                        this.handlePageChange(page - 1)
+                      }
+                    />
+                  </Grid>
+                  <Grid item xs={3} />
+                </Grid>
+              )}
             </Grid>
           </Grid>
         </Container>
