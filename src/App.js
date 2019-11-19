@@ -15,6 +15,9 @@ import { BrowserRouter, Route, Switch, withRouter } from 'react-router-dom';
 import Snackbar from './components/Snackbar';
 
 const theme = createMuiTheme({
+  typography: {
+    fontFamily: ['Poppins'],
+  },
   palette: {
     primary: {
       main: '#FFA502',
