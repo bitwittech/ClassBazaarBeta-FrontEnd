@@ -1,7 +1,6 @@
-import React from 'react';
 import Grid from '@material-ui/core/Grid';
-
 import Logo from '../assets/logo.png';
+import React from 'react';
 
 const Footer = () => {
   return (
@@ -13,7 +12,7 @@ const Footer = () => {
         <div className="footer-links">
           <div>
             <p>
-              <a href="#">About Us</a>
+              <a href="/about">About Us</a>
             </p>
           </div>
           <div>
@@ -21,7 +20,7 @@ const Footer = () => {
           </div>
           <div>
             <p>
-              <a href="#">Contact Us</a>
+              <a href="/about">Contact Us</a>
             </p>
           </div>
           <div>
@@ -29,7 +28,7 @@ const Footer = () => {
           </div>
           <div>
             <p>
-              <a href="#">Privacy Policy</a>
+              <a href="/privacypolicy">Privacy Policy</a>
             </p>
           </div>
         </div>

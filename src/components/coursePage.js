@@ -1,20 +1,21 @@
 import React, { Component } from 'react';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
-import ReactHtmlParser from 'react-html-parser';
-import getClosestNextRun from './../utils/edxUtils';
-import WatchLaterIcon from '@material-ui/icons/WatchLater';
-import CalendarIcon from '@material-ui/icons/CalendarToday';
-import MoneyIcon from '@material-ui/icons/AttachMoney';
-import ProviderIcon from '@material-ui/icons/Assignment';
-import PlusIcon from '@material-ui/icons/Add';
+
 import ArrowForward from '@material-ui/icons/ArrowForward';
-import { titleCase } from './../utils/utils';
-import formatDate from './../utils/dateUtils';
+import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
-import TopAppBar from './appBar';
+import CalendarIcon from '@material-ui/icons/CalendarToday';
 import Fab from '@material-ui/core/Fab';
+import Grid from '@material-ui/core/Grid';
+import MoneyIcon from '@material-ui/icons/AttachMoney';
+import PlusIcon from '@material-ui/icons/Add';
+import ProviderIcon from '@material-ui/icons/Assignment';
+import ReactHtmlParser from 'react-html-parser';
+import TopAppBar from './appBar';
+import Typography from '@material-ui/core/Typography';
+import WatchLaterIcon from '@material-ui/icons/WatchLater';
+import formatDate from './../utils/dateUtils';
+import getClosestNextRun from './../utils/edxUtils';
+import { titleCase } from './../utils/utils';
 
 const styles = theme => {
   return {
@@ -85,7 +86,7 @@ class CoursePage extends Component {
     console.log(this.props.location.state);
     const uuid = this.props.location.state.uuid;
     const provider = this.props.location.state.provider;
-    var url = `http://167.71.231.7:8080/api/course?uuid=${uuid}&provider=${provider}`;
+    var url = `https://api.classbazaar.in/api/course?uuid=${uuid}&provider=${provider}`;
     fetch(url)
       .then(response => response.json())
       .then(json => {
@@ -195,10 +196,12 @@ class CoursePage extends Component {
             }}
           >
             <PlusIcon style={summaryStyles.iconBig} color="primary" />
-            <Button variant="contained" color="primary">
-              <Box>Enroll Now</Box>
-              <ArrowForward />
-            </Button>
+            <a href={this.props.location.state.url}>
+              <Button variant="contained" color="primary">
+                <Box>Enroll Now</Box>
+                <ArrowForward />
+              </Button>
+            </a>
           </div>
         </Grid>
       </Grid>
@@ -350,10 +353,101 @@ class CoursePage extends Component {
     );
   }
 
+  renderUdemy() {
+    return (
+      <div>
+        <TopAppBar onChange={this.onSearchChange} />
+        {this.state.data !== undefined && (
+          <Grid container spacing={2} style={{ margin: 20 }}>
+            <Grid item xs={8}>
+              <Typography variant="title" component="h2">
+                {this.state.data.title}
+              </Typography>
+              <Typography variant="body2">
+                <Box display="inline" fontWeight="fontWeightBold">
+                  {this.state.data.owners[0].name}{' '}
+                </Box>
+                <Box display="inline" fontStyle="oblique">
+                  via {this.props.location.state.provider}
+                </Box>
+              </Typography>
+              <br></br>
+              {getHeader('Course Overview')}
+              <Typography variant="body2">
+                <Box>
+                  {ReactHtmlParser(this.state.data.full_description, {
+                    transform: node => {
+                      if (node.name === 'h2' || node.name === 'h3') {
+                        // console.log({ node });
+                        return <Box>{node.children[0].children[0].data}</Box>;
+                      }
+                      if (node.name === 'br') {
+                        return null;
+                      }
+                      if (node.name === 'strong') {
+                        console.log({ node });
+                        return <Box>{node.children[0].data}</Box>;
+                      }
+                    },
+                  })}
+                </Box>
+              </Typography>
+              {this.state.data.outcome !== '' && (
+                <div>
+                  {getHeader('What will you learn?')}
+                  <Typography variant="body2">
+                    <Box>
+                      {ReactHtmlParser(this.state.data.outcome, {
+                        transform: node => {
+                          // console.log({ node });
+                          if (node.name === 'h2') {
+                            return <Box>{node.children[0].data}</Box>;
+                          }
+                        },
+                      })}
+                    </Box>
+                  </Typography>
+                </div>
+              )}
+              {this.state.data.prerequisites_raw !== '' && (
+                <div>
+                  {getHeader('Prerequisites')}
+                  <Typography variant="body2">
+                    <Box>{this.state.data.prerequisites_raw}</Box>
+                  </Typography>
+                </div>
+              )}
+              {this.state.closestRun !== undefined && (
+                <div>
+                  {getHeader('Professor')}
+                  {this.state.closestRun.staff.map((obj, index) => (
+                    <Typography variant="body2">
+                      <Box>{`${obj.given_name}`}</Box>
+                    </Typography>
+                  ))}
+                </div>
+              )}
+              {this.getReviews()}
+            </Grid>
+            {this.getSummary()}
+          </Grid>
+        )}
+      </div>
+    );
+  }
+
+  renderComingSoon() {
+    return <div>Coming Soon</div>;
+  }
+
   render() {
     if (this.props.location.state.provider === 'EDx') return this.renderEdx();
     if (this.props.location.state.provider === 'FutureLearn')
       return this.renderFL();
+    if (this.props.location.state.provider === 'SimpliLearn')
+      return this.renderComingSoon();
+    if (this.props.location.state.provider === 'Udemy')
+      return this.renderComingSoon();
   }
 }
 

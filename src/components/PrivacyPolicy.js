@@ -1,8 +1,8 @@
-import React from 'react';
 import AppBar from './appBar';
-import Container from '@material-ui/core/Container';
-import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
+import Container from '@material-ui/core/Container';
+import React from 'react';
+import Typography from '@material-ui/core/Typography';
 
 const ProvacyPolicy = () => {
   return (
@@ -162,7 +162,7 @@ const ProvacyPolicy = () => {
           International Policy Rights for EEA Residents under GDPR If you are a
           resident of European Economic Area (EEA) then you have certain rights
           with regards to your data. If you wish you exercise any of these
-          rights please contact us at ____________________. We may ask you to
+          rights please contact us at info@classbazaar.com. We may ask you to
           verify your identify before we comply with any such requests.
           <br />
           Rights : 1. Rights of access — You have the right to ask us to access,
@@ -189,7 +189,7 @@ const ProvacyPolicy = () => {
           and obtain from us once a calendar year information about the customer
           information we shared, if any, with other businesses for their own
           direct marketing uses. If you wish to obtain this data please contact
-          us at ____________________. Note that not all data is covered by this
+          us at info@classbazaar.com. Note that not all data is covered by this
           law and only data covered by this law will be shared with you.
           <br />
           Legal Proceedings Class Bazaar is a registered corporation in Mumbai,
