@@ -1,5 +1,6 @@
 body {
   font-family: 'Poppins', sans-serif !important;
+  background: #F8F8F8;
 }
 
 .App-logo {
@@ -22,6 +23,12 @@ body {
   color: white;
 }
 
+.cd-head {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
 .text-field {
   padding: 12px 30px;
   width: 45%;
@@ -32,6 +39,24 @@ body {
   text-align: center !important;
   font-weight: '600' !important;
 
+}
+
+.enroll-btn {
+  padding: 5px 10px;
+  color: white;
+  background: #FFA502;
+  border: none;
+  border-radius: 4px;
+}
+
+.enroll-btn:hover {
+  background: rgb(255, 186, 59);
+}
+
+.provider {
+  font-weight: 300;
+  font-style: italic;
+  color: #968484;
 }
 
 .c-card {
