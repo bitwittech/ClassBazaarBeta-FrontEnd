@@ -1,11 +1,11 @@
-import React from 'react';
 import AppBar from './appBar';
-import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
-import Typography from '@material-ui/core/Typography';
 import Footer from './Footer';
+import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
+import React from 'react';
+import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@material-ui/core/styles';
 
 const data = {
   section: [
@@ -21,7 +21,7 @@ const data = {
     },
     {
       heading: 'Our Team',
-      body: `${'We are a small team currently working in roles of the business which we have never done before. However, we share a common passion for online learning and the impact it can have in elevating lives. If you too think you feel similarly and want to help people find the next jump in their careers, there may be a role for you on our growing team. We would love to hear from you. Drop us an email at _______'}
+      body: `${'We are a small team currently working in roles of the business which we have never done before. However, we share a common passion for online learning and the impact it can have in elevating lives. If you too think you feel similarly and want to help people find the next jump in their careers, there may be a role for you on our growing team. We would love to hear from you. Drop us an email at info@classbazaar.com'}
     `,
     },
   ],
