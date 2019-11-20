@@ -19,10 +19,12 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import TopAppBar from './appBar';
 import Typography from '@material-ui/core/Typography';
 import { black } from 'material-ui/styles/colors';
+import config from '../config.json';
 import { subjectsData } from './../utils/data';
 import { withStyles } from '@material-ui/core/styles';
 
 const providerData = ['EDx', 'FutureLearn', 'SimpliLearn', 'Udemy'];
+const { API, API_LOCAL } = config;
 
 const styles = {
   dashboardLink: {
@@ -92,8 +94,8 @@ class HomePage extends Component {
       page * this.state.perPage,
       (page + 1) * this.state.perPage,
     ]);
-    // var url = `http://localhost:8080/api/courses/?range=${range}&q=${query}&filter=${parsedFilter}&subjects=${this.state.subjects}&provider=${this.state.providers}`;
-    var url = `https://api.classbazaar.in/api/courses/?range=${range}&q=${query}&filter=${parsedFilter}&subjects=${this.state.subjects}&provider=${this.state.providers}`;
+    const subjects = encodeURIComponent(this.state.subjects);
+    var url = `${API}/api/courses/?range=${range}&q=${query}&filter=${parsedFilter}&subjects=${subjects}&provider=${this.state.providers}`;
     return fetch(url)
       .then(response => response.json())
       .then(json => {

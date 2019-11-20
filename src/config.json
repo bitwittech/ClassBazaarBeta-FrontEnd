@@ -1,3 +1,4 @@
 {
-    "API": "https://api.classbazaar.in"
+  "API": "https://api.classbazaar.in",
+  "API_LOCAL": "http://localhost:8080"
 }
