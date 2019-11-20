@@ -4,11 +4,12 @@ import Store from '../store/Context';
 
 const Snackbar = () => {
   const { state } = useContext(Store);
-  console.log('sata', state);
+  console.log('snackbar state', state);
   return (
     <div>
-      {/* {state.alerts > 0 &&
-        state.alerts.map((a, key) => <Alert data={a} index={key} />)} */}
+      {state.alerts.length > 0
+        ? state.alerts.map((a, i) => <Alert data={a} />)
+        : null}
     </div>
   );
 };

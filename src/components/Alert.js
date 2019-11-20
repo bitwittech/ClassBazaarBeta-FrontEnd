@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import Button from '@material-ui/core/Button';
@@ -12,7 +12,8 @@ import Snackbar from '@material-ui/core/Snackbar';
 import SnackbarContent from '@material-ui/core/SnackbarContent';
 import WarningIcon from '@material-ui/icons/Warning';
 import { makeStyles } from '@material-ui/core/styles';
-
+import Store from '../store/Context';
+import { REMOVE_ALERT } from '../store/Types';
 const variantIcon = {
   success: CheckCircleIcon,
   warning: WarningIcon,
@@ -80,22 +81,31 @@ const useStyles2 = makeStyles(theme => ({
   },
 }));
 
-const Alert = ({ index, data }) => {
+const Alert = props => {
+  const { dispatch } = useContext(Store);
   const handleClose = () => {
-    console.log('snackbarclosed');
+    dispatch({
+      type: REMOVE_ALERT,
+      payload: props.data.id,
+    });
   };
+
+  console.log(props.data);
   return (
-    <div key={index}>
+    <div>
       <Snackbar
         anchorOrigin={{
           vertical: 'bottom',
           horizontal: 'left',
         }}
         open={true}
-        autoHideDuration={6000}
+        autoHideDuration={4000}
         onClose={handleClose}
       >
-        <MySnackbarContentWrapper variant="success" message="hey" />
+        <MySnackbarContentWrapper
+          variant={props.data.varient}
+          message={props.data.message}
+        />
       </Snackbar>
     </div>
   );
