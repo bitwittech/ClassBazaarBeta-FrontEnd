@@ -56,6 +56,7 @@ class NestedMenu extends Component {
             <FormControlLabel
               control={
                 <Checkbox
+                  style={{ color: '#FFA502' }}
                   checked={this.state.checkedA}
                   onChange={this.handleChangeLevel1}
                   value={this.state.checkedLevel1}
@@ -73,6 +74,7 @@ class NestedMenu extends Component {
                     <FormControlLabel
                       control={
                         <Checkbox
+                          style={{ color: '#FFA502' }}
                           checked={this.state.checkedLevel2[index]}
                           onChange={this.handleChangeLevel2(index)}
                           value={this.obj}
