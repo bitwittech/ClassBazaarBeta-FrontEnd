@@ -1,7 +1,8 @@
 import {
     LOGIN_MODAL,
     LOADING,
-    ALERT
+    ALERT,
+    REMOVE_ALERT
 } from './Types'
 
 export default function reducer(state, action) {
@@ -23,12 +24,22 @@ export default function reducer(state, action) {
                     loading: payload
                 }
                 case ALERT:
+                    const keyId = Math.random();
+                    const finalPayload = {
+                        ...payload,
+                        id: keyId
+                    }
                     return {
                         ...state,
-                        alerts: state.alerts.push(payload)
+                        alerts: [...state.alerts, finalPayload]
                     }
-                    default:
-                        return state;
+                    case REMOVE_ALERT:
+                        return {
+                            ...state,
+                            alerts: state.alerts.filter(a => a.id !== payload)
+                        }
+                        default:
+                            return state;
     }
 
 }
