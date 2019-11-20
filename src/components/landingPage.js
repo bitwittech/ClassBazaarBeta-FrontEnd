@@ -340,6 +340,7 @@ class LandingPage extends Component {
                 variant="body2"
                 component="p"
                 align="center"
+                className="sub-text"
               >
                 Discover best courses from top universities around the world
                 like MIT, Stanford, and Harvard.
@@ -390,6 +391,7 @@ class LandingPage extends Component {
                   style={{ width: '60%', margin: 'auto' }}
                   component="p"
                   align="center"
+                  className="sub-text"
                 >
                   Launch yourself in your career with an online degree. Did you
                   know many of the universities’ issue certificates which don’t
@@ -510,7 +512,7 @@ class LandingPage extends Component {
           alignItems="center"
           style={{
             background: '#FFA502',
-            padding: '50px',
+            padding: '30px 50px',
             width: '100%',
             textAlign: 'center',
             marginLeft: '-50px',

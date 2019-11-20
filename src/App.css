@@ -72,6 +72,12 @@ body {
   text-align: left;
 }
 
+.sub-text {
+  font-style: italic;
+  font-size: 16px !important;
+
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -88,12 +94,12 @@ body {
   color: white;
   padding: 10px 15px;
   border-radius: 5px 0px 0px 5px;
-  width: 200px;
+  width: 300px;
 }
 
 @media (max-width:800px) {
   .ns-input {
-    width: 100px;
+    width: 150px;
   }
 }
 
@@ -103,6 +109,7 @@ body {
   border-radius: 0px 5px 5px 0px;
   border: 2px white solid;
   padding: 10px 15px;
+  width: 100px;
 }
 
 .footer {
