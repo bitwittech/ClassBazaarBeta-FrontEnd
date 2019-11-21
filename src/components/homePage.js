@@ -215,52 +215,54 @@ class HomePage extends Component {
         <Container maxWidth={'lg'}>
           <Grid container spacing={3}>
             <Grid item xs={12} sm={3}>
-              <Typography variant="h6" gutterBottom>
-                Filter by
-              </Typography>
-              <Divider style={{ marginBottom: '25px', marginTop: '15px' }} />
-              <FormControl component="fieldset">
-                <RadioGroup
-                  aria-label="filter"
-                  name="filter"
-                  value={this.state.filterValue}
-                  onChange={this.onFilterChange}
-                >
-                  <NestedMenu
-                    isLevel1Checked={false}
-                    isOnlyOneAllowed={true}
-                    level1Name={'Providers'}
-                    level2List={this.state.providerData}
-                    onChangeOptions={s => this.onProviderFilterChange(s)}
-                  />
-                  <NestedMenu
-                    isLevel1Checked={false}
-                    isOnlyOneAllowed={true}
-                    level1Name={'Fees'}
-                    level2List={['Free', 'Paid']}
-                    onChangeOptions={s => this.onFeeFilterChange(s)}
-                  />
-                  <NestedMenu
-                    isLevel1Checked={false}
-                    isOnlyOneAllowed={true}
-                    level1Name={'Start Date'}
-                    level2List={[
-                      'Starts within 30 days',
-                      'Starts after 30 days',
-                      'Flexible',
-                    ]}
-                    onChangeOptions={s => this.onFeeFilterChange(s)}
-                  />
-                  <NestedMenu
-                    isLevel1Checked={this.state.isLevel1CheckedSubjects}
-                    checkedLevel2={this.state.checkedLevel2Subjects}
-                    isOnlyOneAllowed={false}
-                    level1Name={'Subject'}
-                    level2List={subjectsData.map(s => s.name)}
-                    onChangeOptions={s => this.onSubjectFilterChange(s)}
-                  />
-                </RadioGroup>
-              </FormControl>
+              <Box borderRight={1} style={{ borderColor: '#DCDCDC' }}>
+                <Typography variant="h6" gutterBottom>
+                  Filter by
+                </Typography>
+                <Divider style={{ marginBottom: '25px', marginTop: '15px' }} />
+                <FormControl component="fieldset">
+                  <RadioGroup
+                    aria-label="filter"
+                    name="filter"
+                    value={this.state.filterValue}
+                    onChange={this.onFilterChange}
+                  >
+                    <NestedMenu
+                      isLevel1Checked={false}
+                      isOnlyOneAllowed={true}
+                      level1Name={'Providers'}
+                      level2List={this.state.providerData}
+                      onChangeOptions={s => this.onProviderFilterChange(s)}
+                    />
+                    <NestedMenu
+                      isLevel1Checked={false}
+                      isOnlyOneAllowed={true}
+                      level1Name={'Fees'}
+                      level2List={['Free', 'Paid']}
+                      onChangeOptions={s => this.onFeeFilterChange(s)}
+                    />
+                    <NestedMenu
+                      isLevel1Checked={false}
+                      isOnlyOneAllowed={true}
+                      level1Name={'Start Date'}
+                      level2List={[
+                        'Starts within 30 days',
+                        'Starts after 30 days',
+                        'Flexible',
+                      ]}
+                      onChangeOptions={s => this.onFeeFilterChange(s)}
+                    />
+                    <NestedMenu
+                      isLevel1Checked={this.state.isLevel1CheckedSubjects}
+                      checkedLevel2={this.state.checkedLevel2Subjects}
+                      isOnlyOneAllowed={false}
+                      level1Name={'Subject'}
+                      level2List={subjectsData.map(s => s.name)}
+                      onChangeOptions={s => this.onSubjectFilterChange(s)}
+                    />
+                  </RadioGroup>
+                </FormControl>
+              </Box>
             </Grid>
             <Grid item xs={12} sm={9}>
               <Container>
@@ -268,7 +270,13 @@ class HomePage extends Component {
                   Top Courses
                 </Typography>
               </Container>
-              <Divider style={{ marginBottom: '25px', marginTop: '15px' }} />
+              <Divider
+                style={{
+                  marginBottom: '25px',
+                  marginTop: '15px',
+                  marginLeft: '-25px',
+                }}
+              />
               {this.state.data.length > 0 ? (
                 this.state.data.length > 0 &&
                 this.state.data.map((obj, index) => {
