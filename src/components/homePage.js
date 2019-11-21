@@ -155,12 +155,19 @@ class HomePage extends Component {
     let query = '';
     let subjects = 'all';
     let isLevel1CheckedSubjects = false;
+    let checkedLevel2Subjects = subjectsData.map(s => false);
+
     if (this.props.location.state !== undefined) {
       if (this.props.location.state.query !== undefined)
         query = this.props.location.state.query;
       if (this.props.location.state.subject !== undefined) {
         subjects = this.props.location.state.subject;
         isLevel1CheckedSubjects = true;
+        checkedLevel2Subjects[
+          subjectsData
+            .map(s => s.name)
+            .indexOf(this.props.location.state.subject)
+        ] = true;
       }
     }
     if (!this.state.isStateUpdatedFromProp) {
@@ -170,6 +177,7 @@ class HomePage extends Component {
           isStateUpdatedFromProp: true,
           subjects,
           isLevel1CheckedSubjects,
+          checkedLevel2Subjects,
         },
         () => {
           console.log('After the mount', this.state);
@@ -228,6 +236,7 @@ class HomePage extends Component {
                     onChange={this.onFilterChange}
                   >
                     <NestedMenu
+                      shouldUpdate={false}
                       isLevel1Checked={false}
                       isOnlyOneAllowed={true}
                       level1Name={'Providers'}
@@ -235,6 +244,7 @@ class HomePage extends Component {
                       onChangeOptions={s => this.onProviderFilterChange(s)}
                     />
                     <NestedMenu
+                      shouldUpdate={false}
                       isLevel1Checked={false}
                       isOnlyOneAllowed={true}
                       level1Name={'Fees'}
@@ -242,6 +252,7 @@ class HomePage extends Component {
                       onChangeOptions={s => this.onFeeFilterChange(s)}
                     />
                     <NestedMenu
+                      shouldUpdate={false}
                       isLevel1Checked={false}
                       isOnlyOneAllowed={true}
                       level1Name={'Start Date'}
@@ -253,6 +264,7 @@ class HomePage extends Component {
                       onChangeOptions={s => this.onFeeFilterChange(s)}
                     />
                     <NestedMenu
+                      shouldUpdate={true}
                       isLevel1Checked={this.state.isLevel1CheckedSubjects}
                       checkedLevel2={this.state.checkedLevel2Subjects}
                       isOnlyOneAllowed={false}

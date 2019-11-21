@@ -55,6 +55,16 @@ class NestedMenu extends Component {
     this.setState({ checkedLevel2 });
   };
 
+  componentWillReceiveProps(nextProps) {
+    console.log('Inside componentWillReceiveProps', this.props === nextProps);
+    if (this.props !== nextProps && nextProps.shouldUpdate) {
+      this.setState({
+        checkedLevel1: nextProps.isLevel1Checked,
+        checkedLevel2: nextProps.checkedLevel2,
+      });
+    }
+  }
+
   render() {
     return (
       <div>
@@ -64,7 +74,7 @@ class NestedMenu extends Component {
               control={
                 <Checkbox
                   style={{ color: '#FFA502' }}
-                  checked={this.state.checkedA}
+                  checked={this.state.checkedLevel1}
                   onChange={this.handleChangeLevel1}
                   value={this.state.checkedLevel1}
                   inputProps={{
