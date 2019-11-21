@@ -1,9 +1,11 @@
+import Box from '@material-ui/core/Box';
 import CalendarIcon from '@material-ui/icons/CalendarToday';
 import { Container } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import MoneyIcon from '@material-ui/icons/AttachMoney';
 import Paper from '@material-ui/core/Paper';
 import React from 'react';
+import { ThemeProvider } from '@material-ui/styles';
 import TurnedInIcon from '@material-ui/icons/TurnedIn';
 import TurnedInNotIcon from '@material-ui/icons/TurnedInNot';
 import Typography from '@material-ui/core/Typography';
@@ -55,9 +57,9 @@ const ProfileCourseCard = withRouter(({ history, ...data }) => {
         <Typography
           variant="subtitle2"
           style={{
-            color: '#3C3C3C',
             fontWeight: '600',
             padding: '0px 15px 0px 15px',
+            color: '#FFA502',
           }}
           gutterBottom
         >
@@ -69,10 +71,17 @@ const ProfileCourseCard = withRouter(({ history, ...data }) => {
           display="block"
           gutterBottom
         >
-          {data.props.courseName}
+          <Box fontSize="0.95rem" fontWeight="600">
+            {data.props.courseName}
+          </Box>
         </Typography>
-        <Typography variant="caption" display="block" gutterBottom>
-          via {data.props.provider}
+        <Typography
+          variant="caption"
+          display="block"
+          style={{ padding: '0px 15px 0px 15px', color: '#696969' }}
+          gutterBottom
+        >
+          <Box fontStyle="oblique">via {data.props.provider}</Box>
         </Typography>
         <br />
         <div>
