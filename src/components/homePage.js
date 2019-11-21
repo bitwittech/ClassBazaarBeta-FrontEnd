@@ -153,7 +153,7 @@ class HomePage extends Component {
   componentDidMount() {
     console.log(this.state, this.props);
     let query = '';
-    let subjects = '';
+    let subjects = 'all';
     let isLevel1CheckedSubjects = false;
     if (this.props.location.state !== undefined) {
       if (this.props.location.state.query !== undefined)
@@ -212,7 +212,7 @@ class HomePage extends Component {
         </div>
         <br />
         <br />
-        <Container maxWidth={'md'}>
+        <Container maxWidth={'lg'}>
           <Grid container spacing={3}>
             <Grid item xs={12} sm={3}>
               <Typography variant="h6" gutterBottom>
