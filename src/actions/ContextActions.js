@@ -31,6 +31,7 @@ export const register = async (data, dispatch) => {
         }
       })
     } else {
+
       dispatch({
         type: ALERT,
         payload: {
@@ -40,6 +41,10 @@ export const register = async (data, dispatch) => {
       })
     }
   } catch (error) {
+    dispatch({
+      type: LOADING,
+      payload: false
+    })
     dispatch({
       type: ALERT,
       payload: {
