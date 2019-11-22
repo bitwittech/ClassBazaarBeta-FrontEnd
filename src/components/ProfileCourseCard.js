@@ -1,9 +1,13 @@
+import Box from '@material-ui/core/Box';
 import CalendarIcon from '@material-ui/icons/CalendarToday';
 import { Container } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import MoneyIcon from '@material-ui/icons/AttachMoney';
 import Paper from '@material-ui/core/Paper';
 import React from 'react';
+import { ThemeProvider } from '@material-ui/styles';
+import TurnedInIcon from '@material-ui/icons/TurnedIn';
+import TurnedInNotIcon from '@material-ui/icons/TurnedInNot';
 import Typography from '@material-ui/core/Typography';
 import WatchLaterIcon from '@material-ui/icons/WatchLater';
 import formatDate from './../utils/dateUtils';
@@ -33,11 +37,12 @@ const styles = {
     backgroundColor: 'aliceblue',
   },
 };
+
 const ProfileCourseCard = withRouter(({ history, ...data }) => {
   return (
     <>
       <Paper
-        style={{ padding: '15px' }}
+        style={{ padding: '15px', margin: '20px' }}
         onClick={() =>
           history.push({
             pathname: data.routingURL,
@@ -50,27 +55,45 @@ const ProfileCourseCard = withRouter(({ history, ...data }) => {
         }
       >
         <Typography
-          color="primary"
-          style={{ fontWeight: '600' }}
-          variant="subtitle1"
+          variant="subtitle2"
+          style={{
+            fontWeight: '600',
+            padding: '0px 15px 0px 15px',
+            color: '#FFA502',
+          }}
           gutterBottom
         >
           {data.props.university}
         </Typography>
         <Typography
-          variant="h5"
-          style={{ color: '#3C3C3C', fontWeight: '500' }}
+          style={{ padding: '0px 15px 0px 15px' }}
+          variant="caption"
+          display="block"
           gutterBottom
         >
-          {data.props.courseName}
+          <Box fontSize="0.95rem" fontWeight="600">
+            {data.props.courseName}
+          </Box>
         </Typography>
-        <Typography variant="caption" display="block" gutterBottom>
-          via {data.props.provider}
+        <Typography
+          variant="caption"
+          display="block"
+          style={{ padding: '0px 15px 0px 15px', color: '#696969' }}
+          gutterBottom
+        >
+          <Box fontStyle="oblique">via {data.props.provider}</Box>
         </Typography>
         <br />
         <div>
-          <div className={styles.root}>
-            <Grid container spacing={2}>
+          <div
+            className={styles.root}
+            style={{
+              background: '#F4F2F2',
+              padding: '0px 15px 0px 15px',
+              borderRadius: '0px 0px 4px 4px',
+            }}
+          >
+            <Grid container align="left" spacing={2}>
               <Grid item sm={3}>
                 <WatchLaterIcon className="mb" color="primary" />{' '}
                 {data.props.startingOn == null
@@ -92,7 +115,6 @@ const ProfileCourseCard = withRouter(({ history, ...data }) => {
           </div>
         </div>
       </Paper>
-      <br />
     </>
   );
 });

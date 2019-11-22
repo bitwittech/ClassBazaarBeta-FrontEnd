@@ -1,12 +1,16 @@
-import Checkbox from '@material-ui/core/Checkbox';
 import React, { Component } from 'react';
-import { withStyles } from '@material-ui/core/styles';
-import PropTypes from 'prop-types';
-import FormLabel from '@material-ui/core/FormLabel';
+
+import CheckBoxIcon from '@material-ui/icons/CheckBox';
+import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
+import Checkbox from '@material-ui/core/Checkbox';
 import FormControl from '@material-ui/core/FormControl';
-import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormGroup from '@material-ui/core/FormGroup';
+import FormLabel from '@material-ui/core/FormLabel';
 import Grid from '@material-ui/core/Grid';
+import PropTypes from 'prop-types';
+import Typography from '@material-ui/core/Typography';
+import { withStyles } from '@material-ui/core/styles';
 
 const styles = theme => ({
   container: {
@@ -16,6 +20,9 @@ const styles = theme => ({
   formControl: {
     margin: theme.spacing(3),
   },
+  sizeIcon: {
+    fontSize: '0.9rem',
+  },
 });
 
 class NestedMenu extends Component {
@@ -24,7 +31,7 @@ class NestedMenu extends Component {
     console.log('Inside constructor');
     console.log(this.props);
     this.state = {
-      checkedLevel1: false,
+      checkedLevel1: this.props.isLevel1Checked,
       checkedLevel2: this.props.level2List.map(c => false),
       level1Name: this.props.level1Name,
       level2List: this.props.level2List,
@@ -48,6 +55,16 @@ class NestedMenu extends Component {
     this.setState({ checkedLevel2 });
   };
 
+  componentWillReceiveProps(nextProps) {
+    console.log('Inside componentWillReceiveProps', this.props === nextProps);
+    if (this.props !== nextProps && nextProps.shouldUpdate) {
+      this.setState({
+        checkedLevel1: nextProps.isLevel1Checked,
+        checkedLevel2: nextProps.checkedLevel2,
+      });
+    }
+  }
+
   render() {
     return (
       <div>
@@ -56,7 +73,8 @@ class NestedMenu extends Component {
             <FormControlLabel
               control={
                 <Checkbox
-                  checked={this.state.checkedA}
+                  style={{ color: '#FFA502' }}
+                  checked={this.state.checkedLevel1}
                   onChange={this.handleChangeLevel1}
                   value={this.state.checkedLevel1}
                   inputProps={{
@@ -73,6 +91,9 @@ class NestedMenu extends Component {
                     <FormControlLabel
                       control={
                         <Checkbox
+                          icon={<CheckBoxOutlineBlankIcon fontSize="small" />}
+                          checkedIcon={<CheckBoxIcon fontSize="small" />}
+                          style={{ color: '#FFA502' }}
                           checked={this.state.checkedLevel2[index]}
                           onChange={this.handleChangeLevel2(index)}
                           value={this.obj}
@@ -82,7 +103,11 @@ class NestedMenu extends Component {
                           }}
                         />
                       }
-                      label={this.state.level2List[index]}
+                      label={
+                        <Typography style={{ fontSize: '0.87rem' }}>
+                          {this.state.level2List[index]}
+                        </Typography>
+                      }
                     />
                   </Grid>
                 ))}

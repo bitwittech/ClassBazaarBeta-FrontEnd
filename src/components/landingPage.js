@@ -135,6 +135,40 @@ const Search = withRouter(({ history, ...data }) => {
   );
 });
 
+const SubjectCard = withRouter(({ history, ...data }) => {
+  const classes = data.classes;
+  return (
+    <Grid
+      container
+      onClick={() => {
+        history.push({
+          pathname: data.routingURL,
+          state: {
+            subject: data.name,
+          },
+        });
+      }}
+    >
+      <Grid align="center" justify="center" alignContent="center" item xs={9}>
+        <img
+          className={classes.imgCricular}
+          src={data.image}
+          alt="Avatar"
+        ></img>
+        <Typography
+          color="primary"
+          style={{ fontWeight: '600' }}
+          align="center"
+          variant="body1"
+          component="p"
+        >
+          {data.name}
+        </Typography>
+      </Grid>
+    </Grid>
+  );
+});
+
 class LandingPage extends Component {
   constructor(props) {
     super(props);
@@ -185,25 +219,6 @@ class LandingPage extends Component {
         subjects: subjectsData.slice(0, 3),
         showMoreButtonText: 'Show More',
       });
-  }
-
-  getSubjectCard(courseName, image, classes) {
-    return (
-      <Grid container>
-        <Grid align="center" justify="center" alignContent="center" item xs={9}>
-          <img className={classes.imgCricular} src={image} alt="Avatar"></img>
-          <Typography
-            color="primary"
-            style={{ fontWeight: '600' }}
-            align="center"
-            variant="body1"
-            component="p"
-          >
-            {courseName}
-          </Typography>
-        </Grid>
-      </Grid>
-    );
   }
 
   getQuery() {
@@ -350,11 +365,12 @@ class LandingPage extends Component {
                 {this.state.subjects.map(subject => {
                   return (
                     <Grid item xs={4} style={{ padding: 30 }}>
-                      {this.getSubjectCard(
-                        subject.name,
-                        subject.image,
-                        classes
-                      )}
+                      <SubjectCard
+                        name={subject.name}
+                        image={subject.image}
+                        classes={classes}
+                        routingURL={'/listing'}
+                      />
                     </Grid>
                   );
                 })}
