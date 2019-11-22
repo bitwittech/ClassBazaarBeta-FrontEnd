@@ -365,7 +365,7 @@ class CoursePage extends Component {
               </Typography>
               <Typography variant="body2">
                 <Box display="inline" fontWeight="fontWeightBold">
-                  {this.state.data.owners[0].name}{' '}
+                  {this.state.data.visible_instructors[0].title}{' '}
                 </Box>
                 <Box display="inline" fontStyle="oblique">
                   via {this.props.location.state.provider}
@@ -375,7 +375,7 @@ class CoursePage extends Component {
               {getHeader('Course Overview')}
               <Typography variant="body2">
                 <Box>
-                  {ReactHtmlParser(this.state.data.full_description, {
+                  {ReactHtmlParser(this.state.data.description, {
                     transform: node => {
                       if (node.name === 'h2' || node.name === 'h3') {
                         // console.log({ node });
@@ -397,14 +397,7 @@ class CoursePage extends Component {
                   {getHeader('What will you learn?')}
                   <Typography variant="body2">
                     <Box>
-                      {ReactHtmlParser(this.state.data.outcome, {
-                        transform: node => {
-                          // console.log({ node });
-                          if (node.name === 'h2') {
-                            return <Box>{node.children[0].data}</Box>;
-                          }
-                        },
-                      })}
+                      {this.state.data.what_you_will_learn_data.items.join(' ')}
                     </Box>
                   </Typography>
                 </div>
@@ -413,7 +406,9 @@ class CoursePage extends Component {
                 <div>
                   {getHeader('Prerequisites')}
                   <Typography variant="body2">
-                    <Box>{this.state.data.prerequisites_raw}</Box>
+                    <Box>
+                      {this.state.data.requirements_data.items.join(' ')}
+                    </Box>
                   </Typography>
                 </div>
               )}
@@ -447,7 +442,7 @@ class CoursePage extends Component {
     if (this.props.location.state.provider === 'SimpliLearn')
       return this.renderComingSoon();
     if (this.props.location.state.provider === 'Udemy')
-      return this.renderComingSoon();
+      return this.renderUdemy();
   }
 }
 
