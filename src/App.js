@@ -13,6 +13,7 @@ import './App.css';
 import Login from './components/Login';
 import { BrowserRouter, Route, Switch, withRouter } from 'react-router-dom';
 import Snackbar from './components/Snackbar';
+import CourseDetails from './components/CourseDetails';
 
 const theme = createMuiTheme({
   typography: {
@@ -47,6 +48,7 @@ const Root = () => {
       <Route exact path="/profile" component={ProfilePage} />
       <Route exact path="/about" component={About} />
       <Route exact path="/privacypolicy" component={PrivacyPolicy} />
+      <Route exact path="/coursedetails" component={CourseDetails} />
     </Switch>
   );
 };
