@@ -1,17 +1,18 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
-import StarRatings from 'react-star-ratings';
-import Grid from '@material-ui/core/Grid';
-import WatchLaterIcon from '@material-ui/icons/WatchLater';
-import CalendarIcon from '@material-ui/icons/CalendarToday';
-import MoneyIcon from '@material-ui/icons/AttachMoney';
+import { formatPrice, titleCase } from './../utils/utils';
+
 import Box from '@material-ui/core/Box';
-import { withRouter } from 'react-router-dom';
+import CalendarIcon from '@material-ui/icons/CalendarToday';
+import Grid from '@material-ui/core/Grid';
+import { Link } from 'react-router-dom';
+import MoneyIcon from '@material-ui/icons/AttachMoney';
+import Paper from '@material-ui/core/Paper';
+import React from 'react';
+import StarRatings from 'react-star-ratings';
+import Typography from '@material-ui/core/Typography';
+import WatchLaterIcon from '@material-ui/icons/WatchLater';
 import formatDate from './../utils/dateUtils';
-import { titleCase, formatPrice } from './../utils/utils';
+import { makeStyles } from '@material-ui/core/styles';
+import { withRouter } from 'react-router-dom';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -56,7 +57,7 @@ const Card = withRouter(({ history, ...data }) => {
               <Typography
                 variant="subtitle1"
                 component="h6"
-                color="textSecondary"
+                color="textPrimary"
               >
                 {data.props.university}
               </Typography>

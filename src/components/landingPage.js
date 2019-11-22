@@ -6,14 +6,16 @@ import {
   trendingData,
 } from './../utils/data';
 import { fade, makeStyles } from '@material-ui/core/styles';
-import Footer from './Footer';
+
 import AuthProvider from './authProvider';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
-import Container from '@material-ui/core/Container';
 import CS from './../assets/CS.png';
+import Container from '@material-ui/core/Container';
+import Footer from './Footer';
 import Grid from '@material-ui/core/Grid';
 import InputBase from '@material-ui/core/InputBase';
+import { Paper } from 'material-ui';
 import SearchBG1 from './../assets/Search-option1.jpg';
 import SearchIcon from '@material-ui/icons/Search';
 import Snackbar from '@material-ui/core/Snackbar';
@@ -21,7 +23,6 @@ import TopAppBar from './appBar';
 import Typography from '@material-ui/core/Typography';
 import { withRouter } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
-import { Paper } from 'material-ui';
 
 const styles = theme => ({
   dashboardLink: {
@@ -134,6 +135,40 @@ const Search = withRouter(({ history, ...data }) => {
   );
 });
 
+const SubjectCard = withRouter(({ history, ...data }) => {
+  const classes = data.classes;
+  return (
+    <Grid
+      container
+      onClick={() => {
+        history.push({
+          pathname: data.routingURL,
+          state: {
+            subject: data.name,
+          },
+        });
+      }}
+    >
+      <Grid align="center" justify="center" alignContent="center" item xs={9}>
+        <img
+          className={classes.imgCricular}
+          src={data.image}
+          alt="Avatar"
+        ></img>
+        <Typography
+          color="primary"
+          style={{ fontWeight: '600' }}
+          align="center"
+          variant="body1"
+          component="p"
+        >
+          {data.name}
+        </Typography>
+      </Grid>
+    </Grid>
+  );
+});
+
 class LandingPage extends Component {
   constructor(props) {
     super(props);
@@ -184,25 +219,6 @@ class LandingPage extends Component {
         subjects: subjectsData.slice(0, 3),
         showMoreButtonText: 'Show More',
       });
-  }
-
-  getSubjectCard(courseName, image, classes) {
-    return (
-      <Grid container>
-        <Grid align="center" justify="center" alignContent="center" item xs={9}>
-          <img className={classes.imgCricular} src={image} alt="Avatar"></img>
-          <Typography
-            color="primary"
-            style={{ fontWeight: '600' }}
-            align="center"
-            variant="body1"
-            component="p"
-          >
-            {courseName}
-          </Typography>
-        </Grid>
-      </Grid>
-    );
   }
 
   getQuery() {
@@ -340,9 +356,8 @@ class LandingPage extends Component {
                 component="p"
                 align="center"
               >
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                eiusmod tempor incididunt ut ero labore et dolore magna aliqua.
-                Ut enim ad minim veniam, quis nostrud exercitation ullamco.
+                Discover best courses from top universities around the world
+                like MIT, Stanford, and Harvard.
               </Typography>
             </Grid>
             <Container maxWidth={'md'}>
@@ -350,11 +365,12 @@ class LandingPage extends Component {
                 {this.state.subjects.map(subject => {
                   return (
                     <Grid item xs={4} style={{ padding: 30 }}>
-                      {this.getSubjectCard(
-                        subject.name,
-                        subject.image,
-                        classes
-                      )}
+                      <SubjectCard
+                        name={subject.name}
+                        image={subject.image}
+                        classes={classes}
+                        routingURL={'/listing'}
+                      />
                     </Grid>
                   );
                 })}
@@ -391,10 +407,9 @@ class LandingPage extends Component {
                   component="p"
                   align="center"
                 >
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
-                  do eiusmod tempor incididunt ut ero labore et dolore magna
-                  aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                  ullamco.
+                  Launch yourself in your career with an online degree. Did you
+                  know many of the universities’ issue certificates which don’t
+                  even mention “taken online” on them.
                 </Typography>
               </Grid>
 
