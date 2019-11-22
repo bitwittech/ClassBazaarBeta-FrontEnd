@@ -135,7 +135,11 @@ const Login = () => {
                 >
                   <i class="fab fa-linkedin-in"></i>&nbsp; Connect Linked-In
                 </Button>
-                <Typography
+           
+                <form onSubmit={handleSubmit}>
+                {modal.state === 1 ? (
+                    <>
+                    <Typography
                   style={{
                     fontWeight: '900',
                     fontSize: '12px',
@@ -146,7 +150,6 @@ const Login = () => {
                 >
                   User Name
                 </Typography>
-                <form onSubmit={handleSubmit}>
                   <input
                     type="text"
                     name="username"
@@ -155,10 +158,10 @@ const Login = () => {
                     className="text-field"
                     placeholder="Enter your User name"
                   />
-                  {modal.state === 1 ? (
-                    <>
-                      {' '}
-                      <Typography
+                    </>
+                  ) : null}
+         
+                   <Typography
                         style={{
                           fontWeight: '900',
                           fontSize: '12px',
@@ -168,7 +171,7 @@ const Login = () => {
                         variant="subtitle1"
                         gutterBottom
                       >
-                        Email ID*
+                        Email ID
                       </Typography>
                       <input
                         onChange={handleChange}
@@ -178,6 +181,10 @@ const Login = () => {
                         className="text-field"
                         placeholder="Enter your Email ID"
                       />
+                  {modal.state === 1 ? (
+                    <>
+                      {' '}
+                     
                       <Typography
                         style={{
                           fontWeight: '900',
