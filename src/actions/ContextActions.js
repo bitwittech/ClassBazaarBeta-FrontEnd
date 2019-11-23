@@ -65,6 +65,7 @@ export const signin = async (data, dispatch) => {
       username: data.email,
       password: data.password
     }
+
     const res = await axios.post(`${API}/login`, loginCred);
     console.log("youo", res)
     dispatch({
