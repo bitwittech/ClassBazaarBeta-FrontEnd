@@ -1,95 +1,115 @@
+import { ALERT, LOADING } from '../store/Types';
+
 import axios from 'axios';
 import config from '../config.json';
-import {
-  LOADING,
-  ALERT
-} from '../store/Types'
 
-const {
-  API
-} = config;
+const { API } = config;
 
 export const register = async (data, dispatch) => {
   dispatch({
     type: LOADING,
-    payload: true
-  })
+    payload: true,
+  });
 
   try {
     const res = await axios.post(`${API}/register`, data);
-    console.log(res)
+    console.log(res);
     dispatch({
       type: LOADING,
-      payload: false
-    })
+      payload: false,
+    });
     if (res.status === 200) {
       dispatch({
         type: ALERT,
         payload: {
           varient: 'success',
-          message: 'Successfully registered.'
-        }
-      })
+          message: 'Successfully registered.',
+        },
+      });
     } else {
-
       dispatch({
         type: ALERT,
         payload: {
           varient: 'error',
-          message: 'Registration failed'
-        }
-      })
+          message: 'Registration failed',
+        },
+      });
     }
   } catch (error) {
     dispatch({
       type: LOADING,
-      payload: false
-    })
+      payload: false,
+    });
     dispatch({
       type: ALERT,
       payload: {
         varient: 'error',
-        message: 'Registration failed'
-      }
-    })
+        message: 'Registration failed',
+      },
+    });
   }
 };
 
 export const signin = async (data, dispatch) => {
   dispatch({
     type: LOADING,
-    payload: true
-  })
+    payload: true,
+  });
   try {
-    const loginCred = {
+    let loginCred = {
       username: data.email,
-      password: data.password
-    }
+      password: data.password,
+    };
 
-    const res = await axios.post(`${API}/login`, loginCred);
-    console.log("youo", res)
+    loginCred = {
+      username: 'chaks4@gmail.com',
+      password: 'pass4',
+    };
+
+    // const res = await axios.post(`${API}/login`, loginCred);
+    const postData = {
+      username: 'chaks4@gmail.com',
+      password: 'pass4',
+    };
+    const body = Object.keys(postData)
+      .map(key => {
+        return (
+          encodeURIComponent(key) + '=' + encodeURIComponent(postData[key])
+        );
+      })
+      .join('&');
+
+    var url = `${API}/login`;
+    const res = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body,
+    });
+    console.log('youo', res);
     dispatch({
       type: LOADING,
-      payload: false
-    })
+      payload: false,
+    });
     dispatch({
       type: ALERT,
       payload: {
         varient: 'success',
-        message: 'Successfully logged in.'
-      }
-    })
+        message: 'Successfully logged in.',
+      },
+    });
   } catch (error) {
     dispatch({
       type: LOADING,
-      payload: false
-    })
+      payload: false,
+    });
     dispatch({
       type: ALERT,
       payload: {
         varient: 'error',
-        message: 'Login failed'
-      }
-    })
+        message: 'Login failed',
+      },
+    });
   }
 };
