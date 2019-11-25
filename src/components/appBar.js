@@ -178,10 +178,18 @@ export default function TopBar(props) {
           <Button
             variant="outlined"
             color="primary"
-            className={classes.button}
+            className="signup-btn"
             onClick={handleLoginModal}
           >
-            Login / Sign Up
+            Signup
+          </Button>
+          <Button
+            variant="outlined"
+            color="primary"
+            className="login-btn"
+            onClick={handleLoginModal}
+          >
+            login
           </Button>
           <IconWithRouter routingURL={'/profile'} />
         </div>

@@ -78,6 +78,31 @@ body {
 
 }
 
+.signup-btn {
+  color: #3C3C3C !important;
+  border: none !important;
+  background: transparent !important;
+  font-weight: 600 !important;
+  margin-left: 20px;
+  text-transform: none !important;
+}
+
+.signup-btn:hover {
+  color: #4e4e4e !important;
+}
+
+.login-btn {
+  color: white !important;
+  background: #FFA502 !important;
+  border-radius: 6px !important;
+  font-weight: 600 !important;
+  padding: 3px 20px !important;
+}
+
+.login-btn:hover {
+  background: rgb(255, 187, 62) !important;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
