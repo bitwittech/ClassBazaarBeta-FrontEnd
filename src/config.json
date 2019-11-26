@@ -1,4 +1,5 @@
 {
   "API": "https://api.classbazaar.in",
-  "API_LOCAL": "http://localhost:8080"
+  "API_LOCAL": "http://localhost:8080",
+  "API_NGROK": "https://fc7774e6.ngrok.io"
 }

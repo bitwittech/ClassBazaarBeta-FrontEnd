@@ -3,7 +3,7 @@ import { ALERT, LOADING } from '../store/Types';
 import axios from 'axios';
 import config from '../config.json';
 
-const { API } = config;
+const { API, API_NGROK } = config;
 
 export const register = async (data, dispatch) => {
   dispatch({
@@ -80,14 +80,15 @@ export const signin = async (data, dispatch) => {
       .join('&');
 
     var url = `${API}/login`;
-    const res = await fetch(url, {
+    await fetch(url, {
+      credentials: 'include',
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
       body,
     });
-    console.log('youo', res);
+
     dispatch({
       type: LOADING,
       payload: false,
