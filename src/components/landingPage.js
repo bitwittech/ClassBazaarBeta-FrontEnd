@@ -93,6 +93,12 @@ const styles = theme => ({
   subjectCardContainer: {
     padding: 20,
   },
+  courseCardImage: {
+    objectFit: 'cover',
+    backgroundSize: 'contain',
+    width: '100%',
+    height: '100%',
+  },
 });
 
 const defaultProps = {
@@ -225,61 +231,32 @@ class LandingPage extends Component {
     return this.state.q;
   }
 
-  getDegreeCard(name, university, classes) {
+  getDegreeCard(degree, classes) {
     return (
       <Grid container className="c-card">
-        <Grid item xs={1}></Grid>
-        <Grid item xs={10}>
+        <Grid item xs={12}>
           <Box display="flex" style={{ height: '100px', margin: '30' }}>
             <Grid item xs={9} style={{ margin: 'auto', paddingLeft: 30 }}>
               <Typography variant="body2" color="primary" align="left">
-                <Box fontWeight="fontWeightBold">{name}</Box>
+                <Box fontWeight="fontWeightBold">{degree.university}</Box>
               </Typography>
               <Typography variant="body2" align="left">
-                {university}
+                {degree.name}
+              </Typography>
+              <Typography variant="body2" align="left">
+                <Box
+                  height="100%"
+                  fontWeight="fontWeightlight"
+                  fontStyle="italic"
+                >
+                  via {degree.provider}
+                </Box>
               </Typography>
             </Grid>
-            <Grid
-              item
-              xs={3}
-              style={{ background: '#BCE0FD', height: '100%' }}
-            ></Grid>
+            <Grid item xs={3} style={{ height: '100%' }}>
+              <img className={classes.courseCardImage} src={degree.image}></img>
+            </Grid>
           </Box>
-        </Grid>
-      </Grid>
-    );
-  }
-
-  getTopTrendingCoursesCard(name, provider, classes) {
-    return (
-      <Grid
-        className="c-card"
-        item
-        xs={12}
-        style={{ width: '100%', padding: 10, marginBottom: '30px' }}
-      >
-        <Grid container>
-          <Grid item xs={1}></Grid>
-          <Grid item xs={10}>
-            <Box display="flex" style={{ height: '100px', margin: '30' }}>
-              <Grid item xs={9} style={{ margin: 'auto', paddingLeft: 30 }}>
-                <Typography variant="body2" color="primary" align="left">
-                  <Box fontWeight="fontWeightBold">{name}</Box>
-                </Typography>
-                <Typography variant="body2" align="left">
-                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                </Typography>
-                <Typography variant="caption" align="left">
-                  {provider}
-                </Typography>
-              </Grid>
-              <Grid
-                item
-                xs={3}
-                style={{ background: '#BCE0FD', height: '100%' }}
-              ></Grid>
-            </Box>
-          </Grid>
         </Grid>
       </Grid>
     );
@@ -420,7 +397,7 @@ class LandingPage extends Component {
                 <br />
                 <Grid container>
                   {degreeData.map(degree =>
-                    this.getDegreeCard(degree.name, degree.university, classes)
+                    this.getDegreeCard(degree, classes)
                   )}
                 </Grid>
               </Container>
@@ -461,11 +438,7 @@ class LandingPage extends Component {
                     </Grid>
                     <Grid container>
                       {trendingData.map(degree =>
-                        this.getTopTrendingCoursesCard(
-                          degree.name,
-                          degree.university,
-                          classes
-                        )
+                        this.getDegreeCard(degree, classes)
                       )}
                     </Grid>
                     <Grid item xs={12} style={{ margin: 30 }}>
@@ -500,11 +473,7 @@ class LandingPage extends Component {
                     </Grid>
                     <Grid container>
                       {freeCourses.map(degree =>
-                        this.getTopTrendingCoursesCard(
-                          degree.name,
-                          degree.university,
-                          classes
-                        )
+                        this.getDegreeCard(degree, classes)
                       )}
                     </Grid>
                     <Grid item xs={12} style={{ margin: 30 }}>

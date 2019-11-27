@@ -3,7 +3,7 @@ import { ALERT, LOADING } from '../store/Types';
 import axios from 'axios';
 import config from '../config.json';
 
-const { API, API_NGROK } = config;
+const { API, API_NGROK, API_LOCAL } = config;
 
 export const register = async (data, dispatch) => {
   dispatch({
@@ -79,7 +79,7 @@ export const signin = async (data, dispatch) => {
       })
       .join('&');
 
-    var url = `${API}/login`;
+    var url = `${API_LOCAL}/login`;
     await fetch(url, {
       credentials: 'include',
       method: 'POST',

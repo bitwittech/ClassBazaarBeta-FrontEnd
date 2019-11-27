@@ -1,6 +1,6 @@
 body {
   font-family: 'Poppins', sans-serif !important;
-  background: #F8F8F8;
+  background: #f8f8f8;
 }
 
 .App-logo {
@@ -14,7 +14,7 @@ body {
 } */
 .App-header {
   width: 100%;
-  background-color: #FFF;
+  background-color: #fff;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -32,19 +32,18 @@ body {
 .text-field {
   padding: 12px 30px;
   width: 45%;
-  border: 1px solid #E3E8F0;
-  background: #F0F2F7;
+  border: 1px solid #e3e8f0;
+  background: #f0f2f7;
   border-radius: 6px;
-  color: "#B9BED1" !important;
+  color: '#B9BED1' !important;
   text-align: center !important;
   font-weight: '600' !important;
-
 }
 
 .enroll-btn {
   padding: 5px 10px;
   color: white;
-  background: #FFA502;
+  background: #ffa502;
   border: none;
   border-radius: 4px;
 }
@@ -63,23 +62,23 @@ body {
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   margin-bottom: 25px;
   border-radius: 4px;
+  width: 60%;
   /* border: 1px solid #707070; */
   /* padding: 15px 10px; */
 }
 
 .App-link {
-  color: #FFF;
+  color: #fff;
   text-align: left;
 }
 
 .sub-text {
   font-style: italic;
   font-size: 16px !important;
-
 }
 
 .signup-btn {
-  color: #3C3C3C !important;
+  color: #3c3c3c !important;
   border: none !important;
   background: transparent !important;
   font-weight: 600 !important;
@@ -93,7 +92,7 @@ body {
 
 .login-btn {
   color: white !important;
-  background: #FFA502 !important;
+  background: #ffa502 !important;
   border-radius: 6px !important;
   font-weight: 600 !important;
   padding: 3px 20px !important;
@@ -122,7 +121,7 @@ body {
   width: 300px;
 }
 
-@media (max-width:800px) {
+@media (max-width: 800px) {
   .ns-input {
     width: 150px;
   }
@@ -130,7 +129,7 @@ body {
 
 .ns-submit {
   background: white;
-  color: #FFA502 !important;
+  color: #ffa502 !important;
   border-radius: 0px 5px 5px 0px;
   border: 2px white solid;
   padding: 10px 15px;
@@ -143,10 +142,8 @@ body {
   display: flex;
   justify-content: center;
   flex-direction: column;
-  background: #FAFAFA;
+  background: #fafafa;
 }
-
-
 
 .footer-logo {
   max-width: 150px;
@@ -162,7 +159,7 @@ body {
   justify-content: center;
 }
 
-.footer-links>* {
+.footer-links > * {
   padding-left: 10px;
 }
 
@@ -172,7 +169,7 @@ body {
 
 a {
   text-decoration: none;
-  color: #0975F4;
+  color: #0975f4;
 }
 
 .tsm {
@@ -197,7 +194,6 @@ a {
 }
 
 .link-button:hover {
-
   cursor: pointer;
 }
 
@@ -218,7 +214,7 @@ a {
   position: relative;
   top: 40%;
   transform: translateY(-50%);
-  color: #FFF;
+  color: #fff;
   margin: 0;
   font-size: 1.75em;
 }
@@ -234,7 +230,7 @@ a {
 }
 
 body {
-  background: #F8F8F8;
+  background: #f8f8f8;
 }
 
 .profile-img {
@@ -248,7 +244,6 @@ body {
   font-weight: '600';
 }
 
-
 .review-util {
   text-align: center;
   padding: 25px;
@@ -260,8 +255,6 @@ body {
   justify-content: space-between;
   padding: 15px 15px 0px 15px;
 }
-
-
 
 @media only screen and (max-height: 700px) {
   .route-link {
@@ -314,7 +307,6 @@ dashboard-options-header {
     max-height: 65px;
   }
 }
-
 
 .branding-div {
   text-align: center;
