@@ -79,7 +79,7 @@ export const signin = async (data, dispatch) => {
       })
       .join('&');
 
-    var url = `${API_LOCAL}/login`;
+    var url = `${API}/login`;
     await fetch(url, {
       credentials: 'include',
       method: 'POST',
