@@ -1,17 +1,18 @@
-import React, { useState, useContext } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Modal from '@material-ui/core/Modal';
-import Backdrop from '@material-ui/core/Backdrop';
-import Fade from '@material-ui/core/Fade';
-import Typography from '@material-ui/core/Typography';
-import Container from '@material-ui/core/Container';
-import Button from '@material-ui/core/Button';
-import Grid from '@material-ui/core/Grid';
-import CircularProgress from '@material-ui/core/CircularProgress';
-
-import Store from '../store/Context';
-import { LOGIN_MODAL } from '../store/Types';
+import React, { useContext, useState } from 'react';
 import { register, signin } from '../actions/ContextActions';
+
+import Backdrop from '@material-ui/core/Backdrop';
+import Button from '@material-ui/core/Button';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import Container from '@material-ui/core/Container';
+import Fade from '@material-ui/core/Fade';
+import Grid from '@material-ui/core/Grid';
+import { LOGIN_MODAL } from '../store/Types';
+import Modal from '@material-ui/core/Modal';
+import Store from '../store/Context';
+import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@material-ui/core/styles';
+
 const useStyles = makeStyles(theme => ({
   modal: {
     display: 'flex',
@@ -125,8 +126,8 @@ const Login = () => {
                   variant="subtitle1"
                   gutterBottom
                 >
-                  Sign-in via Linked-in to receive personalised course
-                  recommendation
+                  Stay ahead of the curve! Get personalized course
+                  recommendations, track subjects and more.
                 </Typography>
                 <Button
                   variant="contained"
@@ -135,56 +136,55 @@ const Login = () => {
                 >
                   <i class="fab fa-linkedin-in"></i>&nbsp; Connect Linked-In
                 </Button>
-           
+
                 <form onSubmit={handleSubmit}>
-                {modal.state === 1 ? (
+                  {modal.state === 1 ? (
                     <>
-                    <Typography
-                  style={{
-                    fontWeight: '900',
-                    fontSize: '12px',
-                  }}
-                  color="primary"
-                  variant="subtitle1"
-                  gutterBottom
-                >
-                  User Name
-                </Typography>
-                  <input
-                    type="text"
-                    name="username"
-                    value={modal.formData.username}
-                    onChange={handleChange}
-                    className="text-field"
-                    placeholder="Enter your User name"
-                  />
-                    </>
-                  ) : null}
-         
-                   <Typography
+                      <Typography
                         style={{
                           fontWeight: '900',
                           fontSize: '12px',
-                          marginTop: '20px',
                         }}
                         color="primary"
                         variant="subtitle1"
                         gutterBottom
                       >
-                        Email ID
+                        User Name
                       </Typography>
                       <input
-                        onChange={handleChange}
-                        name="email"
-                        value={modal.formData.email}
                         type="text"
+                        name="username"
+                        value={modal.formData.username}
+                        onChange={handleChange}
                         className="text-field"
-                        placeholder="Enter your Email ID"
+                        placeholder="Enter your User name"
                       />
+                    </>
+                  ) : null}
+
+                  <Typography
+                    style={{
+                      fontWeight: '900',
+                      fontSize: '12px',
+                      marginTop: '20px',
+                    }}
+                    color="primary"
+                    variant="subtitle1"
+                    gutterBottom
+                  >
+                    Email ID
+                  </Typography>
+                  <input
+                    onChange={handleChange}
+                    name="email"
+                    value={modal.formData.email}
+                    type="text"
+                    className="text-field"
+                    placeholder="Enter your Email ID"
+                  />
                   {modal.state === 1 ? (
                     <>
                       {' '}
-                     
                       <Typography
                         style={{
                           fontWeight: '900',
