@@ -38,6 +38,17 @@ const styles = {
   },
 };
 
+const formatPrice = price => {
+  if (!price || price === null || price === undefined) return 'Free';
+  else return price;
+};
+
+const formatDuration = duration => {
+  if (!duration || duration === null || duration === undefined)
+    return 'Self Paced';
+  else return duration;
+};
+
 const ProfileCourseCard = withRouter(({ history, ...data }) => {
   return (
     <>
@@ -94,8 +105,12 @@ const ProfileCourseCard = withRouter(({ history, ...data }) => {
             }}
           >
             <Grid container align="left" spacing={2}>
-              <Grid item sm={3}>
+              <Grid item sm={4}>
                 <WatchLaterIcon className="mb" color="primary" />{' '}
+                {formatDuration(data.props.duration)}
+              </Grid>
+              <Grid item sm={4}>
+                <CalendarIcon className="mb" color="primary" />{' '}
                 {data.props.startingOn == null
                   ? 'NA'
                   : formatDate(
@@ -103,13 +118,9 @@ const ProfileCourseCard = withRouter(({ history, ...data }) => {
                       'MMMM d, yyyy'
                     )}{' '}
               </Grid>
-              <Grid item sm={3}>
-                <CalendarIcon className="mb" color="primary" />{' '}
-                {data.props.duration}
-              </Grid>
-              <Grid item sm={3}>
+              <Grid item sm={4}>
                 <MoneyIcon className="mb" color="primary" />
-                {data.props.price}
+                {formatPrice(data.props.price)}
               </Grid>
             </Grid>
           </div>

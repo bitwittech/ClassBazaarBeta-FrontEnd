@@ -256,7 +256,7 @@ class LandingPage extends Component {
               <Typography
                 variant="body2"
                 align="left"
-                style={{ paddingTop: 6, paddingBottom: 6 }}
+                style={{ paddingTop: 6, paddingBottom: 6, fontColor: '#ddd' }}
               >
                 <Box
                   height="100%"

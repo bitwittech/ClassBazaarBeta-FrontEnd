@@ -71,7 +71,7 @@ const Card = withRouter(({ history, ...data }) => {
                 <Typography component="p">{data.props.rating}</Typography>
               </div>
             </Grid>
-            <Grid xs={4} container spacing={2}>
+            <Grid container spacing={2}>
               <Grid xs={12}>
                 <div
                   style={{
