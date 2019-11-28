@@ -62,9 +62,13 @@ body {
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.02), 0 3px 6px rgba(0, 0, 0, 0.23);
   margin-bottom: 25px;
   border-radius: 4px;
-  width: 60%;
+  width: 100%;
   /* border: 1px solid #707070; */
   /* padding: 15px 10px; */
+}
+
+a {
+  color: inherit !important;
 }
 
 .App-link {

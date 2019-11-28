@@ -48,7 +48,11 @@ const Root = () => {
       <Route exact path="/profile" component={ProfilePage} />
       <Route exact path="/about" component={About} />
       <Route exact path="/privacypolicy" component={PrivacyPolicy} />
-      <Route exact path="/coursedetails" component={CourseDetails} />
+      <Route
+        exact
+        path="/coursedetails/:provider/:uuid"
+        component={CourseDetails}
+      />
     </Switch>
   );
 };
