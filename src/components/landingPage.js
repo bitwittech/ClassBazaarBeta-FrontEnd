@@ -235,18 +235,32 @@ class LandingPage extends Component {
   }
 
   getDegreeCard(degree, classes) {
+    const padding = { paddingTop: 6, paddingBottom: 6 };
     return (
       <Grid container className="c-card">
         <Grid item xs={12}>
-          <Box display="flex" style={{ height: '100px', margin: '30' }}>
+          <Box display="flex" style={{ height: '135px', margin: '30' }}>
             <Grid item xs={9} style={{ margin: 'auto', paddingLeft: 30 }}>
-              <Typography variant="body2" color="primary" align="left">
-                <Box fontWeight="fontWeightBold">{degree.university}</Box>
+              <Typography
+                variant="body2"
+                color="primary"
+                align="left"
+                style={padding}
+              >
+                <Box>{degree.university.trim()}</Box>
               </Typography>
-              <Typography variant="body2" align="left">
-                {degree.name}
+              <Typography
+                variant="body2"
+                align="left"
+                style={{ paddingTop: 6, paddingBottom: 6 }}
+              >
+                <Box fontWeight="fontWeightBold">{degree.name}</Box>
               </Typography>
-              <Typography variant="body2" align="left">
+              <Typography
+                variant="body2"
+                align="left"
+                style={{ paddingTop: 6, paddingBottom: 6 }}
+              >
                 <Box
                   height="100%"
                   fontWeight="fontWeightlight"
@@ -465,7 +479,7 @@ class LandingPage extends Component {
                   </Grid>
                 </Box>
               </Grid>
-              <Grid item xs={6}>
+              <Grid item xs={6} style={{ background: '#FFF' }}>
                 <Box style={{ minHeight: '60vh', width: '95%', margin: 10 }}>
                   <Grid
                     container
