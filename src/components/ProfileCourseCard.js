@@ -8,6 +8,7 @@ import MoneyIcon from '@material-ui/icons/AttachMoney';
 import CalendarIcon from '@material-ui/icons/CalendarToday';
 import TurnedInNotIcon from '@material-ui/icons/TurnedInNot';
 import TurnedInIcon from '@material-ui/icons/TurnedIn';
+import { withRouter } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 const styles = {
   grid: {
@@ -33,46 +34,58 @@ const styles = {
     backgroundColor: 'aliceblue',
   },
 };
-const ProfileCourseCard = props => {
+const ProfileCourseCard = withRouter(({ history, ...data }) => {
+  console.log(data);
   return (
     <>
-      <Link to={`/coursedetails/${props.provider}/${props.uuid}`}>
-        <div className="c-card">
-          <div className="coursecard-header">
-            <div>
-              <Typography
-                color="primary"
-                style={{ fontWeight: '600' }}
-                variant="subtitle1"
-                gutterBottom
-              >
-                {props.university}
-              </Typography>
-            </div>
-            <div>
-              <TurnedInNotIcon color="primary" />
-            </div>
+      <div
+        className="c-card"
+        onClick={() =>
+          history.push({
+            pathname: `/coursedetails/${data.provider}/${data.uuid}`,
+            state: {
+              uuid: data.uuid,
+              provider: data.provider,
+              ...data,
+            },
+          })
+        }
+      >
+        <div className="coursecard-header">
+          <div>
+            <Typography
+              color="primary"
+              style={{ fontWeight: '600' }}
+              variant="subtitle1"
+              gutterBottom
+            >
+              {data.university}
+            </Typography>
           </div>
-          <Typography
-            variant="subtitle2"
-            style={{
-              color: '#3C3C3C',
-              fontWeight: '600',
-              padding: '0px 15px 0px 15px',
-            }}
-            gutterBottom
-          >
-            {props.courseName}
-          </Typography>
-          <Typography
-            style={{ padding: '0px 15px 0px 15px', color: '#968484' }}
-            variant="caption"
-            display="block"
-            gutterBottom
-          >
-            {props.provider}
-          </Typography>
-          {/* <Typography
+          <div>
+            <TurnedInNotIcon color="primary" />
+          </div>
+        </div>
+        <Typography
+          variant="subtitle2"
+          style={{
+            color: '#3C3C3C',
+            fontWeight: '600',
+            padding: '0px 15px 0px 15px',
+          }}
+          gutterBottom
+        >
+          {data.courseName}
+        </Typography>
+        <Typography
+          style={{ padding: '0px 15px 0px 15px', color: '#968484' }}
+          variant="caption"
+          display="block"
+          gutterBottom
+        >
+          {data.provider}
+        </Typography>
+        {/* <Typography
           style={{ padding: '15px 15px 0px 15px' }}
           variant="body2"
           gutterBottom
@@ -83,44 +96,39 @@ const ProfileCourseCard = props => {
           justo eget tempor aliquam. Etiam bibendum in massa vehicula sagittis.
           Proin varius nisi mauris, id semper nulla rhoncus at.
         </Typography> */}
-          <br />
-          <div>
-            <div
-              className={styles.root}
-              style={{
-                background: '#F4F2F2',
-                padding: '0px 15px 0px 15px',
-                borderRadius: '0px 0px 4px 4px',
-              }}
-            >
-              <Grid container align="left" spacing={2}>
-                <Grid item sm={3}>
-                  <WatchLaterIcon
-                    fontSize="small"
-                    className="mb"
-                    color="primary"
-                  />{' '}
-                  1 month
-                </Grid>
-                <Grid item sm={3}>
-                  <CalendarIcon
-                    fontSize="small"
-                    className="mb"
-                    color="primary"
-                  />{' '}
-                  Flexible
-                </Grid>
-                <Grid item sm={3}>
-                  <MoneyIcon fontSize="small" className="mb" color="primary" />
-                  Subscriptions
-                </Grid>
+        <br />
+        <div>
+          <div
+            className={styles.root}
+            style={{
+              background: '#F4F2F2',
+              padding: '0px 15px 0px 15px',
+              borderRadius: '0px 0px 4px 4px',
+            }}
+          >
+            <Grid container align="left" spacing={2}>
+              <Grid item sm={3}>
+                <WatchLaterIcon
+                  fontSize="small"
+                  className="mb"
+                  color="primary"
+                />{' '}
+                1 month
               </Grid>
-            </div>
+              <Grid item sm={3}>
+                <CalendarIcon fontSize="small" className="mb" color="primary" />{' '}
+                Flexible
+              </Grid>
+              <Grid item sm={3}>
+                <MoneyIcon fontSize="small" className="mb" color="primary" />
+                Subscriptions
+              </Grid>
+            </Grid>
           </div>
         </div>
-      </Link>
+      </div>
     </>
   );
-};
+});
 
 export default ProfileCourseCard;

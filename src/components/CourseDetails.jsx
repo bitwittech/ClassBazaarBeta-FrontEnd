@@ -273,13 +273,25 @@ const CourseDetails = props => {
                 >
                   Reviews
                 </Typography>
-                {/* <div className="reviews">
-            <div className="review">
-                <div className="review-left">
-                    <img src="" alt=""/>
-                </div>
-            </div>
-            </div> */}
+                <Grid
+                  container
+                  style={{ padding: 20, background: '#00000015' }}
+                >
+                  <Grid item xs={3}>
+                    <Grid item xs={12}>
+                      {/* <Fab color="primary" aria-label="add" className={classes.fab}>
+                  <AddIcon />
+                </Fab> */}
+                    </Grid>
+                  </Grid>
+                  <Grid item xs={9}>
+                    <Box style={{ padding: 30 }}>
+                      Natus error sit voluptartem accusantium doloremque
+                      laudantium, totam rem aperiam, eaque ipsa quae ab illo
+                      inventore.
+                    </Box>
+                  </Grid>
+                </Grid>
               </div>
             </div>
           </Grid>
