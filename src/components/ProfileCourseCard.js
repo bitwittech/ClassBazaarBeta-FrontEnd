@@ -1,18 +1,15 @@
-import Box from '@material-ui/core/Box';
-import CalendarIcon from '@material-ui/icons/CalendarToday';
-import { Container } from '@material-ui/core';
-import Grid from '@material-ui/core/Grid';
-import MoneyIcon from '@material-ui/icons/AttachMoney';
-import Paper from '@material-ui/core/Paper';
 import React from 'react';
-import { ThemeProvider } from '@material-ui/styles';
-import TurnedInIcon from '@material-ui/icons/TurnedIn';
-import TurnedInNotIcon from '@material-ui/icons/TurnedInNot';
+import { Container } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
+import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
 import WatchLaterIcon from '@material-ui/icons/WatchLater';
-import formatDate from './../utils/dateUtils';
+import MoneyIcon from '@material-ui/icons/AttachMoney';
+import CalendarIcon from '@material-ui/icons/CalendarToday';
+import TurnedInNotIcon from '@material-ui/icons/TurnedInNot';
+import TurnedInIcon from '@material-ui/icons/TurnedIn';
 import { withRouter } from 'react-router-dom';
-
+import { Link } from 'react-router-dom';
 const styles = {
   grid: {
     flexGrow: 1,
@@ -37,52 +34,68 @@ const styles = {
     backgroundColor: 'aliceblue',
   },
 };
-
 const ProfileCourseCard = withRouter(({ history, ...data }) => {
+  console.log(data);
   return (
     <>
-      <Paper
-        style={{ padding: '15px', margin: '20px' }}
+      <div
+        className="c-card"
         onClick={() =>
           history.push({
-            pathname: data.routingURL,
+            pathname: `/coursedetails/${data.provider}/${data.uuid}`,
             state: {
-              uuid: data.props.uuid,
-              provider: data.props.provider,
-              ...data.props,
+              uuid: data.uuid,
+              provider: data.provider,
+              ...data,
             },
           })
         }
       >
+        <div className="coursecard-header">
+          <div>
+            <Typography
+              color="primary"
+              style={{ fontWeight: '600' }}
+              variant="subtitle1"
+              gutterBottom
+            >
+              {data.university}
+            </Typography>
+          </div>
+          <div>
+            <TurnedInNotIcon color="primary" />
+          </div>
+        </div>
         <Typography
           variant="subtitle2"
           style={{
+            color: '#3C3C3C',
             fontWeight: '600',
             padding: '0px 15px 0px 15px',
-            color: '#FFA502',
           }}
           gutterBottom
         >
-          {data.props.university}
+          {data.courseName}
         </Typography>
         <Typography
-          style={{ padding: '0px 15px 0px 15px' }}
+          style={{ padding: '0px 15px 0px 15px', color: '#968484' }}
           variant="caption"
           display="block"
           gutterBottom
         >
-          <Box fontSize="0.95rem" fontWeight="600">
-            {data.props.courseName}
-          </Box>
+          {data.provider}
         </Typography>
-        <Typography
-          variant="caption"
-          display="block"
-          style={{ padding: '0px 15px 0px 15px', color: '#696969' }}
+        {/* <Typography
+          style={{ padding: '15px 15px 0px 15px' }}
+          variant="body2"
           gutterBottom
         >
-          <Box fontStyle="oblique">via {data.props.provider}</Box>
-        </Typography>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
+          aliquam vitae ipsum sit amet egestas. Sed molestie dui id diam tempor,
+          vel tristique turpis ullamcorper. In eget fringilla diam. Ut placerat
+          justo eget tempor aliquam. Etiam bibendum in massa vehicula sagittis.
+          Proin varius nisi mauris, id semper nulla rhoncus at.
+        </Typography> */}
         <br />
         <div>
           <div
@@ -95,32 +108,27 @@ const ProfileCourseCard = withRouter(({ history, ...data }) => {
           >
             <Grid container align="left" spacing={2}>
               <Grid item sm={3}>
-                <WatchLaterIcon className="mb" color="primary" />{' '}
-                {data.props.startingOn == null
-                  ? 'NA'
-                  : formatDate(
-                      new Date(data.props.startingOn),
-                      'MMMM d, yyyy'
-                    )}{' '}
+                <WatchLaterIcon
+                  fontSize="small"
+                  className="mb"
+                  color="primary"
+                />{' '}
+                1 month
               </Grid>
               <Grid item sm={3}>
-                <CalendarIcon className="mb" color="primary" />{' '}
-                {data.props.duration}
+                <CalendarIcon fontSize="small" className="mb" color="primary" />{' '}
+                Flexible
               </Grid>
               <Grid item sm={3}>
-                <MoneyIcon className="mb" color="primary" />
-                {data.props.price}
+                <MoneyIcon fontSize="small" className="mb" color="primary" />
+                Subscriptions
               </Grid>
             </Grid>
           </div>
         </div>
-      </Paper>
+      </div>
     </>
   );
 });
 
-const CourseCard = props => {
-  return <ProfileCourseCard props={props} routingURL={'/course'} />;
-};
-
-export default CourseCard;
+export default ProfileCourseCard;

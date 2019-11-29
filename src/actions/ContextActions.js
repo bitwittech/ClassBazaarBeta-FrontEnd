@@ -80,7 +80,7 @@ export const signin = async (data, dispatch) => {
       .join('&');
 
     var url = `${API}/login`;
-    await fetch(url, {
+    const res = await fetch(url, {
       credentials: 'include',
       method: 'POST',
       headers: {
@@ -88,6 +88,10 @@ export const signin = async (data, dispatch) => {
       },
       body,
     });
+
+    const response = await res.json();
+
+    console.log(response);
 
     dispatch({
       type: LOADING,
