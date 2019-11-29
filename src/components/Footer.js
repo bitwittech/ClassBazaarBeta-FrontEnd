@@ -34,7 +34,7 @@ const Footer = () => {
         </div>
         <p class="footer-text"> Email: info@company.com </p>
         <p class="footer-text tsm">
-          © Copyright 2018 <strong>Class Bazaar</strong>, All Right Reserved
+          © Copyright 2019 <strong>Class Bazaar</strong>, All Right Reserved
         </p>
       </div>
     </>

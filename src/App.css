@@ -59,14 +59,15 @@ body {
 }
 
 .c-card {
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.02), 0 3px 6px rgba(0, 0, 0, 0.23);
   background: white;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   margin-bottom: 25px;
   border-radius: 4px;
-  width: 60%;
+  width: 100%;
   /* border: 1px solid #707070; */
   /* padding: 15px 10px; */
 }
+
 
 .App-link {
   color: #fff;
@@ -76,6 +77,10 @@ body {
 .sub-text {
   font-style: italic;
   font-size: 16px !important;
+}
+
+.LandingPage-search-11 {
+  border: none !important;
 }
 
 .signup-btn {
@@ -122,9 +127,17 @@ body {
   width: 300px;
 }
 
+.main-search {
+  margin-left: -400px !important;
+}
+
 @media (max-width: 800px) {
   .ns-input {
     width: 150px;
+  }
+
+  .main-search {
+    margin-left: 0 !important;
   }
 }
 
@@ -160,7 +173,7 @@ body {
   justify-content: center;
 }
 
-.footer-links > * {
+.footer-links>* {
   padding-left: 10px;
 }
 

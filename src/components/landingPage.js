@@ -70,7 +70,9 @@ const styles = theme => ({
     justifyContent: 'center',
   },
   inputRoot: {
-    color: 'inherit',
+    color: '#FFA502',
+    border: '2px solid #FFA502',
+    borderRadius: '6px',
   },
   inputInput: {
     padding: theme.spacing(1, 1, 1, 7),
@@ -94,10 +96,11 @@ const styles = theme => ({
     padding: 20,
   },
   courseCardImage: {
-    objectFit: 'cover',
+    objectFit: 'cover !important',
     backgroundSize: 'contain',
     width: '100%',
     height: '100%',
+    borderRadius: '4px',
   },
 });
 
@@ -114,7 +117,7 @@ const Search = withRouter(({ history, ...data }) => {
   return (
     <div className={classes.search}>
       <div className={classes.searchIcon}>
-        <SearchIcon />
+        <SearchIcon color="primary" />
       </div>
       <InputBase
         placeholder="Search for a course"
@@ -262,6 +265,7 @@ class LandingPage extends Component {
                   height="100%"
                   fontWeight="fontWeightlight"
                   fontStyle="italic"
+                  style={{ color: '#949494', fontSize: '0.8rem' }}
                 >
                   via {degree.provider}
                 </Box>
@@ -313,7 +317,7 @@ class LandingPage extends Component {
               backgroundSize: 'cover',
             }}
           >
-            <Grid item xs={12}>
+            <Grid className="main-search" item xs={12}>
               <Search
                 getQuery={this.getQuery}
                 onSearchChange={this.onSearchChange}
@@ -332,7 +336,7 @@ class LandingPage extends Component {
               minHeight: '20vh',
               margin: 0,
               width: '100%',
-              background: '#FFF',
+              background: '#fff',
             }}
           >
             <Grid item xs={12} style={{ paddingTop: 30 }}>
@@ -431,7 +435,7 @@ class LandingPage extends Component {
               </Grid>
             </Grid>
           </Box>
-          <Container max-width={'lg'}>
+          <Container max-width={'xl'}>
             <Grid container>
               <Grid item xs={6}>
                 <Box style={{ minHeight: '60vh', width: '96%', margin: 10 }}>
@@ -439,7 +443,7 @@ class LandingPage extends Component {
                     container
                     spacing={0}
                     direction="column"
-                    alignItems="center"
+                    alignItems="left"
                   >
                     <Grid
                       item
@@ -448,7 +452,10 @@ class LandingPage extends Component {
                     >
                       <Typography
                         color="primary"
-                        style={{ fontWeight: '600', marginBottom: '20px' }}
+                        style={{
+                          fontWeight: '600',
+                          marginBottom: '20px',
+                        }}
                         variant="h5"
                         component="h2"
                       >
@@ -460,7 +467,7 @@ class LandingPage extends Component {
                         this.getDegreeCard(degree, classes)
                       )}
                     </Grid>
-                    <Grid item xs={12} style={{ margin: 30 }}>
+                    <Grid item xs={12} style={{ margin: 30, marginLeft: '0' }}>
                       <Button
                         variant="contained"
                         color="primary"
@@ -478,7 +485,7 @@ class LandingPage extends Component {
                     container
                     spacing={0}
                     direction="column"
-                    alignItems="center"
+                    alignItems="left"
                   >
                     <Grid item xs={12} style={{ paddingTop: 30 }}>
                       <Typography
@@ -495,7 +502,7 @@ class LandingPage extends Component {
                         this.getDegreeCard(degree, classes)
                       )}
                     </Grid>
-                    <Grid item xs={12} style={{ margin: 30 }}>
+                    <Grid item xs={12} style={{ margin: 30, marginLeft: '0' }}>
                       <Button
                         variant="contained"
                         color="primary"
