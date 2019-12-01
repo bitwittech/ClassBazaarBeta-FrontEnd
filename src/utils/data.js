@@ -1,13 +1,13 @@
 import A from './../assets/A.png';
 import ATTLogo from './../assets/ATTLogo.png';
 import B from './../assets/B.png';
-import BostonUniLogo from './../assets/BostonUniLogo.jpg';
+import BostonUniLogo from './../assets/BostonUniLogo.png';
 import CS from './../assets/CS.png';
 import DA from './../assets/DA.png';
 import DEV from './../assets/DEV.png';
 import GeorgiaTechUniLogo from './../assets/GeorgiaTechUniLogo.png';
 import HL from './../assets/HL.png';
-import HarvardUniLogo from './../assets/HarvardUniLogo.jpg';
+import HarvardUniLogo from './../assets/HarvardUniLogo.png';
 import IIITBLogo from './../assets/IIITBLogo.jpg';
 import IITKLogo from './../assets/IITKLogo.jpg';
 import M from './../assets/M.png';
@@ -16,10 +16,10 @@ import O from './../assets/O.png';
 import PMPInstLogo from './../assets/PMPInstLogo.jpg';
 import SENG from './../assets/SENG.png';
 import SO from './../assets/SO.png';
-import UdacityLogo from './../assets/UdacityLogo.jpg';
+import UdacityLogo from './../assets/UdacityLogo.png';
 import UdemyLogo from './../assets/UdemyLogo.png';
-import UniAuklandLogo from './../assets/UniAuklandLogo.png';
-import UniNewcastleLogo from './../assets/UniNewcastleLogo.jpg';
+import UniAuklandLogo from './../assets/UniAuklandLogo.jpg';
+import UniNewcastleLogo from './../assets/UniNewcastleLogo.jpeg';
 
 export const subjectsData = [
   {
