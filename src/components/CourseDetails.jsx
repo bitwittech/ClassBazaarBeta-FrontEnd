@@ -1,21 +1,22 @@
-import React, { useEffect, useState } from 'react';
 import { Container, Grid, Typography } from '@material-ui/core';
-import TurnedInIcon from '@material-ui/icons/TurnedIn';
-import QueryBuilderIcon from '@material-ui/icons/QueryBuilder';
-import DateRangeIcon from '@material-ui/icons/DateRange';
-import TurnedInNotIcon from '@material-ui/icons/TurnedInNot';
-import getClosestNextRun from './../utils/edxUtils';
-import ReactHtmlParser from 'react-html-parser';
-import StarIcon from '@material-ui/icons/Star';
-import StarHalfIcon from '@material-ui/icons/StarHalf';
-import StarBorderIcon from '@material-ui/icons/StarBorder';
-import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
-import formatDate from './../utils/dateUtils';
-import ListAltIcon from '@material-ui/icons/ListAlt';
-import Box from '@material-ui/core/Box';
-import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
+import React, { useEffect, useState } from 'react';
+
 import AppBar from './appBar';
+import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
+import Box from '@material-ui/core/Box';
+import DateRangeIcon from '@material-ui/icons/DateRange';
 import Footer from './Footer';
+import ListAltIcon from '@material-ui/icons/ListAlt';
+import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
+import QueryBuilderIcon from '@material-ui/icons/QueryBuilder';
+import ReactHtmlParser from 'react-html-parser';
+import StarBorderIcon from '@material-ui/icons/StarBorder';
+import StarHalfIcon from '@material-ui/icons/StarHalf';
+import StarIcon from '@material-ui/icons/Star';
+import TurnedInIcon from '@material-ui/icons/TurnedIn';
+import TurnedInNotIcon from '@material-ui/icons/TurnedInNot';
+import formatDate from './../utils/dateUtils';
+import getClosestNextRun from './../utils/edxUtils';
 
 const CourseDetails = props => {
   const [state, setState] = useState({
@@ -29,6 +30,7 @@ const CourseDetails = props => {
   useEffect(() => {
     const getCourseDetails = async () => {
       var url = `https://api.classbazaar.in/api/course?uuid=${uuid}&provider=${provider}`;
+      console.log(url, uuid);
       const res = await fetch(url);
       const data = await res.json();
 
@@ -719,9 +721,245 @@ const CourseDetails = props => {
       </Container>
     );
 
+  const upGrad = () =>
+    state.data && (
+      <Container maxWidth="lg" style={{ marginTop: '40px' }}>
+        <Grid container spacing={3}>
+          <Grid item xs={12} sm={8}>
+            <div
+              style={{
+                background: '#fff',
+                padding: '20px',
+                paddingLeft: '40px',
+              }}
+            >
+              <div className="cd-head">
+                <div>
+                  <Typography
+                    style={{ fontWeight: '600' }}
+                    color="primary"
+                    variant="subtitle2"
+                    gutterBottom
+                  >
+                    {props.location.state.university}
+                  </Typography>
+                  <Typography variant="h6" gutterBottom>
+                    {/* {ReactHtmlParser(state.data.courseData.fields.title)} */}
+                  </Typography>
+                  <Typography
+                    variant="caption"
+                    display="block"
+                    className="provider"
+                    gutterBottom
+                  >
+                    via {provider}
+                  </Typography>
+                </div>
+                <div style={{ textAlign: 'right' }}>{reviewSection()}</div>
+              </div>
+              <br />
+              <div className="cd-cont">
+                <Typography
+                  style={{ fontWeight: '600', fontSize: '22px' }}
+                  variant="subtitle2"
+                  gutterBottom
+                >
+                  Course Overview
+                </Typography>
+                <Typography
+                  style={{ fontSize: '16px', fontWeight: '300' }}
+                  variant="body1"
+                  gutterBottom
+                >
+                  {state.data.short_description}
+                </Typography>
+                <Typography
+                  style={{ fontWeight: '600', fontSize: '22px' }}
+                  variant="subtitle2"
+                  gutterBottom
+                >
+                  Whos is this course for?
+                </Typography>
+                <Typography
+                  style={{ fontSize: '16px', fontWeight: '300' }}
+                  variant="body1"
+                  gutterBottom
+                >
+                  {state.data.who_is_this_program_for}
+                </Typography>
+
+                <Typography
+                  style={{ fontWeight: '600', fontSize: '22px' }}
+                  variant="subtitle2"
+                  gutterBottom
+                >
+                  Professor:{' '}
+                  {this.state.closestRun.staff.map((obj, index) => (
+                    <span key={index} style={{ fontWeight: '300' }}>
+                      {obj.given_name}
+                    </span>
+                  ))}
+                </Typography>
+                <br />
+                <Typography
+                  style={{ fontWeight: '600', fontSize: '22px' }}
+                  variant="subtitle2"
+                  gutterBottom
+                >
+                  Reviews
+                </Typography>
+                <Grid
+                  container
+                  style={{ padding: 20, background: '#00000015' }}
+                >
+                  <Grid item xs={3}>
+                    <Grid item xs={12}>
+                      {/* <Fab color="primary" aria-label="add" className={classes.fab}>
+                <AddIcon />
+              </Fab> */}
+                    </Grid>
+                  </Grid>
+                  <Grid item xs={9}>
+                    <Box style={{ padding: 30 }}>
+                      Natus error sit voluptartem accusantium doloremque
+                      laudantium, totam rem aperiam, eaque ipsa quae ab illo
+                      inventore.
+                    </Box>
+                  </Grid>
+                </Grid>
+              </div>
+            </div>
+          </Grid>
+          <Grid item xs={12} sm={4}>
+            {courseSummary()}
+          </Grid>
+        </Grid>
+      </Container>
+    );
+
+  const udacity = () =>
+    state.data && (
+      <Container maxWidth="lg" style={{ marginTop: '40px' }}>
+        <Grid container spacing={3}>
+          <Grid item xs={12} sm={8}>
+            <div
+              style={{
+                background: '#fff',
+                padding: '20px',
+                paddingLeft: '40px',
+              }}
+            >
+              <div className="cd-head">
+                <div>
+                  <Typography
+                    style={{ fontWeight: '600' }}
+                    color="primary"
+                    variant="subtitle2"
+                    gutterBottom
+                  >
+                    {props.location.state.university}
+                  </Typography>
+                  <Typography variant="h6" gutterBottom>
+                    {ReactHtmlParser(state.data.title)}
+                  </Typography>
+                  <Typography
+                    variant="caption"
+                    display="block"
+                    className="provider"
+                    gutterBottom
+                  >
+                    via {provider}
+                  </Typography>
+                </div>
+                <div style={{ textAlign: 'right' }}>{reviewSection()}</div>
+              </div>
+              <br />
+              <div className="cd-cont">
+                <Typography
+                  style={{ fontWeight: '600', fontSize: '22px' }}
+                  variant="subtitle2"
+                  gutterBottom
+                >
+                  Course Overview
+                </Typography>
+                <Typography
+                  style={{ fontSize: '16px', fontWeight: '300' }}
+                  variant="body1"
+                  gutterBottom
+                >
+                  {ReactHtmlParser(state.data.summary)}
+                </Typography>
+                <Typography
+                  style={{ fontWeight: '600', fontSize: '22px' }}
+                  variant="subtitle2"
+                  gutterBottom
+                >
+                  Syllabus
+                </Typography>
+                <Typography
+                  style={{ fontSize: '16px', fontWeight: '300' }}
+                  variant="body1"
+                  gutterBottom
+                >
+                  {ReactHtmlParser(state.data.syllabus)}
+                </Typography>
+
+                {state.data.instructors !== undefined && (
+                  <>
+                    <Typography
+                      style={{ fontWeight: '600', fontSize: '22px' }}
+                      variant="subtitle2"
+                      gutterBottom
+                    >
+                      Professor(s):{' '}
+                      {state.data.instructors.map((obj, index) => (
+                        <span key={index} style={{ fontWeight: '300' }}>
+                          {obj.name + ', '}
+                        </span>
+                      ))}
+                    </Typography>
+                  </>
+                )}
+                <br />
+                <Typography
+                  style={{ fontWeight: '600', fontSize: '22px' }}
+                  variant="subtitle2"
+                  gutterBottom
+                >
+                  Reviews
+                </Typography>
+                <Grid
+                  container
+                  style={{ padding: 20, background: '#00000015' }}
+                >
+                  <Grid item xs={3}>
+                    <Grid item xs={12}>
+                      {/* <Fab color="primary" aria-label="add" className={classes.fab}>
+                <AddIcon />
+              </Fab> */}
+                    </Grid>
+                  </Grid>
+                  <Grid item xs={9}>
+                    <Box style={{ padding: 30 }}>
+                      Natus error sit voluptartem accusantium doloremque
+                      laudantium, totam rem aperiam, eaque ipsa quae ab illo
+                      inventore.
+                    </Box>
+                  </Grid>
+                </Grid>
+              </div>
+            </div>
+          </Grid>
+          <Grid item xs={12} sm={4}>
+            {courseSummary()}
+          </Grid>
+        </Grid>
+      </Container>
+    );
+
   const renderSwitch = provider => {
     switch (provider) {
-      case 'EDx':
+      case 'edX':
         return edX();
       case 'Udemy':
         return udemy();
@@ -729,6 +967,10 @@ const CourseDetails = props => {
         return fl();
       case 'SimpliLearn':
         return sl();
+      case 'upGrad':
+        return upGrad();
+      case 'Udacity':
+        return udacity();
       default:
         return <h1>Coming Soon</h1>;
     }

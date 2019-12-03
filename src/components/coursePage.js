@@ -100,7 +100,7 @@ class CoursePage extends Component {
       .then(json => {
         console.log(json);
         this.setState({ data: json.data });
-        if (provider === 'EDx') {
+        if (provider === 'edX') {
           let closestRun = getClosestNextRun(this.state.data.course_runs);
           this.setState({ closestRun });
         }
@@ -525,7 +525,7 @@ class CoursePage extends Component {
   }
 
   render() {
-    if (this.props.location.state.provider === 'EDx') return this.renderEdx();
+    if (this.props.location.state.provider === 'edX') return this.renderEdx();
     if (this.props.location.state.provider === 'FutureLearn')
       return this.renderFL();
     if (this.props.location.state.provider === 'SimpliLearn')

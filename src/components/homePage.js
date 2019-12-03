@@ -27,7 +27,14 @@ import config from '../config.json';
 import { subjectsData } from './../utils/data';
 import { withStyles } from '@material-ui/core/styles';
 
-const providerData = ['EDx', 'FutureLearn', 'SimpliLearn', 'Udemy'];
+const providerData = [
+  'edX',
+  'FutureLearn',
+  'SimpliLearn',
+  'Udemy',
+  'Udacity',
+  'upGrad',
+];
 const { API, API_LOCAL } = config;
 
 const styles = {
