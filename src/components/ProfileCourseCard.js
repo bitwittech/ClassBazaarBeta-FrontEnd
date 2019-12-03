@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import MoneyIcon from '@material-ui/icons/AttachMoney';
 import Paper from '@material-ui/core/Paper';
 import React from 'react';
+import ReactHtmlParser from 'react-html-parser';
 import TurnedInIcon from '@material-ui/icons/TurnedIn';
 import TurnedInNotIcon from '@material-ui/icons/TurnedInNot';
 import Typography from '@material-ui/core/Typography';
@@ -88,7 +89,9 @@ const ProfileCourseCard = withRouter(({ history, ...data }) => {
           }}
           gutterBottom
         >
-          {data.courseName}
+          {data.provider !== 'SimpliLearn'
+            ? data.courseName
+            : ReactHtmlParser(data.courseName)}
         </Typography>
         <Typography
           style={{ padding: '0px 15px 0px 15px', color: '#968484' }}

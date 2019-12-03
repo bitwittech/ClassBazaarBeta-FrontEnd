@@ -6,7 +6,6 @@ import ArrowForward from '@material-ui/icons/ArrowForward';
 import Box from '@material-ui/core/Box';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import CourseCard from './ProfileCourseCard';
-// import CourseCard from './courseCard';
 import Footer from './Footer';
 import FormControl from '@material-ui/core/FormControl';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
