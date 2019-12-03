@@ -741,10 +741,10 @@ const CourseDetails = props => {
                     variant="subtitle2"
                     gutterBottom
                   >
-                    {props.location.state.university}
+                    {state.data.university}
                   </Typography>
                   <Typography variant="h6" gutterBottom>
-                    {/* {ReactHtmlParser(state.data.courseData.fields.title)} */}
+                    {state.data.title}
                   </Typography>
                   <Typography
                     variant="caption"
@@ -787,8 +787,52 @@ const CourseDetails = props => {
                 >
                   {state.data.who_is_this_program_for}
                 </Typography>
+                <Typography
+                  style={{ fontWeight: '600', fontSize: '22px' }}
+                  variant="subtitle2"
+                  gutterBottom
+                >
+                  What will you learn?
+                </Typography>
+                <Typography
+                  style={{ fontSize: '16px', fontWeight: '300' }}
+                  variant="body1"
+                  gutterBottom
+                >
+                  {state.data.top_Skills}
+                </Typography>
 
                 <Typography
+                  style={{ fontWeight: '600', fontSize: '22px' }}
+                  variant="subtitle2"
+                  gutterBottom
+                >
+                  Minimum Eligibility
+                </Typography>
+                <Typography
+                  style={{ fontSize: '16px', fontWeight: '300' }}
+                  variant="body1"
+                  gutterBottom
+                >
+                  {state.data['Minimum Eligibility']}
+                </Typography>
+
+                <Typography
+                  style={{ fontWeight: '600', fontSize: '22px' }}
+                  variant="subtitle2"
+                  gutterBottom
+                >
+                  Job Opportunities
+                </Typography>
+                <Typography
+                  style={{ fontSize: '16px', fontWeight: '300' }}
+                  variant="body1"
+                  gutterBottom
+                >
+                  {state.data['job_opportunities\n']}
+                </Typography>
+
+                {/* <Typography
                   style={{ fontWeight: '600', fontSize: '22px' }}
                   variant="subtitle2"
                   gutterBottom
@@ -799,7 +843,7 @@ const CourseDetails = props => {
                       {obj.given_name}
                     </span>
                   ))}
-                </Typography>
+                </Typography> */}
                 <br />
                 <Typography
                   style={{ fontWeight: '600', fontSize: '22px' }}
