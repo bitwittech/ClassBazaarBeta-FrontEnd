@@ -721,6 +721,141 @@ const CourseDetails = props => {
       </Container>
     );
 
+  const swayam = () =>
+    state.data && (
+      <Container maxWidth="lg" style={{ marginTop: '40px' }}>
+        <Grid container spacing={3}>
+          <Grid item xs={12} sm={8}>
+            <div
+              style={{
+                background: '#fff',
+                padding: '20px',
+                paddingLeft: '40px',
+              }}
+            >
+              <div className="cd-head">
+                <div>
+                  <Typography
+                    style={{ fontWeight: '600' }}
+                    color="primary"
+                    variant="subtitle2"
+                    gutterBottom
+                  >
+                    {props.location.state.university}
+                  </Typography>
+                  <Typography variant="h6" gutterBottom>
+                    {ReactHtmlParser(state.data.title)}
+                  </Typography>
+                  <Typography
+                    variant="caption"
+                    display="block"
+                    className="provider"
+                    gutterBottom
+                  >
+                    via {provider}
+                  </Typography>
+                </div>
+                <div style={{ textAlign: 'right' }}>{reviewSection()}</div>
+              </div>
+              <br />
+              <div className="cd-cont">
+                <Typography
+                  style={{ fontWeight: '600', fontSize: '22px' }}
+                  variant="subtitle2"
+                  gutterBottom
+                >
+                  Course Overview
+                </Typography>
+                <Typography
+                  style={{ fontSize: '16px', fontWeight: '300' }}
+                  variant="body1"
+                  gutterBottom
+                >
+                  {ReactHtmlParser(state.data.sections[0])}
+                </Typography>
+                <Typography
+                  style={{ fontWeight: '600', fontSize: '22px' }}
+                  variant="subtitle2"
+                  gutterBottom
+                >
+                  Course Layout
+                </Typography>
+                <Typography
+                  style={{ fontSize: '16px', fontWeight: '300' }}
+                  variant="body1"
+                  gutterBottom
+                >
+                  {ReactHtmlParser(state.data.sections[2])}
+                </Typography>
+
+                <Typography
+                  style={{ fontWeight: '600', fontSize: '22px' }}
+                  variant="subtitle2"
+                  gutterBottom
+                >
+                  Course Certificate
+                </Typography>
+                <Typography
+                  style={{ fontSize: '16px', fontWeight: '300' }}
+                  variant="body1"
+                  gutterBottom
+                >
+                  {ReactHtmlParser(state.data.sections[5])}
+                </Typography>
+
+                {state.data.closestRun !== undefined && (
+                  <>
+                    <Typography
+                      style={{ fontWeight: '600', fontSize: '22px' }}
+                      variant="subtitle2"
+                      gutterBottom
+                    >
+                      Professor:{' '}
+                      {this.state.closestRun.staff.map((obj, index) => (
+                        <span key={index} style={{ fontWeight: '300' }}>
+                          {obj.given_name}
+                        </span>
+                      ))}
+                    </Typography>
+                  </>
+                )}
+                <br />
+                <Typography
+                  style={{ fontWeight: '600', fontSize: '22px' }}
+                  variant="subtitle2"
+                  gutterBottom
+                >
+                  Reviews
+                </Typography>
+                <Grid
+                  container
+                  style={{ padding: 20, background: '#00000015' }}
+                >
+                  <Grid item xs={3}>
+                    <Grid item xs={12}>
+                      {/* <Fab color="primary" aria-label="add" className={classes.fab}>
+                <AddIcon />
+              </Fab> */}
+                    </Grid>
+                  </Grid>
+                  <Grid item xs={9}>
+                    <Box style={{ padding: 30 }}>
+                      Natus error sit voluptartem accusantium doloremque
+                      laudantium, totam rem aperiam, eaque ipsa quae ab illo
+                      inventore.
+                    </Box>
+                  </Grid>
+                </Grid>
+              </div>
+            </div>
+          </Grid>
+          <Grid item xs={12} sm={4}>
+            {courseSummary()}
+          </Grid>
+        </Grid>
+      </Container>
+    );
+
   const upGrad = () =>
     state.data && (
       <Container maxWidth="lg" style={{ marginTop: '40px' }}>
@@ -1015,6 +1150,8 @@ const CourseDetails = props => {
         return upGrad();
       case 'Udacity':
         return udacity();
+      case 'Swayam':
+        return swayam();
       default:
         return <h1>Coming Soon</h1>;
     }
