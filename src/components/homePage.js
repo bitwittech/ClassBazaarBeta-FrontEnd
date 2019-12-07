@@ -33,6 +33,7 @@ const providerData = [
   'Udemy',
   'Udacity',
   'upGrad',
+  'Swayam',
 ];
 const { API, API_LOCAL } = config;
 
