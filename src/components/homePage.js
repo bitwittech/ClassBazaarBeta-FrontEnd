@@ -78,6 +78,8 @@ class HomePage extends Component {
       filterValue: 'all',
       q: '',
       filter: '',
+      feeFilter: '',
+      startDateFilter: '',
       isStateUpdatedFromProp: false,
       subjects: 'all',
       providers: 'all',
@@ -91,7 +93,9 @@ class HomePage extends Component {
     this.onSearchChange = this.onSearchChange.bind(this);
     this.onSubjectFilterChange = this.onSubjectFilterChange.bind(this);
     this.onFeeFilterChange = this.onFeeFilterChange.bind(this);
+    this.onStartFilterChange = this.onStartFilterChange.bind(this);
     this.onProviderFilterChange = this.onProviderFilterChange.bind(this);
+    this.setupDefaultFilters = this.setupDefaultFilters.bind(this);
   }
 
   updateData() {
@@ -99,15 +103,24 @@ class HomePage extends Component {
     const query = this.state.q;
     const filter = this.state.filterValue;
     let parsedFilter = '';
-    if (filter === 'free') parsedFilter = 'price:free';
-    if (filter === 'flexible') parsedFilter = 'start:flexible';
-    if (filter === 'paid') parsedFilter = 'certificates';
+    let feeFilter = '';
+    let startDateFilter = '';
+
+    console.log({ filter });
+
+    if (filter === 'free') feeFilter = 'price:free';
+    if (filter === 'paid') feeFilter = 'price:paid';
+
+    if (filter === 'flexible') startDateFilter = 'start:flexible';
+    if (filter === 'lte30') startDateFilter = 'start:lte30';
+    if (filter === 'gte30') startDateFilter = 'start:gte30';
+
     const range = JSON.stringify([
       page * this.state.perPage,
       (page + 1) * this.state.perPage,
     ]);
     const subjects = encodeURIComponent(this.state.subjects);
-    var url = `${API}/api/courses/?range=${range}&q=${query}&filter=${parsedFilter}&subjects=${subjects}&provider=${this.state.providers}`;
+    var url = `${API}/api/courses/?range=${range}&q=${query}&filter=${parsedFilter}&subjects=${subjects}&provider=${this.state.providers}&feeFilter=${feeFilter}&startDateFilter=${startDateFilter}`;
     return fetch(url)
       .then(response => response.json())
       .then(json => {
@@ -132,7 +145,29 @@ class HomePage extends Component {
     });
   };
 
-  onFeeFilterChange = type => {};
+  onFeeFilterChange = feeType => {
+    console.log({ feeType });
+    let filterValue;
+    if (feeType[0] === true) filterValue = 'free';
+    else if (feeType[1] === true) filterValue = 'paid';
+    else filterValue = '';
+    this.setState({ filterValue }, () => {
+      this.updateData();
+    });
+  };
+  onStartFilterChange = startDateType => {
+    console.log({ startDateType });
+    let filterValue;
+    if (startDateType[2] === true) filterValue = 'flexible';
+    else if (startDateType[0] === true) filterValue = 'lte30';
+    else if (startDateType[1] === true) filterValue = 'gte30';
+    else filterValue = '';
+    console.log({ filterValue });
+    this.setState({ filterValue }, () => {
+      console.log(this.state);
+      this.updateData();
+    });
+  };
 
   onProviderFilterChange = providerList => {
     let providerFilter = '';
@@ -157,12 +192,18 @@ class HomePage extends Component {
     // Call api after this.
   }
 
+  setupDefaultFilters() {}
+
+  /*
+    This is used to update filters coming from other pages.
+  */
   componentDidMount() {
     console.log(this.state, this.props);
     let query = '';
     let subjects = 'all';
     let isLevel1CheckedSubjects = false;
     let checkedLevel2Subjects = subjectsData.map(s => false);
+    let filterValue = '';
 
     if (this.props.location.state !== undefined) {
       if (this.props.location.state.query !== undefined)
@@ -176,7 +217,11 @@ class HomePage extends Component {
             .indexOf(this.props.location.state.subject)
         ] = true;
       }
+      if (this.props.location.state.filter !== undefined) {
+        filterValue = this.props.location.state.filter;
+      }
     }
+    console.log({ filterValue });
     if (!this.state.isStateUpdatedFromProp) {
       this.setState(
         {
@@ -185,6 +230,7 @@ class HomePage extends Component {
           subjects,
           isLevel1CheckedSubjects,
           checkedLevel2Subjects,
+          filterValue,
         },
         () => {
           console.log('After the mount', this.state);
@@ -245,7 +291,7 @@ class HomePage extends Component {
                     <NestedMenu
                       shouldUpdate={false}
                       isLevel1Checked={false}
-                      isOnlyOneAllowed={true}
+                      isOnlyOneAllowed={false}
                       level1Name={'Providers'}
                       level2List={this.state.providerData}
                       onChangeOptions={s => this.onProviderFilterChange(s)}
@@ -268,7 +314,7 @@ class HomePage extends Component {
                         'Starts after 30 days',
                         'Flexible',
                       ]}
-                      onChangeOptions={s => this.onFeeFilterChange(s)}
+                      onChangeOptions={s => this.onStartFilterChange(s)}
                     />
                     <NestedMenu
                       shouldUpdate={true}

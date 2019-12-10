@@ -49,7 +49,6 @@ const formatDuration = duration => {
 };
 
 const ProfileCourseCard = withRouter(({ history, ...data }) => {
-  console.log(data);
   return (
     <>
       <div

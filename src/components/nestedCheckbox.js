@@ -35,6 +35,7 @@ class NestedMenu extends Component {
       checkedLevel2: this.props.level2List.map(c => false),
       level1Name: this.props.level1Name,
       level2List: this.props.level2List,
+      isOnlyOneAllowed: this.props.isOnlyOneAllowed,
     };
 
     this.handleChangeLevel1 = this.handleChangeLevel1.bind(this);
@@ -48,7 +49,10 @@ class NestedMenu extends Component {
   };
 
   handleChangeLevel2 = index => event => {
-    const checkedLevel2 = this.state.checkedLevel2;
+    let checkedLevel2 = this.state.checkedLevel2;
+    if (this.state.isOnlyOneAllowed) {
+      checkedLevel2 = checkedLevel2.map(s => false);
+    }
     checkedLevel2[index] = event.target.checked;
     console.log(checkedLevel2);
     this.props.onChangeOptions(checkedLevel2);

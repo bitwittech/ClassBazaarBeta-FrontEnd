@@ -144,6 +144,27 @@ const Search = withRouter(({ history, ...data }) => {
   );
 });
 
+const ShowMore = withRouter(({ history, ...data }) => {
+  const classes = data.classes;
+  return (
+    <Button
+      onClick={() => {
+        history.push({
+          pathname: data.routingURL,
+          state: {
+            filter: data.filter,
+          },
+        });
+      }}
+      variant="contained"
+      color="primary"
+      className={classes.button}
+    >
+      Show More
+    </Button>
+  );
+});
+
 const SubjectCard = withRouter(({ history, ...data }) => {
   const classes = data.classes;
   return (
@@ -438,13 +459,11 @@ class LandingPage extends Component {
                 </Grid>
               </Container>
               <Grid container style={{ margin: 30 }} justify="center">
-                <Button
-                  variant="contained"
-                  color="primary"
-                  className={classes.button}
-                >
-                  Show More
-                </Button>
+                <ShowMore
+                  classes={classes}
+                  filter={'paid'}
+                  routingURL={'/listing'}
+                />
               </Grid>
             </Grid>
           </Box>
@@ -477,13 +496,11 @@ class LandingPage extends Component {
                       )}
                     </Grid>
                     <Grid container style={{ margin: 30 }} justify="center">
-                      <Button
-                        variant="contained"
-                        color="primary"
-                        className={classes.button}
-                      >
-                        Show More
-                      </Button>
+                      <ShowMore
+                        classes={classes}
+                        filter={''}
+                        routingURL={'/listing'}
+                      />
                     </Grid>
                   </Grid>
                 </Box>
@@ -516,13 +533,11 @@ class LandingPage extends Component {
                       )}
                     </Grid>
                     <Grid container style={{ margin: 30 }} justify="center">
-                      <Button
-                        variant="contained"
-                        color="primary"
-                        className={classes.button}
-                      >
-                        Show More
-                      </Button>
+                      <ShowMore
+                        classes={classes}
+                        filter={'free'}
+                        routingURL={'/listing'}
+                      />
                     </Grid>
                   </Grid>
                 </Box>
