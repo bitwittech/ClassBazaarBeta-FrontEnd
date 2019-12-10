@@ -68,7 +68,6 @@ body {
   /* padding: 15px 10px; */
 }
 
-
 .App-link {
   color: #fff;
   text-align: left;
@@ -173,7 +172,7 @@ body {
   justify-content: center;
 }
 
-.footer-links>* {
+.footer-links > * {
   padding-left: 10px;
 }
 
@@ -350,4 +349,14 @@ dashboard-options-header {
 .top-bar-logo {
   max-height: 38px;
   padding: 5px;
+}
+
+.clear-all {
+  z-index: 100;
+  float: right;
+  position: relative;
+  color: #ffa502 !important;
+  bottom: -20px;
+  text-decoration-line: underline;
+  font-size: 0.9rem !important;
 }

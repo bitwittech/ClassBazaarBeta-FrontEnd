@@ -53,6 +53,14 @@ const styles = {
   filter: {
     background: '#333',
   },
+  clearAll: {
+    position: 'relative',
+    float: 'right',
+    color: '#ffa502',
+    bottom: -20,
+    textDecorationLine: 'underline',
+    fontSize: '1rem',
+  },
 };
 
 const defaultProps = {
@@ -85,6 +93,10 @@ class HomePage extends Component {
       providers: 'all',
       fee: 'all',
       isLevel1CheckedSubjects: false,
+      subjecttReset: false,
+      feeReset: false,
+      providerReset: false,
+      startReset: false,
     };
     this.getUniversityForUdemy = this.getUniversityForUdemy.bind(this);
     this.handlePageChange = this.handlePageChange.bind(this);
@@ -139,8 +151,12 @@ class HomePage extends Component {
       }
     });
     subjectFilter = subjectFilter.substring(0, subjectFilter.length - 2);
-    if (subjectFilter === '') subjectFilter = 'all';
-    this.setState({ subjects: subjectFilter }, () => {
+    let isLevel1CheckedSubjects = true;
+    if (subjectFilter === '') {
+      subjectFilter = 'all';
+      isLevel1CheckedSubjects = false;
+    }
+    this.setState({ subjects: subjectFilter, isLevel1CheckedSubjects }, () => {
       this.updateData();
     });
   };
@@ -192,7 +208,33 @@ class HomePage extends Component {
     // Call api after this.
   }
 
-  setupDefaultFilters() {}
+  setupDefaultFilters() {
+    console.log('Setting up default filters');
+    // Uncheck all boxes. Reset all radios.
+    this.setState(
+      {
+        filterValue: 'all',
+        subjecttReset: true,
+        feeReset: true,
+        providerReset: true,
+        startReset: true,
+        subjects: 'all',
+        providers: 'all',
+        fee: 'all',
+        isLevel1CheckedSubjects: false,
+        checkedLevel2Subjects: subjectsData.map(s => false),
+      },
+      () => {
+        this.updateData();
+        this.setState({
+          subjecttReset: false,
+          feeReset: false,
+          providerReset: false,
+          startReset: false,
+        });
+      }
+    );
+  }
 
   /*
     This is used to update filters coming from other pages.
@@ -279,6 +321,12 @@ class HomePage extends Component {
               <Box borderRight={1} style={{ borderColor: '#DCDCDC' }}>
                 <Typography variant="h6" gutterBottom>
                   Filter by
+                  <Box
+                    onClick={this.setupDefaultFilters}
+                    style={styles.clearAll}
+                  >
+                    Clear all
+                  </Box>
                 </Typography>
                 <Divider style={{ marginBottom: '25px', marginTop: '15px' }} />
                 <FormControl component="fieldset">
@@ -289,6 +337,7 @@ class HomePage extends Component {
                     onChange={this.onFilterChange}
                   >
                     <NestedMenu
+                      shouldReset={this.state.providerReset}
                       shouldUpdate={false}
                       isLevel1Checked={false}
                       isOnlyOneAllowed={false}
@@ -297,6 +346,7 @@ class HomePage extends Component {
                       onChangeOptions={s => this.onProviderFilterChange(s)}
                     />
                     <NestedMenu
+                      shouldReset={this.state.feeReset}
                       shouldUpdate={false}
                       isLevel1Checked={false}
                       isOnlyOneAllowed={true}
@@ -305,6 +355,7 @@ class HomePage extends Component {
                       onChangeOptions={s => this.onFeeFilterChange(s)}
                     />
                     <NestedMenu
+                      shouldReset={this.state.startReset}
                       shouldUpdate={false}
                       isLevel1Checked={false}
                       isOnlyOneAllowed={true}
@@ -317,6 +368,7 @@ class HomePage extends Component {
                       onChangeOptions={s => this.onStartFilterChange(s)}
                     />
                     <NestedMenu
+                      shouldReset={this.state.subjecttReset}
                       shouldUpdate={true}
                       isLevel1Checked={this.state.isLevel1CheckedSubjects}
                       checkedLevel2={this.state.checkedLevel2Subjects}
