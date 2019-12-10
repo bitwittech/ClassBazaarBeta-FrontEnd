@@ -42,7 +42,7 @@ const theme = createMuiTheme({
   },
 });
 
-const GA_TRACKING_ID = 'GTM-TFFTDD7';
+const GA_TRACKING_ID = 'UA-154109881-1';
 const debug = process.env.NODE_ENV === 'production' ? false : true;
 initAnalytics(GA_TRACKING_ID, { debug: debug });
 
