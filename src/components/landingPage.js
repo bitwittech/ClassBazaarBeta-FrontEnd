@@ -16,7 +16,7 @@ import Footer from './Footer';
 import Grid from '@material-ui/core/Grid';
 import InputBase from '@material-ui/core/InputBase';
 import { Paper } from 'material-ui';
-import SearchBG1 from './../assets/Search-option1.jpg';
+import SearchBG1 from './../assets/Search-option1.png';
 import SearchIcon from '@material-ui/icons/Search';
 import Snackbar from '@material-ui/core/Snackbar';
 import TopAppBar from './appBar';

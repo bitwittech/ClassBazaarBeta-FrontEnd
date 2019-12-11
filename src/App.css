@@ -127,7 +127,7 @@ body {
 }
 
 .main-search {
-  margin-left: -400px !important;
+  margin-left: 500px !important;
 }
 
 @media (max-width: 800px) {
