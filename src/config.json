@@ -1,5 +1,15 @@
 {
   "API": "https://api.classbazaar.in",
   "API_LOCAL": "http://localhost:8080",
-  "API_NGROK": "https://fc7774e6.ngrok.io"
+  "API_NGROK": "https://fc7774e6.ngrok.io",
+  "fusionAuthURL": "http://auth.samagra.io:9011",
+  "fusionAuthAPIKey": "YFpyHxhW0-NoKRwQrXgCU5QIAQq8nBNhE--i5_n3pTU",
+  "fusionAuthApplicationId": "bbcdce65-eeab-4502-b29b-725be9614997",
+  "localForageConfig": {
+    "name": "classBazaar",
+    "version": 1.0,
+    "size": 4980736,
+    "storeName": "store",
+    "description": "Class Bazaar"
+  }
 }

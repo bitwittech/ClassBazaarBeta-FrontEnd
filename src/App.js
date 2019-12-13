@@ -17,6 +17,8 @@ import ReactGA from 'react-ga';
 import Reducer from './store/Reducer';
 import Snackbar from './components/Snackbar';
 import Store from './store/Context';
+import config from './config.json';
+import localForage from 'localforage';
 
 const theme = createMuiTheme({
   typography: {
@@ -63,7 +65,7 @@ const Root = () => {
     </Switch>
   );
 };
-
+var store = localForage.createInstance(config.localForage);
 const AppWithRouter = withRouter(withAnalytics(Root));
 
 function App() {
