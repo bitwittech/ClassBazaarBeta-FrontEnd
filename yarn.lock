@@ -974,9 +974,9 @@
   resolved "https://registry.yarnpkg.com/@emotion/hash/-/hash-0.7.3.tgz#a166882c81c0c6040975dd30df24fae8549bd96f"
   integrity sha512-14ZVlsB9akwvydAdaEnVnvqu6J2P6ySv39hYyl/aoB6w/V+bXX0tay8cF6paqbgZsN2n5Xh15uF4pE+GvE+itw==
 
-"@fusionauth/node-client@https://github.com/FusionAuth/fusionauth-node-client":
+"@fusionauth/node-client@https://github.com/ChakshuGautam/fusionauth-node-client":
   version "1.13.0"
-  resolved "https://github.com/FusionAuth/fusionauth-node-client#dfdd45bfd4467609e7b09044df330bb5c3d4f7d4"
+  resolved "https://github.com/ChakshuGautam/fusionauth-node-client#533cc164ac39f24f3710ac43e9bbd54fa8d4f5cd"
   dependencies:
     promise "^8.0.3"
 
