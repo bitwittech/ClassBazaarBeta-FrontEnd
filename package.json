@@ -19,9 +19,11 @@
     "react-scripts": "3.1.0",
     "react-star-ratings": "^2.3.0",
     "react-with-analytics": "^0.0.5",
+    "source-map-explorer": "^2.1.2",
     "workbox-webpack-plugin": "^4.3.1"
   },
   "scripts": {
+    "analyze": "source-map-explorer 'build/static/js/*.js'",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
