@@ -13,6 +13,7 @@ import ReactHtmlParser from 'react-html-parser';
 import StarBorderIcon from '@material-ui/icons/StarBorder';
 import StarHalfIcon from '@material-ui/icons/StarHalf';
 import StarIcon from '@material-ui/icons/Star';
+import StarRatings from 'react-star-ratings';
 import TurnedInIcon from '@material-ui/icons/TurnedIn';
 import TurnedInNotIcon from '@material-ui/icons/TurnedInNot';
 import formatDate from './../utils/dateUtils';
@@ -44,36 +45,41 @@ const CourseDetails = props => {
 
   console.log(state);
   console.log(props);
-  const reviewSection = () => (
-    <>
-      <TurnedInIcon color="primary" fontSize="large" />
-      <Typography
-        variant="caption"
-        display="block"
-        style={{ color: '#898989' }}
-        gutterBottom
-      >
-        4.3(43 review)
-      </Typography>
-      <div style={{ display: 'flex' }}>
-        <div>
-          <StarIcon color="primary" />
-        </div>
-        <div>
-          <StarIcon color="primary" />
-        </div>
-        <div>
-          <StarIcon color="primary" />
-        </div>
-        <div>
-          <StarIcon color="primary" />
-        </div>
-        <div>
-          <StarBorderIcon color="primary" />
-        </div>
-      </div>
-    </>
-  );
+  const reviewSection = (ratingNumber, noOfReviews) => {
+    console.log({ ratingNumber, noOfReviews });
+    return (
+      <>
+        <TurnedInIcon color="primary" fontSize="large" />
+        <Typography
+          variant="caption"
+          display="block"
+          style={{ color: '#898989' }}
+          gutterBottom
+        >
+          {noOfReviews >= 0 && ratingNumber && (
+            <>{`${Math.round(ratingNumber * 10) /
+              10}(${noOfReviews} reviews)`}</>
+          )}
+          {noOfReviews < 0 && ratingNumber && (
+            <>{`${Math.round(ratingNumber * 10) / 10}`}</>
+          )}
+          {noOfReviews >= 0 && !ratingNumber && <>{`${noOfReviews} reviews`}</>}
+        </Typography>
+        {noOfReviews < 0 && !ratingNumber && (
+          <div style={{ display: 'flex' }}>
+            <StarRatings
+              rating={ratingNumber}
+              starRatedColor="#FFA502"
+              numberOfStars={5}
+              starDimension="20px"
+              starSpacing="0px"
+              name="rating"
+            />
+          </div>
+        )}
+      </>
+    );
+  };
 
   const courseSummary = () => (
     <>
@@ -189,7 +195,6 @@ const CourseDetails = props => {
                     via {provider}
                   </Typography>
                 </div>
-                <div style={{ textAlign: 'right' }}>{reviewSection()}</div>
               </div>
               <br />
               <div className="cd-cont">
@@ -355,7 +360,9 @@ const CourseDetails = props => {
                     via {provider}
                   </Typography>
                 </div>
-                <div style={{ textAlign: 'right' }}>{reviewSection()}</div>
+                <div style={{ textAlign: 'right' }}>
+                  {reviewSection(state.data.avg_rating, state.data.num_reviews)}
+                </div>
               </div>
               <br />
               <div className="cd-cont">
@@ -504,7 +511,6 @@ const CourseDetails = props => {
                     via {provider}
                   </Typography>
                 </div>
-                <div style={{ textAlign: 'right' }}>{reviewSection()}</div>
               </div>
               <br />
               <div className="cd-cont">
@@ -649,7 +655,12 @@ const CourseDetails = props => {
                     via {provider}
                   </Typography>
                 </div>
-                <div style={{ textAlign: 'right' }}>{reviewSection()}</div>
+                <div style={{ textAlign: 'right' }}>
+                  {reviewSection(
+                    parseFloat(state.data.courseData.fields.star_ratings),
+                    -1
+                  )}
+                </div>
               </div>
               <br />
               <div className="cd-cont">
@@ -890,7 +901,9 @@ const CourseDetails = props => {
                     via {provider}
                   </Typography>
                 </div>
-                <div style={{ textAlign: 'right' }}>{reviewSection()}</div>
+                <div style={{ textAlign: 'right' }}>
+                  {reviewSection(undefined, parseInt(state.data.no_of_reviews))}
+                </div>
               </div>
               <br />
               <div className="cd-cont">

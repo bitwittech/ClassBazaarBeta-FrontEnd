@@ -137,8 +137,8 @@ const ProfileCourseCard = withRouter(({ history, ...data }) => {
                   : formatDate(new Date(data.startingOn), 'MMMM d, yyyy')}{' '}
               </Grid>
               <Grid item sm={4}>
-                <MoneyIcon fontSize="small" className="mb" color="primary" />
-                {formatPrice(data.price)}
+                <i class="fas fa-rupee-sign" style={{ color: '#FFA502' }} />
+                {` ${formatPrice(data.price)}`}
               </Grid>
             </Grid>
           </div>
