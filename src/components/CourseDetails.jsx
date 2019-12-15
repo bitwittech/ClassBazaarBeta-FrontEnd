@@ -65,7 +65,7 @@ const CourseDetails = props => {
           )}
           {noOfReviews >= 0 && !ratingNumber && <>{`${noOfReviews} reviews`}</>}
         </Typography>
-        {noOfReviews < 0 && !ratingNumber && (
+        {ratingNumber && (
           <div style={{ display: 'flex' }}>
             <StarRatings
               rating={ratingNumber}
