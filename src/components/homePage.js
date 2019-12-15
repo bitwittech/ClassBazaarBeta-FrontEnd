@@ -23,6 +23,7 @@ import TurnedInNotIcon from '@material-ui/icons/TurnedInNot';
 import Typography from '@material-ui/core/Typography';
 import { black } from 'material-ui/styles/colors';
 import config from '../config.json';
+import { store } from './../App';
 import { subjectsData } from './../utils/data';
 import { withStyles } from '@material-ui/core/styles';
 
@@ -108,6 +109,9 @@ class HomePage extends Component {
     this.onStartFilterChange = this.onStartFilterChange.bind(this);
     this.onProviderFilterChange = this.onProviderFilterChange.bind(this);
     this.setupDefaultFilters = this.setupDefaultFilters.bind(this);
+    this.getCheckedProvidersFromString = this.getCheckedProvidersFromString.bind(
+      this
+    );
   }
 
   updateData() {
@@ -136,9 +140,10 @@ class HomePage extends Component {
     return fetch(url)
       .then(response => response.json())
       .then(json => {
-        this.setState({ data: json.data, total: json.total }, () => {
+        this.setState({ data: json.data, total: json.total }, async () => {
           console.log('After data update');
           console.log(this.state);
+          await store.setItem('filterData', this.state);
         });
       });
   }
@@ -240,6 +245,20 @@ class HomePage extends Component {
     This is used to update filters coming from other pages.
   */
   componentDidMount() {
+    if (this.props.history.action === 'POP') {
+      console.log('From back button');
+      store.getItem('filterData').then(data => {
+        console.log('Data from localForage', data);
+        this.setState(
+          {
+            ...data,
+          },
+          () => {
+            this.updateData();
+          }
+        );
+      });
+    }
     console.log(this.state, this.props);
     let query = '';
     let subjects = 'all';
@@ -302,6 +321,15 @@ class HomePage extends Component {
     });
   }
 
+  getCheckedProvidersFromString() {
+    const selectedProviders = this.state.providers.split('::');
+    const checkedData = this.state.providerData.map(s => {
+      return selectedProviders.indexOf(s) > -1;
+    });
+    console.log({ checkedData });
+    return checkedData;
+  }
+
   render() {
     console.log('Rendering now');
     return (
@@ -337,9 +365,10 @@ class HomePage extends Component {
                     onChange={this.onFilterChange}
                   >
                     <NestedMenu
-                      shouldReset={this.state.providerReset}
-                      shouldUpdate={false}
-                      isLevel1Checked={false}
+                      shouldReset={this.state.providers !== 'all'}
+                      shouldUpdate={true}
+                      isLevel1Checked={this.state.providers !== 'all'}
+                      checkedLevel2={this.getCheckedProvidersFromString()}
                       isOnlyOneAllowed={false}
                       level1Name={'Providers'}
                       level2List={this.state.providerData}

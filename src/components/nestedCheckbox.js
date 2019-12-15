@@ -61,6 +61,7 @@ class NestedMenu extends Component {
 
   componentWillReceiveProps(nextProps) {
     console.log('Inside componentWillReceiveProps', this.props === nextProps);
+    console.log(nextProps);
     if (this.props !== nextProps && nextProps.shouldReset) {
       this.setState({
         checkedLevel1: false,
