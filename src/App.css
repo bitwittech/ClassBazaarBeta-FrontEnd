@@ -29,8 +29,10 @@ body {
   justify-content: space-between;
 }
 
+
+
 .text-field {
-  padding: 12px 30px;
+  padding: 12px 8px;
   width: 45%;
   border: 1px solid #e3e8f0;
   background: #f0f2f7;
@@ -38,6 +40,10 @@ body {
   color: '#B9BED1' !important;
   text-align: center !important;
   font-weight: '600' !important;
+}
+
+.text-field:focus {
+  font-size: 1rem;
 }
 
 .enroll-btn {
@@ -107,6 +113,10 @@ body {
   background: rgb(255, 187, 62) !important;
 }
 
+a:hover {
+  cursor: pointer;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -172,7 +182,7 @@ body {
   justify-content: center;
 }
 
-.footer-links > * {
+.footer-links>* {
   padding-left: 10px;
 }
 

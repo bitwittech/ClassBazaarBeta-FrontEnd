@@ -392,7 +392,7 @@ class LandingPage extends Component {
                 className="sub-text"
               >
                 Discover best courses from top universities around the world
-                like MIT, Stanford, and Harvard.
+                like MIT, Stanford, Harvard, IIT and many more
               </Typography>
             </Grid>
             <Container maxWidth={'md'}>
@@ -483,6 +483,7 @@ class LandingPage extends Component {
                         style={{
                           fontWeight: '600',
                           marginBottom: '20px',
+                          textAlign: 'center',
                         }}
                         variant="h5"
                         component="h2"
@@ -520,7 +521,11 @@ class LandingPage extends Component {
                     <Grid item xs={12} style={{ paddingTop: 30 }}>
                       <Typography
                         variant="h5"
-                        style={{ fontWeight: '600', marginBottom: '20px' }}
+                        style={{
+                          fontWeight: '600',
+                          marginBottom: '20px',
+                          textAlign: 'center',
+                        }}
                         color="primary"
                         component="h2"
                       >
