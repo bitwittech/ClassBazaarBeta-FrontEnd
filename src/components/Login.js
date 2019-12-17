@@ -195,7 +195,7 @@ const Login = () => {
                         variant="subtitle1"
                         gutterBottom
                       >
-                        Mobile Number*
+                        Mobile Number
                       </Typography>
                       <input
                         type="text"

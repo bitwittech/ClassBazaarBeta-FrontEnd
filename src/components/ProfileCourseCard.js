@@ -69,7 +69,7 @@ const ProfileCourseCard = withRouter(({ history, ...data }) => {
             <Typography
               color="primary"
               style={{ fontWeight: '600' }}
-              variant="subtitle1"
+              variant="subtitle2"
               gutterBottom
             >
               {data.university}
@@ -80,7 +80,7 @@ const ProfileCourseCard = withRouter(({ history, ...data }) => {
           </div>
         </div>
         <Typography
-          variant="subtitle2"
+          variant="subtitle1"
           style={{
             color: '#3C3C3C',
             fontWeight: '600',
