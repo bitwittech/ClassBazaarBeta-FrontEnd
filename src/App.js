@@ -1,19 +1,24 @@
-import React, { useContext, useReducer } from 'react';
+import './App.css';
+
+import { BrowserRouter, Route, Switch, withRouter } from 'react-router-dom';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import React, { useContext, useReducer } from 'react';
+import withAnalytics, { initAnalytics } from 'react-with-analytics';
+
+import About from './components/About';
+import CourseDetails from './components/CourseDetails';
+import CoursePage from './components/coursePage';
 import HomePage from './components/homePage';
 import LandingPage from './components/landingPage';
-import CoursePage from './components/coursePage';
-import About from './components/About';
-import ProfilePage from './components/profilePage';
-import PrivacyPolicy from './components/PrivacyPolicy';
-import Store from './store/Context';
-import Reducer from './store/Reducer';
-import withAnalytics, { initAnalytics } from 'react-with-analytics';
-import './App.css';
 import Login from './components/Login';
-import { BrowserRouter, Route, Switch, withRouter } from 'react-router-dom';
+import PrivacyPolicy from './components/PrivacyPolicy';
+import ProfilePage from './components/profilePage';
+import ReactGA from 'react-ga';
+import Reducer from './store/Reducer';
 import Snackbar from './components/Snackbar';
-import CourseDetails from './components/CourseDetails';
+import Store from './store/Context';
+import config from './config.json';
+import localForage from 'localforage';
 
 const theme = createMuiTheme({
   typography: {
@@ -39,6 +44,10 @@ const theme = createMuiTheme({
   },
 });
 
+const GA_TRACKING_ID = 'UA-154109881-1';
+const debug = process.env.NODE_ENV === 'production' ? false : true;
+initAnalytics(GA_TRACKING_ID, { debug: debug });
+
 const Root = () => {
   return (
     <Switch>
@@ -56,7 +65,7 @@ const Root = () => {
     </Switch>
   );
 };
-
+var store = localForage.createInstance(config.localForage);
 const AppWithRouter = withRouter(withAnalytics(Root));
 
 function App() {
@@ -77,4 +86,4 @@ function App() {
   );
 }
 
-export default App;
+export { App, store };

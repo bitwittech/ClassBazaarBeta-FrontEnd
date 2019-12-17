@@ -1,15 +1,17 @@
-import React from 'react';
-import { Container } from '@material-ui/core';
-import Typography from '@material-ui/core/Typography';
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-import WatchLaterIcon from '@material-ui/icons/WatchLater';
-import MoneyIcon from '@material-ui/icons/AttachMoney';
 import CalendarIcon from '@material-ui/icons/CalendarToday';
-import TurnedInNotIcon from '@material-ui/icons/TurnedInNot';
-import TurnedInIcon from '@material-ui/icons/TurnedIn';
-import { withRouter } from 'react-router-dom';
+import { Container } from '@material-ui/core';
+import Grid from '@material-ui/core/Grid';
 import { Link } from 'react-router-dom';
+import MoneyIcon from '@material-ui/icons/AttachMoney';
+import Paper from '@material-ui/core/Paper';
+import React from 'react';
+import ReactHtmlParser from 'react-html-parser';
+import TurnedInIcon from '@material-ui/icons/TurnedIn';
+import TurnedInNotIcon from '@material-ui/icons/TurnedInNot';
+import Typography from '@material-ui/core/Typography';
+import WatchLaterIcon from '@material-ui/icons/WatchLater';
+import formatDate from './../utils/dateUtils';
+import { withRouter } from 'react-router-dom';
 const styles = {
   grid: {
     flexGrow: 1,
@@ -34,8 +36,19 @@ const styles = {
     backgroundColor: 'aliceblue',
   },
 };
+
+const formatPrice = price => {
+  if (!price || price === null || price === undefined) return 'Free';
+  else return price;
+};
+
+const formatDuration = duration => {
+  if (!duration || duration === null || duration === undefined)
+    return 'Self Paced';
+  else return duration;
+};
+
 const ProfileCourseCard = withRouter(({ history, ...data }) => {
-  console.log(data);
   return (
     <>
       <div
@@ -75,7 +88,9 @@ const ProfileCourseCard = withRouter(({ history, ...data }) => {
           }}
           gutterBottom
         >
-          {data.courseName}
+          {data.provider !== 'SimpliLearn'
+            ? data.courseName
+            : ReactHtmlParser(data.courseName)}
         </Typography>
         <Typography
           style={{ padding: '0px 15px 0px 15px', color: '#968484' }}
@@ -107,21 +122,23 @@ const ProfileCourseCard = withRouter(({ history, ...data }) => {
             }}
           >
             <Grid container align="left" spacing={2}>
-              <Grid item sm={3}>
+              <Grid item sm={4}>
                 <WatchLaterIcon
                   fontSize="small"
                   className="mb"
                   color="primary"
                 />{' '}
-                1 month
+                {formatDuration(data.duration)}
               </Grid>
-              <Grid item sm={3}>
+              <Grid item sm={4}>
                 <CalendarIcon fontSize="small" className="mb" color="primary" />{' '}
-                Flexible
+                {data.startingOn == null
+                  ? 'NA'
+                  : formatDate(new Date(data.startingOn), 'MMMM d, yyyy')}{' '}
               </Grid>
-              <Grid item sm={3}>
-                <MoneyIcon fontSize="small" className="mb" color="primary" />
-                Subscriptions
+              <Grid item sm={4}>
+                <i class="fas fa-rupee-sign" style={{ color: '#FFA502' }} />
+                {` ${formatPrice(data.price)}`}
               </Grid>
             </Grid>
           </div>

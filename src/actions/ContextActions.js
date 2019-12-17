@@ -1,9 +1,16 @@
 import { ALERT, LOADING } from '../store/Types';
 
-import axios from 'axios';
 import config from '../config.json';
+import localForage from 'localforage';
 
-const { API, API_NGROK, API_LOCAL } = config;
+const { FusionAuthClient } = require('@fusionauth/node-client');
+
+const { API, API_NGROK, API_LOCAL, fusionAuthURL } = config;
+
+let client = new FusionAuthClient(
+  config.fusionAuthAPIKey,
+  config.fusionAuthURL
+);
 
 export const register = async (data, dispatch) => {
   dispatch({
@@ -12,30 +19,56 @@ export const register = async (data, dispatch) => {
   });
 
   try {
-    const res = await axios.post(`${API}/register`, data);
-    console.log(res);
+    function handleResponse(clientResponse) {
+      console.info(
+        JSON.stringify(clientResponse.successResponse.user, null, 2)
+      );
+    }
+
+    const userDataForReg = {
+      user: {
+        username: data.username,
+        password: data.password,
+        email: data.email,
+        mobilePhone: data.phone,
+      },
+      registration: {
+        applicationId: config.fusionAuthApplicationId,
+      },
+    };
+
+    console.log({ userDataForReg, client });
+    await client
+      .register(undefined, userDataForReg)
+      .then(response => {
+        console.log(response);
+        if (response.statusCode === 200) {
+          dispatch({
+            type: ALERT,
+            payload: {
+              varient: 'success',
+              message: 'Successfully registered.',
+            },
+          });
+        } else {
+          dispatch({
+            type: ALERT,
+            payload: {
+              varient: 'error',
+              message: 'Registration failed',
+            },
+          });
+        }
+      })
+      .catch(e => {
+        console.error(e);
+      });
     dispatch({
       type: LOADING,
       payload: false,
     });
-    if (res.status === 200) {
-      dispatch({
-        type: ALERT,
-        payload: {
-          varient: 'success',
-          message: 'Successfully registered.',
-        },
-      });
-    } else {
-      dispatch({
-        type: ALERT,
-        payload: {
-          varient: 'error',
-          message: 'Registration failed',
-        },
-      });
-    }
   } catch (error) {
+    console.log(error);
     dispatch({
       type: LOADING,
       payload: false,
@@ -55,54 +88,37 @@ export const signin = async (data, dispatch) => {
     type: LOADING,
     payload: true,
   });
+  console.log(data);
   try {
-    let loginCred = {
-      username: data.email,
-      password: data.password,
-    };
-
-    loginCred = {
-      username: 'chaks4@gmail.com',
-      password: 'pass4',
-    };
-
-    // const res = await axios.post(`${API}/login`, loginCred);
-    const postData = {
-      username: 'chaks4@gmail.com',
-      password: 'pass4',
-    };
-    const body = Object.keys(postData)
-      .map(key => {
-        return (
-          encodeURIComponent(key) + '=' + encodeURIComponent(postData[key])
-        );
+    client
+      .login({
+        loginId: data.email,
+        password: data.password,
       })
-      .join('&');
-
-    var url = `${API}/login`;
-    const res = await fetch(url, {
-      credentials: 'include',
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      body,
-    });
-
-    const response = await res.json();
-
-    console.log(response);
+      .then(response => {
+        console.log(response);
+        dispatch({
+          type: ALERT,
+          payload: {
+            varient: 'success',
+            message: 'Successfully logged in.',
+          },
+        });
+      })
+      .catch(e => {
+        console.log(e);
+        dispatch({
+          type: ALERT,
+          payload: {
+            varient: 'error',
+            message: 'Login failed',
+          },
+        });
+      });
 
     dispatch({
       type: LOADING,
       payload: false,
-    });
-    dispatch({
-      type: ALERT,
-      payload: {
-        varient: 'success',
-        message: 'Successfully logged in.',
-      },
     });
   } catch (error) {
     dispatch({

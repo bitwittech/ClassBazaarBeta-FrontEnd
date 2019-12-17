@@ -7,7 +7,6 @@ import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import CalendarIcon from '@material-ui/icons/CalendarToday';
 import { Container } from '@material-ui/core';
-import CourseCard from './courseCard';
 import DateRangeIcon from '@material-ui/icons/DateRange';
 import Divider from '@material-ui/core/Divider';
 import Fab from '@material-ui/core/Fab';

@@ -16,7 +16,7 @@ import Footer from './Footer';
 import Grid from '@material-ui/core/Grid';
 import InputBase from '@material-ui/core/InputBase';
 import { Paper } from 'material-ui';
-import SearchBG1 from './../assets/Search-option1.jpg';
+import SearchBG1 from './../assets/Search-Option3.jpg';
 import SearchIcon from '@material-ui/icons/Search';
 import Snackbar from '@material-ui/core/Snackbar';
 import TopAppBar from './appBar';
@@ -96,7 +96,7 @@ const styles = theme => ({
     padding: 20,
   },
   courseCardImage: {
-    objectFit: 'cover !important',
+    // objectFit: 'cover !important',
     backgroundSize: 'contain',
     width: '100%',
     height: '100%',
@@ -141,6 +141,27 @@ const Search = withRouter(({ history, ...data }) => {
         }}
       />
     </div>
+  );
+});
+
+const ShowMore = withRouter(({ history, ...data }) => {
+  const classes = data.classes;
+  return (
+    <Button
+      onClick={() => {
+        history.push({
+          pathname: data.routingURL,
+          state: {
+            filter: data.filter,
+          },
+        });
+      }}
+      variant="contained"
+      color="primary"
+      className={classes.button}
+    >
+      Show More
+    </Button>
   );
 });
 
@@ -234,13 +255,13 @@ class LandingPage extends Component {
     return this.state.q;
   }
 
-  getDegreeCard(degree, classes) {
+  getDegreeCard(degree, classes, type) {
     const padding = { paddingTop: 6, paddingBottom: 6 };
     return (
       <Grid container className="c-card">
         <Grid item xs={12}>
-          <Box display="flex" style={{ height: '135px', margin: '30' }}>
-            <Grid item xs={9} style={{ margin: 'auto', paddingLeft: 30 }}>
+          <Box display="flex" style={{ height: '149px', margin: '30' }}>
+            <Grid item xs={8} style={{ margin: 'auto', paddingLeft: 30 }}>
               <Typography
                 variant="body2"
                 color="primary"
@@ -259,7 +280,7 @@ class LandingPage extends Component {
               <Typography
                 variant="body2"
                 align="left"
-                style={{ paddingTop: 6, paddingBottom: 6 }}
+                style={{ paddingTop: 6, paddingBottom: 6, fontColor: '#ddd' }}
               >
                 <Box
                   height="100%"
@@ -271,9 +292,22 @@ class LandingPage extends Component {
                 </Box>
               </Typography>
             </Grid>
-            <Grid item xs={3} style={{ height: '100%' }}>
-              <img className={classes.courseCardImage} src={degree.image}></img>
-            </Grid>
+            {type === 1 && (
+              <Grid item xs={4} style={{ height: '100%' }}>
+                <img
+                  className={classes.courseCardImage}
+                  src={degree.image}
+                ></img>
+              </Grid>
+            )}
+            {type === 2 && (
+              <Grid item style={{ height: '100%', width: 224 }}>
+                <img
+                  className={classes.courseCardImage}
+                  src={degree.image}
+                ></img>
+              </Grid>
+            )}
           </Box>
         </Grid>
       </Grid>
@@ -420,24 +454,22 @@ class LandingPage extends Component {
                 <br />
                 <Grid container>
                   {degreeData.map(degree =>
-                    this.getDegreeCard(degree, classes)
+                    this.getDegreeCard(degree, classes, 1)
                   )}
                 </Grid>
               </Container>
-              <Grid item xs={12} style={{ margin: 30 }}>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  className={classes.button}
-                >
-                  Show More
-                </Button>
+              <Grid container style={{ margin: 30 }} justify="center">
+                <ShowMore
+                  classes={classes}
+                  filter={'paid'}
+                  routingURL={'/listing'}
+                />
               </Grid>
             </Grid>
           </Box>
-          <Container max-width={'xl'}>
+          <Container style={{ paddingLeft: 0, paddingRight: 0 }}>
             <Grid container>
-              <Grid item xs={6}>
+              <Grid item xs={6} style={{ paddingLeft: 24 }}>
                 <Box style={{ minHeight: '60vh', width: '96%', margin: 10 }}>
                   <Grid
                     container
@@ -445,11 +477,7 @@ class LandingPage extends Component {
                     direction="column"
                     alignItems="left"
                   >
-                    <Grid
-                      item
-                      xs={12}
-                      style={{ paddingTop: 30, background: '#FAFAFA' }}
-                    >
+                    <Grid item xs={12} style={{ paddingTop: 30 }}>
                       <Typography
                         color="primary"
                         style={{
@@ -464,22 +492,24 @@ class LandingPage extends Component {
                     </Grid>
                     <Grid container>
                       {trendingData.map(degree =>
-                        this.getDegreeCard(degree, classes)
+                        this.getDegreeCard(degree, classes, 2)
                       )}
                     </Grid>
-                    <Grid item xs={12} style={{ margin: 30, marginLeft: '0' }}>
-                      <Button
-                        variant="contained"
-                        color="primary"
-                        className={classes.button}
-                      >
-                        Show More
-                      </Button>
+                    <Grid container style={{ margin: 30 }} justify="center">
+                      <ShowMore
+                        classes={classes}
+                        filter={''}
+                        routingURL={'/listing'}
+                      />
                     </Grid>
                   </Grid>
                 </Box>
               </Grid>
-              <Grid item xs={6} style={{ background: '#FFF' }}>
+              <Grid
+                item
+                xs={6}
+                style={{ background: '#FFF', paddingRight: 24 }}
+              >
                 <Box style={{ minHeight: '60vh', width: '95%', margin: 10 }}>
                   <Grid
                     container
@@ -499,17 +529,15 @@ class LandingPage extends Component {
                     </Grid>
                     <Grid container>
                       {freeCourses.map(degree =>
-                        this.getDegreeCard(degree, classes)
+                        this.getDegreeCard(degree, classes, 2)
                       )}
                     </Grid>
-                    <Grid item xs={12} style={{ margin: 30, marginLeft: '0' }}>
-                      <Button
-                        variant="contained"
-                        color="primary"
-                        className={classes.button}
-                      >
-                        Show More
-                      </Button>
+                    <Grid container style={{ margin: 30 }} justify="center">
+                      <ShowMore
+                        classes={classes}
+                        filter={'free'}
+                        routingURL={'/listing'}
+                      />
                     </Grid>
                   </Grid>
                 </Box>
