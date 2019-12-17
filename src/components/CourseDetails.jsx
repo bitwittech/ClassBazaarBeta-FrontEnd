@@ -18,10 +18,12 @@ import TurnedInIcon from '@material-ui/icons/TurnedIn';
 import TurnedInNotIcon from '@material-ui/icons/TurnedInNot';
 import formatDate from './../utils/dateUtils';
 import getClosestNextRun from './../utils/edxUtils';
+import { CircularProgress } from '@material-ui/core';
 
 const CourseDetails = props => {
   const [state, setState] = useState({
     data: null,
+    loading: true,
   });
   const provider = props.match.params.provider;
   let uuid = props.match.params.uuid;
@@ -38,6 +40,7 @@ const CourseDetails = props => {
       setState({
         ...state,
         data: data.data,
+        loading: false,
       });
     };
     getCourseDetails();
@@ -1172,7 +1175,16 @@ const CourseDetails = props => {
   return (
     <>
       <AppBar />
-      {renderSwitch(provider)}
+      {state.loading ? (
+        <Grid
+          align="center"
+          style={{ margin: '20px 0', width: '100%', height: '70vh' }}
+        >
+          <CircularProgress color="primary" />
+        </Grid>
+      ) : (
+        renderSwitch(provider)
+      )}
       <Footer />
     </>
   );
