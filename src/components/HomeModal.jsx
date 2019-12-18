@@ -20,7 +20,7 @@ const useStyles = makeStyles(theme => ({
     width: '40%',
     margin: '0',
     color: 'white',
-    padding: '90px',
+    padding: '60px',
     outline: 'none',
   },
   loginButton: {
@@ -50,11 +50,66 @@ const HomeModal = ({ openState, handlePopupClose, state }) => {
         }}
       >
         <Fade in={openState}>
-          <div style={{ backgroundColor: '#ffa502' }} className={classes.paper}>
-            <Typography align="center" variant="h5" gutterBottom>
+          <div style={{ backgroundColor: 'white' }} className={classes.paper}>
+            <Typography
+              style={{ color: '#000000', fontWeight: '900', fontSize: '1rem' }}
+              align="center"
+              variant="h5"
+              gutterBottom
+            >
               Stay ahead of the curve! Get personalized course recommendations,
               track subjects and more.
             </Typography>
+            <Grid align="center" style={{ marginTop: '40px' }}>
+              <form>
+                <Typography
+                  style={{
+                    fontWeight: '900',
+                    fontSize: '12px',
+                    marginTop: '20px',
+                  }}
+                  color="primary"
+                  variant="subtitle1"
+                  gutterBottom
+                >
+                  Full Name
+                </Typography>
+                <input
+                  name="name"
+                  type="text"
+                  className="text-field"
+                  placeholder="Enter your Name"
+                />
+                <Typography
+                  style={{
+                    fontWeight: '900',
+                    fontSize: '12px',
+                    marginTop: '20px',
+                  }}
+                  color="primary"
+                  variant="subtitle1"
+                  gutterBottom
+                >
+                  Email ID
+                </Typography>
+                <input
+                  name="email"
+                  type="text"
+                  className="text-field"
+                  placeholder="Enter your Email ID"
+                />
+                <div style={{ marginTop: '20px' }}>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    type="submit"
+                    className={classes.loginButton}
+                  >
+                    Submit
+                  </Button>
+                </div>
+              </form>
+            </Grid>
           </div>
         </Fade>
       </Modal>
@@ -84,53 +139,55 @@ const HomeModal = ({ openState, handlePopupClose, state }) => {
             >
               Create Review
             </Typography>
+
             <Grid align="center">
-              <Typography
-                style={{
-                  fontWeight: '900',
-                  fontSize: '12px',
-                  marginTop: '20px',
-                }}
-                color="primary"
-                variant="subtitle1"
-                gutterBottom
-              >
-                Add a headline
-              </Typography>
-              <input
-                name="title"
-                type="text"
-                className="text-field"
-                placeholder="What's most important to know?"
-              />
-              <Typography
-                style={{
-                  fontWeight: '900',
-                  fontSize: '12px',
-                  marginTop: '20px',
-                }}
-                color="primary"
-                variant="subtitle1"
-                gutterBottom
-              >
-                Write your review
-              </Typography>
-              <textarea
-                name="password"
-                type="password"
-                className="text-field"
-                placeholder="What did you like or dislike? How could this course improve?"
-              />
-              <div>
-                <Button
-                  variant="contained"
+              <form>
+                <Typography
+                  style={{
+                    fontWeight: '900',
+                    fontSize: '12px',
+                    marginTop: '20px',
+                  }}
                   color="primary"
-                  type="submit"
-                  className={classes.loginButton}
+                  variant="subtitle1"
+                  gutterBottom
                 >
-                  Submit
-                </Button>
-              </div>
+                  Add a headline
+                </Typography>
+                <input
+                  name="headline"
+                  type="text"
+                  className="text-field"
+                  placeholder="What's most important to know?"
+                />
+                <Typography
+                  style={{
+                    fontWeight: '900',
+                    fontSize: '12px',
+                    marginTop: '20px',
+                  }}
+                  color="primary"
+                  variant="subtitle1"
+                  gutterBottom
+                >
+                  Write your review
+                </Typography>
+                <textarea
+                  name="review"
+                  className="text-field"
+                  placeholder="What did you like or dislike? How could this course improve?"
+                />
+                <div>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    type="submit"
+                    className={classes.loginButton}
+                  >
+                    Submit
+                  </Button>
+                </div>
+              </form>
             </Grid>
           </div>
         </Fade>

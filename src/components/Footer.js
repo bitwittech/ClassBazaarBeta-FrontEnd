@@ -32,7 +32,7 @@ const Footer = () => {
             </p>
           </div>
         </div>
-        <p class="footer-text"> Email: info@company.com </p>
+        <p class="footer-text"> Email:  info@classbazaar.com </p>
         <p class="footer-text tsm">
           © Copyright 2019 <strong>Class Bazaar</strong>, All Right Reserved
         </p>
