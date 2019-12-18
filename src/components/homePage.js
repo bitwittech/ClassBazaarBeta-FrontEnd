@@ -99,6 +99,7 @@ class HomePage extends Component {
       providerReset: false,
       startReset: false,
       loading: true,
+      popUp: false,
     };
     this.getUniversityForUdemy = this.getUniversityForUdemy.bind(this);
     this.handlePageChange = this.handlePageChange.bind(this);
@@ -345,6 +346,7 @@ class HomePage extends Component {
             initialSearchValue={this.state.q}
           />
         </div>
+
         <br />
         <br />
         <Container maxWidth={'lg'}>

@@ -23,6 +23,8 @@ import TopAppBar from './appBar';
 import Typography from '@material-ui/core/Typography';
 import { withRouter } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
+import HomeModal from './HomeModal';
+import { Collapse } from '@material-ui/core';
 
 const styles = theme => ({
   dashboardLink: {
@@ -211,8 +213,9 @@ class LandingPage extends Component {
       filter: '',
       subjects: subjectsData.slice(0, 3),
       showMoreButtonText: 'Show More',
+      popUp: false,
     };
-
+    console.log('landing', this.state);
     this.handlePageChange = this.handlePageChange.bind(this);
     this.onFilterChange = this.onFilterChange.bind(this);
     this.onSearchChange = this.onSearchChange.bind(this);
@@ -225,7 +228,22 @@ class LandingPage extends Component {
     // Call api after this.
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+    // window.addEventListener('scroll', this.handleScroll);
+    this.timeouts = setTimeout(() => {
+      this.setState({ popUp: true });
+    }, 4000);
+  }
+
+  componentWillUnmount() {
+    this.clearTimeouts();
+  }
+  clearTimeouts = () => {
+    clearTimeout(this.timeouts);
+  };
+  // componentWillUnmount() {
+  //   window.removeEventListener('scroll', this.handleScroll);
+  // }
 
   handlePageChange(page) {
     this.setState({ page }, () => {
@@ -327,7 +345,9 @@ class LandingPage extends Component {
       ></Snackbar>
     );
   }
-
+  handlePopupClose = () => {
+    this.setState({ popUp: false });
+  };
   render() {
     const { classes, theme } = this.props;
     return (
@@ -337,6 +357,11 @@ class LandingPage extends Component {
             onChange={this.onSearchChange}
             isSearchIncluded={false}
             onLoginClick={this.onLoginClick}
+          />
+          <HomeModal
+            state={0}
+            openState={this.state.popUp}
+            handlePopupClose={this.handlePopupClose}
           />
           <AuthProvider />
           <Grid

@@ -1,6 +1,7 @@
 import { Container, Grid, Typography } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
-
+import RateReviewIcon from '@material-ui/icons/RateReview';
+import HomeModal from './HomeModal';
 import AppBar from './appBar';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import Box from '@material-ui/core/Box';
@@ -24,6 +25,7 @@ const CourseDetails = props => {
   const [state, setState] = useState({
     data: null,
     loading: true,
+    popUp: false,
   });
   const provider = props.match.params.provider;
   let uuid = props.match.params.uuid;
@@ -83,7 +85,9 @@ const CourseDetails = props => {
       </>
     );
   };
-
+  const handlePopupClose = () => {
+    setState({ ...state, popUp: false });
+  };
   const courseSummary = () => (
     <>
       <div
@@ -1098,7 +1102,6 @@ const CourseDetails = props => {
                 >
                   {ReactHtmlParser(state.data.syllabus)}
                 </Typography>
-
                 {state.data.instructors !== undefined && (
                   <>
                     <Typography
@@ -1123,6 +1126,32 @@ const CourseDetails = props => {
                 >
                   Reviews
                 </Typography>
+                <div>
+                  <button
+                    onClick={() => {
+                      setState({ ...state, popUp: !state.popUp });
+                    }}
+                    className="enroll-btn"
+                  >
+                    <div style={{ display: 'flex', flexDirection: 'row' }}>
+                      <div
+                        style={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          fontWeight: '600',
+                        }}
+                      >
+                        <div>Write Review &nbsp;</div>
+                      </div>
+                      <div>
+                        <RateReviewIcon
+                          style={{ fontSize: '22px', marginTop: '2px' }}
+                        />
+                      </div>
+                    </div>
+                  </button>
+                </div>
+                <br />
                 <Grid
                   container
                   style={{ padding: 20, background: '#00000015' }}
@@ -1172,9 +1201,15 @@ const CourseDetails = props => {
         return <h1>Coming Soon</h1>;
     }
   };
+  console.log('Course Details', state);
   return (
     <>
       <AppBar />
+      <HomeModal
+        openState={state.popUp}
+        handlePopupClose={handlePopupClose}
+        state={1}
+      />
       {state.loading ? (
         <Grid
           align="center"
