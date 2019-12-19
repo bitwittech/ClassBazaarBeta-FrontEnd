@@ -304,6 +304,31 @@ const CourseDetails = props => {
                 >
                   Reviews
                 </Typography>
+                <div>
+                  <button
+                    onClick={() => {
+                      setState({ ...state, popUp: !state.popUp });
+                    }}
+                    className="enroll-btn"
+                  >
+                    <div style={{ display: 'flex', flexDirection: 'row' }}>
+                      <div
+                        style={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          fontWeight: '600',
+                        }}
+                      >
+                        <div>Write Review &nbsp;</div>
+                      </div>
+                      <div>
+                        <RateReviewIcon
+                          style={{ fontSize: '22px', marginTop: '2px' }}
+                        />
+                      </div>
+                    </div>
+                  </button>
+                </div>
                 <Grid
                   container
                   style={{ padding: 20, background: '#00000015' }}
@@ -455,6 +480,31 @@ const CourseDetails = props => {
                 >
                   Reviews
                 </Typography>
+                <div>
+                  <button
+                    onClick={() => {
+                      setState({ ...state, popUp: !state.popUp });
+                    }}
+                    className="enroll-btn"
+                  >
+                    <div style={{ display: 'flex', flexDirection: 'row' }}>
+                      <div
+                        style={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          fontWeight: '600',
+                        }}
+                      >
+                        <div>Write Review &nbsp;</div>
+                      </div>
+                      <div>
+                        <RateReviewIcon
+                          style={{ fontSize: '22px', marginTop: '2px' }}
+                        />
+                      </div>
+                    </div>
+                  </button>
+                </div>
                 <Grid
                   container
                   style={{ padding: 20, background: '#00000015' }}
@@ -599,6 +649,31 @@ const CourseDetails = props => {
                 >
                   Reviews
                 </Typography>
+                <div>
+                  <button
+                    onClick={() => {
+                      setState({ ...state, popUp: !state.popUp });
+                    }}
+                    className="enroll-btn"
+                  >
+                    <div style={{ display: 'flex', flexDirection: 'row' }}>
+                      <div
+                        style={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          fontWeight: '600',
+                        }}
+                      >
+                        <div>Write Review &nbsp;</div>
+                      </div>
+                      <div>
+                        <RateReviewIcon
+                          style={{ fontSize: '22px', marginTop: '2px' }}
+                        />
+                      </div>
+                    </div>
+                  </button>
+                </div>
                 <Grid
                   container
                   style={{ padding: 20, background: '#00000015' }}
@@ -710,6 +785,31 @@ const CourseDetails = props => {
                 >
                   Reviews
                 </Typography>
+                <div>
+                  <button
+                    onClick={() => {
+                      setState({ ...state, popUp: !state.popUp });
+                    }}
+                    className="enroll-btn"
+                  >
+                    <div style={{ display: 'flex', flexDirection: 'row' }}>
+                      <div
+                        style={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          fontWeight: '600',
+                        }}
+                      >
+                        <div>Write Review &nbsp;</div>
+                      </div>
+                      <div>
+                        <RateReviewIcon
+                          style={{ fontSize: '22px', marginTop: '2px' }}
+                        />
+                      </div>
+                    </div>
+                  </button>
+                </div>
                 <Grid
                   container
                   style={{ padding: 20, background: '#00000015' }}
@@ -845,6 +945,31 @@ const CourseDetails = props => {
                 >
                   Reviews
                 </Typography>
+                <div>
+                  <button
+                    onClick={() => {
+                      setState({ ...state, popUp: !state.popUp });
+                    }}
+                    className="enroll-btn"
+                  >
+                    <div style={{ display: 'flex', flexDirection: 'row' }}>
+                      <div
+                        style={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          fontWeight: '600',
+                        }}
+                      >
+                        <div>Write Review &nbsp;</div>
+                      </div>
+                      <div>
+                        <RateReviewIcon
+                          style={{ fontSize: '22px', marginTop: '2px' }}
+                        />
+                      </div>
+                    </div>
+                  </button>
+                </div>
                 <Grid
                   container
                   style={{ padding: 20, background: '#00000015' }}
@@ -1007,6 +1132,31 @@ const CourseDetails = props => {
                 >
                   Reviews
                 </Typography>
+                <div>
+                  <button
+                    onClick={() => {
+                      setState({ ...state, popUp: !state.popUp });
+                    }}
+                    className="enroll-btn"
+                  >
+                    <div style={{ display: 'flex', flexDirection: 'row' }}>
+                      <div
+                        style={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          fontWeight: '600',
+                        }}
+                      >
+                        <div>Write Review &nbsp;</div>
+                      </div>
+                      <div>
+                        <RateReviewIcon
+                          style={{ fontSize: '22px', marginTop: '2px' }}
+                        />
+                      </div>
+                    </div>
+                  </button>
+                </div>
                 <Grid
                   container
                   style={{ padding: 20, background: '#00000015' }}
