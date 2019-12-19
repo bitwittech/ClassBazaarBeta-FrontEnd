@@ -98,6 +98,8 @@ class HomePage extends Component {
       feeReset: false,
       providerReset: false,
       startReset: false,
+      loading: true,
+      popUp: false,
     };
     this.getUniversityForUdemy = this.getUniversityForUdemy.bind(this);
     this.handlePageChange = this.handlePageChange.bind(this);
@@ -140,11 +142,14 @@ class HomePage extends Component {
     return fetch(url)
       .then(response => response.json())
       .then(json => {
-        this.setState({ data: json.data, total: json.total }, async () => {
-          console.log('After data update');
-          console.log(this.state);
-          await store.setItem('filterData', this.state);
-        });
+        this.setState(
+          { data: json.data, total: json.total, loading: false },
+          async () => {
+            console.log('After data update');
+            console.log(this.state);
+            await store.setItem('filterData', this.state);
+          }
+        );
       });
   }
 
@@ -341,6 +346,7 @@ class HomePage extends Component {
             initialSearchValue={this.state.q}
           />
         </div>
+
         <br />
         <br />
         <Container maxWidth={'lg'}>
@@ -423,7 +429,11 @@ class HomePage extends Component {
                   marginLeft: '-25px',
                 }}
               />
-              {this.state.data.length > 0 ? (
+              {this.state.loading ? (
+                <Grid align="center">
+                  <CircularProgress />
+                </Grid>
+              ) : this.state.data.length > 0 ? (
                 this.state.data.length > 0 &&
                 this.state.data.map((obj, index) => {
                   return (
@@ -448,7 +458,9 @@ class HomePage extends Component {
                 })
               ) : (
                 <Grid align="center">
-                  <CircularProgress />
+                  <Typography color="primary" variant="h6" gutterBottom>
+                    No course found.
+                  </Typography>
                 </Grid>
               )}
               {this.state.data.length > 0 && (

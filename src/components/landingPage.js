@@ -23,6 +23,8 @@ import TopAppBar from './appBar';
 import Typography from '@material-ui/core/Typography';
 import { withRouter } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
+import HomeModal from './HomeModal';
+import { Collapse } from '@material-ui/core';
 
 const styles = theme => ({
   dashboardLink: {
@@ -211,8 +213,9 @@ class LandingPage extends Component {
       filter: '',
       subjects: subjectsData.slice(0, 3),
       showMoreButtonText: 'Show More',
+      popUp: false,
     };
-
+    console.log('landing', this.state);
     this.handlePageChange = this.handlePageChange.bind(this);
     this.onFilterChange = this.onFilterChange.bind(this);
     this.onSearchChange = this.onSearchChange.bind(this);
@@ -225,7 +228,22 @@ class LandingPage extends Component {
     // Call api after this.
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+    // window.addEventListener('scroll', this.handleScroll);
+    this.timeouts = setTimeout(() => {
+      this.setState({ popUp: true });
+    }, 4000);
+  }
+
+  componentWillUnmount() {
+    this.clearTimeouts();
+  }
+  clearTimeouts = () => {
+    clearTimeout(this.timeouts);
+  };
+  // componentWillUnmount() {
+  //   window.removeEventListener('scroll', this.handleScroll);
+  // }
 
   handlePageChange(page) {
     this.setState({ page }, () => {
@@ -327,7 +345,9 @@ class LandingPage extends Component {
       ></Snackbar>
     );
   }
-
+  handlePopupClose = () => {
+    this.setState({ popUp: false });
+  };
   render() {
     const { classes, theme } = this.props;
     return (
@@ -337,6 +357,11 @@ class LandingPage extends Component {
             onChange={this.onSearchChange}
             isSearchIncluded={false}
             onLoginClick={this.onLoginClick}
+          />
+          <HomeModal
+            state={0}
+            openState={this.state.popUp}
+            handlePopupClose={this.handlePopupClose}
           />
           <AuthProvider />
           <Grid
@@ -392,7 +417,7 @@ class LandingPage extends Component {
                 className="sub-text"
               >
                 Discover best courses from top universities around the world
-                like MIT, Stanford, and Harvard.
+                like MIT, Stanford, Harvard, IIT and many more
               </Typography>
             </Grid>
             <Container maxWidth={'md'}>
@@ -483,6 +508,7 @@ class LandingPage extends Component {
                         style={{
                           fontWeight: '600',
                           marginBottom: '20px',
+                          textAlign: 'center',
                         }}
                         variant="h5"
                         component="h2"
@@ -520,7 +546,11 @@ class LandingPage extends Component {
                     <Grid item xs={12} style={{ paddingTop: 30 }}>
                       <Typography
                         variant="h5"
-                        style={{ fontWeight: '600', marginBottom: '20px' }}
+                        style={{
+                          fontWeight: '600',
+                          marginBottom: '20px',
+                          textAlign: 'center',
+                        }}
                         color="primary"
                         component="h2"
                       >
