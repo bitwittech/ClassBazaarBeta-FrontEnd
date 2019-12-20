@@ -130,7 +130,7 @@ const IconWithRouter = withRouter(({ history, ...props }) => (
 ));
 
 export default function TopBar(props) {
-  const { dispatch } = useContext(Store);
+  const { state, dispatch } = useContext(Store);
   const classes = useStyles();
 
   const handleLoginModal = () => {
@@ -192,7 +192,7 @@ export default function TopBar(props) {
           >
             login
           </Button>
-          <IconWithRouter routingURL={'/profile'} />
+          {state.isAuth ? <IconWithRouter routingURL={'/profile'} /> : null}
         </div>
         <div className={classes.grow} />
         <div className={classes.sectionDesktop}></div>
