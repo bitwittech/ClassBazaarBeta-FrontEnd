@@ -1,13 +1,16 @@
-import {
-    createContext
-} from 'react'
+import { createContext } from 'react';
 
-const Store = createContext({
-    loginModal: false,
-    token: null,
-    isAuth: null,
-    loading: false,
-    alerts: []
-})
+let initialState = {
+  loginModal: false,
+  token: localStorage.getItem('cbtoken')
+    ? localStorage.getItem('cbtoken')
+    : null,
+  isAuth: false,
+  loading: false,
+  user: null,
+  alerts: [],
+};
+
+const Store = createContext(initialState);
 
 export default Store;

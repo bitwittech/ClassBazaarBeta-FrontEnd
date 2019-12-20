@@ -131,6 +131,7 @@ const IconWithRouter = withRouter(({ history, ...props }) => (
 
 export default function TopBar(props) {
   const { state, dispatch } = useContext(Store);
+  console.log(state);
   const classes = useStyles();
 
   const handleLoginModal = () => {

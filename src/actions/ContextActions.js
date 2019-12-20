@@ -1,4 +1,11 @@
-import { ALERT, LOADING } from '../store/Types';
+import {
+  ALERT,
+  LOGIN,
+  LOADING,
+  REMOVE_TOKEN,
+  FETCH_USER,
+  LOGOUT,
+} from '../store/Types';
 
 import config from '../config.json';
 import localForage from 'localforage';
@@ -37,11 +44,15 @@ export const register = async (data, dispatch) => {
       },
     };
 
-    console.log({ userDataForReg, client });
+    console.log({
+      userDataForReg,
+      client,
+    });
+
     await client
       .register(undefined, userDataForReg)
       .then(response => {
-        console.log(response);
+        console.log('Response', response);
         if (response.statusCode === 200) {
           dispatch({
             type: ALERT,
@@ -98,6 +109,13 @@ export const signin = async (data, dispatch) => {
       .then(response => {
         console.log(response);
         dispatch({
+          type: LOGIN,
+          payload: {
+            token: response.successResponse.token,
+            user: response.successResponse.user,
+          },
+        });
+        dispatch({
           type: ALERT,
           payload: {
             varient: 'success',
@@ -131,6 +149,22 @@ export const signin = async (data, dispatch) => {
         varient: 'error',
         message: 'Login failed',
       },
+    });
+  }
+};
+
+export const fetchUser = async (token, dispatch) => {
+  console.log('hey');
+  try {
+    const res = await client.retrieveUserUsingJWT(token);
+
+    dispatch({
+      type: FETCH_USER,
+      payload: res.successResponse.user,
+    });
+  } catch (error) {
+    dispatch({
+      type: REMOVE_TOKEN,
     });
   }
 };
