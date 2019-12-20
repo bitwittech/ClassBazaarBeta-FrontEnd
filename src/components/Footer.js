@@ -5,8 +5,8 @@ import React from 'react';
 const Footer = () => {
   return (
     <>
-      <div className="footer">
-        <div>
+      <div className="footer" style={{ background: 'white' }}>
+        <div style={{ marginTop: '20px' }}>
           <img className="footer-logo" src={Logo} alt="classbazarLogo" />
         </div>
         <div className="footer-links">
@@ -32,7 +32,7 @@ const Footer = () => {
             </p>
           </div>
         </div>
-        <p class="footer-text"> Email:  info@classbazaar.com </p>
+        <p class="footer-text"> Email: info@classbazaar.com </p>
         <p class="footer-text tsm">
           © Copyright 2019 <strong>Class Bazaar</strong>, All Right Reserved
         </p>

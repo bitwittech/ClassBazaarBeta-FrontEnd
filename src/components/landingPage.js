@@ -213,9 +213,10 @@ class LandingPage extends Component {
       filter: '',
       subjects: subjectsData.slice(0, 3),
       showMoreButtonText: 'Show More',
-      popUp: false,
+      popUp: sessionStorage.getItem('cbpop'),
     };
     console.log('landing', this.state);
+    console.log('onrender', sessionStorage.getItem('cbpop'));
     this.handlePageChange = this.handlePageChange.bind(this);
     this.onFilterChange = this.onFilterChange.bind(this);
     this.onSearchChange = this.onSearchChange.bind(this);
@@ -230,9 +231,11 @@ class LandingPage extends Component {
 
   componentDidMount() {
     // window.addEventListener('scroll', this.handleScroll);
-    this.timeouts = setTimeout(() => {
-      this.setState({ popUp: true });
-    }, 4000);
+    if (sessionStorage.getItem('cbpop') == null) {
+      this.timeouts = setTimeout(() => {
+        this.setState({ popUp: true });
+      }, 4000);
+    }
   }
 
   componentWillUnmount() {
@@ -345,11 +348,18 @@ class LandingPage extends Component {
       ></Snackbar>
     );
   }
+
   handlePopupClose = () => {
     this.setState({ popUp: false });
+    sessionStorage.setItem('cbpop', false);
+    console.log('handleClose', this.state);
+    console.log('onClose', this.state.popUp);
   };
+
   render() {
     const { classes, theme } = this.props;
+    console.log('popup', this.state.popUp);
+    console.log('session', sessionStorage.getItem('cbpop'));
     return (
       <>
         <Grid style={{ margin: 0, width: '100%' }}>
@@ -358,11 +368,15 @@ class LandingPage extends Component {
             isSearchIncluded={false}
             onLoginClick={this.onLoginClick}
           />
-          <HomeModal
-            state={0}
-            openState={this.state.popUp}
-            handlePopupClose={this.handlePopupClose}
-          />
+
+          {this.state.popUp === true ? (
+            <HomeModal
+              state={0}
+              openState={this.state.popUp}
+              handlePopupClose={this.handlePopupClose}
+            />
+          ) : null}
+
           <AuthProvider />
           <Grid
             container

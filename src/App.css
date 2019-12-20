@@ -29,8 +29,6 @@ body {
   justify-content: space-between;
 }
 
-
-
 .text-field {
   padding: 12px 8px;
   width: 45%;
@@ -43,7 +41,7 @@ body {
 }
 
 .text-field:focus {
-  font-size: 1rem;
+  font-size: 0.9rem;
 }
 
 .enroll-btn {
@@ -107,6 +105,7 @@ body {
   border-radius: 6px !important;
   font-weight: 600 !important;
   padding: 3px 20px !important;
+  text-transform: none !important;
 }
 
 .login-btn:hover {
@@ -182,7 +181,7 @@ a:hover {
   justify-content: center;
 }
 
-.footer-links>* {
+.footer-links > * {
   padding-left: 10px;
 }
 

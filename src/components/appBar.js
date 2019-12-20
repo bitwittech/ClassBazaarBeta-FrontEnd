@@ -16,7 +16,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { withRouter } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
-
+import { logout } from '../actions/ContextActions';
 const useStyles = makeStyles(theme => ({
   title: {
     display: 'none',
@@ -130,7 +130,7 @@ const IconWithRouter = withRouter(({ history, ...props }) => (
 ));
 
 export default function TopBar(props) {
-  const { dispatch } = useContext(Store);
+  const { state, dispatch } = useContext(Store);
   const classes = useStyles();
 
   const handleLoginModal = () => {
@@ -176,23 +176,36 @@ export default function TopBar(props) {
         )}
 
         <div className={classes.rightLogin}>
-          <Button
-            variant="outlined"
-            color="primary"
-            className="signup-btn"
-            onClick={handleLoginModal}
-          >
-            Signup
-          </Button>
-          <Button
-            variant="outlined"
-            color="primary"
-            className="login-btn"
-            onClick={handleLoginModal}
-          >
-            login
-          </Button>
-          <IconWithRouter routingURL={'/profile'} />
+          {state.isAuth ? <IconWithRouter routingURL={'/profile'} /> : null}
+          {!state.isAuth ? (
+            <>
+              <Button
+                variant="outlined"
+                color="primary"
+                className="signup-btn"
+                onClick={handleLoginModal}
+              >
+                Signup
+              </Button>
+              <Button
+                variant="outlined"
+                color="primary"
+                className="login-btn"
+                onClick={handleLoginModal}
+              >
+                Login
+              </Button>
+            </>
+          ) : (
+            <Button
+              onClick={() => logout(dispatch)}
+              variant="outlined"
+              color="primary"
+              className="signup-btn"
+            >
+              Logout
+            </Button>
+          )}
         </div>
         <div className={classes.grow} />
         <div className={classes.sectionDesktop}></div>

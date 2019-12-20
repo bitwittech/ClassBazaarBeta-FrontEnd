@@ -1,10 +1,8 @@
 import './App.css';
-
 import { BrowserRouter, Route, Switch, withRouter } from 'react-router-dom';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import React, { useContext, useReducer } from 'react';
+import React, { useContext, useReducer, useEffect } from 'react';
 import withAnalytics, { initAnalytics } from 'react-with-analytics';
-
 import About from './components/About';
 import CourseDetails from './components/CourseDetails';
 import CoursePage from './components/coursePage';
@@ -19,7 +17,8 @@ import Snackbar from './components/Snackbar';
 import Store from './store/Context';
 import config from './config.json';
 import localForage from 'localforage';
-
+import Contactus from './components/Contactus';
+import { fetchUser } from './actions/ContextActions';
 const theme = createMuiTheme({
   typography: {
     fontFamily: ['Poppins'],
@@ -62,6 +61,7 @@ const Root = () => {
         path="/coursedetails/:provider/:uuid"
         component={CourseDetails}
       />
+      <Route exact path="/contact" component={Contactus} />
     </Switch>
   );
 };
@@ -71,6 +71,11 @@ const AppWithRouter = withRouter(withAnalytics(Root));
 function App() {
   const initialState = useContext(Store);
   const [state, dispatch] = useReducer(Reducer, initialState);
+  useEffect(() => {
+    if (state.token) {
+      fetchUser(state.token, dispatch);
+    }
+  }, []);
   return (
     <BrowserRouter>
       <MuiThemeProvider theme={theme}>

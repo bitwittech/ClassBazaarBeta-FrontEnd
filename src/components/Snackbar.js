@@ -4,7 +4,6 @@ import Store from '../store/Context';
 
 const Snackbar = () => {
   const { state } = useContext(Store);
-  console.log('snackbar state', state);
   return (
     <div>
       {state.alerts.length > 0
