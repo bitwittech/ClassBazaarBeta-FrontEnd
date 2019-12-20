@@ -5,14 +5,22 @@ import {
   REMOVE_TOKEN,
   FETCH_USER,
   LOGOUT,
+  LOGIN_MODAL,
 } from '../store/Types';
 
 import config from '../config.json';
 import localForage from 'localforage';
 
-const { FusionAuthClient } = require('@fusionauth/node-client');
+const {
+  FusionAuthClient
+} = require('@fusionauth/node-client');
 
-const { API, API_NGROK, API_LOCAL, fusionAuthURL } = config;
+const {
+  API,
+  API_NGROK,
+  API_LOCAL,
+  fusionAuthURL
+} = config;
 
 let client = new FusionAuthClient(
   config.fusionAuthAPIKey,
@@ -108,20 +116,26 @@ export const signin = async (data, dispatch) => {
       })
       .then(response => {
         console.log(response);
-        dispatch({
-          type: LOGIN,
-          payload: {
-            token: response.successResponse.token,
-            user: response.successResponse.user,
-          },
-        });
-        dispatch({
-          type: ALERT,
-          payload: {
-            varient: 'success',
-            message: 'Successfully logged in.',
-          },
-        });
+        if (response.statusCode === 200) {
+          dispatch({
+            type: LOGIN,
+            payload: {
+              token: response.successResponse.token,
+              user: response.successResponse.user,
+            },
+          });
+          dispatch({
+            type: ALERT,
+            payload: {
+              varient: 'success',
+              message: 'Successfully logged in.',
+            },
+          });
+          dispatch({
+            type: LOGIN_MODAL,
+            payload: false,
+          });
+        }
       })
       .catch(e => {
         console.log(e);
@@ -168,3 +182,17 @@ export const fetchUser = async (token, dispatch) => {
     });
   }
 };
+
+
+export const logout = async (dispatch) => {
+  dispatch({
+    type: LOGOUT
+  })
+  dispatch({
+    type: ALERT,
+    payload: {
+      varient: 'success',
+      message: 'Logged out successfully.'
+    }
+  })
+}
