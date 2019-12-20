@@ -61,6 +61,7 @@ const styles = {
     bottom: -20,
     textDecorationLine: 'underline',
     fontSize: '1rem',
+    margin: '0px 10px',
   },
 };
 
@@ -264,7 +265,7 @@ class HomePage extends Component {
         );
       });
     }
-    console.log(this.state, this.props);
+    console.log('componentDidMount Call', this.state, this.props);
     let query = '';
     let subjects = 'all';
     let isLevel1CheckedSubjects = false;

@@ -19,6 +19,7 @@ import Snackbar from './components/Snackbar';
 import Store from './store/Context';
 import config from './config.json';
 import localForage from 'localforage';
+import Contactus from './components/Contactus';
 
 const theme = createMuiTheme({
   typography: {
@@ -62,6 +63,7 @@ const Root = () => {
         path="/coursedetails/:provider/:uuid"
         component={CourseDetails}
       />
+      <Route exact path="/contact" component={Contactus} />
     </Switch>
   );
 };
