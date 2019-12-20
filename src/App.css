@@ -23,6 +23,10 @@ body {
   color: white;
 }
 
+.hover:hover {
+  cursor: pointer;
+}
+
 .cd-head {
   display: flex;
   flex-direction: row;
@@ -277,7 +281,29 @@ body {
   justify-content: space-between;
   padding: 15px 15px 0px 15px;
 }
-
+.flex {
+  display: flex;
+  flex-direction: row;
+}
+.r-tgg-btn {
+  margin-top: 10px;
+  padding: 20px 20px;
+  color: white;
+  background: #f0f2f7;
+  border: #e3e8f0;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 10px;
+  margin-right: 10px;
+  width: 120px;
+  color: black;
+  font-size: 0.7em;
+  font-weight: 600;
+}
+.r-tgg {
+  background: #ffa502;
+  color: white;
+}
 @media only screen and (max-height: 700px) {
   .route-link {
     background: #4e4e4e !important;

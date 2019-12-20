@@ -4,14 +4,17 @@ import Grid from '@material-ui/core/Grid';
 import { Link } from 'react-router-dom';
 import MoneyIcon from '@material-ui/icons/AttachMoney';
 import Paper from '@material-ui/core/Paper';
-import React from 'react';
+import React, { useContext } from 'react';
 import ReactHtmlParser from 'react-html-parser';
 import TurnedInIcon from '@material-ui/icons/TurnedIn';
 import TurnedInNotIcon from '@material-ui/icons/TurnedInNot';
 import Typography from '@material-ui/core/Typography';
 import WatchLaterIcon from '@material-ui/icons/WatchLater';
 import formatDate from './../utils/dateUtils';
+import Store from '../store/Context';
 import { withRouter } from 'react-router-dom';
+import { addBookmark } from '../actions/ContextActions';
+
 const styles = {
   grid: {
     flexGrow: 1,
@@ -49,34 +52,46 @@ const formatDuration = duration => {
 };
 
 const ProfileCourseCard = withRouter(({ history, ...data }) => {
+  const { state, dispatch } = useContext(Store);
+
+  const handleBookmark = uuid => {
+    const userId = state.user.id;
+    const courseId = uuid;
+    const user = state.user;
+    addBookmark(courseId, userId, user, dispatch);
+  };
+
+  console.log(state);
   return (
     <>
-      <div
-        className="c-card"
-        onClick={() =>
-          history.push({
-            pathname: `/coursedetails/${data.provider}/${data.uuid}`,
-            state: {
-              uuid: data.uuid,
-              provider: data.provider,
-              ...data,
-            },
-          })
-        }
-      >
+      <div className="c-card">
         <div className="coursecard-header">
           <div>
             <Typography
               color="primary"
               style={{ fontWeight: '600' }}
               variant="subtitle2"
+              className="hover"
+              onClick={() =>
+                history.push({
+                  pathname: `/coursedetails/${data.provider}/${data.uuid}`,
+                  state: {
+                    uuid: data.uuid,
+                    provider: data.provider,
+                    ...data,
+                  },
+                })
+              }
               gutterBottom
             >
               {data.university}
             </Typography>
           </div>
           <div>
-            <TurnedInNotIcon color="primary" />
+            <TurnedInNotIcon
+              onClick={() => handleBookmark(data.uuid)}
+              color="primary"
+            />
           </div>
         </div>
         <Typography
@@ -86,6 +101,17 @@ const ProfileCourseCard = withRouter(({ history, ...data }) => {
             fontWeight: '600',
             padding: '0px 15px 0px 15px',
           }}
+          className="hover"
+          onClick={() =>
+            history.push({
+              pathname: `/coursedetails/${data.provider}/${data.uuid}`,
+              state: {
+                uuid: data.uuid,
+                provider: data.provider,
+                ...data,
+              },
+            })
+          }
           gutterBottom
         >
           {data.provider !== 'SimpliLearn'

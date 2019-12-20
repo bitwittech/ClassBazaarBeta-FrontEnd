@@ -196,3 +196,22 @@ export const logout = async (dispatch) => {
     }
   })
 }
+
+
+export const addBookmark = async (uuid, userId, user, dispatch) => {
+
+  console.log(uuid, userId, user)
+  const dummy = {
+    data: 'dummy'
+  }
+  // const newUser = {
+  //   ...user,
+  //   ...dummy
+  // }
+  user.name = "saran"
+  // console.log(newUser)
+
+  client.createUser(userId, user).then(res =>
+    console.log(res))
+
+}

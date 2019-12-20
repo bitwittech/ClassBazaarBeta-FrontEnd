@@ -16,7 +16,7 @@ export default function reducer(state, action) {
 
     switch (type) {
         case LOGIN:
-            console.log('reducerddd');
+
             localStorage.setItem('cbtoken', payload.token);
             return {
                 ...state,
