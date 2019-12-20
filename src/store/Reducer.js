@@ -16,7 +16,6 @@ export default function reducer(state, action) {
 
     switch (type) {
         case LOGIN:
-
             localStorage.setItem('cbtoken', payload.token);
             return {
                 ...state,
@@ -28,42 +27,43 @@ export default function reducer(state, action) {
             return {
                 ...state,
                 user: payload,
-                    isAuth: true
+                    isAuth: true,
             };
         case LOGOUT:
-            localStorage.removeItem('cbtoken')
+            localStorage.removeItem('cbtoken');
             return {
                 ...state,
                 isAuth: false,
                     token: null,
-                    user: null
-            }
-            case LOGIN_MODAL:
-                return {
-                    ...state,
-                    loginModal: payload,
-                };
-            case LOADING:
-                return {
-                    ...state,
-                    loading: payload,
-                };
-            case ALERT:
-                const keyId = Math.random();
-                const finalPayload = {
-                    ...payload,
-                    id: keyId,
-                };
-                return {
-                    ...state,
-                    alerts: [...state.alerts, finalPayload],
-                };
-            case REMOVE_ALERT:
-                return {
-                    ...state,
-                    alerts: state.alerts.filter(a => a.id !== payload),
-                };
-            default:
-                return state;
+                    user: null,
+            };
+        case LOGIN_MODAL:
+            console.log("call", payload)
+            return {
+                ...state,
+                loginModal: payload
+            };
+        case LOADING:
+            return {
+                ...state,
+                loading: payload,
+            };
+        case ALERT:
+            const keyId = Math.random();
+            const finalPayload = {
+                ...payload,
+                id: keyId,
+            };
+            return {
+                ...state,
+                alerts: [...state.alerts, finalPayload],
+            };
+        case REMOVE_ALERT:
+            return {
+                ...state,
+                alerts: state.alerts.filter(a => a.id !== payload),
+            };
+        default:
+            return state;
     }
 }

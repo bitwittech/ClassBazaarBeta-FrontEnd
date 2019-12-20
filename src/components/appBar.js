@@ -133,13 +133,6 @@ export default function TopBar(props) {
   const { state, dispatch } = useContext(Store);
   const classes = useStyles();
 
-  const handleLoginModal = () => {
-    dispatch({
-      type: LOGIN_MODAL,
-      payload: true,
-    });
-  };
-
   return (
     <AppBar
       position="static"
@@ -183,7 +176,15 @@ export default function TopBar(props) {
                 variant="outlined"
                 color="primary"
                 className="signup-btn"
-                onClick={handleLoginModal}
+                onClick={() =>
+                  dispatch({
+                    type: LOGIN_MODAL,
+                    payload: {
+                      open: true,
+                      state: 1,
+                    },
+                  })
+                }
               >
                 Signup
               </Button>
@@ -191,7 +192,15 @@ export default function TopBar(props) {
                 variant="outlined"
                 color="primary"
                 className="login-btn"
-                onClick={handleLoginModal}
+                onClick={() => {
+                  dispatch({
+                    type: LOGIN_MODAL,
+                    payload: {
+                      open: true,
+                      state: 0,
+                    },
+                  });
+                }}
               >
                 Login
               </Button>

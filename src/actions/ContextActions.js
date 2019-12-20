@@ -11,16 +11,9 @@ import {
 import config from '../config.json';
 import localForage from 'localforage';
 
-const {
-  FusionAuthClient
-} = require('@fusionauth/node-client');
+const { FusionAuthClient } = require('@fusionauth/node-client');
 
-const {
-  API,
-  API_NGROK,
-  API_LOCAL,
-  fusionAuthURL
-} = config;
+const { API, API_NGROK, API_LOCAL, fusionAuthURL } = config;
 
 let client = new FusionAuthClient(
   config.fusionAuthAPIKey,
@@ -183,35 +176,30 @@ export const fetchUser = async (token, dispatch) => {
   }
 };
 
-
-export const logout = async (dispatch) => {
+export const logout = async dispatch => {
   dispatch({
-    type: LOGOUT
-  })
+    type: LOGOUT,
+  });
   dispatch({
     type: ALERT,
     payload: {
       varient: 'success',
-      message: 'Logged out successfully.'
-    }
-  })
-}
-
+      message: 'Logged out successfully.',
+    },
+  });
+};
 
 export const addBookmark = async (uuid, userId, user, dispatch) => {
-
-  console.log(uuid, userId, user)
+  console.log(uuid, userId, user);
   const dummy = {
-    data: 'dummy'
-  }
-  // const newUser = {
-  //   ...user,
-  //   ...dummy
-  // }
-  user.name = "saran"
-  // console.log(newUser)
+    data: 'dummy',
+  };
+  const newUser = {
+    ...user,
+    ...dummy,
+  };
+  console.log(newUser);
 
-  client.createUser(userId, user).then(res =>
-    console.log(res))
-
-}
+  // client.patchUser(userId, newUser).then(res =>
+  // console.log(res))
+};

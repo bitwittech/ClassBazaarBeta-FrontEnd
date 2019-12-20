@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { register, signin } from '../actions/ContextActions';
 
 import Backdrop from '@material-ui/core/Backdrop';
@@ -61,10 +61,18 @@ const Login = () => {
       email: '',
     },
   });
+  console.log(loginModal);
+  useEffect(() => {
+    setModal({ ...modal, state: loginModal.state });
+  }, []);
+  console.log(modal.state);
   const handleClose = () => {
     dispatch({
       type: LOGIN_MODAL,
-      payload: false,
+      payload: {
+        state: 0,
+        open: false,
+      },
     });
   };
 
@@ -81,10 +89,10 @@ const Login = () => {
   const handleSubmit = e => {
     e.preventDefault();
 
-    if (modal.state === 0) {
+    if (loginModal.state === 0) {
       signin(modal.formData, dispatch);
     }
-    if (modal.state === 1) {
+    if (loginModal.state === 1) {
       register(modal.formData, dispatch);
     }
 
@@ -98,14 +106,13 @@ const Login = () => {
       },
     });
   };
-  console.log(modal);
   return (
     <>
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
         className={classes.modal}
-        open={loginModal}
+        open={loginModal.open}
         onClose={handleClose}
         closeAfterTransition
         BackdropComponent={Backdrop}
@@ -113,7 +120,7 @@ const Login = () => {
           timeout: 500,
         }}
       >
-        <Fade in={loginModal}>
+        <Fade in={loginModal.open}>
           <div className={classes.paper}>
             <Container maxWidth="sm">
               <Typography component="div" align="center">
@@ -138,7 +145,7 @@ const Login = () => {
                 </Button>
 
                 <form onSubmit={handleSubmit}>
-                  {modal.state === 1 ? (
+                  {loginModal.state === 1 ? (
                     <>
                       <Typography
                         style={{
@@ -182,7 +189,7 @@ const Login = () => {
                     className="text-field"
                     placeholder="Enter your Email ID"
                   />
-                  {modal.state === 1 ? (
+                  {loginModal.state === 1 ? (
                     <>
                       {' '}
                       <Typography
@@ -236,7 +243,7 @@ const Login = () => {
                   >
                     Forgot password?
                   </Typography>
-                  {modal.state === 0 ? (
+                  {loginModal.state === 0 ? (
                     <Button
                       variant="contained"
                       color="primary"
@@ -250,7 +257,7 @@ const Login = () => {
                       )}
                     </Button>
                   ) : null}
-                  {modal.state === 1 ? (
+                  {loginModal.state === 1 ? (
                     <Button
                       variant="contained"
                       type="submit"
@@ -287,15 +294,18 @@ const Login = () => {
                     </Button>
                   </Grid>
                 </Grid>
-                {modal.state === 0 ? (
+                {loginModal.state === 0 ? (
                   <Typography
                     className="link-button"
                     variant="body2"
                     gutterBottom
                     onClick={() => {
-                      setModal({
-                        ...modal,
-                        state: 1,
+                      dispatch({
+                        type: LOGIN_MODAL,
+                        payload: {
+                          state: 1,
+                          open: false,
+                        },
                       });
                     }}
                     style={{ marginTop: '10px' }}
@@ -303,15 +313,18 @@ const Login = () => {
                     First time here? Create a Class Bazaar account.
                   </Typography>
                 ) : null}
-                {modal.state === 1 ? (
+                {loginModal.state === 1 ? (
                   <Typography
                     className="link-button"
                     variant="body2"
                     gutterBottom
                     onClick={() => {
-                      setModal({
-                        ...modal,
-                        state: 0,
+                      dispatch({
+                        type: LOGIN_MODAL,
+                        payload: {
+                          state: 0,
+                          open: true,
+                        },
                       });
                     }}
                     style={{ marginTop: '10px' }}
