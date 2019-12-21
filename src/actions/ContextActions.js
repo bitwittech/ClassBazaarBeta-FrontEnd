@@ -6,14 +6,22 @@ import {
   FETCH_USER,
   LOGOUT,
   LOGIN_MODAL,
+  UPDATE_BOOKMARK,
 } from '../store/Types';
 
 import config from '../config.json';
 import localForage from 'localforage';
 
-const { FusionAuthClient } = require('@fusionauth/node-client');
+const {
+  FusionAuthClient
+} = require('@fusionauth/node-client');
 
-const { API, API_NGROK, API_LOCAL, fusionAuthURL } = config;
+const {
+  API,
+  API_NGROK,
+  API_LOCAL,
+  fusionAuthURL
+} = config;
 
 let client = new FusionAuthClient(
   config.fusionAuthAPIKey,
@@ -189,17 +197,68 @@ export const logout = async dispatch => {
   });
 };
 
-export const addBookmark = async (uuid, userId, user, dispatch) => {
-  console.log(uuid, userId, user);
-  const dummy = {
-    data: 'dummy',
-  };
-  const newUser = {
-    ...user,
-    ...dummy,
-  };
-  console.log(newUser);
+export const addBookmark = async (uuid, userId, user, provider, dispatch) => {
+  console.log(uuid, userId, user, provider);
 
-  // client.patchUser(userId, newUser).then(res =>
-  // console.log(res))
+  //check if it is already there if then remove and dispatch update
+  //else add and dispatch updated
+  const presentCheck = () => {
+    if (user.data.bookmarks.find(e => uuid === e.id) === undefined) return false
+    else
+      return true
+  }
+  const isPresentAlready = presentCheck()
+
+  console.log(isPresentAlready)
+
+  const updateData = async (newBookmarks) => {
+    try {
+      const patchedData = await client.patchUser(
+        userId, {
+          user: {
+            data: {
+              ...user.data,
+              bookmarks: newBookmarks
+            }
+          }
+        }
+      )
+      console.log(patchedData)
+      console.log("DISPATCHING DATA", patchedData.successResponse.user.data.bookmarks)
+
+
+      dispatch({
+        type: UPDATE_BOOKMARK,
+        payload: patchedData.successResponse.user.data.bookmarks
+      })
+
+    } catch (error) {
+      dispatch({
+        type: ALERT,
+        payload: {
+          varient: 'error',
+          message: 'Could not bookmark.',
+        },
+      });
+    }
+  }
+
+  if (isPresentAlready) {
+    const newBookmarks = user.data.bookmarks.filter(e => e.id !== uuid)
+    console.log("ALREADY PRESENT", newBookmarks)
+    await updateData(newBookmarks)
+  } else {
+    const oldBookmarks = user.data.bookmarks
+    console.log("oldBookmarks", oldBookmarks)
+
+    const newBookmarks = [...oldBookmarks, {
+      id: uuid,
+      provider
+    }]
+    console.log("NEW ADDED", newBookmarks)
+    await updateData(newBookmarks)
+  }
+
+
+
 };

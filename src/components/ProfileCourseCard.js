@@ -54,14 +54,28 @@ const formatDuration = duration => {
 const ProfileCourseCard = withRouter(({ history, ...data }) => {
   const { state, dispatch } = useContext(Store);
 
-  const handleBookmark = uuid => {
+  const handleBookmark = (uuid, provider) => {
+    if (state.user === null) {
+      return console.log('NOT AUTHORISED');
+    }
     const userId = state.user.id;
     const courseId = uuid;
     const user = state.user;
-    addBookmark(courseId, userId, user, dispatch);
+    addBookmark(courseId, userId, user, provider, dispatch);
   };
 
-  console.log(state);
+  const isBookmarked = uuid => {
+    if (state.user === null) {
+      return false;
+    }
+    const globalBookmarks = state.user.data.bookmarks;
+    if (globalBookmarks.find(e => e.id === uuid) === undefined) {
+      return false;
+    } else {
+      return true;
+    }
+  };
+
   return (
     <>
       <div className="c-card">
@@ -88,10 +102,17 @@ const ProfileCourseCard = withRouter(({ history, ...data }) => {
             </Typography>
           </div>
           <div>
-            <TurnedInNotIcon
-              onClick={() => handleBookmark(data.uuid)}
-              color="primary"
-            />
+            {isBookmarked(data.uuid) ? (
+              <TurnedInIcon
+                onClick={() => handleBookmark(data.uuid, data.provider)}
+                color="primary"
+              />
+            ) : (
+              <TurnedInNotIcon
+                onClick={() => handleBookmark(data.uuid, data.provider)}
+                color="primary"
+              />
+            )}
           </div>
         </div>
         <Typography

@@ -6,6 +6,7 @@ import {
     LOGIN,
     LOGOUT,
     FETCH_USER,
+    UPDATE_BOOKMARK,
 } from './Types';
 
 export default function reducer(state, action) {
@@ -58,12 +59,24 @@ export default function reducer(state, action) {
                 ...state,
                 alerts: [...state.alerts, finalPayload],
             };
-        case REMOVE_ALERT:
+        case UPDATE_BOOKMARK:
             return {
                 ...state,
-                alerts: state.alerts.filter(a => a.id !== payload),
-            };
-        default:
-            return state;
+                user: {
+                    ...state.user,
+                    data: {
+                        ...state.user.data,
+                        bookmarks: payload
+                    }
+
+                }
+            }
+            case REMOVE_ALERT:
+                return {
+                    ...state,
+                    alerts: state.alerts.filter(a => a.id !== payload),
+                };
+            default:
+                return state;
     }
 }

@@ -70,7 +70,7 @@ const Login = () => {
     dispatch({
       type: LOGIN_MODAL,
       payload: {
-        state: 0,
+        state: loginModal.state,
         open: false,
       },
     });
@@ -304,7 +304,7 @@ const Login = () => {
                         type: LOGIN_MODAL,
                         payload: {
                           state: 1,
-                          open: false,
+                          open: true,
                         },
                       });
                     }}
