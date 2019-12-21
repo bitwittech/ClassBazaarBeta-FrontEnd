@@ -1,27 +1,22 @@
 import {
   ALERT,
-  LOGIN,
-  LOADING,
-  REMOVE_TOKEN,
   FETCH_USER,
-  LOGOUT,
+  LOADING,
+  LOGIN,
   LOGIN_MODAL,
+
   UPDATE_BOOKMARK,
+
+  LOGOUT,
+  REMOVE_TOKEN,
 } from '../store/Types';
 
 import config from '../config.json';
 import localForage from 'localforage';
 
-const {
-  FusionAuthClient
-} = require('@fusionauth/node-client');
+const { FusionAuthClient } = require('@fusionauth/node-client');
 
-const {
-  API,
-  API_NGROK,
-  API_LOCAL,
-  fusionAuthURL
-} = config;
+const { API, API_NGROK, API_LOCAL, fusionAuthURL } = config;
 
 let client = new FusionAuthClient(
   config.fusionAuthAPIKey,
@@ -104,6 +99,7 @@ export const register = async (data, dispatch) => {
 };
 
 export const signin = async (data, dispatch) => {
+  testEmail();
   dispatch({
     type: LOADING,
     payload: true,
@@ -115,8 +111,16 @@ export const signin = async (data, dispatch) => {
         loginId: data.email,
         password: data.password,
       })
-      .then(response => {
-        console.log(response);
+      .then(async response => {
+        console.log(response.successResponse.user);
+        data = {
+          bookmarks: [{ id: 'balfjdhfierhjahfjdhfjd', provider: 'edx' }],
+        };
+        const udpatedUser = await client.patchUser(
+          response.successResponse.user.id,
+          { user: { data } }
+        );
+        console.log(udpatedUser);
         if (response.statusCode === 200) {
           dispatch({
             type: LOGIN,
@@ -262,3 +266,4 @@ export const addBookmark = async (uuid, userId, user, provider, dispatch) => {
 
 
 };
+
