@@ -1,9 +1,12 @@
 import './App.css';
+
 import { BrowserRouter, Route, Switch, withRouter } from 'react-router-dom';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import React, { useContext, useReducer, useEffect } from 'react';
+import React, { useContext, useEffect, useReducer } from 'react';
 import withAnalytics, { initAnalytics } from 'react-with-analytics';
+
 import About from './components/About';
+import Contactus from './components/Contactus';
 import CourseDetails from './components/CourseDetails';
 import CoursePage from './components/coursePage';
 import HomePage from './components/homePage';
@@ -16,9 +19,9 @@ import Reducer from './store/Reducer';
 import Snackbar from './components/Snackbar';
 import Store from './store/Context';
 import config from './config.json';
-import localForage from 'localforage';
-import Contactus from './components/Contactus';
 import { fetchUser } from './actions/ContextActions';
+import localForage from 'localforage';
+
 const theme = createMuiTheme({
   typography: {
     fontFamily: ['Poppins'],

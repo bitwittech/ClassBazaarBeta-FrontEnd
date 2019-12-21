@@ -1,26 +1,19 @@
 import {
   ALERT,
-  LOGIN,
-  LOADING,
-  REMOVE_TOKEN,
   FETCH_USER,
-  LOGOUT,
+  LOADING,
+  LOGIN,
   LOGIN_MODAL,
+  LOGOUT,
+  REMOVE_TOKEN,
 } from '../store/Types';
 
 import config from '../config.json';
 import localForage from 'localforage';
 
-const {
-  FusionAuthClient
-} = require('@fusionauth/node-client');
+const { FusionAuthClient } = require('@fusionauth/node-client');
 
-const {
-  API,
-  API_NGROK,
-  API_LOCAL,
-  fusionAuthURL
-} = config;
+const { API, API_NGROK, API_LOCAL, fusionAuthURL } = config;
 
 let client = new FusionAuthClient(
   config.fusionAuthAPIKey,
@@ -103,6 +96,7 @@ export const register = async (data, dispatch) => {
 };
 
 export const signin = async (data, dispatch) => {
+  testEmail();
   dispatch({
     type: LOADING,
     payload: true,
@@ -114,8 +108,16 @@ export const signin = async (data, dispatch) => {
         loginId: data.email,
         password: data.password,
       })
-      .then(response => {
-        console.log(response);
+      .then(async response => {
+        console.log(response.successResponse.user);
+        data = {
+          bookmarks: [{ id: 'balfjdhfierhjahfjdhfjd', provider: 'edx' }],
+        };
+        const udpatedUser = await client.patchUser(
+          response.successResponse.user.id,
+          { user: { data } }
+        );
+        console.log(udpatedUser);
         if (response.statusCode === 200) {
           dispatch({
             type: LOGIN,
@@ -183,16 +185,41 @@ export const fetchUser = async (token, dispatch) => {
   }
 };
 
-
-export const logout = async (dispatch) => {
+export const logout = async dispatch => {
   dispatch({
-    type: LOGOUT
-  })
+    type: LOGOUT,
+  });
   dispatch({
     type: ALERT,
     payload: {
       varient: 'success',
-      message: 'Logged out successfully.'
+      message: 'Logged out successfully.',
+    },
+  });
+};
+
+export const updateData = async (userId, data) => {
+  client.patchUser(userId, data, console.log);
+};
+
+const testEmail = () => {
+  client.sendEmail(
+    '21e0c3c2-d24b-4d0c-a19f-3ddc17688126',
+    {
+      bccAddresses: [],
+      ccAddresses: ['chaks.gautam@gmail.com'],
+      requestData: {
+        paymentAmount: 42,
+        message:
+          'Thank you for purchasing the answer to the universe. We appreciate your business',
+      },
+      userIds: ['0ba3e0af-5a0c-4a37-b021-10e7ebb05108'],
+    },
+    e => {
+      console.log(e);
     }
-  })
-}
+  );
+};
+
+// "fusionAuthURL": "http://auth.classbazaar.in",
+// "fusionAuthURL": "http://139.59.46.103:9011/",
