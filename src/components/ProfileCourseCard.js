@@ -10,6 +10,7 @@ import TurnedInIcon from '@material-ui/icons/TurnedIn';
 import TurnedInNotIcon from '@material-ui/icons/TurnedInNot';
 import Typography from '@material-ui/core/Typography';
 import WatchLaterIcon from '@material-ui/icons/WatchLater';
+import { ALERT } from '../store/Types';
 import formatDate from './../utils/dateUtils';
 import Store from '../store/Context';
 import { withRouter } from 'react-router-dom';
@@ -56,7 +57,13 @@ const ProfileCourseCard = withRouter(({ history, ...data }) => {
 
   const handleBookmark = (uuid, provider) => {
     if (state.user === null) {
-      return console.log('NOT AUTHORISED');
+      return dispatch({
+        type: ALERT,
+        payload: {
+          varient: 'info',
+          message: 'Please login ',
+        },
+      });
     }
     const userId = state.user.id;
     const courseId = uuid;
