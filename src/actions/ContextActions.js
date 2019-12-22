@@ -264,3 +264,37 @@ export const addBookmark = async (uuid, userId, user, provider, dispatch) => {
     await updateData(newBookmarks);
   }
 };
+
+export const updateUser = async (type, userId, data) => {
+  try {
+    const patchedData = await client.patchUser(userId, {
+      user: {
+        [type]: data
+      },
+    });
+    console.log(patchedData)
+    store.setItem('user', patchedData.successResponse.user);
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export const updatePassword = async (curPass, newPass, email, userId) => {
+  console.log(userId)
+  try {
+
+    const res = await client.retrieveRefreshTokens('44a983ba-a135-414d-84d1-e9e33d24e097')
+
+    // const request = {
+    //   currentPassword: 'classbazaarco',
+    //   loginId: 'classbazaarco@gmail.com',
+    //   password: 'cb123456789'
+    // }
+    // const res = await client.changePasswordByIdentity(request)
+
+    console.log(res)
+  } catch (error) {
+    console.log(error)
+  }
+
+}

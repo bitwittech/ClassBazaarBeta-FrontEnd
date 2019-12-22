@@ -283,6 +283,7 @@ body {
 }
 
 .flex {
+
   display: flex;
   flex-direction: row;
 }

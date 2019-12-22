@@ -7,6 +7,7 @@ import {
     LOGOUT,
     FETCH_USER,
     UPDATE_BOOKMARK,
+    REMOVE_TOKEN
 } from './Types';
 import {
     store
@@ -33,6 +34,7 @@ export default function reducer(state, action) {
                     isAuth: true,
             };
         case LOGOUT:
+        case REMOVE_TOKEN:
             localStorage.removeItem('cbtoken');
             store.clear().then(res => {
                 console.log("LOGOUT", res)
@@ -44,6 +46,8 @@ export default function reducer(state, action) {
                     token: null,
                     user: null,
             };
+
+
         case LOGIN_MODAL:
             console.log("call", payload)
             return {

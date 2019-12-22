@@ -5,7 +5,7 @@ import ArrowForward from '@material-ui/icons/ArrowForward';
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
-import CalendarIcon from '@material-ui/icons/CalendarToday';
+import CreateIcon from '@material-ui/icons/Create';
 import { Container } from '@material-ui/core';
 import DateRangeIcon from '@material-ui/icons/DateRange';
 import Divider from '@material-ui/core/Divider';
@@ -27,6 +27,8 @@ import getClosestNextRun from './../utils/edxUtils';
 import { store } from '../App';
 import { titleCase } from './../utils/utils';
 import { Redirect, withRouter } from 'react-router';
+import SaveIcon from '@material-ui/icons/Save';
+import { updateUser, updatePassword } from '../actions/ContextActions';
 
 const styles = {
   grid: {
@@ -47,6 +49,7 @@ const styles = {
     minHeight: '70px',
     border: '1px solid #c0c3c6',
   },
+
   profile: {
     maxHeight: '500px',
     backgroundColor: 'aliceblue',
@@ -62,6 +65,15 @@ class ProfilePage extends Component {
       data: [],
       user: {},
       loading: true,
+      phoneB: false,
+      emailB: false,
+      changePasswordB: false,
+      locationB: false,
+      location: '',
+      email: '',
+      phone: '',
+      newPassword: '',
+      curPassword: '',
     };
     this.updateData = this.updateData.bind(this);
 
@@ -72,7 +84,12 @@ class ProfilePage extends Component {
       if (user == null) {
         return this.props.history.push('/');
       }
-      this.setState({ user });
+      this.setState({
+        user,
+        phone: user.mobilePhone,
+        email: user.email,
+        location: user.data.location ? user.data.location : 'Add Location',
+      });
       const data = user.data.bookmarks;
       console.log(data);
       // var url = `http://localhost:8080/api/bookmarks/?data=${JSON.stringify(
@@ -81,10 +98,11 @@ class ProfilePage extends Component {
       var url = `https://api.classbazaar.in/api/bookmarks/?data=${JSON.stringify(
         data
       )}`;
+
       return fetch(url)
         .then(response => response.json())
         .then(json => {
-          console.log(json);
+          console.log('BOOKMARK DATA', json);
           this.setState({ data: json.data, loading: false });
         });
     });
@@ -94,7 +112,7 @@ class ProfilePage extends Component {
 
   render() {
     if (this.state.user == null) return <Redirect to="/" />;
-
+    console.log(this.state);
     return (
       <>
         <TopAppBar />
@@ -107,7 +125,7 @@ class ProfilePage extends Component {
               <Grid container spacing={3}>
                 <Grid item xs={12} md={4} lg={3}>
                   <Paper className={styles.paper}>
-                    <Container maxWidth="lg">
+                    <Container maxWidth="lg" style={{ padding: '0 25px' }}>
                       <div className={styles.grid}>
                         <Grid container spacing={3}>
                           <Grid
@@ -119,35 +137,104 @@ class ProfilePage extends Component {
                             xs={12}
                             md={12}
                           >
-                            <div>
-                              <img
-                                src="https://via.placeholder.com/150"
-                                alt="profile-img"
-                                className="profile-img"
-                              />
-                              <Typography
-                                align="center"
-                                variant="h6"
-                                gutterBottom
-                                className="profile-subtext"
-                                style={{ color: '#274E5D', fontWeight: '600' }}
-                              >
-                                {this.state.user.firstName +
-                                  ' ' +
-                                  this.state.user.lastName}
-                              </Typography>
-                              <Typography
-                                align="center"
-                                variant="subtitle2"
-                                gutterBottom
-                              >
-                                {this.state.user.data &&
-                                this.state.user.data.location
-                                  ? this.state.user.data.location
-                                  : 'Add Location'}
-                              </Typography>
-                            </div>
-                            <div></div>
+                            <img
+                              src="https://via.placeholder.com/150"
+                              alt="profile-img"
+                              className="profile-img"
+                            />
+                          </Grid>
+                          <Grid
+                            item
+                            container
+                            align-center
+                            justify="center"
+                            alignItems="center"
+                            xs={12}
+                            md={12}
+                            style={{ paddingBottom: '0' }}
+                          >
+                            <Typography
+                              align="center"
+                              variant="h6"
+                              gutterBottom
+                              className="profile-subtext"
+                              style={{
+                                color: '#274E5D',
+                                fontWeight: '600',
+                              }}
+                            >
+                              {this.state.user.firstName +
+                                ' ' +
+                                this.state.user.lastName}
+                            </Typography>
+                          </Grid>
+                          <Grid
+                            item
+                            container
+                            align-center
+                            justify="center"
+                            alignItems="center"
+                            xs={12}
+                            md={12}
+                            style={{ paddingTop: '0' }}
+                          >
+                            <Grid container spacing={3}>
+                              <Grid item xs={2}></Grid>
+                              <Grid item xs={8} style={{ paddingLeft: '0' }}>
+                                {!this.state.locationB ? (
+                                  <Typography
+                                    align="center"
+                                    variant="subtitle2"
+                                    gutterBottom
+                                  >
+                                    {this.state.location}
+                                  </Typography>
+                                ) : (
+                                  <input
+                                    value={this.state.location}
+                                    onChange={e =>
+                                      this.setState({
+                                        location: e.target.value,
+                                      })
+                                    }
+                                    style={{
+                                      background: 'white',
+                                      border: '1px solid rgb(231, 231, 231)',
+                                      width: '100%',
+                                    }}
+                                    name="name"
+                                    type="text"
+                                    className="text-field"
+                                    placeholder="Your Location"
+                                  />
+                                )}
+                              </Grid>
+
+                              <Grid item xs={2}>
+                                {!this.state.locationB ? (
+                                  <CreateIcon
+                                    onClick={() =>
+                                      this.setState({ locationB: true })
+                                    }
+                                    color="primary"
+                                    style={{ fontSize: '1.2em' }}
+                                  />
+                                ) : (
+                                  <SaveIcon
+                                    onClick={() => {
+                                      updateUser(
+                                        'location',
+                                        this.state.user.id,
+                                        this.state.location
+                                      );
+                                      this.setState({ locationB: false });
+                                    }}
+                                    color="primary"
+                                    style={{ fontSize: '1.2em' }}
+                                  />
+                                )}
+                              </Grid>
+                            </Grid>
                           </Grid>
                           <Grid item xs={12}>
                             <Typography
@@ -157,9 +244,56 @@ class ProfilePage extends Component {
                             >
                               Phone No
                             </Typography>
-                            <Typography variant="body2" gutterBottom>
-                              {this.state.user.mobilePhone}
-                            </Typography>
+                            <Grid container spacing={3}>
+                              <Grid item xs={10}>
+                                {!this.state.phoneB ? (
+                                  <Typography variant="body2" gutterBottom>
+                                    {this.state.phone}
+                                  </Typography>
+                                ) : (
+                                  <input
+                                    value={this.state.phone}
+                                    onChange={e =>
+                                      this.setState({ phone: e.target.value })
+                                    }
+                                    style={{
+                                      background: 'white',
+                                      border: '1px solid rgb(231, 231, 231)',
+                                      width: '100%',
+                                    }}
+                                    name="phone"
+                                    type="text"
+                                    className="text-field"
+                                  />
+                                )}
+                              </Grid>
+                              <Grid item xs={2}>
+                                {!this.state.phoneB ? (
+                                  <CreateIcon
+                                    onClick={() =>
+                                      this.setState({ phoneB: true })
+                                    }
+                                    color="primary"
+                                    style={{ fontSize: '1.2em' }}
+                                  />
+                                ) : (
+                                  <SaveIcon
+                                    onClick={() => {
+                                      updateUser(
+                                        'mobilePhone',
+                                        this.state.user.id,
+                                        this.state.phone
+                                      );
+                                      this.setState({ phoneB: false });
+                                    }}
+                                    color="primary"
+                                    style={{ fontSize: '1.2em' }}
+                                  />
+                                )}
+                              </Grid>
+                            </Grid>
+
+                            <br />
                             <Divider variant="left" />
                             <br />
                             <Typography
@@ -169,11 +303,58 @@ class ProfilePage extends Component {
                             >
                               Email ID{' '}
                             </Typography>
-                            <Typography variant="body2" gutterBottom>
-                              {this.state.user.email}
-                            </Typography>
-                            <Divider variant="left" />
+                            <Grid container spacing={3}>
+                              <Grid item xs={10}>
+                                {!this.state.emailB ? (
+                                  <Typography variant="body2" gutterBottom>
+                                    {this.state.email}
+                                  </Typography>
+                                ) : (
+                                  <input
+                                    onChange={e =>
+                                      this.setState({ email: e.target.value })
+                                    }
+                                    value={this.state.email}
+                                    style={{
+                                      background: 'white',
+                                      border: '1px solid rgb(231, 231, 231)',
+                                      width: '100%',
+                                    }}
+                                    name="email"
+                                    type="text"
+                                    className="text-field"
+                                    placeholder="Name"
+                                  />
+                                )}
+                              </Grid>
+                              <Grid item xs={2}>
+                                {!this.state.emailB ? (
+                                  <CreateIcon
+                                    onClick={() =>
+                                      this.setState({ emailB: true })
+                                    }
+                                    color="primary"
+                                    style={{ fontSize: '1.2em' }}
+                                  />
+                                ) : (
+                                  <SaveIcon
+                                    onClick={() => {
+                                      updateUser(
+                                        'email',
+                                        this.state.user.id,
+                                        this.state.email
+                                      );
+                                      this.setState({ emailB: false });
+                                    }}
+                                    color="primary"
+                                    style={{ fontSize: '1.2em' }}
+                                  />
+                                )}
+                              </Grid>
+                            </Grid>
+
                             <br />
+                            <Divider variant="left" />
                             <br />
                             <Typography variant="body2" gutterBottom>
                               {this.state.user.data &&
@@ -181,9 +362,6 @@ class ProfilePage extends Component {
                                 ? this.state.user.data.location
                                 : ''}
                             </Typography>
-                            <Divider variant="left" />
-                            <br />
-                            <br />
                             <Typography
                               style={{ color: '#274E5D', fontWeight: '600' }}
                               variant="body1"
@@ -191,9 +369,83 @@ class ProfilePage extends Component {
                             >
                               Settings{' '}
                             </Typography>
-                            <Typography variant="body2" gutterBottom>
-                              Change Password
-                            </Typography>
+                            <Grid container spacing={3}>
+                              <Grid item xs={10}>
+                                {!this.state.changePasswordB ? (
+                                  <Typography variant="body2" gutterBottom>
+                                    Change Password
+                                  </Typography>
+                                ) : (
+                                  <>
+                                    <input
+                                      value={this.state.password}
+                                      onChange={e =>
+                                        this.setState({
+                                          curPassword: e.target.value,
+                                        })
+                                      }
+                                      style={{
+                                        background: 'white',
+                                        border: '1px solid rgb(231, 231, 231)',
+                                        width: '100%',
+                                        marginBottom: '10px',
+                                      }}
+                                      name="password"
+                                      type="password"
+                                      className="text-field"
+                                      placeholder="Current Password"
+                                    />
+                                    <input
+                                      value={this.state.password}
+                                      onChange={e =>
+                                        this.setState({
+                                          newPassword: e.target.value,
+                                        })
+                                      }
+                                      style={{
+                                        background: 'white',
+                                        border: '1px solid rgb(231, 231, 231)',
+                                        width: '100%',
+                                      }}
+                                      name="password"
+                                      type="password"
+                                      className="text-field"
+                                      placeholder="New Password"
+                                    />
+                                  </>
+                                )}
+                              </Grid>
+                              <Grid item xs={2}>
+                                {!this.state.changePasswordB ? (
+                                  <CreateIcon
+                                    onClick={() =>
+                                      this.setState({ changePasswordB: true })
+                                    }
+                                    color="primary"
+                                    style={{ fontSize: '1.2em' }}
+                                  />
+                                ) : (
+                                  <SaveIcon
+                                    onClick={() => {
+                                      const {
+                                        curPassword,
+                                        newPassword,
+                                      } = this.state;
+                                      updatePassword(
+                                        curPassword,
+                                        newPassword,
+                                        this.state.user.email,
+                                        this.state.user.id
+                                      );
+                                      this.setState({ passwordP: false });
+                                    }}
+                                    color="primary"
+                                    style={{ fontSize: '1.2em' }}
+                                  />
+                                )}
+                              </Grid>
+                            </Grid>
+                            <br />
                             <Divider variant="left" />
                             <br />
                           </Grid>
