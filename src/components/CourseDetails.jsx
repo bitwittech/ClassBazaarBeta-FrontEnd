@@ -1,15 +1,17 @@
 import { Container, Grid, Typography } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
-import RateReviewIcon from '@material-ui/icons/RateReview';
-import HomeModal from './HomeModal';
+
 import AppBar from './appBar';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import Box from '@material-ui/core/Box';
+import { CircularProgress } from '@material-ui/core';
 import DateRangeIcon from '@material-ui/icons/DateRange';
 import Footer from './Footer';
+import HomeModal from './HomeModal';
 import ListAltIcon from '@material-ui/icons/ListAlt';
 import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 import QueryBuilderIcon from '@material-ui/icons/QueryBuilder';
+import RateReviewIcon from '@material-ui/icons/RateReview';
 import ReactHtmlParser from 'react-html-parser';
 import StarBorderIcon from '@material-ui/icons/StarBorder';
 import StarHalfIcon from '@material-ui/icons/StarHalf';
@@ -19,7 +21,6 @@ import TurnedInIcon from '@material-ui/icons/TurnedIn';
 import TurnedInNotIcon from '@material-ui/icons/TurnedInNot';
 import formatDate from './../utils/dateUtils';
 import getClosestNextRun from './../utils/edxUtils';
-import { CircularProgress } from '@material-ui/core';
 
 const CourseDetails = props => {
   const [state, setState] = useState({
@@ -170,7 +171,10 @@ const CourseDetails = props => {
   );
   const edX = () =>
     state.data && (
-      <Container maxWidth="lg" style={{ marginTop: '40px' }}>
+      <Container
+        maxWidth="lg"
+        style={{ marginTop: '40px', background: '#FFF' }}
+      >
         <Grid container spacing={3}>
           <Grid item xs={12} sm={8}>
             <div
@@ -360,7 +364,10 @@ const CourseDetails = props => {
 
   const udemy = () =>
     state.data && (
-      <Container maxWidth="lg" style={{ marginTop: '40px' }}>
+      <Container
+        maxWidth="lg"
+        style={{ marginTop: '40px', background: '#FFF' }}
+      >
         <Grid container spacing={3}>
           <Grid item xs={12} sm={8}>
             <div
@@ -536,7 +543,10 @@ const CourseDetails = props => {
 
   const fl = () =>
     state.data && (
-      <Container maxWidth="lg" style={{ marginTop: '40px' }}>
+      <Container
+        maxWidth="lg"
+        style={{ marginTop: '40px', background: '#FFF' }}
+      >
         <Grid container spacing={3}>
           <Grid item xs={12} sm={8}>
             <div
@@ -705,7 +715,10 @@ const CourseDetails = props => {
 
   const sl = () =>
     state.data && (
-      <Container maxWidth="lg" style={{ marginTop: '40px' }}>
+      <Container
+        maxWidth="lg"
+        style={{ marginTop: '40px', background: '#FFF' }}
+      >
         <Grid container spacing={3}>
           <Grid item xs={12} sm={8}>
             <div
@@ -841,7 +854,10 @@ const CourseDetails = props => {
 
   const swayam = () =>
     state.data && (
-      <Container maxWidth="lg" style={{ marginTop: '40px' }}>
+      <Container
+        maxWidth="lg"
+        style={{ marginTop: '40px', background: '#FFF' }}
+      >
         <Grid container spacing={3}>
           <Grid item xs={12} sm={8}>
             <div
@@ -1001,7 +1017,10 @@ const CourseDetails = props => {
 
   const upGrad = () =>
     state.data && (
-      <Container maxWidth="lg" style={{ marginTop: '40px' }}>
+      <Container
+        maxWidth="lg"
+        style={{ marginTop: '40px', background: '#FFF' }}
+      >
         <Grid container spacing={3}>
           <Grid item xs={12} sm={8}>
             <div
@@ -1188,7 +1207,10 @@ const CourseDetails = props => {
 
   const udacity = () =>
     state.data && (
-      <Container maxWidth="lg" style={{ marginTop: '40px' }}>
+      <Container
+        maxWidth="lg"
+        style={{ marginTop: '40px', background: '#FFF' }}
+      >
         <Grid container spacing={3}>
           <Grid item xs={12} sm={8}>
             <div

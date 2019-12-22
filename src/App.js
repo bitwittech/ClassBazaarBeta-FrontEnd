@@ -83,7 +83,7 @@ function App() {
     <BrowserRouter>
       <MuiThemeProvider theme={theme}>
         <Store.Provider value={{ state, dispatch }}>
-          <div className="App">
+          <div className="App" style={{ background: '#FFF' }}>
             <Snackbar />
             <Login />
             <AppWithRouter />
