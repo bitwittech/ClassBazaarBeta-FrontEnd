@@ -18,8 +18,8 @@
   <title>Class Bazaar</title>
   <script>
     fetch('http://ip-api.com/json/').then(res => res.json()).then(data => {
-      console.log(data)
-      if (data.country === 'India') {
+      console.log(data.country)
+      if (data.country !== 'India') {
 
         var commandQueue = [];
         var cmp = function (command, parameter, callback) {
