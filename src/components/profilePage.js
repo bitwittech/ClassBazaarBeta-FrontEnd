@@ -18,6 +18,7 @@ import PlusIcon from '@material-ui/icons/Add';
 import ProfileCourseCard from './ProfileCourseCard';
 import ProviderIcon from '@material-ui/icons/Assignment';
 import ReactHtmlParser from 'react-html-parser';
+import { CircularProgress } from '@material-ui/core';
 import TopAppBar from './appBar';
 import Typography from '@material-ui/core/Typography';
 import WatchLaterIcon from '@material-ui/icons/WatchLater';
@@ -60,6 +61,7 @@ class ProfilePage extends Component {
     this.state = {
       data: [],
       user: {},
+      loading: true,
     };
     this.updateData = this.updateData.bind(this);
 
@@ -83,7 +85,7 @@ class ProfilePage extends Component {
         .then(response => response.json())
         .then(json => {
           console.log(json);
-          this.setState({ data: json.data });
+          this.setState({ data: json.data, loading: false });
         });
     });
   }
@@ -212,21 +214,34 @@ class ProfilePage extends Component {
                     </Typography>
                     <Divider />
                     <br />
-                    {this.state.data.map(obj => (
-                      <ProfileCourseCard
-                        key={obj.title}
-                        isInstructor={true}
-                        university={obj.university}
-                        courseName={obj.title}
-                        provider={obj.provider}
-                        duration={obj.commitment}
-                        startingOn={obj.start_date}
-                        price={obj.price}
-                        rating={obj.rating}
-                        uuid={obj.uuid}
-                        url={obj.url}
-                      />
-                    ))}
+                    {this.state.loading ? (
+                      <Grid align="center">
+                        <CircularProgress color="primary" />
+                      </Grid>
+                    ) : !this.state.data.length > 0 ? (
+                      <Grid align="center">
+                        <Typography variant="h6" gutterBottom>
+                          No Bookmarks
+                        </Typography>
+                      </Grid>
+                    ) : (
+                      this.state.data.map(obj => (
+                        <ProfileCourseCard
+                          key={obj.title}
+                          isInstructor={true}
+                          university={obj.university}
+                          courseName={obj.title}
+                          provider={obj.provider}
+                          duration={obj.commitment}
+                          startingOn={obj.start_date}
+                          price={obj.price}
+                          rating={obj.rating}
+                          uuid={obj.uuid}
+                          url={obj.url}
+                        />
+                      ))
+                    )}
+
                     <br />
                     <Typography
                       variant="h4"
