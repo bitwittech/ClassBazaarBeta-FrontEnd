@@ -25,6 +25,7 @@ import formatDate from './../utils/dateUtils';
 import getClosestNextRun from './../utils/edxUtils';
 import { store } from '../App';
 import { titleCase } from './../utils/utils';
+import { Redirect, withRouter } from 'react-router';
 
 const styles = {
   grid: {
@@ -66,6 +67,9 @@ class ProfilePage extends Component {
   }
   updateData() {
     store.getItem('user').then(user => {
+      if (user == null) {
+        return this.props.history.push('/');
+      }
       this.setState({ user });
       const data = user.data.bookmarks;
       console.log(data);
@@ -87,7 +91,8 @@ class ProfilePage extends Component {
   componentDidMount() {}
 
   render() {
-    console.log(this.state);
+    if (this.state.user == null) return <Redirect to="/" />;
+
     return (
       <>
         <TopAppBar />
@@ -266,4 +271,4 @@ const ProfileSidebar = () => (
 
 ProfilePage.propTypes = {};
 
-export default ProfilePage;
+export default withRouter(ProfilePage);

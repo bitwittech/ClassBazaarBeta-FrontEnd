@@ -8,13 +8,21 @@ import {
   REMOVE_TOKEN,
   UPDATE_BOOKMARK,
 } from '../store/Types';
-
 import config from '../config.json';
-import { store } from './../App';
+import {
+  store
+} from './../App';
 
-const { FusionAuthClient } = require('@fusionauth/node-client');
+const {
+  FusionAuthClient
+} = require('@fusionauth/node-client');
 
-const { API, API_NGROK, API_LOCAL, fusionAuthURL } = config;
+const {
+  API,
+  API_NGROK,
+  API_LOCAL,
+  fusionAuthURL
+} = config;
 
 let client = new FusionAuthClient(
   config.fusionAuthAPIKey,
