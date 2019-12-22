@@ -6,6 +6,7 @@ import ArrowForward from '@material-ui/icons/ArrowForward';
 import Box from '@material-ui/core/Box';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import CourseCard from './ProfileCourseCard';
+import CourseList from './CourseList';
 import Footer from './Footer';
 import FormControl from '@material-ui/core/FormControl';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -101,6 +102,7 @@ class HomePage extends Component {
       startReset: false,
       loading: true,
       popUp: false,
+      queryURL: '',
     };
     this.getUniversityForUdemy = this.getUniversityForUdemy.bind(this);
     this.handlePageChange = this.handlePageChange.bind(this);
@@ -139,19 +141,18 @@ class HomePage extends Component {
       (page + 1) * this.state.perPage,
     ]);
     const subjects = encodeURIComponent(this.state.subjects);
-    var url = `${API}/api/courses/?range=${range}&q=${query}&filter=${parsedFilter}&subjects=${subjects}&provider=${this.state.providers}&feeFilter=${feeFilter}&startDateFilter=${startDateFilter}`;
-    return fetch(url)
-      .then(response => response.json())
-      .then(json => {
-        this.setState(
-          { data: json.data, total: json.total, loading: false },
-          async () => {
-            console.log('After data update');
-            console.log(this.state);
-            await store.setItem('filterData', this.state);
-          }
-        );
+
+    var url = `${API}/api/courses/?q=${query}&filter=${parsedFilter}&subjects=${subjects}&provider=${this.state.providers}&feeFilter=${feeFilter}&startDateFilter=${startDateFilter}`;
+    console.log(url);
+    this.setState({ queryURL: url }, () => {
+      const state = this.state;
+      store.removeItem('filterData').then(s => {
+        store.setItem('filterData', this.state).then(d => {
+          console.log('Data updated in localstorage');
+          console.log(d);
+        });
       });
+    });
   }
 
   onSubjectFilterChange = subjectList => {
@@ -178,7 +179,7 @@ class HomePage extends Component {
     if (feeType[0] === true) filterValue = 'free';
     else if (feeType[1] === true) filterValue = 'paid';
     else filterValue = '';
-    this.setState({ filterValue }, () => {
+    this.setState({ filterValue }, async () => {
       this.updateData();
     });
   };
@@ -190,13 +191,13 @@ class HomePage extends Component {
     else if (startDateType[1] === true) filterValue = 'gte30';
     else filterValue = '';
     console.log({ filterValue });
-    this.setState({ filterValue }, () => {
+    this.setState({ filterValue }, async () => {
       console.log(this.state);
       this.updateData();
     });
   };
 
-  onProviderFilterChange = providerList => {
+  onProviderFilterChange = async providerList => {
     let providerFilter = '';
     this.state.providerData.forEach((obj, index) => {
       if (providerList[index]) {
@@ -210,9 +211,9 @@ class HomePage extends Component {
     });
   };
 
-  onFilterChange(event) {
+  async onFilterChange(event) {
     const value = event.target.value;
-    this.setState({ filterValue: value }, () => {
+    this.setState({ filterValue: value }, async () => {
       console.log('Filter changed to', value);
       this.updateData();
     });
@@ -235,8 +236,8 @@ class HomePage extends Component {
         isLevel1CheckedSubjects: false,
         checkedLevel2Subjects: subjectsData.map(s => false),
       },
-      () => {
-        this.updateData();
+      async () => {
+        await this.updateData();
         this.setState({
           subjecttReset: false,
           feeReset: false,
@@ -430,60 +431,7 @@ class HomePage extends Component {
                   marginLeft: '-25px',
                 }}
               />
-              {this.state.loading ? (
-                <Grid align="center">
-                  <CircularProgress />
-                </Grid>
-              ) : this.state.data.length > 0 ? (
-                this.state.data.length > 0 &&
-                this.state.data.map((obj, index) => {
-                  return (
-                    <>
-                      <Container>
-                        <CourseCard
-                          key={obj.title}
-                          isInstructor={true}
-                          university={obj.university}
-                          courseName={obj.title}
-                          provider={obj.provider}
-                          duration={obj.commitment}
-                          startingOn={obj.start_date}
-                          price={obj.price}
-                          rating={obj.rating}
-                          uuid={obj.uuid}
-                          url={obj.url}
-                        />
-                      </Container>
-                    </>
-                  );
-                })
-              ) : (
-                <Grid align="center">
-                  <Typography color="primary" variant="h6" gutterBottom>
-                    No course found.
-                  </Typography>
-                </Grid>
-              )}
-              {this.state.data.length > 0 && (
-                <Grid container spacing={10}>
-                  <Grid item xs={3} />
-                  <Grid item xs={6}>
-                    <Pagination
-                      classes={{ colorInherit: { color: black } }}
-                      currentPageColor={'inherit'}
-                      limit={this.state.perPage}
-                      offset={this.state.page * this.state.perPage}
-                      total={this.state.total}
-                      nextPageLabel={<ArrowForward fontSize="inherit" />}
-                      previousPageLabel={<ArrowBack fontSize="inherit" />}
-                      onClick={(e, offset, page) =>
-                        this.handlePageChange(page - 1)
-                      }
-                    />
-                  </Grid>
-                  <Grid item xs={3} />
-                </Grid>
-              )}
+              <CourseList url={this.state.queryURL} />
             </Grid>
           </Grid>
         </Container>
