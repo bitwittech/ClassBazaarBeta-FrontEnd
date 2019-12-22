@@ -28,8 +28,8 @@ const styles = theme => ({
 class NestedMenu extends Component {
   constructor(props) {
     super(props);
-    console.log('Inside constructor');
-    console.log(this.props);
+    // console.log('Inside constructor');
+    // console.log(this.props);
     this.state = {
       checkedLevel1: this.props.isLevel1Checked,
       checkedLevel2: this.props.level2List.map(c => false),
@@ -60,8 +60,8 @@ class NestedMenu extends Component {
   };
 
   componentWillReceiveProps(nextProps) {
-    console.log('Inside componentWillReceiveProps', this.props === nextProps);
-    console.log(nextProps);
+    // console.log('Inside componentWillReceiveProps', this.props === nextProps);
+    // console.log(nextProps);
     if (this.props !== nextProps && nextProps.shouldReset) {
       this.setState({
         checkedLevel1: false,
