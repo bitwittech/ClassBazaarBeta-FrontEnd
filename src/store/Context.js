@@ -1,7 +1,10 @@
 import { createContext } from 'react';
 
 let initialState = {
-  loginModal: false,
+  loginModal: {
+    state: 0,
+    open: false,
+  },
   token: localStorage.getItem('cbtoken')
     ? localStorage.getItem('cbtoken')
     : null,

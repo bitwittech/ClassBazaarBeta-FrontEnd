@@ -1358,6 +1358,7 @@ const CourseDetails = props => {
       <HomeModal
         openState={state.popUp}
         handlePopupClose={handlePopupClose}
+        course={state.data && state.data.title}
         state={1}
       />
       {state.loading ? (

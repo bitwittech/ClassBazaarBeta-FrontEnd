@@ -20,7 +20,7 @@ const Footer = () => {
           </div>
           <div>
             <p>
-              <a href="/about">Contact Us</a>
+              <a href="/contact">Contact Us</a>
             </p>
           </div>
           <div>
