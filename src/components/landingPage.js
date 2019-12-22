@@ -11,9 +11,11 @@ import AuthProvider from './authProvider';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import CS from './../assets/CS.png';
+import { Collapse } from '@material-ui/core';
 import Container from '@material-ui/core/Container';
 import Footer from './Footer';
 import Grid from '@material-ui/core/Grid';
+import HomeModal from './HomeModal';
 import InputBase from '@material-ui/core/InputBase';
 import { Paper } from 'material-ui';
 import SearchBG1 from './../assets/Search-Option3.jpg';
@@ -23,8 +25,6 @@ import TopAppBar from './appBar';
 import Typography from '@material-ui/core/Typography';
 import { withRouter } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
-import HomeModal from './HomeModal';
-import { Collapse } from '@material-ui/core';
 
 const styles = theme => ({
   dashboardLink: {
@@ -468,7 +468,7 @@ class LandingPage extends Component {
                 <Typography
                   variant="h5"
                   color="primary"
-                  style={{ fontWeight: '600' }}
+                  style={{ fontWeight: '600', background: '#fff' }}
                   component="h2"
                 >
                   Earn a Degree
@@ -488,7 +488,7 @@ class LandingPage extends Component {
                 </Typography>
               </Grid>
 
-              <Container style={{ background: '#FAFAFA' }} maxWidth={'md'}>
+              <Container style={{ background: '#FFF' }} maxWidth={'md'}>
                 <br />
                 <br />
                 <Grid container>

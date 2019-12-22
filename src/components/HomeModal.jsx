@@ -1,14 +1,14 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
+import Button from '@material-ui/core/Button';
 import Fade from '@material-ui/core/Fade';
 import Grid from '@material-ui/core/Grid';
-import Button from '@material-ui/core/Button';
+import Modal from '@material-ui/core/Modal';
 import Rating from '@material-ui/lab/Rating';
-import Typography from '@material-ui/core/Typography';
-// import Rating from '@material-ui/lab/Rating';
+// import { Rating } from '@material-ui/lab';
+import React from 'react';
 import Tooltip from '@material-ui/core/Tooltip';
+import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@material-ui/core/styles';
 
 const labels = {
   0.5: 'Useless',

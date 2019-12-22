@@ -4,15 +4,13 @@ import {
   LOADING,
   LOGIN,
   LOGIN_MODAL,
-
-  UPDATE_BOOKMARK,
-
   LOGOUT,
   REMOVE_TOKEN,
+  UPDATE_BOOKMARK,
 } from '../store/Types';
 
 import config from '../config.json';
-import localForage from 'localforage';
+import { store } from './../App';
 
 const { FusionAuthClient } = require('@fusionauth/node-client');
 
@@ -58,6 +56,7 @@ export const register = async (data, dispatch) => {
       .then(response => {
         console.log('Response', response);
         if (response.statusCode === 200) {
+          console.log(response);
           dispatch({
             type: ALERT,
             payload: {
@@ -99,7 +98,6 @@ export const register = async (data, dispatch) => {
 };
 
 export const signin = async (data, dispatch) => {
-  testEmail();
   dispatch({
     type: LOADING,
     payload: true,
@@ -112,16 +110,8 @@ export const signin = async (data, dispatch) => {
         password: data.password,
       })
       .then(async response => {
-        console.log(response.successResponse.user);
-        data = {
-          bookmarks: [{ id: 'balfjdhfierhjahfjdhfjd', provider: 'edx' }],
-        };
-        const udpatedUser = await client.patchUser(
-          response.successResponse.user.id,
-          { user: { data } }
-        );
-        console.log(udpatedUser);
         if (response.statusCode === 200) {
+          store.setItem('user', response.successResponse.user);
           dispatch({
             type: LOGIN,
             payload: {
@@ -207,35 +197,35 @@ export const addBookmark = async (uuid, userId, user, provider, dispatch) => {
   //check if it is already there if then remove and dispatch update
   //else add and dispatch updated
   const presentCheck = () => {
-    if (user.data.bookmarks.find(e => uuid === e.id) === undefined) return false
-    else
-      return true
-  }
-  const isPresentAlready = presentCheck()
+    if (user.data.bookmarks.find(e => uuid === e.id) === undefined)
+      return false;
+    else return true;
+  };
+  const isPresentAlready = presentCheck();
 
-  console.log(isPresentAlready)
+  console.log(isPresentAlready);
 
-  const updateData = async (newBookmarks) => {
+  const updateData = async newBookmarks => {
     try {
-      const patchedData = await client.patchUser(
-        userId, {
-          user: {
-            data: {
-              ...user.data,
-              bookmarks: newBookmarks
-            }
-          }
-        }
-      )
-      console.log(patchedData)
-      console.log("DISPATCHING DATA", patchedData.successResponse.user.data.bookmarks)
-
+      const patchedData = await client.patchUser(userId, {
+        user: {
+          data: {
+            ...user.data,
+            bookmarks: newBookmarks,
+          },
+        },
+      });
+      console.log(patchedData);
+      store.setItem('user', patchedData.successResponse.user);
+      console.log(
+        'DISPATCHING DATA',
+        patchedData.successResponse.user.data.bookmarks
+      );
 
       dispatch({
         type: UPDATE_BOOKMARK,
-        payload: patchedData.successResponse.user.data.bookmarks
-      })
-
+        payload: patchedData.successResponse.user.data.bookmarks,
+      });
     } catch (error) {
       dispatch({
         type: ALERT,
@@ -245,25 +235,24 @@ export const addBookmark = async (uuid, userId, user, provider, dispatch) => {
         },
       });
     }
-  }
+  };
 
   if (isPresentAlready) {
-    const newBookmarks = user.data.bookmarks.filter(e => e.id !== uuid)
-    console.log("ALREADY PRESENT", newBookmarks)
-    await updateData(newBookmarks)
+    const newBookmarks = user.data.bookmarks.filter(e => e.id !== uuid);
+    console.log('ALREADY PRESENT', newBookmarks);
+    await updateData(newBookmarks);
   } else {
-    const oldBookmarks = user.data.bookmarks
-    console.log("oldBookmarks", oldBookmarks)
+    const oldBookmarks = user.data.bookmarks;
+    console.log('oldBookmarks', oldBookmarks);
 
-    const newBookmarks = [...oldBookmarks, {
-      id: uuid,
-      provider
-    }]
-    console.log("NEW ADDED", newBookmarks)
-    await updateData(newBookmarks)
+    const newBookmarks = [
+      ...oldBookmarks,
+      {
+        id: uuid,
+        provider,
+      },
+    ];
+    console.log('NEW ADDED', newBookmarks);
+    await updateData(newBookmarks);
   }
-
-
-
 };
-

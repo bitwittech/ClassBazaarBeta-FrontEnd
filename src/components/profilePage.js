@@ -23,6 +23,7 @@ import Typography from '@material-ui/core/Typography';
 import WatchLaterIcon from '@material-ui/icons/WatchLater';
 import formatDate from './../utils/dateUtils';
 import getClosestNextRun from './../utils/edxUtils';
+import { store } from '../App';
 import { titleCase } from './../utils/utils';
 
 const styles = {
@@ -57,54 +58,33 @@ class ProfilePage extends Component {
     super(props);
     this.state = {
       data: [],
-      page: 0,
-      start: 0,
-      end: perPage,
-      perPage: perPage,
-      filterValue: 'all',
-      q: '',
-      filter: '',
-      isStateUpdatedFromProp: false,
-      subjects: 'all',
-      providers: 'all',
-      fee: 'all',
+      user: {},
     };
+    this.updateData = this.updateData.bind(this);
+
+    this.updateData();
   }
   updateData() {
-    const page = this.state.page;
-    const query = this.state.q;
-    const filter = this.state.filterValue;
-    let parsedFilter = '';
-    if (filter === 'free') parsedFilter = 'price:free';
-    if (filter === 'flexible') parsedFilter = 'start:flexible';
-    if (filter === 'paid') parsedFilter = 'certificates';
-    const range = JSON.stringify([
-      page * this.state.perPage,
-      (page + 1) * this.state.perPage,
-    ]);
-    // var url = `http://localhost:8080/api/courses/?range=${range}&q=${query}&filter=${parsedFilter}&subjects=${this.state.subjects}&provider=${this.state.providers}`;
-    var url = `https://api.classbazaar.in/api/courses/?range=${range}&q=${query}&filter=${parsedFilter}&subjects=${this.state.subjects}&provider=${this.state.providers}`;
-    return fetch(url)
-      .then(response => response.json())
-      .then(json => {
-        console.log(json);
-        this.setState({ data: json.data, total: json.total });
-      });
+    store.getItem('user').then(user => {
+      this.setState({ user });
+      const data = user.data.bookmarks;
+      console.log(data);
+      // var url = `http://localhost:8080/api/bookmarks/?data=${JSON.stringify(
+      //   data
+      // )}`;
+      var url = `https://api.classbazaar.in/api/bookmarks/?data=${JSON.stringify(
+        data
+      )}`;
+      return fetch(url)
+        .then(response => response.json())
+        .then(json => {
+          console.log(json);
+          this.setState({ data: json.data });
+        });
+    });
   }
-  componentDidMount() {
-    console.log(this.state, this.props);
-    const query =
-      this.props.location.state !== undefined
-        ? this.props.location.state.query
-        : '';
-    if (!this.state.isStateUpdatedFromProp) {
-      this.setState({ q: query, isStateUpdatedFromProp: true }, () => {
-        this.updateData();
-      });
-    } else {
-      this.updateData();
-    }
-  }
+
+  componentDidMount() {}
 
   render() {
     console.log(this.state);
@@ -145,14 +125,19 @@ class ProfilePage extends Component {
                                 className="profile-subtext"
                                 style={{ color: '#274E5D', fontWeight: '600' }}
                               >
-                                Clayton Allen
+                                {this.state.user.firstName +
+                                  ' ' +
+                                  this.state.user.lastName}
                               </Typography>
                               <Typography
                                 align="center"
                                 variant="subtitle2"
                                 gutterBottom
                               >
-                                Los Angeles, California
+                                {this.state.user.data &&
+                                this.state.user.data.location
+                                  ? this.state.user.data.location
+                                  : 'Add Location'}
                               </Typography>
                             </div>
                             <div></div>
@@ -166,7 +151,7 @@ class ProfilePage extends Component {
                               Phone No
                             </Typography>
                             <Typography variant="body2" gutterBottom>
-                              +333 245 9632
+                              {this.state.user.mobilePhone}
                             </Typography>
                             <Divider variant="left" />
                             <br />
@@ -178,13 +163,16 @@ class ProfilePage extends Component {
                               Email ID{' '}
                             </Typography>
                             <Typography variant="body2" gutterBottom>
-                              dorothy.daniel@domain.com
+                              {this.state.user.email}
                             </Typography>
                             <Divider variant="left" />
                             <br />
                             <br />
                             <Typography variant="body2" gutterBottom>
-                              116 Annabell Rapid Apt. 654
+                              {this.state.user.data &&
+                              this.state.user.data.address
+                                ? this.state.user.data.location
+                                : ''}
                             </Typography>
                             <Divider variant="left" />
                             <br />
@@ -218,25 +206,22 @@ class ProfilePage extends Component {
                       Bookmarked Courses
                     </Typography>
                     <Divider />
-                    {/* {this.state.data.length > 0 &&
-                      this.state.data.map((obj, index) => {
-                        return (
-                          <CourseCard
-                            key={obj.title}
-                            isInstructor={true}
-                            university={obj.university}
-                            courseName={obj.title}
-                            provider={obj.provider}
-                            duration={obj.commitment}
-                            startingOn={obj.start_date}
-                            price={obj.price}
-                            rating={obj.rating}
-                            uuid={obj.uuid}
-                          ></CourseCard>
-                        );
-                      })} */}
                     <br />
-                    <ProfileCourseCard />
+                    {this.state.data.map(obj => (
+                      <ProfileCourseCard
+                        key={obj.title}
+                        isInstructor={true}
+                        university={obj.university}
+                        courseName={obj.title}
+                        provider={obj.provider}
+                        duration={obj.commitment}
+                        startingOn={obj.start_date}
+                        price={obj.price}
+                        rating={obj.rating}
+                        uuid={obj.uuid}
+                        url={obj.url}
+                      />
+                    ))}
                     <br />
                     <Typography
                       variant="h4"
