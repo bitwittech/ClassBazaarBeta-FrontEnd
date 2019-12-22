@@ -111,21 +111,11 @@ class CourseList extends Component {
     return fetch(url)
       .then(response => response.json())
       .then(json => {
-        this.setState(
-          { data: json.data, total: json.total, loading: false },
-          async () => {
-            console.log('After data update');
-            console.log(this.state);
-            await store.setItem('filterData', this.state);
-          }
-        );
+        this.setState({ data: json.data, total: json.total, loading: false });
       });
   }
 
   componentWillReceiveProps(nextProps) {
-    // console.log('Inside componentWillReceiveProps', this.props === nextProps);
-    // console.log(nextProps);
-    console.log(nextProps);
     if (this.props !== nextProps) {
       this.setState(
         {

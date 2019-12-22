@@ -144,7 +144,15 @@ class HomePage extends Component {
 
     var url = `${API}/api/courses/?q=${query}&filter=${parsedFilter}&subjects=${subjects}&provider=${this.state.providers}&feeFilter=${feeFilter}&startDateFilter=${startDateFilter}`;
     console.log(url);
-    this.setState({ queryURL: url });
+    this.setState({ queryURL: url }, () => {
+      const state = this.state;
+      store.removeItem('filterData').then(s => {
+        store.setItem('filterData', this.state).then(d => {
+          console.log('Data updated in localstorage');
+          console.log(d);
+        });
+      });
+    });
   }
 
   onSubjectFilterChange = subjectList => {
@@ -171,7 +179,7 @@ class HomePage extends Component {
     if (feeType[0] === true) filterValue = 'free';
     else if (feeType[1] === true) filterValue = 'paid';
     else filterValue = '';
-    this.setState({ filterValue }, () => {
+    this.setState({ filterValue }, async () => {
       this.updateData();
     });
   };
@@ -183,13 +191,13 @@ class HomePage extends Component {
     else if (startDateType[1] === true) filterValue = 'gte30';
     else filterValue = '';
     console.log({ filterValue });
-    this.setState({ filterValue }, () => {
+    this.setState({ filterValue }, async () => {
       console.log(this.state);
       this.updateData();
     });
   };
 
-  onProviderFilterChange = providerList => {
+  onProviderFilterChange = async providerList => {
     let providerFilter = '';
     this.state.providerData.forEach((obj, index) => {
       if (providerList[index]) {
@@ -203,9 +211,9 @@ class HomePage extends Component {
     });
   };
 
-  onFilterChange(event) {
+  async onFilterChange(event) {
     const value = event.target.value;
-    this.setState({ filterValue: value }, () => {
+    this.setState({ filterValue: value }, async () => {
       console.log('Filter changed to', value);
       this.updateData();
     });
@@ -228,8 +236,8 @@ class HomePage extends Component {
         isLevel1CheckedSubjects: false,
         checkedLevel2Subjects: subjectsData.map(s => false),
       },
-      () => {
-        this.updateData();
+      async () => {
+        await this.updateData();
         this.setState({
           subjecttReset: false,
           feeReset: false,
