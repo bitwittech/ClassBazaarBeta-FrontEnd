@@ -1,88 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
-    <link rel="apple-touch-icon" href="logo.png" />
-    <link
-      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
-      rel="stylesheet"
-      integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
-      crossorigin="anonymous"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css"
-      integrity="sha256-46qynGAkLSFpVbEBog43gvNhfrOj+BmwXdxFgVK/Kvc="
-      crossorigin="anonymous"
-    />
-    <link
-      href="https://fonts.googleapis.com/css?family=Poppins:400,600,300,700&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
 
-    <title>Class Bazaar</title>
-    <script>
-      var commandQueue = [];
-      var cmp = function(command, parameter, callback) {
-        commandQueue.push({
-          command: command,
-          parameter: parameter,
-          callback: callback,
-        });
-      };
-      cmp.commandQueue = commandQueue;
-      cmp.config = {
-        /* customPurposeListLocation: '', */
-        layout: 'modal',
-        blockBrowsing: true,
-        storePublisherData: false,
-        storeConsentGlobally: true,
-        logging: false,
-        localization: {},
-        forceLocale: null,
-        gdprAppliesGlobally: false,
-        repromptOptions: {
-          fullConsentGiven: 360,
-          someConsentGiven: 30,
-          noConsentGiven: 30,
-        },
-        geoIPVendor: 'https://cdn.digitrust.mgr.consensu.org/1/geoip.json',
-        testingMode: 'normal',
-        showFooterAfterSubmit: true,
-        /* logoUrl: "https://www.example.com/image.png", */
-        css: {
-          'color-primary': '#0a82be',
-          'color-secondary': '#eaeaea',
-          'color-border': '#eaeaea',
-          'color-background': '#ffffff',
-          'color-text-primary': '#333333',
-          'color-text-secondary': '#0a82be',
-          'color-linkColor': '#0a82be',
-          'color-table-background': '#f7f7f7',
-          'font-family':
-            "'Noto Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif",
-          'custom-font-url':
-            'https://fonts.googleapis.com/css?family=Noto+Sans',
-        },
-      };
-      window.__cmp = cmp;
-    </script>
-    <script
-      src="https://cdn.digitrust.mgr.consensu.org/1/cmp.complete.bundle.js"
-      async
-    ></script>
-  </head>
+<head>
+  <meta charset="utf-8" />
+  <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#000000" />
+  <meta name="description" content="Web site created using create-react-app" />
+  <link rel="apple-touch-icon" href="logo.png" />
+  <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+    integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css"
+    integrity="sha256-46qynGAkLSFpVbEBog43gvNhfrOj+BmwXdxFgVK/Kvc=" crossorigin="anonymous" />
+  <link href="https://fonts.googleapis.com/css?family=Poppins:400,600,300,700&display=swap" rel="stylesheet" />
+  <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
 
-  <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
-  </body>
+  <title>Class Bazaar</title>
+  <script>
+    fetch('http://ip-api.com/json/').then(res => res.json()).then(data => {
+      console.log(data)
+      if (data.country === 'India') {
+
+        var commandQueue = [];
+        var cmp = function (command, parameter, callback) {
+          commandQueue.push({
+            command: command,
+            parameter: parameter,
+            callback: callback,
+          });
+        };
+        cmp.commandQueue = commandQueue;
+        cmp.config = {
+          /* customPurposeListLocation: '', */
+          layout: 'modal',
+          blockBrowsing: true,
+          storePublisherData: false,
+          storeConsentGlobally: true,
+          logging: false,
+          localization: {},
+          forceLocale: null,
+          gdprAppliesGlobally: false,
+          repromptOptions: {
+            fullConsentGiven: 360,
+            someConsentGiven: 30,
+            noConsentGiven: 30,
+          },
+          geoIPVendor: 'https://cdn.digitrust.mgr.consensu.org/1/geoip.json',
+          testingMode: 'normal',
+          showFooterAfterSubmit: true,
+          /* logoUrl: "https://www.example.com/image.png", */
+          css: {
+            'color-primary': '#0a82be',
+            'color-secondary': '#eaeaea',
+            'color-border': '#eaeaea',
+            'color-background': '#ffffff',
+            'color-text-primary': '#333333',
+            'color-text-secondary': '#0a82be',
+            'color-linkColor': '#0a82be',
+            'color-table-background': '#f7f7f7',
+            'font-family': "'Noto Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif",
+            'custom-font-url': 'https://fonts.googleapis.com/css?family=Noto+Sans',
+          },
+        };
+        window.__cmp = cmp;
+      }
+    })
+  </script>
+
+  <script src="https://cdn.digitrust.mgr.consensu.org/1/cmp.complete.bundle.js" async></script>
+</head>
+
+<body>
+  <noscript>You need to enable JavaScript to run this app.</noscript>
+  <div id="root"></div>
+</body>
+
 </html>
