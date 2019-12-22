@@ -9,6 +9,7 @@ import CourseCard from './ProfileCourseCard';
 import Footer from './Footer';
 import FormControl from '@material-ui/core/FormControl';
 import Grid from '@material-ui/core/Grid';
+import Infinite from 'react-infinite';
 import NestedMenu from './nestedCheckbox';
 import Pagination from 'material-ui-flat-pagination';
 import RadioGroup from '@material-ui/core/RadioGroup';
@@ -95,10 +96,61 @@ class CourseList extends Component {
       loading: true,
       popUp: false,
       queryURL: props.url,
+      elements: [],
+      isInfiniteLoading: true,
     };
     this.getUniversityForUdemy = this.getUniversityForUdemy.bind(this);
     this.handlePageChange = this.handlePageChange.bind(this);
     this.updateData = this.updateData.bind(this);
+    this.buildElements = this.buildElements.bind(this);
+    this.elementInfiniteLoad = this.elementInfiniteLoad.bind(this);
+    this.handleInfiniteLoad = this.handleInfiniteLoad.bind(this);
+  }
+
+  async buildElements() {
+    const page = this.state.page;
+    const range = JSON.stringify([
+      page * this.state.perPage,
+      (page + 1) * this.state.perPage,
+    ]);
+    var url = this.state.queryURL + `&range=${range}`;
+    return fetch(url)
+      .then(response => response.json())
+      .then(json => {
+        this.setState({ page: page + 1 });
+        return json.data.map(obj => {
+          return (
+            <CourseCard
+              key={obj.title}
+              isInstructor={true}
+              university={obj.university}
+              courseName={obj.title}
+              provider={obj.provider}
+              duration={obj.commitment}
+              startingOn={obj.start_date}
+              price={obj.price}
+              rating={obj.rating}
+              uuid={obj.uuid}
+              url={obj.url}
+            />
+          );
+        });
+      });
+  }
+
+  handleInfiniteLoad() {
+    let that = this;
+    this.setState({
+      isInfiniteLoading: true,
+    });
+    this.buildElements().then(newElements => {
+      console.log({ newElements });
+
+      this.setState({
+        isInfiniteLoading: false,
+        elements: that.state.elements.concat(newElements),
+      });
+    });
   }
 
   updateData() {
@@ -121,8 +173,9 @@ class CourseList extends Component {
         {
           queryURL: nextProps.url,
         },
-        () => {
+        async () => {
           this.updateData();
+          this.handleInfiniteLoad();
         }
       );
     }
@@ -152,65 +205,27 @@ class CourseList extends Component {
     return checkedData;
   }
 
+  elementInfiniteLoad() {
+    return <div className="infinite-list-item">Loading...</div>;
+  }
+
   render() {
     console.log('Rendering now');
     return (
       <Container maxWidth={'lg'}>
         <Grid container spacing={3}>
           <Grid item xs={12} sm={12}>
-            {this.state.loading ? (
-              <Grid align="center">
-                <CircularProgress />
-              </Grid>
-            ) : this.state.data.length > 0 ? (
-              this.state.data.length > 0 &&
-              this.state.data.map((obj, index) => {
-                return (
-                  <>
-                    <Container>
-                      <CourseCard
-                        key={obj.title}
-                        isInstructor={true}
-                        university={obj.university}
-                        courseName={obj.title}
-                        provider={obj.provider}
-                        duration={obj.commitment}
-                        startingOn={obj.start_date}
-                        price={obj.price}
-                        rating={obj.rating}
-                        uuid={obj.uuid}
-                        url={obj.url}
-                      />
-                    </Container>
-                  </>
-                );
-              })
-            ) : (
-              <Grid align="center">
-                <Typography color="primary" variant="h6" gutterBottom>
-                  No course found.
-                </Typography>
-              </Grid>
-            )}
-            {this.state.data.length > 0 && (
-              <Grid container spacing={10}>
-                <Grid item xs={3} />
-                <Grid item xs={6}>
-                  <Pagination
-                    classes={{ colorInherit: { color: black } }}
-                    currentPageColor={'inherit'}
-                    limit={this.state.perPage}
-                    offset={this.state.page * this.state.perPage}
-                    total={this.state.total}
-                    nextPageLabel={<ArrowForward fontSize="inherit" />}
-                    previousPageLabel={<ArrowBack fontSize="inherit" />}
-                    onClick={(e, offset, page) =>
-                      this.handlePageChange(page - 1)
-                    }
-                  />
-                </Grid>
-                <Grid item xs={3} />
-              </Grid>
+            {this.state.elements.length > 0 && (
+              <Infinite
+                elementHeight={161}
+                useWindowAsScrollContainer={true}
+                infiniteLoadBeginEdgeOffset={200}
+                onInfiniteLoad={this.handleInfiniteLoad}
+                loadingSpinnerDelegate={this.elementInfiniteLoad()}
+                isInfiniteLoading={this.state.isInfiniteLoading}
+              >
+                {this.state.elements}
+              </Infinite>
             )}
           </Grid>
         </Grid>
