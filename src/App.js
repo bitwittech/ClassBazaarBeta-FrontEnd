@@ -21,6 +21,7 @@ import Store from './store/Context';
 import config from './config.json';
 import { fetchUser } from './actions/ContextActions';
 import localForage from 'localforage';
+import ScrollToTop from './components/ScrollToTop';
 
 const theme = createMuiTheme({
   typography: {
@@ -86,6 +87,7 @@ function App() {
           <div className="App" style={{ background: '#FFF' }}>
             <Snackbar />
             <Login />
+            <ScrollToTop />
             <AppWithRouter />
           </div>
         </Store.Provider>
