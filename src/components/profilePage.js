@@ -76,8 +76,6 @@ class ProfilePage extends Component {
       curPassword: '',
     };
     this.updateData = this.updateData.bind(this);
-
-    this.updateData();
   }
   updateData() {
     store.getItem('user').then(user => {
@@ -88,8 +86,16 @@ class ProfilePage extends Component {
         user,
         phone: user.mobilePhone,
         email: user.email,
-        location: user.data.location ? user.data.location : 'Add Location',
+        location:
+          user.data && user.data.location
+            ? user.data && user.data.location
+            : 'Add Location',
       });
+
+      if (user.data === undefined) {
+        return this.setState({ data: [], loading: false });
+      }
+
       const data = user.data.bookmarks;
       console.log(data);
       // var url = `http://localhost:8080/api/bookmarks/?data=${JSON.stringify(
@@ -108,7 +114,9 @@ class ProfilePage extends Component {
     });
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+    this.updateData();
+  }
 
   render() {
     if (this.state.user == null) return <Redirect to="/" />;

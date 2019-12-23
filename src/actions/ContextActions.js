@@ -204,6 +204,43 @@ export const addBookmark = async (uuid, userId, user, provider, dispatch) => {
 
   //check if it is already there if then remove and dispatch update
   //else add and dispatch updated
+
+  //check for first time new user whose user.data in undefined
+
+  if (user.data === undefined) {
+    console.log('YEAH')
+    try {
+      const addNewData = await client.patchUser(userId, {
+        user: {
+          data: {
+            bookmarks: [{
+              id: uuid,
+              provider
+            }]
+          }
+        }
+      })
+      store.setItem('user', addNewData.successResponse.user);
+      console.log("ADD NEW DATA", addNewData)
+      dispatch({
+        type: UPDATE_BOOKMARK,
+        payload: addNewData.successResponse.user.data.bookmarks,
+      });
+      console.log("GONE")
+      return;
+
+    } catch (error) {
+      dispatch({
+        type: ALERT,
+        payload: {
+          varient: 'error',
+          message: 'Could not bookmark.',
+        },
+      });
+    }
+  }
+  console.log("NOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO")
+
   const presentCheck = () => {
     if (user.data.bookmarks.find(e => uuid === e.id) === undefined)
       return false;
