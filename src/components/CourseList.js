@@ -128,27 +128,23 @@ class CourseList extends Component {
     });
     if (this.state.urlChanged) {
       this.setState({ elements: [] }, () => {
-        this.buildElements().then(newElements => {
-          console.log({ newElements });
-          this.setState({
-            isInfiniteLoading: false,
-            elements: that.state.elements.concat(newElements),
-            loading: false,
-            urlChanged: false,
-          });
-        });
+        this.update(that);
       });
     } else {
-      this.buildElements().then(newElements => {
-        console.log({ newElements });
-        this.setState({
-          isInfiniteLoading: false,
-          elements: that.state.elements.concat(newElements),
-          loading: false,
-          urlChanged: false,
-        });
-      });
+      this.update(that);
     }
+  }
+
+  update(that) {
+    that.buildElements().then(newElements => {
+      console.log({ newElements });
+      that.setState({
+        isInfiniteLoading: false,
+        elements: that.state.elements.concat(newElements),
+        loading: false,
+        urlChanged: false,
+      });
+    });
   }
 
   componentWillReceiveProps(nextProps) {
