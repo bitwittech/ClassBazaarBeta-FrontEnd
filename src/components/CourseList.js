@@ -100,8 +100,6 @@ class CourseList extends Component {
       isInfiniteLoading: true,
     };
     this.getUniversityForUdemy = this.getUniversityForUdemy.bind(this);
-    this.handlePageChange = this.handlePageChange.bind(this);
-    this.updateData = this.updateData.bind(this);
     this.buildElements = this.buildElements.bind(this);
     this.elementInfiniteLoad = this.elementInfiniteLoad.bind(this);
     this.handleInfiniteLoad = this.handleInfiniteLoad.bind(this);
@@ -149,22 +147,9 @@ class CourseList extends Component {
       this.setState({
         isInfiniteLoading: false,
         elements: that.state.elements.concat(newElements),
+        loading: false,
       });
     });
-  }
-
-  updateData() {
-    const page = this.state.page;
-    const range = JSON.stringify([
-      page * this.state.perPage,
-      (page + 1) * this.state.perPage,
-    ]);
-    var url = this.state.queryURL + `&range=${range}`;
-    return fetch(url)
-      .then(response => response.json())
-      .then(json => {
-        this.setState({ data: json.data, total: json.total, loading: false });
-      });
   }
 
   componentWillReceiveProps(nextProps) {
@@ -174,28 +159,19 @@ class CourseList extends Component {
           queryURL: nextProps.url,
           elements: [],
           isInfiniteLoading: false,
+          loading: true,
+          page: 0,
         },
-        async () => {
-          this.updateData();
+        () => {
           this.handleInfiniteLoad();
         }
       );
     }
   }
 
-  componentDidMount() {
-    this.updateData();
-  }
-
   getUniversityForUdemy(obj) {
     let names = obj.visible_instructors.map(i => i.name + ', ').join('');
     return names.slice(0, names.length - 2);
-  }
-
-  handlePageChange(page) {
-    this.setState({ page }, () => {
-      this.updateData();
-    });
   }
 
   getCheckedProvidersFromString() {
@@ -208,7 +184,11 @@ class CourseList extends Component {
   }
 
   elementInfiniteLoad() {
-    return <div className="infinite-list-item">Loading...</div>;
+    return (
+      <Grid align="center">
+        <CircularProgress />
+      </Grid>
+    );
   }
 
   render() {
@@ -217,7 +197,11 @@ class CourseList extends Component {
       <Container maxWidth={'lg'} style={{ paddingRight: '0' }}>
         <Grid container spacing={3}>
           <Grid item xs={12} sm={12}>
-            {this.state.elements.length > 0 && (
+            {this.state.loading ? (
+              <Grid align="center">
+                <CircularProgress />
+              </Grid>
+            ) : this.state.elements.length > 0 ? (
               <Infinite
                 elementHeight={161}
                 useWindowAsScrollContainer={true}
@@ -228,6 +212,12 @@ class CourseList extends Component {
               >
                 {this.state.elements}
               </Infinite>
+            ) : (
+              <Grid align="center">
+                <Typography color="primary" variant="h6" gutterBottom>
+                  No course found.
+                </Typography>
+              </Grid>
             )}
           </Grid>
         </Grid>
