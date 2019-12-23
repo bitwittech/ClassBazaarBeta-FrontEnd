@@ -172,6 +172,8 @@ class CourseList extends Component {
       this.setState(
         {
           queryURL: nextProps.url,
+          elements: [],
+          isInfiniteLoading: false,
         },
         async () => {
           this.updateData();
