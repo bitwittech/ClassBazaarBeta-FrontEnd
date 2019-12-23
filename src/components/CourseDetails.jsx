@@ -905,7 +905,22 @@ const CourseDetails = props => {
                   variant="body1"
                   gutterBottom
                 >
-                  {ReactHtmlParser(state.data.sections[0])}
+                  {ReactHtmlParser(state.data.sections[0], {
+                    transform: node => {
+                      console.log({ node });
+                      if (node.name === 'b') {
+                        return (
+                          <Typography
+                            style={{ fontWeight: '600', fontSize: '22px' }}
+                            variant="subtitle2"
+                            gutterBottom
+                          >
+                            {node.children[0].data}{' '}
+                          </Typography>
+                        );
+                      }
+                    },
+                  })}
                 </Typography>
                 <Typography
                   style={{ fontWeight: '600', fontSize: '22px' }}
@@ -919,7 +934,14 @@ const CourseDetails = props => {
                   variant="body1"
                   gutterBottom
                 >
-                  {ReactHtmlParser(state.data.sections[2])}
+                  {ReactHtmlParser(state.data.sections[2], {
+                    transform: node => {
+                      console.log({ node });
+                      if (node.name === 'h3') {
+                        return null;
+                      }
+                    },
+                  })}
                 </Typography>
 
                 <Typography
