@@ -431,7 +431,7 @@ class HomePage extends Component {
                   marginLeft: '-25px',
                 }}
               />
-              <CourseList url={this.state.queryURL} />
+              <CourseList url={this.state.queryURL} urlChanged={true} />
             </Grid>
           </Grid>
         </Container>

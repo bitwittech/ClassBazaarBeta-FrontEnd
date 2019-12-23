@@ -73,31 +73,16 @@ class CourseList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      providerData,
       data: [],
       page: 0,
       start: 0,
       end: perPage,
       perPage: perPage,
-      filterValue: 'all',
-      q: '',
-      filter: '',
-      feeFilter: '',
-      startDateFilter: '',
-      isStateUpdatedFromProp: false,
-      subjects: 'all',
-      providers: 'all',
-      fee: 'all',
-      isLevel1CheckedSubjects: false,
-      subjecttReset: false,
-      feeReset: false,
-      providerReset: false,
-      startReset: false,
       loading: true,
-      popUp: false,
       queryURL: props.url,
       elements: [],
       isInfiniteLoading: true,
+      urlChanged: this.props.urlChanged,
     };
     this.getUniversityForUdemy = this.getUniversityForUdemy.bind(this);
     this.buildElements = this.buildElements.bind(this);
@@ -141,15 +126,29 @@ class CourseList extends Component {
     this.setState({
       isInfiniteLoading: true,
     });
-    this.buildElements().then(newElements => {
-      console.log({ newElements });
-
-      this.setState({
-        isInfiniteLoading: false,
-        elements: that.state.elements.concat(newElements),
-        loading: false,
+    if (this.state.urlChanged) {
+      this.setState({ elements: [] }, () => {
+        this.buildElements().then(newElements => {
+          console.log({ newElements });
+          this.setState({
+            isInfiniteLoading: false,
+            elements: that.state.elements.concat(newElements),
+            loading: false,
+            urlChanged: false,
+          });
+        });
       });
-    });
+    } else {
+      this.buildElements().then(newElements => {
+        console.log({ newElements });
+        this.setState({
+          isInfiniteLoading: false,
+          elements: that.state.elements.concat(newElements),
+          loading: false,
+          urlChanged: false,
+        });
+      });
+    }
   }
 
   componentWillReceiveProps(nextProps) {
@@ -161,6 +160,7 @@ class CourseList extends Component {
           isInfiniteLoading: false,
           loading: true,
           page: 0,
+          urlChanged: true,
         },
         () => {
           this.handleInfiniteLoad();
