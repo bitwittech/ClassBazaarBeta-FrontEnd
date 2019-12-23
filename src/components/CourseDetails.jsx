@@ -417,7 +417,25 @@ const CourseDetails = props => {
                   variant="body1"
                   gutterBottom
                 >
-                  {ReactHtmlParser(state.data.description)}
+                  {
+                    (ReactHtmlParser(state.data.description),
+                    {
+                      transform: node => {
+                        console.log({ node });
+                        if (node.name === 'h1') {
+                          return (
+                            <Typography
+                              style={{ fontWeight: '600', fontSize: '22px' }}
+                              variant="subtitle2"
+                              gutterBottom
+                            >
+                              {node.children[0].data}{' '}
+                            </Typography>
+                          );
+                        }
+                      },
+                    })
+                  }
                 </Typography>
                 <br />
                 {state.data.outcome !== '' && (
@@ -1081,7 +1099,7 @@ const CourseDetails = props => {
               <br />
               <div className="cd-cont">
                 <Typography
-                  style={{ fontWeight: '600', fontSize: '22px' }}
+                  style={{ fontWeight: '600', fontSize: '18px' }}
                   variant="subtitle2"
                   gutterBottom
                 >
@@ -1095,7 +1113,7 @@ const CourseDetails = props => {
                   {state.data.short_description}
                 </Typography>
                 <Typography
-                  style={{ fontWeight: '600', fontSize: '22px' }}
+                  style={{ fontWeight: '600', fontSize: '18px' }}
                   variant="subtitle2"
                   gutterBottom
                 >
@@ -1109,7 +1127,7 @@ const CourseDetails = props => {
                   {state.data.who_is_this_program_for}
                 </Typography>
                 <Typography
-                  style={{ fontWeight: '600', fontSize: '22px' }}
+                  style={{ fontWeight: '600', fontSize: '18px' }}
                   variant="subtitle2"
                   gutterBottom
                 >
@@ -1124,7 +1142,7 @@ const CourseDetails = props => {
                 </Typography>
 
                 <Typography
-                  style={{ fontWeight: '600', fontSize: '22px' }}
+                  style={{ fontWeight: '600', fontSize: '18px' }}
                   variant="subtitle2"
                   gutterBottom
                 >
@@ -1139,7 +1157,7 @@ const CourseDetails = props => {
                 </Typography>
 
                 <Typography
-                  style={{ fontWeight: '600', fontSize: '22px' }}
+                  style={{ fontWeight: '600', fontSize: '18px' }}
                   variant="subtitle2"
                   gutterBottom
                 >
@@ -1154,7 +1172,7 @@ const CourseDetails = props => {
                 </Typography>
 
                 {/* <Typography
-                  style={{ fontWeight: '600', fontSize: '22px' }}
+                  style={{ fontWeight: '600', fontSize: '18px' }}
                   variant="subtitle2"
                   gutterBottom
                 >
@@ -1167,7 +1185,7 @@ const CourseDetails = props => {
                 </Typography> */}
                 <br />
                 <Typography
-                  style={{ fontWeight: '600', fontSize: '22px' }}
+                  style={{ fontWeight: '600', fontSize: '18px' }}
                   variant="subtitle2"
                   gutterBottom
                 >
@@ -1192,7 +1210,7 @@ const CourseDetails = props => {
                       </div>
                       <div>
                         <RateReviewIcon
-                          style={{ fontSize: '22px', marginTop: '2px' }}
+                          style={{ fontSize: '18px', marginTop: '2px' }}
                         />
                       </div>
                     </div>
@@ -1269,7 +1287,7 @@ const CourseDetails = props => {
               <br />
               <div className="cd-cont">
                 <Typography
-                  style={{ fontWeight: '600', fontSize: '22px' }}
+                  style={{ fontWeight: '600', fontSize: '18px' }}
                   variant="subtitle2"
                   gutterBottom
                 >
@@ -1294,12 +1312,26 @@ const CourseDetails = props => {
                   variant="body1"
                   gutterBottom
                 >
-                  {ReactHtmlParser(state.data.syllabus)}
+                  {ReactHtmlParser(state.data.syllabus, {
+                    transform: node => {
+                      if (node.name === 'h1') {
+                        return (
+                          <Typography
+                            style={{ fontWeight: '600', fontSize: '18px' }}
+                            variant="subtitle2"
+                            gutterBottom
+                          >
+                            {node.children[0].data}
+                          </Typography>
+                        );
+                      }
+                    },
+                  })}
                 </Typography>
                 {state.data.instructors !== undefined && (
                   <>
                     <Typography
-                      style={{ fontWeight: '600', fontSize: '22px' }}
+                      style={{ fontWeight: '600', fontSize: '18px' }}
                       variant="subtitle2"
                       gutterBottom
                     >
