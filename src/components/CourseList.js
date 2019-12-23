@@ -96,7 +96,7 @@ class CourseList extends Component {
       page * this.state.perPage,
       (page + 1) * this.state.perPage,
     ]);
-    var url = this.state.queryURL + `&range=${range}`;
+    var url = this.state.queryURL + `&range=${10}`;
     return fetch(url)
       .then(response => response.json())
       .then(json => {

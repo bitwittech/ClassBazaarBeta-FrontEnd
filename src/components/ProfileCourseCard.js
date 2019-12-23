@@ -72,7 +72,7 @@ const ProfileCourseCard = withRouter(({ history, ...data }) => {
   };
 
   const isBookmarked = uuid => {
-    if (state.user === null) {
+    if (state.user === null || state.user.data === undefined) {
       return false;
     }
     const globalBookmarks = state.user.data.bookmarks;
