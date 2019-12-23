@@ -185,7 +185,7 @@ a:hover {
   justify-content: center;
 }
 
-.footer-links > * {
+.footer-links>* {
   padding-left: 10px;
 }
 
@@ -281,10 +281,13 @@ body {
   justify-content: space-between;
   padding: 15px 15px 0px 15px;
 }
+
 .flex {
+
   display: flex;
   flex-direction: row;
 }
+
 .r-tgg-btn {
   margin-top: 10px;
   padding: 20px 20px;
@@ -300,10 +303,12 @@ body {
   font-size: 0.7em;
   font-weight: 600;
 }
+
 .r-tgg {
   background: #ffa502;
   color: white;
 }
+
 @media only screen and (max-height: 700px) {
   .route-link {
     background: #4e4e4e !important;

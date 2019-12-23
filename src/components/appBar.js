@@ -17,6 +17,7 @@ import Typography from '@material-ui/core/Typography';
 import { withRouter } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 import { logout } from '../actions/ContextActions';
+
 const useStyles = makeStyles(theme => ({
   title: {
     display: 'none',
@@ -129,9 +130,13 @@ const IconWithRouter = withRouter(({ history, ...props }) => (
   </IconButton>
 ));
 
-export default function TopBar(props) {
+function TopBar(props) {
   const { state, dispatch } = useContext(Store);
   const classes = useStyles();
+  const handleLogout = () => {
+    props.history.push('/');
+    logout(dispatch);
+  };
 
   return (
     <AppBar
@@ -207,7 +212,7 @@ export default function TopBar(props) {
             </>
           ) : (
             <Button
-              onClick={() => logout(dispatch)}
+              onClick={() => handleLogout()}
               variant="outlined"
               color="primary"
               className="signup-btn"
@@ -223,4 +228,4 @@ export default function TopBar(props) {
   );
 }
 
-// Add a padding to the
+export default withRouter(TopBar);

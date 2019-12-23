@@ -418,7 +418,7 @@ class HomePage extends Component {
                 </FormControl>
               </Box>
             </Grid>
-            <Grid item xs={12} sm={9}>
+            <Grid item xs={12} sm={8}>
               <Container>
                 <Typography variant="h6" gutterBottom>
                   Top Courses
