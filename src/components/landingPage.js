@@ -6,7 +6,8 @@ import {
   trendingData,
 } from './../utils/data';
 import { fade, makeStyles } from '@material-ui/core/styles';
-
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import AuthProvider from './authProvider';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
@@ -103,6 +104,9 @@ const styles = theme => ({
     width: '100%',
     height: '100%',
     borderRadius: '4px',
+    maxWidth: '100%',
+    maxHeight: '100%',
+    display: 'block',
   },
 });
 
@@ -160,9 +164,16 @@ const ShowMore = withRouter(({ history, ...data }) => {
       }}
       variant="contained"
       color="primary"
-      className={classes.button}
+      className="landing-showmore"
     >
-      Show More
+      <div className="flex">
+        <div style={{ alignSelf: 'center' }}>Show More</div>
+        <div className="flex">
+          <div style={{ alignSelf: 'center', height: '25px' }}>
+            <ExpandMoreIcon />
+          </div>
+        </div>
+      </div>
     </Button>
   );
 });
@@ -171,7 +182,10 @@ const SubjectCard = withRouter(({ history, ...data }) => {
   const classes = data.classes;
   return (
     <Grid
-      container
+      item
+      xs={12}
+      sm={4}
+      style={{ marginTop: '20px' }}
       onClick={() => {
         history.push({
           pathname: data.routingURL,
@@ -181,21 +195,30 @@ const SubjectCard = withRouter(({ history, ...data }) => {
         });
       }}
     >
-      <Grid align="center" justify="center" alignContent="center" item xs={9}>
-        <img
-          className={classes.imgCricular}
-          src={data.image}
-          alt="Avatar"
-        ></img>
-        <Typography
-          color="primary"
-          style={{ fontWeight: '600' }}
-          align="center"
-          variant="body1"
-          component="p"
+      <Grid container>
+        <Grid xs={3} sm={12} align="center">
+          <img class="course-cat-icon-sm" src={data.image} alt="Avatar"></img>
+        </Grid>
+        <Grid
+          xs={9}
+          style={{ alignSelf: 'center' }}
+          alignItems={'center'}
+          sm={12}
         >
-          {data.name}
-        </Typography>
+          <Typography
+            className="course-cat-text-sm"
+            color="primary"
+            style={{ fontWeight: '600' }}
+            align="center"
+            variant="body1"
+            component="p"
+          >
+            {data.name}
+          </Typography>
+          <Typography className="show-only-mobile cat-sub">
+            Lorem ipsum dolor sit amet consectetur adipisicin
+          </Typography>
+        </Grid>
       </Grid>
     </Grid>
   );
@@ -282,7 +305,12 @@ class LandingPage extends Component {
       <Grid container className="c-card">
         <Grid item xs={12}>
           <Box display="flex" style={{ height: '149px', margin: '30' }}>
-            <Grid item xs={8} style={{ margin: 'auto', paddingLeft: 30 }}>
+            <Grid
+              item
+              xs={8}
+              style={{ margin: 'auto', paddingLeft: 30 }}
+              className="card-content"
+            >
               <Typography
                 variant="body2"
                 color="primary"
@@ -424,28 +452,25 @@ class LandingPage extends Component {
             </Grid>
             <Grid item xs={12}>
               <Typography
-                style={{ width: '60%', margin: 'auto' }}
+                className="sub-text-landing"
                 variant="body2"
                 component="p"
                 align="center"
-                className="sub-text"
               >
                 Discover best courses from top universities around the world
                 like MIT, Stanford, Harvard, IIT and many more
               </Typography>
             </Grid>
             <Container maxWidth={'md'}>
-              <Grid style={{ marginLeft: '30px' }} justify="center" container>
+              <Grid container className="course-options" justify="center">
                 {this.state.subjects.map(subject => {
                   return (
-                    <Grid item xs={4} style={{ padding: 30 }}>
-                      <SubjectCard
-                        name={subject.name}
-                        image={subject.image}
-                        classes={classes}
-                        routingURL={'/listing'}
-                      />
-                    </Grid>
+                    <SubjectCard
+                      name={subject.name}
+                      image={subject.image}
+                      classes={classes}
+                      routingURL={'/listing'}
+                    />
                   );
                 })}
               </Grid>
@@ -454,140 +479,117 @@ class LandingPage extends Component {
               <Button
                 variant="contained"
                 color="primary"
-                className={classes.button}
+                className="landing-showmore"
                 onClick={this.showMore}
               >
-                {this.state.showMoreButtonText}
+                <div className="flex">
+                  <div style={{ alignSelf: 'center' }}>
+                    {this.state.showMoreButtonText}
+                  </div>
+                  <div className="flex">
+                    <div style={{ alignSelf: 'center', height: '25px' }}>
+                      {this.state.showMoreButtonText === 'Show More' ? (
+                        <ExpandMoreIcon />
+                      ) : (
+                        <ExpandLessIcon />
+                      )}
+                    </div>
+                  </div>
+                </div>
               </Button>
             </Grid>
           </Grid>
 
-          <Box style={{ minHeight: '30vh', width: '100%', margin: 10 }}>
-            <Grid container spacing={0} direction="column" alignItems="center">
-              <Grid item xs={12} style={{ paddingTop: 30 }}>
+          <Container align="center" className="ead-sec">
+            <Typography
+              variant="h5"
+              color="primary"
+              style={{ fontWeight: '600', background: '#fff' }}
+              component="h2"
+            >
+              Earn a Degree
+            </Typography>
+            <Grid item xs={12} className="width">
+              <Typography
+                className="sub-text-landing bt-m-no"
+                variant="body2"
+                component="p"
+                align="center"
+              >
+                Launch yourself in your career with an online degree. Did you
+                know many of the universities’ issue certificates which don’t
+                even mention “taken online” on them.
+              </Typography>
+            </Grid>
+            <Container style={{ background: '#FFF' }} maxWidth={'md'}>
+              <Grid container>
+                {degreeData.map(degree =>
+                  this.getDegreeCard(degree, classes, 1)
+                )}
+              </Grid>
+            </Container>
+            <ShowMore
+              classes={classes}
+              filter={'paid'}
+              routingURL={'/listing'}
+            />
+          </Container>
+          <div className="landing-2bar">
+            <div className="bar-item" style={{ background: '#FAFAFA' }}>
+              <div className="card-flow">
                 <Typography
-                  variant="h5"
                   color="primary"
-                  style={{ fontWeight: '600', background: '#fff' }}
+                  style={{
+                    fontWeight: '600',
+                    marginBottom: '20px',
+                    textAlign: 'center',
+                    marginTop: '20px',
+                  }}
+                  variant="h5"
                   component="h2"
                 >
-                  Earn a Degree
+                  Top Trending Courses
                 </Typography>
-              </Grid>
-              <Grid item xs={12}>
+                {trendingData.map(degree =>
+                  this.getDegreeCard(degree, classes, 2)
+                )}
+                <div className="center-button">
+                  <ShowMore
+                    classes={classes}
+                    filter={''}
+                    routingURL={'/listing'}
+                  />
+                </div>
+              </div>
+            </div>
+            <div className="bar-item">
+              <div className="card-flow">
                 <Typography
-                  variant="body2"
-                  style={{ width: '60%', margin: 'auto' }}
-                  component="p"
-                  align="center"
-                  className="sub-text"
+                  variant="h5"
+                  style={{
+                    fontWeight: '600',
+                    marginBottom: '20px',
+                    textAlign: 'center',
+                    marginTop: '20px',
+                  }}
+                  color="primary"
+                  component="h2"
                 >
-                  Launch yourself in your career with an online degree. Did you
-                  know many of the universities’ issue certificates which don’t
-                  even mention “taken online” on them.
+                  Learn for Free
                 </Typography>
-              </Grid>
-
-              <Container style={{ background: '#FFF' }} maxWidth={'md'}>
-                <br />
-                <br />
-                <Grid container>
-                  {degreeData.map(degree =>
-                    this.getDegreeCard(degree, classes, 1)
-                  )}
-                </Grid>
-              </Container>
-              <Grid container style={{ margin: 30 }} justify="center">
-                <ShowMore
-                  classes={classes}
-                  filter={'paid'}
-                  routingURL={'/listing'}
-                />
-              </Grid>
-            </Grid>
-          </Box>
-          <Container style={{ paddingLeft: 0, paddingRight: 0 }}>
-            <Grid container>
-              <Grid item xs={6} style={{ paddingLeft: 24 }}>
-                <Box style={{ minHeight: '60vh', width: '96%', margin: 10 }}>
-                  <Grid
-                    container
-                    spacing={0}
-                    direction="column"
-                    alignItems="left"
-                  >
-                    <Grid item xs={12} style={{ paddingTop: 30 }}>
-                      <Typography
-                        color="primary"
-                        style={{
-                          fontWeight: '600',
-                          marginBottom: '20px',
-                          textAlign: 'center',
-                        }}
-                        variant="h5"
-                        component="h2"
-                      >
-                        Top Trending Courses
-                      </Typography>
-                    </Grid>
-                    <Grid container>
-                      {trendingData.map(degree =>
-                        this.getDegreeCard(degree, classes, 2)
-                      )}
-                    </Grid>
-                    <Grid container style={{ margin: 30 }} justify="center">
-                      <ShowMore
-                        classes={classes}
-                        filter={''}
-                        routingURL={'/listing'}
-                      />
-                    </Grid>
-                  </Grid>
-                </Box>
-              </Grid>
-              <Grid
-                item
-                xs={6}
-                style={{ background: '#FFF', paddingRight: 24 }}
-              >
-                <Box style={{ minHeight: '60vh', width: '95%', margin: 10 }}>
-                  <Grid
-                    container
-                    spacing={0}
-                    direction="column"
-                    alignItems="left"
-                  >
-                    <Grid item xs={12} style={{ paddingTop: 30 }}>
-                      <Typography
-                        variant="h5"
-                        style={{
-                          fontWeight: '600',
-                          marginBottom: '20px',
-                          textAlign: 'center',
-                        }}
-                        color="primary"
-                        component="h2"
-                      >
-                        Learn for Free
-                      </Typography>
-                    </Grid>
-                    <Grid container>
-                      {freeCourses.map(degree =>
-                        this.getDegreeCard(degree, classes, 2)
-                      )}
-                    </Grid>
-                    <Grid container style={{ margin: 30 }} justify="center">
-                      <ShowMore
-                        classes={classes}
-                        filter={'free'}
-                        routingURL={'/listing'}
-                      />
-                    </Grid>
-                  </Grid>
-                </Box>
-              </Grid>
-            </Grid>
-          </Container>
+                {freeCourses.map(degree =>
+                  this.getDegreeCard(degree, classes, 2)
+                )}
+                <div className="center-button">
+                  <ShowMore
+                    classes={classes}
+                    filter={'free'}
+                    routingURL={'/listing'}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
         </Grid>
         <Grid
           justify="center"
