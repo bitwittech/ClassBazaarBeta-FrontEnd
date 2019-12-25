@@ -168,7 +168,8 @@ a:hover {
   display: flex;
   justify-content: center;
   flex-direction: column;
-  background: #fafafa;
+  margin-bottom: 0;
+  padding-bottom: 10px;
 }
 
 .footer-logo {
@@ -256,7 +257,7 @@ a {
 }
 
 body {
-  background: #f8f8f8;
+  background: #FAFAFA !important;
 }
 
 .profile-img {
@@ -393,11 +394,22 @@ dashboard-options-header {
   transform: translateX(-50%);
 }
 
+.bgwhite {
+  background: #FAFAFA !important;
+}
+
 .ead-sec {
-  width: 98% !important;
+  width: 100% !important;
   margin: 0 !important;
-  margin: auto !important;
   padding: 0 !important;
+  background: #FAFAFA !important;
+  padding-bottom: 30px !important;
+}
+
+.cd-container {
+  width: 90%;
+  margin: auto;
+  padding-top: 30px;
 }
 
 .download {
@@ -446,7 +458,7 @@ dashboard-options-header {
   flex-wrap: wrap;
   flex-direction: row;
   width: 100%;
-  margin-top: 20px;
+
 }
 
 .bar-item {
@@ -543,8 +555,11 @@ dashboard-options-header {
     color: #ffa502 !important;
     box-shadow: none !important;
     padding-bottom: 0px !important;
-    padding-top: 10px;
     padding-bottom: 10px;
+    padding-top: 5px !important;
+    padding-left: 20px !important;
+    padding-right: 12px !important;
+    padding-bottom: 3px !important;
   }
 
   .landing-showmore:hover {
@@ -567,4 +582,8 @@ dashboard-options-header {
   }
 
 
+}
+
+body {
+  background: #FAFAFA !important;
 }

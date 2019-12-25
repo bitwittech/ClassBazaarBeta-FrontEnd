@@ -500,11 +500,15 @@ class LandingPage extends Component {
             </Grid>
           </Grid>
 
-          <Container align="center" className="ead-sec">
+          <div align="center" className="ead-sec">
             <Typography
               variant="h5"
               color="primary"
-              style={{ fontWeight: '600', background: '#fff' }}
+              style={{
+                fontWeight: '600',
+                background: '#FAFAFA',
+                paddingTop: '10px',
+              }}
               component="h2"
             >
               Earn a Degree
@@ -521,7 +525,7 @@ class LandingPage extends Component {
                 even mention “taken online” on them.
               </Typography>
             </Grid>
-            <Container style={{ background: '#FFF' }} maxWidth={'md'}>
+            <Container style={{ background: '#FAFAFA' }} maxWidth={'md'}>
               <Grid container>
                 {degreeData.map(degree =>
                   this.getDegreeCard(degree, classes, 1)
@@ -533,7 +537,7 @@ class LandingPage extends Component {
               filter={'paid'}
               routingURL={'/listing'}
             />
-          </Container>
+          </div>
           <div className="landing-2bar">
             <div className="bar-item" style={{ background: '#FAFAFA' }}>
               <div className="card-flow">
