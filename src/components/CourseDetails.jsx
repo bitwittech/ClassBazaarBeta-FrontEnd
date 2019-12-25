@@ -973,7 +973,14 @@ const CourseDetails = props => {
                     variant="body1"
                     gutterBottom
                   >
-                    {ReactHtmlParser(state.data.sections[5])}
+                    {ReactHtmlParser(state.data.sections[5], {
+                      transform: node => {
+                        console.log({ node });
+                        if (node.name === 'h3') {
+                          return null;
+                        }
+                      },
+                    })}
                   </Typography>
 
                   {state.data.closestRun !== undefined && (
