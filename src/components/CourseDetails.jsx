@@ -278,7 +278,7 @@ const CourseDetails = props => {
                       variant="body1"
                       gutterBottom
                     >
-                      {state.data.prerequisites_raw}
+                      {ReactHtmlParser(state.data.prerequisites_raw)}
                     </Typography>
                   </>
                 ) : null}
@@ -300,7 +300,7 @@ const CourseDetails = props => {
                     </Typography>
                   </>
                 )}
-                <br />
+
                 <Typography
                   style={{ fontWeight: '600', fontSize: '22px' }}
                   variant="subtitle2"
