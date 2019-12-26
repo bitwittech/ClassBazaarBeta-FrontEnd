@@ -257,7 +257,7 @@ class LandingPage extends Component {
     if (sessionStorage.getItem('cbpop') == null) {
       this.timeouts = setTimeout(() => {
         this.setState({ popUp: true });
-      }, 4000);
+      }, 60000);
     }
   }
 
@@ -618,7 +618,7 @@ class LandingPage extends Component {
             <button className="ns-submit">Submit</button>
           </div>
         </Grid>
-        <Footer />
+        <Footer bgColor={'#FFF'} />
       </>
     );
   }
