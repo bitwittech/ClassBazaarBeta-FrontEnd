@@ -435,7 +435,7 @@ class HomePage extends Component {
             </Grid>
           </Grid>
         </Container>
-        <Footer />
+        <Footer bgColor="white" />
       </>
     );
   }
