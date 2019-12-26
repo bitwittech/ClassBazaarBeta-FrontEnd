@@ -87,7 +87,6 @@ function App() {
           <div className="App" style={{ background: '#FFF' }}>
             <Snackbar />
             <Login />
-            <ScrollToTop />
             <AppWithRouter />
           </div>
         </Store.Provider>

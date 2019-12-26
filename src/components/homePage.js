@@ -27,6 +27,7 @@ import config from '../config.json';
 import { store } from './../App';
 import { subjectsData } from './../utils/data';
 import { withStyles } from '@material-ui/core/styles';
+import ScrollToTop from './ScrollToTop';
 
 const providerData = [
   'edX',
@@ -341,6 +342,7 @@ class HomePage extends Component {
     console.log('Rendering now');
     return (
       <>
+        <ScrollToTop />
         <div>
           <TopAppBar
             onChange={this.onSearchChange}
