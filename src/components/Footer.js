@@ -2,10 +2,10 @@ import Grid from '@material-ui/core/Grid';
 import Logo from '../assets/logo.png';
 import React from 'react';
 
-const Footer = () => {
+const Footer = ({ bgColor }) => {
   return (
     <>
-      <div className="footer" style={{ background: 'white' }}>
+      <div className="footer" style={{ background: `${bgColor}` }}>
         <div style={{ marginTop: '20px' }}>
           <img className="footer-logo" src={Logo} alt="classbazarLogo" />
         </div>

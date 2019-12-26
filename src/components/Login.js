@@ -165,6 +165,7 @@ const Login = () => {
                         onChange={handleChange}
                         className="text-field"
                         placeholder="Enter your User name"
+                        required
                       />
                     </>
                   ) : null}
@@ -185,9 +186,10 @@ const Login = () => {
                     onChange={handleChange}
                     name="email"
                     value={modal.formData.email}
-                    type="text"
+                    type="email"
                     className="text-field"
                     placeholder="Enter your Email ID"
+                    required
                   />
                   {loginModal.state === 1 ? (
                     <>
@@ -211,6 +213,7 @@ const Login = () => {
                         onChange={handleChange}
                         className="text-field"
                         placeholder="Enter your number"
+                        required
                       />
                     </>
                   ) : null}
@@ -234,6 +237,7 @@ const Login = () => {
                     className="text-field"
                     onChange={handleChange}
                     placeholder="Enter your password"
+                    minLength={8}
                   />
                   <Typography
                     className="link-button"

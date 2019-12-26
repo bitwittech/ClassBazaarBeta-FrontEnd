@@ -30,6 +30,17 @@ let client = new FusionAuthClient(
 );
 
 export const register = async (data, dispatch) => {
+
+  if (data.phone.match(/^(\+\d{1,3}[- ]?)?\d{10}$/) === null) {
+    return dispatch({
+      type: ALERT,
+      payload: {
+        varient: 'info',
+        message: "Please enter a valid mobile number"
+      }
+    })
+  }
+
   dispatch({
     type: LOADING,
     payload: true,
@@ -72,6 +83,10 @@ export const register = async (data, dispatch) => {
               message: 'Successfully registered.',
             },
           });
+          dispatch({
+            type: LOGIN_MODAL,
+            payload: false,
+          });
         } else {
           dispatch({
             type: ALERT,
@@ -80,6 +95,10 @@ export const register = async (data, dispatch) => {
               message: 'Registration failed',
             },
           });
+          dispatch({
+            type: LOGIN_MODAL,
+            payload: false,
+          });
         }
       })
       .catch(e => {
@@ -87,6 +106,10 @@ export const register = async (data, dispatch) => {
       });
     dispatch({
       type: LOADING,
+      payload: false,
+    });
+    dispatch({
+      type: LOGIN_MODAL,
       payload: false,
     });
   } catch (error) {
@@ -101,6 +124,10 @@ export const register = async (data, dispatch) => {
         varient: 'error',
         message: 'Registration failed',
       },
+    });
+    dispatch({
+      type: LOGIN_MODAL,
+      payload: false,
     });
   }
 };
