@@ -618,7 +618,7 @@ class LandingPage extends Component {
             <button className="ns-submit">Submit</button>
           </div>
         </Grid>
-        <Footer />
+        <Footer bgColor={'#FFF'} />
       </>
     );
   }
