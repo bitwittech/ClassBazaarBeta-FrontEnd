@@ -1,9 +1,9 @@
-import React from 'react';
 import AppBar from './appBar';
 import Container from '@material-ui/core/Container';
 import Footer from './Footer';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
+import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -11,7 +11,16 @@ const Contactus = () => {
   return (
     <>
       <AppBar />
-      <div style={{ width: '90%', margin: 'auto', marginTop: '20px' }}>
+      <div
+        style={{
+          padding: 50,
+          width: '100%',
+          margin: 'auto',
+          marginTop: '0px',
+          marginBottom: 20,
+          background: '#FAFAFA',
+        }}
+      >
         <Typography
           style={{ fontWeight: '900', fontSize: '2.2rem', marginBottom: '0px' }}
           color="primary"
@@ -125,7 +134,7 @@ const Contactus = () => {
           </Grid>
         </form>
       </div>
-      <Footer />
+      <Footer bgColor={'#FAFAFA'} />
     </>
   );
 };

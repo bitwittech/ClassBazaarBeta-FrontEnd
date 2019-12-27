@@ -6,14 +6,15 @@ import {
   trendingData,
 } from './../utils/data';
 import { fade, makeStyles } from '@material-ui/core/styles';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import ExpandLessIcon from '@material-ui/icons/ExpandLess';
+
 import AuthProvider from './authProvider';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import CS from './../assets/CS.png';
 import { Collapse } from '@material-ui/core';
 import Container from '@material-ui/core/Container';
+import ExpandLessIcon from '@material-ui/icons/ExpandLess';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Footer from './Footer';
 import Grid from '@material-ui/core/Grid';
 import HomeModal from './HomeModal';
@@ -46,7 +47,7 @@ const styles = theme => ({
   search: {
     background: '#FFF',
     position: 'relative',
-    borderRadius: theme.shape.borderRadius,
+    // borderRadius: 10000000,
     // backgroundColor: fade(theme.palette.common.white, 0.15),
     '&:hover': {
       backgroundColor: fade(theme.palette.common.white, 0.25),
@@ -245,6 +246,7 @@ class LandingPage extends Component {
     this.onSearchChange = this.onSearchChange.bind(this);
     this.showMore = this.showMore.bind(this);
     this.getQuery = this.getQuery.bind(this);
+    this.trackScrolling = this.trackScrolling.bind(this);
   }
 
   onFilterChange(event) {
@@ -259,17 +261,25 @@ class LandingPage extends Component {
         this.setState({ popUp: true });
       }, 60000);
     }
+    document.addEventListener('scroll', this.trackScrolling);
   }
+
+  trackScrolling = () => {
+    const wrappedElement = document.getElementById('header');
+    if (this.isBottom(wrappedElement)) {
+      console.log('header bottom reached');
+      document.removeEventListener('scroll', this.trackScrolling);
+    }
+  };
 
   componentWillUnmount() {
     this.clearTimeouts();
+    document.removeEventListener('scroll', this.trackScrolling);
   }
+
   clearTimeouts = () => {
     clearTimeout(this.timeouts);
   };
-  // componentWillUnmount() {
-  //   window.removeEventListener('scroll', this.handleScroll);
-  // }
 
   handlePageChange(page) {
     this.setState({ page }, () => {

@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
-import Grid from '@material-ui/core/Grid';
+
+import Box from '@material-ui/core/Box';
+import Button from '@material-ui/core/Button';
+import CloseIcon from '@material-ui/icons/Close';
 import Dialog from '@material-ui/core/Dialog';
+import Grid from '@material-ui/core/Grid';
+import Icon from '@material-ui/core/Icon';
+import PropTypes from 'prop-types';
 import TextField from '@material-ui/core/TextField';
+import Typography from '@material-ui/core/Typography';
 import clsx from 'clsx';
 import { withStyles } from '@material-ui/core/styles';
-import PropTypes from 'prop-types';
-import CloseIcon from '@material-ui/icons/Close';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
-import Icon from '@material-ui/core/Icon';
 
 const styles = theme => ({
   container: {
@@ -192,6 +193,7 @@ class SignUp extends Component {
                       focused: classes.cssLabel,
                     },
                   }}
+                  validators={['required']}
                   fullWidth
                   id="outlined-dense"
                   label="Full Name"
@@ -208,6 +210,7 @@ class SignUp extends Component {
             {this.state.showEmail && (
               <Grid item xs={10}>
                 <TextField
+                  validators={['isEmail', 'required']}
                   InputProps={{
                     classes: {
                       input: classes.input,
@@ -255,6 +258,7 @@ class SignUp extends Component {
                     },
                   }}
                   fullWidth
+                  validators={['required', 'minStringLength:8']}
                   id="outlined-dense"
                   label="Password"
                   type="password"

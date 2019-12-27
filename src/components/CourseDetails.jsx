@@ -1,6 +1,6 @@
 import { Container, Grid, Typography } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
-import Logo from '../assets/logo.png';
+
 import AppBar from './appBar';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import Box from '@material-ui/core/Box';
@@ -9,6 +9,7 @@ import DateRangeIcon from '@material-ui/icons/DateRange';
 import Footer from './Footer';
 import HomeModal from './HomeModal';
 import ListAltIcon from '@material-ui/icons/ListAlt';
+import Logo from '../assets/logo.png';
 import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 import QueryBuilderIcon from '@material-ui/icons/QueryBuilder';
 import RateReviewIcon from '@material-ui/icons/RateReview';
@@ -174,7 +175,7 @@ const CourseDetails = props => {
       <div maxWidth="lg" className="ead-sec">
         <div className="cd-container">
           <Grid container spacing={3}>
-            <Grid item xs={12} sm={8}>
+            <Grid item xs={12} sm={9}>
               <div
                 style={{
                   background: '#fff',
@@ -353,7 +354,7 @@ const CourseDetails = props => {
                 </div>
               </div>
             </Grid>
-            <Grid item xs={12} sm={4}>
+            <Grid item xs={12} sm={3}>
               {courseSummary()}
             </Grid>
           </Grid>
@@ -366,7 +367,7 @@ const CourseDetails = props => {
       <div maxWidth="lg" className="ead-sec">
         <div className="cd-container">
           <Grid container spacing={3}>
-            <Grid item xs={12} sm={8}>
+            <Grid item xs={12} sm={9}>
               <div
                 style={{
                   background: '#fff',
@@ -554,7 +555,7 @@ const CourseDetails = props => {
                 </div>
               </div>
             </Grid>
-            <Grid item xs={12} sm={4}>
+            <Grid item xs={12} sm={3}>
               {courseSummary()}
             </Grid>
           </Grid>
@@ -567,7 +568,7 @@ const CourseDetails = props => {
       <div maxWidth="lg" className="ead-sec">
         <div className="cd-container">
           <Grid container spacing={3}>
-            <Grid item xs={12} sm={8}>
+            <Grid item xs={12} sm={9}>
               <div
                 style={{
                   background: '#fff',
@@ -725,7 +726,7 @@ const CourseDetails = props => {
                 </div>
               </div>
             </Grid>
-            <Grid item xs={12} sm={4}>
+            <Grid item xs={12} sm={3}>
               {courseSummary()}
             </Grid>
           </Grid>
@@ -738,7 +739,7 @@ const CourseDetails = props => {
       <div maxWidth="lg" className="ead-sec">
         <div className="cd-container">
           <Grid container spacing={3}>
-            <Grid item xs={12} sm={8}>
+            <Grid item xs={12} sm={9}>
               <div
                 style={{
                   background: '#fff',
@@ -863,7 +864,7 @@ const CourseDetails = props => {
                 </div>
               </div>
             </Grid>
-            <Grid item xs={12} sm={4}>
+            <Grid item xs={12} sm={3}>
               {courseSummary()}
             </Grid>
           </Grid>
@@ -876,7 +877,7 @@ const CourseDetails = props => {
       <div maxWidth="lg" className="ead-sec">
         <div className="cd-container">
           <Grid container spacing={3}>
-            <Grid item xs={12} sm={8}>
+            <Grid item xs={12} sm={9}>
               <div
                 style={{
                   background: '#fff',
@@ -1054,7 +1055,7 @@ const CourseDetails = props => {
                 </div>
               </div>
             </Grid>
-            <Grid item xs={12} sm={4}>
+            <Grid item xs={12} sm={3}>
               {courseSummary()}
             </Grid>
           </Grid>
@@ -1067,7 +1068,7 @@ const CourseDetails = props => {
       <div maxWidth="lg" className="ead-sec">
         <div className="cd-container">
           <Grid container spacing={3}>
-            <Grid item xs={12} sm={8}>
+            <Grid item xs={12} sm={9}>
               <div
                 style={{
                   background: '#fff',
@@ -1246,7 +1247,7 @@ const CourseDetails = props => {
                 </div>
               </div>
             </Grid>
-            <Grid item xs={12} sm={4}>
+            <Grid item xs={12} sm={3}>
               {courseSummary()}
             </Grid>
           </Grid>
@@ -1263,7 +1264,7 @@ const CourseDetails = props => {
       >
         <div className="cd-container">
           <Grid container spacing={3}>
-            <Grid item xs={12} sm={8} className="bgwhite">
+            <Grid item xs={12} sm={9} className="bgwhite">
               <div
                 style={{
                   background: '#fff',
@@ -1411,7 +1412,7 @@ const CourseDetails = props => {
                 </div>
               </div>
             </Grid>
-            <Grid item xs={12} sm={4}>
+            <Grid item xs={12} sm={3}>
               {courseSummary()}
             </Grid>
           </Grid>
