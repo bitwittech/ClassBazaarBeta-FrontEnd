@@ -247,6 +247,7 @@ class LandingPage extends Component {
     this.showMore = this.showMore.bind(this);
     this.getQuery = this.getQuery.bind(this);
     this.trackScrolling = this.trackScrolling.bind(this);
+    this.isBottom = this.isBottom.bind(this);
   }
 
   onFilterChange(event) {
@@ -264,11 +265,15 @@ class LandingPage extends Component {
     document.addEventListener('scroll', this.trackScrolling);
   }
 
+  isBottom(el) {
+    return el.getBoundingClientRect().bottom <= window.innerHeight;
+  }
+
   trackScrolling = () => {
-    const wrappedElement = document.getElementById('header');
+    const wrappedElement = document.getElementById('topTrendingCourses');
     if (this.isBottom(wrappedElement)) {
-      console.log('header bottom reached');
       document.removeEventListener('scroll', this.trackScrolling);
+      this.setState({ popUp: true });
     }
   };
 
@@ -549,7 +554,11 @@ class LandingPage extends Component {
             />
           </div>
           <div className="landing-2bar">
-            <div className="bar-item" style={{ background: '#FAFAFA' }}>
+            <div
+              className="bar-item"
+              style={{ background: '#FAFAFA' }}
+              id="topTrendingCourses"
+            >
               <div className="card-flow">
                 <Typography
                   color="primary"
