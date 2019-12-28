@@ -699,8 +699,45 @@ dashboard-options-header {
     margin: auto;
 
   }
+
+  .Bookmark-profile-title {
+    padding-top: 10px;
+    text-align: center;
+    font-size: 1.5em !important;
+  }
+
+  .cont-profile {
+
+    width: 90%;
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 25px;
+    border-bottom: 2px solid #D1D1D1;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .profile-topbar-text {
+    margin-left: -20px;
+    font-family: 2em !important;
+  }
+
+  .background {
+    margin-top: 10px !important;
+  }
+
+  .searchicon {
+    color: #D1D1D1;
+  }
+
+  .reviews-profile {
+    font-size: 1.5em !important;
+  }
 }
 
+.background {
+  margin-top: 50px;
+}
 
 
 @media only screen and (max-width: 600px) {
