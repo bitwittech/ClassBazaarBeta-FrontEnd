@@ -434,6 +434,7 @@ body {
   flex-direction: row;
 }
 
+
 .r-tgg-btn {
   margin-top: 10px;
   padding: 20px 20px;
@@ -729,6 +730,7 @@ dashboard-options-header {
   .searchicon {
     color: #D1D1D1;
   }
+
 
   .reviews-profile {
     font-size: 1.5em !important;

@@ -13,7 +13,7 @@ import Logo from '../assets/logo.png';
 import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 import QueryBuilderIcon from '@material-ui/icons/QueryBuilder';
 import RateReviewIcon from '@material-ui/icons/RateReview';
-import ReactHtmlParser from 'react-html-parser';
+import ReactHtmlParser, { convertNodeToElement } from 'react-html-parser';
 import StarBorderIcon from '@material-ui/icons/StarBorder';
 import StarHalfIcon from '@material-ui/icons/StarHalf';
 import StarIcon from '@material-ui/icons/Star';
@@ -925,7 +925,6 @@ const CourseDetails = props => {
                   >
                     {ReactHtmlParser(state.data.sections[0], {
                       transform: node => {
-                        console.log({ node });
                         if (node.name === 'b') {
                           return (
                             <Typography
@@ -954,7 +953,6 @@ const CourseDetails = props => {
                   >
                     {ReactHtmlParser(state.data.sections[2], {
                       transform: node => {
-                        console.log({ node });
                         if (node.name === 'h3') {
                           return null;
                         }
@@ -962,23 +960,23 @@ const CourseDetails = props => {
                     })}
                   </Typography>
 
-                  <Typography
+                  {/* <Typography
                     style={{ fontWeight: '600', fontSize: '22px' }}
                     variant="subtitle2"
                     gutterBottom
                   >
                     Course Certificate
-                  </Typography>
+                  </Typography> */}
                   <Typography
                     style={{ fontSize: '16px', fontWeight: '300' }}
                     variant="body1"
                     gutterBottom
                   >
                     {ReactHtmlParser(state.data.sections[5], {
-                      transform: node => {
-                        console.log({ node });
-                        if (node.name === 'h3') {
-                          return null;
+                      transform: (node, index, transform) => {
+                        if (node.children && node.children[8]) {
+                          node.children = node.children.slice(0, 8);
+                          return convertNodeToElement(node, index, transform);
                         }
                       },
                     })}
