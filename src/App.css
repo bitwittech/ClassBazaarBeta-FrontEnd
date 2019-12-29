@@ -72,6 +72,7 @@ body {
   margin-bottom: 25px;
   border-radius: 4px;
   width: 100%;
+  height: auto !important;
   /* border: 1px solid #707070; */
   /* padding: 15px 10px; */
 }
@@ -143,6 +144,30 @@ a:hover {
   margin-left: 500px !important;
 }
 
+.no-desktop {
+  display: none;
+}
+
+.bg-change {
+  background: #FAFAFA;
+}
+
+.home-modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.home-modal-paper {
+  border-radius: 8px;
+  width: 40%;
+  margin: 0;
+  color: white;
+  padding: 60px;
+  outline: none;
+  padding-top: 30px;
+}
+
 @media (max-width: 800px) {
   .ns-input {
     width: 150px;
@@ -151,6 +176,101 @@ a:hover {
   .main-search {
     margin-left: 0 !important;
   }
+
+  .no-mobile {
+    display: none !important;
+  }
+
+  .footer-text-m {
+    color: #3E3E3E;
+    font-size: 12px;
+  }
+
+  .footer-text {
+    font-size: 0.8em;
+    font-weight: 300;
+  }
+
+  .bold {
+    font-weight: 800;
+  }
+
+  .mt-2 {
+    margin-top: 20px !important;
+  }
+
+  .no-desktop {
+    display: block;
+  }
+
+  .bg-change {
+    background: white;
+  }
+
+  .card-content {
+    padding-left: 30px !important;
+  }
+
+  .card-uni {
+    font-weight: 900 !important;
+    font-size: 0.8em !important;
+    padding-top: 5px !important;
+  }
+
+  .card-course {
+    padding-top: 6px;
+    padding-bottom: 6px;
+    font-weight: 500 !important;
+    font-size: 0.75em !important;
+  }
+
+  .card-provider {
+    font-size: 12px !important;
+  }
+
+  .home-modal {
+    width: 100% !important;
+    margin: auto !important;
+    padding: 0 !important;
+  }
+
+  .home-modal-paper {
+    width: 70%;
+    padding: 20px;
+  }
+
+  .home-modal-text {
+    font-size: 0.8em !important;
+    font-weight: 600 !important;
+
+  }
+
+  .home-modal-field {
+    margin-top: 10px !important;
+  }
+
+  .w-l {
+    width: 200px;
+  }
+
+  .btn-mobile {
+    width: 100px;
+    box-shadow: none !important;
+    font-size: 0.8em !important;
+    font-weight: 500 !important;
+    text-transform: none !important;
+    border-radius: 6px !important;
+  }
+}
+
+
+.card-uni {
+  font-weight: 900 !important;
+}
+
+.card-course {
+  padding-top: 6px;
+  padding-bottom: 6px;
 }
 
 .ns-submit {
@@ -573,8 +693,51 @@ dashboard-options-header {
     color: white !important;
     transition: 0.6s;
   }
+
+  .card-flow {
+    width: 90%;
+    margin: auto;
+
+  }
+
+  .Bookmark-profile-title {
+    padding-top: 10px;
+    text-align: center;
+    font-size: 1.5em !important;
+  }
+
+  .cont-profile {
+
+    width: 90%;
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 25px;
+    border-bottom: 2px solid #D1D1D1;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .profile-topbar-text {
+    margin-left: -20px;
+    font-family: 2em !important;
+  }
+
+  .background {
+    margin-top: 10px !important;
+  }
+
+  .searchicon {
+    color: #D1D1D1;
+  }
+
+  .reviews-profile {
+    font-size: 1.5em !important;
+  }
 }
 
+.background {
+  margin-top: 50px;
+}
 
 
 @media only screen and (max-width: 600px) {

@@ -70,7 +70,7 @@ const HomeModal = ({ openState, handlePopupClose, state, course }) => {
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
-        className={classes.modal}
+        className="home-modal"
         onClose={handlePopupClose}
         open={openState}
         closeAfterTransition
@@ -80,17 +80,25 @@ const HomeModal = ({ openState, handlePopupClose, state, course }) => {
         }}
       >
         <Fade in={openState}>
-          <div style={{ backgroundColor: 'white' }} className={classes.paper}>
+          <div
+            style={{ backgroundColor: 'white' }}
+            className="home-modal-paper"
+          >
             <Typography
               style={{ color: '#000000', fontWeight: '900', fontSize: '1rem' }}
               align="center"
               variant="h5"
               gutterBottom
+              className="home-modal-text"
             >
               Stay ahead of the curve! Get personalized course recommendations,
               track subjects and more.
             </Typography>
-            <Grid align="center" style={{ marginTop: '40px' }}>
+            <Grid
+              align="center"
+              className="home-modal-field"
+              style={{ marginTop: '40px' }}
+            >
               <form>
                 <Typography
                   style={{
@@ -107,7 +115,7 @@ const HomeModal = ({ openState, handlePopupClose, state, course }) => {
                 <input
                   name="name"
                   type="text"
-                  className="text-field"
+                  className="text-field w-l"
                   placeholder="Enter your Name"
                 />
                 <Typography
@@ -125,7 +133,7 @@ const HomeModal = ({ openState, handlePopupClose, state, course }) => {
                 <input
                   name="email"
                   type="text"
-                  className="text-field"
+                  className="text-field w-l"
                   placeholder="Enter your Email ID"
                 />
                 <div style={{ marginTop: '20px' }}>
@@ -134,6 +142,7 @@ const HomeModal = ({ openState, handlePopupClose, state, course }) => {
                     color="primary"
                     type="submit"
                     className={classes.loginButton}
+                    className="btn-mobile"
                   >
                     Submit
                   </Button>

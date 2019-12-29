@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import MobileTopBar from './MobileTopbar';
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
 import ArrowForward from '@material-ui/icons/ArrowForward';
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
@@ -124,10 +124,8 @@ class ProfilePage extends Component {
     return (
       <>
         <TopAppBar />
-
+        <MobileTopBar />
         <div className="background">
-          <br />
-          <br />
           <Container maxWidth="lg">
             <div className={styles.root}>
               <Grid container spacing={3}>
@@ -142,8 +140,6 @@ class ProfilePage extends Component {
                             align-center
                             justify="center"
                             alignItems="center"
-                            xs={12}
-                            md={12}
                           >
                             <img
                               src="https://via.placeholder.com/150"
@@ -157,8 +153,6 @@ class ProfilePage extends Component {
                             align-center
                             justify="center"
                             alignItems="center"
-                            xs={12}
-                            md={12}
                             style={{ paddingBottom: '0' }}
                           >
                             <Typography
@@ -467,6 +461,7 @@ class ProfilePage extends Component {
                   <Container maxWidth="md">
                     <Typography
                       variant="h4"
+                      className="Bookmark-profile-title"
                       style={{ color: '#3E3E3E' }}
                       gutterBottom
                     >
@@ -507,8 +502,9 @@ class ProfilePage extends Component {
                       variant="h4"
                       style={{ color: '#3E3E3E' }}
                       gutterBottom
+                      className="reviews-profile"
                     >
-                      Reviews
+                      My Reviews
                     </Typography>
                     <br />
                     <Paper>

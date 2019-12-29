@@ -330,16 +330,12 @@ class LandingPage extends Component {
                 variant="body2"
                 color="primary"
                 align="left"
-                style={padding}
+                className="card-uni"
               >
                 <Box>{degree.university.trim()}</Box>
               </Typography>
-              <Typography
-                variant="body2"
-                align="left"
-                style={{ paddingTop: 6, paddingBottom: 6 }}
-              >
-                <Box fontWeight="fontWeightBold">{degree.name}</Box>
+              <Typography variant="body2" align="left">
+                <Box className="card-course">{degree.name}</Box>
               </Typography>
               <Typography
                 variant="body2"
@@ -350,6 +346,7 @@ class LandingPage extends Component {
                   height="100%"
                   fontWeight="fontWeightlight"
                   fontStyle="italic"
+                  className="card-provider"
                   style={{ color: '#949494', fontSize: '0.8rem' }}
                 >
                   via {degree.provider}
@@ -365,7 +362,11 @@ class LandingPage extends Component {
               </Grid>
             )}
             {type === 2 && (
-              <Grid item style={{ height: '100%', width: 224 }}>
+              <Grid
+                item
+                className="card-image"
+                style={{ height: '100%', width: 224 }}
+              >
                 <img
                   className={classes.courseCardImage}
                   src={degree.image}
@@ -540,7 +541,10 @@ class LandingPage extends Component {
                 even mention “taken online” on them.
               </Typography>
             </Grid>
-            <Container style={{ background: '#FAFAFA' }} maxWidth={'md'}>
+            <Container
+              style={{ background: '#FAFAFA', marginTop: '35px' }}
+              maxWidth={'md'}
+            >
               <Grid container>
                 {degreeData.map(degree =>
                   this.getDegreeCard(degree, classes, 1)
@@ -554,11 +558,7 @@ class LandingPage extends Component {
             />
           </div>
           <div className="landing-2bar">
-            <div
-              className="bar-item"
-              style={{ background: '#FAFAFA' }}
-              id="topTrendingCourses"
-            >
+            <div className="bar-item bg-change" id="topTrendingCourses">
               <div className="card-flow">
                 <Typography
                   color="primary"
