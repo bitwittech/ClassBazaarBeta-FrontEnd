@@ -214,8 +214,12 @@ const ProvacyPolicy = () => {
           <br />
           If you are a resident of European Economic Area (EEA) then you have
           certain rights with regards to your data. If you wish you exercise any
-          of these rights please contact us at ____________________. We may ask
-          you to verify your identify before we comply with any such requests.
+          of these rights please contact us at{' '}
+          <a style={{ color: '#FFA502' }} href="mailto:info@classbazaar.com?">
+            info@classbazaar.com
+          </a>{' '}
+          . We may ask you to verify your identify before we comply with any
+          such requests.
           <br />
           <br />
           Rights :
@@ -256,8 +260,11 @@ const ProvacyPolicy = () => {
           information we shared, if any, with other businesses for their own
           direct marketing uses.
           <br />
-          If you wish to obtain this data please contact us at
-          ____________________.
+          If you wish to obtain this data please contact us at &nbsp;
+          <a style={{ color: '#FFA502' }} href="mailto:info@classbazaar.com?">
+            info@classbazaar.com
+          </a>
+          .
           <br />
           Note that not all data is covered by this law and only data covered by
           this law will be shared with you. <br />
