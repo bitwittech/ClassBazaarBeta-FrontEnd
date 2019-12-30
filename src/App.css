@@ -261,6 +261,7 @@ a:hover {
     text-transform: none !important;
     border-radius: 6px !important;
   }
+
 }
 
 
@@ -382,7 +383,7 @@ a {
 }
 
 body {
-  background: #FAFAFA !important;
+  background: #FFF !important;
 }
 
 .profile-img {
@@ -433,6 +434,7 @@ body {
   display: flex;
   flex-direction: row;
 }
+
 
 .r-tgg-btn {
   margin-top: 10px;
@@ -730,6 +732,7 @@ dashboard-options-header {
     color: #D1D1D1;
   }
 
+
   .reviews-profile {
     font-size: 1.5em !important;
   }
@@ -753,5 +756,5 @@ dashboard-options-header {
 }
 
 body {
-  background: #FAFAFA !important;
+  background: #FFF !important;
 }

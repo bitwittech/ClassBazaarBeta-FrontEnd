@@ -22,6 +22,7 @@ import config from './config.json';
 import { fetchUser } from './actions/ContextActions';
 import localForage from 'localforage';
 import ScrollToTop from './components/ScrollToTop';
+import MobileAuth from './components/MobileAuth';
 
 const theme = createMuiTheme({
   typography: {
@@ -60,6 +61,7 @@ const Root = () => {
       <Route exact path="/profile" component={ProfilePage} />
       <Route exact path="/about" component={About} />
       <Route exact path="/privacypolicy" component={PrivacyPolicy} />
+      <Route exact path="/mobileauth" component={MobileAuth} />
       <Route
         exact
         path="/coursedetails/:provider/:uuid"
