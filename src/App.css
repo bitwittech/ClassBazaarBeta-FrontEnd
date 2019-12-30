@@ -609,6 +609,10 @@ dashboard-options-header {
 
 }
 
+.border-right {
+  border-right: 1px #D1D1D1 solid !important;
+}
+
 @media (max-width:800px) {
   .cat-sub {
     font-size: 12px !important;
@@ -736,7 +740,39 @@ dashboard-options-header {
   .reviews-profile {
     font-size: 1.5em !important;
   }
+
+  .c-list {
+    padding-left: 0px !important;
+  }
+
+  .profile-topbar-text {
+    margin-left: -10px;
+  }
+
+  .filter-overlay {
+    margin-top: 12px;
+
+  }
+
+  .hidef {
+    display: none !important;
+  }
+
+  .border-right {
+    border-right: 1px transparent solid !important;
+  }
+
+  .filter-close {
+    position: relative;
+    float: right;
+    color: #333;
+    bottom: -20;
+    fontSize: 1.3rem;
+    margin: 0px 10px;
+  }
 }
+
+
 
 .background {
   margin-top: 50px;

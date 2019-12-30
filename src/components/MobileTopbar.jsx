@@ -1,7 +1,9 @@
 import React from 'react';
 import SearchIcon from '@material-ui/icons/Search';
 import Typography from '@material-ui/core/Typography';
-const MobileTopbar = () => {
+import FilterListIcon from '@material-ui/icons/FilterList';
+
+const MobileTopbar = props => {
   return (
     <div className="no-desktop">
       <div className="cont-profile">
@@ -10,10 +12,20 @@ const MobileTopbar = () => {
         </div>
         <div className="profile-topbar-text">
           <Typography align="center" variant="h6" gutterBottom>
-            My Profile
+            {props.title}
           </Typography>
         </div>
-        <div></div>
+        <div>
+          {props.filter ? (
+            <FilterListIcon
+              onClick={() => {
+                props.handleFilterClick();
+              }}
+              fontSize="large"
+              className="searchicon"
+            />
+          ) : null}
+        </div>
       </div>
     </div>
   );
