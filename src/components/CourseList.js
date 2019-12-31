@@ -1,4 +1,4 @@
-import { Container, Divider } from '@material-ui/core';
+import { Button, Container, Divider } from '@material-ui/core';
 import React, { Component } from 'react';
 
 import ArrowBack from '@material-ui/icons/ArrowBack';
@@ -69,6 +69,7 @@ const defaultProps = {
 
 const perPage = 10;
 
+const ADDED_NETWORK_DELAY = 1500;
 class CourseList extends Component {
   constructor(props) {
     super(props);
@@ -83,6 +84,9 @@ class CourseList extends Component {
       elements: [],
       isInfiniteLoading: true,
       urlChanged: this.props.urlChanged,
+      isFirstLoad: true,
+      isFirstResultFetched: false,
+      isFromLoadMore: false,
     };
     this.getUniversityForUdemy = this.getUniversityForUdemy.bind(this);
     this.buildElements = this.buildElements.bind(this);
@@ -100,7 +104,6 @@ class CourseList extends Component {
     return fetch(url)
       .then(response => response.json())
       .then(json => {
-        this.setState({ page: page + 1 });
         return json.data.map(obj => {
           return (
             <CourseCard
@@ -123,15 +126,29 @@ class CourseList extends Component {
 
   handleInfiniteLoad() {
     let that = this;
-    this.setState({
-      isInfiniteLoading: true,
-    });
-    if (this.state.urlChanged) {
-      this.setState({ elements: [] }, () => {
-        this.update(that);
+    if (this.state.isFromLoadMore || this.state.urlChanged) {
+      this.setState({
+        isInfiniteLoading: true,
       });
-    } else {
-      this.update(that);
+      if (this.state.urlChanged) {
+        this.setState({ elements: [] }, () => {
+          if (!this.state.isFirstLoad) {
+            setTimeout(() => {
+              this.update(that);
+            }, ADDED_NETWORK_DELAY);
+          } else {
+            this.update(that);
+          }
+        });
+      } else {
+        if (!this.state.isFirstLoad) {
+          setTimeout(() => {
+            this.update(that);
+          }, ADDED_NETWORK_DELAY);
+        } else {
+          this.update(that);
+        }
+      }
     }
   }
 
@@ -140,15 +157,19 @@ class CourseList extends Component {
       console.log({ newElements });
       that.setState({
         isInfiniteLoading: false,
-        elements: that.state.elements.concat(newElements),
+        elements: that.state.isFirstLoad
+          ? newElements
+          : that.state.elements.concat(newElements),
         loading: false,
         urlChanged: false,
+        page: that.state.isFirstLoad ? 0 : this.state.page + 1,
       });
     });
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.props !== nextProps) {
+    console.log('Here', nextProps, this.state);
+    if (this.state.queryURL !== nextProps.url) {
       this.setState(
         {
           queryURL: nextProps.url,
@@ -157,6 +178,8 @@ class CourseList extends Component {
           loading: true,
           page: 0,
           urlChanged: true,
+          isFirstResultFetched: false,
+          isFirstLoad: true,
         },
         () => {
           this.handleInfiniteLoad();
@@ -180,11 +203,37 @@ class CourseList extends Component {
   }
 
   elementInfiniteLoad() {
-    return (
-      <Grid align="center">
-        <CircularProgress />
-      </Grid>
-    );
+    if (this.state.isFirstLoad && !this.state.isFirstResultFetched) {
+      return (
+        <Grid align="center">
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() => {
+              this.setState(
+                {
+                  isInfiniteLoading: false,
+                  isFirstLoad: false,
+                  isFromLoadMore: true,
+                  isFirstResultFetched: true,
+                },
+                () => {
+                  this.handleInfiniteLoad();
+                }
+              );
+            }}
+          >
+            Load More
+          </Button>
+        </Grid>
+      );
+    } else {
+      return (
+        <Grid align="center">
+          <CircularProgress />
+        </Grid>
+      );
+    }
   }
 
   render() {
