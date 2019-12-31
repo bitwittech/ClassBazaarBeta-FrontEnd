@@ -28,7 +28,7 @@ import { store } from './../App';
 import { subjectsData } from './../utils/data';
 import { withStyles } from '@material-ui/core/styles';
 import ScrollToTop from './ScrollToTop';
-
+import MobileTopbar from '../components/MobileTopbar';
 const providerData = [
   'edX',
   'FutureLearn',
@@ -104,6 +104,7 @@ class HomePage extends Component {
       loading: true,
       popUp: false,
       queryURL: '',
+      mobileFilter: false,
     };
     this.getUniversityForUdemy = this.getUniversityForUdemy.bind(this);
     this.handlePageChange = this.handlePageChange.bind(this);
@@ -337,9 +338,89 @@ class HomePage extends Component {
     console.log({ checkedData });
     return checkedData;
   }
+  handleFilterClick = () => {
+    this.setState({
+      mobileFilter: !this.state.mobileFilter,
+    });
+  };
+
+  filter = () => (
+    <Container className="no-desktop filter-overlay">
+      <Grid container>
+        <Grid item xs={12} sm={3} className="filter-overlay-content">
+          <Container maxWidth={'md'}>
+            <Box className="border-right">
+              <Typography
+                style={{ fontWeight: '600' }}
+                variant="h6"
+                gutterBottom
+              >
+                Filter
+                <Box onClick={this.handleFilterClick} className="filter-close">
+                  ×
+                </Box>
+              </Typography>
+              <Divider style={{ marginBottom: '25px', marginTop: '15px' }} />
+              <FormControl component="fieldset">
+                <RadioGroup
+                  aria-label="filter"
+                  name="filter"
+                  value={this.state.filterValue}
+                  onChange={this.onFilterChange}
+                >
+                  <NestedMenu
+                    shouldReset={this.state.providers !== 'all'}
+                    shouldUpdate={true}
+                    isLevel1Checked={this.state.providers !== 'all'}
+                    checkedLevel2={this.getCheckedProvidersFromString()}
+                    isOnlyOneAllowed={false}
+                    level1Name={'Providers'}
+                    level2List={this.state.providerData}
+                    onChangeOptions={s => this.onProviderFilterChange(s)}
+                  />
+                  <NestedMenu
+                    shouldReset={this.state.feeReset}
+                    shouldUpdate={false}
+                    isLevel1Checked={false}
+                    isOnlyOneAllowed={true}
+                    level1Name={'Fees'}
+                    level2List={['Free', 'Paid']}
+                    onChangeOptions={s => this.onFeeFilterChange(s)}
+                  />
+                  <NestedMenu
+                    shouldReset={this.state.startReset}
+                    shouldUpdate={false}
+                    isLevel1Checked={false}
+                    isOnlyOneAllowed={true}
+                    level1Name={'Start Date'}
+                    level2List={[
+                      'Starts within 30 days',
+                      'Starts after 30 days',
+                      'Flexible',
+                    ]}
+                    onChangeOptions={s => this.onStartFilterChange(s)}
+                  />
+                  <NestedMenu
+                    shouldReset={this.state.subjecttReset}
+                    shouldUpdate={true}
+                    isLevel1Checked={this.state.isLevel1CheckedSubjects}
+                    checkedLevel2={this.state.checkedLevel2Subjects}
+                    isOnlyOneAllowed={false}
+                    level1Name={'Subject'}
+                    level2List={subjectsData.map(s => s.name)}
+                    onChangeOptions={s => this.onSubjectFilterChange(s)}
+                  />
+                </RadioGroup>
+              </FormControl>
+            </Box>
+          </Container>
+        </Grid>
+      </Grid>
+    </Container>
+  );
 
   render() {
-    console.log('Rendering now');
+    console.log('FILTER SHOW', this.state.mobileFilter);
     return (
       <>
         <ScrollToTop />
@@ -349,13 +430,22 @@ class HomePage extends Component {
             isSearchIncluded={true}
             initialSearchValue={this.state.q}
           />
+          {this.state.mobileFilter ? this.filter() : null}
         </div>
-
-        <br />
-        <br />
-        <Container maxWidth={'lg'}>
+        {!this.state.mobileFilter ? (
+          <MobileTopbar
+            title="Top Courses"
+            filter="true"
+            handleFilterClick={this.handleFilterClick}
+          />
+        ) : null}
+        <Container
+          className={this.state.mobileFilter ? 'no-mobile' : ''}
+          style={{ marginTop: '25px' }}
+          maxWidth={'lg'}
+        >
           <Grid container spacing={3}>
-            <Grid item xs={12} sm={3}>
+            <Grid className="no-mobile" item xs={12} sm={3}>
               <Box borderRight={1} style={{ borderColor: '#DCDCDC' }}>
                 <Typography variant="h6" gutterBottom>
                   Filter by
@@ -422,11 +512,12 @@ class HomePage extends Component {
             </Grid>
             <Grid item xs={12} sm={8}>
               <Container>
-                <Typography variant="h6" gutterBottom>
+                <Typography className="no-mobile" variant="h6" gutterBottom>
                   Top Courses
                 </Typography>
               </Container>
               <Divider
+                className="no-mobile"
                 style={{
                   marginBottom: '25px',
                   marginTop: '15px',

@@ -190,7 +190,11 @@ class CourseList extends Component {
   render() {
     console.log('Rendering now');
     return (
-      <Container maxWidth={'lg'} style={{ paddingRight: '0' }}>
+      <Container
+        maxWidth={'lg'}
+        style={{ paddingRight: '0' }}
+        className="c-list"
+      >
         <Grid container spacing={3}>
           <Grid item xs={12} sm={12}>
             {this.state.loading ? (
