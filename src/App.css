@@ -169,6 +169,10 @@ a:hover {
 }
 
 @media (max-width: 800px) {
+  body {
+    overflow-x: hidden;
+  }
+
   .ns-input {
     width: 150px;
   }
@@ -736,6 +740,9 @@ dashboard-options-header {
     color: #D1D1D1;
   }
 
+  .search-icon {
+    width: 20%;
+  }
 
   .reviews-profile {
     font-size: 1.5em !important;
@@ -746,7 +753,26 @@ dashboard-options-header {
   }
 
   .profile-topbar-text {
-    margin-left: -10px;
+    margin-left: -40px;
+  }
+
+  .search-input {
+    width: 100%;
+  }
+
+  .searchField {
+    width: 90%;
+    height: 75%;
+    border: none;
+    font-size: 1.1em;
+    color: #7C7C7C;
+    transition: 0.5s;
+  }
+
+  .searchField::placeholder {
+    color: rgb(100, 100, 100);
+    font-size: 1.2em;
+    opacity: 0.3;
   }
 
   .filter-overlay {
