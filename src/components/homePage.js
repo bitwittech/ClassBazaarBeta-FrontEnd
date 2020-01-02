@@ -439,6 +439,7 @@ class HomePage extends Component {
             onSearchChange={this.onSearchChange}
             handleFilterClick={this.handleFilterClick}
             q={this.state.q}
+            onlySearch={false}
           />
         ) : null}
         <Container

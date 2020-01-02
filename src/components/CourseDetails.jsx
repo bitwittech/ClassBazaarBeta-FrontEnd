@@ -22,6 +22,7 @@ import TurnedInIcon from '@material-ui/icons/TurnedIn';
 import TurnedInNotIcon from '@material-ui/icons/TurnedInNot';
 import formatDate from './../utils/dateUtils';
 import getClosestNextRun from './../utils/edxUtils';
+import MobileTopbar from './MobileTopbar';
 
 const CourseDetails = props => {
   const [state, setState] = useState({
@@ -1403,6 +1404,7 @@ const CourseDetails = props => {
   return (
     <>
       <AppBar />
+      <MobileTopbar onlySearch={true} />
       <HomeModal
         openState={state.popUp}
         handlePopupClose={handlePopupClose}

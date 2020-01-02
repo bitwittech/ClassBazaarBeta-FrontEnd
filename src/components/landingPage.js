@@ -516,7 +516,7 @@ class LandingPage extends Component {
             </Grid>
           </Grid>
 
-          <div align="center" className="ead-sec">
+          <div align="center" className="ead-sec ead-bg ">
             <Typography
               variant="h5"
               color="primary"

@@ -634,6 +634,7 @@ dashboard-options-header {
     display: inherit !important;
   }
 
+
   .d-card {
     padding-left: 15px;
     padding: 15px;
@@ -810,7 +811,7 @@ dashboard-options-header {
 
   .searchField::placeholder {
     color: rgb(100, 100, 100);
-    font-size: 1.2em;
+    font-size: 1em;
     opacity: 0.3;
   }
 
@@ -832,8 +833,37 @@ dashboard-options-header {
     float: right;
     color: #333;
     bottom: -20;
-    fontSize: 1.3rem;
+    font-size: 1.3rem;
     margin: 0px 10px;
+  }
+
+  .ead-sec {
+    background-color: #FFF !important;
+  }
+
+  .ead-bg {
+    background-color: #FAFAFA !important;
+  }
+
+  .bgwhite {
+    background-color: #FFF !important;
+  }
+
+  .cd-container {
+    padding-top: 0px;
+  }
+
+  .searchinput-1 {
+    width: 89%;
+  }
+
+  .search-in {
+    width: 90%;
+    height: 75%;
+    border: none;
+    font-size: 1.1em;
+    color: #7C7C7C;
+    transition: 0.5s;
   }
 }
 
@@ -852,6 +882,8 @@ dashboard-options-header {
   .branding-image2 {
     max-height: 65px;
   }
+
+
 
 
 }
