@@ -41,6 +41,7 @@ const MobileTopbar = props => {
             <input
               className="searchField"
               onChange={props.onSearchChange}
+              value={props.q}
               type="text"
               placeholder="Search for a course"
             />

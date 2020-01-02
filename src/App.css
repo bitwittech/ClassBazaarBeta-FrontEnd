@@ -617,7 +617,46 @@ dashboard-options-header {
   border-right: 1px #D1D1D1 solid !important;
 }
 
+.d-card {
+  background: #fff;
+  padding: 20px;
+  padding-left: 40px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.02), 0 3px 6px rgba(0, 0, 0, 0.23);
+  border-radius: 4px;
+}
+
+.mobile-break {
+  display: none;
+}
+
 @media (max-width:800px) {
+  .mobile-break {
+    display: inherit !important;
+  }
+
+  .d-card {
+    padding-left: 15px;
+    padding: 15px;
+  }
+
+  .cd-card {
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.02), 0 3px 6px rgba(0, 0, 0, 0.23);
+    border-radius: 4px;
+  }
+
+  .d-flex {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    font-size: 0.8em;
+  }
+
+  .d-flex>div {
+    margin-top: 0px !important;
+    padding-right: 10px;
+  }
+
+
   .cat-sub {
     font-size: 12px !important;
     color: #7C7C7C;
