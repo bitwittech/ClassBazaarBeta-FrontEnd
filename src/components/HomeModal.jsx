@@ -189,7 +189,7 @@ const HomeModal = ({ openState, handlePopupClose, state, course }) => {
           }}
         >
           <Fade in={openState}>
-            <div className={classes.paper}>
+            <div className="review-modal">
               <Typography
                 style={{ fontSize: '1.1rem', fontWeight: '600' }}
                 variant="h6"
@@ -245,12 +245,12 @@ const HomeModal = ({ openState, handlePopupClose, state, course }) => {
                   className="text-field"
                   placeholder="What did you like or dislike? How could this course improve?"
                 />
-                <div>
+                <div style={{ marginTop: '10px' }}>
                   <Button
                     variant="contained"
                     color="primary"
                     type="submit"
-                    className={classes.loginButton}
+                    className="enroll-btn"
                   >
                     Submit
                   </Button>

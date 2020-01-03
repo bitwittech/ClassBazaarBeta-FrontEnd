@@ -168,7 +168,22 @@ a:hover {
   padding-top: 30px;
 }
 
+.review-modal {
+  border-radius: 8px;
+  width: 40%;
+  margin: 0;
+  color: white;
+  background: white;
+  padding: 60px;
+  outline: none;
+  padding-top: 30px;
+}
+
 @media (max-width: 800px) {
+  .review-modal {
+    width: 60%;
+  }
+
   body {
     overflow-x: hidden;
   }
@@ -266,6 +281,9 @@ a:hover {
     border-radius: 6px !important;
   }
 
+  .pr-pad {
+    margin-right: 100px;
+  }
 }
 
 

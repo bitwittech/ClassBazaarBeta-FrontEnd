@@ -139,12 +139,13 @@ const CourseDetails = props => {
             </div>
           </div>
 
-          <div style={{ display: 'flex', marginTop: '15px' }}>
+          <div class="pr-pad" style={{ display: 'flex', marginTop: '15px' }}>
             <div>
               <ListAltIcon color="primary" /> &nbsp;
             </div>
             <div>{provider}</div>
           </div>
+
           <div style={{ marginTop: '20px' }}>
             <button
               onClick={() => {
