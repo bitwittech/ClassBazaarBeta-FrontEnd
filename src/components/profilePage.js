@@ -124,7 +124,7 @@ class ProfilePage extends Component {
     return (
       <>
         <TopAppBar />
-        <MobileTopBar title="My Profile" />
+        <MobileTopBar title="My Profile" onlySearch={false} />
         <div className="background">
           <Container maxWidth="lg">
             <div className={styles.root}>

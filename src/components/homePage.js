@@ -436,7 +436,10 @@ class HomePage extends Component {
           <MobileTopbar
             title="Top Courses"
             filter="true"
+            onSearchChange={this.onSearchChange}
             handleFilterClick={this.handleFilterClick}
+            q={this.state.q}
+            onlySearch={false}
           />
         ) : null}
         <Container
