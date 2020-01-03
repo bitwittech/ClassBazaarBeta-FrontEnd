@@ -169,6 +169,10 @@ a:hover {
 }
 
 @media (max-width: 800px) {
+  body {
+    overflow-x: hidden;
+  }
+
   .ns-input {
     width: 150px;
   }
@@ -613,7 +617,47 @@ dashboard-options-header {
   border-right: 1px #D1D1D1 solid !important;
 }
 
+.d-card {
+  background: #fff;
+  padding: 20px;
+  padding-left: 40px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.02), 0 3px 6px rgba(0, 0, 0, 0.23);
+  border-radius: 4px;
+}
+
+.mobile-break {
+  display: none;
+}
+
 @media (max-width:800px) {
+  .mobile-break {
+    display: inherit !important;
+  }
+
+
+  .d-card {
+    padding-left: 15px;
+    padding: 15px;
+  }
+
+  .cd-card {
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.02), 0 3px 6px rgba(0, 0, 0, 0.23);
+    border-radius: 4px;
+  }
+
+  .d-flex {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    font-size: 0.8em;
+  }
+
+  .d-flex>div {
+    margin-top: 0px !important;
+    padding-right: 10px;
+  }
+
+
   .cat-sub {
     font-size: 12px !important;
     color: #7C7C7C;
@@ -736,6 +780,9 @@ dashboard-options-header {
     color: #D1D1D1;
   }
 
+  .search-icon {
+    width: 20%;
+  }
 
   .reviews-profile {
     font-size: 1.5em !important;
@@ -746,7 +793,26 @@ dashboard-options-header {
   }
 
   .profile-topbar-text {
-    margin-left: -10px;
+    margin-left: -40px;
+  }
+
+  .search-input {
+    width: 100%;
+  }
+
+  .searchField {
+    width: 90%;
+    height: 75%;
+    border: none;
+    font-size: 1.1em;
+    color: #7C7C7C;
+    transition: 0.5s;
+  }
+
+  .searchField::placeholder {
+    color: rgb(100, 100, 100);
+    font-size: 1em;
+    opacity: 0.3;
   }
 
   .filter-overlay {
@@ -767,8 +833,37 @@ dashboard-options-header {
     float: right;
     color: #333;
     bottom: -20;
-    fontSize: 1.3rem;
+    font-size: 1.3rem;
     margin: 0px 10px;
+  }
+
+  .ead-sec {
+    background-color: #FFF !important;
+  }
+
+  .ead-bg {
+    background-color: #FAFAFA !important;
+  }
+
+  .bgwhite {
+    background-color: #FFF !important;
+  }
+
+  .cd-container {
+    padding-top: 0px;
+  }
+
+  .searchinput-1 {
+    width: 89%;
+  }
+
+  .search-in {
+    width: 90%;
+    height: 75%;
+    border: none;
+    font-size: 1.1em;
+    color: #7C7C7C;
+    transition: 0.5s;
   }
 }
 
@@ -787,6 +882,8 @@ dashboard-options-header {
   .branding-image2 {
     max-height: 65px;
   }
+
+
 
 
 }

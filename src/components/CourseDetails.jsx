@@ -22,6 +22,7 @@ import TurnedInIcon from '@material-ui/icons/TurnedIn';
 import TurnedInNotIcon from '@material-ui/icons/TurnedInNot';
 import formatDate from './../utils/dateUtils';
 import getClosestNextRun from './../utils/edxUtils';
+import MobileTopbar from './MobileTopbar';
 
 const CourseDetails = props => {
   const [state, setState] = useState({
@@ -98,6 +99,7 @@ const CourseDetails = props => {
           padding: '20px',
           paddingLeft: '40px',
         }}
+        className="cd-card"
       >
         <Typography
           style={{ fontWeight: '600', fontSize: '22px' }}
@@ -107,65 +109,67 @@ const CourseDetails = props => {
         >
           At a Glance
         </Typography>
-        <div style={{ display: 'flex' }}>
-          <div>
-            <QueryBuilderIcon color="primary" /> &nbsp;
-          </div>
-          <div>{props.location.state.duration}</div>
-        </div>
-
-        <div style={{ display: 'flex', marginTop: '15px' }}>
-          <div>
-            <DateRangeIcon color="primary" /> &nbsp;
-          </div>
-          <div>{` Starts on ${formatDate(
-            new Date(props.location.state.startingOn),
-            'MMMM d'
-          )}`}</div>
-        </div>
-
-        <div style={{ display: 'flex', marginTop: '15px' }}>
-          <div>
-            <MonetizationOnIcon color="primary" /> &nbsp;
-          </div>
-          <div>
-            {props.location.state.price === '' ||
-            props.location.state.price === null
-              ? 'Free'
-              : props.location.state.price}
-          </div>
-        </div>
-
-        <div style={{ display: 'flex', marginTop: '15px' }}>
-          <div>
-            <ListAltIcon color="primary" /> &nbsp;
-          </div>
-          <div>{provider}</div>
-        </div>
-        <div style={{ marginTop: '20px' }}>
-          <button
-            onClick={() => {
-              window.open(props.location.state.url, '_blank');
-            }}
-            className="enroll-btn"
-          >
-            <div style={{ display: 'flex', flexDirection: 'row' }}>
-              <div
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  fontWeight: '600',
-                }}
-              >
-                <div>Enroll Now &nbsp;</div>
-              </div>
-              <div>
-                <ArrowForwardIcon
-                  style={{ fontSize: '22px', marginTop: '2px' }}
-                />
-              </div>
+        <div className="d-flex">
+          <div style={{ display: 'flex' }}>
+            <div>
+              <QueryBuilderIcon color="primary" /> &nbsp;
             </div>
-          </button>
+            <div>{props.location.state.duration}</div>
+          </div>
+
+          <div style={{ display: 'flex', marginTop: '15px' }}>
+            <div>
+              <DateRangeIcon color="primary" /> &nbsp;
+            </div>
+            <div>{` Starts on ${formatDate(
+              new Date(props.location.state.startingOn),
+              'MMMM d'
+            )}`}</div>
+          </div>
+
+          <div style={{ display: 'flex', marginTop: '15px' }}>
+            <div>
+              <MonetizationOnIcon color="primary" /> &nbsp;
+            </div>
+            <div>
+              {props.location.state.price === '' ||
+              props.location.state.price === null
+                ? 'Free'
+                : props.location.state.price}
+            </div>
+          </div>
+
+          <div style={{ display: 'flex', marginTop: '15px' }}>
+            <div>
+              <ListAltIcon color="primary" /> &nbsp;
+            </div>
+            <div>{provider}</div>
+          </div>
+          <div style={{ marginTop: '20px' }}>
+            <button
+              onClick={() => {
+                window.open(props.location.state.url, '_blank');
+              }}
+              className="enroll-btn"
+            >
+              <div style={{ display: 'flex', flexDirection: 'row' }}>
+                <div
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    fontWeight: '600',
+                  }}
+                >
+                  <div>Enroll Now &nbsp;</div>
+                </div>
+                <div>
+                  <ArrowForwardIcon
+                    style={{ fontSize: '22px', marginTop: '2px' }}
+                  />
+                </div>
+              </div>
+            </button>
+          </div>
         </div>
       </div>
     </>
@@ -176,13 +180,7 @@ const CourseDetails = props => {
         <div className="cd-container">
           <Grid container spacing={3}>
             <Grid item xs={12} sm={9}>
-              <div
-                style={{
-                  background: '#fff',
-                  padding: '20px',
-                  paddingLeft: '40px',
-                }}
-              >
+              <div className="d-card">
                 <div className="cd-head">
                   <div>
                     <Typography
@@ -368,13 +366,7 @@ const CourseDetails = props => {
         <div className="cd-container">
           <Grid container spacing={3}>
             <Grid item xs={12} sm={9}>
-              <div
-                style={{
-                  background: '#fff',
-                  padding: '20px',
-                  paddingLeft: '40px',
-                }}
-              >
+              <div className="d-card">
                 <div className="cd-head">
                   <div>
                     <Typography
@@ -569,13 +561,7 @@ const CourseDetails = props => {
         <div className="cd-container">
           <Grid container spacing={3}>
             <Grid item xs={12} sm={9}>
-              <div
-                style={{
-                  background: '#fff',
-                  padding: '20px',
-                  paddingLeft: '40px',
-                }}
-              >
+              <div className="d-card">
                 <div className="cd-head">
                   <div>
                     <Typography
@@ -740,13 +726,7 @@ const CourseDetails = props => {
         <div className="cd-container">
           <Grid container spacing={3}>
             <Grid item xs={12} sm={9}>
-              <div
-                style={{
-                  background: '#fff',
-                  padding: '20px',
-                  paddingLeft: '40px',
-                }}
-              >
+              <div className="d-card">
                 <div className="cd-head">
                   <div>
                     <Typography
@@ -878,13 +858,7 @@ const CourseDetails = props => {
         <div className="cd-container">
           <Grid container spacing={3}>
             <Grid item xs={12} sm={9}>
-              <div
-                style={{
-                  background: '#fff',
-                  padding: '20px',
-                  paddingLeft: '40px',
-                }}
-              >
+              <div className="d-card">
                 <div className="cd-head">
                   <div>
                     <Typography
@@ -1067,13 +1041,7 @@ const CourseDetails = props => {
         <div className="cd-container">
           <Grid container spacing={3}>
             <Grid item xs={12} sm={9}>
-              <div
-                style={{
-                  background: '#fff',
-                  padding: '20px',
-                  paddingLeft: '40px',
-                }}
-              >
+              <div className="d-card">
                 <div className="cd-head">
                   <div>
                     <Typography
@@ -1263,13 +1231,7 @@ const CourseDetails = props => {
         <div className="cd-container">
           <Grid container spacing={3}>
             <Grid item xs={12} sm={9} className="bgwhite">
-              <div
-                style={{
-                  background: '#fff',
-                  padding: '20px',
-                  paddingLeft: '40px',
-                }}
-              >
+              <div className="d-card">
                 <div className="cd-head">
                   <div>
                     <Typography
@@ -1442,6 +1404,7 @@ const CourseDetails = props => {
   return (
     <>
       <AppBar />
+      <MobileTopbar onlySearch={true} />
       <HomeModal
         openState={state.popUp}
         handlePopupClose={handlePopupClose}
