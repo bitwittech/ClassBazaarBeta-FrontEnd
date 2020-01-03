@@ -4,21 +4,42 @@ import AppBar from './appBar';
 import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { Container, Typography, Grid } from '@material-ui/core';
+import ForgotPassword from './ForgotPassword';
 const MobileAuth = () => {
   const [state, setState] = useState({ state: 0 });
+  const [forgotPassword, setForgotPassword] = useState(false);
   if (window.innerWidth >= 760) return <Redirect to="/"></Redirect>;
+
+  const handlePopupClose = () => {
+    setForgotPassword(false);
+  };
   return (
     <div className="no-desktop">
+      <ForgotPassword
+        openState={forgotPassword}
+        handlePopupClose={handlePopupClose}
+      />
       <AppBar />
       <Container maxWidth={'lg'} align="center">
-        <Typography
-          style={{ marginTop: '30px', fontWeight: '500', fontSize: '30px' }}
-          variant="h5"
-          gutterBottom
-        >
-          {' '}
-          Login
-        </Typography>
+        {state.state === 0 ? (
+          <Typography
+            style={{ marginTop: '30px', fontWeight: '500', fontSize: '30px' }}
+            variant="h5"
+            gutterBottom
+          >
+            {' '}
+            Login
+          </Typography>
+        ) : (
+          <Typography
+            style={{ marginTop: '30px', fontWeight: '500', fontSize: '30px' }}
+            variant="h5"
+            gutterBottom
+          >
+            {' '}
+            Signup
+          </Typography>
+        )}
         <Typography
           style={{
             fontWeight: '600',
@@ -135,14 +156,19 @@ const MobileAuth = () => {
             placeholder="Enter your password"
             minLength={8}
           />
-          <Typography
-            className="link-button"
-            variant="body2"
-            gutterBottom
-            style={{ marginTop: '10px' }}
-          >
-            Forgot password?
-          </Typography>
+          {state.state === 0 ? (
+            <Typography
+              className="link-button"
+              variant="body2"
+              gutterBottom
+              style={{ marginTop: '10px' }}
+              onClick={() => {
+                setForgotPassword(true);
+              }}
+            >
+              Forgot password?
+            </Typography>
+          ) : null}
           {state.state === 0 ? (
             <Button
               style={{
@@ -172,6 +198,7 @@ const MobileAuth = () => {
                 paddingRight: '13px',
                 marginBottom: '20px',
                 textTransform: 'none',
+                marginTop: '20px',
                 fontWeight: '600',
               }}
               variant="contained"

@@ -180,6 +180,10 @@ a:hover {
 }
 
 @media (max-width: 800px) {
+  .w-m {
+    width: 240px !important;
+  }
+
   .review-modal {
     width: 60%;
   }
