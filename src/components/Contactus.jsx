@@ -28,6 +28,13 @@ const Contactus = () => {
     e.preventDefault();
     const url = 'https://api.classbazaar.in/api/contact';
     const res = await axios.post(url, data);
+    setData({
+      ...data,
+      name: '',
+      email: '',
+      message: '',
+      subject: '',
+    });
     if (res.status === 200) {
       dispatch({
         type: 'ALERT',

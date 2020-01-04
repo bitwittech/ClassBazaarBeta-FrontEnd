@@ -36,10 +36,8 @@ const Footer = ({ bgColor }) => {
             </p>
           </div>
         </div>
-        <p className="footer-text mt-2">Phone: +1 234 567 9332</p>
-        <p className="footer-text">
-          Email: info@company.com | Fax: +1 342 422 5314
-        </p>
+        {/* <p className="footer-text mt-2">Phone: +1 234 567 9332</p> */}
+        <p className="footer-text">Email: info@company.com</p>
         <p className="footer-text tsm">
           © Copyright 2019 <span className="bold">Class Bazaar</span>, All Right
           Reserved
