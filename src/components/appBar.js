@@ -145,6 +145,7 @@ function TopBar(props) {
       style={{
         background: '#FFF',
       }}
+      className="sticky"
     >
       <Toolbar style={{}}>
         <div className={classes.logoHorizontallyCenter}>

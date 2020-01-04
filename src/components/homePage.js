@@ -420,7 +420,6 @@ class HomePage extends Component {
   );
 
   render() {
-    console.log('FILTER SHOW', this.state.mobileFilter);
     return (
       <>
         <ScrollToTop />
@@ -444,7 +443,7 @@ class HomePage extends Component {
         ) : null}
         <Container
           className={this.state.mobileFilter ? 'no-mobile' : ''}
-          style={{ marginTop: '25px' }}
+          style={{ marginTop: '90px' }}
           maxWidth={'lg'}
         >
           <Grid container spacing={3}>

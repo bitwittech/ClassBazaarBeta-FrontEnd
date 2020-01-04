@@ -179,6 +179,21 @@ a:hover {
   padding-top: 30px;
 }
 
+.sticky {
+  position: fixed !important;
+  top: 0 !important;
+}
+
+.contact-container {
+  margin-top: 40px !important;
+}
+
+.ab-t {
+  margin-top: 50px !important;
+}
+
+
+
 @media (max-width: 800px) {
   .contact-cont {
     font-size: 1em !important;
@@ -895,6 +910,18 @@ dashboard-options-header {
     color: #7C7C7C;
     transition: 0.5s;
   }
+
+  .cd-container {
+    padding-top: 10px !important;
+  }
+
+  .mt-ad {
+    padding-top: 60px;
+  }
+
+  .contact-container {
+    margin-top: 25px !important;
+  }
 }
 
 
@@ -913,9 +940,14 @@ dashboard-options-header {
     max-height: 65px;
   }
 
+}
 
+.cd-container {
+  padding-top: 100px;
+}
 
-
+.bg-2 {
+  background: #FAFAFA !important;
 }
 
 body {

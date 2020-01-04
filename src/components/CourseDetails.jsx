@@ -1415,7 +1415,11 @@ const CourseDetails = props => {
       {state.loading ? (
         <Grid
           align="center"
-          style={{ margin: '20px 0', width: '100%', height: '70vh' }}
+          style={{
+            margin: '20px 0',
+            width: '100%',
+            height: '70vh',
+          }}
         >
           <CircularProgress color="primary" />
         </Grid>
