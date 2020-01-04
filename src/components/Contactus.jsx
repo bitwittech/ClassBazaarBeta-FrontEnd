@@ -11,6 +11,7 @@ const Contactus = () => {
   return (
     <>
       <AppBar />
+
       <div
         style={{
           padding: 50,
@@ -20,18 +21,29 @@ const Contactus = () => {
           marginBottom: 20,
           background: '#FAFAFA',
         }}
+        className="contact-container"
       >
         <Typography
-          style={{ fontWeight: '900', fontSize: '2.2rem', marginBottom: '0px' }}
+          style={{
+            fontWeight: '900',
+            fontSize: '2.2rem',
+            marginBottom: '0px',
+          }}
           color="primary"
           variant="h6"
           gutterBottom
         >
           Contact Us
         </Typography>
-        <Typography variant="h6" style={{ fontWeight: '300' }} gutterBottom>
+        <Typography
+          variant="h6"
+          className="contact-cont"
+          style={{ fontWeight: '300' }}
+          gutterBottom
+        >
           You can leave us a message below and our team will get back to you or
-          you can directly email us at <a href="#">info@classbazaar.com</a>
+          you can directly email us at{' '}
+          <a href="mailto:info@classbazaar.com?">info@classbazaar.com</a>
         </Typography>
         <br />
         <form>
@@ -50,8 +62,9 @@ const Contactus = () => {
                 style={{ background: 'white', border: 'none' }}
                 name="name"
                 type="text"
-                className="text-field"
+                className="text-field w-m"
                 placeholder="Name"
+                required
               />
             </Grid>
           </Grid>
@@ -70,8 +83,9 @@ const Contactus = () => {
                 style={{ background: 'white', border: 'none' }}
                 name="email"
                 type="text"
-                className="text-field"
+                className="text-field w-m"
                 placeholder="Email"
+                required
               />
             </Grid>
             <Grid style={{ marginTop: '20px' }} container>
@@ -89,8 +103,9 @@ const Contactus = () => {
                   style={{ background: 'white', border: 'none' }}
                   name="subject"
                   type="text"
-                  className="text-field"
+                  className="text-field w-m"
                   placeholder="Subject"
+                  required
                 />
               </Grid>
             </Grid>
@@ -113,8 +128,9 @@ const Contactus = () => {
                   }}
                   name="message"
                   type="text"
-                  className="text-field"
+                  className="text-field w-m"
                   placeholder="Write your message here."
+                  required
                 />
                 <div style={{ marginTop: '15px' }}>
                   <button
@@ -134,6 +150,7 @@ const Contactus = () => {
           </Grid>
         </form>
       </div>
+
       <Footer bgColor={'#FAFAFA'} />
     </>
   );

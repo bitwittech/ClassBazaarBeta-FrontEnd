@@ -180,6 +180,14 @@ a:hover {
 }
 
 @media (max-width: 800px) {
+  .contact-cont {
+    font-size: 1em !important;
+  }
+
+  .contact-container {
+    width: 70% !important;
+  }
+
   .w-m {
     width: 240px !important;
   }
