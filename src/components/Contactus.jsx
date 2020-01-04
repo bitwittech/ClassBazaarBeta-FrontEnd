@@ -3,11 +3,49 @@ import Container from '@material-ui/core/Container';
 import Footer from './Footer';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import React from 'react';
+import React, { useState, useContext } from 'react';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-
+import Store from '../store/Context';
+import axios from 'axios';
 const Contactus = () => {
+  const [data, setData] = useState({
+    name: '',
+    email: '',
+    message: '',
+    subject: '',
+  });
+  const { state, dispatch } = useContext(Store);
+
+  const handleChange = e => {
+    setData({
+      ...data,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = async e => {
+    e.preventDefault();
+    const url = 'https://api.classbazaar.in/api/contact';
+    const res = await axios.post(url, data);
+    if (res.status === 200) {
+      dispatch({
+        type: 'ALERT',
+        payload: {
+          varient: 'success',
+          message: 'Message sent',
+        },
+      });
+    } else {
+      dispatch({
+        type: 'ALERT',
+        payload: {
+          varient: 'info',
+          message: 'Unable to deliver your message',
+        },
+      });
+    }
+  };
   return (
     <>
       <AppBar />
@@ -46,7 +84,7 @@ const Contactus = () => {
           <a href="mailto:info@classbazaar.com?">info@classbazaar.com</a>
         </Typography>
         <br />
-        <form>
+        <form onSubmit={handleSubmit}>
           <Grid style={{ marginTop: '20px' }} container>
             <Grid item xs={12} sm={1}>
               <Typography
@@ -61,6 +99,8 @@ const Contactus = () => {
               <input
                 style={{ background: 'white', border: 'none' }}
                 name="name"
+                value={data.name}
+                onChange={e => handleChange(e)}
                 type="text"
                 className="text-field w-m"
                 placeholder="Name"
@@ -82,7 +122,9 @@ const Contactus = () => {
               <input
                 style={{ background: 'white', border: 'none' }}
                 name="email"
-                type="text"
+                type="email"
+                value={data.email}
+                onChange={e => handleChange(e)}
                 className="text-field w-m"
                 placeholder="Email"
                 required
@@ -102,6 +144,8 @@ const Contactus = () => {
                 <input
                   style={{ background: 'white', border: 'none' }}
                   name="subject"
+                  value={data.subject}
+                  onChange={e => handleChange(e)}
                   type="text"
                   className="text-field w-m"
                   placeholder="Subject"
@@ -127,6 +171,8 @@ const Contactus = () => {
                     height: '100px',
                   }}
                   name="message"
+                  value={data.message}
+                  onChange={e => handleChange(e)}
                   type="text"
                   className="text-field w-m"
                   placeholder="Write your message here."
