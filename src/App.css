@@ -953,3 +953,16 @@ dashboard-options-header {
 body {
   background: #FFF !important;
 }
+
+.LandingPage-searchIcon-505 {
+  border: none !important;
+  border-radius: 4px !important;
+}
+
+.LandingPage-search-11 {
+  border-radius: 6px !important;
+}
+
+.LandingPage-inputRoot-507 {
+  border: none !important;
+}
