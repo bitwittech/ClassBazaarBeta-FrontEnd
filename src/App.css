@@ -121,6 +121,11 @@ a:hover {
   cursor: pointer;
 }
 
+.color-red {
+  color: rgb(245, 41, 41);
+  font-size: 0.8em;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
