@@ -7,7 +7,7 @@ const MobileTopbar = props => {
   const [search, onSearchClick] = useState(false);
   const [q, setQ] = useState(null);
   return (
-    <div className="no-desktop">
+    <div className="no-desktop mt-ad">
       <div className="cont-profile">
         <div className="search-icon">
           <SearchIcon

@@ -49,7 +49,7 @@ const About = () => {
     <div>
       <AppBar />
       <div className={classes.root}>
-        <Grid container spacing={3}>
+        <Grid container spacing={3} className="ab-t">
           <Grid item xs={12}>
             <Paper className={classes.paper}>
               <Container maxWidth={'md'}>
