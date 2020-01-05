@@ -139,12 +139,13 @@ const CourseDetails = props => {
             </div>
           </div>
 
-          <div style={{ display: 'flex', marginTop: '15px' }}>
+          <div class="pr-pad" style={{ display: 'flex', marginTop: '15px' }}>
             <div>
               <ListAltIcon color="primary" /> &nbsp;
             </div>
             <div>{provider}</div>
           </div>
+
           <div style={{ marginTop: '20px' }}>
             <button
               onClick={() => {
@@ -1414,7 +1415,11 @@ const CourseDetails = props => {
       {state.loading ? (
         <Grid
           align="center"
-          style={{ margin: '20px 0', width: '100%', height: '70vh' }}
+          style={{
+            margin: '20px 0',
+            width: '100%',
+            height: '70vh',
+          }}
         >
           <CircularProgress color="primary" />
         </Grid>
