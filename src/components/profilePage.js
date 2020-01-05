@@ -10,6 +10,7 @@ import { Container } from '@material-ui/core';
 import DateRangeIcon from '@material-ui/icons/DateRange';
 import Divider from '@material-ui/core/Divider';
 import Fab from '@material-ui/core/Fab';
+import Alert from './Alert';
 import Footer from './Footer';
 import Grid from '@material-ui/core/Grid';
 import MoneyIcon from '@material-ui/icons/AttachMoney';
@@ -24,7 +25,9 @@ import Typography from '@material-ui/core/Typography';
 import WatchLaterIcon from '@material-ui/icons/WatchLater';
 import formatDate from './../utils/dateUtils';
 import getClosestNextRun from './../utils/edxUtils';
+import SnackbarContent from '@material-ui/core/SnackbarContent';
 import { store } from '../App';
+import AlertSnackbar from './AlertSnackbar';
 import { titleCase } from './../utils/utils';
 import { Redirect, withRouter } from 'react-router';
 import SaveIcon from '@material-ui/icons/Save';
@@ -74,6 +77,7 @@ class ProfilePage extends Component {
       phone: '',
       newPassword: '',
       curPassword: '',
+      msg: null,
     };
     this.updateData = this.updateData.bind(this);
   }
@@ -118,15 +122,21 @@ class ProfilePage extends Component {
     this.updateData();
   }
 
+  resetMsg = () => {
+    this.setState({ msg: null });
+  };
   render() {
     if (this.state.user == null) return <Redirect to="/" />;
-    console.log(this.state);
+    console.log('YOO', this.state.msg);
     return (
       <>
         <TopAppBar />
+        {this.state.msg && (
+          <AlertSnackbar resetMsg={this.resetMsg} data={this.state.msg} />
+        )}
         <MobileTopBar title="My Profile" onlySearch={false} />
         <div className="background">
-          <Container maxWidth="lg">
+          <Container maxWidth="lg" className="top-push">
             <div className={styles.root}>
               <Grid container spacing={3}>
                 <Grid item xs={12} md={4} lg={3}>
@@ -280,13 +290,26 @@ class ProfilePage extends Component {
                                   />
                                 ) : (
                                   <SaveIcon
-                                    onClick={() => {
-                                      updateUser(
-                                        'mobilePhone',
-                                        this.state.user.id,
-                                        this.state.phone
-                                      );
-                                      this.setState({ phoneB: false });
+                                    onClick={async () => {
+                                      try {
+                                        const res = await updateUser(
+                                          'mobilePhone',
+                                          this.state.user.id,
+                                          this.state.phone
+                                        );
+                                        this.setState({
+                                          phoneB: false,
+                                          msg: res,
+                                        });
+                                      } catch (error) {
+                                        this.setState({
+                                          msg: {
+                                            varient: 'error',
+                                            message: 'Unable to update',
+                                          },
+                                          phoneB: false,
+                                        });
+                                      }
                                     }}
                                     color="primary"
                                     style={{ fontSize: '1.2em' }}
@@ -340,13 +363,26 @@ class ProfilePage extends Component {
                                   />
                                 ) : (
                                   <SaveIcon
-                                    onClick={() => {
-                                      updateUser(
-                                        'email',
-                                        this.state.user.id,
-                                        this.state.email
-                                      );
-                                      this.setState({ emailB: false });
+                                    onClick={async () => {
+                                      try {
+                                        const res = await updateUser(
+                                          'email',
+                                          this.state.user.id,
+                                          this.state.email
+                                        );
+                                        this.setState({
+                                          msg: res,
+                                          emailB: false,
+                                        });
+                                      } catch (error) {
+                                        this.setState({
+                                          emailB: false,
+                                          msg: {
+                                            varient: 'error',
+                                            message: 'Unable to update',
+                                          },
+                                        });
+                                      }
                                     }}
                                     color="primary"
                                     style={{ fontSize: '1.2em' }}

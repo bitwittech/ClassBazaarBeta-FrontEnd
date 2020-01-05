@@ -679,7 +679,15 @@ dashboard-options-header {
   display: none;
 }
 
+.top-push {
+  margin-top: 100px;
+}
+
 @media (max-width:800px) {
+  .top-push {
+    margin-top: 30px;
+  }
+
   .mobile-break {
     display: inherit !important;
   }
