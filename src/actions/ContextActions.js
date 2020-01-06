@@ -338,8 +338,17 @@ export const updateUser = async (type, userId, data) => {
     });
     console.log(patchedData)
     store.setItem('user', patchedData.successResponse.user);
+    return {
+      varient: 'success',
+      message: 'Updated'
+    }
   } catch (error) {
+
     console.log(error)
+    return {
+      varient: 'error',
+      message: 'Unable to update'
+    }
   }
 }
 

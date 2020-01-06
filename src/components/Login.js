@@ -60,6 +60,12 @@ const Login = () => {
       phone: '',
       email: '',
     },
+    errors: {
+      username: null,
+      password: null,
+      phone: null,
+      email: null,
+    },
   });
   console.log(loginModal);
   useEffect(() => {
@@ -77,6 +83,30 @@ const Login = () => {
   };
 
   const handleChange = e => {
+    const { name, value } = e.target;
+    const errors = modal.errors;
+    const validEmailRegex = RegExp(
+      /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
+    );
+    const phoneRegex = RegExp(/^(\+\d{1,3}[- ]?)?\d{10}$/);
+    switch (name) {
+      case 'username':
+        errors.username = !value.toString().trim().length
+          ? 'Username required'
+          : '';
+        break;
+      case 'email':
+        errors.email = validEmailRegex.test(value) ? '' : 'Invalid email';
+        break;
+      case 'password':
+        errors.password =
+          value.length < 8 ? 'Password must be 8 characters long' : '';
+      case 'phone':
+        errors.phone = phoneRegex.test(value) ? '' : 'Invalid phone';
+        break;
+      default:
+        break;
+    }
     setModal({
       ...modal,
       formData: {
@@ -106,6 +136,7 @@ const Login = () => {
       },
     });
   };
+  console.log('STATE', modal.errors.username);
   return (
     <>
       <Modal
@@ -167,6 +198,7 @@ const Login = () => {
                         placeholder="Enter your User name"
                         required
                       />
+                      <div className="color-red">{modal.errors.username}</div>
                     </>
                   ) : null}
 
@@ -191,6 +223,7 @@ const Login = () => {
                     placeholder="Enter your Email ID"
                     required
                   />
+                  <div className="color-red">{modal.errors.email}</div>
                   {loginModal.state === 1 ? (
                     <>
                       {' '}
@@ -215,6 +248,7 @@ const Login = () => {
                         placeholder="Enter your number"
                         required
                       />
+                      <div className="color-red">{modal.errors.phone}</div>
                     </>
                   ) : null}
 
@@ -239,6 +273,7 @@ const Login = () => {
                     placeholder="Enter your password"
                     minLength={8}
                   />
+                  <div className="color-red">{modal.errors.password}</div>
                   <Typography
                     className="link-button"
                     variant="body2"
