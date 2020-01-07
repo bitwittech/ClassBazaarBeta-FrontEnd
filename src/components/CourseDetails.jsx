@@ -360,7 +360,7 @@ const CourseDetails = props => {
         </div>
       </div>
     );
-
+  console.log('DATA', state.data);
   const udemy = () =>
     state.data && (
       <div maxWidth="lg" className="ead-sec">
@@ -411,25 +411,7 @@ const CourseDetails = props => {
                     variant="body1"
                     gutterBottom
                   >
-                    {
-                      (ReactHtmlParser(state.data.description),
-                      {
-                        transform: node => {
-                          console.log({ node });
-                          if (node.name === 'h1') {
-                            return (
-                              <Typography
-                                style={{ fontWeight: '600', fontSize: '22px' }}
-                                variant="subtitle2"
-                                gutterBottom
-                              >
-                                {node.children[0].data}{' '}
-                              </Typography>
-                            );
-                          }
-                        },
-                      })
-                    }
+                    {ReactHtmlParser(state.data.description)}
                   </Typography>
                   <br />
                   {state.data.outcome !== '' && (
