@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { fade, makeStyles } from '@material-ui/core/styles';
-
+import PermIdentityIcon from '@material-ui/icons/PermIdentity';
 import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
@@ -137,7 +137,10 @@ function TopBar(props) {
     props.history.push('/');
     logout(dispatch);
   };
-
+  const handleUserMobile = () => {
+    console.log(props.history);
+    props.history.push('/mobileauth');
+  };
   return (
     <AppBar
       position="static"
@@ -148,7 +151,7 @@ function TopBar(props) {
       className="sticky"
     >
       <Toolbar style={{}}>
-        <div className={classes.logoHorizontallyCenter}>
+        <div className={`${classes.logoHorizontallyCenter} m-logo`}>
           <ImageWithRouter
             image={Logo}
             routingURL={'/'}
@@ -177,13 +180,19 @@ function TopBar(props) {
         )}
 
         <div className={classes.rightLogin}>
+          {!state.isAuth ? (
+            <PermIdentityIcon
+              onClick={handleUserMobile}
+              className="no-desktop user-m-icon"
+            />
+          ) : null}
           {state.isAuth ? <IconWithRouter routingURL={'/profile'} /> : null}
           {!state.isAuth ? (
             <>
               <Button
                 variant="outlined"
                 color="primary"
-                className="signup-btn"
+                className="signup-btn no-mobile"
                 onClick={() =>
                   dispatch({
                     type: LOGIN_MODAL,
@@ -199,7 +208,7 @@ function TopBar(props) {
               <Button
                 variant="outlined"
                 color="primary"
-                className="login-btn"
+                className="login-btn signup-btn no-mobile"
                 onClick={() => {
                   dispatch({
                     type: LOGIN_MODAL,

@@ -150,7 +150,7 @@ a:hover {
 }
 
 .no-desktop {
-  display: none;
+  display: none !important;
 }
 
 .bg-change {
@@ -251,7 +251,7 @@ a:hover {
   }
 
   .no-desktop {
-    display: block;
+    display: block !important;
   }
 
   .bg-change {
@@ -686,6 +686,15 @@ dashboard-options-header {
 @media (max-width:800px) {
   .top-push {
     margin-top: 30px;
+  }
+
+  .margin-toper {
+    margin-top: 80px;
+  }
+
+  .user-m-icon {
+    margin-right: 65px !important;
+    font-size: 1.8em !important;
   }
 
   .mobile-break {
