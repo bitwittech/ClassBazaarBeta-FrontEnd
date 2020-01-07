@@ -1,5 +1,6 @@
 import { Container, Grid, Typography } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
+import ReactHtmlParser, { convertNodeToElement } from 'react-html-parser';
 
 import AppBar from './appBar';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
@@ -10,10 +11,10 @@ import Footer from './Footer';
 import HomeModal from './HomeModal';
 import ListAltIcon from '@material-ui/icons/ListAlt';
 import Logo from '../assets/logo.png';
+import MobileTopbar from './MobileTopbar';
 import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 import QueryBuilderIcon from '@material-ui/icons/QueryBuilder';
 import RateReviewIcon from '@material-ui/icons/RateReview';
-import ReactHtmlParser, { convertNodeToElement } from 'react-html-parser';
 import StarBorderIcon from '@material-ui/icons/StarBorder';
 import StarHalfIcon from '@material-ui/icons/StarHalf';
 import StarIcon from '@material-ui/icons/Star';
@@ -22,7 +23,6 @@ import TurnedInIcon from '@material-ui/icons/TurnedIn';
 import TurnedInNotIcon from '@material-ui/icons/TurnedInNot';
 import formatDate from './../utils/dateUtils';
 import getClosestNextRun from './../utils/edxUtils';
-import MobileTopbar from './MobileTopbar';
 
 const CourseDetails = props => {
   const [state, setState] = useState({
@@ -360,183 +360,187 @@ const CourseDetails = props => {
         </div>
       </div>
     );
-  console.log('DATA', state.data);
-  const udemy = () =>
-    state.data && (
-      <div maxWidth="lg" className="ead-sec">
-        <div className="cd-container">
-          <Grid container spacing={3}>
-            <Grid item xs={12} sm={9}>
-              <div className="d-card">
-                <div className="cd-head">
-                  <div>
+
+  const udemy = () => {
+    console.log(state);
+    return (
+      state.data && (
+        <div maxWidth="lg" className="ead-sec">
+          <div className="cd-container">
+            <Grid container spacing={3}>
+              <Grid item xs={12} sm={9}>
+                <div className="d-card">
+                  <div className="cd-head">
+                    <div>
+                      <Typography
+                        style={{ fontWeight: '600' }}
+                        color="primary"
+                        variant="subtitle2"
+                        gutterBottom
+                      >
+                        {props.location.state.university}
+                      </Typography>
+                      <Typography variant="h6" gutterBottom>
+                        {state.data.title}
+                      </Typography>
+                      <Typography
+                        variant="caption"
+                        display="block"
+                        className="provider"
+                        gutterBottom
+                      >
+                        via {provider}
+                      </Typography>
+                    </div>
+                    <div style={{ textAlign: 'right' }}>
+                      {reviewSection(
+                        state.data.avg_rating,
+                        state.data.num_reviews
+                      )}
+                    </div>
+                  </div>
+                  <br />
+                  <div className="cd-cont">
                     <Typography
-                      style={{ fontWeight: '600' }}
-                      color="primary"
+                      style={{ fontWeight: '600', fontSize: '22px' }}
                       variant="subtitle2"
                       gutterBottom
                     >
-                      {props.location.state.university}
-                    </Typography>
-                    <Typography variant="h6" gutterBottom>
-                      {state.data.title}
+                      Course Overview
                     </Typography>
                     <Typography
-                      variant="caption"
-                      display="block"
-                      className="provider"
+                      style={{ fontSize: '16px', fontWeight: '300' }}
+                      variant="body1"
                       gutterBottom
                     >
-                      via {provider}
+                      {ReactHtmlParser(state.data.description)}
                     </Typography>
-                  </div>
-                  <div style={{ textAlign: 'right' }}>
-                    {reviewSection(
-                      state.data.avg_rating,
-                      state.data.num_reviews
-                    )}
-                  </div>
-                </div>
-                <br />
-                <div className="cd-cont">
-                  <Typography
-                    style={{ fontWeight: '600', fontSize: '22px' }}
-                    variant="subtitle2"
-                    gutterBottom
-                  >
-                    Course Overview
-                  </Typography>
-                  <Typography
-                    style={{ fontSize: '16px', fontWeight: '300' }}
-                    variant="body1"
-                    gutterBottom
-                  >
-                    {ReactHtmlParser(state.data.description)}
-                  </Typography>
-                  <br />
-                  {state.data.outcome !== '' && (
-                    <>
-                      <Typography
-                        style={{ fontWeight: '600', fontSize: '22px' }}
-                        variant="subtitle2"
-                        gutterBottom
-                      >
-                        What will you learn?
-                      </Typography>
-                      <Typography
-                        style={{ fontSize: '16px', fontWeight: '300' }}
-                        variant="body1"
-                        gutterBottom
-                      >
-                        {state.data.what_you_will_learn_data.items.map(
-                          (e, i) => (
-                            <li key={i}>{e}</li>
-                          )
-                        )}
-                      </Typography>{' '}
-                    </>
-                  )}
-                  {state.data.prerequisites_raw !== '' ? (
-                    <>
-                      {' '}
-                      <Typography
-                        style={{ fontWeight: '600', fontSize: '22px' }}
-                        variant="subtitle2"
-                        gutterBottom
-                      >
-                        Prerequisites
-                      </Typography>
-                      <Typography
-                        style={{ fontSize: '16px', fontWeight: '300' }}
-                        variant="body1"
-                        gutterBottom
-                      >
-                        {state.data.prerequisites.map((e, i) => (
-                          <li key={i}>{e}</li>
-                        ))}
-                      </Typography>
-                    </>
-                  ) : null}
-                  <br />
-
-                  {state.data.closestRun !== undefined && (
-                    <>
-                      <Typography
-                        style={{ fontWeight: '600', fontSize: '22px' }}
-                        variant="subtitle2"
-                        gutterBottom
-                      >
-                        Professor:{' '}
-                        {this.state.closestRun.staff.map((obj, index) => (
-                          <span key={index} style={{ fontWeight: '300' }}>
-                            {obj.given_name}
-                          </span>
-                        ))}
-                      </Typography>
-                    </>
-                  )}
-                  <br />
-                  <Typography
-                    style={{ fontWeight: '600', fontSize: '22px' }}
-                    variant="subtitle2"
-                    gutterBottom
-                  >
-                    Reviews
-                  </Typography>
-                  <div>
-                    <button
-                      onClick={() => {
-                        setState({ ...state, popUp: !state.popUp });
-                      }}
-                      className="enroll-btn"
-                    >
-                      <div style={{ display: 'flex', flexDirection: 'row' }}>
-                        <div
-                          style={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            fontWeight: '600',
-                          }}
+                    <br />
+                    {state.data.outcome !== '' && (
+                      <>
+                        <Typography
+                          style={{ fontWeight: '600', fontSize: '22px' }}
+                          variant="subtitle2"
+                          gutterBottom
                         >
-                          <div>Write Review &nbsp;</div>
+                          What will you learn?
+                        </Typography>
+                        <Typography
+                          style={{ fontSize: '16px', fontWeight: '300' }}
+                          variant="body1"
+                          gutterBottom
+                        >
+                          {state.data.what_you_will_learn_data.items.map(
+                            (e, i) => (
+                              <li key={i}>{e}</li>
+                            )
+                          )}
+                        </Typography>{' '}
+                      </>
+                    )}
+                    {state.data.prerequisites_raw !== '' ? (
+                      <>
+                        {' '}
+                        <Typography
+                          style={{ fontWeight: '600', fontSize: '22px' }}
+                          variant="subtitle2"
+                          gutterBottom
+                        >
+                          Prerequisites
+                        </Typography>
+                        <Typography
+                          style={{ fontSize: '16px', fontWeight: '300' }}
+                          variant="body1"
+                          gutterBottom
+                        >
+                          {state.data.prerequisites.map((e, i) => (
+                            <li key={i}>{e}</li>
+                          ))}
+                        </Typography>
+                      </>
+                    ) : null}
+                    <br />
+
+                    {state.data.closestRun !== undefined && (
+                      <>
+                        <Typography
+                          style={{ fontWeight: '600', fontSize: '22px' }}
+                          variant="subtitle2"
+                          gutterBottom
+                        >
+                          Professor:{' '}
+                          {this.state.closestRun.staff.map((obj, index) => (
+                            <span key={index} style={{ fontWeight: '300' }}>
+                              {obj.given_name}
+                            </span>
+                          ))}
+                        </Typography>
+                      </>
+                    )}
+                    <br />
+                    <Typography
+                      style={{ fontWeight: '600', fontSize: '22px' }}
+                      variant="subtitle2"
+                      gutterBottom
+                    >
+                      Reviews
+                    </Typography>
+                    <div>
+                      <button
+                        onClick={() => {
+                          setState({ ...state, popUp: !state.popUp });
+                        }}
+                        className="enroll-btn"
+                      >
+                        <div style={{ display: 'flex', flexDirection: 'row' }}>
+                          <div
+                            style={{
+                              display: 'flex',
+                              alignItems: 'center',
+                              fontWeight: '600',
+                            }}
+                          >
+                            <div>Write Review &nbsp;</div>
+                          </div>
+                          <div>
+                            <RateReviewIcon
+                              style={{ fontSize: '22px', marginTop: '2px' }}
+                            />
+                          </div>
                         </div>
-                        <div>
-                          <RateReviewIcon
-                            style={{ fontSize: '22px', marginTop: '2px' }}
-                          />
-                        </div>
-                      </div>
-                    </button>
-                  </div>
-                  <Grid
-                    container
-                    style={{ padding: 20, background: '#00000015' }}
-                  >
-                    <Grid item xs={3}>
-                      <Grid item xs={12}>
-                        {/* <Fab color="primary" aria-label="add" className={classes.fab}>
+                      </button>
+                    </div>
+                    <Grid
+                      container
+                      style={{ padding: 20, background: '#00000015' }}
+                    >
+                      <Grid item xs={3}>
+                        <Grid item xs={12}>
+                          {/* <Fab color="primary" aria-label="add" className={classes.fab}>
                   <AddIcon />
                 </Fab> */}
+                        </Grid>
+                      </Grid>
+                      <Grid item xs={9}>
+                        <Box style={{ padding: 30 }}>
+                          Natus error sit voluptartem accusantium doloremque
+                          laudantium, totam rem aperiam, eaque ipsa quae ab illo
+                          inventore.
+                        </Box>
                       </Grid>
                     </Grid>
-                    <Grid item xs={9}>
-                      <Box style={{ padding: 30 }}>
-                        Natus error sit voluptartem accusantium doloremque
-                        laudantium, totam rem aperiam, eaque ipsa quae ab illo
-                        inventore.
-                      </Box>
-                    </Grid>
-                  </Grid>
+                  </div>
                 </div>
-              </div>
+              </Grid>
+              <Grid item xs={12} sm={3}>
+                {courseSummary()}
+              </Grid>
             </Grid>
-            <Grid item xs={12} sm={3}>
-              {courseSummary()}
-            </Grid>
-          </Grid>
+          </div>
         </div>
-      </div>
+      )
     );
+  };
 
   const fl = () =>
     state.data && (
@@ -1401,6 +1405,7 @@ const CourseDetails = props => {
             margin: '20px 0',
             width: '100%',
             height: '70vh',
+            marginTop: '100px',
           }}
         >
           <CircularProgress color="primary" />

@@ -4,7 +4,7 @@
   "API_NGROK": "https://fc7774e6.ngrok.io",
   "fusionAuthURL": "https://auth.classbazaar.in",
   "fusionAuthAPIKey": "NiITD64khrkH7jn6PUNYCPdancc2gdiD8oZJDTsXFOA",
-  "fusionAuthApplicationId": "3c219e58-ed0e-4b18-ad48-f4f92793ae32",
+  "fusionAuthApplicationId": "c8682dc3-adbc-4501-b707-9cde8c8ade0f",
   "localForageConfig": {
     "name": "classBazaar",
     "version": 1.0,
