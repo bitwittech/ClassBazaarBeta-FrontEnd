@@ -413,27 +413,7 @@ const CourseDetails = props => {
                       variant="body1"
                       gutterBottom
                     >
-                      {ReactHtmlParser(state.data.description)
-                      // {
-                      //   transform: node => {
-                      //     console.log({ node });
-                      //     if (node.name === 'h1') {
-                      //       return (
-                      //         <Typography
-                      //           style={{
-                      //             fontWeight: '600',
-                      //             fontSize: '22px',
-                      //           }}
-                      //           variant="subtitle2"
-                      //           gutterBottom
-                      //         >
-                      //           {node.children[0].data}{' '}
-                      //         </Typography>
-                      //       );
-                      //     }
-                      //   },
-                      // })
-                      }
+                      {ReactHtmlParser(state.data.description)}
                     </Typography>
                     <br />
                     {state.data.outcome !== '' && (
@@ -1425,6 +1405,7 @@ const CourseDetails = props => {
             margin: '20px 0',
             width: '100%',
             height: '70vh',
+            marginTop: '100px',
           }}
         >
           <CircularProgress color="primary" />

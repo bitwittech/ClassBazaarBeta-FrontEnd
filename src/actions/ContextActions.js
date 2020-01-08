@@ -31,16 +31,6 @@ let client = new FusionAuthClient(
 
 export const register = async (data, dispatch) => {
 
-  if (data.phone.match(/^(\+\d{1,3}[- ]?)?\d{10}$/) === null) {
-    return dispatch({
-      type: ALERT,
-      payload: {
-        varient: 'info',
-        message: "Please enter a valid mobile number"
-      }
-    })
-  }
-
   dispatch({
     type: LOADING,
     payload: true,

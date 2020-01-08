@@ -14,7 +14,7 @@ const MobileAuth = () => {
     setForgotPassword(false);
   };
   return (
-    <div className="no-desktop">
+    <div className="no-desktop margin-toper">
       <ForgotPassword
         openState={forgotPassword}
         handlePopupClose={handlePopupClose}

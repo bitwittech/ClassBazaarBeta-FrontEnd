@@ -98,12 +98,13 @@ const Login = () => {
       case 'email':
         errors.email = validEmailRegex.test(value) ? '' : 'Invalid email';
         break;
-      case 'password':
-        errors.password =
-          value.length < 8 ? 'Password must be 8 characters long' : '';
       case 'phone':
         errors.phone = phoneRegex.test(value) ? '' : 'Invalid phone';
         break;
+      case 'password':
+        errors.password =
+          value.length < 8 ? 'Password must be 8 characters long' : '';
+
       default:
         break;
     }
@@ -118,7 +119,6 @@ const Login = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
-
     if (loginModal.state === 0) {
       signin(modal.formData, dispatch);
     }
@@ -136,7 +136,7 @@ const Login = () => {
       },
     });
   };
-  console.log('STATE', modal.errors.username);
+  console.log('STATE', state.loading);
   return (
     <>
       <Modal
@@ -285,8 +285,8 @@ const Login = () => {
                   {loginModal.state === 0 ? (
                     <Button
                       variant="contained"
-                      color="primary"
                       type="submit"
+                      color="primary"
                       className={classes.loginButton}
                     >
                       {!state.loading ? (
