@@ -179,7 +179,10 @@ const CourseDetails = props => {
     state.data && (
       <div maxWidth="lg" className="ead-sec">
         <div className="cd-container">
-          <Grid container spacing={3}>
+          <Grid container spacing={3} direction="row-reverse">
+            <Grid item xs={12} sm={3}>
+              {courseSummary()}
+            </Grid>
             <Grid item xs={12} sm={9}>
               <div className="d-card">
                 <div className="cd-head">
@@ -353,9 +356,6 @@ const CourseDetails = props => {
                 </div>
               </div>
             </Grid>
-            <Grid item xs={12} sm={3}>
-              {courseSummary()}
-            </Grid>
           </Grid>
         </div>
       </div>
@@ -367,7 +367,10 @@ const CourseDetails = props => {
       state.data && (
         <div maxWidth="lg" className="ead-sec">
           <div className="cd-container">
-            <Grid container spacing={3}>
+            <Grid container spacing={3} direction="row-reverse">
+              <Grid item xs={12} sm={3}>
+                {courseSummary()}
+              </Grid>
               <Grid item xs={12} sm={9}>
                 <div className="d-card">
                   <div className="cd-head">
@@ -532,9 +535,6 @@ const CourseDetails = props => {
                   </div>
                 </div>
               </Grid>
-              <Grid item xs={12} sm={3}>
-                {courseSummary()}
-              </Grid>
             </Grid>
           </div>
         </div>
@@ -546,7 +546,10 @@ const CourseDetails = props => {
     state.data && (
       <div maxWidth="lg" className="ead-sec">
         <div className="cd-container">
-          <Grid container spacing={3}>
+          <Grid container spacing={3} direction="row-reverse">
+            <Grid item xs={12} sm={3}>
+              {courseSummary()}
+            </Grid>
             <Grid item xs={12} sm={9}>
               <div className="d-card">
                 <div className="cd-head">
@@ -699,9 +702,6 @@ const CourseDetails = props => {
                 </div>
               </div>
             </Grid>
-            <Grid item xs={12} sm={3}>
-              {courseSummary()}
-            </Grid>
           </Grid>
         </div>
       </div>
@@ -711,7 +711,10 @@ const CourseDetails = props => {
     state.data && (
       <div maxWidth="lg" className="ead-sec">
         <div className="cd-container">
-          <Grid container spacing={3}>
+          <Grid container spacing={3} direction="row-reverse">
+            <Grid item xs={12} sm={3}>
+              {courseSummary()}
+            </Grid>
             <Grid item xs={12} sm={9}>
               <div className="d-card">
                 <div className="cd-head">
@@ -831,9 +834,6 @@ const CourseDetails = props => {
                 </div>
               </div>
             </Grid>
-            <Grid item xs={12} sm={3}>
-              {courseSummary()}
-            </Grid>
           </Grid>
         </div>
       </div>
@@ -843,7 +843,10 @@ const CourseDetails = props => {
     state.data && (
       <div maxWidth="lg" className="ead-sec">
         <div className="cd-container">
-          <Grid container spacing={3}>
+          <Grid container spacing={3} direction="row-reverse">
+            <Grid item xs={12} sm={3}>
+              {courseSummary()}
+            </Grid>
             <Grid item xs={12} sm={9}>
               <div className="d-card">
                 <div className="cd-head">
@@ -1014,9 +1017,6 @@ const CourseDetails = props => {
                 </div>
               </div>
             </Grid>
-            <Grid item xs={12} sm={3}>
-              {courseSummary()}
-            </Grid>
           </Grid>
         </div>
       </div>
@@ -1026,7 +1026,10 @@ const CourseDetails = props => {
     state.data && (
       <div maxWidth="lg" className="ead-sec">
         <div className="cd-container">
-          <Grid container spacing={3}>
+          <Grid container spacing={3} direction="row-reverse">
+            <Grid item xs={12} sm={3}>
+              {courseSummary()}
+            </Grid>
             <Grid item xs={12} sm={9}>
               <div className="d-card">
                 <div className="cd-head">
@@ -1200,9 +1203,6 @@ const CourseDetails = props => {
                 </div>
               </div>
             </Grid>
-            <Grid item xs={12} sm={3}>
-              {courseSummary()}
-            </Grid>
           </Grid>
         </div>
       </div>
@@ -1216,7 +1216,10 @@ const CourseDetails = props => {
         className="ead-sec"
       >
         <div className="cd-container">
-          <Grid container spacing={3}>
+          <Grid container spacing={3} direction="row-reverse">
+            <Grid item xs={12} sm={3}>
+              {courseSummary()}
+            </Grid>
             <Grid item xs={12} sm={9} className="bgwhite">
               <div className="d-card">
                 <div className="cd-head">
@@ -1358,9 +1361,6 @@ const CourseDetails = props => {
                   </Grid>
                 </div>
               </div>
-            </Grid>
-            <Grid item xs={12} sm={3}>
-              {courseSummary()}
             </Grid>
           </Grid>
         </div>
