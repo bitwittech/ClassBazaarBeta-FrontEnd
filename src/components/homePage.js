@@ -442,8 +442,7 @@ class HomePage extends Component {
           />
         ) : null}
         <Container
-          className={this.state.mobileFilter ? 'no-mobile' : ''}
-          style={{ marginTop: '90px' }}
+          className={this.state.mobileFilter ? 'no-mobile mg' : 'mg'}
           maxWidth={'lg'}
         >
           <Grid container spacing={3}>
