@@ -944,8 +944,17 @@ dashboard-options-header {
   .contact-container {
     margin-top: 25px !important;
   }
+
+  .mg {
+    margin-top: 20px !important;
+  }
+
 }
 
+
+.mg {
+  margin-top: 100px;
+}
 
 
 .background {

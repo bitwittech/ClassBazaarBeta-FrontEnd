@@ -216,9 +216,7 @@ const SubjectCard = withRouter(({ history, ...data }) => {
           >
             {data.name}
           </Typography>
-          <Typography className="show-only-mobile cat-sub">
-            Lorem ipsum dolor sit amet consectetur adipisicin
-          </Typography>
+          <Typography className="show-only-mobile cat-sub"></Typography>
         </Grid>
       </Grid>
     </Grid>

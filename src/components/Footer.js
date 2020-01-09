@@ -9,11 +9,7 @@ const Footer = ({ bgColor }) => {
         <div style={{ marginTop: '20px' }}>
           <img className="footer-logo" src={Logo} alt="classbazarLogo" />
         </div>
-        <div className="footer-text-m no-desktop">
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Consequuntur
-          ipsum dolor si conseq int sapiente obcaecati animi
-        </div>
-        <div className="footer-links no-mobile">
+        <div className="footer-links">
           <div>
             <p>
               <a href="/about">About Us</a>
