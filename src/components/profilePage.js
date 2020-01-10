@@ -12,6 +12,7 @@ import Divider from '@material-ui/core/Divider';
 import Fab from '@material-ui/core/Fab';
 import Alert from './Alert';
 import Footer from './Footer';
+import axios from 'axios'
 import Grid from '@material-ui/core/Grid';
 import MoneyIcon from '@material-ui/icons/AttachMoney';
 import Paper from '@material-ui/core/Paper';
@@ -118,8 +119,33 @@ class ProfilePage extends Component {
     });
   }
 
+  fetchReviews = async() =>{
+    try {
+      const token = localStorage.getItem('cbtoken')
+      const body = JSON.stringify({
+    
+        token: token
+     
+      });
+      console.log("TOKEN",token)
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      };
+     
+      const res = await axios.get('https://api.classbazaar.in/api/review/user',{params:{
+        token
+      }})
+      console.log('REVIEWS REQ',res)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   componentDidMount() {
     this.updateData();
+    this.fetchReviews()
   }
 
   resetMsg = () => {
@@ -127,7 +153,7 @@ class ProfilePage extends Component {
   };
   render() {
     if (this.state.user == null) return <Redirect to="/" />;
-    console.log('YOO', this.state.msg);
+
     return (
       <>
         <TopAppBar />

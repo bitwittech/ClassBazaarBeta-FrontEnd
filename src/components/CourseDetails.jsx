@@ -46,6 +46,7 @@ const CourseDetails = props => {
   const uuid = props.match.params.uuid;
   const provider = props.match.params.provider;
   useEffect(() => {
+    window.scrollTo(0, 0);
     const getCourseDetails = async () => {
       var url = `https://api.classbazaar.in/api/course?uuid=${uuid}&provider=${provider}`;
       // var url = `http://localhost:8080/api/course?uuid=${uuid}&provider=${provider}`;

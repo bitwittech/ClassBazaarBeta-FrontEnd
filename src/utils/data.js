@@ -21,8 +21,7 @@ import UdemyLogo from './../assets/UdemyLogo.png';
 import UniAuklandLogo from './../assets/UniAuklandLogo.jpg';
 import UniNewcastleLogo from './../assets/UniNewcastleLogo.jpeg';
 
-export const subjectsData = [
-  {
+export const subjectsData = [{
     name: 'Computer Science',
     code: 'CS',
     content: '',
@@ -84,83 +83,92 @@ export const subjectsData = [
   },
 ];
 
-export const degreeData = [
-  {
+export const degreeData = [{
     name: 'Master of Science in Machine Learning & AI',
     university: 'Liverpool John Moores University and IIIT, Bangalore',
     image: IIITBLogo,
     provider: 'upGrad',
+    url: '/upGrad/5de5b3af0b4a63ba9b2e9967'
   },
   {
     name: 'PG Certification in Digital Marketing and Communication',
     university: 'MICA, Ahmedabad',
     provider: 'upGrad',
     image: MicaLogo,
+    url: '/upGrad/5de5b3af0b4a63ba9b2e9969'
   },
   {
     name: 'Online Masters of Science in Computer Science',
     university: 'Georgia Tech',
     provider: 'Udacity',
     image: GeorgiaTechUniLogo,
+    url: ''
   },
   {
     name: 'PMP Certification',
     university: 'Project Management Institute, Simplilearn',
     provider: 'Simplilearn',
     image: PMPInstLogo,
+    url: ''
   },
   {
     name: 'Masters in Business Administration',
     university: 'Boston University',
     provider: 'edX',
     image: BostonUniLogo,
+    url: ''
   },
   {
     name: 'Master’s Degree in Analytics',
     university: 'Georgia Tech',
     provider: 'edX',
     image: GeorgiaTechUniLogo,
+    url: ''
   },
 ];
 
-export const freeCourses = [
-  {
+export const freeCourses = [{
     name: "CS50's Introduction to Computer Science",
     university: 'Harvard University',
     provider: 'edX',
     image: HarvardUniLogo,
+    url: '/edX/da1b2400-322b-459b-97b0-0c557f05d017'
   },
   {
     name: 'Natural Language Processing',
     university: 'Coursera',
     provider: 'Swayaam',
     image: IITKLogo,
+    url: '/Swayam/5de9cf0d148eabdc6d615322'
   },
   {
     name: 'Intro to JavaScript',
     university: 'Udacity',
     provider: 'Udacity',
     image: UdacityLogo,
+    url: '/Udacity/5d59f2a947f269dbdfb65ccb'
   },
 ];
 
-export const trendingData = [
-  {
+export const trendingData = [{
     name: 'Microsoft Excel - Excel from Beginner to Advanced',
     university: 'Kyle Pew',
     provider: 'Udemy',
     image: UdemyLogo,
+    url: '/Udemy/5e14133c2c642af9af541f24'
   },
   {
     name: 'Learning Python for Data Analysis and Visualization',
     university: 'Jose Portilla',
     provider: 'Udemy',
     image: UdemyLogo,
+    url: '/Udemy/5e140e9f2c642af9af537704'
   },
   {
     name: 'Data to Insight: An Introduction to Data Analysis and Visualisation',
     university: 'The University of Aukland, New Zealand',
     provider: 'FuturLearn',
     image: UniAuklandLogo,
+    url: '/FutureLearn/a005a3aa-74bc-4c98-9df1-8291e83d4585'
   },
 ];
