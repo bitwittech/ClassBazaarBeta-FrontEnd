@@ -24,20 +24,30 @@ import TurnedInNotIcon from '@material-ui/icons/TurnedInNot';
 import formatDate from './../utils/dateUtils';
 import getClosestNextRun from './../utils/edxUtils';
 
+const formatPrice = price => {
+  if (!price || price === null || price === undefined) return 'Free';
+  else return price;
+};
+
+const formatDuration = duration => {
+  if (!duration || duration === null || duration === undefined)
+    return 'Self Paced';
+  else return duration;
+};
+
 const CourseDetails = props => {
   const [state, setState] = useState({
     data: null,
+    summaryData: null,
     loading: true,
     popUp: false,
   });
-  const provider = props.match.params.provider;
-  let uuid = props.match.params.uuid;
-  if (provider === 'SimpliLearn') {
-    uuid = props.location.state.uuid.replace(/[`~!",.<>\{\}\[\]\\\/]/gi, '');
-  }
+  const provider = props.location.pathname.split('/')[2];
+  let uuid = props.location.pathname.split('/')[3];
   useEffect(() => {
     const getCourseDetails = async () => {
-      var url = `https://api.classbazaar.in/api/course?uuid=${uuid}&provider=${provider}`;
+      // var url = `https://api.classbazaar.in/api/course?uuid=${uuid}&provider=${provider}`;
+      var url = `http://localhost:8080/api/course?uuid=${uuid}&provider=${provider}`;
       console.log(url, uuid);
       const res = await fetch(url);
       const data = await res.json();
@@ -45,6 +55,7 @@ const CourseDetails = props => {
       setState({
         ...state,
         data: data.data,
+        summaryData: data.summaryData,
         loading: false,
       });
     };
@@ -91,90 +102,91 @@ const CourseDetails = props => {
   const handlePopupClose = () => {
     setState({ ...state, popUp: false });
   };
-  const courseSummary = () => (
-    <>
-      <div
-        style={{
-          background: '#fff',
-          padding: '20px',
-          paddingLeft: '40px',
-        }}
-        className="cd-card"
-      >
-        <Typography
-          style={{ fontWeight: '600', fontSize: '22px' }}
-          variant="subtitle2"
-          color="primary"
-          gutterBottom
+  const courseSummary = () =>
+    state.summaryData && (
+      <>
+        <div
+          style={{
+            background: '#fff',
+            padding: '20px',
+            paddingLeft: '40px',
+          }}
+          className="cd-card"
         >
-          At a Glance
-        </Typography>
-        <div className="d-flex">
-          <div style={{ display: 'flex' }}>
-            <div>
-              <QueryBuilderIcon color="primary" /> &nbsp;
-            </div>
-            <div>{props.location.state.duration}</div>
-          </div>
-
-          <div style={{ display: 'flex', marginTop: '15px' }}>
-            <div>
-              <DateRangeIcon color="primary" /> &nbsp;
-            </div>
-            <div>{` Starts on ${formatDate(
-              new Date(props.location.state.startingOn),
-              'MMMM d'
-            )}`}</div>
-          </div>
-
-          <div style={{ display: 'flex', marginTop: '15px' }}>
-            <div>
-              <MonetizationOnIcon color="primary" /> &nbsp;
-            </div>
-            <div>
-              {props.location.state.price === '' ||
-              props.location.state.price === null
-                ? 'Free'
-                : props.location.state.price}
-            </div>
-          </div>
-
-          <div class="pr-pad" style={{ display: 'flex', marginTop: '15px' }}>
-            <div>
-              <ListAltIcon color="primary" /> &nbsp;
-            </div>
-            <div>{provider}</div>
-          </div>
-
-          <div style={{ marginTop: '20px' }}>
-            <button
-              onClick={() => {
-                window.open(props.location.state.url, '_blank');
-              }}
-              className="enroll-btn"
-            >
-              <div style={{ display: 'flex', flexDirection: 'row' }}>
-                <div
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    fontWeight: '600',
-                  }}
-                >
-                  <div>Enroll Now &nbsp;</div>
-                </div>
-                <div>
-                  <ArrowForwardIcon
-                    style={{ fontSize: '22px', marginTop: '2px' }}
-                  />
-                </div>
+          <Typography
+            style={{ fontWeight: '600', fontSize: '22px' }}
+            variant="subtitle2"
+            color="primary"
+            gutterBottom
+          >
+            At a Glance
+          </Typography>
+          <div className="d-flex">
+            <div style={{ display: 'flex' }}>
+              <div>
+                <QueryBuilderIcon color="primary" /> &nbsp;
               </div>
-            </button>
+              <div>{state.summaryData.commitment}</div>
+            </div>
+
+            <div style={{ display: 'flex', marginTop: '15px' }}>
+              <div>
+                <DateRangeIcon color="primary" /> &nbsp;
+              </div>
+              <div>{` Starts on ${formatDate(
+                new Date(state.summaryData.start_date),
+                'MMMM d'
+              )}`}</div>
+            </div>
+
+            <div style={{ display: 'flex', marginTop: '15px' }}>
+              <div>
+                <MonetizationOnIcon color="primary" /> &nbsp;
+              </div>
+              <div>
+                {state.summaryData.price === '' ||
+                state.summaryData.price === null
+                  ? 'Free'
+                  : state.summaryData.price}
+              </div>
+            </div>
+
+            <div class="pr-pad" style={{ display: 'flex', marginTop: '15px' }}>
+              <div>
+                <ListAltIcon color="primary" /> &nbsp;
+              </div>
+              <div>{state.summaryData.provider}</div>
+            </div>
+
+            <div style={{ marginTop: '20px' }}>
+              <button
+                onClick={() => {
+                  window.open(state.summaryData.url, '_blank');
+                }}
+                className="enroll-btn"
+              >
+                <div style={{ display: 'flex', flexDirection: 'row' }}>
+                  <div
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      fontWeight: '600',
+                    }}
+                  >
+                    <div>Enroll Now &nbsp;</div>
+                  </div>
+                  <div>
+                    <ArrowForwardIcon
+                      style={{ fontSize: '22px', marginTop: '2px' }}
+                    />
+                  </div>
+                </div>
+              </button>
+            </div>
           </div>
         </div>
-      </div>
-    </>
-  );
+      </>
+    );
   const edX = () =>
     state.data && (
       <div maxWidth="lg" className="ead-sec">
@@ -381,7 +393,7 @@ const CourseDetails = props => {
                         variant="subtitle2"
                         gutterBottom
                       >
-                        {props.location.state.university}
+                        {state.summaryData.university}
                       </Typography>
                       <Typography variant="h6" gutterBottom>
                         {state.data.title}
@@ -725,7 +737,7 @@ const CourseDetails = props => {
                       variant="subtitle2"
                       gutterBottom
                     >
-                      {props.location.state.university}
+                      {state.summaryData.university}
                     </Typography>
                     <Typography variant="h6" gutterBottom>
                       {ReactHtmlParser(state.data.courseData.fields.title)}
@@ -857,7 +869,7 @@ const CourseDetails = props => {
                       variant="subtitle2"
                       gutterBottom
                     >
-                      {props.location.state.university}
+                      {state.summaryData.university}
                     </Typography>
                     <Typography variant="h6" gutterBottom>
                       {ReactHtmlParser(state.data.title)}
@@ -1230,7 +1242,7 @@ const CourseDetails = props => {
                       variant="subtitle2"
                       gutterBottom
                     >
-                      {props.location.state.university}
+                      {state.summaryData.university}
                     </Typography>
                     <Typography variant="h6" gutterBottom>
                       {ReactHtmlParser(state.data.title)}

@@ -1,20 +1,21 @@
+import React, { useContext } from 'react';
+
+import { ALERT } from '../store/Types';
 import CalendarIcon from '@material-ui/icons/CalendarToday';
 import { Container } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import { Link } from 'react-router-dom';
 import MoneyIcon from '@material-ui/icons/AttachMoney';
 import Paper from '@material-ui/core/Paper';
-import React, { useContext } from 'react';
 import ReactHtmlParser from 'react-html-parser';
+import Store from '../store/Context';
 import TurnedInIcon from '@material-ui/icons/TurnedIn';
 import TurnedInNotIcon from '@material-ui/icons/TurnedInNot';
 import Typography from '@material-ui/core/Typography';
 import WatchLaterIcon from '@material-ui/icons/WatchLater';
-import { ALERT } from '../store/Types';
-import formatDate from './../utils/dateUtils';
-import Store from '../store/Context';
-import { withRouter } from 'react-router-dom';
 import { addBookmark } from '../actions/ContextActions';
+import formatDate from './../utils/dateUtils';
+import { withRouter } from 'react-router-dom';
 
 const styles = {
   grid: {
@@ -134,7 +135,7 @@ const ProfileCourseCard = withRouter(({ history, ...data }) => {
             history.push({
               pathname: `/coursedetails/${data.provider}/${data.uuid}`,
               state: {
-                uuid: data.uuid,
+                uuid: data.uuid.replace(/[`~!",.<>\{\}\[\]\\\/]/gi, ''),
                 provider: data.provider,
                 ...data,
               },
