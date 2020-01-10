@@ -18,6 +18,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Footer from './Footer';
 import Grid from '@material-ui/core/Grid';
 import HomeModal from './HomeModal';
+import { Link } from 'react-router-dom';
 import InputBase from '@material-ui/core/InputBase';
 import { Paper } from 'material-ui';
 import SearchBG1 from './../assets/Search-Option3.jpg';
@@ -47,16 +48,11 @@ const styles = theme => ({
   search: {
     background: '#FFF',
     position: 'relative',
-    // borderRadius: 10000000,
-    // backgroundColor: fade(theme.palette.common.white, 0.15),
     '&:hover': {
       backgroundColor: fade(theme.palette.common.white, 0.25),
     },
     marginRight: theme.spacing(2),
     marginLeft: 0,
-    borderWidth: 1,
-    borderStyle: 'solid',
-    borderColor: '#000',
     width: '100%',
     height: '120%',
     [theme.breakpoints.up('sm')]: {
@@ -200,6 +196,7 @@ const SubjectCard = withRouter(({ history, ...data }) => {
         <Grid xs={3} sm={12} align="center">
           <img class="course-cat-icon-sm" src={data.image} alt="Avatar"></img>
         </Grid>
+
         <Grid
           xs={9}
           style={{ alignSelf: 'center' }}
@@ -313,6 +310,7 @@ class LandingPage extends Component {
   }
 
   getDegreeCard(degree, classes, type) {
+    console.log('DEGREE', degree);
     const padding = { paddingTop: 6, paddingBottom: 6 };
     return (
       <Grid container className="c-card">
@@ -324,14 +322,16 @@ class LandingPage extends Component {
               style={{ margin: 'auto', paddingLeft: 30 }}
               className="card-content"
             >
-              <Typography
-                variant="body2"
-                color="primary"
-                align="left"
-                className="card-uni"
-              >
-                <Box>{degree.university.trim()}</Box>
-              </Typography>
+              <Link to={'/coursedetails' + degree.url}>
+                <Typography
+                  variant="body2"
+                  color="primary"
+                  align="left"
+                  className="card-uni"
+                >
+                  <Box>{degree.university.trim()}</Box>
+                </Typography>
+              </Link>
               <Typography variant="body2" align="left">
                 <Box className="card-course">{degree.name}</Box>
               </Typography>
