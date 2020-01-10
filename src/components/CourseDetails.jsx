@@ -6,6 +6,7 @@ import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import Box from '@material-ui/core/Box';
 import { CircularProgress } from '@material-ui/core';
 import DateRangeIcon from '@material-ui/icons/DateRange';
+import axios from 'axios';
 import Footer from './Footer';
 import HomeModal from './HomeModal';
 import ListAltIcon from '@material-ui/icons/ListAlt';
@@ -40,6 +41,8 @@ const CourseDetails = props => {
     summaryData: null,
     loading: true,
     popUp: false,
+    reviews: [],
+    rloading: true,
   });
   // const provider = props.location.pathname.split('/')[2];
   // let uuid = props.location.pathname.split('/')[3];
@@ -48,19 +51,40 @@ const CourseDetails = props => {
   useEffect(() => {
     window.scrollTo(0, 0);
     const getCourseDetails = async () => {
+      const token = localStorage.getItem('cbtoken');
+      const body = JSON.stringify({
+        token: token,
+        courseID: uuid,
+        provider,
+      });
+      console.log('TOKEN', token);
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      };
       var url = `https://api.classbazaar.in/api/course?uuid=${uuid}&provider=${provider}`;
       // var url = `http://localhost:8080/api/course?uuid=${uuid}&provider=${provider}`;
       console.log(url, uuid);
       const res = await fetch(url);
       const data = await res.json();
 
+      const reviews = await axios.post(
+        'https://api.classbazaar.in/api/review/course',
+        body,
+        config
+      );
+
       setState({
         ...state,
         data: data.data,
         summaryData: data.summaryData,
         loading: false,
+        reviews: reviews.data.data,
+        rloading: false,
       });
     };
+
     getCourseDetails();
   }, []);
 
@@ -477,7 +501,6 @@ const CourseDetails = props => {
                       </>
                     ) : null}
                     <br />
-
                     {state.data.closestRun !== undefined && (
                       <>
                         <Typography
@@ -527,25 +550,31 @@ const CourseDetails = props => {
                         </div>
                       </button>
                     </div>
-                    <Grid
-                      container
-                      style={{ padding: 20, background: '#00000015' }}
-                    >
-                      <Grid item xs={3}>
-                        <Grid item xs={12}>
-                          {/* <Fab color="primary" aria-label="add" className={classes.fab}>
-                  <AddIcon />
-                </Fab> */}
+                    <br />
+                    {state.rlaoding ? (
+                      <p>Loading</p>
+                    ) : state.reviews.length > 0 ? (
+                      state.reviews.map(data => (
+                        <Grid
+                          container
+                          style={{ padding: 20, background: '#00000015' }}
+                        >
+                          <Grid item xs={3}>
+                            <Grid item xs={12}>
+                              <Box style={{ padding: 30 }}>User Image</Box>
+                            </Grid>
+                          </Grid>
+                          <Grid item xs={9}>
+                            <Typography color="primary" variant="h6">
+                              Name
+                            </Typography>
+                            <Box style={{ padding: 30 }}>{data.review}</Box>
+                          </Grid>
                         </Grid>
-                      </Grid>
-                      <Grid item xs={9}>
-                        <Box style={{ padding: 30 }}>
-                          Natus error sit voluptartem accusantium doloremque
-                          laudantium, totam rem aperiam, eaque ipsa quae ab illo
-                          inventore.
-                        </Box>
-                      </Grid>
-                    </Grid>
+                      ))
+                    ) : (
+                      <p>No reviews for this course</p>
+                    )}
                   </div>
                 </div>
               </Grid>
