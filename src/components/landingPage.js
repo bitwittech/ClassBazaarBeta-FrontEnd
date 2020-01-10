@@ -57,7 +57,6 @@ const styles = theme => ({
     marginLeft: 0,
     borderWidth: 1,
     borderStyle: 'solid',
-    borderColor: '#000',
     width: '100%',
     height: '120%',
     [theme.breakpoints.up('sm')]: {
