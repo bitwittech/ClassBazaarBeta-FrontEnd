@@ -133,7 +133,10 @@ const ProfileCourseCard = withRouter(({ history, ...data }) => {
           className="hover"
           onClick={() =>
             history.push({
-              pathname: `/coursedetails/${data.provider}/${data.uuid}`,
+              pathname: `/coursedetails/${data.provider}/${data.uuid.replace(
+                /[`~!",.<>\{\}\[\]\\\/]/gi,
+                ''
+              )}`,
               state: {
                 uuid: data.uuid.replace(/[`~!",.<>\{\}\[\]\\\/]/gi, ''),
                 provider: data.provider,
