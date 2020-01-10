@@ -12,7 +12,7 @@ import Divider from '@material-ui/core/Divider';
 import Fab from '@material-ui/core/Fab';
 import Alert from './Alert';
 import Footer from './Footer';
-import axios from 'axios'
+import axios from 'axios';
 import Grid from '@material-ui/core/Grid';
 import MoneyIcon from '@material-ui/icons/AttachMoney';
 import Paper from '@material-ui/core/Paper';
@@ -33,6 +33,7 @@ import { titleCase } from './../utils/utils';
 import { Redirect, withRouter } from 'react-router';
 import SaveIcon from '@material-ui/icons/Save';
 import { updateUser, updatePassword } from '../actions/ContextActions';
+import { Link } from 'react-router-dom';
 
 const styles = {
   grid: {
@@ -79,6 +80,8 @@ class ProfilePage extends Component {
       newPassword: '',
       curPassword: '',
       msg: null,
+      rLoading: true,
+      reviews: [],
     };
     this.updateData = this.updateData.bind(this);
   }
@@ -98,7 +101,7 @@ class ProfilePage extends Component {
       });
 
       if (user.data === undefined) {
-        return this.setState({ data: [], loading: false });
+        return this.setState({ data: [], reviews: [], loading: false });
       }
 
       const data = user.data.bookmarks;
@@ -119,38 +122,39 @@ class ProfilePage extends Component {
     });
   }
 
-  fetchReviews = async() =>{
+  fetchReviews = async () => {
     try {
-      const token = localStorage.getItem('cbtoken')
+      const token = localStorage.getItem('cbtoken');
       const body = JSON.stringify({
-    
-        token: token
-     
+        token: token,
       });
-      console.log("TOKEN",token)
+      console.log('TOKEN', token);
       const config = {
         headers: {
           'Content-Type': 'application/json',
         },
       };
-     
-      const res = await axios.get('https://api.classbazaar.in/api/review/user',{params:{
-        token
-      }})
-      console.log('REVIEWS REQ',res)
+      const res = await axios.post(
+        'https://api.classbazaar.in/api/review/user',
+        body,
+        config
+      );
+
+      this.setState({ reviews: res.data.data, rloading: false });
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 
   componentDidMount() {
     this.updateData();
-    this.fetchReviews()
+    this.fetchReviews();
   }
 
   resetMsg = () => {
     this.setState({ msg: null });
   };
+
   render() {
     if (this.state.user == null) return <Redirect to="/" />;
 
@@ -569,18 +573,107 @@ class ProfilePage extends Component {
                       My Reviews
                     </Typography>
                     <br />
-                    <Paper>
-                      <div className="review-util">
-                        <Typography
-                          variant="h5"
-                          style={{ color: '#9B9B9B' }}
-                          gutterBottom
-                          align="center"
-                        >
-                          You’ve not written any reviews yet
-                        </Typography>
-                      </div>
-                    </Paper>
+                    {this.state.rloading ? (
+                      <p>Loading</p>
+                    ) : this.state.reviews.length > 0 ? (
+                      this.state.reviews.map(data => (
+                        <>
+                          <div className="c-card">
+                            <div className="coursecard-header">
+                              <div>
+                                <Typography
+                                  color="primary"
+                                  style={{ fontWeight: '600' }}
+                                  variant="subtitle2"
+                                  className="hover"
+                                  gutterBottom
+                                >
+                                  university
+                                </Typography>
+                              </div>
+                              <div></div>
+                            </div>
+                            <Link
+                              to={`/coursedetails/${data.provider}/${data.course_id}`}
+                            >
+                              <Typography
+                                variant="subtitle1"
+                                style={{
+                                  color: '#3C3C3C',
+                                  fontWeight: '600',
+                                  padding: '0px 15px 0px 15px',
+                                }}
+                                className="hover"
+                                gutterBottom
+                              >
+                                Course Name
+                              </Typography>
+                            </Link>
+                            <Typography
+                              style={{
+                                padding: '0px 15px 0px 15px',
+                                color: '#968484',
+                              }}
+                              variant="caption"
+                              display="block"
+                              gutterBottom
+                            >
+                              {data.provider}
+                            </Typography>
+                            <div>
+                              <Typography
+                                style={{
+                                  padding: '0px 15px 0px 15px',
+                                }}
+                                color="primary"
+                                variant="caption"
+                                display="block"
+                                gutterBottom
+                              >
+                                Review
+                              </Typography>
+                            </div>
+                            <div>
+                              <Typography
+                                style={{
+                                  padding: '0px 15px 0px 15px',
+                                  color: '#000',
+                                }}
+                                variant="caption"
+                                display="block"
+                                gutterBottom
+                              >
+                                {data.review}
+                              </Typography>
+                            </div>
+                            <br />
+                            <div>
+                              <div
+                                className={styles.root}
+                                style={{
+                                  background: '#F4F2F2',
+                                  padding: '0px 15px 0px 15px',
+                                  borderRadius: '0px 0px 4px 4px',
+                                }}
+                              ></div>
+                            </div>
+                          </div>
+                        </>
+                      ))
+                    ) : (
+                      <Paper>
+                        <div className="review-util">
+                          <Typography
+                            variant="h5"
+                            style={{ color: '#9B9B9B' }}
+                            gutterBottom
+                            align="center"
+                          >
+                            You’ve not written any reviews yet
+                          </Typography>
+                        </div>
+                      </Paper>
+                    )}
                   </Container>
                 </Grid>
               </Grid>

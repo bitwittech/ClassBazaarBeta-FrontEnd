@@ -185,13 +185,14 @@ const HomeModal = ({
       setMessage(e.target.value);
     };
     const classes = useStyles();
+    console.log('UUID', uuid);
     const handleSubmit = async e => {
       e.preventDefault();
-      console.log(message, finished, value);
+      console.log(message, finished, value, uuid);
       const body = JSON.stringify({
         review: message,
         token: token,
-        courseId: uuid,
+        courseID: uuid,
         provider,
         rating: value,
         status: finished,
