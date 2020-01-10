@@ -48,15 +48,11 @@ const styles = theme => ({
   search: {
     background: '#FFF',
     position: 'relative',
-    // borderRadius: 10000000,
-    // backgroundColor: fade(theme.palette.common.white, 0.15),
     '&:hover': {
       backgroundColor: fade(theme.palette.common.white, 0.25),
     },
     marginRight: theme.spacing(2),
     marginLeft: 0,
-    borderWidth: 1,
-    borderStyle: 'solid',
     width: '100%',
     height: '120%',
     [theme.breakpoints.up('sm')]: {
