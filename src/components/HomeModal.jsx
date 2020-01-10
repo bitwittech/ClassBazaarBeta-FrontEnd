@@ -5,11 +5,12 @@ import Grid from '@material-ui/core/Grid';
 import Modal from '@material-ui/core/Modal';
 import Rating from '@material-ui/lab/Rating';
 // import { Rating } from '@material-ui/lab';
-import React from 'react';
+import React, { useState, useContext } from 'react';
 import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-
+import Store from '../store/Context';
+import axios from 'axios';
 const labels = {
   0.5: 'Useless',
   1: 'Useless+',
@@ -61,7 +62,14 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const HomeModal = ({ openState, handlePopupClose, state, course }) => {
+const HomeModal = ({
+  openState,
+  handlePopupClose,
+  state,
+  course,
+  provider,
+  uuid,
+}) => {
   const classes = useStyles();
 
   //Home made modal
@@ -168,12 +176,44 @@ const HomeModal = ({ openState, handlePopupClose, state, course }) => {
       {text}
     </Typography>
   );
-  const ReviewForm = course => {
+  const ReviewForm = (course, provider, uuid) => {
+    const [message, setMessage] = useState('');
+    const token = localStorage.getItem('cbtoken');
     const [value, setValue] = React.useState(0);
     const [finished, setFinished] = React.useState('Doing Right Now');
-
+    const handleChange = e => {
+      setMessage(e.target.value);
+    };
     const classes = useStyles();
-    console.log(value);
+    const handleSubmit = async e => {
+      e.preventDefault();
+      console.log(message, finished, value);
+      const body = JSON.stringify({
+        review: message,
+        token: token,
+        courseId: uuid,
+        provider,
+        rating: value,
+        status: finished,
+      });
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      };
+      try {
+        const res = await axios.post(
+          'https://api.classbazaar.in/api/review',
+          body,
+          config
+        );
+        console.log('STATUS', res);
+        handlePopupClose();
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    console.log(provider, uuid, token);
     return (
       <div>
         <Modal
@@ -198,82 +238,86 @@ const HomeModal = ({ openState, handlePopupClose, state, course }) => {
                 <span style={{ color: '#000' }}>Add a review for </span>
                 <span style={{ color: '#FFA502' }}> {course}</span>
               </Typography>
-
-              <Grid>
-                {ReviewModalTypo('1) How would you rate this course?')}
-                <Rating
-                  name="hover-tooltip"
-                  value={value}
-                  onChange={(event, newValue) => {
-                    setValue(newValue);
-                  }}
-                  precision={0.5}
-                  IconContainerComponent={IconContainer}
-                />
-                {ReviewModalTypo('2) Have you completed the course?')}
-                <div className="flex">
-                  <div>
-                    <button
-                      onClick={() => setFinished('Doing Right Now')}
-                      className={
-                        finished === 'Doing Right Now'
-                          ? 'r-tgg-btn r-tgg'
-                          : 'r-tgg-btn'
-                      }
-                    >
-                      Doing Right Now
-                    </button>
+              <form onSubmit={handleSubmit}>
+                <Grid>
+                  {ReviewModalTypo('1) How would you rate this course?')}
+                  <Rating
+                    name="hover-tooltip"
+                    value={value}
+                    onChange={(event, newValue) => {
+                      setValue(newValue);
+                    }}
+                    precision={0.5}
+                    IconContainerComponent={IconContainer}
+                  />
+                  {ReviewModalTypo('2) Have you completed the course?')}
+                  <div className="flex">
+                    <div>
+                      <button
+                        onClick={() => setFinished('Doing Right Now')}
+                        className={
+                          finished === 'Doing Right Now'
+                            ? 'r-tgg-btn r-tgg'
+                            : 'r-tgg-btn'
+                        }
+                      >
+                        Doing Right Now
+                      </button>
+                    </div>
+                    <div>
+                      <button
+                        onClick={() => setFinished('Completed')}
+                        className={
+                          finished === 'Completed'
+                            ? 'r-tgg-btn r-tgg'
+                            : 'r-tgg-btn'
+                        }
+                      >
+                        Completed
+                      </button>
+                    </div>
                   </div>
-                  <div>
-                    <button
-                      onClick={() => setFinished('Completed')}
-                      className={
-                        finished === 'Completed'
-                          ? 'r-tgg-btn r-tgg'
-                          : 'r-tgg-btn'
-                      }
-                    >
-                      Completed
-                    </button>
-                  </div>
-                </div>
-                {ReviewModalTypo('3) Write your review')}
+                  {ReviewModalTypo('3) Write your review')}
 
-                <textarea
-                  style={{ width: '100%', height: '90px' }}
-                  name="review"
-                  className="text-field"
-                  placeholder="What did you like or dislike? How could this course improve?"
-                />
-                <div style={{ marginTop: '10px' }}>
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    type="submit"
-                    className="enroll-btn"
-                  >
-                    Submit
-                  </Button>
-                </div>
-              </Grid>
+                  <textarea
+                    value={message}
+                    onChange={handleChange}
+                    style={{ width: '100%', height: '90px' }}
+                    name="review"
+                    className="text-field"
+                    required
+                    placeholder="What did you like or dislike? How could this course improve?"
+                  />
+                  <div style={{ marginTop: '10px' }}>
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      type="submit"
+                      className="enroll-btn"
+                    >
+                      Submit
+                    </Button>
+                  </div>
+                </Grid>
+              </form>
             </div>
           </Fade>
         </Modal>
       </div>
     );
   };
-  const switchRender = course => {
+  const switchRender = (course, provider, uuid) => {
     switch (state) {
       case 0:
         return HomeMessage();
       case 1:
-        return ReviewForm(course);
+        return ReviewForm(course, provider, uuid);
       default:
         return HomeMessage();
     }
   };
 
-  return <>{switchRender(course)}</>;
+  return <>{switchRender(course, provider, uuid)}</>;
 };
 
 export default HomeModal;

@@ -1,7 +1,6 @@
 import { Container, Grid, Typography } from '@material-ui/core';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import ReactHtmlParser, { convertNodeToElement } from 'react-html-parser';
-
 import AppBar from './appBar';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import Box from '@material-ui/core/Box';
@@ -42,8 +41,10 @@ const CourseDetails = props => {
     loading: true,
     popUp: false,
   });
-  const provider = props.location.pathname.split('/')[2];
-  let uuid = props.location.pathname.split('/')[3];
+  // const provider = props.location.pathname.split('/')[2];
+  // let uuid = props.location.pathname.split('/')[3];
+  const uuid = props.match.params.uuid;
+  const provider = props.match.params.provider;
   useEffect(() => {
     const getCourseDetails = async () => {
       var url = `https://api.classbazaar.in/api/course?uuid=${uuid}&provider=${provider}`;
@@ -1399,13 +1400,15 @@ const CourseDetails = props => {
         return <h1>Coming Soon</h1>;
     }
   };
-  console.log('Course Details', state);
+
   return (
     <>
       <AppBar />
       <MobileTopbar onlySearch={true} />
       <HomeModal
         openState={state.popUp}
+        uuid={uuid}
+        provider={provider}
         handlePopupClose={handlePopupClose}
         course={state.data && state.data.title}
         state={1}
