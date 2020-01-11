@@ -157,7 +157,7 @@ class ProfilePage extends Component {
 
   render() {
     if (this.state.user == null) return <Redirect to="/" />;
-
+    console.log("STATE PROFILE",this.state)
     return (
       <>
         <TopAppBar />
@@ -205,9 +205,7 @@ class ProfilePage extends Component {
                                 fontWeight: '600',
                               }}
                             >
-                              {this.state.user.firstName +
-                                ' ' +
-                                this.state.user.lastName}
+                              {this.state.user.username}
                             </Typography>
                           </Grid>
                           <Grid
