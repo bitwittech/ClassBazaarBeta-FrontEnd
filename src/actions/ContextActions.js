@@ -135,6 +135,7 @@ export const signin = async (data, dispatch) => {
         password: data.password,
       })
       .then(async response => {
+        console.log(response)
         if (response.statusCode === 200) {
           store.setItem('user', response.successResponse.user);
           dispatch({
@@ -223,11 +224,10 @@ export const addBookmark = async (uuid, userId, user, provider, dispatch) => {
   //else add and dispatch updated
 
   //check for first time new user whose user.data in undefined
-
   if (user.data === undefined) {
-    console.log('YEAH')
+    console.log("NEW USER")
     try {
-      const addNewData = await client.patchUser(userId, {
+      const newData = await client.patchUser(userId, {
         user: {
           data: {
             bookmarks: [{
@@ -237,86 +237,12 @@ export const addBookmark = async (uuid, userId, user, provider, dispatch) => {
           }
         }
       })
-      store.setItem('user', addNewData.successResponse.user);
-      console.log("ADD NEW DATA", addNewData)
-      dispatch({
-        type: UPDATE_BOOKMARK,
-        payload: addNewData.successResponse.user.data.bookmarks,
-      });
-      console.log("GONE")
-      return;
-
+      console.log("ADDED DATA", newData)
     } catch (error) {
-      dispatch({
-        type: ALERT,
-        payload: {
-          varient: 'error',
-          message: 'Could not bookmark.',
-        },
-      });
+      console.log(error)
     }
   }
-  console.log("NOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO")
 
-  const presentCheck = () => {
-    if (user.data.bookmarks.find(e => uuid === e.id) === undefined)
-      return false;
-    else return true;
-  };
-  const isPresentAlready = presentCheck();
-
-  console.log(isPresentAlready);
-
-  const updateData = async newBookmarks => {
-    try {
-      const patchedData = await client.patchUser(userId, {
-        user: {
-          data: {
-            ...user.data,
-            bookmarks: newBookmarks,
-          },
-        },
-      });
-      console.log(patchedData);
-      store.setItem('user', patchedData.successResponse.user);
-      console.log(
-        'DISPATCHING DATA',
-        patchedData.successResponse.user.data.bookmarks
-      );
-
-      dispatch({
-        type: UPDATE_BOOKMARK,
-        payload: patchedData.successResponse.user.data.bookmarks,
-      });
-    } catch (error) {
-      dispatch({
-        type: ALERT,
-        payload: {
-          varient: 'error',
-          message: 'Could not bookmark.',
-        },
-      });
-    }
-  };
-
-  if (isPresentAlready) {
-    const newBookmarks = user.data.bookmarks.filter(e => e.id !== uuid);
-    console.log('ALREADY PRESENT', newBookmarks);
-    await updateData(newBookmarks);
-  } else {
-    const oldBookmarks = user.data.bookmarks;
-    console.log('oldBookmarks', oldBookmarks);
-
-    const newBookmarks = [
-      ...oldBookmarks,
-      {
-        id: uuid,
-        provider,
-      },
-    ];
-    console.log('NEW ADDED', newBookmarks);
-    await updateData(newBookmarks);
-  }
 };
 
 export const updateUser = async (type, userId, data) => {

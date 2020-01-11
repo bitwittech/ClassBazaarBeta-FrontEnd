@@ -1,18 +1,94 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Redirect } from 'react-router';
 import AppBar from './appBar';
 import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { Container, Typography, Grid } from '@material-ui/core';
+import { register, signin } from '../actions/ContextActions';
+import Store from '../store/Context';
 import ForgotPassword from './ForgotPassword';
 const MobileAuth = () => {
+  const global = useContext(Store);
   const [state, setState] = useState({ state: 0 });
   const [forgotPassword, setForgotPassword] = useState(false);
+  const [modal, setModal] = useState({
+    state: 0, //0 - Login 1-Signup
+    formData: {
+      username: '',
+      password: '',
+      phone: '',
+      email: '',
+    },
+    errors: {
+      username: null,
+      password: null,
+      phone: null,
+      email: null,
+    },
+  });
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    console.log(modal.formData);
+    console.log(state);
+    if (state.state === 0) {
+      signin(modal.formData, global.dispatch);
+    }
+    if (state.state === 1) {
+      register(modal.formData, global.dispatch);
+    }
+
+    setModal({
+      ...modal,
+      formData: {
+        username: '',
+        password: '',
+        phone: '',
+        email: '',
+      },
+    });
+  };
   if (window.innerWidth >= 760) return <Redirect to="/"></Redirect>;
 
   const handlePopupClose = () => {
     setForgotPassword(false);
   };
+
+  const handleChange = e => {
+    const { name, value } = e.target;
+    const errors = modal.errors;
+    const validEmailRegex = RegExp(
+      /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
+    );
+    const phoneRegex = RegExp(/^(\+\d{1,3}[- ]?)?\d{10}$/);
+    switch (name) {
+      case 'username':
+        errors.username = !value.toString().trim().length
+          ? 'Username required'
+          : '';
+        break;
+      case 'email':
+        errors.email = validEmailRegex.test(value) ? '' : 'Invalid email';
+        break;
+      case 'phone':
+        errors.phone = phoneRegex.test(value) ? '' : 'Invalid phone';
+        break;
+      case 'password':
+        errors.password =
+          value.length < 8 ? 'Password must be 8 characters long' : '';
+
+      default:
+        break;
+    }
+    setModal({
+      ...modal,
+      formData: {
+        ...modal.formData,
+        [e.target.name]: e.target.value,
+      },
+    });
+  };
+  if (global.state.isAuth) return <Redirect to="/" />;
   return (
     <div className="no-desktop margin-toper">
       <ForgotPassword
@@ -67,7 +143,7 @@ const MobileAuth = () => {
         >
           <i class="fab fa-linkedin-in"></i>&nbsp; Connect Linked-In
         </Button>
-        <form>
+        <form onSubmit={handleSubmit}>
           {state.state === 1 ? (
             <>
               <Typography
@@ -83,12 +159,15 @@ const MobileAuth = () => {
               </Typography>
               <input
                 type="text"
+                value={modal.formData.username}
+                onChange={handleChange}
                 name="username"
                 className="text-field"
                 style={{ width: '250px' }}
                 placeholder="Enter your User name"
                 required
               />
+              <div className="color-red">{modal.errors.username}</div>
             </>
           ) : null}
           <Typography
@@ -104,13 +183,16 @@ const MobileAuth = () => {
             Email ID
           </Typography>
           <input
+            onChange={handleChange}
             name="email"
+            value={modal.formData.email}
             type="email"
             style={{ width: '250px' }}
             className="text-field"
             placeholder="Enter your Email ID"
             required
           />
+          <div className="color-red">{modal.errors.email}</div>
           {state.state === 1 ? (
             <>
               {' '}
@@ -129,11 +211,14 @@ const MobileAuth = () => {
               <input
                 type="text"
                 name="phone"
+                value={modal.formData.phone}
+                onChange={handleChange}
                 style={{ width: '250px' }}
                 className="text-field"
                 placeholder="Enter your number"
                 required
               />
+              <div className="color-red">{modal.errors.phone}</div>
             </>
           ) : null}
           <Typography
@@ -151,11 +236,14 @@ const MobileAuth = () => {
           <input
             name="password"
             type="password"
+            onChange={handleChange}
+            value={modal.formData.password}
             className="text-field"
             style={{ width: '250px' }}
             placeholder="Enter your password"
             minLength={8}
           />
+          <div className="color-red">{modal.errors.password}</div>
           {state.state === 0 ? (
             <Typography
               className="link-button"
