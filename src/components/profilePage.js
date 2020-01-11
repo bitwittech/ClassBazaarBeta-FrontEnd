@@ -575,7 +575,7 @@ class ProfilePage extends Component {
                       <p>Loading</p>
                     ) : this.state.reviews.length > 0 ? (
                       this.state.reviews.map(data => (
-                        <>
+                        <div key={Math.random()}>
                           <div className="c-card">
                             <div className="coursecard-header">
                               <div>
@@ -656,7 +656,7 @@ class ProfilePage extends Component {
                               ></div>
                             </div>
                           </div>
-                        </>
+                        </div>
                       ))
                     ) : (
                       <Paper>

@@ -310,7 +310,6 @@ class LandingPage extends Component {
   }
 
   getDegreeCard(degree, classes, type) {
-    console.log('DEGREE', degree);
     const padding = { paddingTop: 6, paddingBottom: 6 };
     return (
       <Grid container className="c-card">
