@@ -612,29 +612,28 @@ class LandingPage extends Component {
             </div>
           </div>
         </Grid>
-        <Grid
-          justify="center"
-          justify="center"
-          alignItems="center"
-          style={{
-            background: '#FFA502',
-            padding: '30px 50px',
-            width: '100%',
-            textAlign: 'center',
-            marginLeft: '-50px',
-          }}
-        >
-          <Typography
-            variant="h6"
-            style={{ color: 'white', fontWeight: '500', marginBottom: '20px' }}
-          >
-            Never stop learning. Subscribe to our newsletter
-          </Typography>
-          <div style={{ marginTop: '10px', width: '90%', margin: 'auto' }}>
-            <input type="email" placeholder="Your email" className="ns-input" />
-            <button className="ns-submit">Submit</button>
+        <div className="orange-band">
+          <div className="inner-orange">
+            <Typography
+              variant="h6"
+              style={{
+                color: 'white',
+                fontWeight: '500',
+                marginBottom: '20px',
+              }}
+            >
+              Never stop learning. Subscribe to our newsletter
+            </Typography>
+            <div style={{ marginTop: '10px', width: '90%', margin: 'auto' }}>
+              <input
+                type="email"
+                placeholder="Your email"
+                className="ns-input"
+              />
+              <button className="ns-submit">Submit</button>
+            </div>
           </div>
-        </Grid>
+        </div>
         <Footer bgColor={'#FFF'} />
       </>
     );
