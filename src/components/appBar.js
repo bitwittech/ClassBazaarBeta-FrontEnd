@@ -152,13 +152,18 @@ function TopBar(props) {
     >
       <div className="appbar-flex">
         <div className="topbar-cont">
+          <div className="no-desktop">
+            <MenuIcon />
+          </div>
           <div className="searchbar-div">
             {!props.isSearchIncluded ? (
               <p className="color-white no-mobile">
                 classbazaarclassbazaarcsdasdddfdsfd
               </p>
             ) : null}
-
+            <div className="no-desktop"></div>
+            <div className="no-desktop"></div>
+            <div className="no-desktop"></div>
             {props.isSearchIncluded && (
               <div className="no-mobile">
                 <div className={classes.search}>
