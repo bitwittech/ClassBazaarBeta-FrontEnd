@@ -154,7 +154,9 @@ function TopBar(props) {
         <div className="topbar-cont">
           <div className="searchbar-div">
             {!props.isSearchIncluded ? (
-              <p className="color-white">classbazaarclassbazaarcsdasdddfdsfd</p>
+              <p className="color-white no-mobile">
+                classbazaarclassbazaarcsdasdddfdsfd
+              </p>
             ) : null}
 
             {props.isSearchIncluded && (

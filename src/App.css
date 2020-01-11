@@ -748,7 +748,20 @@ dashboard-options-header {
   margin-top: 100px;
 }
 
+
 @media (max-width:800px) {
+  .smicon {
+    transform: rotate(90deg);
+    width: 10px;
+    margin-left: 10px;
+  }
+
+  .smicon2 {
+    transform: rotate(270deg);
+    width: 10px;
+    margin-left: 10px;
+  }
+
   .top-push {
     margin-top: 30px;
   }

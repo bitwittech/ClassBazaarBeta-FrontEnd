@@ -28,7 +28,7 @@ import TopAppBar from './appBar';
 import Typography from '@material-ui/core/Typography';
 import { withRouter } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
-
+import Smicon from '../assets/smicon.svg';
 const styles = theme => ({
   dashboardLink: {
     color: 'white',
@@ -167,7 +167,7 @@ const ShowMore = withRouter(({ history, ...data }) => {
         <div style={{ alignSelf: 'center' }}>Show More</div>
         <div className="flex">
           <div style={{ alignSelf: 'center', height: '25px' }}>
-            <ExpandMoreIcon />
+            <img className="smicon" src={Smicon} alt="sm-icon" />
           </div>
         </div>
       </div>
@@ -503,9 +503,9 @@ class LandingPage extends Component {
                   <div className="flex">
                     <div style={{ alignSelf: 'center', height: '25px' }}>
                       {this.state.showMoreButtonText === 'Show More' ? (
-                        <ExpandMoreIcon />
+                        <img className="smicon" src={Smicon} alt="sm-icon" />
                       ) : (
-                        <ExpandLessIcon />
+                        <img className="smicon2" src={Smicon} alt="sm-icon2" />
                       )}
                     </div>
                   </div>
