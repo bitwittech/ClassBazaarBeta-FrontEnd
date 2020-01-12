@@ -28,7 +28,7 @@ import TopAppBar from './appBar';
 import Typography from '@material-ui/core/Typography';
 import { withRouter } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
-
+import Smicon from '../assets/smicon.svg';
 const styles = theme => ({
   dashboardLink: {
     color: 'white',
@@ -167,7 +167,7 @@ const ShowMore = withRouter(({ history, ...data }) => {
         <div style={{ alignSelf: 'center' }}>Show More</div>
         <div className="flex">
           <div style={{ alignSelf: 'center', height: '25px' }}>
-            <ExpandMoreIcon />
+            <img className="smicon" src={Smicon} alt="sm-icon" />
           </div>
         </div>
       </div>
@@ -310,7 +310,6 @@ class LandingPage extends Component {
   }
 
   getDegreeCard(degree, classes, type) {
-    console.log('DEGREE', degree);
     const padding = { paddingTop: 6, paddingBottom: 6 };
     return (
       <Grid container className="c-card">
@@ -503,9 +502,9 @@ class LandingPage extends Component {
                   <div className="flex">
                     <div style={{ alignSelf: 'center', height: '25px' }}>
                       {this.state.showMoreButtonText === 'Show More' ? (
-                        <ExpandMoreIcon />
+                        <img className="smicon" src={Smicon} alt="sm-icon" />
                       ) : (
-                        <ExpandLessIcon />
+                        <img className="smicon2" src={Smicon} alt="sm-icon2" />
                       )}
                     </div>
                   </div>
@@ -612,29 +611,28 @@ class LandingPage extends Component {
             </div>
           </div>
         </Grid>
-        <Grid
-          justify="center"
-          justify="center"
-          alignItems="center"
-          style={{
-            background: '#FFA502',
-            padding: '30px 50px',
-            width: '100%',
-            textAlign: 'center',
-            marginLeft: '-50px',
-          }}
-        >
-          <Typography
-            variant="h6"
-            style={{ color: 'white', fontWeight: '500', marginBottom: '20px' }}
-          >
-            Never stop learning. Subscribe to our newsletter
-          </Typography>
-          <div style={{ marginTop: '10px', width: '90%', margin: 'auto' }}>
-            <input type="email" placeholder="Your email" className="ns-input" />
-            <button className="ns-submit">Submit</button>
+        <div className="orange-band">
+          <div className="inner-orange">
+            <Typography
+              variant="h6"
+              style={{
+                color: 'white',
+                fontWeight: '500',
+                marginBottom: '20px',
+              }}
+            >
+              Never stop learning. Subscribe to our newsletter
+            </Typography>
+            <div style={{ marginTop: '10px', width: '90%', margin: 'auto' }}>
+              <input
+                type="email"
+                placeholder="Your email"
+                className="ns-input"
+              />
+              <button className="ns-submit">Submit</button>
+            </div>
           </div>
-        </Grid>
+        </div>
         <Footer bgColor={'#FFF'} />
       </>
     );

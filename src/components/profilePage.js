@@ -157,7 +157,7 @@ class ProfilePage extends Component {
 
   render() {
     if (this.state.user == null) return <Redirect to="/" />;
-
+    console.log("STATE PROFILE",this.state)
     return (
       <>
         <TopAppBar />
@@ -205,9 +205,7 @@ class ProfilePage extends Component {
                                 fontWeight: '600',
                               }}
                             >
-                              {this.state.user.firstName +
-                                ' ' +
-                                this.state.user.lastName}
+                              {this.state.user.username}
                             </Typography>
                           </Grid>
                           <Grid
@@ -577,7 +575,7 @@ class ProfilePage extends Component {
                       <p>Loading</p>
                     ) : this.state.reviews.length > 0 ? (
                       this.state.reviews.map(data => (
-                        <>
+                        <div key={Math.random()}>
                           <div className="c-card">
                             <div className="coursecard-header">
                               <div>
@@ -658,7 +656,7 @@ class ProfilePage extends Component {
                               ></div>
                             </div>
                           </div>
-                        </>
+                        </div>
                       ))
                     ) : (
                       <Paper>

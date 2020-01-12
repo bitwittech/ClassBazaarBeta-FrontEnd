@@ -150,92 +150,105 @@ function TopBar(props) {
       }}
       className="sticky"
     >
-      <Toolbar style={{}}>
-        <div className={`${classes.logoHorizontallyCenter} m-logo`}>
-          <ImageWithRouter
-            image={Logo}
-            routingURL={'/'}
-            clazzNames={classes.logo}
-            alt="logo"
-          />
-        </div>
-        {props.isSearchIncluded && (
-          <div className="no-mobile">
-            <div className={classes.search}>
-              <div className={classes.searchIcon}>
-                <SearchIcon />
+      <div className="appbar-flex">
+        <div className="topbar-cont">
+          <div className="no-desktop">
+            <MenuIcon />
+          </div>
+          <div className="searchbar-div no-mobile">
+            {!props.isSearchIncluded ? (
+              <p className="color-white no-mobile">
+                classbazaarclassbazaarcsdasdddfdsfd
+              </p>
+            ) : null}
+
+            {props.isSearchIncluded && (
+              <div className="no-mobile">
+                <div className={classes.search}>
+                  <div className={classes.searchIcon}>
+                    <SearchIcon />
+                  </div>
+                  <InputBase
+                    placeholder="Search for a course"
+                    value={props.initialSearchValue}
+                    onChange={props.onChange}
+                    classes={{
+                      root: classes.inputRoot,
+                      input: classes.inputInput,
+                    }}
+                    inputProps={{ 'aria-label': 'search' }}
+                  />
+                </div>
               </div>
-              <InputBase
-                placeholder="Search for a course"
-                value={props.initialSearchValue}
-                onChange={props.onChange}
-                classes={{
-                  root: classes.inputRoot,
-                  input: classes.inputInput,
-                }}
-                inputProps={{ 'aria-label': 'search' }}
-              />
+            )}
+          </div>
+          <div>
+            {' '}
+            <ImageWithRouter
+              image={Logo}
+              routingURL={'/'}
+              clazzNames={`${classes.logo} c-logo`}
+              alt="logo"
+            />
+          </div>
+          <div className="end-flex">
+            <div>
+              {!state.isAuth ? (
+                <PermIdentityIcon
+                  onClick={handleUserMobile}
+                  className="no-desktop"
+                />
+              ) : null}
+              {state.isAuth ? <IconWithRouter routingURL={'/profile'} /> : null}
+              {!state.isAuth ? (
+                <>
+                  <Button
+                    variant="outlined"
+                    color="primary"
+                    className="signup-btn no-mobile"
+                    onClick={() =>
+                      dispatch({
+                        type: LOGIN_MODAL,
+                        payload: {
+                          open: true,
+                          state: 1,
+                        },
+                      })
+                    }
+                  >
+                    Signup
+                  </Button>
+                  <Button
+                    variant="outlined"
+                    color="primary"
+                    className="login-btn signup-btn no-mobile"
+                    onClick={() => {
+                      dispatch({
+                        type: LOGIN_MODAL,
+                        payload: {
+                          open: true,
+                          state: 0,
+                        },
+                      });
+                    }}
+                  >
+                    Login
+                  </Button>
+                </>
+              ) : (
+                <Button
+                  onClick={() => handleLogout()}
+                  variant="outlined"
+                  color="primary"
+                  className="signup-btn"
+                >
+                  Logout
+                </Button>
+              )}
             </div>
           </div>
-        )}
-
-        <div className={classes.rightLogin}>
-          {!state.isAuth ? (
-            <PermIdentityIcon
-              onClick={handleUserMobile}
-              className="no-desktop user-m-icon"
-            />
-          ) : null}
-          {state.isAuth ? <IconWithRouter routingURL={'/profile'} /> : null}
-          {!state.isAuth ? (
-            <>
-              <Button
-                variant="outlined"
-                color="primary"
-                className="signup-btn no-mobile"
-                onClick={() =>
-                  dispatch({
-                    type: LOGIN_MODAL,
-                    payload: {
-                      open: true,
-                      state: 1,
-                    },
-                  })
-                }
-              >
-                Signup
-              </Button>
-              <Button
-                variant="outlined"
-                color="primary"
-                className="login-btn signup-btn no-mobile"
-                onClick={() => {
-                  dispatch({
-                    type: LOGIN_MODAL,
-                    payload: {
-                      open: true,
-                      state: 0,
-                    },
-                  });
-                }}
-              >
-                Login
-              </Button>
-            </>
-          ) : (
-            <Button
-              onClick={() => handleLogout()}
-              variant="outlined"
-              color="primary"
-              className="signup-btn"
-            >
-              Logout
-            </Button>
-          )}
         </div>
-        <div className={classes.grow} />
-        <div className={classes.sectionDesktop}></div>
-      </Toolbar>
+      </div>
     </AppBar>
   );
 }
