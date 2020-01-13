@@ -70,7 +70,7 @@ export const register = async (data, dispatch) => {
             type: ALERT,
             payload: {
               varient: 'success',
-              message: 'Successfully registered.',
+              message: 'Registration successful. Please login',
             },
           });
           dispatch({
