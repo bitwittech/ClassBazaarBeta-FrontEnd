@@ -71,6 +71,7 @@ const HomeModal = ({
   uuid,
 }) => {
   const classes = useStyles();
+  const { dispatch } = useContext(Store);
 
   //Home made modal
   const HomeMessage = () => (
@@ -176,7 +177,8 @@ const HomeModal = ({
       {text}
     </Typography>
   );
-  const ReviewForm = (course, provider, uuid) => {
+  const ReviewForm = (course, provider, uuid, dispatch) => {
+    console.log(dispatch);
     const [message, setMessage] = useState('');
     const token = localStorage.getItem('cbtoken');
     const [value, setValue] = React.useState(0);
@@ -209,9 +211,23 @@ const HomeModal = ({
           config
         );
         console.log('STATUS', res);
+        dispatch({
+          type: 'ALERT',
+          payload: {
+            varient: 'success',
+            message: 'Review Added',
+          },
+        });
         handlePopupClose();
       } catch (error) {
         console.log(error);
+        dispatch({
+          type: 'ALERT',
+          payload: {
+            varient: 'error',
+            message: 'Could not add your review',
+          },
+        });
       }
     };
     console.log(provider, uuid, token);
@@ -312,7 +328,7 @@ const HomeModal = ({
       case 0:
         return HomeMessage();
       case 1:
-        return ReviewForm(course, provider, uuid);
+        return ReviewForm(course, provider, uuid, dispatch);
       default:
         return HomeMessage();
     }
