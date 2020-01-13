@@ -372,25 +372,30 @@ const CourseDetails = props => {
                       </div>
                     </button>
                   </div>
-                  <Grid
-                    container
-                    style={{ padding: 20, background: '#00000015' }}
-                  >
-                    <Grid item xs={3}>
-                      <Grid item xs={12}>
-                        {/* <Fab color="primary" aria-label="add" className={classes.fab}>
-                  <AddIcon />
-                </Fab> */}
+                  {state.rlaoding ? (
+                    <p>Loading</p>
+                  ) : state.reviews.length > 0 ? (
+                    state.reviews.map(data => (
+                      <Grid
+                        container
+                        style={{ padding: 20, background: '#00000015' }}
+                      >
+                        <Grid item xs={3}>
+                          <Grid item xs={12}>
+                            <Box style={{ padding: 30 }}>User Image</Box>
+                          </Grid>
+                        </Grid>
+                        <Grid item xs={9}>
+                          <Typography color="primary" variant="h6">
+                            Name
+                          </Typography>
+                          <Box style={{ padding: 30 }}>{data.review}</Box>
+                        </Grid>
                       </Grid>
-                    </Grid>
-                    <Grid item xs={9}>
-                      <Box style={{ padding: 30 }}>
-                        Natus error sit voluptartem accusantium doloremque
-                        laudantium, totam rem aperiam, eaque ipsa quae ab illo
-                        inventore.
-                      </Box>
-                    </Grid>
-                  </Grid>
+                    ))
+                  ) : (
+                    <p>No reviews for this course</p>
+                  )}
                 </div>
               </div>
             </Grid>
@@ -723,25 +728,30 @@ const CourseDetails = props => {
                       </div>
                     </button>
                   </div>
-                  <Grid
-                    container
-                    style={{ padding: 20, background: '#00000015' }}
-                  >
-                    <Grid item xs={3}>
-                      <Grid item xs={12}>
-                        {/* <Fab color="primary" aria-label="add" className={classes.fab}>
-                  <AddIcon />
-                </Fab> */}
+                  {state.rlaoding ? (
+                    <p>Loading</p>
+                  ) : state.reviews.length > 0 ? (
+                    state.reviews.map(data => (
+                      <Grid
+                        container
+                        style={{ padding: 20, background: '#00000015' }}
+                      >
+                        <Grid item xs={3}>
+                          <Grid item xs={12}>
+                            <Box style={{ padding: 30 }}>User Image</Box>
+                          </Grid>
+                        </Grid>
+                        <Grid item xs={9}>
+                          <Typography color="primary" variant="h6">
+                            Name
+                          </Typography>
+                          <Box style={{ padding: 30 }}>{data.review}</Box>
+                        </Grid>
                       </Grid>
-                    </Grid>
-                    <Grid item xs={9}>
-                      <Box style={{ padding: 30 }}>
-                        Natus error sit voluptartem accusantium doloremque
-                        laudantium, totam rem aperiam, eaque ipsa quae ab illo
-                        inventore.
-                      </Box>
-                    </Grid>
-                  </Grid>
+                    ))
+                  ) : (
+                    <p>No reviews for this course</p>
+                  )}
                 </div>
               </div>
             </Grid>
@@ -855,25 +865,30 @@ const CourseDetails = props => {
                       </div>
                     </button>
                   </div>
-                  <Grid
-                    container
-                    style={{ padding: 20, background: '#00000015' }}
-                  >
-                    <Grid item xs={3}>
-                      <Grid item xs={12}>
-                        {/* <Fab color="primary" aria-label="add" className={classes.fab}>
-                <AddIcon />
-              </Fab> */}
+                  {state.rlaoding ? (
+                    <p>Loading</p>
+                  ) : state.reviews.length > 0 ? (
+                    state.reviews.map(data => (
+                      <Grid
+                        container
+                        style={{ padding: 20, background: '#00000015' }}
+                      >
+                        <Grid item xs={3}>
+                          <Grid item xs={12}>
+                            <Box style={{ padding: 30 }}>User Image</Box>
+                          </Grid>
+                        </Grid>
+                        <Grid item xs={9}>
+                          <Typography color="primary" variant="h6">
+                            Name
+                          </Typography>
+                          <Box style={{ padding: 30 }}>{data.review}</Box>
+                        </Grid>
                       </Grid>
-                    </Grid>
-                    <Grid item xs={9}>
-                      <Box style={{ padding: 30 }}>
-                        Natus error sit voluptartem accusantium doloremque
-                        laudantium, totam rem aperiam, eaque ipsa quae ab illo
-                        inventore.
-                      </Box>
-                    </Grid>
-                  </Grid>
+                    ))
+                  ) : (
+                    <p>No reviews for this course</p>
+                  )}
                 </div>
               </div>
             </Grid>
@@ -1038,25 +1053,30 @@ const CourseDetails = props => {
                       </div>
                     </button>
                   </div>
-                  <Grid
-                    container
-                    style={{ padding: 20, background: '#00000015' }}
-                  >
-                    <Grid item xs={3}>
-                      <Grid item xs={12}>
-                        {/* <Fab color="primary" aria-label="add" className={classes.fab}>
-                <AddIcon />
-              </Fab> */}
+                  {state.rlaoding ? (
+                    <p>Loading</p>
+                  ) : state.reviews.length > 0 ? (
+                    state.reviews.map(data => (
+                      <Grid
+                        container
+                        style={{ padding: 20, background: '#00000015' }}
+                      >
+                        <Grid item xs={3}>
+                          <Grid item xs={12}>
+                            <Box style={{ padding: 30 }}>User Image</Box>
+                          </Grid>
+                        </Grid>
+                        <Grid item xs={9}>
+                          <Typography color="primary" variant="h6">
+                            Name
+                          </Typography>
+                          <Box style={{ padding: 30 }}>{data.review}</Box>
+                        </Grid>
                       </Grid>
-                    </Grid>
-                    <Grid item xs={9}>
-                      <Box style={{ padding: 30 }}>
-                        Natus error sit voluptartem accusantium doloremque
-                        laudantium, totam rem aperiam, eaque ipsa quae ab illo
-                        inventore.
-                      </Box>
-                    </Grid>
-                  </Grid>
+                    ))
+                  ) : (
+                    <p>No reviews for this course</p>
+                  )}
                 </div>
               </div>
             </Grid>
@@ -1224,25 +1244,30 @@ const CourseDetails = props => {
                       </div>
                     </button>
                   </div>
-                  <Grid
-                    container
-                    style={{ padding: 20, background: '#00000015' }}
-                  >
-                    <Grid item xs={3}>
-                      <Grid item xs={12}>
-                        {/* <Fab color="primary" aria-label="add" className={classes.fab}>
-                <AddIcon />
-              </Fab> */}
+                  {state.rlaoding ? (
+                    <p>Loading</p>
+                  ) : state.reviews.length > 0 ? (
+                    state.reviews.map(data => (
+                      <Grid
+                        container
+                        style={{ padding: 20, background: '#00000015' }}
+                      >
+                        <Grid item xs={3}>
+                          <Grid item xs={12}>
+                            <Box style={{ padding: 30 }}>User Image</Box>
+                          </Grid>
+                        </Grid>
+                        <Grid item xs={9}>
+                          <Typography color="primary" variant="h6">
+                            Name
+                          </Typography>
+                          <Box style={{ padding: 30 }}>{data.review}</Box>
+                        </Grid>
                       </Grid>
-                    </Grid>
-                    <Grid item xs={9}>
-                      <Box style={{ padding: 30 }}>
-                        Natus error sit voluptartem accusantium doloremque
-                        laudantium, totam rem aperiam, eaque ipsa quae ab illo
-                        inventore.
-                      </Box>
-                    </Grid>
-                  </Grid>
+                    ))
+                  ) : (
+                    <p>No reviews for this course</p>
+                  )}
                 </div>
               </div>
             </Grid>
@@ -1383,25 +1408,30 @@ const CourseDetails = props => {
                     </button>
                   </div>
                   <br />
-                  <Grid
-                    container
-                    style={{ padding: 20, background: '#00000015' }}
-                  >
-                    <Grid item xs={3}>
-                      <Grid item xs={12}>
-                        {/* <Fab color="primary" aria-label="add" className={classes.fab}>
-                <AddIcon />
-              </Fab> */}
+                  {state.rlaoding ? (
+                    <p>Loading</p>
+                  ) : state.reviews.length > 0 ? (
+                    state.reviews.map(data => (
+                      <Grid
+                        container
+                        style={{ padding: 20, background: '#00000015' }}
+                      >
+                        <Grid item xs={3}>
+                          <Grid item xs={12}>
+                            <Box style={{ padding: 30 }}>User Image</Box>
+                          </Grid>
+                        </Grid>
+                        <Grid item xs={9}>
+                          <Typography color="primary" variant="h6">
+                            Name
+                          </Typography>
+                          <Box style={{ padding: 30 }}>{data.review}</Box>
+                        </Grid>
                       </Grid>
-                    </Grid>
-                    <Grid item xs={9}>
-                      <Box style={{ padding: 30 }}>
-                        Natus error sit voluptartem accusantium doloremque
-                        laudantium, totam rem aperiam, eaque ipsa quae ab illo
-                        inventore.
-                      </Box>
-                    </Grid>
-                  </Grid>
+                    ))
+                  ) : (
+                    <p>No reviews for this course</p>
+                  )}
                 </div>
               </div>
             </Grid>
