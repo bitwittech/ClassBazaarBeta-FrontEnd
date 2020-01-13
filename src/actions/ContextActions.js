@@ -309,14 +309,14 @@ export const updateUser = async (type, userId, data) => {
     store.setItem('user', patchedData.successResponse.user);
     return {
       varient: 'success',
-      message: 'Updated'
+      message: 'Updated profile.'
     }
   } catch (error) {
 
     console.log(error)
     return {
       varient: 'error',
-      message: 'Unable to update'
+      message: 'Unable to update your profile.'
     }
   }
 }
