@@ -412,7 +412,7 @@ class LandingPage extends Component {
 
           {this.state.popUp === true ? (
             <HomeModal
-              state={0}
+              Mstate={0}
               openState={this.state.popUp}
               handlePopupClose={this.handlePopupClose}
             />

@@ -44,6 +44,7 @@ const CourseDetails = props => {
     reviews: [],
     rloading: true,
   });
+  console.log('COURSE DETAILS PAGE', state);
   // const provider = props.location.pathname.split('/')[2];
   // let uuid = props.location.pathname.split('/')[3];
   const uuid = props.match.params.uuid;
@@ -213,6 +214,55 @@ const CourseDetails = props => {
         </div>
       </>
     );
+
+  const reviews = () => (
+    <>
+      {state.rlaoding ? (
+        <p>Loading</p>
+      ) : state.reviews.length > 0 ? (
+        state.reviews.map(data => (
+          <Grid
+            key={data.course_id}
+            container
+            style={{
+              padding: 20,
+              background: '#00000015',
+              marginTop: '15px',
+            }}
+          >
+            <Grid item xs={3}>
+              <Grid item xs={12}>
+                <Box style={{ padding: '0 10px' }}>
+                  <img
+                    className="review-image"
+                    src="https://via.placeholder.com/150"
+                    alt="user-image"
+                  />
+                </Box>
+              </Grid>
+            </Grid>
+            <Grid item xs={9}>
+              <Typography color="primary" variant="h6">
+                Name
+              </Typography>
+              <Box
+                style={{
+                  padding: 30,
+                  paddingTop: 5,
+                  paddingLeft: 5,
+                }}
+              >
+                {data.review}
+              </Box>
+            </Grid>
+          </Grid>
+        ))
+      ) : (
+        <p>No reviews for this course</p>
+      )}
+    </>
+  );
+
   const edX = () =>
     state.data && (
       <div maxWidth="lg" className="ead-sec">
@@ -372,30 +422,7 @@ const CourseDetails = props => {
                       </div>
                     </button>
                   </div>
-                  {state.rlaoding ? (
-                    <p>Loading</p>
-                  ) : state.reviews.length > 0 ? (
-                    state.reviews.map(data => (
-                      <Grid
-                        container
-                        style={{ padding: 20, background: '#00000015' }}
-                      >
-                        <Grid item xs={3}>
-                          <Grid item xs={12}>
-                            <Box style={{ padding: 30 }}>User Image</Box>
-                          </Grid>
-                        </Grid>
-                        <Grid item xs={9}>
-                          <Typography color="primary" variant="h6">
-                            Name
-                          </Typography>
-                          <Box style={{ padding: 30 }}>{data.review}</Box>
-                        </Grid>
-                      </Grid>
-                    ))
-                  ) : (
-                    <p>No reviews for this course</p>
-                  )}
+                  {reviews()}
                 </div>
               </div>
             </Grid>
@@ -556,30 +583,7 @@ const CourseDetails = props => {
                       </button>
                     </div>
                     <br />
-                    {state.rlaoding ? (
-                      <p>Loading</p>
-                    ) : state.reviews.length > 0 ? (
-                      state.reviews.map(data => (
-                        <Grid
-                          container
-                          style={{ padding: 20, background: '#00000015' }}
-                        >
-                          <Grid item xs={3}>
-                            <Grid item xs={12}>
-                              <Box style={{ padding: 30 }}>User Image</Box>
-                            </Grid>
-                          </Grid>
-                          <Grid item xs={9}>
-                            <Typography color="primary" variant="h6">
-                              Name
-                            </Typography>
-                            <Box style={{ padding: 30 }}>{data.review}</Box>
-                          </Grid>
-                        </Grid>
-                      ))
-                    ) : (
-                      <p>No reviews for this course</p>
-                    )}
+                    {reviews()}
                   </div>
                 </div>
               </Grid>
@@ -728,30 +732,7 @@ const CourseDetails = props => {
                       </div>
                     </button>
                   </div>
-                  {state.rlaoding ? (
-                    <p>Loading</p>
-                  ) : state.reviews.length > 0 ? (
-                    state.reviews.map(data => (
-                      <Grid
-                        container
-                        style={{ padding: 20, background: '#00000015' }}
-                      >
-                        <Grid item xs={3}>
-                          <Grid item xs={12}>
-                            <Box style={{ padding: 30 }}>User Image</Box>
-                          </Grid>
-                        </Grid>
-                        <Grid item xs={9}>
-                          <Typography color="primary" variant="h6">
-                            Name
-                          </Typography>
-                          <Box style={{ padding: 30 }}>{data.review}</Box>
-                        </Grid>
-                      </Grid>
-                    ))
-                  ) : (
-                    <p>No reviews for this course</p>
-                  )}
+                  {reviews()}
                 </div>
               </div>
             </Grid>
@@ -865,30 +846,7 @@ const CourseDetails = props => {
                       </div>
                     </button>
                   </div>
-                  {state.rlaoding ? (
-                    <p>Loading</p>
-                  ) : state.reviews.length > 0 ? (
-                    state.reviews.map(data => (
-                      <Grid
-                        container
-                        style={{ padding: 20, background: '#00000015' }}
-                      >
-                        <Grid item xs={3}>
-                          <Grid item xs={12}>
-                            <Box style={{ padding: 30 }}>User Image</Box>
-                          </Grid>
-                        </Grid>
-                        <Grid item xs={9}>
-                          <Typography color="primary" variant="h6">
-                            Name
-                          </Typography>
-                          <Box style={{ padding: 30 }}>{data.review}</Box>
-                        </Grid>
-                      </Grid>
-                    ))
-                  ) : (
-                    <p>No reviews for this course</p>
-                  )}
+                  {reviews()}
                 </div>
               </div>
             </Grid>
@@ -1053,30 +1011,7 @@ const CourseDetails = props => {
                       </div>
                     </button>
                   </div>
-                  {state.rlaoding ? (
-                    <p>Loading</p>
-                  ) : state.reviews.length > 0 ? (
-                    state.reviews.map(data => (
-                      <Grid
-                        container
-                        style={{ padding: 20, background: '#00000015' }}
-                      >
-                        <Grid item xs={3}>
-                          <Grid item xs={12}>
-                            <Box style={{ padding: 30 }}>User Image</Box>
-                          </Grid>
-                        </Grid>
-                        <Grid item xs={9}>
-                          <Typography color="primary" variant="h6">
-                            Name
-                          </Typography>
-                          <Box style={{ padding: 30 }}>{data.review}</Box>
-                        </Grid>
-                      </Grid>
-                    ))
-                  ) : (
-                    <p>No reviews for this course</p>
-                  )}
+                  {reviews()}
                 </div>
               </div>
             </Grid>
@@ -1244,30 +1179,7 @@ const CourseDetails = props => {
                       </div>
                     </button>
                   </div>
-                  {state.rlaoding ? (
-                    <p>Loading</p>
-                  ) : state.reviews.length > 0 ? (
-                    state.reviews.map(data => (
-                      <Grid
-                        container
-                        style={{ padding: 20, background: '#00000015' }}
-                      >
-                        <Grid item xs={3}>
-                          <Grid item xs={12}>
-                            <Box style={{ padding: 30 }}>User Image</Box>
-                          </Grid>
-                        </Grid>
-                        <Grid item xs={9}>
-                          <Typography color="primary" variant="h6">
-                            Name
-                          </Typography>
-                          <Box style={{ padding: 30 }}>{data.review}</Box>
-                        </Grid>
-                      </Grid>
-                    ))
-                  ) : (
-                    <p>No reviews for this course</p>
-                  )}
+                  {reviews()}
                 </div>
               </div>
             </Grid>
@@ -1408,30 +1320,7 @@ const CourseDetails = props => {
                     </button>
                   </div>
                   <br />
-                  {state.rlaoding ? (
-                    <p>Loading</p>
-                  ) : state.reviews.length > 0 ? (
-                    state.reviews.map(data => (
-                      <Grid
-                        container
-                        style={{ padding: 20, background: '#00000015' }}
-                      >
-                        <Grid item xs={3}>
-                          <Grid item xs={12}>
-                            <Box style={{ padding: 30 }}>User Image</Box>
-                          </Grid>
-                        </Grid>
-                        <Grid item xs={9}>
-                          <Typography color="primary" variant="h6">
-                            Name
-                          </Typography>
-                          <Box style={{ padding: 30 }}>{data.review}</Box>
-                        </Grid>
-                      </Grid>
-                    ))
-                  ) : (
-                    <p>No reviews for this course</p>
-                  )}
+                  {reviews()}
                 </div>
               </div>
             </Grid>
@@ -1461,6 +1350,14 @@ const CourseDetails = props => {
     }
   };
 
+  const addReviewToCurrentState = data => {
+    console.log('HIT HERE', data);
+    setState({
+      ...state,
+      reviews: [data, ...state.reviews],
+    });
+  };
+
   return (
     <>
       <AppBar />
@@ -1471,7 +1368,8 @@ const CourseDetails = props => {
         provider={provider}
         handlePopupClose={handlePopupClose}
         course={state.data && state.data.title}
-        state={1}
+        Mstate={1}
+        addReviewToCurrentState={addReviewToCurrentState}
       />
       {state.loading ? (
         <Grid
