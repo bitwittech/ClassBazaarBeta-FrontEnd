@@ -172,6 +172,7 @@ const CourseDetails = props => {
   const handlePopupClose = () => {
     setState({ ...Gstate, popUp: false });
   };
+
   const courseSummary = () =>
     Gstate.summaryData && (
       <>
@@ -231,7 +232,16 @@ const CourseDetails = props => {
             <div style={{ marginTop: '20px' }}>
               <button
                 onClick={() => {
-                  window.open(Gstate.summaryData.url, '_blank');
+                  window.open(
+                    provider === 'Swayam'
+                      ? Gstate.summaryData &&
+                          Gstate.summaryData.url.replace(
+                            'www.swayam.com',
+                            'www.swayam.gov.in'
+                          )
+                      : Gstate.summaryData && Gstate.summaryData.url,
+                    '_blank'
+                  );
                 }}
                 className="enroll-btn"
               >
