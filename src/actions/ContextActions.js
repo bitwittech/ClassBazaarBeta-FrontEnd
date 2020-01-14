@@ -272,13 +272,13 @@ export const addBookmark = async (uuid, userId, user, provider, dispatch) => {
       const res = await client.patchUser(userId, {
         user: {
           data: {
-            bookmarks: [
-              ...user.data.bookmarks,
+            bookmarks: [...user.data.bookmarks,
               {
                 id: uuid,
                 provider
               }
             ]
+
           }
         }
       })
