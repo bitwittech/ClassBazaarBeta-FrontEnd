@@ -23,7 +23,8 @@ import TurnedInIcon from '@material-ui/icons/TurnedIn';
 import TurnedInNotIcon from '@material-ui/icons/TurnedInNot';
 import formatDate from './../utils/dateUtils';
 import getClosestNextRun from './../utils/edxUtils';
-
+import Store from '../store/Context';
+import { addBookmark } from '../actions/ContextActions';
 const formatPrice = price => {
   if (!price || price === null || price === undefined) return 'Free';
   else return price;
@@ -36,7 +37,7 @@ const formatDuration = duration => {
 };
 
 const CourseDetails = props => {
-  const [state, setState] = useState({
+  const [Gstate, setState] = useState({
     data: null,
     summaryData: null,
     loading: true,
@@ -44,6 +45,38 @@ const CourseDetails = props => {
     reviews: [],
     rloading: true,
   });
+  console.log(Gstate);
+  const { state, dispatch } = useContext(Store);
+  const handleBookmark = (uuid, provider) => {
+    console.log(uuid, provider);
+    if (state.user === null) {
+      return dispatch({
+        type: 'ALERT',
+        payload: {
+          varient: 'info',
+          message: 'Please login ',
+        },
+      });
+    }
+    const userId = state.user.id;
+    const courseId = uuid;
+    const user = state.user;
+    addBookmark(courseId, userId, user, provider, dispatch);
+  };
+
+  const isBookmarked = uuid => {
+    console.log('isbookmarked', uuid);
+    if (state.user === null || state.user.data === undefined) {
+      return false;
+    }
+    const globalBookmarks = state.user.data.bookmarks;
+    if (globalBookmarks.find(e => e.id === uuid) === undefined) {
+      return false;
+    } else {
+      return true;
+    }
+  };
+
   // const provider = props.location.pathname.split('/')[2];
   // let uuid = props.location.pathname.split('/')[3];
   const uuid = props.match.params.uuid;
@@ -76,7 +109,7 @@ const CourseDetails = props => {
       );
 
       setState({
-        ...state,
+        ...Gstate,
         data: data.data,
         summaryData: data.summaryData,
         loading: false,
@@ -88,13 +121,24 @@ const CourseDetails = props => {
     getCourseDetails();
   }, []);
 
-  console.log(state);
-  console.log(props);
   const reviewSection = (ratingNumber, noOfReviews) => {
     console.log({ ratingNumber, noOfReviews });
     return (
       <>
-        <TurnedInIcon color="primary" fontSize="large" />
+        {isBookmarked(Gstate.data._id) ? (
+          <TurnedInIcon
+            onClick={() => handleBookmark(uuid, provider)}
+            color="primary"
+            fontSize="large"
+          />
+        ) : (
+          <TurnedInNotIcon
+            onClick={() => handleBookmark(uuid, provider)}
+            color="primary"
+            fontSize="large"
+          />
+        )}
+
         <Typography
           variant="caption"
           display="block"
@@ -126,10 +170,11 @@ const CourseDetails = props => {
     );
   };
   const handlePopupClose = () => {
-    setState({ ...state, popUp: false });
+    setState({ ...Gstate, popUp: false });
   };
+
   const courseSummary = () =>
-    state.summaryData && (
+    Gstate.summaryData && (
       <>
         <div
           style={{
@@ -152,7 +197,7 @@ const CourseDetails = props => {
               <div>
                 <QueryBuilderIcon color="primary" /> &nbsp;
               </div>
-              <div>{state.summaryData.commitment}</div>
+              <div>{Gstate.summaryData.commitment}</div>
             </div>
 
             <div style={{ display: 'flex', marginTop: '15px' }}>
@@ -160,7 +205,7 @@ const CourseDetails = props => {
                 <DateRangeIcon color="primary" /> &nbsp;
               </div>
               <div>{` Starts on ${formatDate(
-                new Date(state.summaryData.start_date),
+                new Date(Gstate.summaryData.start_date),
                 'MMMM d'
               )}`}</div>
             </div>
@@ -170,10 +215,10 @@ const CourseDetails = props => {
                 <MonetizationOnIcon color="primary" /> &nbsp;
               </div>
               <div>
-                {state.summaryData.price === '' ||
-                state.summaryData.price === null
+                {Gstate.summaryData.price === '' ||
+                Gstate.summaryData.price === null
                   ? 'Free'
-                  : state.summaryData.price}
+                  : Gstate.summaryData.price}
               </div>
             </div>
 
@@ -181,13 +226,22 @@ const CourseDetails = props => {
               <div>
                 <ListAltIcon color="primary" /> &nbsp;
               </div>
-              <div>{state.summaryData.provider}</div>
+              <div>{Gstate.summaryData.provider}</div>
             </div>
 
             <div style={{ marginTop: '20px' }}>
               <button
                 onClick={() => {
-                  window.open(state.summaryData.url, '_blank');
+                  window.open(
+                    provider === 'Swayam'
+                      ? Gstate.summaryData &&
+                          Gstate.summaryData.url.replace(
+                            'www.swayam.com',
+                            'www.swayam.gov.in'
+                          )
+                      : Gstate.summaryData && Gstate.summaryData.url,
+                    '_blank'
+                  );
                 }}
                 className="enroll-btn"
               >
@@ -213,9 +267,58 @@ const CourseDetails = props => {
         </div>
       </>
     );
+
+  const reviews = () => (
+    <>
+      {Gstate.rlaoding ? (
+        <p>Loading</p>
+      ) : Gstate.reviews.length > 0 ? (
+        Gstate.reviews.map(data => (
+          <Grid
+            key={data.course_id}
+            container
+            style={{
+              padding: 20,
+              background: '#00000015',
+              marginTop: '15px',
+            }}
+          >
+            <Grid item xs={3}>
+              <Grid item xs={12}>
+                <Box style={{ padding: '0 10px' }}>
+                  <img
+                    className="review-image"
+                    src="https://via.placeholder.com/150"
+                    alt="user-image"
+                  />
+                </Box>
+              </Grid>
+            </Grid>
+            <Grid item xs={9}>
+              <Typography color="primary" variant="h6">
+                Name
+              </Typography>
+              <Box
+                style={{
+                  padding: 30,
+                  paddingTop: 5,
+                  paddingLeft: 5,
+                }}
+              >
+                {data.review}
+              </Box>
+            </Grid>
+          </Grid>
+        ))
+      ) : (
+        <p>No reviews for this course</p>
+      )}
+    </>
+  );
+
   const edX = () =>
-    state.data && (
-      <div maxWidth="lg" className="ead-sec">
+    Gstate.data && (
+      <div maxwidth="lg" className="ead-sec">
         <div className="cd-container">
           <Grid container spacing={3} direction="row-reverse">
             <Grid item xs={12} sm={3}>
@@ -231,10 +334,10 @@ const CourseDetails = props => {
                       variant="subtitle2"
                       gutterBottom
                     >
-                      {state.data.owners[0].name}
+                      {Gstate.data.owners[0].name}
                     </Typography>
                     <Typography variant="h6" gutterBottom>
-                      {state.data.title}
+                      {Gstate.data.title}
                     </Typography>
                     <Typography
                       variant="caption"
@@ -260,7 +363,7 @@ const CourseDetails = props => {
                     variant="body1"
                     gutterBottom
                   >
-                    {ReactHtmlParser(state.data.full_description, {
+                    {ReactHtmlParser(Gstate.data.full_description, {
                       transform: node => {
                         if (node.name === 'h2' || node.name === 'h3') {
                           // console.log({ node });
@@ -277,7 +380,7 @@ const CourseDetails = props => {
                     })}
                   </Typography>
                   <br />
-                  {state.data.outcome !== '' && (
+                  {Gstate.data.outcome !== '' && (
                     <>
                       <Typography
                         style={{ fontWeight: '600', fontSize: '22px' }}
@@ -291,7 +394,7 @@ const CourseDetails = props => {
                         variant="body1"
                         gutterBottom
                       >
-                        {ReactHtmlParser(state.data.outcome, {
+                        {ReactHtmlParser(Gstate.data.outcome, {
                           transform: node => {
                             // console.log({ node });
                             if (node.name === 'h2') {
@@ -302,7 +405,7 @@ const CourseDetails = props => {
                       </Typography>{' '}
                     </>
                   )}
-                  {state.data.prerequisites_raw !== '' ? (
+                  {Gstate.data.prerequisites_raw !== '' ? (
                     <>
                       {' '}
                       <Typography
@@ -317,13 +420,13 @@ const CourseDetails = props => {
                         variant="body1"
                         gutterBottom
                       >
-                        {ReactHtmlParser(state.data.prerequisites_raw)}
+                        {ReactHtmlParser(Gstate.data.prerequisites_raw)}
                       </Typography>
                     </>
                   ) : null}
                   <br />
 
-                  {state.data.closestRun !== undefined && (
+                  {Gstate.data.closestRun !== undefined && (
                     <>
                       <Typography
                         style={{ fontWeight: '600', fontSize: '22px' }}
@@ -331,7 +434,7 @@ const CourseDetails = props => {
                         gutterBottom
                       >
                         Professor:{' '}
-                        {this.state.closestRun.staff.map((obj, index) => (
+                        {this.Gstate.closestRun.staff.map((obj, index) => (
                           <span key={index} style={{ fontWeight: '300' }}>
                             {obj.given_name}
                           </span>
@@ -350,7 +453,7 @@ const CourseDetails = props => {
                   <div>
                     <button
                       onClick={() => {
-                        setState({ ...state, popUp: !state.popUp });
+                        setState({ ...Gstate, popUp: !Gstate.popUp });
                       }}
                       className="enroll-btn"
                     >
@@ -372,25 +475,7 @@ const CourseDetails = props => {
                       </div>
                     </button>
                   </div>
-                  <Grid
-                    container
-                    style={{ padding: 20, background: '#00000015' }}
-                  >
-                    <Grid item xs={3}>
-                      <Grid item xs={12}>
-                        {/* <Fab color="primary" aria-label="add" className={classes.fab}>
-                  <AddIcon />
-                </Fab> */}
-                      </Grid>
-                    </Grid>
-                    <Grid item xs={9}>
-                      <Box style={{ padding: 30 }}>
-                        Natus error sit voluptartem accusantium doloremque
-                        laudantium, totam rem aperiam, eaque ipsa quae ab illo
-                        inventore.
-                      </Box>
-                    </Grid>
-                  </Grid>
+                  {reviews()}
                 </div>
               </div>
             </Grid>
@@ -400,10 +485,9 @@ const CourseDetails = props => {
     );
 
   const udemy = () => {
-    console.log(state);
     return (
-      state.data && (
-        <div maxWidth="lg" className="ead-sec">
+      Gstate.data && (
+        <div maxwidth="lg" className="ead-sec">
           <div className="cd-container">
             <Grid container spacing={3} direction="row-reverse">
               <Grid item xs={12} sm={3}>
@@ -419,10 +503,10 @@ const CourseDetails = props => {
                         variant="subtitle2"
                         gutterBottom
                       >
-                        {state.summaryData.university}
+                        {Gstate.summaryData.university}
                       </Typography>
                       <Typography variant="h6" gutterBottom>
-                        {state.data.title}
+                        {Gstate.data.title}
                       </Typography>
                       <Typography
                         variant="caption"
@@ -435,8 +519,8 @@ const CourseDetails = props => {
                     </div>
                     <div style={{ textAlign: 'right' }}>
                       {reviewSection(
-                        state.data.avg_rating,
-                        state.data.num_reviews
+                        Gstate.data.avg_rating,
+                        Gstate.data.num_reviews
                       )}
                     </div>
                   </div>
@@ -454,10 +538,10 @@ const CourseDetails = props => {
                       variant="body1"
                       gutterBottom
                     >
-                      {ReactHtmlParser(state.data.description)}
+                      {ReactHtmlParser(Gstate.data.description)}
                     </Typography>
                     <br />
-                    {state.data.outcome !== '' && (
+                    {Gstate.data.outcome !== '' && (
                       <>
                         <Typography
                           style={{ fontWeight: '600', fontSize: '22px' }}
@@ -471,7 +555,7 @@ const CourseDetails = props => {
                           variant="body1"
                           gutterBottom
                         >
-                          {state.data.what_you_will_learn_data.items.map(
+                          {Gstate.data.what_you_will_learn_data.items.map(
                             (e, i) => (
                               <li key={i}>{e}</li>
                             )
@@ -479,7 +563,7 @@ const CourseDetails = props => {
                         </Typography>{' '}
                       </>
                     )}
-                    {state.data.prerequisites_raw !== '' ? (
+                    {Gstate.data.prerequisites_raw !== '' ? (
                       <>
                         {' '}
                         <Typography
@@ -494,14 +578,14 @@ const CourseDetails = props => {
                           variant="body1"
                           gutterBottom
                         >
-                          {state.data.prerequisites.map((e, i) => (
+                          {Gstate.data.prerequisites.map((e, i) => (
                             <li key={i}>{e}</li>
                           ))}
                         </Typography>
                       </>
                     ) : null}
                     <br />
-                    {state.data.closestRun !== undefined && (
+                    {Gstate.data.closestRun !== undefined && (
                       <>
                         <Typography
                           style={{ fontWeight: '600', fontSize: '22px' }}
@@ -509,7 +593,7 @@ const CourseDetails = props => {
                           gutterBottom
                         >
                           Professor:{' '}
-                          {this.state.closestRun.staff.map((obj, index) => (
+                          {this.Gstate.closestRun.staff.map((obj, index) => (
                             <span key={index} style={{ fontWeight: '300' }}>
                               {obj.given_name}
                             </span>
@@ -528,7 +612,7 @@ const CourseDetails = props => {
                     <div>
                       <button
                         onClick={() => {
-                          setState({ ...state, popUp: !state.popUp });
+                          setState({ ...Gstate, popUp: !Gstate.popUp });
                         }}
                         className="enroll-btn"
                       >
@@ -551,30 +635,7 @@ const CourseDetails = props => {
                       </button>
                     </div>
                     <br />
-                    {state.rlaoding ? (
-                      <p>Loading</p>
-                    ) : state.reviews.length > 0 ? (
-                      state.reviews.map(data => (
-                        <Grid
-                          container
-                          style={{ padding: 20, background: '#00000015' }}
-                        >
-                          <Grid item xs={3}>
-                            <Grid item xs={12}>
-                              <Box style={{ padding: 30 }}>User Image</Box>
-                            </Grid>
-                          </Grid>
-                          <Grid item xs={9}>
-                            <Typography color="primary" variant="h6">
-                              Name
-                            </Typography>
-                            <Box style={{ padding: 30 }}>{data.review}</Box>
-                          </Grid>
-                        </Grid>
-                      ))
-                    ) : (
-                      <p>No reviews for this course</p>
-                    )}
+                    {reviews()}
                   </div>
                 </div>
               </Grid>
@@ -586,7 +647,7 @@ const CourseDetails = props => {
   };
 
   const fl = () =>
-    state.data && (
+    Gstate.data && (
       <div maxWidth="lg" className="ead-sec">
         <div className="cd-container">
           <Grid container spacing={3} direction="row-reverse">
@@ -603,10 +664,10 @@ const CourseDetails = props => {
                       variant="subtitle2"
                       gutterBottom
                     >
-                      {state.data.organisation.name}
+                      {Gstate.data.organisation.name}
                     </Typography>
                     <Typography variant="h6" gutterBottom>
-                      {state.data.name}
+                      {Gstate.data.name}
                     </Typography>
                     <Typography
                       variant="caption"
@@ -632,10 +693,10 @@ const CourseDetails = props => {
                     variant="body1"
                     gutterBottom
                   >
-                    {ReactHtmlParser(state.data.description)}
+                    {ReactHtmlParser(Gstate.data.description)}
                   </Typography>
                   <br />
-                  {state.data.learning_outcomes !== '' && (
+                  {Gstate.data.learning_outcomes !== '' && (
                     <>
                       <Typography
                         style={{ fontWeight: '600', fontSize: '22px' }}
@@ -649,13 +710,13 @@ const CourseDetails = props => {
                         variant="body1"
                         gutterBottom
                       >
-                        {state.data.learning_outcomes.map((e, i) => (
+                        {Gstate.data.learning_outcomes.map((e, i) => (
                           <li key={i}>{e}</li>
                         ))}
                       </Typography>{' '}
                     </>
                   )}
-                  {state.data.requirements !== '' && (
+                  {Gstate.data.requirements !== '' && (
                     <>
                       <Typography
                         style={{ fontWeight: '600', fontSize: '22px' }}
@@ -669,14 +730,14 @@ const CourseDetails = props => {
                         variant="body1"
                         gutterBottom
                       >
-                        {state.data.requirements}
+                        {Gstate.data.requirements}
                       </Typography>{' '}
                     </>
                   )}
 
                   <br />
 
-                  {state.data.educator !== '' && (
+                  {Gstate.data.educator !== '' && (
                     <>
                       <Typography
                         style={{ fontWeight: '600', fontSize: '22px' }}
@@ -685,7 +746,7 @@ const CourseDetails = props => {
                       >
                         Professor:{' '}
                         <span style={{ fontWeight: '300' }}>
-                          {state.data.educator}
+                          {Gstate.data.educator}
                         </span>
                       </Typography>
                     </>
@@ -701,7 +762,7 @@ const CourseDetails = props => {
                   <div>
                     <button
                       onClick={() => {
-                        setState({ ...state, popUp: !state.popUp });
+                        setState({ ...Gstate, popUp: !Gstate.popUp });
                       }}
                       className="enroll-btn"
                     >
@@ -723,25 +784,7 @@ const CourseDetails = props => {
                       </div>
                     </button>
                   </div>
-                  <Grid
-                    container
-                    style={{ padding: 20, background: '#00000015' }}
-                  >
-                    <Grid item xs={3}>
-                      <Grid item xs={12}>
-                        {/* <Fab color="primary" aria-label="add" className={classes.fab}>
-                  <AddIcon />
-                </Fab> */}
-                      </Grid>
-                    </Grid>
-                    <Grid item xs={9}>
-                      <Box style={{ padding: 30 }}>
-                        Natus error sit voluptartem accusantium doloremque
-                        laudantium, totam rem aperiam, eaque ipsa quae ab illo
-                        inventore.
-                      </Box>
-                    </Grid>
-                  </Grid>
+                  {reviews()}
                 </div>
               </div>
             </Grid>
@@ -751,8 +794,8 @@ const CourseDetails = props => {
     );
 
   const sl = () =>
-    state.data && (
-      <div maxWidth="lg" className="ead-sec">
+    Gstate.data && (
+      <div maxwidth="lg" className="ead-sec">
         <div className="cd-container">
           <Grid container spacing={3} direction="row-reverse">
             <Grid item xs={12} sm={3}>
@@ -768,10 +811,10 @@ const CourseDetails = props => {
                       variant="subtitle2"
                       gutterBottom
                     >
-                      {state.summaryData.university}
+                      {Gstate.summaryData.university}
                     </Typography>
                     <Typography variant="h6" gutterBottom>
-                      {ReactHtmlParser(state.data.courseData.fields.title)}
+                      {ReactHtmlParser(Gstate.data.courseData.fields.title)}
                     </Typography>
                     <Typography
                       variant="caption"
@@ -784,7 +827,7 @@ const CourseDetails = props => {
                   </div>
                   <div style={{ textAlign: 'right' }}>
                     {reviewSection(
-                      parseFloat(state.data.courseData.fields.star_ratings),
+                      parseFloat(Gstate.data.courseData.fields.star_ratings),
                       -1
                     )}
                   </div>
@@ -803,10 +846,10 @@ const CourseDetails = props => {
                     variant="body1"
                     gutterBottom
                   >
-                    {ReactHtmlParser(state.data.courseData.highlights.content)}
+                    {ReactHtmlParser(Gstate.data.courseData.highlights.content)}
                   </Typography>
 
-                  {state.data.closestRun !== undefined && (
+                  {Gstate.data.closestRun !== undefined && (
                     <>
                       <Typography
                         style={{ fontWeight: '600', fontSize: '22px' }}
@@ -814,7 +857,7 @@ const CourseDetails = props => {
                         gutterBottom
                       >
                         Professor:{' '}
-                        {this.state.closestRun.staff.map((obj, index) => (
+                        {this.Gstate.closestRun.staff.map((obj, index) => (
                           <span key={index} style={{ fontWeight: '300' }}>
                             {obj.given_name}
                           </span>
@@ -833,7 +876,7 @@ const CourseDetails = props => {
                   <div>
                     <button
                       onClick={() => {
-                        setState({ ...state, popUp: !state.popUp });
+                        setState({ ...Gstate, popUp: !Gstate.popUp });
                       }}
                       className="enroll-btn"
                     >
@@ -855,25 +898,7 @@ const CourseDetails = props => {
                       </div>
                     </button>
                   </div>
-                  <Grid
-                    container
-                    style={{ padding: 20, background: '#00000015' }}
-                  >
-                    <Grid item xs={3}>
-                      <Grid item xs={12}>
-                        {/* <Fab color="primary" aria-label="add" className={classes.fab}>
-                <AddIcon />
-              </Fab> */}
-                      </Grid>
-                    </Grid>
-                    <Grid item xs={9}>
-                      <Box style={{ padding: 30 }}>
-                        Natus error sit voluptartem accusantium doloremque
-                        laudantium, totam rem aperiam, eaque ipsa quae ab illo
-                        inventore.
-                      </Box>
-                    </Grid>
-                  </Grid>
+                  {reviews()}
                 </div>
               </div>
             </Grid>
@@ -883,7 +908,7 @@ const CourseDetails = props => {
     );
 
   const swayam = () =>
-    state.data && (
+    Gstate.data && (
       <div maxWidth="lg" className="ead-sec">
         <div className="cd-container">
           <Grid container spacing={3} direction="row-reverse">
@@ -900,10 +925,10 @@ const CourseDetails = props => {
                       variant="subtitle2"
                       gutterBottom
                     >
-                      {state.summaryData.university}
+                      {Gstate.summaryData.university}
                     </Typography>
                     <Typography variant="h6" gutterBottom>
-                      {ReactHtmlParser(state.data.title)}
+                      {ReactHtmlParser(Gstate.data.title)}
                     </Typography>
                     <Typography
                       variant="caption"
@@ -930,7 +955,7 @@ const CourseDetails = props => {
                     variant="body1"
                     gutterBottom
                   >
-                    {ReactHtmlParser(state.data.sections[0], {
+                    {ReactHtmlParser(Gstate.data.sections[0], {
                       transform: node => {
                         if (node.name === 'b') {
                           return (
@@ -958,7 +983,7 @@ const CourseDetails = props => {
                     variant="body1"
                     gutterBottom
                   >
-                    {ReactHtmlParser(state.data.sections[2], {
+                    {ReactHtmlParser(Gstate.data.sections[2], {
                       transform: node => {
                         if (node.name === 'h3') {
                           return null;
@@ -979,7 +1004,7 @@ const CourseDetails = props => {
                     variant="body1"
                     gutterBottom
                   >
-                    {ReactHtmlParser(state.data.sections[5], {
+                    {ReactHtmlParser(Gstate.data.sections[5], {
                       transform: (node, index, transform) => {
                         if (node.children && node.children[8]) {
                           node.children = node.children.slice(0, 8);
@@ -989,7 +1014,7 @@ const CourseDetails = props => {
                     })}
                   </Typography>
 
-                  {state.data.closestRun !== undefined && (
+                  {Gstate.data.closestRun !== undefined && (
                     <>
                       <Typography
                         style={{ fontWeight: '600', fontSize: '22px' }}
@@ -997,7 +1022,7 @@ const CourseDetails = props => {
                         gutterBottom
                       >
                         Professor:{' '}
-                        {this.state.closestRun.staff.map((obj, index) => (
+                        {this.Gstate.closestRun.staff.map((obj, index) => (
                           <span key={index} style={{ fontWeight: '300' }}>
                             {obj.given_name}
                           </span>
@@ -1016,7 +1041,7 @@ const CourseDetails = props => {
                   <div>
                     <button
                       onClick={() => {
-                        setState({ ...state, popUp: !state.popUp });
+                        setState({ ...Gstate, popUp: !Gstate.popUp });
                       }}
                       className="enroll-btn"
                     >
@@ -1038,25 +1063,7 @@ const CourseDetails = props => {
                       </div>
                     </button>
                   </div>
-                  <Grid
-                    container
-                    style={{ padding: 20, background: '#00000015' }}
-                  >
-                    <Grid item xs={3}>
-                      <Grid item xs={12}>
-                        {/* <Fab color="primary" aria-label="add" className={classes.fab}>
-                <AddIcon />
-              </Fab> */}
-                      </Grid>
-                    </Grid>
-                    <Grid item xs={9}>
-                      <Box style={{ padding: 30 }}>
-                        Natus error sit voluptartem accusantium doloremque
-                        laudantium, totam rem aperiam, eaque ipsa quae ab illo
-                        inventore.
-                      </Box>
-                    </Grid>
-                  </Grid>
+                  {reviews()}
                 </div>
               </div>
             </Grid>
@@ -1066,7 +1073,7 @@ const CourseDetails = props => {
     );
 
   const upGrad = () =>
-    state.data && (
+    Gstate.data && (
       <div maxWidth="lg" className="ead-sec">
         <div className="cd-container">
           <Grid container spacing={3} direction="row-reverse">
@@ -1083,10 +1090,10 @@ const CourseDetails = props => {
                       variant="subtitle2"
                       gutterBottom
                     >
-                      {state.data.university}
+                      {Gstate.data.university}
                     </Typography>
                     <Typography variant="h6" gutterBottom>
-                      {state.data.title}
+                      {Gstate.data.title}
                     </Typography>
                     <Typography
                       variant="caption"
@@ -1100,7 +1107,7 @@ const CourseDetails = props => {
                   <div style={{ textAlign: 'right' }}>
                     {reviewSection(
                       undefined,
-                      parseInt(state.data.no_of_reviews)
+                      parseInt(Gstate.data.no_of_reviews)
                     )}
                   </div>
                 </div>
@@ -1118,7 +1125,7 @@ const CourseDetails = props => {
                     variant="body1"
                     gutterBottom
                   >
-                    {state.data.short_description}
+                    {Gstate.data.short_description}
                   </Typography>
                   <Typography
                     style={{ fontWeight: '600', fontSize: '18px' }}
@@ -1132,7 +1139,7 @@ const CourseDetails = props => {
                     variant="body1"
                     gutterBottom
                   >
-                    {state.data.who_is_this_program_for}
+                    {Gstate.data.who_is_this_program_for}
                   </Typography>
                   <Typography
                     style={{ fontWeight: '600', fontSize: '18px' }}
@@ -1146,7 +1153,7 @@ const CourseDetails = props => {
                     variant="body1"
                     gutterBottom
                   >
-                    {state.data.top_Skills}
+                    {Gstate.data.top_Skills}
                   </Typography>
 
                   <Typography
@@ -1161,7 +1168,7 @@ const CourseDetails = props => {
                     variant="body1"
                     gutterBottom
                   >
-                    {state.data['Minimum Eligibility']}
+                    {Gstate.data['Minimum Eligibility']}
                   </Typography>
 
                   <Typography
@@ -1176,7 +1183,7 @@ const CourseDetails = props => {
                     variant="body1"
                     gutterBottom
                   >
-                    {state.data['job_opportunities\n']}
+                    {Gstate.data['job_opportunities\n']}
                   </Typography>
 
                   {/* <Typography
@@ -1185,7 +1192,7 @@ const CourseDetails = props => {
                   gutterBottom
                 >
                   Professor:{' '}
-                  {this.state.closestRun.staff.map((obj, index) => (
+                  {this.Gstate.closestRun.staff.map((obj, index) => (
                     <span key={index} style={{ fontWeight: '300' }}>
                       {obj.given_name}
                     </span>
@@ -1202,7 +1209,7 @@ const CourseDetails = props => {
                   <div>
                     <button
                       onClick={() => {
-                        setState({ ...state, popUp: !state.popUp });
+                        setState({ ...Gstate, popUp: !Gstate.popUp });
                       }}
                       className="enroll-btn"
                     >
@@ -1224,25 +1231,7 @@ const CourseDetails = props => {
                       </div>
                     </button>
                   </div>
-                  <Grid
-                    container
-                    style={{ padding: 20, background: '#00000015' }}
-                  >
-                    <Grid item xs={3}>
-                      <Grid item xs={12}>
-                        {/* <Fab color="primary" aria-label="add" className={classes.fab}>
-                <AddIcon />
-              </Fab> */}
-                      </Grid>
-                    </Grid>
-                    <Grid item xs={9}>
-                      <Box style={{ padding: 30 }}>
-                        Natus error sit voluptartem accusantium doloremque
-                        laudantium, totam rem aperiam, eaque ipsa quae ab illo
-                        inventore.
-                      </Box>
-                    </Grid>
-                  </Grid>
+                  {reviews()}
                 </div>
               </div>
             </Grid>
@@ -1252,7 +1241,7 @@ const CourseDetails = props => {
     );
 
   const udacity = () =>
-    state.data && (
+    Gstate.data && (
       <div
         maxWidth="lg"
         style={{ marginTop: '40px', background: '#FAFAFA' }}
@@ -1273,10 +1262,10 @@ const CourseDetails = props => {
                       variant="subtitle2"
                       gutterBottom
                     >
-                      {state.summaryData.university}
+                      {Gstate.summaryData.university}
                     </Typography>
                     <Typography variant="h6" gutterBottom>
-                      {ReactHtmlParser(state.data.title)}
+                      {ReactHtmlParser(Gstate.data.title)}
                     </Typography>
                     <Typography
                       variant="caption"
@@ -1303,7 +1292,7 @@ const CourseDetails = props => {
                     variant="body1"
                     gutterBottom
                   >
-                    {ReactHtmlParser(state.data.summary)}
+                    {ReactHtmlParser(Gstate.data.summary)}
                   </Typography>
                   <Typography
                     style={{ fontWeight: '600', fontSize: '22px' }}
@@ -1317,7 +1306,7 @@ const CourseDetails = props => {
                     variant="body1"
                     gutterBottom
                   >
-                    {ReactHtmlParser(state.data.syllabus, {
+                    {ReactHtmlParser(Gstate.data.syllabus, {
                       transform: node => {
                         if (node.name === 'h1') {
                           return (
@@ -1333,7 +1322,7 @@ const CourseDetails = props => {
                       },
                     })}
                   </Typography>
-                  {state.data.instructors !== undefined && (
+                  {Gstate.data.instructors !== undefined && (
                     <>
                       <Typography
                         style={{ fontWeight: '600', fontSize: '18px' }}
@@ -1341,7 +1330,7 @@ const CourseDetails = props => {
                         gutterBottom
                       >
                         Professor(s):{' '}
-                        {state.data.instructors.map((obj, index) => (
+                        {Gstate.data.instructors.map((obj, index) => (
                           <span key={index} style={{ fontWeight: '300' }}>
                             {obj.name + ', '}
                           </span>
@@ -1360,7 +1349,7 @@ const CourseDetails = props => {
                   <div>
                     <button
                       onClick={() => {
-                        setState({ ...state, popUp: !state.popUp });
+                        setState({ ...Gstate, popUp: !Gstate.popUp });
                       }}
                       className="enroll-btn"
                     >
@@ -1383,25 +1372,7 @@ const CourseDetails = props => {
                     </button>
                   </div>
                   <br />
-                  <Grid
-                    container
-                    style={{ padding: 20, background: '#00000015' }}
-                  >
-                    <Grid item xs={3}>
-                      <Grid item xs={12}>
-                        {/* <Fab color="primary" aria-label="add" className={classes.fab}>
-                <AddIcon />
-              </Fab> */}
-                      </Grid>
-                    </Grid>
-                    <Grid item xs={9}>
-                      <Box style={{ padding: 30 }}>
-                        Natus error sit voluptartem accusantium doloremque
-                        laudantium, totam rem aperiam, eaque ipsa quae ab illo
-                        inventore.
-                      </Box>
-                    </Grid>
-                  </Grid>
+                  {reviews()}
                 </div>
               </div>
             </Grid>
@@ -1431,19 +1402,28 @@ const CourseDetails = props => {
     }
   };
 
+  const addReviewToCurrentState = data => {
+    console.log('HIT HERE', data);
+    setState({
+      ...Gstate,
+      reviews: [data, ...Gstate.reviews],
+    });
+  };
+
   return (
     <>
       <AppBar />
       <MobileTopbar onlySearch={true} />
       <HomeModal
-        openState={state.popUp}
+        openState={Gstate.popUp}
         uuid={uuid}
         provider={provider}
         handlePopupClose={handlePopupClose}
-        course={state.data && state.data.title}
-        state={1}
+        course={Gstate.data && Gstate.data.title}
+        Mstate={1}
+        addReviewToCurrentState={addReviewToCurrentState}
       />
-      {state.loading ? (
+      {Gstate.loading ? (
         <Grid
           align="center"
           style={{

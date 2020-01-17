@@ -117,13 +117,13 @@ const Login = () => {
     });
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
     if (loginModal.state === 0) {
-      signin(modal.formData, dispatch);
+      await signin(modal.formData, dispatch);
     }
     if (loginModal.state === 1) {
-      register(modal.formData, dispatch);
+      await register(modal.formData, dispatch);
     }
 
     setModal({

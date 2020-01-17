@@ -70,7 +70,7 @@ export const register = async (data, dispatch) => {
             type: ALERT,
             payload: {
               varient: 'success',
-              message: 'Successfully registered.',
+              message: 'Registration successful. Please login',
             },
           });
           dispatch({
@@ -272,13 +272,13 @@ export const addBookmark = async (uuid, userId, user, provider, dispatch) => {
       const res = await client.patchUser(userId, {
         user: {
           data: {
-            bookmarks: [
-              ...user.data.bookmarks,
+            bookmarks: [...user.data.bookmarks,
               {
                 id: uuid,
                 provider
               }
             ]
+
           }
         }
       })
@@ -309,14 +309,14 @@ export const updateUser = async (type, userId, data) => {
     store.setItem('user', patchedData.successResponse.user);
     return {
       varient: 'success',
-      message: 'Updated'
+      message: 'Updated profile.'
     }
   } catch (error) {
 
     console.log(error)
     return {
       varient: 'error',
-      message: 'Unable to update'
+      message: 'Unable to update your profile.'
     }
   }
 }

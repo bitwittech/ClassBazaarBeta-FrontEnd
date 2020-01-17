@@ -65,12 +65,14 @@ const useStyles = makeStyles(theme => ({
 const HomeModal = ({
   openState,
   handlePopupClose,
-  state,
+  Mstate,
   course,
   provider,
   uuid,
+  addReviewToCurrentState,
 }) => {
   const classes = useStyles();
+  const { state, dispatch } = useContext(Store);
 
   //Home made modal
   const HomeMessage = () => (
@@ -176,7 +178,15 @@ const HomeModal = ({
       {text}
     </Typography>
   );
-  const ReviewForm = (course, provider, uuid) => {
+  const ReviewForm = (
+    course,
+    provider,
+    uuid,
+    dispatch,
+    state,
+    addReviewToCurrentState
+  ) => {
+    console.log(dispatch);
     const [message, setMessage] = useState('');
     const token = localStorage.getItem('cbtoken');
     const [value, setValue] = React.useState(0);
@@ -188,7 +198,19 @@ const HomeModal = ({
     console.log('UUID', uuid);
     const handleSubmit = async e => {
       e.preventDefault();
-      console.log(message, finished, value, uuid);
+
+      if (!state.isAuth) {
+        console.log('REQUIRED', state);
+        dispatch({
+          type: 'ALERT',
+          payload: {
+            varient: 'info',
+            message: 'Please login to add your review.',
+          },
+        });
+        return;
+      }
+
       const body = JSON.stringify({
         review: message,
         token: token,
@@ -208,13 +230,32 @@ const HomeModal = ({
           body,
           config
         );
-        console.log('STATUS', res);
+        addReviewToCurrentState({
+          review: message,
+          course_id: uuid,
+          provider,
+          rating: value,
+          status: finished,
+        });
+        dispatch({
+          type: 'ALERT',
+          payload: {
+            varient: 'success',
+            message: 'Review Added',
+          },
+        });
         handlePopupClose();
       } catch (error) {
-        console.log(error);
+        dispatch({
+          type: 'ALERT',
+          payload: {
+            varient: 'error',
+            message: 'Could not add your review',
+          },
+        });
       }
     };
-    console.log(provider, uuid, token);
+
     return (
       <div>
         <Modal
@@ -254,7 +295,7 @@ const HomeModal = ({
                   {ReviewModalTypo('2) Have you completed the course?')}
                   <div className="flex">
                     <div>
-                      <button
+                      <a
                         onClick={() => setFinished('Doing Right Now')}
                         className={
                           finished === 'Doing Right Now'
@@ -263,10 +304,10 @@ const HomeModal = ({
                         }
                       >
                         Doing Right Now
-                      </button>
+                      </a>
                     </div>
                     <div>
-                      <button
+                      <a
                         onClick={() => setFinished('Completed')}
                         className={
                           finished === 'Completed'
@@ -275,7 +316,7 @@ const HomeModal = ({
                         }
                       >
                         Completed
-                      </button>
+                      </a>
                     </div>
                   </div>
                   {ReviewModalTypo('3) Write your review')}
@@ -308,11 +349,18 @@ const HomeModal = ({
     );
   };
   const switchRender = (course, provider, uuid) => {
-    switch (state) {
+    switch (Mstate) {
       case 0:
         return HomeMessage();
       case 1:
-        return ReviewForm(course, provider, uuid);
+        return ReviewForm(
+          course,
+          provider,
+          uuid,
+          dispatch,
+          state,
+          addReviewToCurrentState
+        );
       default:
         return HomeMessage();
     }

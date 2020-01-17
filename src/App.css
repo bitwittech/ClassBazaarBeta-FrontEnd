@@ -251,6 +251,12 @@ a:hover {
   margin-left: -110px !important;
 }
 
+.review-image {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
+
 @media (max-width: 800px) {
 
   .c-logo {

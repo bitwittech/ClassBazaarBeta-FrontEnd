@@ -103,6 +103,9 @@ class ProfilePage extends Component {
       if (user.data === undefined) {
         return this.setState({ data: [], reviews: [], loading: false });
       }
+      if(user.data.bookmarks.length === 0){
+        return this.setState({data:[],loading:false})
+      }
 
       const data = user.data.bookmarks;
       console.log(data);
