@@ -245,6 +245,7 @@ const HomeModal = ({
           },
         });
         handlePopupClose();
+        window.location.reload();
       } catch (error) {
         dispatch({
           type: 'ALERT',
