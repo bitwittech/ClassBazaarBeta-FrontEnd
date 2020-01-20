@@ -495,18 +495,29 @@ class ProfilePage extends Component {
                                   />
                                 ) : (
                                   <SaveIcon
-                                    onClick={() => {
-                                      const {
+                                    onClick={async () => {
+                                      try{
+                                        const {
                                         curPassword,
                                         newPassword,
                                       } = this.state;
-                                      updatePassword(
+
+                                      const res = await updatePassword(
                                         curPassword,
                                         newPassword,
                                         this.state.user.email,
                                         this.state.user.id
                                       );
-                                      this.setState({ passwordP: false });
+                                      this.setState({ changePasswordB: false,msg: res });
+                                      }catch(error){
+                                        this.setState({
+                                          changePasswordB: false,
+                                          msg: {
+                                            varient: 'error',
+                                            message: 'Unable to update',
+                                          },
+                                        });
+                                      }
                                     }}
                                     color="primary"
                                     style={{ fontSize: '1.2em' }}
