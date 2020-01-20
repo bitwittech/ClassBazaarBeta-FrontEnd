@@ -322,6 +322,39 @@ export const updateUser = async (type, userId, data) => {
   }
 }
 
+export const updateLocation = async (userId, data, user) => {
+  try {
+    const patchedData = await client.patchUser(userId, {
+      user: {
+        ...user,
+        data: {
+          ...user.data,
+          location: data
+        }
+      },
+    });
+    console.log(patchedData)
+    store.setItem('user', patchedData.successResponse.user);
+    if (patchedData.statusCode === 200) {
+      return {
+        varient: 'success',
+        message: 'Location Changed'
+      }
+    } else {
+      return {
+        varient: 'error',
+        message: 'Unable to update location'
+      }
+    }
+  } catch (error) {
+    console.log(error)
+    return {
+      varient: 'error',
+      message: 'Unable to update location'
+    }
+  }
+}
+
 export const updatePassword = async (curPass, newPass, email, userId) => {
   console.log(userId, email, newPass, curPass)
   try {

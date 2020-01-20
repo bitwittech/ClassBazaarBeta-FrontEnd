@@ -32,7 +32,7 @@ import AlertSnackbar from './AlertSnackbar';
 import { titleCase } from './../utils/utils';
 import { Redirect, withRouter } from 'react-router';
 import SaveIcon from '@material-ui/icons/Save';
-import { updateUser, updatePassword } from '../actions/ContextActions';
+import { updateUser, updatePassword, updateLocation } from '../actions/ContextActions';
 import { Link } from 'react-router-dom';
 
 const styles = {
@@ -81,6 +81,7 @@ class ProfilePage extends Component {
       curPassword: '',
       msg: null,
       rLoading: true,
+      userImage:'',
       reviews: [],
     };
     this.updateData = this.updateData.bind(this);
@@ -94,6 +95,9 @@ class ProfilePage extends Component {
         user,
         phone: user.mobilePhone,
         email: user.email,
+        userImage: user.data && user.data.image
+        ? user.data && user.data.image
+        : 'https://www.sketchengine.eu/wp-content/plugins/all-in-one-seo-pack/images/default-user-image.png',
         location:
           user.data && user.data.location
             ? user.data && user.data.location
@@ -185,7 +189,7 @@ class ProfilePage extends Component {
                             alignItems="center"
                           >
                             <img
-                              src="https://via.placeholder.com/150"
+                              src={this.state.userImage}
                               alt="profile-img"
                               className="profile-img"
                             />
@@ -264,13 +268,20 @@ class ProfilePage extends Component {
                                   />
                                 ) : (
                                   <SaveIcon
-                                    onClick={() => {
-                                      updateUser(
-                                        'location',
+                                    onClick={async () => {
+                                     try{
+                                      const res = await updateLocation(
                                         this.state.user.id,
-                                        this.state.location
+                                        this.state.location,
+                                        this.state.user
                                       );
-                                      this.setState({ locationB: false });
+                                      this.setState({ locationB: false,msg:res });
+                                     }catch{
+                                      this.setState({ locationB: false,msg:{
+                                        varient: 'error',
+                                        message:"Unable to change location"
+                                      } });
+                                     }
                                     }}
                                     color="primary"
                                     style={{ fontSize: '1.2em' }}
