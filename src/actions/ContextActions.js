@@ -9,28 +9,59 @@ import {
   UPDATE_BOOKMARK,
 } from '../store/Types';
 import config from '../config.json';
-import {
-  store
-} from './../App';
+import { store } from './../App';
 
-const {
-  FusionAuthClient
-} = require('@fusionauth/node-client');
+const { FusionAuthClient } = require('@fusionauth/node-client');
 
-const {
-  API,
-  API_NGROK,
-  API_LOCAL,
-  fusionAuthURL
-} = config;
+const { API, API_NGROK, API_LOCAL, fusionAuthURL } = config;
 
 let client = new FusionAuthClient(
   config.fusionAuthAPIKey,
   config.fusionAuthURL
 );
 
-export const register = async (data, dispatch) => {
+export const googleLogin = async (data, dispatch) => {
+  client
+    .identityProviderLogin({
+      applicationId: 'c8682dc3-adbc-4501-b707-9cde8c8ade0f',
+      identityProviderId: '82339786-3dff-42a6-aac6-1f1ceecb6c46 ',
+      data: {
+        token: data.id_token,
+        redirect_uri: 'http://localhost:3000',
+      },
+    })
+    .then(async resp => {
+      if (resp.statusCode === 200) {
+        const user = resp.successResponse.user;
+        if (!user.username) {
+          // Need to fetch details from google and update the user.
+          await fetch(
+            `https://www.googleapis.com/oauth2/v1/userinfo?access_token=${data.access_token}`
+          )
+            .then(resp => resp.json())
+            .then(googleDetails => {
+              user.name = googleDetails.name;
+              user.username = googleDetails.email;
+              updateUser('name', user.id, googleDetails.name);
+              updateUser('username', user.id, googleDetails.email);
+            })
+            .catch(err => {
+              console.error(err);
+            });
+        }
+        store.setItem('user', user);
+        dispatch({
+          type: LOGIN,
+          payload: {
+            token: resp.successResponse.token,
+            user,
+          },
+        });
+      }
+    });
+};
 
+export const register = async (data, dispatch) => {
   dispatch({
     type: LOADING,
     payload: true,
@@ -135,7 +166,7 @@ export const signin = async (data, dispatch) => {
         password: data.password,
       })
       .then(async response => {
-        console.log(response)
+        console.log(response);
         if (response.statusCode === 200) {
           store.setItem('user', response.successResponse.user);
           dispatch({
@@ -225,44 +256,45 @@ export const addBookmark = async (uuid, userId, user, provider, dispatch) => {
 
   //check for first time new user whose user.data in undefined
   if (user.data === undefined) {
-    console.log("NEW USER")
+    console.log('NEW USER');
     try {
       const res = await client.patchUser(userId, {
         user: {
           data: {
-            bookmarks: [{
-              id: uuid,
-              provider
-            }]
-          }
-        }
-      })
+            bookmarks: [
+              {
+                id: uuid,
+                provider,
+              },
+            ],
+          },
+        },
+      });
       store.setItem('user', res.successResponse.user);
       dispatch({
         type: UPDATE_BOOKMARK,
         payload: res.successResponse.user.data.bookmarks,
       });
-      console.log("ADDED DATA", res)
+      console.log('ADDED DATA', res);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   } else {
-
     //already bookmarked?
-    console.log('UUID', uuid)
-    const isAlreadyPresent = user.data.bookmarks.find(e => e.id === uuid)
-    console.log("PRESENT", isAlreadyPresent)
+    console.log('UUID', uuid);
+    const isAlreadyPresent = user.data.bookmarks.find(e => e.id === uuid);
+    console.log('PRESENT', isAlreadyPresent);
 
     if (isAlreadyPresent) {
-      const newBookmarks = user.data.bookmarks.filter(e => e.id !== uuid)
+      const newBookmarks = user.data.bookmarks.filter(e => e.id !== uuid);
       const res = await client.patchUser(userId, {
         user: {
           data: {
-            bookmarks: newBookmarks
-          }
-        }
-      })
-      console.log("ALREADY PRESENT", res)
+            bookmarks: newBookmarks,
+          },
+        },
+      });
+      console.log('ALREADY PRESENT', res);
       store.setItem('user', res.successResponse.user);
       dispatch({
         type: UPDATE_BOOKMARK,
@@ -272,60 +304,54 @@ export const addBookmark = async (uuid, userId, user, provider, dispatch) => {
       const res = await client.patchUser(userId, {
         user: {
           data: {
-            bookmarks: [...user.data.bookmarks,
+            bookmarks: [
+              ...user.data.bookmarks,
               {
                 id: uuid,
-                provider
-              }
-            ]
-
-          }
-        }
-      })
+                provider,
+              },
+            ],
+          },
+        },
+      });
       store.setItem('user', res.successResponse.user);
       dispatch({
         type: UPDATE_BOOKMARK,
         payload: res.successResponse.user.data.bookmarks,
       });
-      console.log("NEW ADDED", res)
+      console.log('NEW ADDED', res);
     }
-
-
-
   }
-
-
-
 };
 
 export const updateUser = async (type, userId, data) => {
   try {
     const patchedData = await client.patchUser(userId, {
       user: {
-        [type]: data
+        [type]: data,
       },
     });
-    console.log(patchedData)
+    console.log(patchedData);
     store.setItem('user', patchedData.successResponse.user);
     return {
       varient: 'success',
-      message: 'Updated profile.'
-    }
+      message: 'Updated profile.',
+    };
   } catch (error) {
-
-    console.log(error)
+    console.log(error);
     return {
       varient: 'error',
-      message: 'Unable to update your profile.'
-    }
+      message: 'Unable to update your profile.',
+    };
   }
-}
+};
 
 export const updatePassword = async (curPass, newPass, email, userId) => {
-  console.log(userId)
+  console.log(userId);
   try {
-
-    const res = await client.retrieveRefreshTokens('44a983ba-a135-414d-84d1-e9e33d24e097')
+    const res = await client.retrieveRefreshTokens(
+      '44a983ba-a135-414d-84d1-e9e33d24e097'
+    );
 
     // const request = {
     //   currentPassword: 'classbazaarco',
@@ -334,9 +360,8 @@ export const updatePassword = async (curPass, newPass, email, userId) => {
     // }
     // const res = await client.changePasswordByIdentity(request)
 
-    console.log(res)
+    console.log(res);
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
-
-}
+};
