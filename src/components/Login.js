@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { register, signin } from '../actions/ContextActions';
+import { register, signin, googleLogin } from '../actions/ContextActions';
 
 import Backdrop from '@material-ui/core/Backdrop';
 import Button from '@material-ui/core/Button';
@@ -12,6 +12,7 @@ import Modal from '@material-ui/core/Modal';
 import Store from '../store/Context';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
+import { googleClient } from '../utils/oauth';
 
 const useStyles = makeStyles(theme => ({
   modal: {
@@ -114,6 +115,13 @@ const Login = () => {
         ...modal.formData,
         [e.target.name]: e.target.value,
       },
+    });
+  };
+
+  const onGoogleLogin = async () => {
+    googleClient.getToken().then(token => {
+      console.log('I got the token', token);
+      googleLogin(token, dispatch);
     });
   };
 
@@ -326,10 +334,11 @@ const Login = () => {
                     <Button
                       variant="contained"
                       style={{ background: '#DD6D5C', color: 'white' }}
+                      onClick={() => onGoogleLogin()}
                       className={classes.social}
                     >
                       <i class="fab fa-google" aria-hidden="true"></i>
-                      &nbsp;Google Plus
+                      &nbsp;Google
                     </Button>
                   </Grid>
                 </Grid>
