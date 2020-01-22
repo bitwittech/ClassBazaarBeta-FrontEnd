@@ -8,6 +8,7 @@ import {
   REMOVE_TOKEN,
   UPDATE_BOOKMARK,
 } from '../store/Types';
+
 import config from '../config.json';
 import { store } from './../App';
 
@@ -166,7 +167,7 @@ export const signin = async (data, dispatch) => {
         password: data.password,
       })
       .then(async response => {
-        console.log("LOGIN", response)
+        console.log('LOGIN', response);
         if (response.statusCode === 200) {
           store.setItem('user', response.successResponse.user);
 
@@ -354,68 +355,66 @@ export const updateLocation = async (userId, data, user) => {
         ...user,
         data: {
           ...user.data,
-          location: data
-        }
+          location: data,
+        },
       },
     });
-    console.log(patchedData)
+    console.log(patchedData);
     store.setItem('user', patchedData.successResponse.user);
     if (patchedData.statusCode === 200) {
       return {
         varient: 'success',
-        message: 'Location Changed'
-      }
+        message: 'Location Changed',
+      };
     } else {
       return {
         varient: 'error',
-        message: 'Unable to update location'
-      }
+        message: 'Unable to update location',
+      };
     }
   } catch (error) {
-    console.log(error)
+    console.log(error);
     return {
       varient: 'error',
-      message: 'Unable to update location'
-    }
+      message: 'Unable to update location',
+    };
   }
-}
+};
 
 export const updatePassword = async (curPass, newPass, email, userId) => {
   console.log(userId);
   try {
-    const res = await client.retrieveRefreshTokens(
-      '44a983ba-a135-414d-84d1-e9e33d24e097'
-    );
-  console.log(userId, email, newPass, curPass)
-  try {
-
+    // const res = await client.retrieveRefreshTokens(
+    //   '44a983ba-a135-414d-84d1-e9e33d24e097'
+    // );
+    console.log(userId, email, newPass, curPass);
     // const res = await client.retrieveRefreshTokens('saran@gmail.com')
     // console.log("RT", res)
     const request = {
       currentPassword: curPass,
       loginId: email,
-      password: newPass
-    }
-    const res = await client.changePasswordByIdentity(request)
+      password: newPass,
+    };
+    const res = await client.changePasswordByIdentity(request);
 
     if (res.statusCode === 200) {
       return {
         varient: 'success',
-        message: 'Password changed'
-      }
+        message: 'Password changed',
+      };
     } else {
       return {
         varient: 'error',
-        message: 'Invalid current password'
-      }
+        message: 'Invalid current password',
+      };
     }
 
     console.log(res);
   } catch (error) {
-    console.log(error)
+    console.log(error);
     return {
       varient: 'error',
-      message: 'Unable to update password'
-    }
+      message: 'Unable to update password',
+    };
   }
 };

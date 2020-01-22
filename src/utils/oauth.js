@@ -11,7 +11,7 @@ const googleClient = new JSO({
   providerId: 'google',
   client_id:
     '844357402268-ihn8eo096oqq60irm9sb1gn6n4uh1mf6.apps.googleusercontent.com',
-  redirect_uri: 'https://www.classbazaar.in', // The URL where you is redirected back, and where you perform run the callback() function.
+  redirect_uri: 'https://www.classbazaar.com', // The URL where you is redirected back, and where you perform run the callback() function.
   authorization: 'https://accounts.google.com/o/oauth2/auth',
   scopes: {
     request: [
