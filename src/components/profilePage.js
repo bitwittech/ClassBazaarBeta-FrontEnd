@@ -32,7 +32,11 @@ import AlertSnackbar from './AlertSnackbar';
 import { titleCase } from './../utils/utils';
 import { Redirect, withRouter } from 'react-router';
 import SaveIcon from '@material-ui/icons/Save';
-import { updateUser, updatePassword } from '../actions/ContextActions';
+import {
+  updateUser,
+  updatePassword,
+  updateLocation,
+} from '../actions/ContextActions';
 import { Link } from 'react-router-dom';
 
 const styles = {
@@ -81,6 +85,7 @@ class ProfilePage extends Component {
       curPassword: '',
       msg: null,
       rLoading: true,
+      userImage: '',
       reviews: [],
     };
     this.updateData = this.updateData.bind(this);
@@ -94,6 +99,10 @@ class ProfilePage extends Component {
         user,
         phone: user.mobilePhone,
         email: user.email,
+        userImage:
+          user.data && user.data.image
+            ? user.data && user.data.image
+            : 'https://www.sketchengine.eu/wp-content/plugins/all-in-one-seo-pack/images/default-user-image.png',
         location:
           user.data && user.data.location
             ? user.data && user.data.location
@@ -103,8 +112,8 @@ class ProfilePage extends Component {
       if (user.data === undefined) {
         return this.setState({ data: [], reviews: [], loading: false });
       }
-      if(user.data.bookmarks.length === 0){
-        return this.setState({data:[],loading:false})
+      if (user.data.bookmarks.length === 0) {
+        return this.setState({ data: [], loading: false });
       }
 
       const data = user.data.bookmarks;
@@ -160,7 +169,7 @@ class ProfilePage extends Component {
 
   render() {
     if (this.state.user == null) return <Redirect to="/" />;
-    console.log("STATE PROFILE",this.state)
+    console.log('STATE PROFILE', this.state);
     return (
       <>
         <TopAppBar />
@@ -185,7 +194,7 @@ class ProfilePage extends Component {
                             alignItems="center"
                           >
                             <img
-                              src="https://via.placeholder.com/150"
+                              src={this.state.userImage}
                               alt="profile-img"
                               className="profile-img"
                             />
@@ -264,13 +273,27 @@ class ProfilePage extends Component {
                                   />
                                 ) : (
                                   <SaveIcon
-                                    onClick={() => {
-                                      updateUser(
-                                        'location',
-                                        this.state.user.id,
-                                        this.state.location
-                                      );
-                                      this.setState({ locationB: false });
+                                    onClick={async () => {
+                                      try {
+                                        const res = await updateLocation(
+                                          this.state.user.id,
+                                          this.state.location,
+                                          this.state.user
+                                        );
+                                        this.setState({
+                                          locationB: false,
+                                          msg: res,
+                                        });
+                                      } catch {
+                                        this.setState({
+                                          locationB: false,
+                                          msg: {
+                                            varient: 'error',
+                                            message:
+                                              'Unable to change location',
+                                          },
+                                        });
+                                      }
                                     }}
                                     color="primary"
                                     style={{ fontSize: '1.2em' }}
@@ -495,18 +518,32 @@ class ProfilePage extends Component {
                                   />
                                 ) : (
                                   <SaveIcon
-                                    onClick={() => {
-                                      const {
-                                        curPassword,
-                                        newPassword,
-                                      } = this.state;
-                                      updatePassword(
-                                        curPassword,
-                                        newPassword,
-                                        this.state.user.email,
-                                        this.state.user.id
-                                      );
-                                      this.setState({ passwordP: false });
+                                    onClick={async () => {
+                                      try {
+                                        const {
+                                          curPassword,
+                                          newPassword,
+                                        } = this.state;
+
+                                        const res = await updatePassword(
+                                          curPassword,
+                                          newPassword,
+                                          this.state.user.email,
+                                          this.state.user.id
+                                        );
+                                        this.setState({
+                                          changePasswordB: false,
+                                          msg: res,
+                                        });
+                                      } catch (error) {
+                                        this.setState({
+                                          changePasswordB: false,
+                                          msg: {
+                                            varient: 'error',
+                                            message: 'Unable to update',
+                                          },
+                                        });
+                                      }
                                     }}
                                     color="primary"
                                     style={{ fontSize: '1.2em' }}
@@ -589,7 +626,7 @@ class ProfilePage extends Component {
                                   className="hover"
                                   gutterBottom
                                 >
-                                  university
+                                  {data.course && data.course.university}
                                 </Typography>
                               </div>
                               <div></div>
@@ -607,7 +644,7 @@ class ProfilePage extends Component {
                                 className="hover"
                                 gutterBottom
                               >
-                                Course Name
+                                {data.course && data.course.title}
                               </Typography>
                             </Link>
                             <Typography
@@ -619,7 +656,7 @@ class ProfilePage extends Component {
                               display="block"
                               gutterBottom
                             >
-                              {data.provider}
+                              {data.review.provider}
                             </Typography>
                             <div>
                               <Typography
@@ -644,7 +681,7 @@ class ProfilePage extends Component {
                                 display="block"
                                 gutterBottom
                               >
-                                {data.review}
+                                {data.review.review}
                               </Typography>
                             </div>
                             <br />
