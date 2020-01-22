@@ -68,15 +68,15 @@ const defaultProps = {
 };
 
 const perPage = 10;
-
+// 35.224.4.2
 const ADDED_NETWORK_DELAY = 1500;
 class CourseList extends Component {
   constructor(props) {
     super(props);
     this.state = {
       data: [],
-      page: 0,
-      start: 0,
+      page: 1,
+      start: 1,
       end: perPage,
       perPage: perPage,
       loading: true,
@@ -92,6 +92,7 @@ class CourseList extends Component {
     this.buildElements = this.buildElements.bind(this);
     this.elementInfiniteLoad = this.elementInfiniteLoad.bind(this);
     this.handleInfiniteLoad = this.handleInfiniteLoad.bind(this);
+    this.getElements = this.getElements.bind(this);
   }
 
   async buildElements() {
@@ -126,6 +127,7 @@ class CourseList extends Component {
 
   handleInfiniteLoad() {
     let that = this;
+
     if (this.state.isFromLoadMore || this.state.urlChanged) {
       this.setState({
         isInfiniteLoading: true,
@@ -152,23 +154,24 @@ class CourseList extends Component {
     }
   }
 
+  getElements(newElements) {
+    return this.state.elements.concat(newElements);
+  }
+
   update(that) {
     that.buildElements().then(newElements => {
-      console.log({ newElements });
+      // console.log({ newElements: newElements.map(e => e.key) });
       that.setState({
         isInfiniteLoading: false,
-        elements: that.state.isFirstLoad
-          ? newElements
-          : that.state.elements.concat(newElements),
+        elements: this.getElements(newElements),
         loading: false,
         urlChanged: false,
-        page: that.state.isFirstLoad ? 0 : this.state.page + 1,
+        page: that.state.isFirstLoad ? 1 : this.state.page + 1,
       });
     });
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log('Here', nextProps, this.state);
     if (this.state.queryURL !== nextProps.url) {
       this.setState(
         {
@@ -198,7 +201,6 @@ class CourseList extends Component {
     const checkedData = this.state.providerData.map(s => {
       return selectedProviders.indexOf(s) > -1;
     });
-    console.log({ checkedData });
     return checkedData;
   }
 
@@ -237,7 +239,6 @@ class CourseList extends Component {
   }
 
   render() {
-    console.log('Rendering now');
     return (
       <Container
         maxWidth={'lg'}
