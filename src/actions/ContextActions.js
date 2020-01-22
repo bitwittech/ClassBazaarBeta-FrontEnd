@@ -27,7 +27,7 @@ export const googleLogin = async (data, dispatch) => {
       identityProviderId: '82339786-3dff-42a6-aac6-1f1ceecb6c46 ',
       data: {
         token: data.id_token,
-        redirect_uri: 'http://localhost:3000',
+        redirect_uri: 'https://www.classbazaar.com',
       },
     })
     .then(async resp => {
