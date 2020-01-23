@@ -5,7 +5,7 @@ import {
   googleLogin,
   facebookLogin,
 } from '../actions/ContextActions';
-
+import config from '../config.json';
 import Backdrop from '@material-ui/core/Backdrop';
 import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
@@ -332,7 +332,7 @@ const Login = () => {
                 <Grid style={{ marginTop: '20px' }} container spacing={3}>
                   <Grid item xs={12} sm={6} style={{ textAlign: 'right' }}>
                     <FacebookLogin
-                      appId="2818294571521012"
+                      appId={fbAppId}
                       autoLoad={false}
                       callback={responseFacebook}
                       scope="public_profile"

@@ -39,7 +39,7 @@ export const facebookLogin = async (data, dispatch) => {
       identityProviderId: '56abdcc7-8bd9-4321-9621-4e9bbebae494',
       data: {
         token: data.accessToken,
-        redirect_uri: 'http://localhost:3000',
+        redirect_uri: `${config.P_redirecturl}`,
       },
     })
     .then(resp => {
@@ -86,7 +86,7 @@ export const googleLogin = async (data, dispatch) => {
       identityProviderId: '82339786-3dff-42a6-aac6-1f1ceecb6c46 ',
       data: {
         token: data.id_token,
-        redirect_uri: 'http://localhost:3000',
+        redirect_uri: `${config.P_redirecturl}`,
       },
     })
     .then(async resp => {
