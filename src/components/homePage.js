@@ -1,6 +1,6 @@
 import { Container, Divider } from '@material-ui/core';
 import React, { Component } from 'react';
-
+import { trackEvent } from 'react-with-analytics/lib/utils';
 import ArrowBack from '@material-ui/icons/ArrowBack';
 import ArrowForward from '@material-ui/icons/ArrowForward';
 import Box from '@material-ui/core/Box';
@@ -328,6 +328,9 @@ class HomePage extends Component {
     this.setState({ q: query.target.value }, () => {
       this.updateData();
     });
+    setTimeout(() => {
+      trackEvent('search', 'onSearch', 'Search_rest');
+    }, 5000);
   }
 
   getCheckedProvidersFromString() {

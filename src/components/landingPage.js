@@ -29,6 +29,7 @@ import Typography from '@material-ui/core/Typography';
 import { withRouter } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 import Smicon from '../assets/smicon.svg';
+import { trackEvent } from 'react-with-analytics/lib/utils';
 const styles = theme => ({
   dashboardLink: {
     color: 'white',
@@ -133,6 +134,7 @@ const Search = withRouter(({ history, ...data }) => {
         onKeyPress={ev => {
           if (ev.key === 'Enter') {
             const query = data.getQuery;
+            trackEvent('search', 'onSearch', 'Search_homepage');
             history.push({
               pathname: data.routingURL,
               state: {
@@ -167,7 +169,7 @@ const ShowMore = withRouter(({ history, ...data }) => {
         <div style={{ alignSelf: 'center' }}>Show More</div>
         <div className="flex">
           <div style={{ alignSelf: 'center', height: '25px' }}>
-            <img className="smicon" src={Smicon} alt="sm-icon" />
+            <img className="smicon no-desktop" src={Smicon} alt="sm-icon" />
           </div>
         </div>
       </div>
@@ -233,6 +235,7 @@ class LandingPage extends Component {
       subjects: subjectsData.slice(0, 3),
       showMoreButtonText: 'Show More',
       popUp: sessionStorage.getItem('cbpop'),
+      nsEmail: '',
     };
     console.log('landing', this.state);
     console.log('onrender', sessionStorage.getItem('cbpop'));
@@ -293,6 +296,7 @@ class LandingPage extends Component {
   }
 
   showMore() {
+    trackEvent('showmore', 'click', 'Subject_showmore');
     if (this.state.subjects.length === 3)
       this.setState({
         subjects: subjectsData,
@@ -309,7 +313,7 @@ class LandingPage extends Component {
     return this.state.q;
   }
 
-  getDegreeCard(degree, classes, type) {
+  getDegreeCard(degree, classes, type, dataType) {
     const padding = { paddingTop: 6, paddingBottom: 6 };
     return (
       <Grid container className="c-card">
@@ -321,7 +325,31 @@ class LandingPage extends Component {
               style={{ margin: 'auto', paddingLeft: 30 }}
               className="card-content"
             >
-              <Link to={'/coursedetails' + degree.url}>
+              <Link
+                onClick={() => {
+                  switch (dataType) {
+                    case 'degree':
+                      return trackEvent(
+                        'Degree_course',
+                        'click',
+                        `${degree.name}`
+                      );
+                    case 'trending':
+                      return trackEvent(
+                        'Trending_course',
+                        'click',
+                        `${degree.name}`
+                      );
+                    case 'free':
+                      return trackEvent(
+                        'Free_course',
+                        'click',
+                        `${degree.name}`
+                      );
+                  }
+                }}
+                to={'/coursedetails' + degree.url}
+              >
                 <Typography
                   variant="body2"
                   color="primary"
@@ -483,6 +511,13 @@ class LandingPage extends Component {
                       image={subject.image}
                       classes={classes}
                       routingURL={'/listing'}
+                      onClick={() => {
+                        trackEvent(
+                          'Subject Selected',
+                          'click',
+                          `${subject.name}`
+                        );
+                      }}
                     />
                   );
                 })}
@@ -502,9 +537,17 @@ class LandingPage extends Component {
                   <div className="flex">
                     <div style={{ alignSelf: 'center', height: '25px' }}>
                       {this.state.showMoreButtonText === 'Show More' ? (
-                        <img className="smicon" src={Smicon} alt="sm-icon" />
+                        <img
+                          className="smicon no-desktop"
+                          src={Smicon}
+                          alt="sm-icon"
+                        />
                       ) : (
-                        <img className="smicon2" src={Smicon} alt="sm-icon2" />
+                        <img
+                          className="smicon2 no-dekstop"
+                          src={Smicon}
+                          alt="sm-icon2"
+                        />
                       )}
                     </div>
                   </div>
@@ -544,11 +587,14 @@ class LandingPage extends Component {
             >
               <Grid container>
                 {degreeData.map(degree =>
-                  this.getDegreeCard(degree, classes, 1)
+                  this.getDegreeCard(degree, classes, 1, 'degree')
                 )}
               </Grid>
             </Container>
             <ShowMore
+              onClick={() => {
+                trackEvent('showmore', 'click', 'Degree_showmore');
+              }}
               classes={classes}
               filter={'paid'}
               routingURL={'/listing'}
@@ -571,12 +617,15 @@ class LandingPage extends Component {
                   Top Trending Courses
                 </Typography>
                 {trendingData.map(degree =>
-                  this.getDegreeCard(degree, classes, 2)
+                  this.getDegreeCard(degree, classes, 2, 'trending')
                 )}
                 <div className="center-button">
                   <ShowMore
                     classes={classes}
                     filter={''}
+                    onClick={() => {
+                      trackEvent('showmore', 'click', 'Trending_showmore');
+                    }}
                     routingURL={'/listing'}
                   />
                 </div>
@@ -598,10 +647,13 @@ class LandingPage extends Component {
                   Learn for Free
                 </Typography>
                 {freeCourses.map(degree =>
-                  this.getDegreeCard(degree, classes, 2)
+                  this.getDegreeCard(degree, classes, 2, 'free')
                 )}
                 <div className="center-button">
                   <ShowMore
+                    onClick={() => {
+                      trackEvent('showmore', 'click', 'Free_showmore');
+                    }}
                     classes={classes}
                     filter={'free'}
                     routingURL={'/listing'}
@@ -629,7 +681,16 @@ class LandingPage extends Component {
                 placeholder="Your email"
                 className="ns-input"
               />
-              <button className="ns-submit">Submit</button>
+              <button
+                onClick={() => {
+                  if (this.state.nsEmail !== '') {
+                    trackEvent('Newsletter', 'click', 'Newsletter Email');
+                  }
+                }}
+                className="ns-submit"
+              >
+                Submit
+              </button>
             </div>
           </div>
         </div>
