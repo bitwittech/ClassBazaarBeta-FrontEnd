@@ -27,22 +27,6 @@ const googleClient = new JSO({
 
 googleClient.callback();
 
-
-// const facebookClient = new JSO({
-//   providerId: 'facebook',
-//   client_id: '2818294571521012',
-//   redirect_uri: 'http://localhost:3000/', // The URL where you is redirected back, and where you perform run the callback() function.
-//   authorization: 'https://www.facebook.com/v5.0/dialog/oauth',
-//   scopes: {
-//     request: ['email'],
-//   },
-//   response_type: 'id_token token',
-//   debug: true,
-// })
-
-// facebookClient.callback();
-
 export {
-  googleClient,
-  facebookClient
+  googleClient
 };

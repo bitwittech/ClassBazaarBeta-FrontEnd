@@ -332,7 +332,7 @@ const Login = () => {
                 <Grid style={{ marginTop: '20px' }} container spacing={3}>
                   <Grid item xs={12} sm={6} style={{ textAlign: 'right' }}>
                     <FacebookLogin
-                      appId={fbAppId}
+                      appId={config.fbAppId}
                       autoLoad={false}
                       callback={responseFacebook}
                       scope="public_profile"
