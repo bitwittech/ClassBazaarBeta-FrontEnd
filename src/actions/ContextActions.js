@@ -10,35 +10,94 @@ import {
 } from '../store/Types';
 
 import config from '../config.json';
-import { store } from './../App';
+import {
+  store
+} from './../App';
 
-const { FusionAuthClient } = require('@fusionauth/node-client');
+const {
+  FusionAuthClient
+} = require('@fusionauth/node-client');
 
-const { API, API_NGROK, API_LOCAL, fusionAuthURL } = config;
+const {
+  API,
+  API_NGROK,
+  API_LOCAL,
+  fusionAuthURL
+} = config;
 
 let client = new FusionAuthClient(
   config.fusionAuthAPIKey,
   config.fusionAuthURL
 );
-
+export const facebookLogin = async (data, dispatch) => {
+  console.log(data)
+  const username = (data) ? data.name : null;
+  let user;
+  client
+    .identityProviderLogin({
+      applicationId: 'c8682dc3-adbc-4501-b707-9cde8c8ade0f',
+      identityProviderId: '56abdcc7-8bd9-4321-9621-4e9bbebae494',
+      data: {
+        token: data.accessToken,
+        redirect_uri: 'http://localhost:3000',
+      },
+    })
+    .then(resp => {
+      console.log(resp)
+      user = {
+        ...resp.successResponse.user,
+        username
+      }
+      store.setItem('user', user);
+      dispatch({
+        type: LOGIN,
+        payload: {
+          token: resp.successResponse.token,
+          user,
+        },
+      });
+      dispatch({
+        type: ALERT,
+        payload: {
+          varient: 'success',
+          message: 'Login successful',
+        },
+      });
+      dispatch({
+        type: LOGIN_MODAL,
+        payload: false,
+      });
+    }).catch(err => {
+      console.log(err)
+      dispatch({
+        type: ALERT,
+        payload: {
+          varient: 'success',
+          message: 'Login failed',
+        },
+      });
+    })
+}
 export const googleLogin = async (data, dispatch) => {
+
   client
     .identityProviderLogin({
       applicationId: 'c8682dc3-adbc-4501-b707-9cde8c8ade0f',
       identityProviderId: '82339786-3dff-42a6-aac6-1f1ceecb6c46 ',
       data: {
         token: data.id_token,
-        redirect_uri: 'https://www.classbazaar.com',
+        redirect_uri: 'http://localhost:3000',
       },
     })
     .then(async resp => {
+      console.log(resp)
       if (resp.statusCode === 200) {
         const user = resp.successResponse.user;
         if (!user.username) {
           // Need to fetch details from google and update the user.
           await fetch(
-            `https://www.googleapis.com/oauth2/v1/userinfo?access_token=${data.access_token}`
-          )
+              `https://www.googleapis.com/oauth2/v1/userinfo?access_token=${data.access_token}`
+            )
             .then(resp => resp.json())
             .then(googleDetails => {
               user.name = googleDetails.name;
@@ -57,6 +116,17 @@ export const googleLogin = async (data, dispatch) => {
             token: resp.successResponse.token,
             user,
           },
+        });
+        dispatch({
+          type: ALERT,
+          payload: {
+            varient: 'success',
+            message: 'Login successful',
+          },
+        });
+        dispatch({
+          type: LOGIN_MODAL,
+          payload: false,
         });
       }
     });
@@ -263,12 +333,10 @@ export const addBookmark = async (uuid, userId, user, provider, dispatch) => {
       const res = await client.patchUser(userId, {
         user: {
           data: {
-            bookmarks: [
-              {
-                id: uuid,
-                provider,
-              },
-            ],
+            bookmarks: [{
+              id: uuid,
+              provider,
+            }, ],
           },
         },
       });

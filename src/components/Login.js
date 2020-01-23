@@ -1,5 +1,10 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { register, signin, googleLogin } from '../actions/ContextActions';
+import {
+  register,
+  signin,
+  googleLogin,
+  facebookLogin,
+} from '../actions/ContextActions';
 
 import Backdrop from '@material-ui/core/Backdrop';
 import Button from '@material-ui/core/Button';
@@ -12,8 +17,8 @@ import Modal from '@material-ui/core/Modal';
 import Store from '../store/Context';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-import { googleClient } from '../utils/oauth';
-
+import { googleClient, facebookClient } from '../utils/oauth';
+import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
 const useStyles = makeStyles(theme => ({
   modal: {
     display: 'flex',
@@ -81,6 +86,10 @@ const Login = () => {
         open: false,
       },
     });
+  };
+
+  const responseFacebook = res => {
+    facebookLogin(res, dispatch);
   };
 
   const handleChange = e => {
@@ -322,13 +331,22 @@ const Login = () => {
 
                 <Grid style={{ marginTop: '20px' }} container spacing={3}>
                   <Grid item xs={12} sm={6} style={{ textAlign: 'right' }}>
-                    <Button
-                      variant="contained"
-                      style={{ background: '#4267B3', color: 'white' }}
-                      className={classes.social}
-                    >
-                      <i class="fab fa-facebook-f"></i> &nbsp; Facebook
-                    </Button>
+                    <FacebookLogin
+                      appId="2818294571521012"
+                      autoLoad={false}
+                      callback={responseFacebook}
+                      scope="public_profile"
+                      render={renderProps => (
+                        <Button
+                          variant="contained"
+                          style={{ background: '#4267B3', color: 'white' }}
+                          className={classes.social}
+                          onClick={renderProps.onClick}
+                        >
+                          <i class="fab fa-facebook-f"></i> &nbsp; Facebook
+                        </Button>
+                      )}
+                    />
                   </Grid>
                   <Grid item xs={12} sm={6} style={{ textAlign: 'left' }}>
                     <Button
