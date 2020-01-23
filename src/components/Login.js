@@ -19,6 +19,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import { googleClient, facebookClient } from '../utils/oauth';
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
+import { trackEvent } from 'react-with-analytics';
 const useStyles = makeStyles(theme => ({
   modal: {
     display: 'flex',
@@ -90,6 +91,7 @@ const Login = () => {
 
   const responseFacebook = res => {
     facebookLogin(res, dispatch);
+    trackEvent('social-icon', 'click', 'facebook');
   };
 
   const handleChange = e => {
@@ -132,6 +134,7 @@ const Login = () => {
       console.log('I got the token', token);
       googleLogin(token, dispatch);
     });
+    trackEvent('social-icon', 'click', 'google');
   };
 
   const handleSubmit = async e => {
@@ -142,7 +145,7 @@ const Login = () => {
     if (loginModal.state === 1) {
       await register(modal.formData, dispatch);
     }
-
+    trackEvent('SignUp', 'manually', 'register');
     setModal({
       ...modal,
       formData: {
