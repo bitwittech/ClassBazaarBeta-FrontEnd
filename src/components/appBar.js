@@ -17,7 +17,7 @@ import Typography from '@material-ui/core/Typography';
 import { withRouter } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 import { logout } from '../actions/ContextActions';
-
+import { trackEvent } from 'react-with-analytics';
 const useStyles = makeStyles(theme => ({
   title: {
     display: 'none',
@@ -141,6 +141,7 @@ function TopBar(props) {
     console.log(props.history);
     props.history.push('/mobileauth');
   };
+
   return (
     <AppBar
       position="static"
@@ -189,6 +190,9 @@ function TopBar(props) {
               routingURL={'/'}
               clazzNames={`${classes.logo} c-logo`}
               alt="logo"
+              onClick={() => {
+                trackEvent('HeaderIcon', 'Click', `${props.location.pathname}`);
+              }}
             />
           </div>
           <div className="end-flex">

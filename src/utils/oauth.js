@@ -1,5 +1,7 @@
 import FusionAuthClient from './fusionAuth/FusionAuthClient';
-import { JSO } from 'jso';
+import {
+  JSO
+} from 'jso';
 import config from '../config.json';
 
 let client = new FusionAuthClient(
@@ -9,9 +11,8 @@ let client = new FusionAuthClient(
 
 const googleClient = new JSO({
   providerId: 'google',
-  client_id:
-    '844357402268-ihn8eo096oqq60irm9sb1gn6n4uh1mf6.apps.googleusercontent.com',
-  redirect_uri: 'https://www.classbazaar.com', // The URL where you is redirected back, and where you perform run the callback() function.
+  client_id: `${config.GOAUTH}`,
+  redirect_uri: `${config.P_redirecturl}`, // The URL where you is redirected back, and where you perform run the callback() function.
   authorization: 'https://accounts.google.com/o/oauth2/auth',
   scopes: {
     request: [
@@ -26,4 +27,6 @@ const googleClient = new JSO({
 
 googleClient.callback();
 
-export { googleClient };
+export {
+  googleClient
+};

@@ -1,6 +1,11 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { register, signin, googleLogin } from '../actions/ContextActions';
-
+import {
+  register,
+  signin,
+  googleLogin,
+  facebookLogin,
+} from '../actions/ContextActions';
+import config from '../config.json';
 import Backdrop from '@material-ui/core/Backdrop';
 import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
@@ -12,8 +17,9 @@ import Modal from '@material-ui/core/Modal';
 import Store from '../store/Context';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-import { googleClient } from '../utils/oauth';
-
+import { googleClient, facebookClient } from '../utils/oauth';
+import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
+import { trackEvent } from 'react-with-analytics';
 const useStyles = makeStyles(theme => ({
   modal: {
     display: 'flex',
@@ -83,6 +89,11 @@ const Login = () => {
     });
   };
 
+  const responseFacebook = res => {
+    facebookLogin(res, dispatch);
+    trackEvent('social-icon', 'click', 'facebook');
+  };
+
   const handleChange = e => {
     const { name, value } = e.target;
     const errors = modal.errors;
@@ -123,6 +134,7 @@ const Login = () => {
       console.log('I got the token', token);
       googleLogin(token, dispatch);
     });
+    trackEvent('social-icon', 'click', 'google');
   };
 
   const handleSubmit = async e => {
@@ -133,7 +145,7 @@ const Login = () => {
     if (loginModal.state === 1) {
       await register(modal.formData, dispatch);
     }
-
+    trackEvent('SignUp', 'manually', 'register');
     setModal({
       ...modal,
       formData: {
@@ -322,13 +334,22 @@ const Login = () => {
 
                 <Grid style={{ marginTop: '20px' }} container spacing={3}>
                   <Grid item xs={12} sm={6} style={{ textAlign: 'right' }}>
-                    <Button
-                      variant="contained"
-                      style={{ background: '#4267B3', color: 'white' }}
-                      className={classes.social}
-                    >
-                      <i class="fab fa-facebook-f"></i> &nbsp; Facebook
-                    </Button>
+                    <FacebookLogin
+                      appId={config.fbAppId}
+                      autoLoad={false}
+                      callback={responseFacebook}
+                      scope="public_profile"
+                      render={renderProps => (
+                        <Button
+                          variant="contained"
+                          style={{ background: '#4267B3', color: 'white' }}
+                          className={classes.social}
+                          onClick={renderProps.onClick}
+                        >
+                          <i class="fab fa-facebook-f"></i> &nbsp; Facebook
+                        </Button>
+                      )}
+                    />
                   </Grid>
                   <Grid item xs={12} sm={6} style={{ textAlign: 'left' }}>
                     <Button

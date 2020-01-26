@@ -5,6 +5,10 @@
   "fusionAuthURL": "https://auth.classbazaar.in",
   "fusionAuthAPIKey": "NiITD64khrkH7jn6PUNYCPdancc2gdiD8oZJDTsXFOA",
   "fusionAuthApplicationId": "c8682dc3-adbc-4501-b707-9cde8c8ade0f",
+  "GOAUTH": "844357402268-ihn8eo096oqq60irm9sb1gn6n4uh1mf6.apps.googleusercontent.com",
+  "P_redirecturl": "https://www.classbazaar.com",
+  "D_redirecturl": "http://localhost:3000",
+  "fbAppId": "2818294571521012",
   "localForageConfig": {
     "name": "classBazaar",
     "version": 1.0,
