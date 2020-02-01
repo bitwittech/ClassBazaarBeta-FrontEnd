@@ -1,6 +1,6 @@
 import { Container, Divider } from '@material-ui/core';
 import React, { Component } from 'react';
-import { trackEvent } from 'react-with-analytics/lib/utils';
+
 import ArrowBack from '@material-ui/icons/ArrowBack';
 import ArrowForward from '@material-ui/icons/ArrowForward';
 import Box from '@material-ui/core/Box';
@@ -13,11 +13,13 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormLabel from '@material-ui/core/FormLabel';
 import Grid from '@material-ui/core/Grid';
+import MobileTopbar from '../components/MobileTopbar';
 import NestedMenu from './nestedCheckbox';
 import Pagination from 'material-ui-flat-pagination';
 import ProfileCourseCard from './ProfileCourseCard';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
+import ScrollToTop from './ScrollToTop';
 import TopAppBar from './appBar';
 import TurnedInIcon from '@material-ui/icons/TurnedIn';
 import TurnedInNotIcon from '@material-ui/icons/TurnedInNot';
@@ -26,9 +28,8 @@ import { black } from 'material-ui/styles/colors';
 import config from '../config.json';
 import { store } from './../App';
 import { subjectsData } from './../utils/data';
+import { trackEvent } from 'react-with-analytics/lib/utils';
 import { withStyles } from '@material-ui/core/styles';
-import ScrollToTop from './ScrollToTop';
-import MobileTopbar from '../components/MobileTopbar';
 const providerData = [
   'edX',
   'FutureLearn',
@@ -144,7 +145,7 @@ class HomePage extends Component {
     ]);
     const subjects = encodeURIComponent(this.state.subjects);
 
-    var url = `${API}/api/courses/?q=${query}&filter=${parsedFilter}&subjects=${subjects}&provider=${this.state.providers}&feeFilter=${feeFilter}&startDateFilter=${startDateFilter}`;
+    var url = `${API_LOCAL}/api/courses/?q=${query}&filter=${parsedFilter}&subjects=${subjects}&provider=${this.state.providers}&feeFilter=${feeFilter}&startDateFilter=${startDateFilter}`;
     console.log(url);
     this.setState({ queryURL: url }, () => {
       const state = this.state;

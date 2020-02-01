@@ -1,12 +1,12 @@
 import { Container, Grid, Typography } from '@material-ui/core';
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import ReactHtmlParser, { convertNodeToElement } from 'react-html-parser';
+
 import AppBar from './appBar';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import Box from '@material-ui/core/Box';
 import { CircularProgress } from '@material-ui/core';
 import DateRangeIcon from '@material-ui/icons/DateRange';
-import axios from 'axios';
 import Footer from './Footer';
 import HomeModal from './HomeModal';
 import ListAltIcon from '@material-ui/icons/ListAlt';
@@ -19,12 +19,13 @@ import StarBorderIcon from '@material-ui/icons/StarBorder';
 import StarHalfIcon from '@material-ui/icons/StarHalf';
 import StarIcon from '@material-ui/icons/Star';
 import StarRatings from 'react-star-ratings';
+import Store from '../store/Context';
 import TurnedInIcon from '@material-ui/icons/TurnedIn';
 import TurnedInNotIcon from '@material-ui/icons/TurnedInNot';
+import { addBookmark } from '../actions/ContextActions';
+import axios from 'axios';
 import formatDate from './../utils/dateUtils';
 import getClosestNextRun from './../utils/edxUtils';
-import Store from '../store/Context';
-import { addBookmark } from '../actions/ContextActions';
 const formatPrice = price => {
   if (!price || price === null || price === undefined) return 'Free';
   else return price;
@@ -96,8 +97,8 @@ const CourseDetails = props => {
           'Content-Type': 'application/json',
         },
       };
-      var url = `https://api.classbazaar.in/api/course?uuid=${uuid}&provider=${provider}`;
-      // var url = `http://localhost:8080/api/course?uuid=${uuid}&provider=${provider}`;
+      // var url = `https://api.classbazaar.in/api/course?uuid=${uuid}&provider=${provider}`;
+      var url = `http://localhost:8080/api/course?uuid=${uuid}&provider=${provider}`;
       console.log(url, uuid);
       const res = await fetch(url);
       const data = await res.json();
