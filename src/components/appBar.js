@@ -154,7 +154,9 @@ function TopBar(props) {
       <div className="appbar-flex">
         <div className="topbar-cont">
           <div className="no-desktop">
-            <MenuIcon />
+            <div className={props.home ? 'no-mobile' : ''}>
+              <MenuIcon />
+            </div>
           </div>
           <div className="searchbar-div no-mobile">
             {!props.isSearchIncluded ? (
