@@ -30,6 +30,7 @@ import { store } from './../App';
 import { subjectsData } from './../utils/data';
 import { trackEvent } from 'react-with-analytics/lib/utils';
 import { withStyles } from '@material-ui/core/styles';
+
 const providerData = [
   'edX',
   'FutureLearn',
@@ -329,9 +330,7 @@ class HomePage extends Component {
     this.setState({ q: query.target.value }, () => {
       this.updateData();
     });
-    setTimeout(() => {
-      trackEvent('search', 'onSearch', 'Search_rest');
-    }, 5000);
+    trackEvent('search', 'onSearch', 'Search_rest');
   }
 
   getCheckedProvidersFromString() {
