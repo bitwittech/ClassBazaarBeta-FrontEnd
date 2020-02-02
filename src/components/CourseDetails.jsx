@@ -97,8 +97,8 @@ const CourseDetails = props => {
           'Content-Type': 'application/json',
         },
       };
-      // var url = `https://api.classbazaar.in/api/course?uuid=${uuid}&provider=${provider}`;
-      var url = `http://localhost:8080/api/course?uuid=${uuid}&provider=${provider}`;
+      var url = `https://api.classbazaar.in/api/course?uuid=${uuid}&provider=${provider}`;
+      // var url = `http://localhost:8080/api/course?uuid=${uuid}&provider=${provider}`;
       console.log(url, uuid);
       const res = await fetch(url);
       const data = await res.json();
@@ -156,7 +156,7 @@ const CourseDetails = props => {
           {noOfReviews >= 0 && !ratingNumber && <>{`${noOfReviews} reviews`}</>}
         </Typography>
         {ratingNumber && (
-          <div style={{ display: 'flex' }}>
+          <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
             <StarRatings
               rating={ratingNumber}
               starRatedColor="#FFA502"
@@ -497,28 +497,29 @@ const CourseDetails = props => {
               <Grid item xs={12} sm={9}>
                 <div className="d-card">
                   <div className="cd-head">
-                    <div>
+                    <div className="cd-head-o">
                       <Typography
                         style={{ fontWeight: '600' }}
                         color="primary"
                         variant="subtitle2"
+                        className="u-uni"
                         gutterBottom
                       >
                         {Gstate.summaryData.university}
                       </Typography>
-                      <Typography variant="h6" gutterBottom>
+                      <Typography variant="h6" className="u-title" gutterBottom>
                         {Gstate.data.title}
                       </Typography>
                       <Typography
                         variant="caption"
                         display="block"
-                        className="provider"
+                        className="provider u-provider"
                         gutterBottom
                       >
                         via {provider}
                       </Typography>
                     </div>
-                    <div style={{ textAlign: 'right' }}>
+                    <div style={{ textAlign: 'right' }} className="cd-head-t">
                       {reviewSection(
                         Gstate.data.avg_rating,
                         Gstate.data.num_reviews

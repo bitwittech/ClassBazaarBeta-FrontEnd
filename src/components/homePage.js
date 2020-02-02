@@ -145,7 +145,7 @@ class HomePage extends Component {
     ]);
     const subjects = encodeURIComponent(this.state.subjects);
 
-    var url = `${API_LOCAL}/api/courses/?q=${query}&filter=${parsedFilter}&subjects=${subjects}&provider=${this.state.providers}&feeFilter=${feeFilter}&startDateFilter=${startDateFilter}`;
+    var url = `${API}/api/courses/?q=${query}&filter=${parsedFilter}&subjects=${subjects}&provider=${this.state.providers}&feeFilter=${feeFilter}&startDateFilter=${startDateFilter}`;
     console.log(url);
     this.setState({ queryURL: url }, () => {
       const state = this.state;
