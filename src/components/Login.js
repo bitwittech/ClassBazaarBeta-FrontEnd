@@ -1,4 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
+import { Popup } from 'jso';
 import {
   register,
   signin,
@@ -20,6 +21,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { googleClient, facebookClient } from '../utils/oauth';
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
 import { trackEvent } from 'react-with-analytics';
+import { GoogleLogin } from 'react-google-login';
 const useStyles = makeStyles(theme => ({
   modal: {
     display: 'flex',
@@ -129,14 +131,6 @@ const Login = () => {
     });
   };
 
-  const onGoogleLogin = async () => {
-    googleClient.getToken().then(token => {
-      console.log('I got the token', token);
-      googleLogin(token, dispatch);
-    });
-    trackEvent('social-icon', 'click', 'google');
-  };
-
   const handleSubmit = async e => {
     e.preventDefault();
     if (loginModal.state === 0) {
@@ -157,6 +151,10 @@ const Login = () => {
     });
   };
   console.log('STATE', state.loading);
+  const responseGoogle = res => {
+    googleLogin(res, dispatch);
+    trackEvent('social-icon', 'click', 'google');
+  };
   return (
     <>
       <Modal
@@ -352,15 +350,36 @@ const Login = () => {
                     />
                   </Grid>
                   <Grid item xs={12} sm={6} style={{ textAlign: 'left' }}>
-                    <Button
-                      variant="contained"
-                      style={{ background: '#DD6D5C', color: 'white' }}
-                      onClick={() => onGoogleLogin()}
-                      className={classes.social}
-                    >
-                      <i class="fab fa-google" aria-hidden="true"></i>
-                      &nbsp;Google
-                    </Button>
+                    <GoogleLogin
+                      clientId={config.GOAUTH}
+                      render={renderProps => (
+                        <Button
+                          variant="contained"
+                          style={{ background: '#DD6D5C', color: 'white' }}
+                          onClick={renderProps.onClick}
+                          disabled={renderProps.disabled}
+                          className={classes.social}
+                        >
+                          <i class="fab fa-google" aria-hidden="true"></i>
+                          &nbsp;Google
+                        </Button>
+                      )}
+                      onSuccess={responseGoogle}
+                      onFailure={() => {
+                        dispatch({
+                          type: 'ALERT',
+                          payload: {
+                            varient: 'error',
+                            message: 'Login failed',
+                          },
+                        });
+                        dispatch({
+                          type: 'LOGOUT',
+                        });
+                      }}
+                      autoLoad={false}
+                      cookiePolicy={'single_host_origin'}
+                    />
                   </Grid>
                 </Grid>
                 {loginModal.state === 0 ? (
