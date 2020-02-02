@@ -12,17 +12,17 @@ import CoursePage from './components/coursePage';
 import HomePage from './components/homePage';
 import LandingPage from './components/landingPage';
 import Login from './components/Login';
+import MobileAuth from './components/MobileAuth';
 import PrivacyPolicy from './components/PrivacyPolicy';
 import ProfilePage from './components/profilePage';
 import ReactGA from 'react-ga';
 import Reducer from './store/Reducer';
+import ScrollToTop from './components/ScrollToTop';
 import Snackbar from './components/Snackbar';
 import Store from './store/Context';
 import config from './config.json';
 import { fetchUser } from './actions/ContextActions';
 import localForage from 'localforage';
-import ScrollToTop from './components/ScrollToTop';
-import MobileAuth from './components/MobileAuth';
 
 const theme = createMuiTheme({
   typography: {
