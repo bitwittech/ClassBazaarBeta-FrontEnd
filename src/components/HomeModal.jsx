@@ -11,6 +11,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Store from '../store/Context';
 import axios from 'axios';
+import { trackEvent } from 'react-with-analytics';
 const labels = {
   0.5: 'Useless',
   1: 'Useless+',
@@ -74,6 +75,11 @@ const HomeModal = ({
   const classes = useStyles();
   const { state, dispatch } = useContext(Store);
 
+  const handleSubmit = () => {
+    console.log('Home modal');
+    trackEvent('Homepage PopUp', 'click', 'submit');
+  };
+
   //Home made modal
   const HomeMessage = () => (
     <div>
@@ -109,7 +115,7 @@ const HomeModal = ({
               className="home-modal-field"
               style={{ marginTop: '40px' }}
             >
-              <form>
+              <form onSubmit={handleSubmit}>
                 <Typography
                   style={{
                     fontWeight: '900',

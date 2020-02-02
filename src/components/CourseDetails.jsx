@@ -26,6 +26,7 @@ import { addBookmark } from '../actions/ContextActions';
 import axios from 'axios';
 import formatDate from './../utils/dateUtils';
 import getClosestNextRun from './../utils/edxUtils';
+import { trackEvent } from 'react-with-analytics/lib/utils';
 const formatPrice = price => {
   if (!price || price === null || price === undefined) return 'Free';
   else return price;
@@ -48,7 +49,12 @@ const CourseDetails = props => {
   });
   console.log(Gstate);
   const { state, dispatch } = useContext(Store);
-  const handleBookmark = (uuid, provider) => {
+  const handleBookmark = (uuid, provider, name) => {
+    trackEvent(
+      'Bookmarked_details',
+      'click',
+      `${provider}|${Gstate.data && Gstate.data.title}`
+    );
     console.log(uuid, provider);
     if (state.user === null) {
       return dispatch({

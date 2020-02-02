@@ -216,6 +216,7 @@ class HomePage extends Component {
 
   async onFilterChange(event) {
     const value = event.target.value;
+    trackEvent('Filter Applied', 'click', `${value}`);
     this.setState({ filterValue: value }, async () => {
       console.log('Filter changed to', value);
       this.updateData();
@@ -224,6 +225,7 @@ class HomePage extends Component {
   }
 
   setupDefaultFilters() {
+    trackEvent('Filter Unapplied', 'click', 'clearall');
     console.log('Setting up default filters');
     // Uncheck all boxes. Reset all radios.
     this.setState(
@@ -426,7 +428,11 @@ class HomePage extends Component {
   render() {
     return (
       <>
-        <ScrollToTop />
+        <ScrollToTop
+          onClick={() => {
+            trackEvent('Back to Top', 'click', 'toTop');
+          }}
+        />
         <div>
           <TopAppBar
             home={true}

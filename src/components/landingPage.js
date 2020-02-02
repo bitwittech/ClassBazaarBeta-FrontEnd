@@ -419,6 +419,7 @@ class LandingPage extends Component {
   }
 
   handlePopupClose = () => {
+    trackEvent('Homepage PopUp', 'click', 'side-close');
     this.setState({ popUp: false });
     sessionStorage.setItem('cbpop', false);
     console.log('handleClose', this.state);

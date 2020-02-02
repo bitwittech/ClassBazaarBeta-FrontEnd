@@ -16,6 +16,7 @@ import WatchLaterIcon from '@material-ui/icons/WatchLater';
 import { addBookmark } from '../actions/ContextActions';
 import formatDate from './../utils/dateUtils';
 import { withRouter } from 'react-router-dom';
+import { trackEvent } from 'react-with-analytics/lib/utils';
 
 const styles = {
   grid: {
@@ -56,7 +57,8 @@ const formatDuration = duration => {
 const ProfileCourseCard = withRouter(({ history, ...data }) => {
   const { state, dispatch } = useContext(Store);
 
-  const handleBookmark = (uuid, provider) => {
+  const handleBookmark = (uuid, provider, name) => {
+    trackEvent('Bookmarked_lisitng', 'click', `${provider}|${name}`);
     if (state.user === null) {
       return dispatch({
         type: ALERT,
@@ -94,7 +96,12 @@ const ProfileCourseCard = withRouter(({ history, ...data }) => {
               style={{ fontWeight: '600' }}
               variant="subtitle2"
               className="hover"
-              onClick={() =>
+              onClick={() => {
+                trackEvent(
+                  'Course Card clicked',
+                  'click',
+                  `${data.povider}|${data.courseName}`
+                );
                 history.push({
                   pathname: `/coursedetails/${data.provider}/${data.uuid}`,
                   state: {
@@ -102,8 +109,8 @@ const ProfileCourseCard = withRouter(({ history, ...data }) => {
                     provider: data.provider,
                     ...data,
                   },
-                })
-              }
+                });
+              }}
               gutterBottom
             >
               {data.university}
@@ -112,12 +119,16 @@ const ProfileCourseCard = withRouter(({ history, ...data }) => {
           <div>
             {isBookmarked(data.uuid) ? (
               <TurnedInIcon
-                onClick={() => handleBookmark(data.uuid, data.provider)}
+                onClick={() =>
+                  handleBookmark(data.uuid, data.provider, data.courseName)
+                }
                 color="primary"
               />
             ) : (
               <TurnedInNotIcon
-                onClick={() => handleBookmark(data.uuid, data.provider)}
+                onClick={() =>
+                  handleBookmark(data.uuid, data.provider, data.courseName)
+                }
                 color="primary"
               />
             )}
