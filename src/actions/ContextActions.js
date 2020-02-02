@@ -72,7 +72,7 @@ export const facebookLogin = async (data, dispatch) => {
       dispatch({
         type: ALERT,
         payload: {
-          varient: 'success',
+          varient: 'error',
           message: 'Login failed',
         },
       });
@@ -85,12 +85,12 @@ export const googleLogin = async (data, dispatch) => {
       applicationId: 'c8682dc3-adbc-4501-b707-9cde8c8ade0f',
       identityProviderId: '82339786-3dff-42a6-aac6-1f1ceecb6c46 ',
       data: {
-        token: data.id_token,
-        redirect_uri: `${config.P_redirecturl}`,
+        token: data.tokenId,
+        redirect_uri: `${config.D_redirecturl}`,
       },
     })
     .then(async resp => {
-      console.log(resp)
+      console.log("Identity Provider Response ", resp)
       if (resp.statusCode === 200) {
         const user = resp.successResponse.user;
         if (!user.username) {

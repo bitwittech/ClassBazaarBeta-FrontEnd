@@ -257,6 +257,10 @@ a:hover {
   border-radius: 50%;
 }
 
+.mt-a {
+  margin-top: 75px !important;
+}
+
 @media (max-width: 800px) {
 
   .c-logo {

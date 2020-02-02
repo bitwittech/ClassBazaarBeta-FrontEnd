@@ -348,7 +348,7 @@ class HomePage extends Component {
   };
 
   filter = () => (
-    <Container className="no-desktop filter-overlay">
+    <Container className="no-desktop filter-overlay mt-a">
       <Grid container>
         <Grid item xs={12} sm={3} className="filter-overlay-content">
           <Container maxWidth={'md'}>
@@ -428,6 +428,7 @@ class HomePage extends Component {
         <ScrollToTop />
         <div>
           <TopAppBar
+            home={true}
             onChange={this.onSearchChange}
             isSearchIncluded={true}
             initialSearchValue={this.state.q}

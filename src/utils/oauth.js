@@ -12,7 +12,7 @@ let client = new FusionAuthClient(
 const googleClient = new JSO({
   providerId: 'google',
   client_id: `${config.GOAUTH}`,
-  redirect_uri: `${config.P_redirecturl}`, // The URL where you is redirected back, and where you perform run the callback() function.
+  redirect_uri: `${config.D_redirecturl}`, // The URL where you is redirected back, and where you perform run the callback() function.
   authorization: 'https://accounts.google.com/o/oauth2/auth',
   scopes: {
     request: [
