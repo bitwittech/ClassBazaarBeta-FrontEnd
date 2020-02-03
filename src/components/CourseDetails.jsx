@@ -239,6 +239,11 @@ const CourseDetails = props => {
             <div style={{ marginTop: '20px' }}>
               <button
                 onClick={() => {
+                  trackEvent(
+                    'Enroll Now',
+                    'click',
+                    `${provider}|${Gstate.data.title}`
+                  );
                   window.open(
                     provider === 'Swayam'
                       ? Gstate.summaryData &&

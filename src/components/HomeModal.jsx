@@ -243,6 +243,7 @@ const HomeModal = ({
           rating: value,
           status: finished,
         });
+        trackEvent('Review', 'submit', 'Review Submitted');
         dispatch({
           type: 'ALERT',
           payload: {
