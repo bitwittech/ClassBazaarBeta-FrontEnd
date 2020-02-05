@@ -20,6 +20,7 @@ import config from '../config.json';
 import { store } from './../App';
 import { subjectsData } from './../utils/data';
 import { withStyles } from '@material-ui/core/styles';
+import { trackEvent } from 'react-with-analytics/lib/utils';
 
 const providerData = [
   'edX',
@@ -212,6 +213,7 @@ class CourseList extends Component {
             variant="contained"
             color="primary"
             onClick={() => {
+              trackEvent('Infinite Load More', 'click', 'button');
               this.setState(
                 {
                   isInfiniteLoading: false,

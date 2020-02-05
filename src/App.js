@@ -24,6 +24,7 @@ import config from './config.json';
 import { fetchUser } from './actions/ContextActions';
 import localForage from 'localforage';
 import { trackPage } from 'react-with-analytics/lib/utils';
+import StaticCourseDetails from './components/StaticCourseDetails';
 
 const theme = createMuiTheme({
   typography: {
@@ -66,6 +67,7 @@ const Root = props => {
       <Route exact path="/about" component={About} />
       <Route exact path="/privacypolicy" component={PrivacyPolicy} />
       <Route exact path="/mobileauth" component={MobileAuth} />
+      <Route exact path="/coursedetail" component={StaticCourseDetails} />
       <Route
         exact
         path="/coursedetails/:provider/:uuid"

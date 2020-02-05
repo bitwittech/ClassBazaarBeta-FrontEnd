@@ -1,7 +1,7 @@
 import { Container, Grid, Typography } from '@material-ui/core';
 import React, { useContext, useEffect, useState } from 'react';
 import ReactHtmlParser, { convertNodeToElement } from 'react-html-parser';
-
+import { Link } from 'react-router-dom';
 import AppBar from './appBar';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import Box from '@material-ui/core/Box';
@@ -1458,7 +1458,14 @@ const CourseDetails = props => {
         <div className="footer-links">
           <div>
             <p>
-              <a href="/about">About Us</a>
+              <Link
+                onClick={() => {
+                  trackEvent('About Us', 'click', 'footer');
+                }}
+                to="/about"
+              >
+                About Us
+              </Link>
             </p>
           </div>
           <div>
@@ -1466,7 +1473,7 @@ const CourseDetails = props => {
           </div>
           <div>
             <p>
-              <a href="/contact">Contact Us</a>
+              <Link to="/contact">Contact Us</Link>
             </p>
           </div>
           <div>
@@ -1474,7 +1481,7 @@ const CourseDetails = props => {
           </div>
           <div>
             <p>
-              <a href="/privacypolicy">Privacy Policy</a>
+              <Link to="/privacypolicy">Privacy Policy</Link>
             </p>
           </div>
         </div>

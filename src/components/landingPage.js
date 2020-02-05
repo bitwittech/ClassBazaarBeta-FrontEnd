@@ -30,6 +30,8 @@ import { withRouter } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 import Smicon from '../assets/smicon.svg';
 import { trackEvent } from 'react-with-analytics/lib/utils';
+import StaticCourseDetails from './StaticCourseDetails';
+import { clearConfigCache } from 'prettier';
 const styles = theme => ({
   dashboardLink: {
     color: 'white',
@@ -315,93 +317,188 @@ class LandingPage extends Component {
 
   getDegreeCard(degree, classes, type, dataType) {
     const padding = { paddingTop: 6, paddingBottom: 6 };
-    return (
-      <Grid container className="c-card">
-        <Grid item xs={12}>
-          <Box display="flex" style={{ height: '149px', margin: '30' }}>
-            <Grid
-              item
-              xs={8}
-              style={{ margin: 'auto', paddingLeft: 30 }}
-              className="card-content"
-            >
-              <Link
-                onClick={() => {
-                  switch (dataType) {
-                    case 'degree':
-                      return trackEvent(
-                        'Degree_course',
-                        'click',
-                        `${degree.name}`
-                      );
-                    case 'trending':
-                      return trackEvent(
-                        'Trending_course',
-                        'click',
-                        `${degree.name}`
-                      );
-                    case 'free':
-                      return trackEvent(
-                        'Free_course',
-                        'click',
-                        `${degree.name}`
-                      );
-                  }
-                }}
-                to={'/coursedetails' + degree.url}
-              >
-                <Typography
-                  variant="body2"
-                  color="primary"
-                  align="left"
-                  className="card-uni"
-                >
-                  <Box>{degree.university.trim()}</Box>
-                </Typography>
-              </Link>
-              <Typography variant="body2" align="left">
-                <Box className="card-course">{degree.name}</Box>
-              </Typography>
-              <Typography
-                variant="body2"
-                align="left"
-                style={{ paddingTop: 6, paddingBottom: 6, fontColor: '#ddd' }}
-              >
-                <Box
-                  height="100%"
-                  fontWeight="fontWeightlight"
-                  fontStyle="italic"
-                  className="card-provider"
-                  style={{ color: '#949494', fontSize: '0.8rem' }}
-                >
-                  via {degree.provider}
-                </Box>
-              </Typography>
-            </Grid>
-            {type === 1 && (
-              <Grid item xs={4} style={{ height: '100%' }}>
-                <img
-                  className={classes.courseCardImage}
-                  src={degree.image}
-                ></img>
-              </Grid>
-            )}
-            {type === 2 && (
+    if (degree.url) {
+      return (
+        <Grid container className="c-card">
+          <Grid item xs={12}>
+            <Box display="flex" style={{ height: '149px', margin: '30' }}>
               <Grid
                 item
-                className="card-image"
-                style={{ height: '100%', width: 224 }}
+                xs={8}
+                style={{ margin: 'auto', paddingLeft: 30 }}
+                className="card-content"
               >
-                <img
-                  className={classes.courseCardImage}
-                  src={degree.image}
-                ></img>
+                <Link
+                  onClick={() => {
+                    switch (dataType) {
+                      case 'degree':
+                        return trackEvent(
+                          'Degree_course',
+                          'click',
+                          `${degree.name}`
+                        );
+                      case 'trending':
+                        return trackEvent(
+                          'Trending_course',
+                          'click',
+                          `${degree.name}`
+                        );
+                      case 'free':
+                        return trackEvent(
+                          'Free_course',
+                          'click',
+                          `${degree.name}`
+                        );
+                    }
+                  }}
+                  to={'/coursedetails' + degree.url}
+                >
+                  <Typography
+                    variant="body2"
+                    color="primary"
+                    align="left"
+                    className="card-uni"
+                  >
+                    <Box>{degree.university.trim()}</Box>
+                  </Typography>
+                </Link>
+                <Typography variant="body2" align="left">
+                  <Box className="card-course">{degree.name}</Box>
+                </Typography>
+                <Typography
+                  variant="body2"
+                  align="left"
+                  style={{ paddingTop: 6, paddingBottom: 6, fontColor: '#ddd' }}
+                >
+                  <Box
+                    height="100%"
+                    fontWeight="fontWeightlight"
+                    fontStyle="italic"
+                    className="card-provider"
+                    style={{ color: '#949494', fontSize: '0.8rem' }}
+                  >
+                    via {degree.provider}
+                  </Box>
+                </Typography>
               </Grid>
-            )}
-          </Box>
+              {type === 1 && (
+                <Grid item xs={4} style={{ height: '100%' }}>
+                  <img
+                    className={classes.courseCardImage}
+                    src={degree.image}
+                  ></img>
+                </Grid>
+              )}
+              {type === 2 && (
+                <Grid
+                  item
+                  className="card-image"
+                  style={{ height: '100%', width: 224 }}
+                >
+                  <img
+                    className={classes.courseCardImage}
+                    src={degree.image}
+                  ></img>
+                </Grid>
+              )}
+            </Box>
+          </Grid>
         </Grid>
-      </Grid>
-    );
+      );
+    } else {
+      return (
+        <Grid container className="c-card">
+          <Grid item xs={12}>
+            <Box display="flex" style={{ height: '149px', margin: '30' }}>
+              <Grid
+                item
+                xs={8}
+                style={{ margin: 'auto', paddingLeft: 30 }}
+                className="card-content"
+              >
+                <Link
+                  onClick={() => {
+                    switch (dataType) {
+                      case 'degree':
+                        return trackEvent(
+                          'Degree_course',
+                          'click',
+                          `${degree.name}`
+                        );
+                      case 'trending':
+                        return trackEvent(
+                          'Trending_course',
+                          'click',
+                          `${degree.name}`
+                        );
+                      case 'free':
+                        return trackEvent(
+                          'Free_course',
+                          'click',
+                          `${degree.name}`
+                        );
+                    }
+                  }}
+                  to={{
+                    pathname: '/coursedetail',
+                    state: {
+                      data: degree.data,
+                    },
+                  }}
+                >
+                  <Typography
+                    variant="body2"
+                    color="primary"
+                    align="left"
+                    className="card-uni"
+                  >
+                    <Box>{degree.university.trim()}</Box>
+                  </Typography>
+                </Link>
+                <Typography variant="body2" align="left">
+                  <Box className="card-course">{degree.name}</Box>
+                </Typography>
+                <Typography
+                  variant="body2"
+                  align="left"
+                  style={{ paddingTop: 6, paddingBottom: 6, fontColor: '#ddd' }}
+                >
+                  <Box
+                    height="100%"
+                    fontWeight="fontWeightlight"
+                    fontStyle="italic"
+                    className="card-provider"
+                    style={{ color: '#949494', fontSize: '0.8rem' }}
+                  >
+                    via {degree.provider}
+                  </Box>
+                </Typography>
+              </Grid>
+              {type === 1 && (
+                <Grid item xs={4} style={{ height: '100%' }}>
+                  <img
+                    className={classes.courseCardImage}
+                    src={degree.image}
+                  ></img>
+                </Grid>
+              )}
+              {type === 2 && (
+                <Grid
+                  item
+                  className="card-image"
+                  style={{ height: '100%', width: 224 }}
+                >
+                  <img
+                    className={classes.courseCardImage}
+                    src={degree.image}
+                  ></img>
+                </Grid>
+              )}
+            </Box>
+          </Grid>
+        </Grid>
+      );
+    }
   }
 
   renderSnackbar() {
