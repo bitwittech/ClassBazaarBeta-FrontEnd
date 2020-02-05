@@ -106,7 +106,7 @@ export const googleLogin = async (data, dispatch) => {
               updateUser('username', user.id, googleDetails.email);
             })
             .catch(err => {
-              console.error(err);
+              console.error("ERROR", err);
             });
         }
         store.setItem('user', user);

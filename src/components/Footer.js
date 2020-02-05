@@ -1,7 +1,8 @@
 import Grid from '@material-ui/core/Grid';
 import Logo from '../assets/logo.png';
 import React from 'react';
-
+import { Link } from 'react-router-dom';
+import { trackEvent } from 'react-with-analytics/lib/utils';
 const Footer = ({ bgColor }) => {
   return (
     <>
@@ -12,7 +13,14 @@ const Footer = ({ bgColor }) => {
         <div className="footer-links">
           <div>
             <p>
-              <a href="/about">About Us</a>
+              <Link
+                onClick={() => {
+                  trackEvent('About Us', 'click', 'footer');
+                }}
+                to="/about"
+              >
+                About Us
+              </Link>
             </p>
           </div>
           <div>
@@ -20,7 +28,7 @@ const Footer = ({ bgColor }) => {
           </div>
           <div>
             <p>
-              <a href="/contact">Contact Us</a>
+              <Link to="/contact">Contact Us</Link>
             </p>
           </div>
           <div>
@@ -28,7 +36,7 @@ const Footer = ({ bgColor }) => {
           </div>
           <div>
             <p>
-              <a href="/privacypolicy">Privacy Policy</a>
+              <Link to="/privacypolicy">Privacy Policy</Link>
             </p>
           </div>
         </div>
