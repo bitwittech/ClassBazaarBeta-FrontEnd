@@ -31,6 +31,9 @@ import { Link } from 'react-router-dom';
 
 const StaticCourseDetails = props => {
   var data = props.location.state.data;
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const courseSummary = () => (
     <>
       <div
@@ -479,6 +482,152 @@ const StaticCourseDetails = props => {
       </div>
     </div>
   );
+  const fl = () => (
+    <div maxWidth="lg" className="ead-sec">
+      <div className="cd-container">
+        <Grid container spacing={3} direction="row-reverse">
+          <Grid item xs={12} sm={3}>
+            {courseSummary()}
+          </Grid>
+          <Grid item xs={12} sm={9}>
+            <div className="d-card">
+              <div className="cd-head">
+                <div>
+                  <Typography
+                    style={{ fontWeight: '600' }}
+                    color="primary"
+                    variant="subtitle2"
+                    gutterBottom
+                  >
+                    {data.university}
+                  </Typography>
+                  <Typography variant="h6" gutterBottom>
+                    {data.name}
+                  </Typography>
+                  <Typography
+                    variant="caption"
+                    display="block"
+                    className="provider"
+                    gutterBottom
+                  >
+                    via {data.provider}
+                  </Typography>
+                </div>
+              </div>
+              <br />
+              <div className="cd-cont">
+                <Typography
+                  style={{ fontWeight: '600', fontSize: '22px' }}
+                  variant="subtitle2"
+                  gutterBottom
+                >
+                  Course Overview
+                </Typography>
+                <Typography
+                  style={{ fontSize: '16px', fontWeight: '300' }}
+                  variant="body1"
+                  gutterBottom
+                >
+                  {ReactHtmlParser(data.outcome)}
+                </Typography>
+                <br />
+                {/* {Gstate.data.learning_outcomes !== '' && (
+                    <>
+                      <Typography
+                        style={{ fontWeight: '600', fontSize: '22px' }}
+                        variant="subtitle2"
+                        gutterBottom
+                      >
+                        What will you learn?
+                      </Typography>
+                      <Typography
+                        style={{ fontSize: '16px', fontWeight: '300' }}
+                        variant="body1"
+                        gutterBottom
+                      >
+                        {Gstate.data.learning_outcomes.map((e, i) => (
+                          <li key={i}>{e}</li>
+                        ))}
+                      </Typography>{' '}
+                    </>
+                  )} */}
+                {/* {Gstate.data.requirements !== '' && (
+                    <>
+                      <Typography
+                        style={{ fontWeight: '600', fontSize: '22px' }}
+                        variant="subtitle2"
+                        gutterBottom
+                      >
+                        Who is this course for?
+                      </Typography>
+                      <Typography
+                        style={{ fontSize: '16px', fontWeight: '300' }}
+                        variant="body1"
+                        gutterBottom
+                      >
+                        {Gstate.data.requirements}
+                      </Typography>{' '}
+                    </>
+                  )} */}
+
+                <br />
+
+                {/* {Gstate.data.educator !== '' && (
+                    <>
+                      <Typography
+                        style={{ fontWeight: '600', fontSize: '22px' }}
+                        variant="subtitle2"
+                        gutterBottom
+                      >
+                        Professor:{' '}
+                        <span style={{ fontWeight: '300' }}>
+                          {Gstate.data.educator}
+                        </span>
+                      </Typography>
+                    </>
+                  )} */}
+                <br />
+                {/* <Typography
+                    style={{ fontWeight: '600', fontSize: '22px' }}
+                    variant="subtitle2"
+                    gutterBottom
+                  >
+                    Reviews
+                  </Typography> */}
+                {/* <div>
+                    <button
+                      onClick={() => {
+                        setState({ ...Gstate, popUp: !Gstate.popUp });
+                      }}
+                      className="enroll-btn"
+                    >
+                      <div style={{ display: 'flex', flexDirection: 'row' }}>
+                        <div
+                          style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            fontWeight: '600',
+                          }}
+                        >
+                          <div>Write Review &nbsp;</div>
+                        </div>
+                        <div>
+                          <RateReviewIcon
+                            style={{ fontSize: '22px', marginTop: '2px' }}
+                          />
+                        </div>
+                      </div>
+                    </button>
+                  </div> */}
+                {/* {reviews()} */}
+              </div>
+            </div>
+          </Grid>
+        </Grid>
+      </div>
+    </div>
+  );
+
   const renderSwitch = provider => {
     switch (provider) {
       case 'edX':
@@ -487,6 +636,8 @@ const StaticCourseDetails = props => {
         return sl();
       case 'Udacity':
         return udacity();
+      case 'FutureLearn':
+        return fl();
       default:
         return <h1>Coming Soon</h1>;
     }

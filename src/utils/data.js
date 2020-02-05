@@ -5,6 +5,7 @@ import BostonUniLogo from './../assets/BostonUniLogo.png';
 import CS from './../assets/CS.png';
 import DA from './../assets/DA.png';
 import DEV from './../assets/DEV.png';
+import NC from '../assets/NC.png';
 import GeorgiaTechUniLogo from './../assets/GeorgiaTechUniLogo.png';
 import HL from './../assets/HL.png';
 import HarvardUniLogo from './../assets/HarvardUniLogo.png';
@@ -98,22 +99,32 @@ export const degreeData = [{
     url: '/upGrad/5de5b3af0b4a63ba9b2e9969',
   },
   {
-    name: 'Online Masters of Science in Computer Science',
-    university: 'Georgia Tech',
-    provider: 'Udacity',
-    image: GeorgiaTechUniLogo,
+    name: 'Bachelor of Arts',
+    university: 'University of Newcastle',
+    provider: 'FutureLearn',
+    image: NC,
     url: '',
-    // data: {
-    //   name: 'Online Masters of Science in Computer Science',
-    //   university: 'Georgia Tech',
-    //   provider: 'Udacity',
-    //   outcome: '',
-    //   prerequisites: '',
-    //   startDate: '',
-    //   duration: 'Self-paced',
-    //   price: 'Free ',
-    //   enroll:'https://www.udacity.com/georgia-tech'
-    // },
+    data: {
+      name: 'Bachelor of Arts',
+      university: 'University of Newcastle',
+      provider: 'FutureLearn',
+      outcome: `<div>Studying our new Bachelor of Arts degree (online) at UON lets you forge your own path. Tailor your studies and gain core specialisations by choosing from 4 majors and minors.
+
+      Study a range of courses to analyse and deconstruct the world around you. Explore ideas, theories and records of how people process the human experience. You will learn about society, culture, history, media and more. If you’re hungry for knowledge, an arts degree will allow you to turn your interests into meaningful careers.</div><div class="m-fact-sheet__detail"><h2 class="m-fact-sheet__heading">What are the learning outcomes?</h2><div class="m-fact-sheet__text"><ul>
+      <li>Knowledge: The capacity to research, analyse, and apply knowledge from disciplinary and multidisciplinary perspectives within the Bachelor of Arts.</li>
+      <li>Communication: The developed capacity to communicate effectively across written, oral, visual, and digital forms.</li>
+      <li>Critical thinking and research skills: The ability to identify high-quality information and critically analyse it as a user, researcher and producer, with a focus on well-reasoned argumentation.</li>
+      <li>Intercultural competence: The ability to engage with a range of diverse perspectives from which knowledge, beliefs, and values are developed and maintained from the local to the global, regional, and global levels.</li>
+      <li>Work readiness:  A demonstrated capacity to engage in teamwork, initiative, problem solving, ethical decision-making, and to manage projects.</li>
+    </ul>
+    
+    <p>Please note Programs (and/or their titles) listed below may change.</p>
+    </div></div>`,
+      startDate: '',
+      duration: '3 years',
+      price: '',
+      enroll: 'https://www.udacity.com/georgia-tech'
+    },
   },
   {
     name: 'PMP Certification',
