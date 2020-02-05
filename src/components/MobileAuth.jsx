@@ -4,8 +4,17 @@ import AppBar from './appBar';
 import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { Container, Typography, Grid } from '@material-ui/core';
-import { register, signin } from '../actions/ContextActions';
+import {
+  register,
+  signin,
+  googleLogin,
+  facebookLogin,
+} from '../actions/ContextActions';
+import { GoogleLogin } from 'react-google-login';
+import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
 import Store from '../store/Context';
+import { trackEvent } from 'react-with-analytics';
+import config from '../config.json';
 import ForgotPassword from './ForgotPassword';
 const MobileAuth = () => {
   const global = useContext(Store);
@@ -52,6 +61,16 @@ const MobileAuth = () => {
 
   const handlePopupClose = () => {
     setForgotPassword(false);
+  };
+
+  const responseFacebook = res => {
+    facebookLogin(res, global.dispatch);
+    trackEvent('social-icon', 'click', 'facebook');
+  };
+
+  const responseGoogle = res => {
+    googleLogin(res, global.dispatch);
+    trackEvent('social-icon', 'click', 'google');
   };
 
   const handleChange = e => {
@@ -303,35 +322,66 @@ const MobileAuth = () => {
         </form>
         <Grid container spacing={2}>
           <Grid item xs={6} align="right">
-            <Button
-              variant="contained"
-              style={{
-                background: '#fff',
-                border: '#4267B3 2px solid',
-                color: '#4267B3',
-                padding: '20px 30px',
-              }}
-            >
-              <i class="fab fa-facebook-f"></i>
-            </Button>
+            <FacebookLogin
+              appId={config.fbAppId}
+              autoLoad={false}
+              callback={responseFacebook}
+              scope="public_profile"
+              render={renderProps => (
+                <Button
+                  variant="contained"
+                  style={{
+                    background: '#fff',
+                    border: '#4267B3 2px solid',
+                    color: '#4267B3',
+                    padding: '20px 30px',
+                  }}
+                  onClick={renderProps.onClick}
+                >
+                  <i class="fab fa-facebook-f"></i>
+                </Button>
+              )}
+            />
           </Grid>
 
           <Grid item xs={6} align="left">
-            <Button
-              variant="contained"
-              style={{
-                background: '#fff',
-                border: '#DD6D5C 2px solid',
-                color: 'white',
-                padding: '20px 30px',
+            <GoogleLogin
+              clientId={config.GOAUTH}
+              render={renderProps => (
+                <Button
+                  variant="contained"
+                  style={{
+                    background: '#fff',
+                    border: '#DD6D5C 2px solid',
+                    color: 'white',
+                    padding: '20px 30px',
+                  }}
+                  onClick={renderProps.onClick}
+                  disabled={renderProps.disabled}
+                >
+                  <i
+                    class="fab fa-google"
+                    style={{ color: '#DD6D5C' }}
+                    aria-hidden="true"
+                  ></i>
+                </Button>
+              )}
+              onSuccess={responseGoogle}
+              onFailure={() => {
+                global.dispatch({
+                  type: 'ALERT',
+                  payload: {
+                    varient: 'error',
+                    message: 'Login failed',
+                  },
+                });
+                global.dispatch({
+                  type: 'LOGOUT',
+                });
               }}
-            >
-              <i
-                class="fab fa-google"
-                style={{ color: '#DD6D5C' }}
-                aria-hidden="true"
-              ></i>
-            </Button>
+              autoLoad={false}
+              cookiePolicy={'single_host_origin'}
+            />
           </Grid>
         </Grid>{' '}
         {state.state === 0 ? (

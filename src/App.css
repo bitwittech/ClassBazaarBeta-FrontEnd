@@ -262,6 +262,25 @@ a:hover {
 }
 
 @media (max-width: 800px) {
+  .cd-head-o {
+    width: 60%;
+  }
+
+  .u-uni {
+    font-size: 0.8em !important;
+  }
+
+  .u-provider {
+    font-size: 0.6em !important;
+  }
+
+  .u-title {
+    font-size: 0.9em !important;
+  }
+
+  .cd-head-t {
+    width: 40%;
+  }
 
   .c-logo {
     margin-left: 0 !important;

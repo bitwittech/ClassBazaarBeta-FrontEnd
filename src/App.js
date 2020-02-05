@@ -23,6 +23,8 @@ import Store from './store/Context';
 import config from './config.json';
 import { fetchUser } from './actions/ContextActions';
 import localForage from 'localforage';
+import { trackPage } from 'react-with-analytics/lib/utils';
+import StaticCourseDetails from './components/StaticCourseDetails';
 
 const theme = createMuiTheme({
   typography: {
@@ -52,7 +54,10 @@ const GA_TRACKING_ID = 'UA-154109881-1';
 const debug = process.env.NODE_ENV === 'production' ? false : true;
 initAnalytics(GA_TRACKING_ID, { debug: debug });
 
-const Root = () => {
+const Root = props => {
+  useEffect(() => {
+    props.history.listen(location => trackPage(location.pathname));
+  }, []);
   return (
     <Switch>
       <Route exact path="/" component={LandingPage} />
@@ -62,6 +67,7 @@ const Root = () => {
       <Route exact path="/about" component={About} />
       <Route exact path="/privacypolicy" component={PrivacyPolicy} />
       <Route exact path="/mobileauth" component={MobileAuth} />
+      <Route exact path="/coursedetail" component={StaticCourseDetails} />
       <Route
         exact
         path="/coursedetails/:provider/:uuid"
