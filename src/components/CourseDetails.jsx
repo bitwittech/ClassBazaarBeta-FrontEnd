@@ -1,7 +1,7 @@
 import { Container, Grid, Typography } from '@material-ui/core';
 import React, { useContext, useEffect, useState } from 'react';
 import ReactHtmlParser, { convertNodeToElement } from 'react-html-parser';
-import { Link } from 'react-router-dom';
+
 import AppBar from './appBar';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import Box from '@material-ui/core/Box';
@@ -9,6 +9,7 @@ import { CircularProgress } from '@material-ui/core';
 import DateRangeIcon from '@material-ui/icons/DateRange';
 import Footer from './Footer';
 import HomeModal from './HomeModal';
+import { Link } from 'react-router-dom';
 import ListAltIcon from '@material-ui/icons/ListAlt';
 import Logo from '../assets/logo.png';
 import MobileTopbar from './MobileTopbar';
@@ -27,6 +28,7 @@ import axios from 'axios';
 import formatDate from './../utils/dateUtils';
 import getClosestNextRun from './../utils/edxUtils';
 import { trackEvent } from 'react-with-analytics/lib/utils';
+
 const formatPrice = price => {
   if (!price || price === null || price === undefined) return 'Free';
   else return price;
