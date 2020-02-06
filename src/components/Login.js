@@ -22,6 +22,8 @@ import { googleClient, facebookClient } from '../utils/oauth';
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
 import { trackEvent } from 'react-with-analytics';
 import { GoogleLogin } from 'react-google-login';
+import { LinkedIn } from 'react-linkedin-login-oauth2';
+
 const useStyles = makeStyles(theme => ({
   modal: {
     display: 'flex',
@@ -94,6 +96,13 @@ const Login = () => {
   const responseFacebook = res => {
     facebookLogin(res, dispatch);
     trackEvent('social-icon', 'click', 'facebook');
+  };
+
+  const responseLinkedin = data => {
+    console.log(data);
+  };
+  const handleLinkedInFailure = data => {
+    console.log(data);
   };
 
   const handleChange = e => {
@@ -185,13 +194,23 @@ const Login = () => {
                   Stay ahead of the curve! Get personalized course
                   recommendations, track subjects and more.
                 </Typography>
-                <Button
-                  variant="contained"
-                  style={{ background: '#0077B6', color: 'white' }}
-                  className={classes.button}
+
+                <LinkedIn
+                  clientId="81vr4cluxkzpau"
+                  onFailure={handleLinkedInFailure}
+                  className="btn-l"
+                  onSuccess={responseLinkedin}
+                  redirectUri="http://localhost:3000"
+                  scope="r_emailaddress"
                 >
-                  <i class="fab fa-linkedin-in"></i>&nbsp; Connect Linked-In
-                </Button>
+                  <Button
+                    variant="contained"
+                    style={{ background: '#0077B6', color: 'white' }}
+                    className={classes.button}
+                  >
+                    <i class="fab fa-linkedin-in"></i>&nbsp; Connect Linked-In
+                  </Button>
+                </LinkedIn>
 
                 <form onSubmit={handleSubmit}>
                   {loginModal.state === 1 ? (
