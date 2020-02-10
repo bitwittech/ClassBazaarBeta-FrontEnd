@@ -148,7 +148,7 @@ const Login = () => {
     if (loginModal.state === 1) {
       await register(modal.formData, dispatch);
     }
-    trackEvent('SignUp', 'manually', 'register');
+
     setModal({
       ...modal,
       formData: {

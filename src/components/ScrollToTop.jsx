@@ -1,10 +1,14 @@
 import React from 'react';
 import Up from '../assets/Up.png';
+import { trackEvent } from 'react-with-analytics/lib/utils';
 
 const ScrollToTop = () => {
   return (
     <div
-      onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+      onClick={() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        trackEvent('Back to Top', 'click', 'toTop');
+      }}
       className="scrolltop"
     >
       <div>

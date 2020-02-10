@@ -55,11 +55,13 @@ const formatDuration = duration => {
 };
 
 const ProfileCourseCard = withRouter(({ history, ...data }) => {
+  console.log('DATAAA', data);
   const { state, dispatch } = useContext(Store);
 
   const handleBookmark = (uuid, provider, name) => {
     trackEvent('Bookmarked_lisitng', 'click', `${provider}|${name}`);
     if (state.user === null) {
+      localStorage.setItem('GA-track', true);
       return dispatch({
         type: ALERT,
         payload: {
@@ -71,7 +73,7 @@ const ProfileCourseCard = withRouter(({ history, ...data }) => {
     const userId = state.user.id;
     const courseId = uuid;
     const user = state.user;
-    addBookmark(courseId, userId, user, provider, dispatch);
+    addBookmark(courseId, userId, user, provider, dispatch, data.from);
   };
 
   const isBookmarked = uuid => {
@@ -97,6 +99,13 @@ const ProfileCourseCard = withRouter(({ history, ...data }) => {
               variant="subtitle2"
               className="hover"
               onClick={() => {
+                if (data.from === 'profile') {
+                  trackEvent(
+                    'Profile Action',
+                    'click',
+                    'Bookmarked_card_profile'
+                  );
+                }
                 trackEvent(
                   'Course Card clicked',
                   'click',
