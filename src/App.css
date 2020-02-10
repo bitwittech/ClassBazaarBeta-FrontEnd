@@ -1108,3 +1108,14 @@ body {
 .LandingPage-inputRoot-507 {
   border: none !important;
 }
+
+.btn-linkedin {
+  background-color: none !important;
+  border: none !important;
+}
+
+.btn-l {
+  padding: 0 !important;
+  border: none;
+  background-color: white;
+}

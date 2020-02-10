@@ -28,6 +28,7 @@ import axios from 'axios';
 import formatDate from './../utils/dateUtils';
 import getClosestNextRun from './../utils/edxUtils';
 import { trackEvent } from 'react-with-analytics/lib/utils';
+import Rupee from '../assets/rupee.svg';
 
 const formatPrice = price => {
   if (!price || price === null || price === undefined) return 'Free';
@@ -221,7 +222,7 @@ const CourseDetails = props => {
 
             <div style={{ display: 'flex', marginTop: '15px' }}>
               <div>
-                <MonetizationOnIcon color="primary" /> &nbsp;
+                <img src={Rupee} alt="cb-rupee" /> &nbsp;
               </div>
               <div>
                 {Gstate.summaryData.price === '' ||

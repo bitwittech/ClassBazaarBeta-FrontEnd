@@ -25,7 +25,7 @@ const googleClient = new JSO({
   debug: true,
 });
 
-googleClient.callback();
+// googleClient.callback();
 
 export {
   googleClient
