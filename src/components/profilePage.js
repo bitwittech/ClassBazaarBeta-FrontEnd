@@ -597,6 +597,7 @@ class ProfilePage extends Component {
                           rating={obj.rating}
                           uuid={obj.uuid}
                           url={obj.url}
+                          from={'profile'}
                         />
                       ))
                     )}

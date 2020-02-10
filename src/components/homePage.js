@@ -427,11 +427,7 @@ class HomePage extends Component {
   render() {
     return (
       <>
-        <ScrollToTop
-          onClick={() => {
-            trackEvent('Back to Top', 'click', 'toTop');
-          }}
-        />
+        <ScrollToTop />
         <div>
           <TopAppBar
             home={true}

@@ -13,6 +13,9 @@ import config from '../config.json';
 import {
   store
 } from './../App';
+import {
+  trackEvent
+} from 'react-with-analytics/lib/utils';
 
 const {
   FusionAuthClient
@@ -175,6 +178,15 @@ export const register = async (data, dispatch) => {
               message: 'Registration successful. Please login',
             },
           });
+          if (localStorage.getItem('GA-track')) {
+            trackEvent('SignUp', 'register', 'Bookmarked_account')
+            localStorage.removeItem('GA-track')
+          }
+          if (localStorage.getItem('GA-track-review')) {
+            trackEvent('SignUp', 'register', 'Review_account')
+            localStorage.removeItem('GA-track-review')
+          }
+          trackEvent('SignUp', 'click', 'manually');
           dispatch({
             type: LOGIN_MODAL,
             payload: false,
@@ -255,6 +267,7 @@ export const signin = async (data, dispatch) => {
               message: 'Successfully logged in.',
             },
           });
+          trackEvent('Login', 'click', 'manually');
           dispatch({
             type: LOGIN_MODAL,
             payload: false,
@@ -320,7 +333,7 @@ export const logout = async dispatch => {
   });
 };
 
-export const addBookmark = async (uuid, userId, user, provider, dispatch) => {
+export const addBookmark = async (uuid, userId, user, provider, dispatch, fromWhere) => {
   console.log(uuid, userId, user, provider);
 
   //check if it is already there if then remove and dispatch update
@@ -356,6 +369,12 @@ export const addBookmark = async (uuid, userId, user, provider, dispatch) => {
     console.log('PRESENT', isAlreadyPresent);
 
     if (isAlreadyPresent) {
+      if (fromWhere === 'listing') {
+        trackEvent('Profile Action', 'click', 'Unbookmarked_listing')
+      }
+      if (fromWhere === 'profile') {
+        trackEvent('Profile Action', 'click', 'Unbookmarked_profile')
+      }
       const newBookmarks = user.data.bookmarks.filter(e => e.id !== uuid);
       const res = await client.patchUser(userId, {
         user: {

@@ -207,6 +207,7 @@ const HomeModal = ({
 
       if (!state.isAuth) {
         console.log('REQUIRED', state);
+        localStorage.setItem('GA-track-review', true);
         dispatch({
           type: 'ALERT',
           payload: {
