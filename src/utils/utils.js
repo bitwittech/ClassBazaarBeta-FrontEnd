@@ -9,5 +9,5 @@ export const titleCase = str => {
 
 export const formatPrice = price => {
   if (price === null) return 'Free Course';
-  else return price;
+  else return Math.round(price);
 };
