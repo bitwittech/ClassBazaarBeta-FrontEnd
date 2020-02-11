@@ -226,8 +226,9 @@ const CourseDetails = props => {
               </div>
               <div>
                 {Gstate.summaryData.price === '' ||
-                Gstate.summaryData.price === null
-                  ? 'Free'
+                Gstate.summaryData.price === null ||
+                Gstate.summaryData.price === 0
+                  ? 'Provider subscription required'
                   : Gstate.summaryData.price}
               </div>
             </div>
