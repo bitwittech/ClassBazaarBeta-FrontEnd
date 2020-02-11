@@ -139,6 +139,7 @@ const CourseDetails = props => {
           <TurnedInIcon
             onClick={() => handleBookmark(uuid, provider)}
             color="primary"
+            className="click-h"
             fontSize="large"
           />
         ) : (
@@ -146,6 +147,7 @@ const CourseDetails = props => {
             onClick={() => handleBookmark(uuid, provider)}
             color="primary"
             fontSize="large"
+            className="click-h"
           />
         )}
 

@@ -1119,3 +1119,11 @@ body {
   border: none;
   background-color: white;
 }
+
+.enroll-btn:hover {
+  cursor: pointer;
+}
+
+.click-h:hover {
+  cursor: pointer !important;
+}

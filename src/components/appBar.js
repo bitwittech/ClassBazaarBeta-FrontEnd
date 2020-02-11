@@ -190,7 +190,7 @@ function TopBar(props) {
             <ImageWithRouter
               image={Logo}
               routingURL={'/'}
-              clazzNames={`${classes.logo} c-logo`}
+              clazzNames={`${classes.logo} c-logo click-h`}
               alt="logo"
               onClick={() => {
                 trackEvent('HeaderIcon', 'Click', `${props.location.pathname}`);

@@ -354,7 +354,7 @@ export const freeCourses = [{
   },
   {
     name: 'Natural Language Processing',
-    university: 'Coursera',
+    university: 'IIT Kharagpur',
     provider: 'Swayaam',
     image: IITKLogo,
     url: '/Swayam/5de9cf0d148eabdc6d615322',
