@@ -8,7 +8,11 @@ const Footer = ({ bgColor }) => {
     <>
       <div className="footer" style={{ background: `${bgColor}` }}>
         <div style={{ marginTop: '20px' }}>
-          <img className="footer-logo" src={Logo} alt="classbazarLogo" />
+          <img
+            className="footer-logo click-h"
+            src={Logo}
+            alt="classbazarLogo"
+          />
         </div>
         <div className="footer-links">
           <div>

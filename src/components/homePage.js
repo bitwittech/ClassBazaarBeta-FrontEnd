@@ -458,6 +458,7 @@ class HomePage extends Component {
                 <Typography variant="h6" gutterBottom>
                   Filter by
                   <Box
+                    className="click-h"
                     onClick={this.setupDefaultFilters}
                     style={styles.clearAll}
                   >

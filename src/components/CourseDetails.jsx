@@ -139,6 +139,7 @@ const CourseDetails = props => {
           <TurnedInIcon
             onClick={() => handleBookmark(uuid, provider)}
             color="primary"
+            className="click-h"
             fontSize="large"
           />
         ) : (
@@ -146,6 +147,7 @@ const CourseDetails = props => {
             onClick={() => handleBookmark(uuid, provider)}
             color="primary"
             fontSize="large"
+            className="click-h"
           />
         )}
 
@@ -226,8 +228,9 @@ const CourseDetails = props => {
               </div>
               <div>
                 {Gstate.summaryData.price === '' ||
-                Gstate.summaryData.price === null
-                  ? 'Free'
+                Gstate.summaryData.price === null ||
+                Gstate.summaryData.price === 0
+                  ? 'Provider subscription required'
                   : Gstate.summaryData.price}
               </div>
             </div>

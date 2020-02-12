@@ -265,6 +265,7 @@ class ProfilePage extends Component {
                               <Grid item xs={2}>
                                 {!this.state.locationB ? (
                                   <CreateIcon
+                                    className="click-h"
                                     onClick={() =>
                                       this.setState({ locationB: true })
                                     }
@@ -273,6 +274,7 @@ class ProfilePage extends Component {
                                   />
                                 ) : (
                                   <SaveIcon
+                                    className="click-h"
                                     onClick={async () => {
                                       try {
                                         const res = await updateLocation(
@@ -336,6 +338,7 @@ class ProfilePage extends Component {
                               <Grid item xs={2}>
                                 {!this.state.phoneB ? (
                                   <CreateIcon
+                                    className="click-h"
                                     onClick={() =>
                                       this.setState({ phoneB: true })
                                     }
@@ -344,6 +347,7 @@ class ProfilePage extends Component {
                                   />
                                 ) : (
                                   <SaveIcon
+                                    className="click-h"
                                     onClick={async () => {
                                       try {
                                         const res = await updateUser(
@@ -409,6 +413,7 @@ class ProfilePage extends Component {
                               <Grid item xs={2}>
                                 {!this.state.emailB ? (
                                   <CreateIcon
+                                    className="click-h"
                                     onClick={() =>
                                       this.setState({ emailB: true })
                                     }
@@ -417,6 +422,7 @@ class ProfilePage extends Component {
                                   />
                                 ) : (
                                   <SaveIcon
+                                    className="click-h"
                                     onClick={async () => {
                                       try {
                                         const res = await updateUser(
@@ -510,6 +516,7 @@ class ProfilePage extends Component {
                               <Grid item xs={2}>
                                 {!this.state.changePasswordB ? (
                                   <CreateIcon
+                                    className="click-h"
                                     onClick={() =>
                                       this.setState({ changePasswordB: true })
                                     }
@@ -518,6 +525,7 @@ class ProfilePage extends Component {
                                   />
                                 ) : (
                                   <SaveIcon
+                                    className="click-h"
                                     onClick={async () => {
                                       try {
                                         const {

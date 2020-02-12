@@ -128,6 +128,7 @@ const ProfileCourseCard = withRouter(({ history, ...data }) => {
           <div>
             {isBookmarked(data.uuid) ? (
               <TurnedInIcon
+                className="click-h"
                 onClick={() =>
                   handleBookmark(data.uuid, data.provider, data.courseName)
                 }
@@ -135,6 +136,7 @@ const ProfileCourseCard = withRouter(({ history, ...data }) => {
               />
             ) : (
               <TurnedInNotIcon
+                className="click-h"
                 onClick={() =>
                   handleBookmark(data.uuid, data.provider, data.courseName)
                 }

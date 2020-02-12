@@ -198,7 +198,11 @@ const SubjectCard = withRouter(({ history, ...data }) => {
     >
       <Grid container>
         <Grid xs={3} sm={12} align="center">
-          <img class="course-cat-icon-sm" src={data.image} alt="Avatar"></img>
+          <img
+            className="course-cat-icon-sm click-h"
+            src={data.image}
+            alt="Avatar"
+          ></img>
         </Grid>
 
         <Grid
@@ -785,7 +789,7 @@ class LandingPage extends Component {
                     trackEvent('Newsletter', 'click', 'Newsletter Email');
                   }
                 }}
-                className="ns-submit"
+                className="ns-submit click-h"
               >
                 Submit
               </button>
