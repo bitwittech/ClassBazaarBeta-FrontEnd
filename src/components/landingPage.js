@@ -32,6 +32,7 @@ import Smicon from '../assets/smicon.svg';
 import { trackEvent } from 'react-with-analytics/lib/utils';
 import StaticCourseDetails from './StaticCourseDetails';
 import { clearConfigCache } from 'prettier';
+import { store } from '../App';
 const styles = theme => ({
   dashboardLink: {
     color: 'white',
@@ -242,6 +243,7 @@ class LandingPage extends Component {
       showMoreButtonText: 'Show More',
       popUp: sessionStorage.getItem('cbpop'),
       nsEmail: '',
+      user: null,
     };
     console.log('landing', this.state);
     console.log('onrender', sessionStorage.getItem('cbpop'));
@@ -260,11 +262,15 @@ class LandingPage extends Component {
   }
 
   componentDidMount() {
+    store.getItem('user').then(res => {
+      this.setState({ user: res });
+    });
     // window.addEventListener('scroll', this.handleScroll);
     if (sessionStorage.getItem('cbpop') == null) {
       this.timeouts = setTimeout(() => {
-        this.setState({ popUp: true });
-      }, 60000);
+        if (sessionStorage.getItem('cbpop') !== false)
+          this.setState({ popUp: true });
+      }, 5000);
     }
     document.addEventListener('scroll', this.trackScrolling);
   }
@@ -277,7 +283,8 @@ class LandingPage extends Component {
     const wrappedElement = document.getElementById('topTrendingCourses');
     if (this.isBottom(wrappedElement)) {
       document.removeEventListener('scroll', this.trackScrolling);
-      this.setState({ popUp: true });
+      console.log(sessionStorage.getItem('cbpop'));
+      if (!sessionStorage.getItem('cbpop')) this.setState({ popUp: true });
     }
   };
 
@@ -522,14 +529,14 @@ class LandingPage extends Component {
   handlePopupClose = () => {
     trackEvent('Homepage PopUp', 'click', 'side-close');
     this.setState({ popUp: false });
+    console.log('CLOSED');
     sessionStorage.setItem('cbpop', false);
-    console.log('handleClose', this.state);
-    console.log('onClose', this.state.popUp);
   };
 
   render() {
     const { classes, theme } = this.props;
     console.log('popup', this.state.popUp);
+    console.log('LANDING', this.state);
     console.log('session', sessionStorage.getItem('cbpop'));
     return (
       <>
@@ -540,7 +547,7 @@ class LandingPage extends Component {
             onLoginClick={this.onLoginClick}
           />
 
-          {this.state.popUp === true ? (
+          {this.state.popUp === true && this.state.user === null ? (
             <HomeModal
               Mstate={0}
               openState={this.state.popUp}
