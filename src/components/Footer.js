@@ -1,7 +1,7 @@
 import Grid from '@material-ui/core/Grid';
+import { Link } from 'react-router-dom';
 import Logo from '../assets/logo.png';
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { trackEvent } from 'react-with-analytics/lib/utils';
 const Footer = ({ bgColor }) => {
   return (
@@ -45,7 +45,7 @@ const Footer = ({ bgColor }) => {
           </div>
         </div>
         {/* <p className="footer-text mt-2">Phone: +1 234 567 9332</p> */}
-        <p className="footer-text">Email: info@company.com</p>
+        <p className="footer-text">Email: info@classbazaar.com</p>
         <p className="footer-text tsm">
           © Copyright 2019 <span className="bold">Class Bazaar</span>, All Right
           Reserved

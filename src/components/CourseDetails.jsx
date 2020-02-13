@@ -16,6 +16,7 @@ import MobileTopbar from './MobileTopbar';
 import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 import QueryBuilderIcon from '@material-ui/icons/QueryBuilder';
 import RateReviewIcon from '@material-ui/icons/RateReview';
+import Rupee from '../assets/rupee.svg';
 import StarBorderIcon from '@material-ui/icons/StarBorder';
 import StarHalfIcon from '@material-ui/icons/StarHalf';
 import StarIcon from '@material-ui/icons/Star';
@@ -28,11 +29,10 @@ import axios from 'axios';
 import formatDate from './../utils/dateUtils';
 import getClosestNextRun from './../utils/edxUtils';
 import { trackEvent } from 'react-with-analytics/lib/utils';
-import Rupee from '../assets/rupee.svg';
 
 const formatPrice = price => {
   if (!price || price === null || price === undefined) return 'Free';
-  else return price;
+  else return Math.round(price);
 };
 
 const formatDuration = duration => {
@@ -231,7 +231,7 @@ const CourseDetails = props => {
                 Gstate.summaryData.price === null ||
                 Gstate.summaryData.price === 0
                   ? 'Provider subscription required'
-                  : Gstate.summaryData.price}
+                  : formatPrice(Gstate.summaryData.price)}
               </div>
             </div>
 

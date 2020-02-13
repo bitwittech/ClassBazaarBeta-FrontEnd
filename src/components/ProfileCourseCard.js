@@ -15,8 +15,8 @@ import Typography from '@material-ui/core/Typography';
 import WatchLaterIcon from '@material-ui/icons/WatchLater';
 import { addBookmark } from '../actions/ContextActions';
 import formatDate from './../utils/dateUtils';
-import { withRouter } from 'react-router-dom';
 import { trackEvent } from 'react-with-analytics/lib/utils';
+import { withRouter } from 'react-router-dom';
 
 const styles = {
   grid: {
@@ -45,7 +45,7 @@ const styles = {
 
 const formatPrice = price => {
   if (!price || price === null || price === undefined) return 'Free';
-  else return price;
+  else return Math.round(price);
 };
 
 const formatDuration = duration => {
