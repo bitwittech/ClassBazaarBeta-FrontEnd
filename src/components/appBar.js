@@ -18,6 +18,8 @@ import { withRouter } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 import { logout } from '../actions/ContextActions';
 import { trackEvent } from 'react-with-analytics';
+
+import { DebounceInput } from 'react-debounce-input';
 const useStyles = makeStyles(theme => ({
   title: {
     display: 'none',
@@ -106,6 +108,20 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+const SearchInput = () => {
+  const classes = useStyles();
+  return (
+    <InputBase
+      placeholder="Search for a course"
+      classes={{
+        root: classes.inputRoot,
+        input: classes.inputInput,
+      }}
+      inputProps={{ 'aria-label': 'search' }}
+    />
+  );
+};
+
 const ImageWithRouter = withRouter(({ history, ...props }) => (
   <img
     style={{ align: 'center' }}
@@ -142,6 +158,8 @@ function TopBar(props) {
     props.history.push('/mobileauth');
   };
 
+  console.log('search', props.initialSearchValue);
+
   return (
     <AppBar
       position="static"
@@ -160,27 +178,26 @@ function TopBar(props) {
           </div>
           <div className="searchbar-div no-mobile">
             {!props.isSearchIncluded ? (
-              <p className="color-white no-mobile">
-                classbazaarclassbazaarcsdasdddfdsfd
-              </p>
+              <p className="color-white no-mobile">classbazaarclassbazaarcsd</p>
             ) : null}
 
             {props.isSearchIncluded && (
               <div className="no-mobile">
-                <div className={classes.search}>
-                  <div className={classes.searchIcon}>
-                    <SearchIcon />
+                <div className="s-bar">
+                  <div className="f-flex">
+                    <div>
+                      <SearchIcon className="mt-2" />
+                    </div>
                   </div>
-                  <InputBase
-                    placeholder="Search for a course"
-                    value={props.initialSearchValue}
-                    onChange={props.onChange}
-                    classes={{
-                      root: classes.inputRoot,
-                      input: classes.inputInput,
-                    }}
-                    inputProps={{ 'aria-label': 'search' }}
-                  />
+                  <div>
+                    <DebounceInput
+                      minLength={2}
+                      className="s-in"
+                      debounceTimeout={1000}
+                      onChange={props.onChange}
+                      placeholder="Search for a course"
+                    />
+                  </div>
                 </div>
               </div>
             )}

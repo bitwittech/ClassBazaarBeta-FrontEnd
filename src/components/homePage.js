@@ -425,6 +425,7 @@ class HomePage extends Component {
   );
 
   render() {
+    console.log('HoME', this.state);
     return (
       <>
         <ScrollToTop />
