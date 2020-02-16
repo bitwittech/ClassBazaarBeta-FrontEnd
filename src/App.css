@@ -1127,3 +1127,44 @@ body {
 .click-h:hover {
   cursor: pointer !important;
 }
+
+.s-bar {
+  margin-top: 10px;
+  position: relative;
+  border: #FFA502 1px solid;
+  justify-content: center;
+  align-items: center;
+  width: 230px;
+  display: flex;
+  border-radius: 4px;
+  padding: 1px;
+}
+
+.f-flex {
+  display: flex;
+  align-self: center !important;
+  align-content: center !important;
+  align-items: center !important;
+  margin: 0px 10px;
+}
+
+.s-in {
+  border: none;
+  color: #7C7C7C;
+  font-size: 1em;
+}
+
+.mt-2 {
+  margin-top: 4px;
+}
+
+.c-logo {
+  position: absolute;
+  top: -5%;
+  margin-top: 10px !important;
+}
+
+
+.end-flex {
+  margin-top: 10px;
+}

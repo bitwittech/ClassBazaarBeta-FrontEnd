@@ -55,7 +55,6 @@ const formatDuration = duration => {
 };
 
 const ProfileCourseCard = withRouter(({ history, ...data }) => {
-  console.log('DATAAA', data);
   const { state, dispatch } = useContext(Store);
 
   const handleBookmark = (uuid, provider, name) => {
