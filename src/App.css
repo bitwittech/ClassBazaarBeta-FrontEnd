@@ -779,6 +779,15 @@ dashboard-options-header {
 
 
 @media (max-width:800px) {
+  .topbar-cont {
+    display: flex;
+    align-items: center;
+  }
+
+  .adj-i {
+    margin-left: -50px !important;
+  }
+
   .smicon {
     transform: rotate(90deg);
     width: 10px;

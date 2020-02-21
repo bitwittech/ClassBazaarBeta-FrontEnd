@@ -545,6 +545,7 @@ class LandingPage extends Component {
             onChange={this.onSearchChange}
             isSearchIncluded={false}
             onLoginClick={this.onLoginClick}
+            noHome={true}
           />
 
           {this.state.popUp === true && this.state.user === null ? (
