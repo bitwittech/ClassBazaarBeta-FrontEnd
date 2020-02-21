@@ -337,6 +337,7 @@ class HomePage extends Component {
   onSearchChange(query) {
     console.log('onSearchChange', { q: query.target.value });
     trackEvent('search', 'onSearch', 'Search_rest');
+    ReactGA.ga('send', 'pageview', query);
     this.setState({ q: query.target.value }, () => {
       this.updateData();
     });

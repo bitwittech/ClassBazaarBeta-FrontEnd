@@ -193,7 +193,7 @@ function TopBar(props) {
                     <DebounceInput
                       minLength={2}
                       className="s-in"
-                      debounceTimeout={1000}
+                      debounceTimeout={500}
                       onChange={props.onChange}
                       placeholder="Search for a course"
                     />
