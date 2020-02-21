@@ -15,6 +15,7 @@ import { Collapse } from '@material-ui/core';
 import Container from '@material-ui/core/Container';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import ReactGA from 'react-ga';
 import Footer from './Footer';
 import Grid from '@material-ui/core/Grid';
 import HomeModal from './HomeModal';
@@ -138,6 +139,8 @@ const Search = withRouter(({ history, ...data }) => {
           if (ev.key === 'Enter') {
             const query = data.getQuery;
             trackEvent('search', 'onSearch', 'Search_homepage');
+            ReactGA.ga('send', 'pageview', query);
+            console.log(ReactGA);
             history.push({
               pathname: data.routingURL,
               state: {
@@ -545,6 +548,7 @@ class LandingPage extends Component {
             onChange={this.onSearchChange}
             isSearchIncluded={false}
             onLoginClick={this.onLoginClick}
+            noHome={true}
           />
 
           {this.state.popUp === true && this.state.user === null ? (
@@ -607,8 +611,8 @@ class LandingPage extends Component {
                 component="p"
                 align="center"
               >
-                Discover best courses from top universities around the world
-                like MIT, Stanford, Harvard, IIT and many more
+                Discover online best courses from top universities around the
+                world like MIT, Stanford, Harvard, IIT and many more
               </Typography>
             </Grid>
             <Container maxWidth={'md'}>

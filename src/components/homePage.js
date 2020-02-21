@@ -30,7 +30,7 @@ import { store } from './../App';
 import { subjectsData } from './../utils/data';
 import { trackEvent } from 'react-with-analytics/lib/utils';
 import { withStyles } from '@material-ui/core/styles';
-
+import ReactGA from 'react-ga';
 const providerData = [
   'edX',
   'FutureLearn',
@@ -107,6 +107,7 @@ class HomePage extends Component {
       popUp: false,
       queryURL: '',
       mobileFilter: false,
+      totalCount: null,
     };
     this.getUniversityForUdemy = this.getUniversityForUdemy.bind(this);
     this.handlePageChange = this.handlePageChange.bind(this);
@@ -158,6 +159,12 @@ class HomePage extends Component {
       });
     });
   }
+
+  handleCourseNumber = count => {
+    this.setState({
+      totalCount: count,
+    });
+  };
 
   onSubjectFilterChange = subjectList => {
     let subjectFilter = '';
@@ -329,10 +336,11 @@ class HomePage extends Component {
 
   onSearchChange(query) {
     console.log('onSearchChange', { q: query.target.value });
+    trackEvent('search', 'onSearch', 'Search_rest');
+    ReactGA.ga('send', 'pageview', query);
     this.setState({ q: query.target.value }, () => {
       this.updateData();
     });
-    trackEvent('search', 'onSearch', 'Search_rest');
   }
 
   getCheckedProvidersFromString() {
@@ -534,7 +542,18 @@ class HomePage extends Component {
                   marginLeft: '-25px',
                 }}
               />
-              <CourseList url={this.state.queryURL} urlChanged={true} />
+              <div className="show">
+                <div>
+                  <p className="col2">
+                    Result - {this.state.totalCount} courses found
+                  </p>
+                </div>
+              </div>
+              <CourseList
+                url={this.state.queryURL}
+                urlChanged={true}
+                handleCourseNumber={this.handleCourseNumber}
+              />
             </Grid>
           </Grid>
         </Container>

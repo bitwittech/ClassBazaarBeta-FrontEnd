@@ -173,7 +173,7 @@ function TopBar(props) {
         <div className="topbar-cont">
           <div className="no-desktop">
             <div className={props.home ? 'no-mobile' : ''}>
-              <MenuIcon />
+              {props.noHome ? null : <MenuIcon />}
             </div>
           </div>
           <div className="searchbar-div no-mobile">
@@ -193,7 +193,7 @@ function TopBar(props) {
                     <DebounceInput
                       minLength={2}
                       className="s-in"
-                      debounceTimeout={1000}
+                      debounceTimeout={500}
                       onChange={props.onChange}
                       placeholder="Search for a course"
                     />
@@ -207,7 +207,7 @@ function TopBar(props) {
             <ImageWithRouter
               image={Logo}
               routingURL={'/'}
-              clazzNames={`${classes.logo} c-logo click-h`}
+              clazzNames={`${classes.logo} c-logo click-h adj-i`}
               alt="logo"
               onClick={() => {
                 trackEvent('HeaderIcon', 'Click', `${props.location.pathname}`);
