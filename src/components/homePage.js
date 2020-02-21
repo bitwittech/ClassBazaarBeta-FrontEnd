@@ -30,7 +30,7 @@ import { store } from './../App';
 import { subjectsData } from './../utils/data';
 import { trackEvent } from 'react-with-analytics/lib/utils';
 import { withStyles } from '@material-ui/core/styles';
-
+import ReactGA from 'react-ga';
 const providerData = [
   'edX',
   'FutureLearn',
