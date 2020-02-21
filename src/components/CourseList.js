@@ -106,6 +106,8 @@ class CourseList extends Component {
     return fetch(url)
       .then(response => response.json())
       .then(json => {
+        console.log('FETCH', json);
+        this.props.handleCourseNumber(json.total[0].count);
         return json.data.map(obj => {
           return (
             <CourseCard

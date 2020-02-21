@@ -107,6 +107,7 @@ class HomePage extends Component {
       popUp: false,
       queryURL: '',
       mobileFilter: false,
+      totalCount: null,
     };
     this.getUniversityForUdemy = this.getUniversityForUdemy.bind(this);
     this.handlePageChange = this.handlePageChange.bind(this);
@@ -158,6 +159,12 @@ class HomePage extends Component {
       });
     });
   }
+
+  handleCourseNumber = count => {
+    this.setState({
+      totalCount: count,
+    });
+  };
 
   onSubjectFilterChange = subjectList => {
     let subjectFilter = '';
@@ -534,7 +541,18 @@ class HomePage extends Component {
                   marginLeft: '-25px',
                 }}
               />
-              <CourseList url={this.state.queryURL} urlChanged={true} />
+              <div className="show">
+                <div>
+                  <p className="col2">
+                    Result - {this.state.totalCount} courses found
+                  </p>
+                </div>
+              </div>
+              <CourseList
+                url={this.state.queryURL}
+                urlChanged={true}
+                handleCourseNumber={this.handleCourseNumber}
+              />
             </Grid>
           </Grid>
         </Container>

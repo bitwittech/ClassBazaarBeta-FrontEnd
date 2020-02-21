@@ -777,6 +777,16 @@ dashboard-options-header {
   margin-top: 100px;
 }
 
+.show {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.col2 {
+  color: #FFA502;
+  font-weight: 500;
+  font-size: 1.2em;
+}
 
 @media (max-width:800px) {
   .topbar-cont {
