@@ -212,7 +212,7 @@ const ProfileCourseCard = withRouter(({ history, ...data }) => {
               <Grid item sm={4}>
                 <CalendarIcon fontSize="small" className="mb" color="primary" />{' '}
                 {data.startingOn == null
-                  ? 'NA'
+                  ? 'Flexible'
                   : formatDate(new Date(data.startingOn), 'MMMM d, yyyy')}{' '}
               </Grid>
               <Grid item sm={4}>
