@@ -262,6 +262,10 @@ a:hover {
 }
 
 @media (max-width: 800px) {
+  .MuiInputBase-input {
+    color: #000 !important;
+  }
+
   .cd-head-o {
     width: 60%;
   }
