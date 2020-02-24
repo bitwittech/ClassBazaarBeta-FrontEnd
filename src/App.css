@@ -794,6 +794,11 @@ dashboard-options-header {
 }
 
 @media (max-width:800px) {
+  .mt-no {
+    margin-top: -30px !important;
+    margin-bottom: 10px;
+  }
+
   .topbar-cont {
     display: flex;
     align-items: center;

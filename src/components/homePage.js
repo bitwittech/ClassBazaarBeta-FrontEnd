@@ -374,6 +374,13 @@ class HomePage extends Component {
                 </Box>
               </Typography>
               <Divider style={{ marginBottom: '25px', marginTop: '15px' }} />
+              <Box
+                className="click-h mt-no"
+                onClick={this.setupDefaultFilters}
+                style={styles.clearAll}
+              >
+                Clear all
+              </Box>
               <FormControl component="fieldset">
                 <RadioGroup
                   aria-label="filter"
@@ -440,6 +447,7 @@ class HomePage extends Component {
         <div>
           <TopAppBar
             home={true}
+            noHome={true}
             onChange={this.onSearchChange}
             isSearchIncluded={true}
             initialSearchValue={this.state.q}

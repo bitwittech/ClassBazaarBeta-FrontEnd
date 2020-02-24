@@ -55,8 +55,7 @@ const Contactus = () => {
   };
   return (
     <>
-      <AppBar />
-
+      <AppBar noHome={true} />
       <div
         style={{
           padding: 50,

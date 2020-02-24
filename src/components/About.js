@@ -48,7 +48,7 @@ const About = () => {
   const classes = styles();
   return (
     <div>
-      <AppBar />
+      <AppBar noHome={true} />
       <div className={classes.root}>
         <Grid container spacing={3} className="ab-t">
           <Grid item xs={12}>
