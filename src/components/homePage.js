@@ -544,9 +544,7 @@ class HomePage extends Component {
               />
               <div className="show">
                 <div>
-                  <p className="col2">
-                    Result - {this.state.totalCount} courses found
-                  </p>
+                  <p className="col2">{this.state.totalCount} courses</p>
                 </div>
               </div>
               <CourseList

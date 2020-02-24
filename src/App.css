@@ -780,12 +780,17 @@ dashboard-options-header {
 .show {
   display: flex;
   justify-content: flex-end;
+  margin-top: -20px;
+  font-size: 0.8em;
 }
 
 .col2 {
   color: #FFA502;
   font-weight: 500;
   font-size: 1.2em;
+  text-decoration: underline;
+  font-style: italic;
+  line-height: 8px;
 }
 
 @media (max-width:800px) {

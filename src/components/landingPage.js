@@ -611,7 +611,7 @@ class LandingPage extends Component {
                 component="p"
                 align="center"
               >
-                Discover online best courses from top universities around the
+                Discover best online courses from top universities around the
                 world like MIT, Stanford, Harvard, IIT and many more
               </Typography>
             </Grid>
