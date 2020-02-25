@@ -262,6 +262,10 @@ a:hover {
 }
 
 @media (max-width: 800px) {
+  .MuiInputBase-input {
+    color: #000 !important;
+  }
+
   .cd-head-o {
     width: 60%;
   }
@@ -780,15 +784,25 @@ dashboard-options-header {
 .show {
   display: flex;
   justify-content: flex-end;
+  margin-top: -20px;
+  font-size: 0.8em;
 }
 
 .col2 {
   color: #FFA502;
   font-weight: 500;
   font-size: 1.2em;
+  text-decoration: underline;
+  font-style: italic;
+  line-height: 8px;
 }
 
 @media (max-width:800px) {
+  .mt-no {
+    margin-top: -30px !important;
+    margin-bottom: 10px;
+  }
+
   .topbar-cont {
     display: flex;
     align-items: center;

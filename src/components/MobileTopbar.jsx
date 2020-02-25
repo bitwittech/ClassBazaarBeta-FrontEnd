@@ -9,17 +9,14 @@ const MobileTopbar = props => {
   return (
     <div className="no-desktop mt-ad">
       <div className="cont-profile">
-        {props.lnope ? null : (
-          <div className="search-icon">
-            <SearchIcon
-              onClick={() =>
-                !props.onlySearch ? onSearchClick(!search) : null
-              }
-              fontSize="large"
-              className="searchicon"
-            />
-          </div>
-        )}
+        <div className="search-icon">
+          <SearchIcon
+            onClick={() => (!props.onlySearch ? onSearchClick(!search) : null)}
+            fontSize="large"
+            className="searchicon"
+          />
+        </div>
+
         {!search && (
           <>
             {' '}

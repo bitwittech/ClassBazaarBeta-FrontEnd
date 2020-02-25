@@ -114,7 +114,7 @@ const MobileAuth = () => {
         openState={forgotPassword}
         handlePopupClose={handlePopupClose}
       />
-      <AppBar />
+      <AppBar noHome={true} />
       <Container maxWidth={'lg'} align="center">
         {state.state === 0 ? (
           <Typography

@@ -172,7 +172,7 @@ class ProfilePage extends Component {
     console.log('STATE PROFILE', this.state);
     return (
       <>
-        <TopAppBar />
+        <TopAppBar noHome={true} />
         {this.state.msg && (
           <AlertSnackbar resetMsg={this.resetMsg} data={this.state.msg} />
         )}

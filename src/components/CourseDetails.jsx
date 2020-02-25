@@ -1431,7 +1431,7 @@ const CourseDetails = props => {
 
   return (
     <>
-      <AppBar />
+      <AppBar noHome={true} />
       <MobileTopbar onlySearch={true} />
       <HomeModal
         openState={Gstate.popUp}
