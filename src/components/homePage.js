@@ -136,7 +136,8 @@ class HomePage extends Component {
 
     if (filter === 'free') feeFilter = 'price:free';
     if (filter === 'paid') feeFilter = 'price:paid';
-
+    if (filter === 'Provider subscription required')
+      feeFilter = 'price:Provider subscription required';
     if (filter === 'flexible') startDateFilter = 'start:flexible';
     if (filter === 'lte30') startDateFilter = 'start:lte30';
     if (filter === 'gte30') startDateFilter = 'start:gte30';
@@ -189,6 +190,8 @@ class HomePage extends Component {
     let filterValue;
     if (feeType[0] === true) filterValue = 'free';
     else if (feeType[1] === true) filterValue = 'paid';
+    else if (feeType[2] === true)
+      filterValue = 'Provider subscription required';
     else filterValue = '';
     this.setState({ filterValue }, async () => {
       this.updateData();
@@ -404,7 +407,11 @@ class HomePage extends Component {
                     isLevel1Checked={false}
                     isOnlyOneAllowed={true}
                     level1Name={'Fees'}
-                    level2List={['Free', 'Paid']}
+                    level2List={[
+                      'Free',
+                      'Paid',
+                      'Provider subscription required',
+                    ]}
                     onChangeOptions={s => this.onFeeFilterChange(s)}
                   />
                   <NestedMenu
@@ -506,7 +513,11 @@ class HomePage extends Component {
                       isLevel1Checked={false}
                       isOnlyOneAllowed={true}
                       level1Name={'Fees'}
-                      level2List={['Free', 'Paid']}
+                      level2List={[
+                        'Free',
+                        'Paid',
+                        'Provider subscription required',
+                      ]}
                       onChangeOptions={s => this.onFeeFilterChange(s)}
                     />
                     <NestedMenu
