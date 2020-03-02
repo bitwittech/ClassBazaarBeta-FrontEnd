@@ -237,6 +237,7 @@ const HomeModal = ({
           body,
           config
         );
+        console.log('RESPONSE', res);
         addReviewToCurrentState({
           review: message,
           course_id: uuid,
@@ -255,6 +256,7 @@ const HomeModal = ({
         handlePopupClose();
         window.location.reload();
       } catch (error) {
+        console.log(error);
         dispatch({
           type: 'ALERT',
           payload: {

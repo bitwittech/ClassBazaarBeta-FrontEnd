@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { Redirect } from 'react-router';
-import AppBar from './appBar';
+import AppBar from './AppBar';
 import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { Container, Typography, Grid } from '@material-ui/core';

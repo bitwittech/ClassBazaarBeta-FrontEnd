@@ -4,7 +4,7 @@ import {
   freeCourses,
   subjectsData,
   trendingData,
-} from './../utils/data';
+} from '../utils/data';
 import { fade, makeStyles } from '@material-ui/core/styles';
 
 import AuthProvider from './authProvider';
@@ -25,7 +25,7 @@ import { Paper } from 'material-ui';
 import SearchBG1 from './../assets/Search-Option3.jpg';
 import SearchIcon from '@material-ui/icons/Search';
 import Snackbar from '@material-ui/core/Snackbar';
-import TopAppBar from './appBar';
+import TopAppBar from './AppBar';
 import Typography from '@material-ui/core/Typography';
 import { withRouter } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
