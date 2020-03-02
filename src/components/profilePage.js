@@ -641,7 +641,9 @@ class ProfilePage extends Component {
                               <div></div>
                             </div>
                             <Link
-                              to={`/coursedetails/${data.provider}/${data.course_id}`}
+                              to={`/coursedetails/${data.course &&
+                                data.course.provider}/${data.course &&
+                                data.course.uuid}`}
                             >
                               <Typography
                                 variant="subtitle1"

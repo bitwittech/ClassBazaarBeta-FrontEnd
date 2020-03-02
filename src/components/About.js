@@ -12,7 +12,7 @@ const data = {
     {
       heading: 'About Us',
       body: `Class Bazaar is a search engine and reviews website for massive open online courses (MOOCs). Class Bazaar aggregates thousands of courses from multiple providers so that you find the best courses on almost any topic or subject. Our aim is to help you Stop Searching & Start Learning!
-        Our catalog has 1, 50, 000 + courses from world’ s leading universities and organizations.
+        Our catalog has courses from world’ s leading universities and organizations.
         `,
     },
     {
