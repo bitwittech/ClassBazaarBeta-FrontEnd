@@ -19,6 +19,7 @@ import Pagination from 'material-ui-flat-pagination';
 import ProfileCourseCard from './ProfileCourseCard';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
+import ReactGA from 'react-ga';
 import ScrollToTop from './ScrollToTop';
 import TopAppBar from './appBar';
 import TurnedInIcon from '@material-ui/icons/TurnedIn';
@@ -30,7 +31,7 @@ import { store } from './../App';
 import { subjectsData } from './../utils/data';
 import { trackEvent } from 'react-with-analytics/lib/utils';
 import { withStyles } from '@material-ui/core/styles';
-import ReactGA from 'react-ga';
+
 const providerData = [
   'edX',
   'FutureLearn',
@@ -339,8 +340,9 @@ class HomePage extends Component {
 
   onSearchChange(query) {
     console.log('onSearchChange', { q: query.target.value });
+    ReactGA.ga('send', 'pageview', `/listing?q=${query.target.value}`);
     trackEvent('search', 'onSearch', 'Search_rest');
-    ReactGA.ga('send', 'pageview', query);
+
     this.setState({ q: query.target.value }, () => {
       this.updateData();
     });

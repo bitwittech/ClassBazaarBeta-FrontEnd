@@ -15,25 +15,26 @@ import { Collapse } from '@material-ui/core';
 import Container from '@material-ui/core/Container';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import ReactGA from 'react-ga';
 import Footer from './Footer';
 import Grid from '@material-ui/core/Grid';
 import HomeModal from './HomeModal';
-import { Link } from 'react-router-dom';
 import InputBase from '@material-ui/core/InputBase';
+import { Link } from 'react-router-dom';
 import { Paper } from 'material-ui';
+import ReactGA from 'react-ga';
 import SearchBG1 from './../assets/Search-Option3.jpg';
 import SearchIcon from '@material-ui/icons/Search';
+import Smicon from '../assets/smicon.svg';
 import Snackbar from '@material-ui/core/Snackbar';
+import StaticCourseDetails from './StaticCourseDetails';
 import TopAppBar from './appBar';
 import Typography from '@material-ui/core/Typography';
-import { withRouter } from 'react-router-dom';
-import { withStyles } from '@material-ui/core/styles';
-import Smicon from '../assets/smicon.svg';
-import { trackEvent } from 'react-with-analytics/lib/utils';
-import StaticCourseDetails from './StaticCourseDetails';
 import { clearConfigCache } from 'prettier';
 import { store } from '../App';
+import { trackEvent } from 'react-with-analytics/lib/utils';
+import { withRouter } from 'react-router-dom';
+import { withStyles } from '@material-ui/core/styles';
+
 const styles = theme => ({
   dashboardLink: {
     color: 'white',
@@ -141,6 +142,7 @@ const Search = withRouter(({ history, ...data }) => {
             trackEvent('search', 'onSearch', 'Search_homepage');
             ReactGA.ga('send', 'pageview', query);
             console.log(ReactGA);
+            ReactGA.ga('send', 'pageview', `/homepage?q=${query()}`);
             history.push({
               pathname: data.routingURL,
               state: {
