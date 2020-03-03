@@ -1,4 +1,4 @@
-import AppBar from './appBar';
+import AppBar from './AppBar';
 import Container from '@material-ui/core/Container';
 import Footer from './Footer';
 import Grid from '@material-ui/core/Grid';
