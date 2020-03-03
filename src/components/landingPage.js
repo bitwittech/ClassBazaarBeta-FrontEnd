@@ -140,8 +140,6 @@ const Search = withRouter(({ history, ...data }) => {
           if (ev.key === 'Enter') {
             const query = data.getQuery;
             trackEvent('search', 'onSearch', 'Search_homepage');
-            ReactGA.ga('send', 'pageview', query);
-            console.log(ReactGA);
             ReactGA.ga('send', 'pageview', `/homepage?q=${query()}`);
             history.push({
               pathname: data.routingURL,
