@@ -4,7 +4,7 @@ import {
   freeCourses,
   subjectsData,
   trendingData,
-} from './../utils/data';
+} from '../utils/data';
 import { fade, makeStyles } from '@material-ui/core/styles';
 
 import AuthProvider from './authProvider';
@@ -27,7 +27,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import Smicon from '../assets/smicon.svg';
 import Snackbar from '@material-ui/core/Snackbar';
 import StaticCourseDetails from './StaticCourseDetails';
-import TopAppBar from './appBar';
+import TopAppBar from './AppBar';
 import Typography from '@material-ui/core/Typography';
 import { clearConfigCache } from 'prettier';
 import { store } from '../App';

@@ -13,7 +13,7 @@ import Infinite from 'react-infinite';
 import NestedMenu from './nestedCheckbox';
 import Pagination from 'material-ui-flat-pagination';
 import RadioGroup from '@material-ui/core/RadioGroup';
-import TopAppBar from './appBar';
+import TopAppBar from './AppBar';
 import Typography from '@material-ui/core/Typography';
 import { black } from 'material-ui/styles/colors';
 import config from '../config.json';

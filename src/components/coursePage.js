@@ -10,7 +10,7 @@ import MoneyIcon from '@material-ui/icons/AttachMoney';
 import PlusIcon from '@material-ui/icons/Add';
 import ProviderIcon from '@material-ui/icons/Assignment';
 import ReactHtmlParser from 'react-html-parser';
-import TopAppBar from './appBar';
+import TopAppBar from './AppBar';
 import Typography from '@material-ui/core/Typography';
 import WatchLaterIcon from '@material-ui/icons/WatchLater';
 import formatDate from './../utils/dateUtils';
