@@ -19,8 +19,8 @@ import { black } from 'material-ui/styles/colors';
 import config from '../config.json';
 import { store } from './../App';
 import { subjectsData } from './../utils/data';
-import { withStyles } from '@material-ui/core/styles';
 import { trackEvent } from 'react-with-analytics/lib/utils';
+import { withStyles } from '@material-ui/core/styles';
 
 const providerData = [
   'edX',
@@ -31,7 +31,7 @@ const providerData = [
   'upGrad',
   'Swayam',
 ];
-const { API, API_LOCAL } = config;
+let { API, API_LOCAL } = config;
 
 const styles = {
   dashboardLink: {
@@ -107,7 +107,8 @@ class CourseList extends Component {
       .then(response => response.json())
       .then(json => {
         console.log('FETCH', json);
-        this.props.handleCourseNumber(json.total[0].count);
+        this.props.handleCourseNumber(json.total);
+        this.props.udpateOffsets(json.offset);
         return json.data.map(obj => {
           return (
             <CourseCard

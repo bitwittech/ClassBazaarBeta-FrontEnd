@@ -41,7 +41,10 @@ const providerData = [
   'upGrad',
   'Swayam',
 ];
-const { API, API_LOCAL } = config;
+let { API, API_LOCAL } = config;
+
+const debug = process.env.NODE_ENV === 'production' ? false : true;
+if (debug) API = API_LOCAL;
 
 const styles = {
   dashboardLink: {
@@ -109,6 +112,7 @@ class HomePage extends Component {
       queryURL: '',
       mobileFilter: false,
       totalCount: null,
+      providerOffset: [0, 0, 0, 0, 0, 0, 0],
     };
     this.getUniversityForUdemy = this.getUniversityForUdemy.bind(this);
     this.handlePageChange = this.handlePageChange.bind(this);
@@ -123,6 +127,7 @@ class HomePage extends Component {
     this.getCheckedProvidersFromString = this.getCheckedProvidersFromString.bind(
       this
     );
+    this.udpateOffsets = this.udpateOffsets.bind(this);
   }
 
   updateData() {
@@ -149,7 +154,11 @@ class HomePage extends Component {
     ]);
     const subjects = encodeURIComponent(this.state.subjects);
 
-    var url = `${API}/api/courses/?q=${query}&filter=${parsedFilter}&subjects=${subjects}&provider=${this.state.providers}&feeFilter=${feeFilter}&startDateFilter=${startDateFilter}`;
+    var url = `${API}/api/v2/courses/?q=${query}&filter=${parsedFilter}&subjects=${subjects}&provider=${
+      this.state.providers
+    }&feeFilter=${feeFilter}&startDateFilter=${startDateFilter}&providerOffset=${this.state.providerOffset.join(
+      '::'
+    )}`;
     console.log(url);
     this.setState({ queryURL: url }, () => {
       const state = this.state;
@@ -165,6 +174,13 @@ class HomePage extends Component {
   handleCourseNumber = count => {
     this.setState({
       totalCount: count,
+    });
+  };
+
+  udpateOffsets = offsets => {
+    console.log('Updating offsets', offsets);
+    this.setState({
+      providerOffset: offsets,
     });
   };
 
@@ -572,6 +588,7 @@ class HomePage extends Component {
                 url={this.state.queryURL}
                 urlChanged={true}
                 handleCourseNumber={this.handleCourseNumber}
+                udpateOffsets={this.udpateOffsets}
               />
             </Grid>
           </Grid>
