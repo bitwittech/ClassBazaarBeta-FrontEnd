@@ -43,8 +43,8 @@ const providerData = [
 ];
 let { API, API_LOCAL } = config;
 
-const debug = process.env.NODE_ENV === 'production' ? false : true;
-if (debug) API = API_LOCAL;
+// const debug = process.env.NODE_ENV === 'production' ? false : true;
+// if (debug) API = API_LOCAL;
 
 const styles = {
   dashboardLink: {
@@ -156,9 +156,9 @@ class HomePage extends Component {
 
     var url = `${API}/api/v2/courses/?q=${query}&filter=${parsedFilter}&subjects=${subjects}&provider=${
       this.state.providers
-    }&feeFilter=${feeFilter}&startDateFilter=${startDateFilter}&providerOffset=${this.state.providerOffset.join(
-      '::'
-    )}`;
+      }&feeFilter=${feeFilter}&startDateFilter=${startDateFilter}&providerOffset=${this.state.providerOffset.join(
+        '::'
+      )}`;
     console.log(url);
     this.setState({ queryURL: url }, () => {
       const state = this.state;
