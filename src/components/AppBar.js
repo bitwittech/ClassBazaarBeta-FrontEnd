@@ -1,25 +1,26 @@
 import React, { useContext } from 'react';
 import { fade, makeStyles } from '@material-ui/core/styles';
-import PermIdentityIcon from '@material-ui/icons/PermIdentity';
+
 import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
+import { DebounceInput } from 'react-debounce-input';
 import IconButton from '@material-ui/core/IconButton';
 import InputBase from '@material-ui/core/InputBase';
 import { LOGIN_MODAL } from '../store/Types';
 import Logo from './../assets/logo.png';
 import MenuIcon from '@material-ui/icons/Menu';
+import PermIdentityIcon from '@material-ui/icons/PermIdentity';
 import ProfileIcon from '@material-ui/icons/Person';
 import PropTypes from 'prop-types';
 import SearchIcon from '@material-ui/icons/Search';
 import Store from '../store/Context';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import { withRouter } from 'react-router-dom';
-import { withStyles } from '@material-ui/core/styles';
 import { logout } from '../actions/ContextActions';
 import { trackEvent } from 'react-with-analytics';
+import { withRouter } from 'react-router-dom';
+import { withStyles } from '@material-ui/core/styles';
 
-import { DebounceInput } from 'react-debounce-input';
 const useStyles = makeStyles(theme => ({
   title: {
     display: 'none',

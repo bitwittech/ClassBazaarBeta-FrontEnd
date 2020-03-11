@@ -19,12 +19,12 @@ import ReactGA from 'react-ga';
 import Reducer from './store/Reducer';
 import ScrollToTop from './components/ScrollToTop';
 import Snackbar from './components/Snackbar';
+import StaticCourseDetails from './components/StaticCourseDetails';
 import Store from './store/Context';
 import config from './config.json';
 import { fetchUser } from './actions/ContextActions';
 import localForage from 'localforage';
 import { trackPage } from 'react-with-analytics/lib/utils';
-import StaticCourseDetails from './components/StaticCourseDetails';
 
 const theme = createMuiTheme({
   typography: {
@@ -54,7 +54,7 @@ const GA_TRACKING_ID = 'UA-154109881-1';
 const debug = process.env.NODE_ENV === 'production' ? false : true;
 initAnalytics(GA_TRACKING_ID, { debug: debug });
 ReactGA.initialize(GA_TRACKING_ID, {
-  debug: debug,
+  debug: true,
 });
 const Root = props => {
   useEffect(() => {
