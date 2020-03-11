@@ -110,11 +110,15 @@ class CourseList extends Component {
         this.props.handleCourseNumber(json.total);
         this.props.udpateOffsets(json.offset);
         return json.data.map(obj => {
+          let uni = obj.university;
+          if (obj.provider === 'Udemy') {
+            uni = obj.instructors.join(', ');
+          }
           return (
             <CourseCard
               key={obj.title}
               isInstructor={true}
-              university={obj.university}
+              university={uni}
               courseName={obj.title}
               provider={obj.provider}
               duration={obj.commitment}
