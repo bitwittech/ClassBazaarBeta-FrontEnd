@@ -21,94 +21,95 @@ import UdacityLogo from './../assets/UdacityLogo.png';
 import UdemyLogo from './../assets/UdemyLogo.png';
 import UniAuklandLogo from './../assets/UniAuklandLogo.jpg';
 import UniNewcastleLogo from './../assets/UniNewcastleLogo.jpeg';
+import ALTMBA from './../assets/altmba.png'
 
 export const subjectsData = [{
-    name: 'Computer Science',
-    code: 'CS',
-    content: '',
-    image: CS,
-  },
-  {
-    name: 'Business',
-    code: 'B',
-    content: '',
-    image: B,
-  },
-  {
-    name: 'Arts & Design',
-    code: 'A',
-    content: '',
-    image: A,
-  },
-  {
-    name: 'Data Science',
-    code: 'DA',
-    content: '',
-    image: DA,
-  },
-  {
-    name: 'Health & Lifestyle',
-    code: 'HL',
-    content: '',
-    image: HL,
-  },
-  {
-    name: 'Science & Engineering',
-    code: 'SENG',
-    content: '',
-    image: SENG,
-  },
-  {
-    name: 'Social Studies',
-    code: 'SO',
-    content: '',
-    image: SO,
-  },
-  {
-    name: 'Developers/Programming',
-    code: 'DEV',
-    content: '',
-    image: DEV,
-  },
-  {
-    name: 'Others',
-    code: 'O',
-    content: '',
-    image: O,
-  },
-  {
-    name: 'Math',
-    code: 'M',
-    content: '',
-    image: M,
-  },
+  name: 'Computer Science',
+  code: 'CS',
+  content: '',
+  image: CS,
+},
+{
+  name: 'Business',
+  code: 'B',
+  content: '',
+  image: B,
+},
+{
+  name: 'Arts & Design',
+  code: 'A',
+  content: '',
+  image: A,
+},
+{
+  name: 'Data Science',
+  code: 'DA',
+  content: '',
+  image: DA,
+},
+{
+  name: 'Health & Lifestyle',
+  code: 'HL',
+  content: '',
+  image: HL,
+},
+{
+  name: 'Science & Engineering',
+  code: 'SENG',
+  content: '',
+  image: SENG,
+},
+{
+  name: 'Social Studies',
+  code: 'SO',
+  content: '',
+  image: SO,
+},
+{
+  name: 'Developers/Programming',
+  code: 'DEV',
+  content: '',
+  image: DEV,
+},
+{
+  name: 'Others',
+  code: 'O',
+  content: '',
+  image: O,
+},
+{
+  name: 'Math',
+  code: 'M',
+  content: '',
+  image: M,
+},
 ];
 
 export const degreeData = [{
-    name: 'Master of Science in Machine Learning & AI',
-    university: 'Liverpool John Moores University and IIIT, Bangalore',
-    image: IIITBLogo,
-    provider: 'upGrad',
-    url: '/upGrad/5de5b3af0b4a63ba9b2e9967',
-  },
-  {
-    name: 'PG Certification in Digital Marketing and Communication',
-    university: 'MICA, Ahmedabad',
-    provider: 'upGrad',
-    image: MicaLogo,
-    url: '/upGrad/5de5b3af0b4a63ba9b2e9969',
-  },
-  {
+  name: 'Master of Science in Machine Learning & AI',
+  university: 'Liverpool John Moores University and IIIT, Bangalore',
+  image: IIITBLogo,
+  provider: 'upGrad',
+  url: '/upGrad/5de5b3af0b4a63ba9b2e9967',
+},
+{
+  name: 'PG Certification in Digital Marketing and Communication',
+  university: 'MICA, Ahmedabad',
+  provider: 'upGrad',
+  image: MicaLogo,
+  url: '/upGrad/5de5b3af0b4a63ba9b2e9969',
+},
+{
+  name: 'Bachelor of Arts',
+  university: 'University of Newcastle',
+  provider: 'FutureLearn',
+  image: NC,
+  url: '',
+  data: {
     name: 'Bachelor of Arts',
     university: 'University of Newcastle',
     provider: 'FutureLearn',
-    image: NC,
-    url: '',
-    data: {
-      name: 'Bachelor of Arts',
-      university: 'University of Newcastle',
-      provider: 'FutureLearn',
-      outcome: `<div>Studying our new Bachelor of Arts degree (online) at UON lets you forge your own path. Tailor your studies and gain core specialisations by choosing from 4 majors and minors.
+    outcome: `<div>Studying our new Bachelor of Arts degree (online) at UON lets you forge your own path. Tailor your studies and gain core specialisations by choosing from 4 majors and minors.
 
       Study a range of courses to analyse and deconstruct the world around you. Explore ideas, theories and records of how people process the human experience. You will learn about society, culture, history, media and more. If you’re hungry for knowledge, an arts degree will allow you to turn your interests into meaningful careers.</div><div class="m-fact-sheet__detail"><h2 class="m-fact-sheet__heading">What are the learning outcomes?</h2><div class="m-fact-sheet__text"><ul>
       <li>Knowledge: The capacity to research, analyse, and apply knowledge from disciplinary and multidisciplinary perspectives within the Bachelor of Arts.</li>
@@ -120,43 +121,43 @@ export const degreeData = [{
     
     <p>Please note Programs (and/or their titles) listed below may change.</p>
     </div></div>`,
-      startDate: '',
-      duration: '3 years',
-      price: '',
-      enroll: 'https://www.udacity.com/georgia-tech'
-    },
+    startDate: '',
+    duration: '3 years',
+    price: '',
+    enroll: 'https://www.udacity.com/georgia-tech'
   },
-  {
+},
+{
+  name: 'PMP Certification',
+  university: 'Project Management Institute, Simplilearn',
+  provider: 'SimpliLearn',
+  image: PMPInstLogo,
+  url: '',
+  data: {
     name: 'PMP Certification',
     university: 'Project Management Institute, Simplilearn',
     provider: 'SimpliLearn',
-    image: PMPInstLogo,
-    url: '',
-    data: {
-      name: 'PMP Certification',
-      university: 'Project Management Institute, Simplilearn',
-      provider: 'SimpliLearn',
-      outcome: `PMP Certification Course Overview
+    outcome: `PMP Certification Course Overview
 
       The course covers new trends, emerging practices, tailoring considerations, and core competencies required of a Project Management professional. Placing a greater emphasis on strategic and business knowledge, this course also includes a new section on the role of the project manager in both large and small companies.`,
-      prerequisites: `You should have a secondary degree (i.e. high school diploma, associate’s degree or the global equivalent) with 7,500 hours leading and directing projects along with 35 hours of project management education.<br>OR<br>You should have a four-year degree with 4,500 hours leading and directing projects along with 35 hours of project management education.`,
-      startDate: '8th Feb',
-      duration: '29 hours',
-      price: '₹8,999',
-      enroll: '',
-    },
+    prerequisites: `You should have a secondary degree (i.e. high school diploma, associate’s degree or the global equivalent) with 7,500 hours leading and directing projects along with 35 hours of project management education.<br>OR<br>You should have a four-year degree with 4,500 hours leading and directing projects along with 35 hours of project management education.`,
+    startDate: '8th Feb',
+    duration: '29 hours',
+    price: '₹8,999',
+    enroll: '',
   },
-  {
+},
+{
+  name: 'Masters in Business Administration',
+  university: 'Boston University',
+  provider: 'edX',
+  image: BostonUniLogo,
+  url: '',
+  data: {
     name: 'Masters in Business Administration',
     university: 'Boston University',
     provider: 'edX',
-    image: BostonUniLogo,
-    url: '',
-    data: {
-      name: 'Masters in Business Administration',
-      university: 'Boston University',
-      provider: 'edX',
-      outcome: `<p>The BU Questrom Online MBA requires 45 credit-hours of coursework comprised of six 7.5-credit semester-long integrated modules. The curriculum is designed so that you take one module a semester. No more worrying about what courses to take and when.</p>
+    outcome: `<p>The BU Questrom Online MBA requires 45 credit-hours of coursework comprised of six 7.5-credit semester-long integrated modules. The curriculum is designed so that you take one module a semester. No more worrying about what courses to take and when.</p>
       <p>Each module is the workload equivalent of two and a half individual core courses. However, with this innovative program design, the integration within each module makes you feel like you’re taking just one.</p>
       <p>Our modules provide an integrated perspective on the key capabilities needed to make management decisions in a complex global business ecosystem. We’ve designed each module to weave together business concepts. Instead of studying business in silos - with separate courses in accounting, finance, marketing, supply chain, etc. - you’ll discover the interdependent nature of these core business disciplines. In other words, you’ll study business and business management the way you experience it every day in the real world: as complex interconnected challenges. For example, how do you launch a new product; is your business ready to expand in scale and scope; how can your organization create value for the world?</p>
       <p>So, while you won’t see individual courses in our design, you can be assured that you are learning the same core concepts expected from the globally-recognized MBA degree.</p>
@@ -281,24 +282,24 @@ export const degreeData = [{
         <p><i>Note: We expect each module will require approximately 15 to 20 hours of work per week.</i></p>
         <p>Within each module you will also apply learning concepts and skills to your current or previous work, acquire capability-relevant management communications skills, advance your global team leadership acumen, and enhance your career development toolkit.<br>Each module ends with an action-learning experience and the program culminates in a comprehensive capstone project.</p>
         <p>Modules are offered during the fall (September-December), spring (January-May), and summer (May-August) semesters. Taking the modules in five consecutive semesters allows you to complete your MBA in as few as 24 months while attending part-time.</p>`,
-      prerequisites: '<div>Requires a bachelor’s degree from an accredited university.</div>',
-      startDate: 'September 2, 2020',
-      duration: '2-3 years',
-      price: '24000',
-      enroll: 'https://www.edx.org/masters/online-master-business-administration-mba-bux',
-    },
+    prerequisites: '<div>Requires a bachelor’s degree from an accredited university.</div>',
+    startDate: 'September 2, 2020',
+    duration: '2-3 years',
+    price: '24000',
+    enroll: 'https://www.edx.org/masters/online-master-business-administration-mba-bux',
   },
-  {
+},
+{
+  name: 'Master’s Degree in Analytics',
+  university: 'Georgia Tech',
+  provider: 'edX',
+  image: GeorgiaTechUniLogo,
+  url: '',
+  data: {
     name: 'Master’s Degree in Analytics',
     university: 'Georgia Tech',
     provider: 'edX',
-    image: GeorgiaTechUniLogo,
-    url: '',
-    data: {
-      name: 'Master’s Degree in Analytics',
-      university: 'Georgia Tech',
-      provider: 'edX',
-      outcome: `<div><p>The Online Master of Science Analytics degree requires 36 hours of coursework. First, 15 hours of core coursework on big data analytics, visual analytics, computing statistics, and operational research essentials. An additional 15 hours of electives allow students to choose an area of specialization in one of three tracks.</p>
+    outcome: `<div><p>The Online Master of Science Analytics degree requires 36 hours of coursework. First, 15 hours of core coursework on big data analytics, visual analytics, computing statistics, and operational research essentials. An additional 15 hours of electives allow students to choose an area of specialization in one of three tracks.</p>
       <p>
       Full curriculum breakdown:
       </p><ul><li>Introductory core – 9 hours</li>
@@ -315,7 +316,7 @@ export const degreeData = [{
       <li>Computational Data Analytics</li></ul>
       <p></p>
       <p>Like on-campus students, online learners will complete a 6 credit hour applied analytics practicum with an outside company.</p></div>`,
-      prerequisites: `<p>All OMS Analytics applicants are expected to have met the following prerequisite criteria:
+    prerequisites: `<p>All OMS Analytics applicants are expected to have met the following prerequisite criteria:
       </p><ul>
       <li>Hold an undergraduate Bachelor’s degree or equivalent from an accredited institution.</li>
       <li>Possess knowledge of at least one of the following college-level courses or equivalent:
@@ -324,7 +325,7 @@ export const degreeData = [{
       <li>Computer Programming in Python at the level of CS1301</li>
       <li>Calculus and basic linear algebra</li></ul>
       </li><li>Applicants who are selected for admission will be conditionally admitted into the degree program and must pass the two OMS Analytics foundational courses with a grade of B or better to be fully admitted. Students do not need to take these foundational courses before registering for other core or elective courses. However, we recommend students take at least one foundational course per semester in which they are enrolled until they are fully admitted to Georgia Tech.`,
-      full_description: `<div><p>The Georgia Tech Online Master of Science in Analytics (OMS Analytics) is a multidisciplinary degree in collaboration with Georgia Tech’s College of Engineering, College of Computing, and Scheller College of Business.</p>
+    full_description: `<div><p>The Georgia Tech Online Master of Science in Analytics (OMS Analytics) is a multidisciplinary degree in collaboration with Georgia Tech’s College of Engineering, College of Computing, and Scheller College of Business.</p>
       <p>The top 10-ranked master’s program challenges students with the same curriculum and rigor as its on-campus Analytics counterpart, all with tuition for under $10,000 USD. </p>
       
       <p>This fully online program enables students to take a deep dive into analytics and choose from 3 specialized tracks.
@@ -337,56 +338,63 @@ export const degreeData = [{
       <p>OMS Analytics equips you with the insight and multidisciplinary skills needed to succeed in today’s analytics world while offering you the prestige, affordability, flexibility you want in a master’s degree.</p>
       
       <p>Gain a credential that commands attention with the Georgia Tech Online Master of Science in Analytics.</p></div>`,
-      price: '9900',
-      startDate: 'Fall 2020',
-      duration: '1 year',
-      enroll: 'https://www.edx.org/masters/online-master-science-analytics-georgia-tech',
-    },
+    price: '9900',
+    startDate: 'Fall 2020',
+    duration: '1 year',
+    enroll: 'https://www.edx.org/masters/online-master-science-analytics-georgia-tech',
   },
+},
+{
+  name: 'altMBA w/Seth Godin',
+  university: 'Seth Godin',
+  image: ALTMBA,
+  provider: 'altMba',
+  url: '/altmba',
+},
 ];
 
 export const freeCourses = [{
-    name: "CS50's Introduction to Computer Science",
-    university: 'Harvard University',
-    provider: 'edX',
-    image: HarvardUniLogo,
-    url: '/edX/da1b2400-322b-459b-97b0-0c557f05d017',
-  },
-  {
-    name: 'Natural Language Processing',
-    university: 'IIT Kharagpur',
-    provider: 'Swayaam',
-    image: IITKLogo,
-    url: '/Swayam/5de9cf0d148eabdc6d615322',
-  },
-  {
-    name: 'Intro to JavaScript',
-    university: 'Udacity',
-    provider: 'Udacity',
-    image: UdacityLogo,
-    url: '/Udacity/5d59f2a947f269dbdfb65ccb',
-  },
+  name: "CS50's Introduction to Computer Science",
+  university: 'Harvard University',
+  provider: 'edX',
+  image: HarvardUniLogo,
+  url: '/edX/da1b2400-322b-459b-97b0-0c557f05d017',
+},
+{
+  name: 'Natural Language Processing',
+  university: 'IIT Kharagpur',
+  provider: 'Swayaam',
+  image: IITKLogo,
+  url: '/Swayam/5de9cf0d148eabdc6d615322',
+},
+{
+  name: 'Intro to JavaScript',
+  university: 'Udacity',
+  provider: 'Udacity',
+  image: UdacityLogo,
+  url: '/Udacity/5d59f2a947f269dbdfb65ccb',
+},
 ];
 
 export const trendingData = [{
-    name: 'Microsoft Excel - Excel from Beginner to Advanced',
-    university: 'Kyle Pew',
-    provider: 'Udemy',
-    image: UdemyLogo,
-    url: '/Udemy/5e14133c2c642af9af541f24',
-  },
-  {
-    name: 'Learning Python for Data Analysis and Visualization',
-    university: 'Jose Portilla',
-    provider: 'Udemy',
-    image: UdemyLogo,
-    url: '/Udemy/5e140e9f2c642af9af537704',
-  },
-  {
-    name: 'Data to Insight: An Introduction to Data Analysis and Visualisation',
-    university: 'The University of Aukland, New Zealand',
-    provider: 'FuturLearn',
-    image: UniAuklandLogo,
-    url: '/FutureLearn/a005a3aa-74bc-4c98-9df1-8291e83d4585',
-  },
+  name: 'Microsoft Excel - Excel from Beginner to Advanced',
+  university: 'Kyle Pew',
+  provider: 'Udemy',
+  image: UdemyLogo,
+  url: '/Udemy/5e14133c2c642af9af541f24',
+},
+{
+  name: 'Learning Python for Data Analysis and Visualization',
+  university: 'Jose Portilla',
+  provider: 'Udemy',
+  image: UdemyLogo,
+  url: '/Udemy/5e140e9f2c642af9af537704',
+},
+{
+  name: 'Data to Insight: An Introduction to Data Analysis and Visualisation',
+  university: 'The University of Aukland, New Zealand',
+  provider: 'FuturLearn',
+  image: UniAuklandLogo,
+  url: '/FutureLearn/a005a3aa-74bc-4c98-9df1-8291e83d4585',
+},
 ];
