@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { Popup } from 'jso';
+// import { Popup } from 'jso';
 import {
   register,
   signin,
@@ -329,8 +329,8 @@ const Login = () => {
                       {!state.loading ? (
                         'Login'
                       ) : (
-                        <CircularProgress color="white" size={'1.5rem'} />
-                      )}
+                          <CircularProgress color="white" size={'1.5rem'} />
+                        )}
                     </Button>
                   ) : null}
                   {loginModal.state === 1 ? (
@@ -343,8 +343,8 @@ const Login = () => {
                       {!state.loading ? (
                         'Register'
                       ) : (
-                        <CircularProgress color="white" size={'1.5rem'} />
-                      )}
+                          <CircularProgress color="white" size={'1.5rem'} />
+                        )}
                     </Button>
                   ) : null}
                 </form>

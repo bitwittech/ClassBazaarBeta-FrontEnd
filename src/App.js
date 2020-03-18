@@ -25,7 +25,7 @@ import config from './config.json';
 import { fetchUser } from './actions/ContextActions';
 import localForage from 'localforage';
 import { trackPage } from 'react-with-analytics/lib/utils';
-
+import AltMBA from './components/AltMBA'
 const theme = createMuiTheme({
   typography: {
     fontFamily: ['Poppins'],
@@ -70,6 +70,7 @@ const Root = props => {
       <Route exact path="/privacypolicy" component={PrivacyPolicy} />
       <Route exact path="/mobileauth" component={MobileAuth} />
       <Route exact path="/coursedetail" component={StaticCourseDetails} />
+      <Route exact path="/coursedetails/altmba" component={AltMBA} />
       <Route
         exact
         path="/coursedetails/:provider/:uuid"

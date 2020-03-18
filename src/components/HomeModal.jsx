@@ -223,9 +223,10 @@ const HomeModal = ({
         token: token,
         courseID: uuid,
         provider,
-        rating: value,
-        status: finished,
+
       });
+
+
       const config = {
         headers: {
           'Content-Type': 'application/json',

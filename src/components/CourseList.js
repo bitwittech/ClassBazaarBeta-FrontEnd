@@ -274,12 +274,12 @@ class CourseList extends Component {
                 {this.state.elements}
               </Infinite>
             ) : (
-              <Grid align="center">
-                <Typography color="primary" variant="h6" gutterBottom>
-                  No course found.
+                  <Grid align="center">
+                    <Typography color="primary" variant="h6" gutterBottom>
+                      No course found.
                 </Typography>
-              </Grid>
-            )}
+                  </Grid>
+                )}
           </Grid>
         </Grid>
       </Container>
