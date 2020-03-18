@@ -22,7 +22,7 @@ import UdemyLogo from './../assets/UdemyLogo.png';
 import UniAuklandLogo from './../assets/UniAuklandLogo.jpg';
 import UniNewcastleLogo from './../assets/UniNewcastleLogo.jpeg';
 import ALTMBA from './../assets/altmba.png'
-
+import LSH from './../assets/LSH.svg'
 export const subjectsData = [{
   name: 'Computer Science',
   code: 'CS',
@@ -377,11 +377,11 @@ export const freeCourses = [{
 ];
 
 export const trendingData = [{
-  name: 'Microsoft Excel - Excel from Beginner to Advanced',
-  university: 'Kyle Pew',
-  provider: 'Udemy',
-  image: UdemyLogo,
-  url: '/Udemy/5e14133c2c642af9af541f24',
+  name: 'COVID-19: Tackling the Novel Coronavirus',
+  university: 'London School of Hygiene & Tropical Medicine',
+  provider: 'FutureLearn',
+  image: LSH,
+  url: '/FutureLearn/ef9f5b46-c746-4982-a5c5-f50b03c5f849',
 },
 {
   name: 'Learning Python for Data Analysis and Visualization',
