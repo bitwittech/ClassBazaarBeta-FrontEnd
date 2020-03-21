@@ -346,7 +346,7 @@ const CourseDetails = props => {
             <Grid item xs={12} sm={9}>
               <div className="d-card">
                 <div className="cd-head">
-                  <div>
+                  <div className="cd-head-o">
                     <Typography
                       style={{ fontWeight: '600' }}
                       color="primary"
@@ -366,6 +366,12 @@ const CourseDetails = props => {
                     >
                       via {provider}
                     </Typography>
+                  </div>
+                  <div style={{ textAlign: 'right' }} className="cd-head-t">
+                    {reviewSection(
+                      Gstate.data.avg_rating,
+                      Gstate.data.num_reviews
+                    )}
                   </div>
                 </div>
                 <br />
@@ -677,7 +683,7 @@ const CourseDetails = props => {
             <Grid item xs={12} sm={9}>
               <div className="d-card">
                 <div className="cd-head">
-                  <div>
+                  <div className="cd-head-o">
                     <Typography
                       style={{ fontWeight: '600' }}
                       color="primary"
@@ -697,6 +703,12 @@ const CourseDetails = props => {
                     >
                       via {provider}
                     </Typography>
+                  </div>
+                  <div style={{ textAlign: 'right' }} className="cd-head-t">
+                    {reviewSection(
+                      Gstate.data.avg_rating,
+                      Gstate.data.num_reviews
+                    )}
                   </div>
                 </div>
                 <br />
