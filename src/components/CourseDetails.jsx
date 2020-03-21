@@ -143,13 +143,13 @@ const CourseDetails = props => {
             fontSize="large"
           />
         ) : (
-          <TurnedInNotIcon
-            onClick={() => handleBookmark(uuid, provider)}
-            color="primary"
-            fontSize="large"
-            className="click-h"
-          />
-        )}
+            <TurnedInNotIcon
+              onClick={() => handleBookmark(uuid, provider)}
+              color="primary"
+              fontSize="large"
+              className="click-h"
+            />
+          )}
 
         <Typography
           variant="caption"
@@ -228,8 +228,8 @@ const CourseDetails = props => {
               </div>
               <div>
                 {Gstate.summaryData.price === '' ||
-                Gstate.summaryData.price === null ||
-                Gstate.summaryData.price === 0
+                  Gstate.summaryData.price === null ||
+                  Gstate.summaryData.price === 0
                   ? 'Provider subscription required'
                   : formatPrice(Gstate.summaryData.price)}
               </div>
@@ -253,10 +253,10 @@ const CourseDetails = props => {
                   window.open(
                     provider === 'Swayam'
                       ? Gstate.summaryData &&
-                          Gstate.summaryData.url.replace(
-                            'www.swayam.com',
-                            'www.swayam.gov.in'
-                          )
+                      Gstate.summaryData.url.replace(
+                        'www.swayam.com',
+                        'www.swayam.gov.in'
+                      )
                       : Gstate.summaryData && Gstate.summaryData.url,
                     '_blank'
                   );
@@ -329,8 +329,8 @@ const CourseDetails = props => {
           </Grid>
         ))
       ) : (
-        <p>No reviews for this course</p>
-      )}
+            <p>No reviews for this course</p>
+          )}
     </>
   );
 
@@ -1455,8 +1455,8 @@ const CourseDetails = props => {
           <CircularProgress color="primary" />
         </Grid>
       ) : (
-        renderSwitch(provider)
-      )}
+          renderSwitch(provider)
+        )}
       <div className="footer" style={{ background: '#FAFAFA' }}>
         <div style={{ marginTop: '20px' }}>
           <img className="footer-logo" src={Logo} alt="classbazarLogo" />
