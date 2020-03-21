@@ -1,7 +1,7 @@
 import { Container, Grid, Typography } from '@material-ui/core';
 import React, { useContext, useEffect, useState } from 'react';
 import ReactHtmlParser, { convertNodeToElement } from 'react-html-parser';
-
+import ReactGA from 'react-ga';
 import AppBar from './AppBar';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import Box from '@material-ui/core/Box';
@@ -48,6 +48,7 @@ const CourseDetails = props => {
     loading: true,
     popUp: false,
     reviews: [],
+    q: '',
     rloading: true,
   });
   console.log(Gstate);
@@ -1429,9 +1430,36 @@ const CourseDetails = props => {
     });
   };
 
+  const searchChange = (e) => {
+    setState({
+      ...Gstate,
+      q: e.target.value
+    })
+  }
+  const onKeyPress = (e) => {
+    if (e.key === 'Enter') {
+
+      trackEvent('search', 'onSearch', 'Search_homepage');
+      ReactGA.ga('send', 'pageview', `/homepage?q=${Gstate.q}`);
+      props.history.push({
+        pathname: '/listing',
+        state: {
+          query: Gstate.q,
+        },
+      });
+      e.preventDefault();
+    }
+  }
+
   return (
     <>
-      <AppBar noHome={true} />
+      <AppBar
+        home={true}
+        noHome={true}
+        isSearchIncluded={true}
+        onChange={searchChange}
+        onKeyPress={onKeyPress}
+      />
       <MobileTopbar onlySearch={true} />
       <HomeModal
         openState={Gstate.popUp}
