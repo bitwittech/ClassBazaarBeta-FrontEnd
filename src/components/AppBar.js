@@ -186,7 +186,10 @@ function TopBar(props) {
               <div className="no-mobile">
                 <div className="s-bar">
                   <div className="s-a">
-                    <div> <SearchIcon className="mt-2 pd" /></div>
+                    <div>
+                      {' '}
+                      <SearchIcon className="mt-2 pd" />
+                    </div>
                   </div>
                   <div className="s-b">
                     <DebounceInput
@@ -196,12 +199,12 @@ function TopBar(props) {
                       onChange={props.onChange}
                       onKeyPress={props.onKeyPress}
                       placeholder="Search for a course"
+                      value={props.initialSearchValue}
                     />
                   </div>
                 </div>
               </div>
             )}
-
           </div>
           <div>
             {' '}
@@ -260,15 +263,15 @@ function TopBar(props) {
                   </Button>
                 </>
               ) : (
-                  <Button
-                    onClick={() => handleLogout()}
-                    variant="outlined"
-                    color="primary"
-                    className="signup-btn"
-                  >
-                    Logout
-                  </Button>
-                )}
+                <Button
+                  onClick={() => handleLogout()}
+                  variant="outlined"
+                  color="primary"
+                  className="signup-btn"
+                >
+                  Logout
+                </Button>
+              )}
             </div>
           </div>
         </div>
