@@ -1,7 +1,7 @@
 import { Container, Grid, Typography } from '@material-ui/core';
 import React, { useContext, useEffect, useState } from 'react';
 import ReactHtmlParser, { convertNodeToElement } from 'react-html-parser';
-
+import ReactGA from 'react-ga';
 import AppBar from './AppBar';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import Box from '@material-ui/core/Box';
@@ -48,6 +48,7 @@ const CourseDetails = props => {
     loading: true,
     popUp: false,
     reviews: [],
+    q: '',
     rloading: true,
   });
   console.log(Gstate);
@@ -143,13 +144,13 @@ const CourseDetails = props => {
             fontSize="large"
           />
         ) : (
-          <TurnedInNotIcon
-            onClick={() => handleBookmark(uuid, provider)}
-            color="primary"
-            fontSize="large"
-            className="click-h"
-          />
-        )}
+            <TurnedInNotIcon
+              onClick={() => handleBookmark(uuid, provider)}
+              color="primary"
+              fontSize="large"
+              className="click-h"
+            />
+          )}
 
         <Typography
           variant="caption"
@@ -228,8 +229,8 @@ const CourseDetails = props => {
               </div>
               <div>
                 {Gstate.summaryData.price === '' ||
-                Gstate.summaryData.price === null ||
-                Gstate.summaryData.price === 0
+                  Gstate.summaryData.price === null ||
+                  Gstate.summaryData.price === 0
                   ? 'Provider subscription required'
                   : formatPrice(Gstate.summaryData.price)}
               </div>
@@ -253,10 +254,10 @@ const CourseDetails = props => {
                   window.open(
                     provider === 'Swayam'
                       ? Gstate.summaryData &&
-                          Gstate.summaryData.url.replace(
-                            'www.swayam.com',
-                            'www.swayam.gov.in'
-                          )
+                      Gstate.summaryData.url.replace(
+                        'www.swayam.com',
+                        'www.swayam.gov.in'
+                      )
                       : Gstate.summaryData && Gstate.summaryData.url,
                     '_blank'
                   );
@@ -329,8 +330,8 @@ const CourseDetails = props => {
           </Grid>
         ))
       ) : (
-        <p>No reviews for this course</p>
-      )}
+            <p>No reviews for this course</p>
+          )}
     </>
   );
 
@@ -345,7 +346,7 @@ const CourseDetails = props => {
             <Grid item xs={12} sm={9}>
               <div className="d-card">
                 <div className="cd-head">
-                  <div>
+                  <div className="cd-head-o">
                     <Typography
                       style={{ fontWeight: '600' }}
                       color="primary"
@@ -365,6 +366,12 @@ const CourseDetails = props => {
                     >
                       via {provider}
                     </Typography>
+                  </div>
+                  <div style={{ textAlign: 'right' }} className="cd-head-t">
+                    {reviewSection(
+                      Gstate.data.avg_rating,
+                      Gstate.data.num_reviews
+                    )}
                   </div>
                 </div>
                 <br />
@@ -676,7 +683,7 @@ const CourseDetails = props => {
             <Grid item xs={12} sm={9}>
               <div className="d-card">
                 <div className="cd-head">
-                  <div>
+                  <div className="cd-head-o">
                     <Typography
                       style={{ fontWeight: '600' }}
                       color="primary"
@@ -696,6 +703,12 @@ const CourseDetails = props => {
                     >
                       via {provider}
                     </Typography>
+                  </div>
+                  <div style={{ textAlign: 'right' }} className="cd-head-t">
+                    {reviewSection(
+                      Gstate.data.avg_rating,
+                      Gstate.data.num_reviews
+                    )}
                   </div>
                 </div>
                 <br />
@@ -1429,9 +1442,36 @@ const CourseDetails = props => {
     });
   };
 
+  const searchChange = (e) => {
+    setState({
+      ...Gstate,
+      q: e.target.value
+    })
+  }
+  const onKeyPress = (e) => {
+    if (e.key === 'Enter') {
+
+      trackEvent('search', 'onSearch', 'Search_homepage');
+      ReactGA.ga('send', 'pageview', `/homepage?q=${Gstate.q}`);
+      props.history.push({
+        pathname: '/listing',
+        state: {
+          query: Gstate.q,
+        },
+      });
+      e.preventDefault();
+    }
+  }
+
   return (
     <>
-      <AppBar noHome={true} />
+      <AppBar
+        home={true}
+        noHome={true}
+        isSearchIncluded={true}
+        onChange={searchChange}
+        onKeyPress={onKeyPress}
+      />
       <MobileTopbar onlySearch={true} />
       <HomeModal
         openState={Gstate.popUp}
@@ -1455,8 +1495,8 @@ const CourseDetails = props => {
           <CircularProgress color="primary" />
         </Grid>
       ) : (
-        renderSwitch(provider)
-      )}
+          renderSwitch(provider)
+        )}
       <div className="footer" style={{ background: '#FAFAFA' }}>
         <div style={{ marginTop: '20px' }}>
           <img className="footer-logo" src={Logo} alt="classbazarLogo" />

@@ -275,6 +275,10 @@ a:hover {
 }
 
 @media (max-width: 800px) {
+  .review-image{
+    width: 50px;
+    height:50px;
+  }
   .MuiInputBase-input {
     color: #000 !important;
   }
@@ -1175,15 +1179,40 @@ body {
 }
 
 .s-bar {
-  margin-top: 10px;
-  position: relative;
-  border: #FFA502 1px solid;
+
+margin-top: 10px;
+
+border: #FFA502 1px solid;
+
+align-items: center;
+width: 230px;
+display: flex;
+border-radius: 4px;
+padding: 1px;
+padding-left: 10px;
+}
+input:focus, textarea:focus, select:focus{
+  outline: none;
+}
+.s-a{
+  width: 10%;
+  display: flex;
   justify-content: center;
   align-items: center;
-  width: 230px;
-  display: flex;
-  border-radius: 4px;
-  padding: 1px;
+}
+.pd{
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.s-b{
+  width: 70%;
+}
+.s-input{
+  border: none;
+  border: none;
+  color: #7C7C7C;
+  font-size: 1em;
+  width: 190px;
 }
 
 .f-flex {

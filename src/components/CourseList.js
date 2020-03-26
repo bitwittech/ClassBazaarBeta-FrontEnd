@@ -106,6 +106,8 @@ class CourseList extends Component {
     return fetch(url)
       .then(response => response.json())
       .then(json => {
+        console.log(url)
+        console.log("YOYO")
         console.log('FETCH', json);
         this.props.handleCourseNumber(json.total);
         this.props.udpateOffsets(json.offset);

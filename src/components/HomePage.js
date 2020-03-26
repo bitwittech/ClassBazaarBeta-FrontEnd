@@ -159,13 +159,13 @@ class HomePage extends Component {
       }&feeFilter=${feeFilter}&startDateFilter=${startDateFilter}&providerOffset=${this.state.providerOffset.join(
         '::'
       )}`;
-    console.log(url);
+    console.log("FETCH URL", url);
     this.setState({ queryURL: url }, () => {
       const state = this.state;
       store.removeItem('filterData').then(s => {
         store.setItem('filterData', this.state).then(d => {
           console.log('Data updated in localstorage');
-          console.log(d);
+
         });
       });
     });

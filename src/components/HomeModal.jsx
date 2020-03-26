@@ -75,14 +75,59 @@ const HomeModal = ({
   const classes = useStyles();
   const { state, dispatch } = useContext(Store);
 
-  const handleSubmit = () => {
-    console.log('Home modal');
-    trackEvent('Homepage PopUp', 'click', 'submit');
-  };
+
 
   //Home made modal
-  const HomeMessage = () => (
-    <div>
+  const HomeMessage = () => {
+    const [data, setData] = useState({
+      email: '',
+      name: ''
+    });
+
+    const handleChange = (e) => {
+      setData({
+        ...data,
+        [e.target.name]: e.target.value
+      })
+    }
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+      console.log(data)
+      trackEvent('Homepage PopUp', 'click', 'submit');
+
+      try {
+        const res = await axios.post('https://api.classbazaar.in/api/stayupdated', data)
+
+        console.log("RES", res)
+
+        if (res.status === 200) {
+          dispatch({
+            type: "ALERT",
+            payload: {
+              varient: 'success',
+              message: `Added successfully.`,
+            },
+          });
+        }
+
+        setData({
+          ...data,
+          name: '',
+          email: ''
+        })
+        handlePopupClose();
+      } catch (error) {
+        dispatch({
+          type: "ALERT",
+          payload: {
+            varient: 'error',
+            message: `Couldn't add you to the list`,
+          },
+        });
+      }
+
+    };
+    return <div>
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
@@ -133,6 +178,8 @@ const HomeModal = ({
                   type="text"
                   className="text-field w-l"
                   placeholder="Enter your Name"
+                  onChange={handleChange}
+                  value={data.name}
                 />
                 <Typography
                   style={{
@@ -148,9 +195,11 @@ const HomeModal = ({
                 </Typography>
                 <input
                   name="email"
-                  type="text"
+                  type="email"
                   className="text-field w-l"
                   placeholder="Enter your Email ID"
+                  onChange={handleChange}
+                  value={data.email}
                 />
                 <div style={{ marginTop: '20px' }}>
                   <Button
@@ -169,7 +218,7 @@ const HomeModal = ({
         </Fade>
       </Modal>
     </div>
-  );
+  };
   const ReviewModalTypo = text => (
     <Typography
       style={{

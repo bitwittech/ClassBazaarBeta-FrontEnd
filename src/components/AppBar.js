@@ -185,18 +185,21 @@ function TopBar(props) {
             {props.isSearchIncluded && (
               <div className="no-mobile">
                 <div className="s-bar">
-                  <div className="f-flex">
+                  <div className="s-a">
                     <div>
-                      <SearchIcon className="mt-2" />
+                      {' '}
+                      <SearchIcon className="mt-2 pd" />
                     </div>
                   </div>
-                  <div>
+                  <div className="s-b">
                     <DebounceInput
                       minLength={2}
-                      className="s-in"
+                      className="s-input"
                       debounceTimeout={500}
                       onChange={props.onChange}
+                      onKeyPress={props.onKeyPress}
                       placeholder="Search for a course"
+                      value={props.initialSearchValue}
                     />
                   </div>
                 </div>
