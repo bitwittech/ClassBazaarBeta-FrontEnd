@@ -43,8 +43,8 @@ const providerData = [
 ];
 let { API, API_LOCAL } = config;
 
-// const debug = process.env.NODE_ENV === 'production' ? false : true;
-// if (debug) API = API_LOCAL;
+const debug = process.env.NODE_ENV === 'production' ? false : true;
+if (debug) API = API_LOCAL;
 
 const styles = {
   dashboardLink: {
@@ -154,18 +154,12 @@ class HomePage extends Component {
     ]);
     const subjects = encodeURIComponent(this.state.subjects);
 
-    var url = `${API}/api/v2/courses/?q=${query}&filter=${parsedFilter}&subjects=${subjects}&provider=${
-      this.state.providers
-      }&feeFilter=${feeFilter}&startDateFilter=${startDateFilter}&providerOffset=${this.state.providerOffset.join(
-        '::'
-      )}`;
-    console.log("FETCH URL", url);
+    var url = `${API}/api/v2/courses/?q=${query}&filter=${parsedFilter}&subjects=${subjects}&provider=${this.state.providers}&feeFilter=${feeFilter}&startDateFilter=${startDateFilter}`;
     this.setState({ queryURL: url }, () => {
       const state = this.state;
       store.removeItem('filterData').then(s => {
         store.setItem('filterData', this.state).then(d => {
           console.log('Data updated in localstorage');
-
         });
       });
     });

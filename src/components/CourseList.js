@@ -88,6 +88,7 @@ class CourseList extends Component {
       isFirstLoad: true,
       isFirstResultFetched: false,
       isFromLoadMore: false,
+      offset: [0, 0, 0, 0, 0, 0, 0],
     };
     this.getUniversityForUdemy = this.getUniversityForUdemy.bind(this);
     this.buildElements = this.buildElements.bind(this);
@@ -97,20 +98,21 @@ class CourseList extends Component {
   }
 
   async buildElements() {
+    console.log('buildElements called');
     const page = this.state.page;
     const range = JSON.stringify([
       page * this.state.perPage,
       (page + 1) * this.state.perPage,
     ]);
-    var url = this.state.queryURL + `&range=${range}`;
+    var url =
+      this.state.queryURL + `&providerOffset=${this.state.offset.join('::')}`;
+    console.log(url);
     return fetch(url)
       .then(response => response.json())
       .then(json => {
-        console.log(url)
-        console.log("YOYO")
-        console.log('FETCH', json);
+        console.log(url);
         this.props.handleCourseNumber(json.total);
-        this.props.udpateOffsets(json.offset);
+        this.setState({ offset: json.offset });
         return json.data.map(obj => {
           let uni = obj.university;
           if (obj.provider === 'Udemy') {
@@ -276,12 +278,12 @@ class CourseList extends Component {
                 {this.state.elements}
               </Infinite>
             ) : (
-                  <Grid align="center">
-                    <Typography color="primary" variant="h6" gutterBottom>
-                      No course found.
+              <Grid align="center">
+                <Typography color="primary" variant="h6" gutterBottom>
+                  No course found.
                 </Typography>
-                  </Grid>
-                )}
+              </Grid>
+            )}
           </Grid>
         </Grid>
       </Container>
