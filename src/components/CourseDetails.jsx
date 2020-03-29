@@ -144,13 +144,13 @@ const CourseDetails = props => {
             fontSize="large"
           />
         ) : (
-            <TurnedInNotIcon
-              onClick={() => handleBookmark(uuid, provider)}
-              color="primary"
-              fontSize="large"
-              className="click-h"
-            />
-          )}
+          <TurnedInNotIcon
+            onClick={() => handleBookmark(uuid, provider)}
+            color="primary"
+            fontSize="large"
+            className="click-h"
+          />
+        )}
 
         <Typography
           variant="caption"
@@ -229,10 +229,12 @@ const CourseDetails = props => {
               </div>
               <div>
                 {Gstate.summaryData.price === '' ||
-                  Gstate.summaryData.price === null ||
-                  Gstate.summaryData.price === 0
+                Gstate.summaryData.price === null ||
+                Gstate.summaryData.price === 0
                   ? 'Provider subscription required'
-                  : formatPrice(Gstate.summaryData.price)}
+                  : formatPrice(Gstate.summaryData.price).toLocaleString(
+                      'en-IN'
+                    )}
               </div>
             </div>
 
@@ -254,10 +256,10 @@ const CourseDetails = props => {
                   window.open(
                     provider === 'Swayam'
                       ? Gstate.summaryData &&
-                      Gstate.summaryData.url.replace(
-                        'www.swayam.com',
-                        'www.swayam.gov.in'
-                      )
+                          Gstate.summaryData.url.replace(
+                            'www.swayam.com',
+                            'www.swayam.gov.in'
+                          )
                       : Gstate.summaryData && Gstate.summaryData.url,
                     '_blank'
                   );
@@ -330,8 +332,8 @@ const CourseDetails = props => {
           </Grid>
         ))
       ) : (
-            <p>No reviews for this course</p>
-          )}
+        <p>No reviews for this course</p>
+      )}
     </>
   );
 
@@ -353,7 +355,7 @@ const CourseDetails = props => {
                       variant="subtitle2"
                       gutterBottom
                     >
-                      {Gstate.data.owners[0].name}
+                      {Gstate.data && Gstate.data.owners[0].name}
                     </Typography>
                     <Typography variant="h6" gutterBottom>
                       {Gstate.data.title}
@@ -1442,15 +1444,14 @@ const CourseDetails = props => {
     });
   };
 
-  const searchChange = (e) => {
+  const searchChange = e => {
     setState({
       ...Gstate,
-      q: e.target.value
-    })
-  }
-  const onKeyPress = (e) => {
+      q: e.target.value,
+    });
+  };
+  const onKeyPress = e => {
     if (e.key === 'Enter') {
-
       trackEvent('search', 'onSearch', 'Search_homepage');
       ReactGA.ga('send', 'pageview', `/homepage?q=${Gstate.q}`);
       props.history.push({
@@ -1461,7 +1462,7 @@ const CourseDetails = props => {
       });
       e.preventDefault();
     }
-  }
+  };
 
   return (
     <>
@@ -1495,8 +1496,8 @@ const CourseDetails = props => {
           <CircularProgress color="primary" />
         </Grid>
       ) : (
-          renderSwitch(provider)
-        )}
+        renderSwitch(provider)
+      )}
       <div className="footer" style={{ background: '#FAFAFA' }}>
         <div style={{ marginTop: '20px' }}>
           <img className="footer-logo" src={Logo} alt="classbazarLogo" />

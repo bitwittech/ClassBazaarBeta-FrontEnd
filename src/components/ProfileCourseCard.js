@@ -217,7 +217,7 @@ const ProfileCourseCard = withRouter(({ history, ...data }) => {
               </Grid>
               <Grid item sm={4}>
                 <i class="fas fa-rupee-sign" style={{ color: '#FFA502' }} />
-                {` ${formatPrice(data.price)}`}
+                {` ${formatPrice(data.price).toLocaleString('en-IN')}`}
               </Grid>
             </Grid>
           </div>
