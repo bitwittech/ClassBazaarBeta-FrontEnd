@@ -52,7 +52,7 @@ const CourseDetails = props => {
     q: '',
     rloading: true,
   });
-  console.log(Gstate);
+  console.log('PRICE', Gstate);
   const { state, dispatch } = useContext(Store);
   const handleBookmark = (uuid, provider, name) => {
     trackEvent(
