@@ -244,12 +244,12 @@ class LandingPage extends Component {
       filter: '',
       subjects: subjectsData.slice(0, 3),
       showMoreButtonText: 'Show More',
-      popUp: sessionStorage.getItem('cbpop'),
+      popUp: localStorage.getItem('cbpop'),
       nsEmail: '',
       user: null,
     };
     console.log('landing', this.state);
-    console.log('onrender', sessionStorage.getItem('cbpop'));
+    console.log('onrender', localStorage.getItem('cbpop'));
     this.handlePageChange = this.handlePageChange.bind(this);
     this.onFilterChange = this.onFilterChange.bind(this);
     this.onSearchChange = this.onSearchChange.bind(this);
@@ -269,9 +269,9 @@ class LandingPage extends Component {
       this.setState({ user: res });
     });
     // window.addEventListener('scroll', this.handleScroll);
-    if (sessionStorage.getItem('cbpop') == null) {
+    if (localStorage.getItem('cbpop') == null) {
       this.timeouts = setTimeout(() => {
-        if (sessionStorage.getItem('cbpop') !== false)
+        if (localStorage.getItem('cbpop') !== false)
           this.setState({ popUp: true });
       }, 5000);
     }
@@ -286,8 +286,8 @@ class LandingPage extends Component {
     const wrappedElement = document.getElementById('topTrendingCourses');
     if (this.isBottom(wrappedElement)) {
       document.removeEventListener('scroll', this.trackScrolling);
-      console.log(sessionStorage.getItem('cbpop'));
-      if (!sessionStorage.getItem('cbpop')) this.setState({ popUp: true });
+      console.log(localStorage.getItem('cbpop'));
+      if (!localStorage.getItem('cbpop')) this.setState({ popUp: true });
     }
   };
 
@@ -533,14 +533,14 @@ class LandingPage extends Component {
     trackEvent('Homepage PopUp', 'click', 'side-close');
     this.setState({ popUp: false });
     console.log('CLOSED');
-    sessionStorage.setItem('cbpop', false);
+    localStorage.setItem('cbpop', false);
   };
 
   render() {
     const { classes, theme } = this.props;
     console.log('popup', this.state.popUp);
     console.log('LANDING', this.state);
-    console.log('session', sessionStorage.getItem('cbpop'));
+    console.log('session', localStorage.getItem('cbpop'));
     return (
       <>
         <Grid style={{ margin: 0, width: '100%' }}>
