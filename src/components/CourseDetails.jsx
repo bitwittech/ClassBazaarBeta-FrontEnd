@@ -245,8 +245,10 @@ const CourseDetails = props => {
                 <img src={Rupee} alt="cb-rupee" /> &nbsp;
               </div>
               <div>
-                {Gstate.summaryData.price === '' ||
-                Gstate.summaryData.price === null
+                {provider === 'Swayam'
+                  ? 'Free'
+                  : Gstate.summaryData.price === '' ||
+                    Gstate.summaryData.price === null
                   ? 'Provider subscription required'
                   : Gstate.summaryData.price === 0
                   ? 'Free'
