@@ -197,6 +197,7 @@ class CourseList extends Component {
           urlChanged: true,
           isFirstResultFetched: false,
           isFirstLoad: true,
+          offset: [0, 0, 0, 0, 0, 0, 0],
         },
         () => {
           this.handleInfiniteLoad();
