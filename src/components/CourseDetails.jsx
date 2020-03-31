@@ -2,6 +2,7 @@ import { Container, Grid, Typography } from '@material-ui/core';
 import React, { useContext, useEffect, useState } from 'react';
 import ReactHtmlParser, { convertNodeToElement } from 'react-html-parser';
 import ReactGA from 'react-ga';
+import MovieIcon from '@material-ui/icons/Movie';
 import AppBar from './AppBar';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import Box from '@material-ui/core/Box';
@@ -51,7 +52,7 @@ const CourseDetails = props => {
     q: '',
     rloading: true,
   });
-  console.log(Gstate);
+  console.log('PRICE', Gstate);
   const { state, dispatch } = useContext(Store);
   const handleBookmark = (uuid, provider, name) => {
     trackEvent(
@@ -112,21 +113,32 @@ const CourseDetails = props => {
       console.log(url, uuid);
       const res = await fetch(url);
       const data = await res.json();
-
+      console.log('Course Details', url, data);
       const reviews = await axios.post(
         'https://api.classbazaar.in/api/review/course',
         body,
         config
       );
 
-      setState({
-        ...Gstate,
-        data: data.data,
-        summaryData: data.summaryData,
-        loading: false,
-        reviews: reviews.data.data,
-        rloading: false,
-      });
+      if (provider === 'upGrad' || provider === 'FutureLearn') {
+        setState({
+          ...Gstate,
+          data: data.summaryData,
+          summaryData: data.summaryData,
+          loading: false,
+          reviews: reviews.data.data,
+          rloading: false,
+        });
+      } else {
+        setState({
+          ...Gstate,
+          data: data.data,
+          summaryData: data.summaryData,
+          loading: false,
+          reviews: reviews.data.data,
+          rloading: false,
+        });
+      }
     };
 
     getCourseDetails();
@@ -144,13 +156,13 @@ const CourseDetails = props => {
             fontSize="large"
           />
         ) : (
-            <TurnedInNotIcon
-              onClick={() => handleBookmark(uuid, provider)}
-              color="primary"
-              fontSize="large"
-              className="click-h"
-            />
-          )}
+          <TurnedInNotIcon
+            onClick={() => handleBookmark(uuid, provider)}
+            color="primary"
+            fontSize="large"
+            className="click-h"
+          />
+        )}
 
         <Typography
           variant="caption"
@@ -208,7 +220,12 @@ const CourseDetails = props => {
           <div className="d-flex">
             <div style={{ display: 'flex' }}>
               <div>
-                <QueryBuilderIcon color="primary" /> &nbsp;
+                {provider === 'Udemy' ? (
+                  <MovieIcon color="primary" />
+                ) : (
+                  <QueryBuilderIcon color="primary" />
+                )}
+                &nbsp;
               </div>
               <div>{Gstate.summaryData.commitment}</div>
             </div>
@@ -228,11 +245,16 @@ const CourseDetails = props => {
                 <img src={Rupee} alt="cb-rupee" /> &nbsp;
               </div>
               <div>
-                {Gstate.summaryData.price === '' ||
-                  Gstate.summaryData.price === null ||
-                  Gstate.summaryData.price === 0
+                {provider === 'Swayam'
+                  ? 'Free'
+                  : Gstate.summaryData.price === '' ||
+                    Gstate.summaryData.price === null
                   ? 'Provider subscription required'
-                  : formatPrice(Gstate.summaryData.price)}
+                  : Gstate.summaryData.price === 0
+                  ? 'Free'
+                  : formatPrice(Gstate.summaryData.price).toLocaleString(
+                      'en-IN'
+                    )}
               </div>
             </div>
 
@@ -254,10 +276,10 @@ const CourseDetails = props => {
                   window.open(
                     provider === 'Swayam'
                       ? Gstate.summaryData &&
-                      Gstate.summaryData.url.replace(
-                        'www.swayam.com',
-                        'www.swayam.gov.in'
-                      )
+                          Gstate.summaryData.url.replace(
+                            'www.swayam.com',
+                            'www.swayam.gov.in'
+                          )
                       : Gstate.summaryData && Gstate.summaryData.url,
                     '_blank'
                   );
@@ -330,8 +352,8 @@ const CourseDetails = props => {
           </Grid>
         ))
       ) : (
-            <p>No reviews for this course</p>
-          )}
+        <p>No reviews for this course</p>
+      )}
     </>
   );
 
@@ -353,10 +375,10 @@ const CourseDetails = props => {
                       variant="subtitle2"
                       gutterBottom
                     >
-                      {Gstate.data.owners[0].name}
+                      {Gstate.summaryData.university}
                     </Typography>
                     <Typography variant="h6" gutterBottom>
-                      {Gstate.data.title}
+                      {Gstate.summaryData.title}
                     </Typography>
                     <Typography
                       variant="caption"
@@ -366,12 +388,6 @@ const CourseDetails = props => {
                     >
                       via {provider}
                     </Typography>
-                  </div>
-                  <div style={{ textAlign: 'right' }} className="cd-head-t">
-                    {reviewSection(
-                      Gstate.data.avg_rating,
-                      Gstate.data.num_reviews
-                    )}
                   </div>
                 </div>
                 <br />
@@ -529,10 +545,10 @@ const CourseDetails = props => {
                         className="u-uni"
                         gutterBottom
                       >
-                        {Gstate.summaryData.university}
+                        {Gstate.summaryData.instructors[0]}
                       </Typography>
                       <Typography variant="h6" className="u-title" gutterBottom>
-                        {Gstate.data.title}
+                        {Gstate.summaryData.title}
                       </Typography>
                       <Typography
                         variant="caption"
@@ -690,10 +706,10 @@ const CourseDetails = props => {
                       variant="subtitle2"
                       gutterBottom
                     >
-                      {Gstate.data.organisation.name}
+                      {Gstate.data.university}
                     </Typography>
                     <Typography variant="h6" gutterBottom>
-                      {Gstate.data.name}
+                      {Gstate.data.title}
                     </Typography>
                     <Typography
                       variant="caption"
@@ -713,22 +729,28 @@ const CourseDetails = props => {
                 </div>
                 <br />
                 <div className="cd-cont">
-                  <Typography
-                    style={{ fontWeight: '600', fontSize: '22px' }}
-                    variant="subtitle2"
-                    gutterBottom
-                  >
-                    Course Overview
-                  </Typography>
-                  <Typography
-                    style={{ fontSize: '16px', fontWeight: '300' }}
-                    variant="body1"
-                    gutterBottom
-                  >
-                    {ReactHtmlParser(Gstate.data.description)}
-                  </Typography>
+                  {Gstate.data.description && (
+                    <>
+                      {' '}
+                      <Typography
+                        style={{ fontWeight: '600', fontSize: '22px' }}
+                        variant="subtitle2"
+                        gutterBottom
+                      >
+                        Course Overview
+                      </Typography>
+                      <Typography
+                        style={{ fontSize: '16px', fontWeight: '300' }}
+                        variant="body1"
+                        gutterBottom
+                      >
+                        {ReactHtmlParser(Gstate.data.description)}
+                      </Typography>{' '}
+                    </>
+                  )}
+
                   <br />
-                  {Gstate.data.learning_outcomes !== '' && (
+                  {Gstate.data.learning_outcomes && (
                     <>
                       <Typography
                         style={{ fontWeight: '600', fontSize: '22px' }}
@@ -748,7 +770,7 @@ const CourseDetails = props => {
                       </Typography>{' '}
                     </>
                   )}
-                  {Gstate.data.requirements !== '' && (
+                  {Gstate.data.requirements && (
                     <>
                       <Typography
                         style={{ fontWeight: '600', fontSize: '22px' }}
@@ -769,7 +791,7 @@ const CourseDetails = props => {
 
                   <br />
 
-                  {Gstate.data.educator !== '' && (
+                  {Gstate.data.educator && (
                     <>
                       <Typography
                         style={{ fontWeight: '600', fontSize: '22px' }}
@@ -1442,15 +1464,14 @@ const CourseDetails = props => {
     });
   };
 
-  const searchChange = (e) => {
+  const searchChange = e => {
     setState({
       ...Gstate,
-      q: e.target.value
-    })
-  }
-  const onKeyPress = (e) => {
+      q: e.target.value,
+    });
+  };
+  const onKeyPress = e => {
     if (e.key === 'Enter') {
-
       trackEvent('search', 'onSearch', 'Search_homepage');
       ReactGA.ga('send', 'pageview', `/homepage?q=${Gstate.q}`);
       props.history.push({
@@ -1461,7 +1482,7 @@ const CourseDetails = props => {
       });
       e.preventDefault();
     }
-  }
+  };
 
   return (
     <>
@@ -1495,8 +1516,8 @@ const CourseDetails = props => {
           <CircularProgress color="primary" />
         </Grid>
       ) : (
-          renderSwitch(provider)
-        )}
+        renderSwitch(provider)
+      )}
       <div className="footer" style={{ background: '#FAFAFA' }}>
         <div style={{ marginTop: '20px' }}>
           <img className="footer-logo" src={Logo} alt="classbazarLogo" />

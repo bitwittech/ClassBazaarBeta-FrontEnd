@@ -9,6 +9,7 @@ import MoneyIcon from '@material-ui/icons/AttachMoney';
 import Paper from '@material-ui/core/Paper';
 import ReactHtmlParser from 'react-html-parser';
 import Store from '../store/Context';
+import MovieIcon from '@material-ui/icons/Movie';
 import TurnedInIcon from '@material-ui/icons/TurnedIn';
 import TurnedInNotIcon from '@material-ui/icons/TurnedInNot';
 import Typography from '@material-ui/core/Typography';
@@ -202,22 +203,32 @@ const ProfileCourseCard = withRouter(({ history, ...data }) => {
           >
             <Grid container align="left" spacing={2}>
               <Grid item sm={4}>
-                <WatchLaterIcon
-                  fontSize="small"
-                  className="mb"
-                  color="primary"
-                />{' '}
-                {formatDuration(data.duration)}
+                {data.provider === 'Udemy' ? (
+                  <MovieIcon fontSize="small" className="mb" color="primary" />
+                ) : (
+                  <WatchLaterIcon
+                    fontSize="small"
+                    className="mb"
+                    color="primary"
+                  />
+                )}
+
+                <span className="fs-m"> {formatDuration(data.duration)}</span>
               </Grid>
               <Grid item sm={4}>
                 <CalendarIcon fontSize="small" className="mb" color="primary" />{' '}
-                {data.startingOn == null
-                  ? 'Flexible'
-                  : formatDate(new Date(data.startingOn), 'MMMM d, yyyy')}{' '}
+                <span className="fs-m">
+                  {' '}
+                  {data.startingOn == null
+                    ? 'Flexible'
+                    : formatDate(new Date(data.startingOn), 'MMMM d, yyyy')}
+                </span>
               </Grid>
               <Grid item sm={4}>
                 <i class="fas fa-rupee-sign" style={{ color: '#FFA502' }} />
-                {` ${formatPrice(data.price)}`}
+                <span className="fs-m">{` ${formatPrice(
+                  data.price
+                ).toLocaleString('en-IN')}`}</span>
               </Grid>
             </Grid>
           </div>

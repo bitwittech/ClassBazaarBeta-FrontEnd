@@ -154,7 +154,7 @@ class HomePage extends Component {
     ]);
     const subjects = encodeURIComponent(this.state.subjects);
 
-    var url = `${API}/api/v2/courses/?q=${query}&filter=${parsedFilter}&subjects=${subjects}&provider=${this.state.providers}&feeFilter=${feeFilter}&startDateFilter=${startDateFilter}`;
+    var url = `https://api.classbazaar.in/api/v2/courses/?q=${query}&filter=${parsedFilter}&subjects=${subjects}&provider=${this.state.providers}&feeFilter=${feeFilter}&startDateFilter=${startDateFilter}`;
     this.setState({ queryURL: url }, () => {
       const state = this.state;
       store.removeItem('filterData').then(s => {

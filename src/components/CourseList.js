@@ -110,7 +110,7 @@ class CourseList extends Component {
     return fetch(url)
       .then(response => response.json())
       .then(json => {
-        console.log(url);
+        console.log('COURSE LIST', json);
         this.props.handleCourseNumber(json.total);
         this.setState({ offset: json.offset });
         return json.data.map(obj => {

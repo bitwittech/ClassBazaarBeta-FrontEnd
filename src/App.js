@@ -25,7 +25,7 @@ import config from './config.json';
 import { fetchUser } from './actions/ContextActions';
 import localForage from 'localforage';
 import { trackPage } from 'react-with-analytics/lib/utils';
-import AltMBA from './components/AltMBA'
+import AltMBA from './components/AltMBA';
 const theme = createMuiTheme({
   typography: {
     fontFamily: ['Poppins'],
@@ -56,6 +56,7 @@ initAnalytics(GA_TRACKING_ID, { debug: debug });
 ReactGA.initialize(GA_TRACKING_ID, {
   debug: true,
 });
+
 const Root = props => {
   useEffect(() => {
     props.history.listen(location => trackPage(location.pathname));

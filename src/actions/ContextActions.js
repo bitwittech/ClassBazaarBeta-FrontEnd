@@ -8,7 +8,7 @@ import {
   REMOVE_TOKEN,
   UPDATE_BOOKMARK,
 } from '../store/Types';
-
+import ReactGA from 'react-ga';
 import config from '../config.json';
 import {
   store
@@ -252,7 +252,9 @@ export const signin = async (data, dispatch) => {
         console.log('LOGIN', response);
         if (response.statusCode === 200) {
           store.setItem('user', response.successResponse.user);
-
+          ReactGA.set({
+            userId: response.successResponse.user.id
+          });
           dispatch({
             type: LOGIN,
             payload: {
@@ -308,7 +310,10 @@ export const fetchUser = async (token, dispatch) => {
   console.log('hey');
   try {
     const res = await client.retrieveUserUsingJWT(token);
-
+    console.log("USER", res.successResponse.user.id)
+    ReactGA.set({
+      userId: res.successResponse.user.id
+    });
     dispatch({
       type: FETCH_USER,
       payload: res.successResponse.user,

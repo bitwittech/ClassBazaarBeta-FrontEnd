@@ -22,20 +22,22 @@ body {
   font-size: calc(10px + 1vmin);
   color: white;
 }
-.flex-1{
+
+.flex-1 {
   display: flex;
   flex-direction: row;
   width: 100%;
 
 }
 
-.d-1{
+.d-1 {
   width: 50%;
 }
 
-.d-2{
+.d-2 {
   width: 50%;
 }
+
 .hover:hover {
   cursor: pointer;
 }
@@ -128,6 +130,11 @@ body {
 
 .login-btn:hover {
   background: rgb(255, 187, 62) !important;
+}
+
+.fs-m {
+  font-size: 0.9em;
+
 }
 
 a:hover {
@@ -275,10 +282,11 @@ a:hover {
 }
 
 @media (max-width: 800px) {
-  .review-image{
+  .review-image {
     width: 50px;
-    height:50px;
+    height: 50px;
   }
+
   .MuiInputBase-input {
     color: #000 !important;
   }
@@ -1180,34 +1188,41 @@ body {
 
 .s-bar {
 
-margin-top: 10px;
+  margin-top: 10px;
 
-border: #FFA502 1px solid;
+  border: #FFA502 1px solid;
 
-align-items: center;
-width: 230px;
-display: flex;
-border-radius: 4px;
-padding: 1px;
-padding-left: 10px;
+  align-items: center;
+  width: 230px;
+  display: flex;
+  border-radius: 4px;
+  padding: 1px;
+  padding-left: 10px;
 }
-input:focus, textarea:focus, select:focus{
+
+input:focus,
+textarea:focus,
+select:focus {
   outline: none;
 }
-.s-a{
+
+.s-a {
   width: 10%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.pd{
+
+.pd {
   padding-left: 10px;
   padding-right: 10px;
 }
-.s-b{
+
+.s-b {
   width: 70%;
 }
-.s-input{
+
+.s-input {
   border: none;
   border: none;
   color: #7C7C7C;
