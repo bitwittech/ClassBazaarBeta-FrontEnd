@@ -2,7 +2,6 @@ import { Container, Grid, Typography } from '@material-ui/core';
 import React, { useContext, useEffect, useState } from 'react';
 import ReactHtmlParser, { convertNodeToElement } from 'react-html-parser';
 import ReactGA from 'react-ga';
-import MovieIcon from '@material-ui/icons/Movie';
 import AppBar from './AppBar';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import Box from '@material-ui/core/Box';
@@ -52,7 +51,7 @@ const CourseDetails = props => {
     q: '',
     rloading: true,
   });
-  console.log('PRICE', Gstate);
+  console.log(Gstate);
   const { state, dispatch } = useContext(Store);
   const handleBookmark = (uuid, provider, name) => {
     trackEvent(
@@ -113,32 +112,21 @@ const CourseDetails = props => {
       console.log(url, uuid);
       const res = await fetch(url);
       const data = await res.json();
-      console.log('Course Details', url, data);
+
       const reviews = await axios.post(
         'https://api.classbazaar.in/api/review/course',
         body,
         config
       );
 
-      if (provider === 'upGrad' || provider === 'FutureLearn') {
-        setState({
-          ...Gstate,
-          data: data.summaryData,
-          summaryData: data.summaryData,
-          loading: false,
-          reviews: reviews.data.data,
-          rloading: false,
-        });
-      } else {
-        setState({
-          ...Gstate,
-          data: data.data,
-          summaryData: data.summaryData,
-          loading: false,
-          reviews: reviews.data.data,
-          rloading: false,
-        });
-      }
+      setState({
+        ...Gstate,
+        data: data.data,
+        summaryData: data.summaryData,
+        loading: false,
+        reviews: reviews.data.data,
+        rloading: false,
+      });
     };
 
     getCourseDetails();
@@ -220,12 +208,7 @@ const CourseDetails = props => {
           <div className="d-flex">
             <div style={{ display: 'flex' }}>
               <div>
-                {provider === 'Udemy' ? (
-                  <MovieIcon color="primary" />
-                ) : (
-                  <QueryBuilderIcon color="primary" />
-                )}
-                &nbsp;
+                <QueryBuilderIcon color="primary" /> &nbsp;
               </div>
               <div>{Gstate.summaryData.commitment}</div>
             </div>
@@ -375,10 +358,10 @@ const CourseDetails = props => {
                       variant="subtitle2"
                       gutterBottom
                     >
-                      {Gstate.summaryData.university}
+                      {Gstate.data && Gstate.data.owners[0].name}
                     </Typography>
                     <Typography variant="h6" gutterBottom>
-                      {Gstate.summaryData.title}
+                      {Gstate.data.title}
                     </Typography>
                     <Typography
                       variant="caption"
@@ -388,6 +371,12 @@ const CourseDetails = props => {
                     >
                       via {provider}
                     </Typography>
+                  </div>
+                  <div style={{ textAlign: 'right' }} className="cd-head-t">
+                    {reviewSection(
+                      Gstate.data.avg_rating,
+                      Gstate.data.num_reviews
+                    )}
                   </div>
                 </div>
                 <br />
@@ -545,10 +534,10 @@ const CourseDetails = props => {
                         className="u-uni"
                         gutterBottom
                       >
-                        {Gstate.summaryData.instructors[0]}
+                        {Gstate.summaryData.university}
                       </Typography>
                       <Typography variant="h6" className="u-title" gutterBottom>
-                        {Gstate.summaryData.title}
+                        {Gstate.data.title}
                       </Typography>
                       <Typography
                         variant="caption"
@@ -706,10 +695,10 @@ const CourseDetails = props => {
                       variant="subtitle2"
                       gutterBottom
                     >
-                      {Gstate.data.university}
+                      {Gstate.data.organisation.name}
                     </Typography>
                     <Typography variant="h6" gutterBottom>
-                      {Gstate.data.title}
+                      {Gstate.data.name}
                     </Typography>
                     <Typography
                       variant="caption"
@@ -729,28 +718,22 @@ const CourseDetails = props => {
                 </div>
                 <br />
                 <div className="cd-cont">
-                  {Gstate.data.description && (
-                    <>
-                      {' '}
-                      <Typography
-                        style={{ fontWeight: '600', fontSize: '22px' }}
-                        variant="subtitle2"
-                        gutterBottom
-                      >
-                        Course Overview
-                      </Typography>
-                      <Typography
-                        style={{ fontSize: '16px', fontWeight: '300' }}
-                        variant="body1"
-                        gutterBottom
-                      >
-                        {ReactHtmlParser(Gstate.data.description)}
-                      </Typography>{' '}
-                    </>
-                  )}
-
+                  <Typography
+                    style={{ fontWeight: '600', fontSize: '22px' }}
+                    variant="subtitle2"
+                    gutterBottom
+                  >
+                    Course Overview
+                  </Typography>
+                  <Typography
+                    style={{ fontSize: '16px', fontWeight: '300' }}
+                    variant="body1"
+                    gutterBottom
+                  >
+                    {ReactHtmlParser(Gstate.data.description)}
+                  </Typography>
                   <br />
-                  {Gstate.data.learning_outcomes && (
+                  {Gstate.data.learning_outcomes !== '' && (
                     <>
                       <Typography
                         style={{ fontWeight: '600', fontSize: '22px' }}
@@ -770,7 +753,7 @@ const CourseDetails = props => {
                       </Typography>{' '}
                     </>
                   )}
-                  {Gstate.data.requirements && (
+                  {Gstate.data.requirements !== '' && (
                     <>
                       <Typography
                         style={{ fontWeight: '600', fontSize: '22px' }}
@@ -791,7 +774,7 @@ const CourseDetails = props => {
 
                   <br />
 
-                  {Gstate.data.educator && (
+                  {Gstate.data.educator !== '' && (
                     <>
                       <Typography
                         style={{ fontWeight: '600', fontSize: '22px' }}
