@@ -541,6 +541,7 @@ class LandingPage extends Component {
     console.log('popup', this.state.popUp);
     console.log('LANDING', this.state);
     console.log('session', localStorage.getItem('cbpop'));
+    trackEvent('Homepage', 'page', 'opened');
     return (
       <>
         <Grid style={{ margin: 0, width: '100%' }}>
@@ -551,13 +552,13 @@ class LandingPage extends Component {
             noHome={true}
           />
 
-          {this.state.popUp === true && this.state.user === null ? (
+          {/* {this.state.popUp === true && this.state.user === null ? (
             <HomeModal
               Mstate={0}
               openState={this.state.popUp}
               handlePopupClose={this.handlePopupClose}
             />
-          ) : null}
+          ) : null} */}
 
           <AuthProvider />
           <Grid
