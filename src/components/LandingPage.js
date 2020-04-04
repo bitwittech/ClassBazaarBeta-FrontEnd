@@ -265,6 +265,7 @@ class LandingPage extends Component {
   }
 
   componentDidMount() {
+    trackEvent('Homepage', 'page', 'opened');
     store.getItem('user').then(res => {
       this.setState({ user: res });
     });
@@ -541,7 +542,6 @@ class LandingPage extends Component {
     console.log('popup', this.state.popUp);
     console.log('LANDING', this.state);
     console.log('session', localStorage.getItem('cbpop'));
-    trackEvent('Homepage', 'page', 'opened');
     return (
       <>
         <Grid style={{ margin: 0, width: '100%' }}>
