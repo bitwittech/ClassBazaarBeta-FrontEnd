@@ -95,6 +95,7 @@ class CourseList extends Component {
     this.elementInfiniteLoad = this.elementInfiniteLoad.bind(this);
     this.handleInfiniteLoad = this.handleInfiniteLoad.bind(this);
     this.getElements = this.getElements.bind(this);
+    this.isInViewport = this.isInViewport.bind(this);
   }
 
   async buildElements() {
@@ -140,35 +141,45 @@ class CourseList extends Component {
 
   handleInfiniteLoad() {
     let that = this;
-
+    // if (this.isInViewport()) {
     if (this.state.isFromLoadMore || this.state.urlChanged) {
-      this.setState({
-        isInfiniteLoading: true,
-      });
-      if (this.state.urlChanged) {
-        this.setState({ elements: [] }, () => {
-          if (!this.state.isFirstLoad) {
-            setTimeout(() => {
-              this.update(that);
-            }, ADDED_NETWORK_DELAY);
+      this.setState(
+        {
+          isInfiniteLoading: true,
+        },
+        () => {
+          if (this.state.urlChanged) {
+            this.setState({ elements: [] }, () => {
+              if (!this.state.isFirstLoad) {
+                setTimeout(() => {
+                  this.update(that);
+                }, ADDED_NETWORK_DELAY);
+              } else {
+                this.update(that);
+              }
+            });
           } else {
-            this.update(that);
+            if (!this.state.isFirstLoad) {
+              setTimeout(() => {
+                this.update(that);
+              }, ADDED_NETWORK_DELAY);
+            } else {
+              trackEvent(
+                'ScrollNo_listing',
+                'scroll',
+                `${this.state.page * 10}`
+              );
+              this.update(that);
+            }
           }
-        });
-      } else {
-        if (!this.state.isFirstLoad) {
-          setTimeout(() => {
-            this.update(that);
-          }, ADDED_NETWORK_DELAY);
-        } else {
-          trackEvent('ScrollNo_listing', 'scroll', `${this.state.page * 10}`);
-          this.update(that);
         }
-      }
+      );
     }
+    // }
   }
 
   getElements(newElements) {
+    console.log(this.state.elements);
     return this.state.elements.concat(newElements);
   }
 
@@ -219,10 +230,37 @@ class CourseList extends Component {
     return checkedData;
   }
 
+  /**
+   * Check if an element is in viewport
+   *
+   * @param {number} [offset]
+   * @returns {boolean}
+   */
+  isInViewport(offset = 0) {
+    console.log(this.progressBar);
+    if (
+      !this.progressBar &&
+      this.state.isFirstLoad &&
+      !this.state.isFirstResultFetched
+    ) {
+      return true;
+    } else if (this.progressBar) {
+      const top = this.progressBar.getBoundingClientRect().top;
+      const status = top + offset >= 0 && top - offset <= window.innerHeight;
+      return status;
+    } else return false;
+  }
+
   elementInfiniteLoad() {
-    if (this.state.isFirstLoad && !this.state.isFirstResultFetched) {
+    console.log('elementInfiniteLoad called');
+    if (
+      this.state.isFirstLoad &&
+      !this.state.isFirstResultFetched
+      // this.isInViewport()
+    ) {
+      console.log('Case 1');
       return (
-        <Grid align="center">
+        <Grid align="center" ref={el => (this.progressBar = el)}>
           <Button
             variant="contained"
             color="primary"
@@ -246,8 +284,9 @@ class CourseList extends Component {
         </Grid>
       );
     } else {
+      console.log('Case 2');
       return (
-        <Grid align="center">
+        <Grid align="center" ref={el => (this.progressBar = el)}>
           <CircularProgress />
         </Grid>
       );
@@ -269,12 +308,13 @@ class CourseList extends Component {
               </Grid>
             ) : this.state.elements.length > 0 ? (
               <Infinite
-                elementHeight={161}
+                elementHeight={190}
                 useWindowAsScrollContainer={true}
-                infiniteLoadBeginEdgeOffset={200}
+                infiniteLoadBeginEdgeOffset={0}
                 onInfiniteLoad={this.handleInfiniteLoad}
                 loadingSpinnerDelegate={this.elementInfiniteLoad()}
                 isInfiniteLoading={this.state.isInfiniteLoading}
+                // timeScrollStateLastsForAfterUserScrolls={1500}
               >
                 {this.state.elements}
               </Infinite>
