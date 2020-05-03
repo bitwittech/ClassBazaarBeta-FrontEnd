@@ -1,18 +1,20 @@
 import A from './../assets/A.png';
+import ALTMBA from './../assets/altmba.png';
 import ATTLogo from './../assets/ATTLogo.png';
 import B from './../assets/B.png';
 import BostonUniLogo from './../assets/BostonUniLogo.png';
 import CS from './../assets/CS.png';
 import DA from './../assets/DA.png';
 import DEV from './../assets/DEV.png';
-import NC from '../assets/NC.png';
 import GeorgiaTechUniLogo from './../assets/GeorgiaTechUniLogo.png';
 import HL from './../assets/HL.png';
 import HarvardUniLogo from './../assets/HarvardUniLogo.png';
 import IIITBLogo from './../assets/IIITBLogo.jpg';
 import IITKLogo from './../assets/IITKLogo.jpg';
+import LSH from './../assets/LSH.svg';
 import M from './../assets/M.png';
 import MicaLogo from './../assets/MicaLogo.jpg';
+import NC from '../assets/NC.png';
 import O from './../assets/O.png';
 import PMPInstLogo from './../assets/PMPInstLogo.jpg';
 import SENG from './../assets/SENG.png';
@@ -21,9 +23,8 @@ import UdacityLogo from './../assets/UdacityLogo.png';
 import UdemyLogo from './../assets/UdemyLogo.png';
 import UniAuklandLogo from './../assets/UniAuklandLogo.jpg';
 import UniNewcastleLogo from './../assets/UniNewcastleLogo.jpeg';
-import ALTMBA from './../assets/altmba.png'
-import LSH from './../assets/LSH.svg'
-export const subjectsData = [{
+export const subjectsData = [
+  {
     name: 'Computer Science',
     code: 'CS',
     content: '',
@@ -85,7 +86,8 @@ export const subjectsData = [{
   },
 ];
 
-export const degreeData = [{
+export const degreeData = [
+  {
     name: 'Master of Science in Machine Learning & AI',
     university: 'Liverpool John Moores University and IIIT, Bangalore',
     image: IIITBLogo,
@@ -124,7 +126,8 @@ export const degreeData = [{
       startDate: '',
       duration: '3 years',
       price: '',
-      enroll: 'https://www.udacity.com/georgia-tech'
+      enroll:
+        'https://click.linksynergy.com/deeplink?id=aEDzMt9EP*4&mid=42801&murl=https://www.futurelearn.com/degrees/university-of-newcastle-australia/bachelor-of-arts',
     },
   },
   {
@@ -282,11 +285,13 @@ export const degreeData = [{
         <p><i>Note: We expect each module will require approximately 15 to 20 hours of work per week.</i></p>
         <p>Within each module you will also apply learning concepts and skills to your current or previous work, acquire capability-relevant management communications skills, advance your global team leadership acumen, and enhance your career development toolkit.<br>Each module ends with an action-learning experience and the program culminates in a comprehensive capstone project.</p>
         <p>Modules are offered during the fall (September-December), spring (January-May), and summer (May-August) semesters. Taking the modules in five consecutive semesters allows you to complete your MBA in as few as 24 months while attending part-time.</p>`,
-      prerequisites: '<div>Requires a bachelor’s degree from an accredited university.</div>',
+      prerequisites:
+        '<div>Requires a bachelor’s degree from an accredited university.</div>',
       startDate: 'September 2, 2020',
       duration: '2-3 years',
       price: '24000',
-      enroll: 'https://www.edx.org/masters/online-master-business-administration-mba-bux',
+      enroll:
+        'https://www.edx.org/masters/online-master-business-administration-mba-bux',
     },
   },
   {
@@ -341,7 +346,8 @@ export const degreeData = [{
       price: '9900',
       startDate: 'Fall 2020',
       duration: '1 year',
-      enroll: 'https://www.edx.org/masters/online-master-science-analytics-georgia-tech',
+      enroll:
+        'https://www.edx.org/masters/online-master-science-analytics-georgia-tech',
     },
   },
   {
@@ -353,7 +359,8 @@ export const degreeData = [{
   },
 ];
 
-export const freeCourses = [{
+export const freeCourses = [
+  {
     name: "CS50's Introduction to Computer Science",
     university: 'Harvard University',
     provider: 'edX',
@@ -376,7 +383,8 @@ export const freeCourses = [{
   },
 ];
 
-export const trendingData = [{
+export const trendingData = [
+  {
     name: 'COVID-19: Tackling the Novel Coronavirus',
     university: 'London School of Hygiene & Tropical Medicine',
     provider: 'FutureLearn',
