@@ -43,13 +43,8 @@ const theme = createMuiTheme({
     textSecondary: {
       main: '#DCDCDC',
     },
-    // text: {
-    //   primary: "#fff",
-    // }
-    // error: will use the default color
   },
 });
-
 const GA_TRACKING_ID = 'UA-154109881-1';
 const debug = process.env.NODE_ENV === 'production' ? false : true;
 initAnalytics(GA_TRACKING_ID, { debug: debug });

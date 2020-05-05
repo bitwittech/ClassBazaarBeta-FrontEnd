@@ -291,7 +291,112 @@ const CourseDetails = props => {
         </div>
       </>
     );
+  const courseraSummary = () => (
+    <>
+      <div
+        style={{
+          background: '#fff',
+          padding: '20px',
+          paddingLeft: '40px',
+        }}
+        className="cd-card"
+      >
+        <Typography
+          style={{ fontWeight: '600', fontSize: '22px' }}
+          variant="subtitle2"
+          color="primary"
+          gutterBottom
+        >
+          At a Glance
+        </Typography>
+        <div className="d-flex">
+          <div style={{ display: 'flex' }}>
+            <div>
+              <QueryBuilderIcon color="primary" /> &nbsp;
+            </div>
+            {/* <div>{Gstate.summaryData.commitment}</div> */}
+            <div>2</div>
+          </div>
 
+          <div style={{ display: 'flex', marginTop: '15px' }}>
+            <div>
+              <DateRangeIcon color="primary" /> &nbsp;
+            </div>
+            {/* <div>{` Starts on ${formatDate(
+              new Date(Gstate.summaryData.start_date),
+              'MMMM d'
+            )}`}</div> */}
+            <div>starts on date</div>
+          </div>
+
+          <div style={{ display: 'flex', marginTop: '15px' }}>
+            <div>
+              <img src={Rupee} alt="cb-rupee" /> &nbsp;
+            </div>
+            <div>
+              {/* {provider === 'Swayam'
+                ? 'Free'
+                : Gstate.summaryData.price === '' ||
+                  Gstate.summaryData.price === null
+                ? 'Provider subscription required'
+                : Gstate.summaryData.price === 0
+                ? 'Free'
+                : formatPrice(Gstate.summaryData.price).toLocaleString('en-IN')} */}
+              200
+            </div>
+          </div>
+
+          <div class="pr-pad" style={{ display: 'flex', marginTop: '15px' }}>
+            <div>
+              <ListAltIcon color="primary" /> &nbsp;
+            </div>
+            {/* <div>{Gstate.summaryData.provider}</div> */}
+            <div>Coursera</div>
+          </div>
+
+          <div style={{ marginTop: '20px' }}>
+            <button
+              onClick={() => {
+                trackEvent(
+                  'Enroll Now',
+                  'click',
+                  `${provider}|${Gstate.data.title}`
+                );
+                window.open(
+                  provider === 'Swayam'
+                    ? Gstate.summaryData &&
+                        Gstate.summaryData.url.replace(
+                          'www.swayam.com',
+                          'www.swayam.gov.in'
+                        )
+                    : Gstate.summaryData && Gstate.summaryData.url,
+                  '_blank'
+                );
+              }}
+              className="enroll-btn"
+            >
+              <div style={{ display: 'flex', flexDirection: 'row' }}>
+                <div
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    fontWeight: '600',
+                  }}
+                >
+                  <div>Enroll Now &nbsp;</div>
+                </div>
+                <div>
+                  <ArrowForwardIcon
+                    style={{ fontSize: '22px', marginTop: '2px' }}
+                  />
+                </div>
+              </div>
+            </button>
+          </div>
+        </div>
+      </div>
+    </>
+  );
   const reviews = () => (
     <>
       {Gstate.rlaoding ? (
@@ -313,7 +418,7 @@ const CourseDetails = props => {
                   <img
                     className="review-image"
                     src="https://www.sketchengine.eu/wp-content/plugins/all-in-one-seo-pack/images/default-user-image.png"
-                    alt="user-image"
+                    alt="user"
                   />
                 </Box>
               </Grid>
@@ -339,6 +444,166 @@ const CourseDetails = props => {
       )}
     </>
   );
+
+  const coursera = () =>
+    Gstate.data && (
+      <div maxwidth="lg" className="ead-sec">
+        <div className="cd-container">
+          <Grid container spacing={3} direction="row-reverse">
+            <Grid item xs={12} sm={3}>
+              {courseraSummary()}
+            </Grid>
+            <Grid item xs={12} sm={9}>
+              <div className="d-card">
+                <div className="cd-head">
+                  <div className="cd-head-o">
+                    <Typography
+                      style={{ fontWeight: '600' }}
+                      color="primary"
+                      variant="subtitle2"
+                      gutterBottom
+                    >
+                      {/* {Gstate.data && Gstate.data.owners[0].name} */}
+                      Title
+                    </Typography>
+                    <Typography variant="h6" gutterBottom>
+                      {/* {Gstate.data.title} */}
+                      Title2
+                    </Typography>
+                    <Typography
+                      variant="caption"
+                      display="block"
+                      className="provider"
+                      gutterBottom
+                    >
+                      via Coursera
+                    </Typography>
+                  </div>
+                  <div style={{ textAlign: 'right' }} className="cd-head-t">
+                    {/* {reviewSection(
+                      Gstate.data.avg_rating,
+                      Gstate.data.num_reviews
+                    )} */}
+                  </div>
+                </div>
+                <br />
+                <div className="cd-cont">
+                  <Typography
+                    style={{ fontWeight: '600', fontSize: '22px' }}
+                    variant="subtitle2"
+                    gutterBottom
+                  >
+                    Course Overview
+                  </Typography>
+                  <Typography
+                    style={{ fontSize: '16px', fontWeight: '300' }}
+                    variant="body1"
+                    gutterBottom
+                  >
+                    {/* {ReactHtmlParser(Gstate.data.full_description, {
+                      transform: node => {
+                        if (node.name === 'h2' || node.name === 'h3') {
+                          // console.log({ node });
+                          return <Box>{node.children[0].children[0].data}</Box>;
+                        }
+                        if (node.name === 'br') {
+                          return null;
+                        }
+                        if (node.name === 'strong') {
+                          console.log({ node });
+                          return <Box>{node.children[0].data}</Box>;
+                        }
+                      },
+                    })} */}
+                    Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                    Inventore officia porro libero dicta id molestias, optio
+                    ipsum assumenda dolorum dignissimos non suscipit animi
+                    quaerat, ad blanditiis quia culpa nemo ducimus?
+                  </Typography>
+                  <br />
+                  <Typography
+                    style={{ fontWeight: '600', fontSize: '22px' }}
+                    variant="subtitle2"
+                    gutterBottom
+                  >
+                    Syllabus
+                  </Typography>
+                  <Typography
+                    style={{ fontSize: '16px', fontWeight: '300' }}
+                    variant="body1"
+                    gutterBottom
+                  >
+                    <p>week1 - topic name(Time to complete)</p>
+                    <p className="mt-n">Topic description</p>
+                  </Typography>
+                  <br />
+                  <Typography
+                    style={{ fontWeight: '600', fontSize: '22px' }}
+                    variant="subtitle2"
+                    gutterBottom
+                  >
+                    Students Enrolled:{' '}
+                    {/* {this.Gstate.closestRun.staff.map((obj, index) => (
+                          <span key={index} style={{ fontWeight: '300' }}>
+                            {obj.given_name}
+                          </span>
+                        ))} */}
+                    3,450
+                  </Typography>
+                  <Typography
+                    style={{ fontWeight: '600', fontSize: '22px' }}
+                    variant="subtitle2"
+                    gutterBottom
+                  >
+                    Professor:{' '}
+                    {/* {this.Gstate.closestRun.staff.map((obj, index) => (
+                          <span key={index} style={{ fontWeight: '300' }}>
+                            {obj.given_name}
+                          </span>
+                        ))} */}
+                    name
+                  </Typography>
+
+                  <Typography
+                    style={{ fontWeight: '600', fontSize: '22px' }}
+                    variant="subtitle2"
+                    gutterBottom
+                  >
+                    Reviews
+                  </Typography>
+                  <div>
+                    <button
+                      onClick={() => {
+                        setState({ ...Gstate, popUp: !Gstate.popUp });
+                      }}
+                      className="enroll-btn"
+                    >
+                      <div style={{ display: 'flex', flexDirection: 'row' }}>
+                        <div
+                          style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            fontWeight: '600',
+                          }}
+                        >
+                          <div>Write Review &nbsp;</div>
+                        </div>
+                        <div>
+                          <RateReviewIcon
+                            style={{ fontSize: '22px', marginTop: '2px' }}
+                          />
+                        </div>
+                      </div>
+                    </button>
+                  </div>
+                  {reviews()}
+                </div>
+              </div>
+            </Grid>
+          </Grid>
+        </div>
+      </div>
+    );
 
   const edX = () =>
     Gstate.data && (
@@ -1434,6 +1699,8 @@ const CourseDetails = props => {
         return udacity();
       case 'Swayam':
         return swayam();
+      case 'Coursera':
+        return coursera();
       default:
         return <h1>Coming Soon</h1>;
     }

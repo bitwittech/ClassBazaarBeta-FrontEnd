@@ -22,12 +22,13 @@ body {
   font-size: calc(10px + 1vmin);
   color: white;
 }
-
+.mt-n {
+  margin-top: -17px;
+}
 .flex-1 {
   display: flex;
   flex-direction: row;
   width: 100%;
-
 }
 
 .d-1 {
@@ -134,7 +135,6 @@ body {
 
 .fs-m {
   font-size: 0.9em;
-
 }
 
 a:hover {
@@ -174,7 +174,7 @@ a:hover {
 }
 
 .bg-change {
-  background: #FAFAFA;
+  background: #fafafa;
 }
 
 .home-modal {
@@ -217,9 +217,7 @@ a:hover {
   margin-top: 50px !important;
 }
 
-
 .appbar-flex {
-
   height: 60px;
   width: 100%;
   align-items: center;
@@ -232,7 +230,6 @@ a:hover {
   justify-content: space-between !important;
   align-items: center !important;
 }
-
 
 .color-white {
   color: white;
@@ -253,7 +250,6 @@ a:hover {
   justify-content: center;
   align-items: center;
   width: 100%;
-
 }
 
 .inner-orange {
@@ -348,7 +344,7 @@ a:hover {
   }
 
   .footer-text-m {
-    color: #3E3E3E;
+    color: #3e3e3e;
     font-size: 12px;
   }
 
@@ -408,7 +404,6 @@ a:hover {
   .home-modal-text {
     font-size: 0.8em !important;
     font-weight: 600 !important;
-
   }
 
   .home-modal-field {
@@ -441,7 +436,6 @@ a:hover {
   }
 }
 
-
 .card-uni {
   font-weight: 900 !important;
 }
@@ -468,11 +462,10 @@ a:hover {
   flex-direction: column;
   margin-bottom: 0;
   padding-bottom: 10px;
-
 }
 
 .bg-2 {
-  background: #FAFAFA !important;
+  background: #fafafa !important;
 }
 
 .footer-logo {
@@ -489,7 +482,7 @@ a:hover {
   justify-content: center;
 }
 
-.footer-links>* {
+.footer-links > * {
   padding-left: 10px;
 }
 
@@ -560,7 +553,7 @@ a {
 }
 
 body {
-  background: #FFF !important;
+  background: #fff !important;
 }
 
 .profile-img {
@@ -607,11 +600,9 @@ body {
 }
 
 .flex {
-
   display: flex;
   flex-direction: row;
 }
-
 
 .r-tgg-btn {
   margin-top: 10px;
@@ -676,8 +667,6 @@ dashboard-options-header {
   max-height: 130px;
 }
 
-
-
 .branding-div {
   text-align: center;
 }
@@ -699,14 +688,14 @@ dashboard-options-header {
 }
 
 .bgwhite {
-  background: #FAFAFA !important;
+  background: #fafafa !important;
 }
 
 .ead-sec {
   width: 100% !important;
   margin: 0 !important;
   padding: 0 !important;
-  background: #FAFAFA !important;
+  background: #fafafa !important;
   padding-bottom: 30px !important;
 }
 
@@ -762,7 +751,6 @@ dashboard-options-header {
   flex-wrap: wrap;
   flex-direction: row;
   width: 100%;
-
 }
 
 .bar-item {
@@ -776,18 +764,15 @@ dashboard-options-header {
 .card-flow {
   width: 80%;
   margin: auto;
-
 }
-
 
 .center-button {
   text-align: center !important;
   margin-bottom: 30px;
-
 }
 
 .border-right {
-  border-right: 1px #D1D1D1 solid !important;
+  border-right: 1px #d1d1d1 solid !important;
 }
 
 .d-card {
@@ -814,7 +799,7 @@ dashboard-options-header {
 }
 
 .col2 {
-  color: #FFA502;
+  color: #ffa502;
   font-weight: 500;
   font-size: 1.2em;
   text-decoration: underline;
@@ -822,7 +807,7 @@ dashboard-options-header {
   line-height: 8px;
 }
 
-@media (max-width:800px) {
+@media (max-width: 800px) {
   .mt-no {
     margin-top: -30px !important;
     margin-bottom: 10px;
@@ -866,7 +851,6 @@ dashboard-options-header {
     display: inherit !important;
   }
 
-
   .d-card {
     padding-left: 15px;
     padding: 15px;
@@ -884,15 +868,14 @@ dashboard-options-header {
     font-size: 0.8em;
   }
 
-  .d-flex>div {
+  .d-flex > div {
     margin-top: 0px !important;
     padding-right: 10px;
   }
 
-
   .cat-sub {
     font-size: 12px !important;
-    color: #7C7C7C;
+    color: #7c7c7c;
     margin-left: 5px !important;
   }
 
@@ -901,7 +884,7 @@ dashboard-options-header {
   }
 
   .sub-text-landing {
-    color: #7C7C7C;
+    color: #7c7c7c;
     margin-top: 10px !important;
     font-size: 12px !important;
     width: 90% !important;
@@ -945,7 +928,7 @@ dashboard-options-header {
 
   .bg2 {
     width: 100% !important;
-    background-color: #FAFAFA !important;
+    background-color: #fafafa !important;
   }
 
   .landing-2bar {
@@ -979,7 +962,6 @@ dashboard-options-header {
   .card-flow {
     width: 90%;
     margin: auto;
-
   }
 
   .Bookmark-profile-title {
@@ -989,12 +971,11 @@ dashboard-options-header {
   }
 
   .cont-profile {
-
     width: 90%;
     margin: auto;
     margin-top: 20px;
     margin-bottom: 25px;
-    border-bottom: 2px solid #D1D1D1;
+    border-bottom: 2px solid #d1d1d1;
     display: flex;
     justify-content: space-between;
   }
@@ -1009,7 +990,7 @@ dashboard-options-header {
   }
 
   .searchicon {
-    color: #D1D1D1;
+    color: #d1d1d1;
   }
 
   .search-icon {
@@ -1037,7 +1018,7 @@ dashboard-options-header {
     height: 75%;
     border: none;
     font-size: 1.1em;
-    color: #7C7C7C;
+    color: #7c7c7c;
     transition: 0.5s;
   }
 
@@ -1049,7 +1030,6 @@ dashboard-options-header {
 
   .filter-overlay {
     margin-top: 12px;
-
   }
 
   .hidef {
@@ -1070,15 +1050,15 @@ dashboard-options-header {
   }
 
   .ead-sec {
-    background-color: #FFF !important;
+    background-color: #fff !important;
   }
 
   .ead-bg {
-    background-color: #FAFAFA !important;
+    background-color: #fafafa !important;
   }
 
   .bgwhite {
-    background-color: #FFF !important;
+    background-color: #fff !important;
   }
 
   .cd-container {
@@ -1094,7 +1074,7 @@ dashboard-options-header {
     height: 75%;
     border: none;
     font-size: 1.1em;
-    color: #7C7C7C;
+    color: #7c7c7c;
     transition: 0.5s;
   }
 
@@ -1120,16 +1100,13 @@ dashboard-options-header {
   }
 }
 
-
 .mg {
   margin-top: 100px;
 }
 
-
 .background {
   margin-top: 50px;
 }
-
 
 @media only screen and (max-width: 600px) {
   .branding-image {
@@ -1139,7 +1116,6 @@ dashboard-options-header {
   .branding-image2 {
     max-height: 65px;
   }
-
 }
 
 .cd-container {
@@ -1147,11 +1123,11 @@ dashboard-options-header {
 }
 
 .bg-2 {
-  background: #FAFAFA !important;
+  background: #fafafa !important;
 }
 
 body {
-  background: #FFF !important;
+  background: #fff !important;
 }
 
 .LandingPage-searchIcon-505 {
@@ -1187,10 +1163,9 @@ body {
 }
 
 .s-bar {
-
   margin-top: 10px;
 
-  border: #FFA502 1px solid;
+  border: #ffa502 1px solid;
 
   align-items: center;
   width: 230px;
@@ -1225,7 +1200,7 @@ select:focus {
 .s-input {
   border: none;
   border: none;
-  color: #7C7C7C;
+  color: #7c7c7c;
   font-size: 1em;
   width: 190px;
 }
@@ -1240,7 +1215,7 @@ select:focus {
 
 .s-in {
   border: none;
-  color: #7C7C7C;
+  color: #7c7c7c;
   font-size: 1em;
 }
 
@@ -1253,7 +1228,6 @@ select:focus {
   top: -5%;
   margin-top: 10px !important;
 }
-
 
 .end-flex {
   margin-top: 10px;

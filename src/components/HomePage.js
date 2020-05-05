@@ -44,7 +44,7 @@ const providerData = [
 let { API, API_LOCAL } = config;
 
 const debug = process.env.NODE_ENV === 'production' ? false : true;
-if (debug) API = API_LOCAL;
+if (debug) API = API;
 console.log({ debug });
 
 const styles = {
