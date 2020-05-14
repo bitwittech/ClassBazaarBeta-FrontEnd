@@ -33,6 +33,7 @@ import { trackEvent } from 'react-with-analytics/lib/utils';
 import { withStyles } from '@material-ui/core/styles';
 
 const providerData = [
+  'Coursera',
   'edX',
   'FutureLearn',
   'SimpliLearn',
@@ -113,7 +114,7 @@ class HomePage extends Component {
       queryURL: '',
       mobileFilter: false,
       totalCount: null,
-      providerOffset: [0, 0, 0, 0, 0, 0, 0],
+      providerOffset: [0, 0, 0, 0, 0, 0, 0, 0],
     };
     this.getUniversityForUdemy = this.getUniversityForUdemy.bind(this);
     this.handlePageChange = this.handlePageChange.bind(this);
