@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { fade, makeStyles } from '@material-ui/core/styles';
 
 import AppBar from '@material-ui/core/AppBar';
@@ -50,7 +50,7 @@ const useStyles = makeStyles(theme => ({
     marginLeft: 0,
     borderWidth: 1,
     borderStyle: 'solid',
-    borderColor: '#FFA502',
+    borderColor: '#f15a29',
     width: '100%',
     [theme.breakpoints.up('sm')]: {
       marginLeft: theme.spacing(3),
@@ -129,6 +129,7 @@ const ImageWithRouter = withRouter(({ history, ...props }) => (
     className={props.clazzNames}
     src={props.image}
     alt="samarthLogo"
+    style={{ maxHeight: '45px', marginTop: '10px' }}
     onClick={() => {
       history.push(props.routingURL);
     }}
@@ -143,7 +144,7 @@ const IconWithRouter = withRouter(({ history, ...props }) => (
       history.push(props.routingURL);
     }}
   >
-    <ProfileIcon color="primary" />
+    <ProfileIcon color="primary"/>
   </IconButton>
 ));
 
@@ -155,69 +156,63 @@ function TopBar(props) {
     logout(dispatch);
   };
   const handleUserMobile = () => {
-    console.log(props.history);
     props.history.push('/mobileauth');
   };
 
-  console.log('search', props.initialSearchValue);
+  let shouldSwitch = true;
+  const [toggleAppBarTheme, setToggleAppBarTheme] = useState(false);
 
+  if (typeof window != 'undefined') {
+    if (window.location.pathname !== '/') {
+      shouldSwitch = false;
+    } else {
+      window.addEventListener('scroll', function(event) {
+
+        if (window.scrollY > window.innerHeight && !toggleAppBarTheme) {
+          setToggleAppBarTheme(true);
+        } else if (window.scrollY < window.innerHeight && toggleAppBarTheme) {
+          setToggleAppBarTheme(false);
+        }
+      });
+    }
+
+  }
   return (
     <AppBar
       position="static"
+      style={{ padding: '10px 10px', boxShadow: 'none' }}
       color="inherit"
-      style={{
-        background: '#FFF',
-      }}
-      className="sticky"
+      className={`sticky ${
+        !toggleAppBarTheme && shouldSwitch ? 'app-bar-transparent' : 'app-bar-colored'
+      }`}
     >
       <div className="appbar-flex">
         <div className="topbar-cont">
           <div className="no-desktop">
             <div className={props.home ? 'no-mobile' : ''}>
-              {props.noHome ? null : <MenuIcon />}
+              {props.noHome ? null : <MenuIcon/>}
             </div>
           </div>
           <div className="searchbar-div no-mobile">
+            <div>
+              {' '}
+              <ImageWithRouter
+                image={Logo}
+                routingURL={'/'}
+                clazzNames={`${classes.logo} click-h adj-i`}
+                alt="logo"
+                onClick={() => {
+                  trackEvent('HeaderIcon', 'Click', `${props.location.pathname}`);
+                }}
+              />
+            </div>
             {!props.isSearchIncluded ? (
-              <p className="color-white no-mobile">classbazaarclassbazaarcsd</p>
+              <p className="color-white no-mobile"></p>
             ) : null}
 
-            {props.isSearchIncluded && (
-              <div className="no-mobile">
-                <div className="s-bar">
-                  <div className="s-a">
-                    <div>
-                      {' '}
-                      <SearchIcon className="mt-2 pd" />
-                    </div>
-                  </div>
-                  <div className="s-b">
-                    <DebounceInput
-                      minLength={2}
-                      className="s-input"
-                      debounceTimeout={500}
-                      onChange={props.onChange}
-                      onKeyPress={props.onKeyPress}
-                      placeholder="Search for a course"
-                      value={props.initialSearchValue}
-                    />
-                  </div>
-                </div>
-              </div>
-            )}
+
           </div>
-          <div>
-            {' '}
-            <ImageWithRouter
-              image={Logo}
-              routingURL={'/'}
-              clazzNames={`${classes.logo} c-logo click-h adj-i`}
-              alt="logo"
-              onClick={() => {
-                trackEvent('HeaderIcon', 'Click', `${props.location.pathname}`);
-              }}
-            />
-          </div>
+
           <div className="end-flex">
             <div>
               {!state.isAuth ? (
@@ -226,13 +221,65 @@ function TopBar(props) {
                   className="no-desktop"
                 />
               ) : null}
-              {state.isAuth ? <IconWithRouter routingURL={'/profile'} /> : null}
+              {state.isAuth ? <IconWithRouter routingURL={'/profile'}/> : null}
               {!state.isAuth ? (
                 <>
                   <Button
                     variant="outlined"
                     color="primary"
-                    className="signup-btn no-mobile"
+                    className="signup-btn no-mobile header-links"
+                  >
+                    Home
+                  </Button>
+                  <Button
+                    variant="outlined"
+                    color="primary"
+                    className="signup-btn no-mobile header-links"
+                  >
+                    Courses
+                  </Button>
+                  <Button
+                    variant="outlined"
+                    color="primary"
+                    className="signup-btn no-mobile header-links"
+                  >
+                    About Us
+                  </Button>
+                  <Button
+                    variant="outlined"
+                    color="primary"
+                    className="signup-btn no-mobile header-links"
+                  >
+                    Contact
+                  </Button>
+                  {!props.isSearchIncluded && (
+                    <div className="no-mobile" style={{ 'display': 'inline-block' }}>
+                      <div className="s-bar">
+
+                        <div className="s-b">
+                          <DebounceInput
+                            minLength={2}
+                            className="s-input"
+                            debounceTimeout={500}
+                            onChange={props.onChange}
+                            onKeyPress={props.onKeyPress}
+                            placeholder="Search for a course"
+                            value={props.initialSearchValue}
+                          />
+                        </div>
+                        <div className="s-a">
+                          <div>
+                            {' '}
+                            <SearchIcon className="mt-2 pd"/>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                  <Button
+                    variant="outlined"
+                    color="primary"
+                    className="signup-btn no-mobile header-links"
                     onClick={() =>
                       dispatch({
                         type: LOGIN_MODAL,
@@ -259,7 +306,7 @@ function TopBar(props) {
                       });
                     }}
                   >
-                    Login
+                    LOGIN
                   </Button>
                 </>
               ) : (

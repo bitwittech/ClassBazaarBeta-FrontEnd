@@ -67,8 +67,7 @@ const styles = {
   clearAll: {
     position: 'relative',
     float: 'right',
-    color: '#ffa502',
-    bottom: -20,
+    color: '#777777',
     textDecorationLine: 'underline',
     fontSize: '1rem',
     margin: '0px 10px',
@@ -381,7 +380,7 @@ class HomePage extends Component {
           <Container maxWidth={'md'}>
             <Box className="border-right">
               <Typography
-                style={{ fontWeight: '600' }}
+                style={{ fontWeight: '600' , borderBottom: 0}}
                 variant="h6"
                 gutterBottom
               >
@@ -490,9 +489,9 @@ class HomePage extends Component {
           className={this.state.mobileFilter ? 'no-mobile mg' : 'mg'}
           maxWidth={'lg'}
         >
-          <Grid container spacing={3}>
-            <Grid className="no-mobile" item xs={12} sm={3}>
-              <Box borderRight={1} style={{ borderColor: '#DCDCDC' }}>
+          <Grid container spacing={1}>
+            <Grid className="no-mobile" item xs={12} sm={3} spacing={1}>
+              <Box borderRight={1} style={{ borderColor: '#DCDCDC', }}>
                 <Typography variant="h6" gutterBottom>
                   Filter by
                   <Box
@@ -563,7 +562,7 @@ class HomePage extends Component {
             </Grid>
             <Grid item xs={12} sm={8}>
               <Container>
-                <Typography className="no-mobile" variant="h6" gutterBottom>
+                <Typography className="no-mobile" variant="h6" style={{fontWeight: 600}} gutterBottom>
                   Top Courses
                 </Typography>
               </Container>
@@ -575,9 +574,9 @@ class HomePage extends Component {
                   marginLeft: '-25px',
                 }}
               />
-              <div className="show">
+              <div className="show" style={{color: '#777777', margin: '10px 0'}}>
                 <div>
-                  <p className="col2">{this.state.totalCount} courses</p>
+                  <p className="col2" style={{color: '#777777'}}>{this.state.totalCount} courses</p>
                 </div>
               </div>
               <CourseList

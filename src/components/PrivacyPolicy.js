@@ -41,7 +41,7 @@ const ProvacyPolicy = () => {
             The purpose of this Privacy Policy is to describe how Class Bazaar,
             LLP. (“Class Bazaar,” “us,” “we,” or “our”) collects, uses and
             shares data about you through our website{' '}
-            <a href="http://www.classbazaar.com" style={{ color: '#FFA502' }}>
+            <a href="http://www.classbazaar.com" style={{ color: '#f15a29' }}>
               http://www.classbazaar.com
             </a>
             (referred to herein as the “Site”, ”website”).
@@ -218,7 +218,7 @@ const ProvacyPolicy = () => {
             If you are a resident of European Economic Area (EEA) then you have
             certain rights with regards to your data. If you wish you exercise
             any of these rights please contact us at{' '}
-            <a style={{ color: '#FFA502' }} href="mailto:info@classbazaar.com?">
+            <a style={{ color: '#f15a29' }} href="mailto:info@classbazaar.com?">
               info@classbazaar.com
             </a>{' '}
             . We may ask you to verify your identify before we comply with any
@@ -264,7 +264,7 @@ const ProvacyPolicy = () => {
             direct marketing uses.
             <br />
             If you wish to obtain this data please contact us at &nbsp;
-            <a style={{ color: '#FFA502' }} href="mailto:info@classbazaar.com?">
+            <a style={{ color: '#f15a29' }} href="mailto:info@classbazaar.com?">
               info@classbazaar.com
             </a>
             .

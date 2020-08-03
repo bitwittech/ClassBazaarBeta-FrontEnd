@@ -52,7 +52,7 @@ const styles = {
   clearAll: {
     position: 'relative',
     float: 'right',
-    color: '#ffa502',
+    color: '#f15a29',
     bottom: -20,
     textDecorationLine: 'underline',
     fontSize: '1rem',
@@ -263,6 +263,7 @@ class CourseList extends Component {
         <Grid align="center" ref={el => (this.progressBar = el)}>
           <Button
             variant="contained"
+            className={'load-more-button-list'}
             color="primary"
             onClick={() => {
               trackEvent('Infinite Load More', 'click', 'button');
@@ -297,10 +298,10 @@ class CourseList extends Component {
     return (
       <Container
         maxWidth={'lg'}
-        style={{ paddingRight: '0' }}
+        style={{ backgroundColor: '#fff3ef', padding: '0 10px' }}
         className="c-list"
       >
-        <Grid container spacing={3}>
+        <Grid container spacing={1}>
           <Grid item xs={12} sm={12}>
             {this.state.loading ? (
               <Grid align="center">

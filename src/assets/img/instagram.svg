@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="27.5" height="27.5" viewBox="0 0 27.5 27.5">
+    <g data-name="Group 932">
+        <g data-name="Group 931">
+            <path d="M18.906 0H8.594A8.6 8.6 0 0 0 0 8.594v10.312A8.6 8.6 0 0 0 8.594 27.5h10.312a8.6 8.6 0 0 0 8.594-8.594V8.594A8.6 8.6 0 0 0 18.906 0zm6.016 18.906a6.022 6.022 0 0 1-6.016 6.016H8.594a6.022 6.022 0 0 1-6.016-6.016V8.594a6.022 6.022 0 0 1 6.016-6.016h10.312a6.022 6.022 0 0 1 6.016 6.016z" data-name="Path 396"/>
+        </g>
+    </g>
+    <g data-name="Group 934">
+        <g data-name="Group 933">
+            <path d="M6.875 0a6.875 6.875 0 1 0 6.875 6.875A6.875 6.875 0 0 0 6.875 0zm0 11.172a4.3 4.3 0 1 1 4.3-4.3 4.3 4.3 0 0 1-4.3 4.3z" data-name="Path 397" transform="translate(6.875 6.875)"/>
+        </g>
+    </g>
+    <g data-name="Group 936">
+        <g data-name="Group 935" transform="translate(20.225 5.443)">
+            <circle cx=".916" cy=".916" r=".916" data-name="Ellipse 1"/>
+        </g>
+    </g>
+</svg>

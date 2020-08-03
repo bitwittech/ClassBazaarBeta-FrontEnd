@@ -339,7 +339,7 @@ const HomeModal = ({
                 gutterBottom
               >
                 <span style={{ color: '#000' }}>Add a review for </span>
-                <span style={{ color: '#FFA502' }}> {course}</span>
+                <span style={{ color: '#f15a29' }}> {course}</span>
               </Typography>
               <form onSubmit={handleSubmit}>
                 <Grid>

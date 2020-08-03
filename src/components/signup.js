@@ -148,8 +148,6 @@ class SignUp extends Component {
 
   render() {
     const { classes } = this.props;
-    console.log('Rendering Signup');
-    console.log(this.state);
     return (
       <Dialog
         PaperProps={{

@@ -35,7 +35,7 @@ const styles = makeStyles(theme => ({
   paper: {
     padding: theme.spacing(2),
     textAlign: 'center',
-    background: '#FFA502',
+    background: '#f15a29',
     marginTop: '10px',
     height: 'auto',
     color: '#FFF',

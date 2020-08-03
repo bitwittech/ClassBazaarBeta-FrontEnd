@@ -6,7 +6,8 @@ import {
   trendingData,
 } from '../utils/data';
 import { fade, makeStyles } from '@material-ui/core/styles';
-
+import LOGO_PNG from '../assets/img/logo.png';
+import SEARCH_THEMED from '../assets/img/search-themed.svg';
 import AuthProvider from './authProvider';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
@@ -34,6 +35,9 @@ import { store } from '../App';
 import { trackEvent } from 'react-with-analytics/lib/utils';
 import { withRouter } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
+import { EarnADegreeComponent } from './earn-a-degree/earn-a-degree-component';
+import { TrendingCoursesComponent } from './trending-cources/trending-cources';
+import { LearnForFreeComponent } from './learn-for-free/learn-for-free';
 
 const styles = theme => ({
   dashboardLink: {
@@ -76,8 +80,8 @@ const styles = theme => ({
     justifyContent: 'center',
   },
   inputRoot: {
-    color: '#FFA502',
-    border: '2px solid #FFA502',
+    color: '#f15a29',
+    border: '2px solid #f15a29',
     borderRadius: '6px',
   },
   inputInput: {
@@ -126,7 +130,7 @@ const Search = withRouter(({ history, ...data }) => {
   return (
     <div className={classes.search}>
       <div className={classes.searchIcon}>
-        <SearchIcon color="primary" />
+        <SearchIcon color="primary"/>
       </div>
       <InputBase
         placeholder="Search for a course"
@@ -175,7 +179,7 @@ const ShowMore = withRouter(({ history, ...data }) => {
         <div style={{ alignSelf: 'center' }}>Show More</div>
         <div className="flex">
           <div style={{ alignSelf: 'center', height: '25px' }}>
-            <img className="smicon no-desktop" src={Smicon} alt="sm-icon" />
+            <img className="smicon no-desktop" src={Smicon} alt="sm-icon"/>
           </div>
         </div>
       </div>
@@ -280,7 +284,7 @@ class LandingPage extends Component {
   }
 
   isBottom(el) {
-    return el.getBoundingClientRect().bottom <= window.innerHeight;
+    return el && el.getBoundingClientRect().bottom <= window.innerHeight;
   }
 
   trackScrolling = () => {
@@ -350,19 +354,19 @@ class LandingPage extends Component {
                         return trackEvent(
                           'Degree_course',
                           'click',
-                          `${degree.name}`
+                          `${degree.name}`,
                         );
                       case 'trending':
                         return trackEvent(
                           'Trending_course',
                           'click',
-                          `${degree.name}`
+                          `${degree.name}`,
                         );
                       case 'free':
                         return trackEvent(
                           'Free_course',
                           'click',
-                          `${degree.name}`
+                          `${degree.name}`,
                         );
                     }
                   }}
@@ -438,19 +442,19 @@ class LandingPage extends Component {
                         return trackEvent(
                           'Degree_course',
                           'click',
-                          `${degree.name}`
+                          `${degree.name}`,
                         );
                       case 'trending':
                         return trackEvent(
                           'Trending_course',
                           'click',
-                          `${degree.name}`
+                          `${degree.name}`,
                         );
                       case 'free':
                         return trackEvent(
                           'Free_course',
                           'click',
-                          `${degree.name}`
+                          `${degree.name}`,
                         );
                     }
                   }}
@@ -560,224 +564,101 @@ class LandingPage extends Component {
             />
           ) : null} */}
 
-          <AuthProvider />
-          <Grid
-            container
-            spacing={0}
-            direction="column"
-            alignItems="center"
-            justify="center"
-            style={{
-              minHeight: '60vh',
-              background: 'url(' + SearchBG1 + ')',
-              backgroundSize: 'cover',
-            }}
-          >
-            <Grid className="main-search" item xs={12}>
-              <Search
-                getQuery={this.getQuery}
-                onSearchChange={this.onSearchChange}
-                classes={classes}
-                props={this.props}
-                routingURL={'/listing'}
-              />
-            </Grid>
-          </Grid>
-          <Grid
-            container
-            spacing={0}
-            direction="column"
-            alignItems="center"
-            style={{
-              minHeight: '20vh',
-              margin: 0,
-              width: '100%',
-              background: '#fff',
-            }}
-          >
-            <Grid item xs={12} style={{ paddingTop: 30 }}>
-              <Typography
-                variant="h5"
-                color="primary"
-                style={{ fontWeight: '600' }}
-                component="h2"
-              >
-                Browse by Subject
-              </Typography>
-            </Grid>
-            <Grid item xs={12}>
-              <Typography
-                className="sub-text-landing"
-                variant="body2"
-                component="p"
-                align="center"
-              >
-                Discover best online courses from top universities around the
-                world like MIT, Stanford, Harvard, IIT and many more
-              </Typography>
-            </Grid>
-            <Container maxWidth={'md'}>
-              <Grid container className="course-options" justify="center">
-                {this.state.subjects.map(subject => {
-                  return (
-                    <SubjectCard
-                      name={subject.name}
-                      image={subject.image}
-                      classes={classes}
-                      routingURL={'/listing'}
-                      onClick={() => {
-                        trackEvent(
-                          'Subject Selected',
-                          'click',
-                          `${subject.name}`
-                        );
-                      }}
+          <AuthProvider/>
+          <div className={'landing-page-wrapper'}>
+            <section className="main-banner posiition-relative d-flex align-items-center justify-content-center">
+              <div className="overlay"/>
+              <div className="banner-content text-center position-relative text-white">
+                <img src={LOGO_PNG} className="img-fluid logo2"/>
+                <div className="h5 mt-2" style={{ fontSize: '18px' }}>
+                  We believe in
+                </div>
+                <div className="h1" style={{ fontSize: '38px' }}>
+                  Passion for Learning
+                </div>
+                <form>
+                  <div className="main-searchbar-wrapper">
+                    <input
+                      type="text"
+                      name="search"
+                      className="form-control-plaintext"
+                      placeholder="Search for a Course"
                     />
-                  );
-                })}
-              </Grid>
-            </Container>
-            <Grid item xs={12} style={{ margin: 30 }}>
-              <Button
-                variant="contained"
-                color="primary"
-                className="landing-showmore"
-                onClick={this.showMore}
-              >
-                <div className="flex">
-                  <div style={{ alignSelf: 'center' }}>
-                    {this.state.showMoreButtonText}
+                    <img src={SEARCH_THEMED} className="search-icon2"/>
                   </div>
-                  <div className="flex">
-                    <div style={{ alignSelf: 'center', height: '25px' }}>
-                      {this.state.showMoreButtonText === 'Show More' ? (
-                        <img
-                          className="smicon no-desktop"
-                          src={Smicon}
-                          alt="sm-icon"
-                        />
-                      ) : (
-                        <img
-                          className="smicon2 no-dekstop"
-                          src={Smicon}
-                          alt="sm-icon2"
-                        />
-                      )}
+                </form>
+              </div>
+            </section>
+          </div>
+          <div className="landing-page-wrapper">
+            <section className="tiles-section py-5">
+              <div className="container">
+                <div className="row">
+                  <div className="col-6">
+                    <div className="tiles-content">
+                      <div className="tiles-heading">
+                        Find courses on almost any topic
+                      </div>
+                      <p>
+                        Discover best online courses from top universities
+                        around the world like MIT, Stanford, Harvard, IIT and
+                        many more
+                      </p>
+                      <span style={{ borderBottom: '1px solid #000', paddingBottom: '3px', cursor: 'pointer' }}>
+                        Show More
+                      </span>
+                    </div>
+                  </div>
+                  <div className="col-6">
+                    <div className="row">
+                      <div className="col-6">
+                        <figure className="position-relative d-flex align-items-end justify-content-center tile tile1">
+                          <div className="title">Computer Science</div>
+                        </figure>
+                        <figure className="browse-box-wrapper text-right">
+                          <div className="browse-box">
+                            <span className="h2">
+                              Browse by <br/>
+                              Subject
+                            </span>
+                          </div>
+                        </figure>
+                      </div>
+                      <div className="col-6">
+                        <figure className="position-relative d-flex align-items-end justify-content-center tile tile2">
+                          <div className="title">Arts & Design</div>
+                        </figure>
+                        <figure className="position-relative d-flex align-items-end justify-content-center tile tile3">
+                          <div className="title">Business</div>
+                        </figure>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </Button>
-            </Grid>
-          </Grid>
+              </div>
+            </section>
+          </div>
 
-          <div align="center" className="ead-sec ead-bg ">
-            <Typography
-              variant="h5"
-              color="primary"
-              style={{
-                fontWeight: '600',
-                background: '#FAFAFA',
-                paddingTop: '10px',
-              }}
-              component="h2"
-            >
-              Earn a Degree
-            </Typography>
-            <Grid item xs={12} className="width">
-              <Typography
-                className="sub-text-landing bt-m-no"
-                variant="body2"
-                component="p"
-                align="center"
-              >
-                Launch yourself in your career with an online degree. Did you
-                know many of the universities’ issue certificates which don’t
-                even mention “taken online” on them.
-              </Typography>
-            </Grid>
-            <Container
-              style={{ background: '#FAFAFA', marginTop: '35px' }}
-              maxWidth={'md'}
-            >
-              <Grid container>
-                {degreeData.map(degree =>
-                  this.getDegreeCard(degree, classes, 1, 'degree')
-                )}
-              </Grid>
-            </Container>
-            <ShowMore
-              onClick={() => {
-                trackEvent('showmore', 'click', 'Degree_showmore');
-              }}
-              classes={classes}
-              filter={'paid'}
-              routingURL={'/listing'}
-            />
-          </div>
-          <div className="landing-2bar">
-            <div className="bar-item bg-change" id="topTrendingCourses">
-              <div className="card-flow">
-                <Typography
-                  color="primary"
-                  style={{
-                    fontWeight: '600',
-                    marginBottom: '20px',
-                    textAlign: 'center',
-                    marginTop: '20px',
-                  }}
-                  variant="h5"
-                  component="h2"
-                >
-                  Top Trending Courses
-                </Typography>
-                {trendingData.map(degree =>
-                  this.getDegreeCard(degree, classes, 2, 'trending')
-                )}
-                <div className="center-button">
-                  <ShowMore
-                    classes={classes}
-                    filter={''}
-                    onClick={() => {
-                      trackEvent('showmore', 'click', 'Trending_showmore');
-                    }}
-                    routingURL={'/listing'}
-                  />
-                </div>
-              </div>
-            </div>
-            <div className="bar-item">
-              <div className="card-flow">
-                <Typography
-                  variant="h5"
-                  style={{
-                    fontWeight: '600',
-                    marginBottom: '20px',
-                    textAlign: 'center',
-                    marginTop: '20px',
-                  }}
-                  color="primary"
-                  component="h2"
-                >
-                  Learn for Free
-                </Typography>
-                {freeCourses.map(degree =>
-                  this.getDegreeCard(degree, classes, 2, 'free')
-                )}
-                <div className="center-button">
-                  <ShowMore
-                    onClick={() => {
-                      trackEvent('showmore', 'click', 'Free_showmore');
-                    }}
-                    classes={classes}
-                    filter={'free'}
-                    routingURL={'/listing'}
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
+          <EarnADegreeComponent
+            trackEvent={trackEvent}
+            degreeData={degreeData}
+            filter={'trending'}
+            routingURL={'/listing'}
+          />
+          <TrendingCoursesComponent
+            trendingData={trendingData}
+            filter={'trending'}
+            trackEvent={trackEvent}
+            routingURL={'/listing'}
+          />
+          <LearnForFreeComponent
+            trendingData={freeCourses}
+            filter={'free'}
+            trackEvent={trackEvent}
+            routingURL={'/listing'}
+          />
         </Grid>
-        <div className="orange-band">
+        <div className="orange-band" style={{ padding: '50px 20px' }}>
           <div className="inner-orange">
             <Typography
               variant="h6"
@@ -808,7 +689,7 @@ class LandingPage extends Component {
             </div>
           </div>
         </div>
-        <Footer bgColor={'#FFF'} />
+        <Footer bgColor={'#FFF'}/>
       </>
     );
   }

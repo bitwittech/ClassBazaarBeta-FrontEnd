@@ -138,7 +138,7 @@ class CoursePage extends Component {
       <Grid item xs={3}>
         <Grid style={summaryStyles.filter}>
           <Box style={{ padding: 20 }}>
-            <Typography spacing={1} variant="h6" color="#FFA502">
+            <Typography spacing={1} variant="h6" color="#f15a29">
               {getBold('At a Glance')}
             </Typography>
           </Box>
