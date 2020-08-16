@@ -317,7 +317,7 @@ const CourseDetails = props => {
             At a Glance
           </div>
         </Typography>
-        <div className="d-flex" style={{ flexDirection: 'column', marginTop: '25px' }}>
+        <div className="d-flex" style={{ flexDirection: 'column', marginTop: '25px',  lineHeight: '35px' }}>
           <div style={{ display: 'flex' }}>
             <div>
               <QueryBuilderIcon color="secondary"/> &nbsp;
@@ -333,7 +333,7 @@ const CourseDetails = props => {
           </div>
 
           {type === 'degree' ? (
-            <div style={{ display: 'flex', marginTop: '15px' }}>
+            <div style={{ display: 'flex', marginTop: '15px',  lineHeight: '35px' }}>
               <div>
                 <MoveToInboxIcon color="secondary"/> &nbsp;
               </div>
@@ -356,10 +356,10 @@ const CourseDetails = props => {
             </div>
           )}
 
-          <div style={{ display: 'flex', marginTop: '15px' }}>
+          <div style={{ display: 'flex', marginTop: '15px',  lineHeight: '35px' }}>
             <div>
               {/* <img src={Rupee} alt="cb-rupee" /> &nbsp; */}
-              <MonetizationOnIcon color="secondary"/>
+              <img src={Rupee} alt="cb-rupee"/> &nbsp;
               &nbsp;
             </div>
             <div>
@@ -375,7 +375,7 @@ const CourseDetails = props => {
             </div>
           </div>
 
-          <div class="pr-pad" style={{ display: 'flex', marginTop: '15px' }}>
+          <div class="pr-pad" style={{ display: 'flex', marginTop: '15px',  lineHeight: '35px' }}>
             <div>
               <ListAltIcon color="secondary"/> &nbsp;
             </div>
@@ -959,7 +959,7 @@ const CourseDetails = props => {
               {courseSummary()}
             </Grid>
             <Grid item xs={12} sm={9}>
-              <div className="d-card">
+              <div className="d-card" style={{ backgroundColor: '#fff3ef', boxShadow: 'none' }}>
                 <div className="cd-head">
                   <div className="cd-head-o">
                     <Typography
@@ -1134,7 +1134,7 @@ const CourseDetails = props => {
                 {courseSummary()}
               </Grid>
               <Grid item xs={12} sm={9}>
-                <div className="d-card">
+                <div className="d-card" style={{ backgroundColor: '#fff3ef', boxShadow: 'none' }}>
                   <div className="cd-head">
                     <div className="cd-head-o">
                       <Typography
@@ -1296,7 +1296,7 @@ const CourseDetails = props => {
               {courseSummary()}
             </Grid>
             <Grid item xs={12} sm={9}>
-              <div className="d-card">
+              <div className="d-card" style={{ backgroundColor: '#fff3ef', boxShadow: 'none' }}>
                 <div className="cd-head">
                   <div className="cd-head-o">
                     <Typography
@@ -1449,7 +1449,7 @@ const CourseDetails = props => {
               {courseSummary()}
             </Grid>
             <Grid item xs={12} sm={9}>
-              <div className="d-card">
+              <div className="d-card" style={{ backgroundColor: '#fff3ef', boxShadow: 'none' }}>
                 <div className="cd-head">
                   <div>
                     <Typography
@@ -1563,7 +1563,7 @@ const CourseDetails = props => {
               {courseSummary()}
             </Grid>
             <Grid item xs={12} sm={9}>
-              <div className="d-card">
+              <div className="d-card" style={{ backgroundColor: '#fff3ef', boxShadow: 'none' }}>
                 <div className="cd-head">
                   <div>
                     <Typography
@@ -1728,7 +1728,7 @@ const CourseDetails = props => {
               {courseSummary()}
             </Grid>
             <Grid item xs={12} sm={9}>
-              <div className="d-card">
+              <div className="d-card" style={{ backgroundColor: '#fff3ef', boxShadow: 'none' }}>
                 <div className="cd-head">
                   <div>
                     <Typography
@@ -1900,7 +1900,7 @@ const CourseDetails = props => {
               {courseSummary()}
             </Grid>
             <Grid item xs={12} sm={9} className="bgwhite">
-              <div className="d-card">
+              <div className="d-card" style={{ backgroundColor: '#fff3ef', boxShadow: 'none' }}>
                 <div className="cd-head">
                   <div>
                     <Typography

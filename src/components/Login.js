@@ -417,7 +417,7 @@ const Login = () => {
                     }}
                     style={{ marginTop: '10px' }}
                   >
-                    First time here? Create a Class Bazaar account.
+                    Create a Class Bazaar account.
                   </Typography>
                 ) : null}
                 {loginModal.state === 1 ? (

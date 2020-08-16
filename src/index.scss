@@ -42,6 +42,10 @@
     margin-left: auto;
     margin-right: auto;
 
+    @media (max-width: 1100px) {
+      flex-direction: column;
+    }
+
     .card-wrapper {
       padding: 15px;
       flex: 1;
@@ -107,26 +111,31 @@
   }
 }
 
-.s-bar{
+.s-bar {
   border-radius: 20px !important;
   display: flex;
   height: 30px;
   flex-direction: row;
-  input{
+
+  input {
     background: none !important;
-    ::placeholder{
+
+    ::placeholder {
       color: white !important;
     }
   }
-  svg{
+
+  svg {
     color: black !important;
     font-size: 40px !important;
     margin: 0 !important;
   }
+
   .s-a {
     width: 40px;
   }
-  .s-b{
+
+  .s-b {
     flex: 1;
   }
 }
@@ -135,9 +144,11 @@
   .header-links {
     color: white !important;
   }
-  .s-bar{
+
+  .s-bar {
     border: 1px solid white !important;
-    svg{
+
+    svg {
       color: white !important;
     }
 

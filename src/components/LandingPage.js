@@ -569,7 +569,6 @@ class LandingPage extends Component {
             <section className="main-banner posiition-relative d-flex align-items-center justify-content-center">
               <div className="overlay"/>
               <div className="banner-content text-center position-relative text-white">
-                <img src={LOGO_PNG} className="img-fluid logo2"/>
                 <div className="h5 mt-2" style={{ fontSize: '18px' }}>
                   We believe in
                 </div>
@@ -594,10 +593,10 @@ class LandingPage extends Component {
             <section className="tiles-section py-5">
               <div className="container">
                 <div className="row">
-                  <div className="col-6">
+                  <div className="col-md-6 col-sm-12">
                     <div className="tiles-content">
                       <div className="tiles-heading">
-                        Find courses on almost any topic
+                        Find courses on any topic
                       </div>
                       <p>
                         Discover best online courses from top universities
@@ -609,7 +608,7 @@ class LandingPage extends Component {
                       </span>
                     </div>
                   </div>
-                  <div className="col-6">
+                  <div className="col-md-6 col-sm-12">
                     <div className="row">
                       <div className="col-6">
                         <figure className="position-relative d-flex align-items-end justify-content-center tile tile1">

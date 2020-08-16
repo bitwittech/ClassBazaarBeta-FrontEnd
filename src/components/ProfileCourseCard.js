@@ -93,16 +93,7 @@ const ProfileCourseCard = withRouter(({ history, ...data }) => {
       <div className="c-card">
         <div className="c-card-inner">
           <div className="coursecard-header">
-            <div>
-              <div className="ratings">
-                <i className="fas fa-star" style={{ color: 'gold', paddingRight: '4px' }}/>
-                <i className="fas fa-star" style={{ color: 'gold', paddingRight: '4px' }}/>
-                <i className="fas fa-star" style={{ color: 'gold', paddingRight: '4px' }}/>
-                <i className="fas fa-star" style={{ color: 'gold', paddingRight: '4px' }}/>
-                <i className="fas fa-star" style={{ color: '#777777', paddingRight: '10px' }}/>
-                <span style={{ color: '#777777' }}>4.0</span>
-              </div>
-            </div>
+
             <div>
               {isBookmarked(data.uuid) ? (
                 <TurnedInIcon

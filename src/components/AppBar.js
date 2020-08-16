@@ -18,7 +18,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { logout } from '../actions/ContextActions';
 import { trackEvent } from 'react-with-analytics';
-import { withRouter } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
@@ -168,6 +168,11 @@ function TopBar(props) {
     } else {
       window.addEventListener('scroll', function(event) {
 
+
+        if (window.innerWidth < 800) {
+          setToggleAppBarTheme(true);
+          return;
+        }
         if (window.scrollY > window.innerHeight && !toggleAppBarTheme) {
           setToggleAppBarTheme(true);
         } else if (window.scrollY < window.innerHeight && toggleAppBarTheme) {
@@ -188,7 +193,19 @@ function TopBar(props) {
     >
       <div className="appbar-flex">
         <div className="topbar-cont">
-          <div className="no-desktop">
+          <div className="no-desktop" style={{ width: '100%', backgroundColor: 'white' }}>
+            <div className="div" style={{ textAlign: 'center' }}>
+              <ImageWithRouter
+                image={Logo}
+                routingURL={'/'}
+                clazzNames={`${classes.logo} click-h adj-i`}
+                alt="logo"
+                style={{ margin: 'auto' }}
+                onClick={() => {
+                  trackEvent('HeaderIcon', 'Click', `${props.location.pathname}`);
+                }}
+              />
+            </div>
             <div className={props.home ? 'no-mobile' : ''}>
               {props.noHome ? null : <MenuIcon/>}
             </div>
@@ -224,34 +241,39 @@ function TopBar(props) {
               {state.isAuth ? <IconWithRouter routingURL={'/profile'}/> : null}
               {!state.isAuth ? (
                 <>
-                  <Button
+                  <Link
+                    to={'/'}
                     variant="outlined"
                     color="primary"
                     className="signup-btn no-mobile header-links"
                   >
                     Home
-                  </Button>
-                  <Button
+                  </Link>
+                  <Link
+                    to={'/listing'}
                     variant="outlined"
                     color="primary"
                     className="signup-btn no-mobile header-links"
                   >
                     Courses
-                  </Button>
-                  <Button
+                  </Link>
+                  <Link
+                    to={'/about'}
                     variant="outlined"
                     color="primary"
                     className="signup-btn no-mobile header-links"
                   >
                     About Us
-                  </Button>
-                  <Button
+                  </Link>
+                  <Link
+                    to={'/contact'}
+                    style={{ marginRight: '10px' }}
                     variant="outlined"
                     color="primary"
                     className="signup-btn no-mobile header-links"
                   >
                     Contact
-                  </Button>
+                  </Link>
                   {!props.isSearchIncluded && (
                     <div className="no-mobile" style={{ 'display': 'inline-block' }}>
                       <div className="s-bar">

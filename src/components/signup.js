@@ -109,7 +109,7 @@ class SignUp extends Component {
 
   setupLoginDialog() {
     this.setState({
-      prefixText: 'First time here?',
+      prefixText: '',
       linkText: 'Create a Class Bazaar Account',
       buttonText: 'Login',
       showFullName: false,

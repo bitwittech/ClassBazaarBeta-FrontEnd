@@ -397,7 +397,6 @@ const MobileAuth = () => {
             }}
             style={{ marginTop: '10px', marginBottom: '20pz' }}
           >
-            First time here? <br />
             Create a Class Bazaar account.
           </Typography>
         ) : null}
