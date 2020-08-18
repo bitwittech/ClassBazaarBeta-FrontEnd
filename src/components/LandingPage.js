@@ -552,6 +552,20 @@ class LandingPage extends Component {
           <TopAppBar
             onChange={this.onSearchChange}
             isSearchIncluded={false}
+            onKeyPress={(ev) => {
+              if (ev.key === 'Enter') {
+                const query = this.getQuery;
+                trackEvent('search', 'onSearch', 'Search_homepage');
+                ReactGA.ga('send', 'pageview', `/homepage?q=${query()}`);
+                this.props.history.push({
+                  pathname: '/listing',
+                  state: {
+                    query: query(),
+                  },
+                });
+                ev.preventDefault();
+              }
+            }}
             onLoginClick={this.onLoginClick}
             noHome={true}
           />
@@ -580,6 +594,21 @@ class LandingPage extends Component {
                     <input
                       type="text"
                       name="search"
+                      onChange={this.onSearchChange}
+                      onKeyPress={ev => {
+                        if (ev.key === 'Enter') {
+                          const query = this.getQuery;
+                          trackEvent('search', 'onSearch', 'Search_homepage');
+                          ReactGA.ga('send', 'pageview', `/homepage?q=${query()}`);
+                          this.props.history.push({
+                            pathname: '/listing',
+                            state: {
+                              query: query(),
+                            },
+                          });
+                          ev.preventDefault();
+                        }
+                      }}
                       className="form-control-plaintext"
                       placeholder="Search for a Course"
                     />
@@ -696,4 +725,4 @@ class LandingPage extends Component {
 
 LandingPage.propTypes = {};
 
-export default withStyles(styles, { withTheme: true })(LandingPage);
+export default withStyles(styles, { withTheme: true })(withRouter(LandingPage));
