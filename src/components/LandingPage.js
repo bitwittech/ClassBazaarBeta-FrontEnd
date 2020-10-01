@@ -6,38 +6,39 @@ import {
   trendingData,
 } from '../utils/data';
 import { fade, makeStyles } from '@material-ui/core/styles';
-import LOGO_PNG from '../assets/img/logo.png';
-import SEARCH_THEMED from '../assets/img/search-themed.svg';
+
 import AuthProvider from './authProvider';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import CS from './../assets/CS.png';
 import { Collapse } from '@material-ui/core';
 import Container from '@material-ui/core/Container';
+import { EarnADegreeComponent } from './earn-a-degree/earn-a-degree-component';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Footer from './Footer';
 import Grid from '@material-ui/core/Grid';
 import HomeModal from './HomeModal';
 import InputBase from '@material-ui/core/InputBase';
+import LOGO_PNG from '../assets/img/logo.png';
+import { LearnForFreeComponent } from './learn-for-free/learn-for-free';
 import { Link } from 'react-router-dom';
 import { Paper } from 'material-ui';
 import ReactGA from 'react-ga';
+import SEARCH_THEMED from '../assets/img/search-themed.svg';
 import SearchBG1 from './../assets/Search-Option3.jpg';
 import SearchIcon from '@material-ui/icons/Search';
 import Smicon from '../assets/smicon.svg';
 import Snackbar from '@material-ui/core/Snackbar';
 import StaticCourseDetails from './StaticCourseDetails';
 import TopAppBar from './AppBar';
+import { TrendingCoursesComponent } from './trending-cources/trending-cources';
 import Typography from '@material-ui/core/Typography';
 import { clearConfigCache } from 'prettier';
 import { store } from '../App';
 import { trackEvent } from 'react-with-analytics/lib/utils';
 import { withRouter } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
-import { EarnADegreeComponent } from './earn-a-degree/earn-a-degree-component';
-import { TrendingCoursesComponent } from './trending-cources/trending-cources';
-import { LearnForFreeComponent } from './learn-for-free/learn-for-free';
 
 const styles = theme => ({
   dashboardLink: {
@@ -128,34 +129,30 @@ const defaultProps = {
 const Search = withRouter(({ history, ...data }) => {
   const classes = data.classes;
   return (
-    <div className={classes.search}>
-      <div className={classes.searchIcon}>
-        <SearchIcon color="primary"/>
-      </div>
-      <InputBase
-        placeholder="Search for a course"
+    <div className="main-searchbar-wrapper">
+      <input
+        type="text"
+        name="search"
+        className="form-control-plaintext"
+        placeholder="Search for a Course"
         onChange={data.onSearchChange}
-        inputProps={{ 'aria-label': 'search' }}
-        classes={{
-          root: classes.inputRoot,
-          input: classes.inputInput,
-        }}
-        onKeyPress={ev => {
-          if (ev.key === 'Enter') {
-            const query = data.getQuery;
-            trackEvent('search', 'onSearch', 'Search_homepage');
-            ReactGA.ga('send', 'pageview', `/homepage?q=${query()}`);
-            history.push({
-              pathname: data.routingURL,
-              state: {
-                query: query(),
-              },
-            });
-            ev.preventDefault();
-          }
-        }}
+        onKeyPress={onSearchPressed(data, history)}
       />
+      <img src={SEARCH_THEMED} className="search-icon2" />
     </div>
+  );
+});
+
+const TopAppBarWithRouter = withRouter(({ history, ...data }) => {
+  const classes = data.classes;
+  return (
+    <TopAppBar
+      onChange={data.onSearchChange}
+      isSearchIncluded={true}
+      onLoginClick={data.onLoginClick}
+      onKeyPress={onSearchPressed(data, history)}
+      noHome={true}
+    />
   );
 });
 
@@ -179,7 +176,7 @@ const ShowMore = withRouter(({ history, ...data }) => {
         <div style={{ alignSelf: 'center' }}>Show More</div>
         <div className="flex">
           <div style={{ alignSelf: 'center', height: '25px' }}>
-            <img className="smicon no-desktop" src={Smicon} alt="sm-icon"/>
+            <img className="smicon no-desktop" src={Smicon} alt="sm-icon" />
           </div>
         </div>
       </div>
@@ -354,19 +351,19 @@ class LandingPage extends Component {
                         return trackEvent(
                           'Degree_course',
                           'click',
-                          `${degree.name}`,
+                          `${degree.name}`
                         );
                       case 'trending':
                         return trackEvent(
                           'Trending_course',
                           'click',
-                          `${degree.name}`,
+                          `${degree.name}`
                         );
                       case 'free':
                         return trackEvent(
                           'Free_course',
                           'click',
-                          `${degree.name}`,
+                          `${degree.name}`
                         );
                     }
                   }}
@@ -442,19 +439,19 @@ class LandingPage extends Component {
                         return trackEvent(
                           'Degree_course',
                           'click',
-                          `${degree.name}`,
+                          `${degree.name}`
                         );
                       case 'trending':
                         return trackEvent(
                           'Trending_course',
                           'click',
-                          `${degree.name}`,
+                          `${degree.name}`
                         );
                       case 'free':
                         return trackEvent(
                           'Free_course',
                           'click',
-                          `${degree.name}`,
+                          `${degree.name}`
                         );
                     }
                   }}
@@ -549,25 +546,18 @@ class LandingPage extends Component {
     return (
       <>
         <Grid style={{ margin: 0, width: '100%' }}>
-          <TopAppBar
-            onChange={this.onSearchChange}
-            isSearchIncluded={false}
+          <TopAppBarWithRouter
             onLoginClick={this.onLoginClick}
-            noHome={true}
+            getQuery={this.getQuery}
+            onSearchChange={this.onSearchChange}
+            classes={classes}
+            props={this.props}
+            routingURL={'/listing'}
           />
-
-          {/* {this.state.popUp === true && this.state.user === null ? (
-            <HomeModal
-              Mstate={0}
-              openState={this.state.popUp}
-              handlePopupClose={this.handlePopupClose}
-            />
-          ) : null} */}
-
-          <AuthProvider/>
+          <AuthProvider />
           <div className={'landing-page-wrapper'}>
             <section className="main-banner posiition-relative d-flex align-items-center justify-content-center">
-              <div className="overlay"/>
+              <div className="overlay" />
               <div className="banner-content text-center position-relative text-white">
                 <div className="h5 mt-2" style={{ fontSize: '18px' }}>
                   We believe in
@@ -576,15 +566,13 @@ class LandingPage extends Component {
                   Passion for Learning
                 </div>
                 <form>
-                  <div className="main-searchbar-wrapper">
-                    <input
-                      type="text"
-                      name="search"
-                      className="form-control-plaintext"
-                      placeholder="Search for a Course"
-                    />
-                    <img src={SEARCH_THEMED} className="search-icon2"/>
-                  </div>
+                  <Search
+                    getQuery={this.getQuery}
+                    onSearchChange={this.onSearchChange}
+                    classes={classes}
+                    props={this.props}
+                    routingURL={'/listing'}
+                  />
                 </form>
               </div>
             </section>
@@ -603,7 +591,13 @@ class LandingPage extends Component {
                         around the world like MIT, Stanford, Harvard, IIT and
                         many more
                       </p>
-                      <span style={{ borderBottom: '1px solid #000', paddingBottom: '3px', cursor: 'pointer' }}>
+                      <span
+                        style={{
+                          borderBottom: '1px solid #000',
+                          paddingBottom: '3px',
+                          cursor: 'pointer',
+                        }}
+                      >
                         Show More
                       </span>
                     </div>
@@ -617,7 +611,7 @@ class LandingPage extends Component {
                         <figure className="browse-box-wrapper text-right">
                           <div className="browse-box">
                             <span className="h2">
-                              Browse by <br/>
+                              Browse by <br />
                               Subject
                             </span>
                           </div>
@@ -688,7 +682,7 @@ class LandingPage extends Component {
             </div>
           </div>
         </div>
-        <Footer bgColor={'#FFF'}/>
+        <Footer bgColor={'#FFF'} />
       </>
     );
   }
@@ -697,3 +691,20 @@ class LandingPage extends Component {
 LandingPage.propTypes = {};
 
 export default withStyles(styles, { withTheme: true })(LandingPage);
+
+function onSearchPressed(data, history) {
+  return ev => {
+    if (ev.key === 'Enter') {
+      const query = data.getQuery;
+      trackEvent('search', 'onSearch', 'Search_homepage');
+      ReactGA.ga('send', 'pageview', `/homepage?q=${query()}`);
+      history.push({
+        pathname: data.routingURL,
+        state: {
+          query: query(),
+        },
+      });
+      ev.preventDefault();
+    }
+  };
+}

@@ -1,3 +1,4 @@
+import { Link, withRouter } from 'react-router-dom';
 import React, { useContext, useState } from 'react';
 import { fade, makeStyles } from '@material-ui/core/styles';
 
@@ -18,7 +19,6 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { logout } from '../actions/ContextActions';
 import { trackEvent } from 'react-with-analytics';
-import { Link, withRouter } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
@@ -144,7 +144,7 @@ const IconWithRouter = withRouter(({ history, ...props }) => (
       history.push(props.routingURL);
     }}
   >
-    <ProfileIcon color="primary"/>
+    <ProfileIcon color="primary" />
   </IconButton>
 ));
 
@@ -167,8 +167,6 @@ function TopBar(props) {
       shouldSwitch = false;
     } else {
       window.addEventListener('scroll', function(event) {
-
-
         if (window.innerWidth < 800) {
           setToggleAppBarTheme(true);
           return;
@@ -180,7 +178,6 @@ function TopBar(props) {
         }
       });
     }
-
   }
   return (
     <AppBar
@@ -188,12 +185,17 @@ function TopBar(props) {
       style={{ padding: '10px 10px', boxShadow: 'none' }}
       color="inherit"
       className={`sticky ${
-        !toggleAppBarTheme && shouldSwitch ? 'app-bar-transparent' : 'app-bar-colored'
+        !toggleAppBarTheme && shouldSwitch
+          ? 'app-bar-transparent'
+          : 'app-bar-colored'
       }`}
     >
       <div className="appbar-flex">
         <div className="topbar-cont">
-          <div className="no-desktop" style={{ width: '100%', backgroundColor: 'white' }}>
+          <div
+            className="no-desktop"
+            style={{ width: '100%', backgroundColor: 'white' }}
+          >
             <div className="div" style={{ textAlign: 'center' }}>
               <ImageWithRouter
                 image={Logo}
@@ -202,12 +204,16 @@ function TopBar(props) {
                 alt="logo"
                 style={{ margin: 'auto' }}
                 onClick={() => {
-                  trackEvent('HeaderIcon', 'Click', `${props.location.pathname}`);
+                  trackEvent(
+                    'HeaderIcon',
+                    'Click',
+                    `${props.location.pathname}`
+                  );
                 }}
               />
             </div>
             <div className={props.home ? 'no-mobile' : ''}>
-              {props.noHome ? null : <MenuIcon/>}
+              {props.noHome ? null : <MenuIcon />}
             </div>
           </div>
           <div className="searchbar-div no-mobile">
@@ -219,15 +225,17 @@ function TopBar(props) {
                 clazzNames={`${classes.logo} click-h adj-i`}
                 alt="logo"
                 onClick={() => {
-                  trackEvent('HeaderIcon', 'Click', `${props.location.pathname}`);
+                  trackEvent(
+                    'HeaderIcon',
+                    'Click',
+                    `${props.location.pathname}`
+                  );
                 }}
               />
             </div>
             {!props.isSearchIncluded ? (
               <p className="color-white no-mobile"></p>
             ) : null}
-
-
           </div>
 
           <div className="end-flex">
@@ -238,7 +246,7 @@ function TopBar(props) {
                   className="no-desktop"
                 />
               ) : null}
-              {state.isAuth ? <IconWithRouter routingURL={'/profile'}/> : null}
+              {state.isAuth ? <IconWithRouter routingURL={'/profile'} /> : null}
               {!state.isAuth ? (
                 <>
                   <Link
@@ -274,10 +282,12 @@ function TopBar(props) {
                   >
                     Contact
                   </Link>
-                  {!props.isSearchIncluded && (
-                    <div className="no-mobile" style={{ 'display': 'inline-block' }}>
+                  {props.isSearchIncluded && (
+                    <div
+                      className="no-mobile"
+                      style={{ display: 'inline-block' }}
+                    >
                       <div className="s-bar">
-
                         <div className="s-b">
                           <DebounceInput
                             minLength={2}
@@ -292,7 +302,7 @@ function TopBar(props) {
                         <div className="s-a">
                           <div>
                             {' '}
-                            <SearchIcon className="mt-2 pd"/>
+                            <SearchIcon className="mt-2 pd" />
                           </div>
                         </div>
                       </div>
