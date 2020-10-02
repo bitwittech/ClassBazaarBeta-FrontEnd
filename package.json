@@ -27,12 +27,13 @@
     "react-scripts": "^3.3.0",
     "react-star-ratings": "^2.3.0",
     "react-with-analytics": "^0.0.5",
-    "source-map-explorer": "^2.1.2",
+    "source-map-explorer": "^2.5.0",
     "workbox-webpack-plugin": "^4.3.1"
   },
   "scripts": {
     "analyze": "source-map-explorer 'build/static/js/*.js'",
-    "start": "react-scripts --max_old_space_size=4096 start",
+    "start-dev": "react-scripts --max_old_space_size=4096 start",
+    "start": "node server.js",
     "build": "react-scripts --max_old_space_size=4096 build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -53,7 +54,6 @@
     ]
   },
   "devDependencies": {
-    "eslint-plugin-prettier": "^3.1.0",
-    "prettier": "1.18.2"
+    "eslint-plugin-prettier": "^3.1.0"
   }
 }

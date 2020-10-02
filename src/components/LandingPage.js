@@ -34,7 +34,6 @@ import StaticCourseDetails from './StaticCourseDetails';
 import TopAppBar from './AppBar';
 import { TrendingCoursesComponent } from './trending-cources/trending-cources';
 import Typography from '@material-ui/core/Typography';
-import { clearConfigCache } from 'prettier';
 import { store } from '../App';
 import { trackEvent } from 'react-with-analytics/lib/utils';
 import { withRouter } from 'react-router-dom';
