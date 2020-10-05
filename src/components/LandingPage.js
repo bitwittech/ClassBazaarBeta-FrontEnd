@@ -137,7 +137,7 @@ const Search = withRouter(({ history, ...data }) => {
         onChange={data.onSearchChange}
         onKeyPress={onSearchPressed(data, history)}
       />
-      <img src={SEARCH_THEMED} className="search-icon2" />
+      <img src={SEARCH_THEMED} className="search-icon2"/>
     </div>
   );
 });
@@ -175,7 +175,7 @@ const ShowMore = withRouter(({ history, ...data }) => {
         <div style={{ alignSelf: 'center' }}>Show More</div>
         <div className="flex">
           <div style={{ alignSelf: 'center', height: '25px' }}>
-            <img className="smicon no-desktop" src={Smicon} alt="sm-icon" />
+            <img className="smicon no-desktop" src={Smicon} alt="sm-icon"/>
           </div>
         </div>
       </div>
@@ -239,6 +239,7 @@ class LandingPage extends Component {
       data: [],
       page: 0,
       start: 0,
+      subjectsExpanded: true,
       filterValue: 'all',
       q: '',
       filter: '',
@@ -350,19 +351,19 @@ class LandingPage extends Component {
                         return trackEvent(
                           'Degree_course',
                           'click',
-                          `${degree.name}`
+                          `${degree.name}`,
                         );
                       case 'trending':
                         return trackEvent(
                           'Trending_course',
                           'click',
-                          `${degree.name}`
+                          `${degree.name}`,
                         );
                       case 'free':
                         return trackEvent(
                           'Free_course',
                           'click',
-                          `${degree.name}`
+                          `${degree.name}`,
                         );
                     }
                   }}
@@ -438,19 +439,19 @@ class LandingPage extends Component {
                         return trackEvent(
                           'Degree_course',
                           'click',
-                          `${degree.name}`
+                          `${degree.name}`,
                         );
                       case 'trending':
                         return trackEvent(
                           'Trending_course',
                           'click',
-                          `${degree.name}`
+                          `${degree.name}`,
                         );
                       case 'free':
                         return trackEvent(
                           'Free_course',
                           'click',
-                          `${degree.name}`
+                          `${degree.name}`,
                         );
                     }
                   }}
@@ -536,6 +537,9 @@ class LandingPage extends Component {
     console.log('CLOSED');
     localStorage.setItem('cbpop', false);
   };
+  toggleExpand = () => {
+    this.setState({ subjectsExpanded: !this.state.subjectsExpanded });
+  };
 
   render() {
     const { classes, theme } = this.props;
@@ -553,10 +557,10 @@ class LandingPage extends Component {
             props={this.props}
             routingURL={'/listing'}
           />
-          <AuthProvider />
+          <AuthProvider/>
           <div className={'landing-page-wrapper'}>
             <section className="main-banner posiition-relative d-flex align-items-center justify-content-center">
-              <div className="overlay" />
+              <div className="overlay"/>
               <div className="banner-content text-center position-relative text-white">
                 <div className="h5 mt-2" style={{ fontSize: '18px' }}>
                   We believe in
@@ -576,59 +580,234 @@ class LandingPage extends Component {
               </div>
             </section>
           </div>
-          <div className="landing-page-wrapper">
-            <section className="tiles-section py-5">
-              <div className="container">
-                <div className="row">
-                  <div className="col-md-6 col-sm-12">
-                    <div className="tiles-content">
-                      <div className="tiles-heading">
-                        Find courses on any topic
-                      </div>
-                      <p>
-                        Discover best online courses from top universities
-                        around the world like MIT, Stanford, Harvard, IIT and
-                        many more
-                      </p>
-                      <span
-                        style={{
-                          borderBottom: '1px solid #000',
-                          paddingBottom: '3px',
-                          cursor: 'pointer',
-                        }}
-                      >
+          {/*<div className="landing-page-wrapper">*/}
+          {/*  <section className="tiles-section py-5">*/}
+          {/*    <div className="container">*/}
+          {/*      <div className="row">*/}
+          {/*        <div className="col-md-6 col-sm-12">*/}
+          {/*          <div className="tiles-content">*/}
+          {/*            <div className="tiles-heading">*/}
+          {/*              Find courses on any topic*/}
+          {/*            </div>*/}
+          {/*            <p>*/}
+          {/*              Discover best online courses from top universities*/}
+          {/*              around the world like MIT, Stanford, Harvard, IIT and*/}
+          {/*              many more*/}
+          {/*            </p>*/}
+          {/*            <span*/}
+          {/*              style={{*/}
+          {/*                borderBottom: '1px solid #000',*/}
+          {/*                paddingBottom: '3px',*/}
+          {/*                cursor: 'pointer',*/}
+          {/*              }}*/}
+          {/*            >*/}
+          {/*              Show More*/}
+          {/*            </span>*/}
+          {/*          </div>*/}
+          {/*        </div>*/}
+          {/*        <div className="col-md-6 col-sm-12">*/}
+          {/*          <div className="row">*/}
+          {/*            <div className="col-6">*/}
+          {/*              <figure className="position-relative d-flex align-items-end justify-content-center tile tile1">*/}
+          {/*                <div className="title">Computer Science</div>*/}
+          {/*              </figure>*/}
+          {/*              <figure className="browse-box-wrapper text-right">*/}
+          {/*                <div className="browse-box">*/}
+          {/*                  <span className="h2" onClick={() => this.toggleExpand()}>*/}
+          {/*                    Browse by <br/>*/}
+          {/*                    Subject*/}
+          {/*                  </span>*/}
+          {/*                </div>*/}
+          {/*              </figure>*/}
+          {/*            </div>*/}
+          {/*            <div className="col-6">*/}
+          {/*              <figure className="position-relative d-flex align-items-end justify-content-center tile tile2">*/}
+          {/*                <div className="title">Arts & Design</div>*/}
+          {/*              </figure>*/}
+          {/*              <figure className="position-relative d-flex align-items-end justify-content-center tile tile3">*/}
+          {/*                <div className="title">Business</div>*/}
+          {/*              </figure>*/}
+          {/*            </div>*/}
+          {/*          </div>*/}
+          {/*        </div>*/}
+          {/*      </div>*/}
+          {/*    </div>*/}
+          {/*  </section>*/}
+          {/*</div>*/}
+
+          <div className="home-grid-wrapper container" style={{ marginTop: '100px' }}>
+            <div className="left-wrapper">
+              <div className="row-1">
+                <div className="text-section">
+                  <div className="tiles-content">
+                    <div className="tiles-heading">
+                      Find courses on any topic
+                    </div>
+                    <p>
+                      Discover best online courses from top universities
+                      around the world like MIT, Stanford, Harvard, IIT and
+                      many more
+                    </p>
+                    <span
+                      style={{
+                        borderBottom: '1px solid #000',
+                        paddingBottom: '3px',
+                        cursor: 'pointer',
+                      }}
+                    >
                         Show More
                       </span>
-                    </div>
                   </div>
-                  <div className="col-md-6 col-sm-12">
-                    <div className="row">
-                      <div className="col-6">
-                        <figure className="position-relative d-flex align-items-end justify-content-center tile tile1">
-                          <div className="title">Computer Science</div>
-                        </figure>
-                        <figure className="browse-box-wrapper text-right">
-                          <div className="browse-box">
-                            <span className="h2">
-                              Browse by <br />
-                              Subject
-                            </span>
-                          </div>
-                        </figure>
-                      </div>
-                      <div className="col-6">
-                        <figure className="position-relative d-flex align-items-end justify-content-center tile tile2">
-                          <div className="title">Arts & Design</div>
-                        </figure>
-                        <figure className="position-relative d-flex align-items-end justify-content-center tile tile3">
-                          <div className="title">Business</div>
-                        </figure>
-                      </div>
+                </div>
+                <div className="box box-4">
+                  <div className="inner-box" onClick={() => this.props.history.push({
+                    pathname: '/listing',
+                    state: {
+                      filter: '',
+                    },
+                  })}>
+                    <div className="label">
+                      {subjectsData[3]['name']}
                     </div>
                   </div>
                 </div>
               </div>
-            </section>
+              {
+                !this.state.subjectsExpanded && <div style={{ textAlign: 'right' }}>
+                  <figure className="browse-box-wrapper text-right" onClick={() => this.toggleExpand()}>
+                    <div className="browse-box">
+                            <span className="h2">
+                              Browse by <br/>
+                              Subject
+                            </span>
+                    </div>
+                  </figure>
+                </div>
+              }
+              {
+                this.state.subjectsExpanded && <div className={'row-2'}>
+                  <div className="row-row-1">
+                    <figure className="browse-box-wrapper text-right"
+                            onClick={() => {
+                              this.props.history.push({
+                                pathname: '/listing',
+                                state: {
+                                  filter: '',
+                                },
+                              });
+                            }}
+                            style={{ marginTop: '100px', paddingTop: '60px', height: '120px' }}>
+                      <div className="browse-box">
+                            <span className="h2">
+                             Others
+                            </span>
+                      </div>
+                    </figure>
+                    <div className="box box-5">
+                      <div className="inner-box" onClick={() => this.props.history.push({
+                        pathname: '/listing',
+                        state: {
+                          filter: '',
+                        },
+                      })}>
+                        <div className="label">
+                          {subjectsData[4]['name']}
+                        </div>
+                      </div>
+                    </div>
+                    <div className="box box-7">
+                      <div className="inner-box" onClick={() => this.props.history.push({
+                        pathname: '/listing',
+                        state: {
+                          filter: '',
+                        },
+                      })}>
+                        <div className="label">
+                          {subjectsData[8]['name']}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="row-row-2">
+                    <div className="box box-6">
+                      <div className="inner-box" onClick={() => this.props.history.push({
+                        pathname: '/listing',
+                        state: {
+                          filter: '',
+                        },
+                      })}>
+                        <div className="label">
+                          {subjectsData[5]['name']}
+                        </div>
+                      </div>
+                    </div>
+                    <div className="box box-7">
+                      <div className="inner-box" onClick={() => this.props.history.push({
+                        pathname: '/listing',
+                        state: {
+                          filter: '',
+                        },
+                      })}>
+                        <div className="label">
+                          {subjectsData[6]['name']}
+                        </div>
+                      </div>
+                    </div>
+                    <div className="box box-8">
+                      <div className="inner-box" onClick={() => this.props.history.push({
+                        pathname: '/listing',
+                        state: {
+                          filter: '',
+                        },
+                      })}>
+                        <div className="label">
+                          {subjectsData[7]['name']}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              }
+            </div>
+            <div className="right-wrapper">
+              <div className="box-1 box">
+                <div className="inner-box" onClick={() => this.props.history.push({
+                  pathname: '/listing',
+                  state: {
+                    filter: '',
+                  },
+                })}>
+                  <div className="label">
+                    {subjectsData[0]['name']}
+                  </div>
+                </div>
+              </div>
+              <div className="box box-2">
+                <div className="inner-box" onClick={() => this.props.history.push({
+                  pathname: '/listing',
+                  state: {
+                    filter: '',
+                  },
+                })}>
+                  <div className="label">
+                    {subjectsData[1]['name']}
+                  </div>
+                </div>
+              </div>
+              {
+                this.state.subjectsExpanded && <div className="box box-3">
+                  <div className="inner-box" onClick={() => this.props.history.push({
+                    pathname: '/listing',
+                    state: {
+                      filter: '',
+                    },
+                  })}>
+                    <div className="label">
+                      {subjectsData[2]['name']}
+                    </div>
+                  </div>
+                </div>}
+            </div>
           </div>
 
           <EarnADegreeComponent
@@ -681,7 +860,7 @@ class LandingPage extends Component {
             </div>
           </div>
         </div>
-        <Footer bgColor={'#FFF'} />
+        <Footer bgColor={'#FFF'}/>
       </>
     );
   }
@@ -689,7 +868,7 @@ class LandingPage extends Component {
 
 LandingPage.propTypes = {};
 
-export default withStyles(styles, { withTheme: true })(LandingPage);
+export default withRouter(withStyles(styles, { withTheme: true })(LandingPage));
 
 function onSearchPressed(data, history) {
   return ev => {

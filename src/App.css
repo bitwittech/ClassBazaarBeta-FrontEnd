@@ -108,7 +108,6 @@ body {
     background: #f0f2f7;
     border-radius: 6px;
     color: '#B9BED1' !important;
-    text-align: center !important;
     font-weight: '600' !important;
 }
 
@@ -263,7 +262,7 @@ a:hover {
 }
 
 .contact-container {
-    margin-top: 40px !important;
+    margin-top: 0px !important;
 }
 
 .ab-t {

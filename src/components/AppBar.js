@@ -163,7 +163,7 @@ function TopBar(props) {
   const [toggleAppBarTheme, setToggleAppBarTheme] = useState(false);
 
   if (typeof window != 'undefined') {
-    if (window.location.pathname !== '/') {
+    if (window.location.pathname !== '/' && window.location.pathname !== '/contact') {
       shouldSwitch = false;
     } else {
       window.addEventListener('scroll', function(event) {

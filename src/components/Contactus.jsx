@@ -8,6 +8,9 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Store from '../store/Context';
 import axios from 'axios';
+import { trackEvent } from 'react-with-analytics/lib/utils';
+import bannerImage from '../assets/contact-image.jpg';
+
 const Contactus = () => {
   const [data, setData] = useState({
     name: '',
@@ -55,78 +58,81 @@ const Contactus = () => {
   };
   return (
     <>
-      <AppBar noHome={true} />
+      <AppBar noHome={true}/>
+      <div style={{
+        height: '70vh', backgroundPosition: 'center', backgroundImage: `url(${bannerImage})`, paddingTop: '150px',
+      }} className={'contact-banner'}>
+        <div className="container">
+          <Typography
+            style={{
+              fontWeight: '900',
+              fontSize: '2.2rem',
+              marginBottom: '0px',
+              color: 'white',
+            }}
+            variant="h6"
+            gutterBottom
+          >
+            Contact Us
+          </Typography>
+          <Typography
+            variant="h6"
+            className="contact-cont"
+            style={{
+              color: 'white', fontWeight: '300',
+              maxWidth: '500px'
+            }}
+            gutterBottom
+          >
+            You can leave us a message below and our team will get back to you or
+            you can directly email us at{' '}
+            <a href="mailto:info@classbazaar.com?" style={{ color: 'white !important' }}>info@classbazaar.com</a>
+          </Typography>
+        </div>
+      </div>
       <div
         style={{
-          padding: 50,
+          padding: 20,
           width: '100%',
           margin: 'auto',
-          marginTop: '0px',
+          marginTop: '0px !important',
           marginBottom: 20,
           background: '#FAFAFA',
         }}
         className="contact-container"
       >
-        <Typography
-          style={{
-            fontWeight: '900',
-            fontSize: '2.2rem',
-            marginBottom: '0px',
-          }}
-          color="primary"
-          variant="h6"
-          gutterBottom
-        >
-          Contact Us
-        </Typography>
-        <Typography
-          variant="h6"
-          className="contact-cont"
-          style={{ fontWeight: '300' }}
-          gutterBottom
-        >
-          You can leave us a message below and our team will get back to you or
-          you can directly email us at{' '}
-          <a href="mailto:info@classbazaar.com?">info@classbazaar.com</a>
-        </Typography>
-        <br />
-        <form onSubmit={handleSubmit}>
+
+        <form onSubmit={handleSubmit} style={{ maxWidth: '400px', margin: 'auto' }}>
           <Grid style={{ marginTop: '20px' }} container>
-            <Grid item xs={12} sm={1}>
-              <Typography
-                variant="h6"
-                style={{ fontSize: '1.2rem', fontWeight: '500' }}
-                gutterBottom
-              >
-                Name
-              </Typography>
-            </Grid>
-            <Grid item xs={12} sm={5}>
+            <Grid item xs={12} sm={12}>
               <input
-                style={{ background: 'white', border: 'none' }}
+                style={{
+                  background: '#fff3ef',
+                  border: 'none',
+                  width: '100%',
+                  textAlign: 'left !important',
+                  padding: '10px 20px',
+                }}
                 name="name"
                 value={data.name}
                 onChange={e => handleChange(e)}
                 type="text"
-                className="text-field w-m"
+                className="text-field"
                 placeholder="Name"
                 required
               />
             </Grid>
           </Grid>
-          <Grid style={{ marginTop: '20px' }} container>
-            <Grid item xs={12} sm={1}>
-              <Typography
-                variant="h6"
-                style={{ fontSize: '1.2rem', fontWeight: '500' }}
-                gutterBottom
-              >
-                Email
-              </Typography>
-            </Grid>
-            <Grid item xs={12} sm={5}>
+          <Grid container>
+            <Grid item xs={12} sm={12}>
               <input
-                style={{ background: 'white', border: 'none' }}
+                style={{
+                  background: '#fff3ef',
+                  border: 'none',
+                  width: '100%',
+                  textAlign: 'left !important',
+                  padding: '10px 20px',
+                }}
                 name="email"
                 type="email"
                 value={data.email}
@@ -137,18 +143,15 @@ const Contactus = () => {
               />
             </Grid>
             <Grid style={{ marginTop: '20px' }} container>
-              <Grid item xs={12} sm={1}>
-                <Typography
-                  variant="h6"
-                  style={{ fontSize: '1.2rem', fontWeight: '500' }}
-                  gutterBottom
-                >
-                  Subject
-                </Typography>
-              </Grid>
-              <Grid item xs={12} sm={5}>
+              <Grid item xs={12} sm={12}>
                 <input
-                  style={{ background: 'white', border: 'none' }}
+                  style={{
+                    background: '#fff3ef',
+                    border: 'none',
+                    width: '100%',
+                    textAlign: 'left !important',
+                    padding: '10px 20px',
+                  }}
                   name="subject"
                   value={data.subject}
                   onChange={e => handleChange(e)}
@@ -160,21 +163,16 @@ const Contactus = () => {
               </Grid>
             </Grid>
             <Grid style={{ marginTop: '20px' }} container>
-              <Grid item xs={12} sm={1}>
-                <Typography
-                  variant="h6"
-                  style={{ fontSize: '1.2rem', fontWeight: '500' }}
-                  gutterBottom
-                >
-                  Message
-                </Typography>
-              </Grid>
-              <Grid item xs={12} sm={9}>
+
+              <Grid item xs={12} sm={12}>
                 <textarea
                   style={{
-                    background: 'white',
-                    border: 'none',
                     height: '100px',
+                    background: '#fff3ef',
+                    border: 'none',
+                    width: '100%',
+                    textAlign: 'left !important',
+                    padding: '10px 20px',
                   }}
                   name="message"
                   value={data.message}
@@ -190,6 +188,8 @@ const Contactus = () => {
                       display: 'flex',
                       alignItems: 'center',
                       fontWeight: '600',
+                      margin: 'auto',
+                      backgroundColor: '#f15a29',
                       padding: '8px 50px',
                     }}
                     className="enroll-btn"
@@ -202,8 +202,38 @@ const Contactus = () => {
           </Grid>
         </form>
       </div>
-
-      <Footer bgColor={'#FAFAFA'} />
+      <div className="orange-band" style={{ padding: '50px 20px' }}>
+        <div className="inner-orange">
+          <Typography
+            variant="h6"
+            style={{
+              color: 'white',
+              fontWeight: '500',
+              marginBottom: '20px',
+            }}
+          >
+            Never stop learning. Subscribe to our newsletter
+          </Typography>
+          <div style={{ marginTop: '10px', width: '90%', margin: 'auto' }}>
+            <input
+              type="email"
+              placeholder="Your email"
+              className="ns-input"
+            />
+            <button
+              onClick={() => {
+                if (this.state.nsEmail !== '') {
+                  trackEvent('Newsletter', 'click', 'Newsletter Email');
+                }
+              }}
+              className="ns-submit click-h"
+            >
+              Submit
+            </button>
+          </div>
+        </div>
+      </div>
+      <Footer bgColor={'#FAFAFA'}/>
     </>
   );
 };
