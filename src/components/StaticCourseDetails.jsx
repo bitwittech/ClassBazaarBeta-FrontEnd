@@ -28,12 +28,15 @@ import formatDate from './../utils/dateUtils';
 import getClosestNextRun from './../utils/edxUtils';
 import { trackEvent } from 'react-with-analytics/lib/utils';
 import { Link } from 'react-router-dom';
+import MoveToInboxIcon from '@material-ui/core/SvgIcon/SvgIcon';
+import Rupee from '../assets/rupee.svg';
 
 const StaticCourseDetails = props => {
   var data = props.location.state.data;
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+  console.log(data);
   const courseSummary = () => (
     <>
       <div
@@ -50,35 +53,70 @@ const StaticCourseDetails = props => {
           color="primary"
           gutterBottom
         >
-          At a Glance
+          <div style={{ color: '#444444', borderBottom: '2px solid #f15a29', padding: '5px', display: 'inline' }}>
+            At a Glance
+          </div>
         </Typography>
-        <div className="d-flex">
+
+
+        <div className="d-flex" style={{ flexDirection: 'column', marginTop: '25px', lineHeight: '35px' }}>
           <div style={{ display: 'flex' }}>
             <div>
-              <QueryBuilderIcon color="primary" /> &nbsp;
+              <QueryBuilderIcon color="secondary"/> &nbsp;
             </div>
             <div>{data.duration}</div>
+            {/* <div>
+              {
+                Gstate.data.additionalDetails.durationText.split(
+                  'weekSuggested'
+                )[1]
+              }
+            </div> */}
           </div>
 
-          <div style={{ display: 'flex', marginTop: '15px' }}>
-            <div>
-              <DateRangeIcon color="primary" /> &nbsp;
+          {data.type === 'degree' ? (
+            <div style={{ display: 'flex', marginTop: '15px', lineHeight: '35px' }}>
+              <div>
+                <MoveToInboxIcon color="secondary"/> &nbsp;
+              </div>
+              <div>{` Starts on  ${data.startDate}`}</div>
+              {/* <div>{Gstate.data.additionalDetails.courses.length} courses</div> */}
             </div>
-            <div>{` Starts on ${data.startDate}`}</div>
+          ) : (
+            <div style={{ display: 'flex', marginTop: '15px' }}>
+              <div>
+                <DateRangeIcon color="secondary"/> &nbsp;
+              </div>
+              <div>{` Starts on  ${data.startDate}`}</div>
+              <div></div>
+            </div>
+          )}
+
+          <div style={{ display: 'flex', marginTop: '15px', lineHeight: '35px' }}>
+            <div>
+              {/* <img src={Rupee} alt="cb-rupee" /> &nbsp; */}
+              <img src={Rupee} alt="cb-rupee"/> &nbsp;
+              &nbsp;
+            </div>
+            <div>
+              {data.provider === 'Swayam'
+                ? 'Free'
+                : data.price === '' ||
+                data.price === null
+                  ? 'Provider subscription required'
+                  : data.price === 0
+                    ? 'Free'
+                    : data.price}
+              {/* {Gstate.data.rakutenDetails.price.retail._text} */}
+            </div>
           </div>
 
-          <div style={{ display: 'flex', marginTop: '15px' }}>
+          <div className="pr-pad" style={{ display: 'flex', marginTop: '15px', lineHeight: '35px' }}>
             <div>
-              <MonetizationOnIcon color="primary" /> &nbsp;
+              <ListAltIcon color="secondary"/> &nbsp;
             </div>
-            <div>{data.price}</div>
-          </div>
-
-          <div class="pr-pad" style={{ display: 'flex', marginTop: '15px' }}>
-            <div>
-              <ListAltIcon color="primary" /> &nbsp;
-            </div>
-            <div>{data.provider}</div>
+            {/* <div>{Gstate.summaryData.provider}</div> */}
+            <div>Coursera</div>
           </div>
 
           <div style={{ marginTop: '20px' }}>
@@ -87,17 +125,17 @@ const StaticCourseDetails = props => {
                 trackEvent(
                   'Enroll Now',
                   'click',
-                  `${data.provider}|${data.name}`
+                  `${data.provider}|${data.name}`,
                 );
                 window.open(
                   data.provider === 'Swayam'
                     ? data.enroll &&
-                        data.enroll.replace(
-                          'www.swayam.com',
-                          'www.swayam.gov.in'
-                        )
+                    data.enroll.replace(
+                      'www.swayam.com',
+                      'www.swayam.gov.in',
+                    )
                     : data.enroll && data.enroll,
-                  '_blank'
+                  '_blank',
                 );
               }}
               className="enroll-btn"
@@ -121,6 +159,16 @@ const StaticCourseDetails = props => {
             </button>
           </div>
         </div>
+
+
+
+
+
+
+
+
+
+
       </div>
     </>
   );
@@ -132,7 +180,7 @@ const StaticCourseDetails = props => {
             {courseSummary()}
           </Grid>
           <Grid item xs={12} sm={9}>
-            <div className="d-card">
+            <div className="d-card" style={{ backgroundColor: '#fff3ef', boxShadow: 'none' }}>
               <div className="cd-head">
                 <div>
                   <Typography
@@ -143,7 +191,7 @@ const StaticCourseDetails = props => {
                   >
                     {data.university}
                   </Typography>
-                  <Typography variant="h6" gutterBottom>
+                  <Typography variant="h6" className="u-title" gutterBottom>
                     {data.name}
                   </Typography>
                   <Typography
@@ -156,7 +204,7 @@ const StaticCourseDetails = props => {
                   </Typography>
                 </div>
               </div>
-              <br />
+              <br/>
               <div className="cd-cont">
                 <Typography
                   style={{ fontWeight: '600', fontSize: '22px' }}
@@ -172,7 +220,7 @@ const StaticCourseDetails = props => {
                 >
                   {ReactHtmlParser(data.outcome)}
                 </Typography>
-                <br />
+                <br/>
 
                 <Typography
                   style={{ fontWeight: '600', fontSize: '22px' }}
@@ -189,7 +237,7 @@ const StaticCourseDetails = props => {
                   {ReactHtmlParser(data.prerequisites)}
                 </Typography>
 
-                <br />
+                <br/>
 
                 {/* <Typography
                     style={{ fontWeight: '600', fontSize: '22px' }}
@@ -239,7 +287,7 @@ const StaticCourseDetails = props => {
             {courseSummary()}
           </Grid>
           <Grid item xs={12} sm={9}>
-            <div className="d-card">
+            <div className="d-card" style={{ backgroundColor: '#fff3ef', boxShadow: 'none' }}>
               <div className="cd-head">
                 <div>
                   <Typography
@@ -250,7 +298,7 @@ const StaticCourseDetails = props => {
                   >
                     {data.university}
                   </Typography>
-                  <Typography variant="h6" gutterBottom>
+                  <Typography variant="h6" className="u-title" gutterBottom>
                     {data.name}
                   </Typography>
                   <Typography
@@ -269,7 +317,7 @@ const StaticCourseDetails = props => {
                     )} */}
                 </div>
               </div>
-              <br />
+              <br/>
               <div className="cd-cont">
                 <Typography
                   style={{ fontWeight: '600', fontSize: '22px' }}
@@ -285,7 +333,7 @@ const StaticCourseDetails = props => {
                 >
                   {ReactHtmlParser(data.outcome)}
                 </Typography>
-                {/* 
+                {/*
                   {Gstate.data.closestRun !== undefined && (
                     <>
                       <Typography
@@ -302,7 +350,7 @@ const StaticCourseDetails = props => {
                       </Typography>
                     </>
                   )} */}
-                <br />
+                <br/>
                 {/* <Typography
                     style={{ fontWeight: '600', fontSize: '22px' }}
                     variant="subtitle2"
@@ -355,7 +403,7 @@ const StaticCourseDetails = props => {
             {courseSummary()}
           </Grid>
           <Grid item xs={12} sm={9} className="bgwhite">
-            <div className="d-card">
+            <div className="d-card" style={{ backgroundColor: '#fff3ef', boxShadow: 'none' }}>
               <div className="cd-head">
                 <div>
                   <Typography
@@ -366,7 +414,7 @@ const StaticCourseDetails = props => {
                   >
                     {data.university}
                   </Typography>
-                  <Typography variant="h6" gutterBottom>
+                  <Typography variant="h6" className="u-title" gutterBottom>
                     {ReactHtmlParser(data.name)}
                   </Typography>
                   <Typography
@@ -380,7 +428,7 @@ const StaticCourseDetails = props => {
                 </div>
                 {/* <div style={{ textAlign: 'right' }}> {reviewSection()} </div> */}
               </div>
-              <br />
+              <br/>
               <div className="cd-cont">
                 <Typography
                   style={{ fontWeight: '600', fontSize: '18px' }}
@@ -440,7 +488,7 @@ const StaticCourseDetails = props => {
                       </Typography>
                     </>
                   )} */}
-                <br />
+                <br/>
                 {/* <Typography
                     style={{ fontWeight: '600', fontSize: '22px' }}
                     variant="subtitle2"
@@ -473,7 +521,7 @@ const StaticCourseDetails = props => {
                       </div>
                     </button>
                   </div> */}
-                <br />
+                <br/>
                 {/* {reviews()} */}
               </div>
             </div>
@@ -490,7 +538,7 @@ const StaticCourseDetails = props => {
             {courseSummary()}
           </Grid>
           <Grid item xs={12} sm={9}>
-            <div className="d-card">
+            <div className="d-card" style={{ backgroundColor: '#fff3ef', boxShadow: 'none' }}>
               <div className="cd-head">
                 <div>
                   <Typography
@@ -501,7 +549,7 @@ const StaticCourseDetails = props => {
                   >
                     {data.university}
                   </Typography>
-                  <Typography variant="h6" gutterBottom>
+                  <Typography variant="h6" className="u-title" gutterBottom>
                     {data.name}
                   </Typography>
                   <Typography
@@ -514,7 +562,7 @@ const StaticCourseDetails = props => {
                   </Typography>
                 </div>
               </div>
-              <br />
+              <br/>
               <div className="cd-cont">
                 <Typography
                   style={{ fontWeight: '600', fontSize: '22px' }}
@@ -530,7 +578,7 @@ const StaticCourseDetails = props => {
                 >
                   {ReactHtmlParser(data.outcome)}
                 </Typography>
-                <br />
+                <br/>
                 {/* {Gstate.data.learning_outcomes !== '' && (
                     <>
                       <Typography
@@ -570,7 +618,7 @@ const StaticCourseDetails = props => {
                     </>
                   )} */}
 
-                <br />
+                <br/>
 
                 {/* {Gstate.data.educator !== '' && (
                     <>
@@ -586,7 +634,7 @@ const StaticCourseDetails = props => {
                       </Typography>
                     </>
                   )} */}
-                <br />
+                <br/>
                 {/* <Typography
                     style={{ fontWeight: '600', fontSize: '22px' }}
                     variant="subtitle2"
@@ -644,12 +692,12 @@ const StaticCourseDetails = props => {
   };
   return (
     <div>
-      <AppBar />
-      <MobileTopbar onlySearch={true} />
+      <AppBar/>
+      <MobileTopbar onlySearch={true}/>
       {renderSwitch(data.provider)}
       <div className="footer" style={{ background: '#FAFAFA' }}>
         <div style={{ marginTop: '20px' }}>
-          <img className="footer-logo" src={Logo} alt="classbazarLogo" />
+          <img className="footer-logo" src={Logo} alt="classbazarLogo"/>
         </div>
         <div className="footer-links">
           <div>

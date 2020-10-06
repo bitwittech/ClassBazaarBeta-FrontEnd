@@ -1,8 +1,9 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import { withRouter } from 'react-router';
+import { Link } from 'react-router-dom';
 
-export const EarnADegreeComponent =  withRouter(({ history, degreeData,trackEvent,filter, routingURL }) => {
+export const EarnADegreeComponent = withRouter(({ history, degreeData, trackEvent, filter, routingURL }) => {
   const data = degreeData.slice(0, 4);
   return (
     <div className={'earn-a-degree-wrapper'}>
@@ -18,7 +19,19 @@ export const EarnADegreeComponent =  withRouter(({ history, degreeData,trackEven
       <div className="card-section">
         {data.map(degree => {
           return (
-            <div className="card-wrapper">
+            <Link to={degree.url ? ('/coursedetails' + degree.url) : {
+              pathname: '/coursedetail',
+              state: {
+                data: degree.data,
+              },
+            }}
+                  className="card-wrapper" onClick={() => {
+              trackEvent(
+                'Degree_course',
+                'click',
+                `${degree.name}`,
+              );
+            }}>
               <div className="card-inner">
                 <div className="head-section">
                   via {degree.provider}
@@ -28,15 +41,15 @@ export const EarnADegreeComponent =  withRouter(({ history, degreeData,trackEven
               <div className="university-section">
                 {degree.university}
               </div>
-            </div>
+            </Link>
           );
 
         })}
       </div>
-      <div className="card-section" style={{marginTop: 0}}>
+      <div className="card-section" style={{ marginTop: 0 }}>
         {data.map(degree => {
           return (
-            <div className="card-wrapper" style={{paddingTop: 0}}>
+            <div className="card-wrapper" style={{ paddingTop: 0 }}>
               <div className="name-section">
                 {degree.name}
               </div>
@@ -45,7 +58,7 @@ export const EarnADegreeComponent =  withRouter(({ history, degreeData,trackEven
         })}
       </div>
       <div className="show-more-section">
-        <div className="text" onClick={()=>{
+        <div className="text" onClick={() => {
           trackEvent('showmore', 'click', 'Degree_showmore');
           history.push({
             pathname: routingURL,

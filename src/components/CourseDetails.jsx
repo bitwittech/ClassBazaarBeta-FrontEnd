@@ -79,6 +79,7 @@ const CourseDetails = props => {
     addBookmark(courseId, userId, user, provider, dispatch);
   };
 
+  console.log(props,']=============================');
   const isBookmarked = uuid => {
     console.log('isbookmarked', uuid);
     if (state.user === null || state.user.data === undefined) {
@@ -2029,6 +2030,8 @@ const CourseDetails = props => {
     );
 
   const renderSwitch = provider => {
+    console.log(provider);
+    console.log('=============');
     switch (provider) {
       case 'edX':
         return edX();

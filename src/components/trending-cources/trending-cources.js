@@ -2,8 +2,9 @@ import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import { trendingData } from '../../utils/data';
 import { withRouter } from 'react-router';
+import { Link } from 'react-router-dom';
 
-export const TrendingCoursesComponent = withRouter(({ history, trendingData,trackEvent, routingURL,filter }) => {
+export const TrendingCoursesComponent = withRouter(({ history, trendingData, trackEvent, routingURL, filter }) => {
   const data = trendingData.slice(0, 3);
   return (
     <div className={'trending-courses-wrapper'}>
@@ -14,7 +15,19 @@ export const TrendingCoursesComponent = withRouter(({ history, trendingData,trac
       <div className="card-section">
         {data.map(degree => {
           return (
-            <div className="card-wrapper">
+            <Link to={degree.url ? ('/coursedetails' + degree.url) : {
+              pathname: '/coursedetail',
+              state: {
+                data: degree.data,
+              },
+            }}
+                  className="card-wrapper" onClick={() => {
+              trackEvent(
+                'Trending_course',
+                'click',
+                `${degree.name}`,
+              );
+            }}>
               <div className="card-inner">
                 <div className="head-section">
                   via {degree.provider}
@@ -28,7 +41,7 @@ export const TrendingCoursesComponent = withRouter(({ history, trendingData,trac
                 </div>
               </div>
 
-            </div>
+            </Link>
           );
 
         })}
