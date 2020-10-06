@@ -39,6 +39,16 @@ import { trackEvent } from 'react-with-analytics/lib/utils';
 import { withRouter } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 
+import dataScience from '../assets/subjects/20402.jpg';
+import scienceAndEngin from '../assets/subjects/female-engineer-in-laboratory-3861449.jpg';
+import socialStudies from '../assets/subjects/happy-ethnic-woman-sitting-at-table-with-laptop-3769021.jpg';
+import computerScience from '../assets/subjects/Image-2.jpg';
+import art from '../assets/subjects/Image-3.jpg';
+import business from '../assets/subjects/Image-4.jpg';
+import mathImage from '../assets/subjects/Image-16.jpg';
+import developer from '../assets/subjects/person-looking-at-phone-and-at-macbook-pro-1181244.jpg';
+import health from '../assets/subjects/photo-of-woman-practicing-yoga-3820320.jpg';
+
 const styles = theme => ({
   dashboardLink: {
     color: 'white',
@@ -239,7 +249,7 @@ class LandingPage extends Component {
       data: [],
       page: 0,
       start: 0,
-      subjectsExpanded: true,
+      subjectsExpanded: false,
       filterValue: 'all',
       q: '',
       filter: '',
@@ -660,7 +670,7 @@ class LandingPage extends Component {
                   </div>
                 </div>
                 <div className="box box-4">
-                  <div className="inner-box" onClick={() => this.props.history.push({
+                  <div className="inner-box" style={{ backgroundImage: `url(${subjectsData[3].tile})` }} onClick={() => this.props.history.push({
                     pathname: '/listing',
                     state: {
                       filter: '',
@@ -704,7 +714,7 @@ class LandingPage extends Component {
                       </div>
                     </figure>
                     <div className="box box-5">
-                      <div className="inner-box" onClick={() => this.props.history.push({
+                      <div className="inner-box" style={{ backgroundImage: `url(${subjectsData[4].tile})` }} onClick={() => this.props.history.push({
                         pathname: '/listing',
                         state: {
                           filter: '',
@@ -716,7 +726,7 @@ class LandingPage extends Component {
                       </div>
                     </div>
                     <div className="box box-7">
-                      <div className="inner-box" onClick={() => this.props.history.push({
+                      <div className="inner-box" style={{ backgroundImage: `url(${subjectsData[8].tile})` }} onClick={() => this.props.history.push({
                         pathname: '/listing',
                         state: {
                           filter: '',
@@ -730,7 +740,7 @@ class LandingPage extends Component {
                   </div>
                   <div className="row-row-2">
                     <div className="box box-6">
-                      <div className="inner-box" onClick={() => this.props.history.push({
+                      <div className="inner-box" style={{ backgroundImage: `url(${subjectsData[5].tile})` }} onClick={() => this.props.history.push({
                         pathname: '/listing',
                         state: {
                           filter: '',
@@ -742,7 +752,7 @@ class LandingPage extends Component {
                       </div>
                     </div>
                     <div className="box box-7">
-                      <div className="inner-box" onClick={() => this.props.history.push({
+                      <div className="inner-box" style={{ backgroundImage: `url(${subjectsData[6].tile})` }} onClick={() => this.props.history.push({
                         pathname: '/listing',
                         state: {
                           filter: '',
@@ -754,7 +764,7 @@ class LandingPage extends Component {
                       </div>
                     </div>
                     <div className="box box-8">
-                      <div className="inner-box" onClick={() => this.props.history.push({
+                      <div className="inner-box" style={{ backgroundImage: `url(${subjectsData[7].tile})` }} onClick={() => this.props.history.push({
                         pathname: '/listing',
                         state: {
                           filter: '',
@@ -771,24 +781,26 @@ class LandingPage extends Component {
             </div>
             <div className="right-wrapper">
               <div className="box-1 box">
-                <div className="inner-box" onClick={() => this.props.history.push({
-                  pathname: '/listing',
-                  state: {
-                    filter: '',
-                  },
-                })}>
+                <div className="inner-box" style={{ backgroundImage: `url(${subjectsData[0].tile})` }}
+                     onClick={() => this.props.history.push({
+                       pathname: '/listing',
+                       state: {
+                         filter: '',
+                       },
+                     })}>
                   <div className="label">
                     {subjectsData[0]['name']}
                   </div>
                 </div>
               </div>
               <div className="box box-2">
-                <div className="inner-box" onClick={() => this.props.history.push({
-                  pathname: '/listing',
-                  state: {
-                    filter: '',
-                  },
-                })}>
+                <div className="inner-box" style={{ backgroundImage: `url(${subjectsData[1].tile})` }}
+                     onClick={() => this.props.history.push({
+                       pathname: '/listing',
+                       state: {
+                         filter: '',
+                       },
+                     })}>
                   <div className="label">
                     {subjectsData[1]['name']}
                   </div>
@@ -796,12 +808,13 @@ class LandingPage extends Component {
               </div>
               {
                 this.state.subjectsExpanded && <div className="box box-3">
-                  <div className="inner-box" onClick={() => this.props.history.push({
-                    pathname: '/listing',
-                    state: {
-                      filter: '',
-                    },
-                  })}>
+                  <div className="inner-box" style={{ backgroundImage: `url(${subjectsData[2].tile})` }} style={{ backgroundImage: `url(${subjectsData[2].tile})` }}
+                       onClick={() => this.props.history.push({
+                         pathname: '/listing',
+                         state: {
+                           filter: '',
+                         },
+                       })}>
                     <div className="label">
                       {subjectsData[2]['name']}
                     </div>

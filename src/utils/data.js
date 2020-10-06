@@ -23,66 +23,85 @@ import UdacityLogo from './../assets/UdacityLogo.png';
 import UdemyLogo from './../assets/UdemyLogo.png';
 import UniAuklandLogo from './../assets/UniAuklandLogo.jpg';
 import UniNewcastleLogo from './../assets/UniNewcastleLogo.jpeg';
+import dataScience from '../assets/subjects/20402.jpg';
+import scienceAndEngin from '../assets/subjects/female-engineer-in-laboratory-3861449.jpg';
+import socialStudies from '../assets/subjects/happy-ethnic-woman-sitting-at-table-with-laptop-3769021.jpg';
+import computerScience from '../assets/subjects/Image-2.jpg';
+import art from '../assets/subjects/Image-3.jpg';
+import business from '../assets/subjects/Image-4.jpg';
+import mathImage from '../assets/subjects/Image-16.jpg';
+import developer from '../assets/subjects/person-looking-at-phone-and-at-macbook-pro-1181244.jpg';
+import health from '../assets/subjects/photo-of-woman-practicing-yoga-3820320.jpg';
+
 export const subjectsData = [
   {
     name: 'Computer Science',
     code: 'CS',
     content: '',
     image: CS,
+    tile: computerScience,
   },
   {
     name: 'Business',
     code: 'B',
     content: '',
     image: B,
+    tile: business,
   },
   {
     name: 'Arts & Design',
     code: 'A',
     content: '',
     image: A,
+    tile: art,
   },
   {
     name: 'Data Science',
     code: 'DA',
     content: '',
     image: DA,
+    tile: dataScience,
   },
   {
     name: 'Health & Lifestyle',
     code: 'HL',
     content: '',
     image: HL,
+    tile: health,
   },
   {
     name: 'Science & Engineering',
     code: 'SENG',
     content: '',
     image: SENG,
+    tile: scienceAndEngin,
   },
   {
     name: 'Social Studies',
     code: 'SO',
     content: '',
     image: SO,
+    tile: socialStudies,
   },
   {
     name: 'Developers/Programming',
     code: 'DEV',
     content: '',
     image: DEV,
-  },
-  {
-    name: 'Others',
-    code: 'O',
-    content: '',
-    image: O,
+    tile: developer,
   },
   {
     name: 'Math',
     code: 'M',
     content: '',
     image: M,
+    tile: mathImage,
+  },
+  {
+    name: 'Others',
+    code: 'O',
+    content: '',
+    image: O,
   },
 ];
 
@@ -361,7 +380,7 @@ export const degreeData = [
 
 export const freeCourses = [
   {
-    name: "CS50's Introduction to Computer Science",
+    name: 'CS50\'s Introduction to Computer Science',
     university: 'Harvard University',
     provider: 'edX',
     image: HarvardUniLogo,
