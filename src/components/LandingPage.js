@@ -659,6 +659,11 @@ class LandingPage extends Component {
                       many more
                     </p>
                     <span
+                      onClick={() => this.props.history.push({
+                        pathname: '/listing',
+                        state: {
+                        },
+                      })}
                       style={{
                         borderBottom: '1px solid #000',
                         paddingBottom: '3px',
