@@ -35,7 +35,7 @@ const useStyles = makeStyles(theme => ({
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
     borderRadius: '8px',
-    width: '60%',
+    width: '40%',
     margin: '0',
   },
   button: {

@@ -1,11 +1,13 @@
 .c-card {
   border-radius: 7px;
   overflow: hidden;
-  width: 48%;
+  width: 45%;
   margin: 12px 1%;
   display: inline-block;
-  min-height: 340px;
+  min-height: 280px;
   position: relative;
+
+  font-size: 18px;
 
   .c-card-inner {
     display: flex;

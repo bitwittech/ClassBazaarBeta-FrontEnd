@@ -26,17 +26,17 @@ const Footer = ({ bgColor }) => {
               <div className="col-md-3 col-sm-12">
                 <div className="footer-group">
                   <div className="footer-group-heading">Contact Us</div>
-                  <p>
+                  {/* <p>
                     Andheri West, <br/>
                     Mumbai - 400053
-                  </p>
-                  <p>
+                  </p> */}
+                  {/* <p>
                     <a href="tel:18008902909">Phone: 1800 890 2909</a>
                   </p>
                   <p>
                     Monday - Thursday <br/>
                     8:00 am - 6:00 pm
-                  </p>
+                  </p> */}
                   <p>
                     <a href="mailTo:info@classbazaar.com">Email: info@classbazaar.com</a>
                   </p>
