@@ -42,6 +42,7 @@ import { withRouter } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 import Slider from 'react-animated-slider';
 import 'react-animated-slider/build/horizontal.css';
+import Banner1 from '../assets/img/main-banner.jpg'
 import Banner2 from '../assets/img/banner2.png';
 import Banner3 from '../assets/img/banner3.png';
 
@@ -560,7 +561,7 @@ class LandingPage extends Component {
   render() {
     const { classes, theme } = this.props;
     const content = [{
-      image: '/static/media/main-banner.5318be47.jpg',
+      image: Banner1,
     },
     {
       image: Banner3,
