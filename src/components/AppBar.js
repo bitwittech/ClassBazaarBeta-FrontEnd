@@ -9,6 +9,7 @@ import IconButton from '@material-ui/core/IconButton';
 import InputBase from '@material-ui/core/InputBase';
 import { LOGIN_MODAL } from '../store/Types';
 import Logo from './../assets/logo.png';
+import BlackLogo from './../assets/img/logo.png'
 import MenuIcon from '@material-ui/icons/Menu';
 import PermIdentityIcon from '@material-ui/icons/PermIdentity';
 import ProfileIcon from '@material-ui/icons/Person';

@@ -32,6 +32,10 @@ import business from '../assets/subjects/Image-4.jpg';
 import mathImage from '../assets/subjects/Image-16.jpg';
 import developer from '../assets/subjects/person-looking-at-phone-and-at-macbook-pro-1181244.jpg';
 import health from '../assets/subjects/photo-of-woman-practicing-yoga-3820320.jpg';
+import PepGra from '../assets/PepGra.png';
+import Duke from '../assets/Duke.png';
+import ThunderLogo from '../assets/ThunderLogo.png';
+
 
 export const subjectsData = [
   {
@@ -423,5 +427,426 @@ export const trendingData = [
     provider: 'FuturLearn',
     image: UniAuklandLogo,
     url: '/FutureLearn/a005a3aa-74bc-4c98-9df1-8291e83d4585',
+  },
+];
+
+export const exclusiveCourses = [
+  {
+    name: 'Certificate in Healthcare Analytics for Decision-makers',
+    university: 'Pepperdine Graziadio Business School',
+    image: PepGra,
+    provider: 'DHGE',
+    url: '',
+    data: {
+      name: `<span>Certificate in Healthcare Analytics</span><br/>`,
+      university: 'Pepperdine Graziadio Business School',
+      provider: 'DigitalHealth',
+      overView: `<span>Data is everywhere in healthcare. Both clinical and non-clinical work relies heavily on data to drive performance and improve outcomes. Having a solid understanding of healthcare analytics is key to making an impact on healthcare organizations. Harnessing the power of healthcare data analytics empowers leaders â€” in all fields of care, not just in Healthcare Informatics departments” to make data-driven decisions that lead to improved quality, cost, and care.</span><br />
+                  <span>Participants of the Certificate in Healthcare Analytics for Decision-Makers will gain experience contemplating data, determining informed results, and making evidence-based and data-backed decisions. They will learn to ask the right questions, evaluate data collection schemes, and interpret complex data sets from various sources. Expert faculty will demonstrate how to apply theories of statistical models and utilize evaluation methodologies and the program is facilitator-led to ensure student success. In only eight weeks, participants will become empowered to leverage healthcare analytics in their organization, influence important decisions, and achieve better results.</span>`,
+      bulletPoints: `<table style="border-collapse: collapse;  width: 100%; margin-top:30px">
+      <tbody>
+      <tr>
+          <td style="width:20%; padding-bottom: 33.5px; padding-right:8.5px">
+            <h1 style="font-size: 51px;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 0.29;
+            letter-spacing: normal;
+            color: #0d9ca4;
+            text-align: right;
+            font-weight: 700;">1-1</h1>
+          </td>
+          <td style="padding-bottom: 33.5px">
+              <p>support from experienced facilitators</p>
+          </td>
+      </tr>
+      <tr>
+          <td style="width:20%; padding-bottom: 33.5px;padding-right:8.5px">
+            <h1 style="font-size: 51px;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 0.29;
+            letter-spacing: normal;
+            color: #0d9ca4;
+            text-align: right;
+            font-weight: 700;">8</h1>
+          </td>
+          <td style="padding-bottom: 33.5px">
+              <p>topics to learn how to leverage healthcare analytics in your organization</p>
+          </td>
+      </tr>
+      <tr>
+          <td style="width:20%; padding-bottom: 33.5px; padding-right:8.5px">
+            <h1 style="font-size: 51px;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 0.29;
+            letter-spacing: normal;
+            color: #0d9ca4;
+            text-align: right;
+            font-weight: 700;">#21 </h1>
+          </td>
+          <td style="padding-bottom: 33.5px">
+              <p>ranking in 2019 for Best Online MBA - by U.S. News & World Report</p>
+          </td>
+      </tr>
+      <tr>
+          <td style="width:20%; padding-bottom: 33.5px; padding-right:8.5px">
+            <h1 style="font-size: 51px;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 0.29;
+            letter-spacing: normal;
+            color: #0d9ca4;
+            text-align: right;
+            font-weight: 700;">50+</h1>
+          </td>
+          <td style="padding-bottom: 33.5px">
+              <p>years of educating students in the field of business</p>
+          </td>
+      </tr>
+      </tbody></table>`,            
+      curriculum: `The Certificate in Healthcare Leadership focuses on all leadership functions. It is split into the following three pillars.`,
+      curriculumDetails: `<p></p>
+                          <ul style="font-size:12px">
+                            <li>Unit 1: Introduction to Descriptive Analytics</li>
+                            <li>Unit 2: Making Inferences and Practical Probability Theory</li>
+                            <li>Unit 3: Relationships Amongst Variables: Introduction to Correlation and Regression</li>
+                            <li>Unit 4: Multiple Regression</li>
+                            <li>Unit 5: Forecasting</li>
+                            <li>Unit 6: Framework for Decision-Making</li>
+                            <li>Unit 7: Finding Optimized Solutions in Healthcare, Part 1</li>
+                            <li>Unit 8: Finding Optimized Solutions in Healthcare, Part 2</li>
+                          </ul>`,
+      outcome: `<p>Participants of the Certificate in Healthcare Analytics for Decision-Makers will earn the following skills:</p>
+                <ul>
+                  <li>Ask the correct questions prior to healthcare data collection and analysis, and search for possible alternative explanations upon completion.</li>
+                  <li>Identify biases that may corrupt the decision-making process and develop mechanisms for avoiding those biases.<li></li>
+                  <li>Use spreadsheets to model mathematics</li>
+                  <li>Understand practical statistical models that can be used to forecast the future</li>
+                  <li>Identify significant group differences and gauge the practical value of those differences</li>
+                  <li>Create rational frameworks to identify, embrace, integrate, and mitigate risk in the decision-making process</li>
+                  <li>Understand mathematical theories of optimization used to determine the best solutions to perplexing problems</li>
+                  <li>Create accurate, compelling, and convincing presentations to ensure implementation of analysts™ recommendations</li>
+                  <li>Think critically about healthcare issues and use an integrated approach when making decisions, leveraging expertise in all substantive areas</li>
+              </ul>`,
+      whyRequired: `<p>This program is ideal for consumers and producers of healthcare analytics data. As an online healthcare data analytics certificate, it was designed for current and prospective decision-makers who are interested in gaining working knowledge of the topic through participating in a flexible and comprehensive online course, rather than gaining the in-depth knowledge a degree in the field would offer. Participants need little to no background in data science. Groups that might especially benefit from this program are:</p>
+                    <ul>
+                      <li>Leadership and business developers looking to expand business impact</li>
+                      <li>Healthcare professionals new to data analysis and data science</li>
+                      <li>Analysts or recent graduates new to healthcare</li>
+                      <li>Healthcare analysts looking to refresh or expand their knowledge</li>
+                    </ul>`,
+      providerInfoName: 'About the Pepperdine Graziadio Business School',
+      providerInfo: `<p>For the last 50 years, the Pepperdine Graziadio Business School has challenged individuals to think boldly and drive meaningful change within their industries and communities. Dedicated to developing Best for the World Leaders, the Graziadio School offers a comprehensive range of MBA, MS, executive, and doctoral degree programs grounded in integrity, innovation, and entrepreneurship. The Graziadio School advances experiential learning through small classes with distinguished faculty that stimulate critical thinking and meaningful connection, inspiring students and working professionals to realize their greatest potential as value-centered leaders.</p>
+                      <p>Pepperdine University is a private institution founded in 1937. It has a total undergraduate enrollment of 3,604. Its setting is suburban, with the Malibu campus spanning 830 acres. In the 2019 edition of Best Colleges, Pepperdine University ranked 47 on the list of National Universities</p>`,
+      prerequisites:
+        '<div>Requires a bachelor’s degree from an accredited university.</div>',
+      startDate: null,
+      duration: '8 weeks',
+      price: '2995',
+      enroll:
+        'https://dhge.org/our-programs/healthcare-analytics-certificate-pepperdine-graziadio',
+    }
+  },
+  {
+    name: 'Certificate in Healthcare Leadership',
+    university: 'Duke CE',
+    provider: 'DHGE',
+    image: Duke,
+    url: '',
+    data: {
+      name: `<span>Certificate in Healthcare Leadership</span><br/>`,
+      university: 'Duke CE',
+      provider: 'DigitalHealth',
+      overView: `<span>The Certificate in Healthcare Leadership, developed in partnership with Duke Corporate Education (Duke CE, part of Duke University), empowers leaders with the mindset, skills, and confidence to lead in a manner that is authentic to who they are.</span><br />
+                  <span>Designed for healthcare professionals seeking to lead in an effective way, this program teaches leaders to evaluate themselves, improve communication, build relationships, and motivate others. Using a framework developed in collaboration with industry experts and world-leading instructors, students will learn to identify techniques and leverage opportunities to increase influence across a matrixed organization. Through this online certificate, learners will build their leadership style and confidence to elevate performance and maximize impact.</span>`,
+      bulletPoints: `<table style="border-collapse: collapse;  width: 100%; margin-top:30px">
+      <tbody>
+      <tr>
+          <td style="width:20%; padding-bottom: 33.5px; padding-right:8.5px">
+            <h1 style="font-size: 51px;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 0.29;
+            letter-spacing: normal;
+            color: #0d9ca4;
+            text-align: right;
+            font-weight: 700;">#1</h1>
+          </td>
+          <td style="padding-bottom: 33.5px">
+              <p>ranking among Custom Executive Education Providers in North America in the Financial Times (Duke CE)</p>
+          </td>
+      </tr>
+      <tr>
+          <td style="width:20%; padding-bottom: 33.5px;padding-right:8.5px">
+            <h1 style="font-size: 51px;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 0.29;
+            letter-spacing: normal;
+            color: #0d9ca4;
+            text-align: right;
+            font-weight: 700;">300,000+</h1>
+          </td>
+          <td style="padding-bottom: 33.5px">
+              <p>leaders engaged in different Duke CE programs in over 80 countries</p>
+          </td>
+      </tr>
+      <tr>
+          <td style="width:20%; padding-bottom: 33.5px; padding-right:8.5px">
+            <h1 style="font-size: 51px;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 0.29;
+            letter-spacing: normal;
+            color: #0d9ca4;
+            text-align: right;
+            font-weight: 700;">14+</h1>
+          </td>
+          <td style="padding-bottom: 33.5px">
+              <p>industry leaders from a range of healthcare backgrounds are involved in the development of this certificate program</p>
+          </td>
+      </tr>
+    </tbody></table>`,
+      
+      curriculum: `The Certificate in Healthcare Leadership focuses on all leadership functions. It is split into the following three pillars.`,
+      curriculumDetails: `<p></p>
+                            <p style="font-size:12px">Module 1: Leading Self</p>
+                            <ul style="font-size:12px">
+                            <li>Unit 1: Becoming an Authentic Leader</li>
+                            <li>Unit 2: Increasing Energy, Effectiveness, and Impact</li>
+                            <li>Unit 3: Improving Communications and Building Relationships</li>
+                          </ul>
+                          <p></p>
+                            <p style="font-size:12px">Module 2: Leading Others</p>
+                            <ul style="font-size:12px">
+                            <li>Unit 4: Motivating and Coaching Others</li>
+                            <li>Unit 5: Aligning People and Work</li>
+                            <li>Unit 6: Addressing Performance Issues</li>
+                            <li>Unit 7: Elevating Team Effectiveness</li>
+                          </ul>
+                          <p></p>
+                            <p style="font-size:12px">Module 3: Leading Organizations</p>
+                            <ul style="font-size:12px">
+                            <li>Unit 8: Implementing Strategic Plans</li>
+                            <li>Unit 9: Managing the Finances</li>
+                            <li>Unit 10: When Change Happens</li>
+                            <li>Unit 11: Positioning for the Future: Communication and Influence</li>
+                            <li>Unit 12: Reflecting and Planning for Continuous Improvement</li>
+                          </ul>`,
+      outcome: `<p>Participants of the Certificate in Healthcare Leadership will earn the following skills:</p>
+                <ul>
+                  <li>Increase self-awareness of personal preferences and styles and how to align with messages, habits and behaviors that project an authentic and effective leadership identity.</li>
+                  <li>Learn the value of strong relationships and networks and how to build them through communication and collaboration that increase trust and understanding.</li>
+                  <li>and enhance the performance of others by defining clear goals and priorities, and employing key leadership levers such as motivation, coaching, delegation and feedback.</li>
+                  <li>Align with the overall operations of the organization by understanding, translating and implementing strategic and financial plans at the team level and identifying ways to positively contribute to business performance.</li>
+                  <li>Develop leadership techniques to increase their level of influence and guide both the process of change and people transitions as healthcare continues to evolve.</li>
+              </ul>`,
+      whyRequired: `<p>The Healthcare Leadership certificate is designed for:</p>
+                    <ul>
+                      <li>Aspiring or entry-level leaders working across diverse healthcare disciplines such as pharmacy, radiology, occupational therapy, etc.</li>
+                      <li>Experienced managers or directors who want to elevate their existing skills and learn more about emerging leadership trends</li>
+                    </ul>`,
+      providerInfoName: 'About the Duke CE',
+      providerInfo: `<p>Part of Duke University, Duke Corporate Education (Duke CE) is the premier global provider of leadership solutions in context. They deliver leadership development to the global 1000 organizations and governments around the world to get their leaders and their business ready for what’s next.</p>
+                      <p>The Financial Times has ranked Duke Corporate Education the top custom provider of executive education headquartered in the US for two decades.</p>`,
+      prerequisites:
+        '<div>Requires a bachelor’s degree from an accredited university.</div>',
+      startDate: null,
+      duration: '12 weeks',
+      price: '1995',
+      enroll:
+        'https://dhge.org/our-programs/certificate-in-healthcare-leadership',
+    },
+
+  },
+  {
+    name: 'Certificate in Healthcare Marketing',
+    university: 'Pepperdine Graziadio Business School',
+    provider: 'DHGE',
+    image: PepGra,
+    url: '',
+    data: {
+      name: `<span>Certificate in Healthcare Marketing</span><br/>`,
+      university: 'Pepperdine Graziadio Business School',
+      provider: 'DigitalHealth',
+      overView: `<span>The healthcare industry has shifted from volume-based care to value-based care: More than ever, healthcare organizations have to prioritize patient engagement and health outcomes. Patients have become more involved with their own health. Providers must adjust how they engage their target audience to remain relevant and ensure success — in short: They must adopt and lead in a patient-centric approach.</span><br />
+                  <span>The Certificate in Healthcare Marketing was designed to equip healthcare professionals with key marketing concepts, tools, and case studies so they can transform patient interactions into positive customer experiences. Developed in collaboration with the Pepperdine Graziadio Business School and with industry experts, the courses are specifically developed for medical marketing and healthcare marketing, which is unlike marketing in any other field, as the strategies are impacting consumer’s health.</span>`,
+      bulletPoints: `<table style="border-collapse: collapse;  width: 100%; margin-top:30px">
+      <tbody>
+      <tr>
+          <td style="width:20%; padding-bottom: 33.5px; padding-right:8.5px">
+            <h1 style="font-size: 51px;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 0.29;
+            letter-spacing: normal;
+            color: #0d9ca4;
+            text-align: right;
+            font-weight: 700;">1-1</h1>
+          </td>
+          <td style="padding-bottom: 33.5px">
+              <p>live support from experienced facilitators in the U.S. News & World Report 2019 9 units taking you through the marketing essentials</p>
+          </td>
+      </tr>
+      <tr>
+          <td style="width:20%; padding-bottom: 33.5px;padding-right:8.5px">
+            <h1 style="font-size: 51px;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 0.29;
+            letter-spacing: normal;
+            color: #0d9ca4;
+            text-align: right;
+            font-weight: 700;">#21</h1>
+          </td>
+          <td style="padding-bottom: 33.5px">
+              <p>ranking in 2019 for Best Online MBA by U.S. News & World Report</p>
+          </td>
+      </tr>
+      </tbody></table>`,
+      
+      curriculum: `In nine weeks, the certificate covers the following topics in a context of healthcare marketing and medical marketing:`,
+      curriculumDetails: `<p></p><ul style="font-size:12px">
+                            <li>Unit 1: Introduction to Healthcare Marketing</li>
+                            <li>Unit 2: Marketing Insights</li>
+                            <li>Unit 3: Customer Assessment</li>
+                            <li>Unit 4: Marketing Segmentation and Targeting</li>
+                            <li>Unit 5: Brand Development</li>
+                            <li>Unit 6: Creating Value — Product, Service, and Pricing Strategy</li>
+                            <li>Unit 7: Delivering Customer Value Through Distribution</li>
+                            <li>Unit 8: Value-Promotional Strategy and Customer Loyalty</li>
+                            <li>Unit 9: Monitoring the Plan</li>
+                          </ul>`,
+      outcome: `<p>Upon completion of this nine-week online medical marketing course, graduates will be able to:</p>
+                <ul>
+                  <li>Assess the effectiveness of a healthcare marketing plan</li>
+                  <li>Interpret and present relevant data (quantitative and qualitative) to support marketing </li>
+                  <li>Recommendations and decisions</li>
+                  <li>Create viable, executable marketing strategies and tactics for a healthcare organization</li>
+                </ul>`,
+      whyRequired: `<p>The Certificate in Healthcare Marketing is designed for various professionals wanting to learn more about a patient-centric healthcare organization and apply new innovative marketing approaches.</p>
+                    <p>Specifically, it can benefit:</p>
+                    <ul>
+                      <li>Marketing professionals and recent graduates new to healthcare</li>
+                      <li>Healthcare professionals new to marketing</li>
+                      <li>Healthcare marketing professionals wanting to connect with peers</li>
+                      <li>Leadership and business developers looking to learn new marketing strategies</li>
+                    </ul>`,
+      providerInfoName: 'About the Pepperdine Graziadio Business School',
+      providerInfo: `<p>For the last 50 years, the Pepperdine Graziadio Business School has challenged individuals to think boldly and drive meaningful change within their industries and communities. Dedicated to developing Best for the World Leaders, the Graziadio School offers a comprehensive range of MBA, MS, executive, and doctoral degree programs grounded in integrity, innovation, and entrepreneurship. The Graziadio School advances experiential learning through small classes with distinguished faculty that stimulate critical thinking and meaningful connection, inspiring students and working professionals to realize their greatest potential as value-centered leaders.</p>
+                      <p>Pepperdine University is a private institution founded in 1937. It has a total undergraduate enrollment of 3,604. Its setting is suburban, with the Malibu campus spanning 830 acres. In the 2019 edition of Best Colleges, Pepperdine University ranked 47 on the list of National Universities. The Pepperdine Online MBA ranks No. 21 for Best Online MBA in the U.S. News & World Report 2019.</p>`,
+      prerequisites:
+        '<div>Requires a bachelor’s degree from an accredited university.</div>',
+      startDate: null,
+      duration: '9 weeks',
+      price: '2995',
+      enroll:
+        'https://dhge.org/our-programs/healthcare-marketing-certificate-pepperdine-graziadio',
+    },
+  },
+  {
+    name: 'Certificate in Innovation in Healthcare Management',
+    university: 'Thunderbird School of Global Management, a unit of Arizona State University Knowledge Enterprise',
+    provider: 'DHGE',
+    image: ThunderLogo,
+    url: '',
+    data: {
+      name: `<span>Certificate in Innovation</span><br/>
+              <span>in Healthcare Management</span>`,
+      university: 'Thunderbird School of Global Management',
+      provider: 'DigitalHealth',
+      overView: `<span>Healthcare has experienced enormous leaps of innovation over the past several decades with advances in technology such as artificial intelligence, better therapeutic options, and improved diagnostics due to breakthroughs in data analysis and health informatics. The majority of this innovation has been focused on the development of new drugs, medical devices, diagnostic procedures, and therapies” now is the time to bring the delivery of healthcare services up to par with the modern world. An innovative mindset in healthcare is needed to improve quality, enhance the patient experience, reduce harm, improve access, increase efficiency, eliminate waste, and lower costs.</span>
+                  <span>The Certificate in Innovation in Healthcare Management empowers healthcare industry professionals ”from senior executives to aspiring managers” to foster effective, innovative environments and deliver results from new innovations.</span>`,
+      bulletPoints: `<table style="border-collapse: collapse;  width: 100%; margin-top:30px">
+      <tbody>
+      <tr>
+          <td style="width:20%; padding-bottom: 33.5px; padding-right:8.5px">
+            <h1 style="font-size: 51px;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 0.29;
+            letter-spacing: normal;
+            color: #0d9ca4;
+            text-align: right;
+            font-weight: 700;">#1</h1>
+          </td>
+          <td style="padding-bottom: 33.5px">
+              <p>Most Innovative School in the U.S. (ASU) in the U.S. News & World Report 2016, 2017, 2018, 2019</p>
+          </td>
+      </tr>
+      <tr>
+          <td style="width:20%; padding-bottom: 33.5px;padding-right:8.5px">
+            <h1 style="font-size: 51px;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 0.29;
+            letter-spacing: normal;
+            color: #0d9ca4;
+            text-align: right;
+            font-weight: 700;">#1</h1>
+          </td>
+          <td style="padding-bottom: 33.5px">
+              <p>Internationalism of Alumni in The Economist 2014</p>
+          </td>
+      </tr>
+      <tr>
+          <td style="width:20%; padding-bottom: 33.5px; padding-right:8.5px">
+            <h1 style="font-size: 51px;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 0.29;
+            letter-spacing: normal;
+            color: #0d9ca4;
+            text-align: right;
+            font-weight: 700;">#15 </h1>
+          </td>
+          <td style="padding-bottom: 33.5px">
+              <p>Most Innovative School in the U.S. (ASU) in the U.S. News & World Report 201</p>
+          </td>
+      </tr>
+    </tbody></table>`,
+      curriculum: `Students who undertake our healthcare innovation course will be introduced to concepts and definitions which include, but are not limited to, ideation and evaluation of ideas, identifying ways to turn innovative ideas into valuable strategies and business models, and ultimately delivering results from innovation.`,
+      curriculumDetails: `<p></p><ul style="font-size:12px">
+                            <li>Unit 1: Megatrends in Healthcare</li>
+                            <li>Unit 2: Ideation Best Practices</li>
+                            <li>Unit 3: Effective Validation</li>
+                            <li>Unit 4: Understanding Resource Constraints</li>
+                            <li>Unit 5: Planning for New Innovations</li>
+                            <li>Unit 6: Creating Valuable Advantages</li>
+                            <li>Unit 7: Winning Adoption for New Ideas</li>
+                            <li>Unit 8: Delivering Rapid Results</li>
+                          </ul>`,
+      outcome: `<p>Participants of the Certificate in Innovation in Healthcare Management will earn the following skills:</p>
+                <ul>
+                  <li>Describe key trends in the healthcare industry</li>
+                  <li>Recognize key environmental constraints impacting healthcare providers and healthcare service companies</li>
+                  <li>Identify opportunities for innovation in the healthcare industry</li>
+                  <li>Apply and summarize effective validation strategies for healthcare innovations</li>
+                  <li>Identify ways to turn innovative ideas into valuable strategies and business models</li>
+                  <li>Recognize planning models and payoff measurements for new innovation projects</li>
+                  <li>Identify resource needs for new innovation projects</li>
+                  <li>Outline techniques for encouraging others to adopt new innovations</li>
+                  <li>Create a 90-day delivery plan that includes keys to delivering intended results</li>
+              </ul>`,
+      whyRequired: `<p>This online course empowers healthcare industry professionals, from senior executives to aspiring managers, to foster effective innovation environments and deliver results from new innovations. Groups that could especially benefit from this certificate program are</p>
+                    <ul>
+                      <li>Executive leadership</li>
+                      <li>Mid- to senior-level managers</li>
+                      <li>Personnel with budget, management, or team-level decision responsibility</li>
+                      <li>High-potential management candidates</li>
+                    </ul>`,
+      providerInfoName: 'About the Duke CE',
+      providerInfo: `<p>The Thunderbird School of Global Management is a unit of the Arizona State University Knowledge Enterprise. Combined, they hold numerous rankings such as a No. 1 Master's in Management from the Times Higher Education/Wall Street Journal Business Schools Report 2019; No. 1 for Public University of Choice for International Students (ASU) in the 2018 Open Doors Report by the Institute of International Education; No. 1 for Most Innovative School in the U.S. (ASU) in the U.S. News & World Report 2016, 2017, 2018, 2019; and No. 1 for Internationalism of Alumni; among others.</p>
+                      <p>Thunderbird School of Global Management is the vanguard of global leadership, management, and business education for the Fourth Industrial Revolution. They prepare future-ready leaders, managers, entrepreneurs and intrapreneurs across the private and public sectors who advance inclusive and sustainable prosperity worldwide.</p>`,
+      prerequisites:
+        '<div>Requires a bachelor’s degree from an accredited university.</div>',
+      startDate: null,
+      duration: '8 weeks',
+      price: '2995',
+      enroll:
+        'https://dhge.org/our-programs/innovation-healthcare-management-certificate-asu-thunderbird-school-of-global-management',
+    },
   },
 ];

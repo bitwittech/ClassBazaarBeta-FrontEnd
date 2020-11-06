@@ -4,6 +4,7 @@ import {
   freeCourses,
   subjectsData,
   trendingData,
+  exclusiveCourses
 } from '../utils/data';
 import { fade, makeStyles } from '@material-ui/core/styles';
 
@@ -33,11 +34,16 @@ import Snackbar from '@material-ui/core/Snackbar';
 import StaticCourseDetails from './StaticCourseDetails';
 import TopAppBar from './AppBar';
 import { TrendingCoursesComponent } from './trending-cources/trending-cources';
+import { ExclusiveCourseComponent } from './exclusive-course/exclusive-course';
 import Typography from '@material-ui/core/Typography';
 import { store } from '../App';
 import { trackEvent } from 'react-with-analytics/lib/utils';
 import { withRouter } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
+import Slider from 'react-animated-slider';
+import 'react-animated-slider/build/horizontal.css';
+import Banner2 from '../assets/img/banner2.png';
+import Banner3 from '../assets/img/banner3.png';
 
 import dataScience from '../assets/subjects/20402.jpg';
 import scienceAndEngin from '../assets/subjects/female-engineer-in-laboratory-3861449.jpg';
@@ -553,6 +559,15 @@ class LandingPage extends Component {
 
   render() {
     const { classes, theme } = this.props;
+    const content = [{
+      image: '/static/media/main-banner.5318be47.jpg',
+    },
+    {
+      image: Banner3,
+    },
+    {
+      image: Banner2,
+    }]
     console.log('popup', this.state.popUp);
     console.log('LANDING', this.state);
     console.log('session', localStorage.getItem('cbpop'));
@@ -570,8 +585,17 @@ class LandingPage extends Component {
           <AuthProvider/>
           <div className={'landing-page-wrapper'}>
             <section className="main-banner posiition-relative d-flex align-items-center justify-content-center">
+              <Slider autoplay={3000}>
+                {content.map((item, index) => (
+                  <div
+                    key={index}
+                    style={{ backgroundImage: `url('${item.image}')`,backgroundSize: "cover", backgroundRepeat: "no-repeat"}}
+                  >
+                  </div>
+                ))}
+              </Slider>
               <div className="overlay"/>
-              <div className="banner-content text-center position-relative text-white">
+              <div className="banner-content text-center position-absolute text-white">
                 <div className="h5 mt-2" style={{ fontSize: '18px' }}>
                   We believe in
                 </div>
@@ -857,6 +881,12 @@ class LandingPage extends Component {
           />
           <LearnForFreeComponent
             trendingData={freeCourses}
+            filter={'free'}
+            trackEvent={trackEvent}
+            routingURL={'/listing'}
+          />
+          <ExclusiveCourseComponent
+            exclusiveCourse={exclusiveCourses}
             filter={'free'}
             trackEvent={trackEvent}
             routingURL={'/listing'}

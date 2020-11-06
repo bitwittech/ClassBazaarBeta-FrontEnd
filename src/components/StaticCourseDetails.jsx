@@ -11,6 +11,7 @@ import Footer from './Footer';
 import HomeModal from './HomeModal';
 import ListAltIcon from '@material-ui/icons/ListAlt';
 import Logo from '../assets/logo.png';
+import BlackLogo from '../assets/img/logo.png'
 import MobileTopbar from './MobileTopbar';
 import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 import QueryBuilderIcon from '@material-ui/icons/QueryBuilder';
@@ -30,8 +31,10 @@ import { trackEvent } from 'react-with-analytics/lib/utils';
 import { Link } from 'react-router-dom';
 import MoveToInboxIcon from '@material-ui/core/SvgIcon/SvgIcon';
 import Rupee from '../assets/rupee.svg';
+import DigitalHealth from '../assets/DignityHealth.png'
 
 const StaticCourseDetails = props => {
+  console.log(props)
   var data = props.location.state.data;
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -73,25 +76,29 @@ const StaticCourseDetails = props => {
               }
             </div> */}
           </div>
-
-          {data.type === 'degree' ? (
-            <div style={{ display: 'flex', marginTop: '15px', lineHeight: '35px' }}>
-              <div>
-                <MoveToInboxIcon color="secondary"/> &nbsp;
+          {data.startDate ? (
+            data.type === 'degree' ? (
+              <div style={{ display: 'flex', marginTop: '15px', lineHeight: '35px' }}>
+                <div>
+                  <MoveToInboxIcon color="secondary"/> &nbsp;
+                </div>
+                <div>{` Starts on  ${data.startDate}`}</div>
+                {/* <div>{Gstate.data.additionalDetails.courses.length} courses</div> */}
               </div>
-              <div>{` Starts on  ${data.startDate}`}</div>
-              {/* <div>{Gstate.data.additionalDetails.courses.length} courses</div> */}
-            </div>
-          ) : (
-            <div style={{ display: 'flex', marginTop: '15px' }}>
-              <div>
-                <DateRangeIcon color="secondary"/> &nbsp;
+            ) : (
+              <div style={{ display: 'flex', marginTop: '15px' }}>
+                <div>
+                  <DateRangeIcon color="secondary"/> &nbsp;
+                </div>
+                <div>{` Starts on  ${data.startDate}`}</div>
+                <div></div>
               </div>
-              <div>{` Starts on  ${data.startDate}`}</div>
-              <div></div>
-            </div>
+            )
+  
+          ):(
+            null
           )}
-
+          
           <div style={{ display: 'flex', marginTop: '15px', lineHeight: '35px' }}>
             <div>
               {/* <img src={Rupee} alt="cb-rupee" /> &nbsp; */}
@@ -676,6 +683,181 @@ const StaticCourseDetails = props => {
     </div>
   );
 
+  const digitalHealth = () => (
+    <div maxWidth="lg" className="ead-sec">
+      <div className="cd-container">
+        <Grid container spacing={3} direction="row-reverse">
+          <Grid item xs={12} sm={3}>
+            {courseSummary()}
+            <div className="digi__Logo">
+              <img src={DigitalHealth} alt=""Digital Health/>
+            </div>            
+          </Grid>
+          <Grid item xs={12} sm={9}>
+            <div style={{ backgroundColor: '#e6feff', boxShadow: 'none', marginLeft:'4rem' }}>
+              <div className="cd__header" style={{ backgroundColor: '#b42f32'}}>
+                <span>{data.provider} | Global Education</span>
+              </div>
+              <br/>
+              <div className="cd__content">
+                <div className="cd__content__inner">
+                <div className="c__uniName">
+                  <span>{data.university}</span>
+                </div>
+                <div className="c__cert"> 
+                  {/* <span>Certificate in Healthcare</span><br/>
+                  <span>Analytics for Decision-makers</span> */}
+                  {ReactHtmlParser(data.name)}
+                </div>
+                <div className="c__lvl">
+                  <span className="c__lvl_key">Course Level : </span>
+                  <span className="c__lvl__val">Intermediate</span>
+                </div>
+                <div className="c__ovr">
+                  <span className="c__ovr__title">Program Overview</span><br/>
+                  <span className="c__ovr__des">{ReactHtmlParser(data.overView)}</span>
+                </div>
+                <div className="c__ovr">
+                  {ReactHtmlParser(data.bulletPoints)}
+                </div>
+                <div className="c__cir">
+                  <span className="c__ovr__title">Curriculum</span><br/>
+                  <span className="c__ovr__des">{data.curriculum}</span>  
+                  <br />
+                  {ReactHtmlParser(data.curriculumDetails)}
+                </div>
+                <div className="c__cir">
+                  <span className="c__ovr__title">Outcomes</span><br/>
+                  <span className="c__ovr__des">{ReactHtmlParser(data.outcome)}</span>
+                </div>
+
+                <div className="c__cir">
+                  <span className="c__ovr__title">Who should study this program?</span><br/>
+                  <span className="c__ovr__des">{ReactHtmlParser(data.whyRequired)}</span>
+                </div>
+
+                <div className="c__cir">
+                  <span className="c__ovr__title">{data.providerInfoName}</span><br/>
+                  <span className="c__ovr__des">{ReactHtmlParser(data.providerInfo)}</span>
+                </div>
+
+
+
+                </div>
+                {/* <Typography
+                  style={{ fontWeight: '600', fontSize: '22px' }}
+                  variant="subtitle2"
+                  gutterBottom
+                >
+                  Course Overview
+                </Typography>
+                <Typography
+                  style={{ fontSize: '16px', fontWeight: '300' }}
+                  variant="body1"
+                  gutterBottom
+                >
+                  {ReactHtmlParser(data.outcome)}
+                </Typography> */}
+                <br/>
+                {/* {Gstate.data.learning_outcomes !== '' && (
+                    <>
+                      <Typography
+                        style={{ fontWeight: '600', fontSize: '22px' }}
+                        variant="subtitle2"
+                        gutterBottom
+                      >
+                        What will you learn?
+                      </Typography>
+                      <Typography
+                        style={{ fontSize: '16px', fontWeight: '300' }}
+                        variant="body1"
+                        gutterBottom
+                      >
+                        {Gstate.data.learning_outcomes.map((e, i) => (
+                          <li key={i}>{e}</li>
+                        ))}
+                      </Typography>{' '}
+                    </>
+                  )} */}
+                {/* {Gstate.data.requirements !== '' && (
+                    <>
+                      <Typography
+                        style={{ fontWeight: '600', fontSize: '22px' }}
+                        variant="subtitle2"
+                        gutterBottom
+                      >
+                        Who is this course for?
+                      </Typography>
+                      <Typography
+                        style={{ fontSize: '16px', fontWeight: '300' }}
+                        variant="body1"
+                        gutterBottom
+                      >
+                        {Gstate.data.requirements}
+                      </Typography>{' '}
+                    </>
+                  )} */}
+
+                <br/>
+
+                {/* {Gstate.data.educator !== '' && (
+                    <>
+                      <Typography
+                        style={{ fontWeight: '600', fontSize: '22px' }}
+                        variant="subtitle2"
+                        gutterBottom
+                      >
+                        Professor:{' '}
+                        <span style={{ fontWeight: '300' }}>
+                          {Gstate.data.educator}
+                        </span>
+                      </Typography>
+                    </>
+                  )} */}
+                <br/>
+                {/* <Typography
+                    style={{ fontWeight: '600', fontSize: '22px' }}
+                    variant="subtitle2"
+                    gutterBottom
+                  >
+                    Reviews
+                  </Typography> */}
+                {/* <div>
+                    <button
+                      onClick={() => {
+                        setState({ ...Gstate, popUp: !Gstate.popUp });
+                      }}
+                      className="enroll-btn"
+                    >
+                      <div style={{ display: 'flex', flexDirection: 'row' }}>
+                        <div
+                          style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            fontWeight: '600',
+                          }}
+                        >
+                          <div>Write Review &nbsp;</div>
+                        </div>
+                        <div>
+                          <RateReviewIcon
+                            style={{ fontSize: '22px', marginTop: '2px' }}
+                          />
+                        </div>
+                      </div>
+                    </button>
+                  </div> */}
+                {/* {reviews()} */}
+              </div>
+            </div>
+          </Grid>
+        </Grid>
+      </div>
+    </div>
+  )
+
+
+
   const renderSwitch = provider => {
     switch (provider) {
       case 'edX':
@@ -686,6 +868,8 @@ const StaticCourseDetails = props => {
         return udacity();
       case 'FutureLearn':
         return fl();
+      case 'DigitalHealth':
+        return digitalHealth()
       default:
         return <h1>Coming Soon</h1>;
     }
@@ -697,7 +881,7 @@ const StaticCourseDetails = props => {
       {renderSwitch(data.provider)}
       <div className="footer" style={{ background: '#FAFAFA' }}>
         <div style={{ marginTop: '20px' }}>
-          <img className="footer-logo" src={Logo} alt="classbazarLogo"/>
+          <img className="footer-logo" src={BlackLogo} alt="classbazarLogo"/>
         </div>
         <div className="footer-links">
           <div>
@@ -729,8 +913,8 @@ const StaticCourseDetails = props => {
             </p>
           </div>
         </div>
-        <p class="footer-text"> Email: info@classbazaar.com </p>
-        <p class="footer-text tsm">
+        <p className="footer-text"> Email: info@classbazaar.com </p>
+        <p className="footer-text tsm">
           © Copyright 2019 <strong>Class Bazaar</strong>, All Right Reserved
         </p>
       </div>

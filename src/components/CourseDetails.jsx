@@ -2028,6 +2028,180 @@ const CourseDetails = props => {
         </div>
       </div>
     );
+  
+    const digitalHealth = () =>
+    Gstate.data && (
+      <div maxwidth="lg" className="ead-sec">
+        <div className="cd-container">
+          <Grid container spacing={3} direction="row-reverse">
+            <Grid item xs={12} sm={3}>
+              {courseSummary()}
+            </Grid>
+            <Grid item xs={12} sm={9}>
+              <div className="d-card" style={{ backgroundColor: '#fff3ef', boxShadow: 'none' }}>
+                <div className="cd-head">
+                  <div className="cd-head-o">
+                    <Typography
+                      style={{ fontWeight: '600' }}
+                      color="primary"
+                      variant="subtitle2"
+                      gutterBottom
+                    >
+                      {Gstate.data && Gstate.data.owners[0].name}
+                    </Typography>
+                    <Typography variant="h6" gutterBottom>
+                      {Gstate.data.title}
+                    </Typography>
+                    <Typography
+                      variant="caption"
+                      display="block"
+                      className="provider"
+                      gutterBottom
+                    >
+                      via {provider}
+                    </Typography>
+                  </div>
+                  <div style={{ textAlign: 'right' }} className="cd-head-t">
+                    {reviewSection(
+                      Gstate.data.avg_rating,
+                      Gstate.data.num_reviews,
+                    )}
+                  </div>
+                </div>
+                <br/>
+                <div className="cd-cont">
+                  <Typography
+                    style={{ fontWeight: '600', fontSize: '22px' }}
+                    variant="subtitle2"
+                    gutterBottom
+                  >
+                    Course Overview1111111
+                  </Typography>
+                  <Typography
+                    style={{ fontSize: '16px', fontWeight: '300' }}
+                    variant="body1"
+                    gutterBottom
+                  >
+                    {ReactHtmlParser(Gstate.data.full_description, {
+                      transform: node => {
+                        if (node.name === 'h2' || node.name === 'h3') {
+                          // console.log({ node });
+                          return <Box>{node.children[0].children[0].data}</Box>;
+                        }
+                        if (node.name === 'br') {
+                          return null;
+                        }
+                        if (node.name === 'strong') {
+                          console.log({ node });
+                          return <Box>{node.children[0].data}</Box>;
+                        }
+                      },
+                    })}
+                  </Typography>
+                  <br/>
+                  {Gstate.data.outcome !== '' && (
+                    <>
+                      <Typography
+                        style={{ fontWeight: '600', fontSize: '22px' }}
+                        variant="subtitle2"
+                        gutterBottom
+                      >
+                        What will you learn?
+                      </Typography>
+                      <Typography
+                        style={{ fontSize: '16px', fontWeight: '300' }}
+                        variant="body1"
+                        gutterBottom
+                      >
+                        {ReactHtmlParser(Gstate.data.outcome, {
+                          transform: node => {
+                            // console.log({ node });
+                            if (node.name === 'h2') {
+                              return <Box>{node.children[0].data}</Box>;
+                            }
+                          },
+                        })}
+                      </Typography>{' '}
+                    </>
+                  )}
+                  {Gstate.data.prerequisites_raw !== '' ? (
+                    <>
+                      {' '}
+                      <Typography
+                        style={{ fontWeight: '600', fontSize: '22px' }}
+                        variant="subtitle2"
+                        gutterBottom
+                      >
+                        Prerequisites
+                      </Typography>
+                      <Typography
+                        style={{ fontSize: '16px', fontWeight: '300' }}
+                        variant="body1"
+                        gutterBottom
+                      >
+                        {ReactHtmlParser(Gstate.data.prerequisites_raw)}
+                      </Typography>
+                    </>
+                  ) : null}
+                  <br/>
+
+                  {Gstate.data.closestRun !== undefined && (
+                    <>
+                      <Typography
+                        style={{ fontWeight: '600', fontSize: '22px' }}
+                        variant="subtitle2"
+                        gutterBottom
+                      >
+                        Professor:{' '}
+                        {this.Gstate.closestRun.staff.map((obj, index) => (
+                          <span key={index} style={{ fontWeight: '300' }}>
+                            {obj.given_name}
+                          </span>
+                        ))}
+                      </Typography>
+                    </>
+                  )}
+
+                  <Typography
+                    style={{ fontWeight: '600', fontSize: '22px' }}
+                    variant="subtitle2"
+                    gutterBottom
+                  >
+                    Reviews
+                  </Typography>
+                  <div>
+                    <button
+                      onClick={() => {
+                        setState({ ...Gstate, popUp: !Gstate.popUp });
+                      }}
+                      className="enroll-btn"
+                    >
+                      <div style={{ display: 'flex', flexDirection: 'row' }}>
+                        <div
+                          style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            fontWeight: '600',
+                          }}
+                        >
+                          <div>Write Review &nbsp;</div>
+                        </div>
+                        <div>
+                          <RateReviewIcon
+                            style={{ fontSize: '22px', marginTop: '2px' }}
+                          />
+                        </div>
+                      </div>
+                    </button>
+                  </div>
+                  {reviews()}
+                </div>
+              </div>
+            </Grid>
+          </Grid>
+        </div>
+      </div>
+    );
 
   const renderSwitch = provider => {
     console.log(provider);
@@ -2049,6 +2223,8 @@ const CourseDetails = props => {
         return swayam();
       case 'Coursera':
         return coursera();
+      case 'DigitalHealth':
+        return digitalHealth();
       default:
         return <h1>Coming Soon</h1>;
     }

@@ -65,10 +65,22 @@
     height: 45%;
   }
   .main-banner{
-    background-image: url(../assets/img/main-banner.jpg);
+    // background-image: url(../assets/img/main-banner.jpg);
+    // background-size: cover;
+    // background-repeat: no-repeat;
+    height: 100vh;
+  }
+  .slider {
+    // background-image: url(../assets/img/main-banner.jpg);
     background-size: cover;
     background-repeat: no-repeat;
     height: 100vh;
+  }
+  .previousButton {
+    visibility: hidden;
+  }
+  .nextButton {
+    visibility: hidden;
   }
 
   .main-banner .banner-content{
