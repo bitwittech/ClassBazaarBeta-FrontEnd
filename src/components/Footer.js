@@ -8,7 +8,7 @@ import LINKEDIN from '../assets/img/linkedin.svg';
 import AICImage from '../assets/AIC_Logo_png.png';
 import TWITTER from '../assets/img/twitter.svg';
 import INSTAGRAM from '../assets/img/instagram.svg';
-import LOGO from '../assets/img/logo.png';
+import BlackLOGO from '../assets/img/logo.png';
 
 const Footer = ({ bgColor }) => {
   return (
@@ -19,7 +19,7 @@ const Footer = ({ bgColor }) => {
             <div className="row">
               <div className="col-md-3 col-sm-12">
                 <a href="/">
-                  <img src={LOGO} className="logo footer-logo"/>
+                  <img src={BlackLOGO} className="logo footer-logo"/>
                 </a>
               </div>
 

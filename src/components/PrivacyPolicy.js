@@ -5,6 +5,7 @@ import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import Footer from './Footer';
 import Logo from '../assets/logo.png';
+import BlackLogo from '../assets/img/logo.png'
 const ProvacyPolicy = () => {
   return (
     <>
@@ -291,7 +292,7 @@ const ProvacyPolicy = () => {
         </Container>
         <div className="footer" style={{ background: '#FAFAFA' }}>
           <div style={{ marginTop: '20px' }}>
-            <img className="footer-logo" src={Logo} alt="classbazarLogo" />
+            <img className="footer-logo" src={BlackLogo} alt="classbazarLogo" />
           </div>
           <div className="footer-links">
             <div>

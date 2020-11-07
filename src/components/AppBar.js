@@ -199,7 +199,12 @@ function TopBar(props) {
           >
             <div className="div" style={{ textAlign: 'center' }}>
               <ImageWithRouter
-                image={Logo}
+                image={`${
+                  !toggleAppBarTheme && shouldSwitch
+                    ? Logo
+                    : BlackLogo
+
+                }`}
                 routingURL={'/'}
                 clazzNames={`${classes.logo} click-h adj-i`}
                 alt="logo"
@@ -221,7 +226,12 @@ function TopBar(props) {
             <div>
               {' '}
               <ImageWithRouter
-                image={Logo}
+                image={`${
+                  !toggleAppBarTheme && shouldSwitch
+                    ? Logo
+                    : BlackLogo
+                    
+                }`}
                 routingURL={'/'}
                 clazzNames={`${classes.logo} click-h adj-i`}
                 alt="logo"
