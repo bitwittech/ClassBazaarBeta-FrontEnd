@@ -634,7 +634,7 @@ class LandingPage extends Component {
 
                     {index === 1 ? (
                       <div className="d-flex">
-                      <div className="banner-content position-absolute text-white" style={{top:'40%', paddingTop: 0, width: '28%', display:"flex", flexDirection: "column", justifyContent: "flex-end"}}>
+                      <div className="banner-content position-absolute text-white" style={{top:'40%', paddingTop: 0, width: '40%', display:"flex", flexDirection: "column", justifyContent: "flex-end"}}>
                       {/* <div className="h5 mt-2" style={{ fontSize: '18px' }}>
                         We believe in
                       </div> */}
@@ -656,7 +656,7 @@ class LandingPage extends Component {
 
                     {index === 2 ? (
                       <div className="d-flex">
-                      <div className="banner-content position-absolute text-white" style={{top:'40%' ,paddingTop: 0, width: '28%', display:"flex", flexDirection: "column", justifyContent: "flex-start"}}>
+                      <div className="banner-content position-absolute text-white" style={{top:'40%' ,paddingTop: 0, width: '40%', display:"flex", flexDirection: "column", justifyContent: "flex-start"}}>
                       <img src={DignityHealth} alt="dignityHealth" style={{width:'175.5px', height: '35.5px', marginLeft:'6rem', marginBottom: '1rem'}} />
                       <div style={{marginLeft:'6rem'}}>
                       <div className="h1" style={{ fontSize: '40px', lineHeight:1.1 }}>
