@@ -544,7 +544,7 @@ export const exclusiveCourses = [
         '<div>Requires a bachelor’s degree from an accredited university.</div>',
       startDate: null,
       duration: '8 weeks',
-      price: '2995',
+      price: '2,995',
       enroll:
         'https://dhge.org/our-programs/healthcare-analytics-certificate-pepperdine-graziadio',
     }
@@ -655,7 +655,7 @@ export const exclusiveCourses = [
         '<div>Requires a bachelor’s degree from an accredited university.</div>',
       startDate: null,
       duration: '12 weeks',
-      price: '1995',
+      price: '1,49,625',
       enroll:
         'https://dhge.org/our-programs/certificate-in-healthcare-leadership',
     },
@@ -687,7 +687,22 @@ export const exclusiveCourses = [
             font-weight: 700;">1-1</h1>
           </td>
           <td style="padding-bottom: 33.5px">
-              <p>live support from experienced facilitators in the U.S. News & World Report 2019 9 units taking you through the marketing essentials</p>
+              <p>live support from experienced facilitators in the U.S. News & World Report 2019</p>
+          </td>
+      </tr>
+      <tr>
+          <td style="width:20%; padding-bottom: 33.5px; padding-right:8.5px">
+            <h1 style="font-size: 51px;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 0.29;
+            letter-spacing: normal;
+            color: #0d9ca4;
+            text-align: right;
+            font-weight: 700;">9</h1>
+          </td>
+          <td style="padding-bottom: 33.5px">
+              <p>units taking you through the marketing essentials</p>
           </td>
       </tr>
       <tr>
@@ -722,8 +737,7 @@ export const exclusiveCourses = [
       outcome: `<p>Upon completion of this nine-week online medical marketing course, graduates will be able to:</p>
                 <ul>
                   <li>Assess the effectiveness of a healthcare marketing plan</li>
-                  <li>Interpret and present relevant data (quantitative and qualitative) to support marketing </li>
-                  <li>Recommendations and decisions</li>
+                  <li>Interpret and present relevant data (quantitative and qualitative) to support marketing recommendations and decisions</li>
                   <li>Create viable, executable marketing strategies and tactics for a healthcare organization</li>
                 </ul>`,
       whyRequired: `<p>The Certificate in Healthcare Marketing is designed for various professionals wanting to learn more about a patient-centric healthcare organization and apply new innovative marketing approaches.</p>
@@ -741,7 +755,7 @@ export const exclusiveCourses = [
         '<div>Requires a bachelor’s degree from an accredited university.</div>',
       startDate: null,
       duration: '9 weeks',
-      price: '2995',
+      price: '2,995',
       enroll:
         'https://dhge.org/our-programs/healthcare-marketing-certificate-pepperdine-graziadio',
     },
@@ -803,7 +817,7 @@ export const exclusiveCourses = [
             font-weight: 700;">#15 </h1>
           </td>
           <td style="padding-bottom: 33.5px">
-              <p>Most Innovative School in the U.S. (ASU) in the U.S. News & World Report 201</p>
+              <p>Overall Executive Education in the Financial Times 2015</p>
           </td>
       </tr>
     </tbody></table>`,
@@ -844,7 +858,7 @@ export const exclusiveCourses = [
         '<div>Requires a bachelor’s degree from an accredited university.</div>',
       startDate: null,
       duration: '8 weeks',
-      price: '2995',
+      price: '2,995',
       enroll:
         'https://dhge.org/our-programs/innovation-healthcare-management-certificate-asu-thunderbird-school-of-global-management',
     },

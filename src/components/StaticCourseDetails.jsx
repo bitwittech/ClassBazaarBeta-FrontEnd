@@ -40,6 +40,129 @@ const StaticCourseDetails = props => {
     window.scrollTo(0, 0);
   }, []);
   console.log(data);
+  
+  const dignityCourseSummary = () => (
+    <>
+      <div
+        style={{
+          background: '#fff',
+          padding: '20px',
+          paddingLeft: '40px',
+        }}
+        className="cd-card"
+      >
+        <Typography
+          style={{ fontWeight: '600', fontSize: '22px' }}
+          variant="subtitle2"
+          color="primary"
+          gutterBottom
+        >
+          <div style={{ color: '#444444', borderBottom: '2px solid #f15a29', padding: '5px', display: 'inline' }}>
+            At a Glance
+          </div>
+        </Typography>
+
+
+        <div className="d-flex" style={{ flexDirection: 'column', marginTop: '25px', lineHeight: '35px' }}>
+          <div style={{ display: 'flex' }}>
+            <div>
+              <QueryBuilderIcon color="secondary"/> &nbsp;
+            </div>
+            <div>{data.duration}</div>
+            {/* <div>
+              {
+                Gstate.data.additionalDetails.durationText.split(
+                  'weekSuggested'
+                )[1]
+              }
+            </div> */}
+          </div>
+          {data.startDate ? (
+            data.type === 'degree' ? (
+              <div style={{ display: 'flex', marginTop: '15px', lineHeight: '35px' }}>
+                <div>
+                  <MoveToInboxIcon color="secondary"/> &nbsp;
+                </div>
+                <div>{` Starts on  ${data.startDate}`}</div>
+                {/* <div>{Gstate.data.additionalDetails.courses.length} courses</div> */}
+              </div>
+            ) : (
+              <div style={{ display: 'flex', marginTop: '15px' }}>
+                <div>
+                  <DateRangeIcon color="secondary"/> &nbsp;
+                </div>
+                <div>{` Starts on  ${data.startDate}`}</div>
+                <div></div>
+              </div>
+            )
+  
+          ):(
+            null
+          )}
+          
+          <div style={{ display: 'flex', marginTop: '15px', lineHeight: '35px' }}>
+            <div>
+              {/* <img src={Rupee} alt="cb-rupee" /> &nbsp; */}
+              <img src={Rupee} alt="cb-rupee"/> &nbsp;
+              &nbsp;
+            </div>
+            <div>
+              {data.provider === 'Swayam'
+                ? 'Free'
+                : data.price === '' ||
+                data.price === null
+                  ? 'Provider subscription required'
+                  : data.price === 0
+                    ? 'Free'
+                    : data.price}
+              {/* {Gstate.data.rakutenDetails.price.retail._text} */}
+            </div>
+          </div>
+
+          <div style={{ marginTop: '20px' }}>
+            <button
+              onClick={() => {
+                trackEvent(
+                  'Enroll Now',
+                  'click',
+                  `${data.provider}|${data.name}`,
+                );
+                window.open(
+                  data.provider === 'Swayam'
+                    ? data.enroll &&
+                    data.enroll.replace(
+                      'www.swayam.com',
+                      'www.swayam.gov.in',
+                    )
+                    : data.enroll && data.enroll,
+                  '_blank',
+                );
+              }}
+              className="enroll-btn"
+            >
+              <div style={{ display: 'flex', flexDirection: 'row' }}>
+                <div
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    fontWeight: '600',
+                  }}
+                >
+                  <div>Enroll Now &nbsp;</div>
+                </div>
+                <div>
+                  <ArrowForwardIcon
+                    style={{ fontSize: '22px', marginTop: '2px' }}
+                  />
+                </div>
+              </div>
+            </button>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+  
   const courseSummary = () => (
     <>
       <div
@@ -688,7 +811,7 @@ const StaticCourseDetails = props => {
       <div className="cd-container">
         <Grid container spacing={3} direction="row-reverse">
           <Grid item xs={12} sm={3}>
-            {courseSummary()}
+            {dignityCourseSummary()}
             <div className="digi__Logo">
               <img src={DigitalHealth} alt=""Digital Health/>
             </div>            

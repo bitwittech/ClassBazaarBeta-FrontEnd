@@ -7,6 +7,7 @@ import {
   exclusiveCourses
 } from '../utils/data';
 import { fade, makeStyles } from '@material-ui/core/styles';
+import ReactHtmlParser, { convertNodeToElement } from 'react-html-parser';
 
 import AuthProvider from './authProvider';
 import Box from '@material-ui/core/Box';
@@ -45,6 +46,7 @@ import 'react-animated-slider/build/horizontal.css';
 import Banner1 from '../assets/img/main-banner.jpg'
 import Banner2 from '../assets/img/banner2.png';
 import Banner3 from '../assets/img/banner3.png';
+import DignityHealth from '../assets/DignityHealth.png'
 
 import dataScience from '../assets/subjects/20402.jpg';
 import scienceAndEngin from '../assets/subjects/female-engineer-in-laboratory-3861449.jpg';
@@ -252,6 +254,7 @@ const SubjectCard = withRouter(({ history, ...data }) => {
 class LandingPage extends Component {
   constructor(props) {
     super(props);
+    this.exclusiveCourseSection = React.createRef();
     this.state = {
       data: [],
       page: 0,
@@ -558,17 +561,29 @@ class LandingPage extends Component {
     this.setState({ subjectsExpanded: !this.state.subjectsExpanded });
   };
 
+  handleScrollToStats = () => {
+    console.log('scroll this t exclusive course',this.exclusiveCourseSection);
+    window.scrollTo({
+        top: this.exclusiveCourseSection.current.offsetTop,
+        behavior: 'smooth'
+    })
+  }
+
   render() {
     const { classes, theme } = this.props;
-    const content = [{
-      image: Banner1,
+    const bannerCenter = "center";
+    const bannerStart = "start";
+    const content = [
+      {
+      image: Banner1
     },
     {
-      image: Banner3,
+      image: Banner3
     },
     {
-      image: Banner2,
-    }]
+      image: Banner2
+    }
+  ]
     console.log('popup', this.state.popUp);
     console.log('LANDING', this.state);
     console.log('session', localStorage.getItem('cbpop'));
@@ -585,34 +600,91 @@ class LandingPage extends Component {
           />
           <AuthProvider/>
           <div className={'landing-page-wrapper'}>
-            <section className="main-banner posiition-relative d-flex align-items-center justify-content-center">
+            <section className="main-banner posiition-relative">
               <Slider autoplay={3000}>
                 {content.map((item, index) => (
                   <div
                     key={index}
-                    style={{ backgroundImage: `url('${item.image}')`,backgroundSize: "cover", backgroundRepeat: "no-repeat"}}
+                    style={{ backgroundImage: `url('${item.image}')`,backgroundSize: "cover", backgroundRepeat: "no-repeat", 
+                            display: "flex",
+                            justifyContent: `${index !==2 ? bannerCenter: bannerStart}`,
+                            alignItems: "center"}}
                   >
+                    {index === 0 ? (
+                      <div className="d-flex align-items-center justify-content-center">
+                      <div className="banner-content text-center position-absolute text-white">
+                      <div className="h5 mt-2" style={{ fontSize: '18px' }}>
+                        We believe in
+                      </div>
+                      <div className="h1" style={{ fontSize: '38px' }}>
+                        Passion for Learning
+                      </div>
+                      <form>
+                        <Search
+                          getQuery={this.getQuery}
+                          onSearchChange={this.onSearchChange}
+                          classes={classes}
+                          props={this.props}
+                          routingURL={'/listing'}
+                        />
+                      </form>
+                    </div>
+                    </div>
+                    ): (null)}
+
+                    {index === 1 ? (
+                      <div className="d-flex">
+                      <div className="banner-content position-absolute text-white" style={{top:'40%', paddingTop: 0, width: '28%', display:"flex", flexDirection: "column", justifyContent: "flex-end"}}>
+                      {/* <div className="h5 mt-2" style={{ fontSize: '18px' }}>
+                        We believe in
+                      </div> */}
+                      <div style={{marginLeft:'6rem'}}>
+                      <div className="h1" style={{ fontSize: '40px', lineHeight:1.1 }}>
+                        Discover your true passion and turn it into a career
+                      </div>
+                      <Button
+                          variant="outlined"
+                          color="primary"
+                          className="login-btn signup-btn no-mobile"
+                        >
+                          See Tests
+                        </Button>
+                      </div>
+                    </div>
+                    </div>
+                    ): (<div></div>)}
+
+                    {index === 2 ? (
+                      <div className="d-flex">
+                      <div className="banner-content position-absolute text-white" style={{top:'40%' ,paddingTop: 0, width: '28%', display:"flex", flexDirection: "column", justifyContent: "flex-start"}}>
+                      <img src={DignityHealth} alt="dignityHealth" style={{width:'175.5px', height: '35.5px', marginLeft:'6rem', marginBottom: '1rem'}} />
+                      <div style={{marginLeft:'6rem'}}>
+                      <div className="h1" style={{ fontSize: '40px', lineHeight:1.1 }}>
+                        WorldClass Health Education for India
+                      </div>
+                      <div className="h1" style={{ fontSize: '13px', letterSpacing: '0.2px' }}>
+                        Coursed from premium medical institutes like Duke CE, Pepperdine Graziadio Business School and more
+                      </div>
+                      <Button
+                          variant="outlined"
+                          color="primary"
+                          className="select-course-btn no-mobile"
+                          onClick={() => this.handleScrollToStats()}
+                          style={{ marginTop: '1rem'}}
+                        >
+                          See Courses
+                        </Button>
+                      </div>
+                    </div>
+                    </div>
+                    ): (<div></div>)}
+
+                    
                   </div>
                 ))}
               </Slider>
               <div className="overlay"/>
-              <div className="banner-content text-center position-absolute text-white">
-                <div className="h5 mt-2" style={{ fontSize: '18px' }}>
-                  We believe in
-                </div>
-                <div className="h1" style={{ fontSize: '38px' }}>
-                  Passion for Learning
-                </div>
-                <form>
-                  <Search
-                    getQuery={this.getQuery}
-                    onSearchChange={this.onSearchChange}
-                    classes={classes}
-                    props={this.props}
-                    routingURL={'/listing'}
-                  />
-                </form>
-              </div>
+              
             </section>
           </div>
           {/*<div className="landing-page-wrapper">*/}
@@ -886,6 +958,7 @@ class LandingPage extends Component {
             trackEvent={trackEvent}
             routingURL={'/listing'}
           />
+          <div ref={this.exclusiveCourseSection}></div>
           <ExclusiveCourseComponent
             exclusiveCourse={exclusiveCourses}
             filter={'free'}

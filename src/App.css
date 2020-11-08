@@ -1421,3 +1421,17 @@ li {
     -webkit-backdrop-filter: blur(25px);
   backdrop-filter: blur(25px);
 }
+
+.select-course-btn {
+    color: white !important;
+    background: #0d9ca4 !important;
+    border-radius: 0px !important;
+    font-weight: 600 !important;
+    padding: 3px 20px !important;
+    text-transform: none !important;
+}
+
+
+.login-btn:hover {
+    background: rgb(255, 187, 62) !important;
+}
