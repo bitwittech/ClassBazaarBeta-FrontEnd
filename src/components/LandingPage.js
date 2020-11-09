@@ -47,6 +47,8 @@ import Banner1 from '../assets/img/main-banner.jpg'
 import Banner2 from '../assets/img/banner2.png';
 import Banner3 from '../assets/img/banner3.png';
 import DignityHealth from '../assets/DignityHealth.png'
+import DignityHealthWhite from '../assets/DignityHealthWhite.png'
+import EduWhite from '../assets/edubuk white.png';
 
 import dataScience from '../assets/subjects/20402.jpg';
 import scienceAndEngin from '../assets/subjects/female-engineer-in-laboratory-3861449.jpg';
@@ -635,9 +637,7 @@ class LandingPage extends Component {
                     {index === 1 ? (
                       <div className="d-flex">
                       <div className="banner-content position-absolute text-white" style={{top:'40%', paddingTop: 0, width: '40%', display:"flex", flexDirection: "column", justifyContent: "flex-end"}}>
-                      {/* <div className="h5 mt-2" style={{ fontSize: '18px' }}>
-                        We believe in
-                      </div> */}
+                      <img src={EduWhite} alt="edubuk" style={{width:'69px', height: '62px', marginLeft:'6rem', marginBottom: '1rem'}} />
                       <div style={{marginLeft:'6rem'}}>
                       <div className="h1" style={{ fontSize: '40px', lineHeight:1.1 }}>
                         Discover your true passion and turn it into a career
@@ -657,7 +657,7 @@ class LandingPage extends Component {
                     {index === 2 ? (
                       <div className="d-flex">
                       <div className="banner-content position-absolute text-white" style={{top:'40%' ,paddingTop: 0, width: '40%', display:"flex", flexDirection: "column", justifyContent: "flex-start"}}>
-                      <img src={DignityHealth} alt="dignityHealth" style={{width:'175.5px', height: '35.5px', marginLeft:'6rem', marginBottom: '1rem'}} />
+                      <img src={DignityHealthWhite} alt="dignityHealth" style={{width:'175.5px', height: '35.5px', marginLeft:'6rem', marginBottom: '1rem'}} />
                       <div style={{marginLeft:'6rem'}}>
                       <div className="h1" style={{ fontSize: '40px', lineHeight:1.1 }}>
                         WorldClass Health Education for India
