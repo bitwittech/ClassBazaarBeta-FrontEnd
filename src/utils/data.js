@@ -544,7 +544,7 @@ export const exclusiveCourses = [
         '<div>Requires a bachelor’s degree from an accredited university.</div>',
       startDate: null,
       duration: '8 weeks',
-      price: '2,995',
+      price: '2,24,625',
       enroll:
         'https://dhge.org/our-programs/healthcare-analytics-certificate-pepperdine-graziadio',
     }
@@ -755,7 +755,7 @@ export const exclusiveCourses = [
         '<div>Requires a bachelor’s degree from an accredited university.</div>',
       startDate: null,
       duration: '9 weeks',
-      price: '2,995',
+      price: '2,24,625',
       enroll:
         'https://dhge.org/our-programs/healthcare-marketing-certificate-pepperdine-graziadio',
     },
@@ -858,7 +858,7 @@ export const exclusiveCourses = [
         '<div>Requires a bachelor’s degree from an accredited university.</div>',
       startDate: null,
       duration: '8 weeks',
-      price: '2,995',
+      price: '2,24,625',
       enroll:
         'https://dhge.org/our-programs/innovation-healthcare-management-certificate-asu-thunderbird-school-of-global-management',
     },

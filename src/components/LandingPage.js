@@ -642,6 +642,9 @@ class LandingPage extends Component {
                       <div className="h1" style={{ fontSize: '40px', lineHeight:1.1 }}>
                         Discover your true passion and turn it into a career
                       </div>
+                      <div className="h1" style={{ fontSize: '13px', letterSpacing: '0.2px' }}>
+                        With the most popular and trusted career mapping test for <strong>FREE!</strong>
+                      </div>
                       <Button
                           variant="outlined"
                           color="primary"
