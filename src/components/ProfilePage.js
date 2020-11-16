@@ -112,7 +112,7 @@ class ProfilePage extends Component {
       if (user.data === undefined) {
         return this.setState({ data: [], reviews: [], loading: false });
       }
-      if (!user.data.bookmarks || (user.data.bookmarks && !user.data.bookmarks.length)) {
+      if (user.data.bookmarks.length === 0) {
         return this.setState({ data: [], loading: false });
       }
 
@@ -177,158 +177,10 @@ class ProfilePage extends Component {
           <AlertSnackbar resetMsg={this.resetMsg} data={this.state.msg} />
         )}
         <MobileTopBar title="My Profile" onlySearch={false} />
-        <div className="bookmark__top">
+        <div className="background">
           <Container maxWidth="lg" className="top-push">
             <div className={styles.root}>
-              <span className="bookmark__heading">Bookmarked Courses</span>
-              <Grid container spacing={3} style={{backgroundColor: '#fff3ef'}}>
-                <Grid item xs={12} md={8} lg={9}>
-                  <Container maxWidth="md">
-                    {this.state.loading ? (
-                      <Grid align="center">
-                        <CircularProgress color="primary" />
-                      </Grid>
-                    ) : !this.state.data.length > 0 ? (
-                      <Grid align="center">
-                        <Typography variant="h6" gutterBottom>
-                          No Bookmarks
-                        </Typography>
-                      </Grid>
-                    ) : (
-                      this.state.data.map(obj => (
-                        <ProfileCourseCard
-                          key={obj.title}
-                          isInstructor={true}
-                          university={obj.university}
-                          courseName={obj.title}
-                          provider={obj.provider}
-                          duration={obj.commitment}
-                          startingOn={obj.start_date}
-                          price={obj.price}
-                          rating={obj.rating}
-                          uuid={obj.uuid}
-                          url={obj.url}
-                          from={'profile'}
-                        />
-                      ))
-                    )}
-
-                    <br />
-                    <Typography
-                      variant="h4"
-                      style={{ color: '#3E3E3E' }}
-                      gutterBottom
-                      className="reviews-profile"
-                    >
-                      My Reviews
-                    </Typography>
-                    <br />
-                    {this.state.rloading ? (
-                      <p>Loading</p>
-                    ) : this.state.reviews.length > 0 ? (
-                      this.state.reviews.map(data => (
-                        <div key={Math.random()}>
-                          <div className="c-card">
-                            <div className="coursecard-header">
-                              <div>
-                                <Typography
-                                  color="primary"
-                                  style={{ fontWeight: '600' }}
-                                  variant="subtitle2"
-                                  className="hover"
-                                  gutterBottom
-                                >
-                                  {data.course && data.course.university}
-                                </Typography>
-                              </div>
-                              <div></div>
-                            </div>
-                            <Link
-                              to={`/coursedetails/${data.course &&
-                                data.course.provider}/${data.course &&
-                                data.course.uuid}`}
-                            >
-                              <Typography
-                                variant="subtitle1"
-                                style={{
-                                  color: '#3C3C3C',
-                                  fontWeight: '600',
-                                  padding: '0px 15px 0px 15px',
-                                }}
-                                className="hover"
-                                gutterBottom
-                              >
-                                {data.course && data.course.title}
-                              </Typography>
-                            </Link>
-                            <Typography
-                              style={{
-                                padding: '0px 15px 0px 15px',
-                                color: '#968484',
-                              }}
-                              variant="caption"
-                              display="block"
-                              gutterBottom
-                            >
-                              {data.review.provider}
-                            </Typography>
-                            <div>
-                              <Typography
-                                style={{
-                                  padding: '0px 15px 0px 15px',
-                                }}
-                                color="primary"
-                                variant="caption"
-                                display="block"
-                                gutterBottom
-                              >
-                                Review
-                              </Typography>
-                            </div>
-                            <div>
-                              <Typography
-                                style={{
-                                  padding: '0px 15px 0px 15px',
-                                  color: '#000',
-                                }}
-                                variant="caption"
-                                display="block"
-                                gutterBottom
-                              >
-                                {data.review.review}
-                              </Typography>
-                            </div>
-                            <br />
-                            <div>
-                              <div
-                                className={styles.root}
-                                style={{
-                                  background: '#F4F2F2',
-                                  padding: '0px 15px 0px 15px',
-                                  borderRadius: '0px 0px 4px 4px',
-                                }}
-                              ></div>
-                            </div>
-                          </div>
-                        </div>
-                      ))
-                    ) : (
-                      <Paper>
-                        <div className="review-util">
-                          <Typography
-                            variant="h5"
-                            style={{ color: '#9B9B9B' }}
-                            gutterBottom
-                            align="center"
-                          >
-                            You’ve not written any reviews yet
-                          </Typography>
-                        </div>
-                      </Paper>
-                    )}
-                  </Container>
-                </Grid>
-                
+              <Grid container spacing={3}>
                 <Grid item xs={12} md={4} lg={3}>
                   <Paper className={styles.paper}>
                     <Container maxWidth="lg" style={{ padding: '0 25px' }}>
@@ -717,6 +569,162 @@ class ProfilePage extends Component {
                   </Paper>
                 </Grid>
 
+                <Grid item xs={12} md={8} lg={9}>
+                  <Container maxWidth="md">
+                    <Typography
+                      variant="h4"
+                      className="Bookmark-profile-title"
+                      style={{ color: '#3E3E3E' }}
+                      gutterBottom
+                    >
+                      Bookmarked Courses
+                    </Typography>
+                    <Divider />
+                    <br />
+                    {this.state.loading ? (
+                      <Grid align="center">
+                        <CircularProgress color="primary" />
+                      </Grid>
+                    ) : !this.state.data.length > 0 ? (
+                      <Grid align="center">
+                        <Typography variant="h6" gutterBottom>
+                          No Bookmarks
+                        </Typography>
+                      </Grid>
+                    ) : (
+                      this.state.data.map(obj => (
+                        <ProfileCourseCard
+                          key={obj.title}
+                          isInstructor={true}
+                          university={obj.university}
+                          courseName={obj.title}
+                          provider={obj.provider}
+                          duration={obj.commitment}
+                          startingOn={obj.start_date}
+                          price={obj.price}
+                          rating={obj.rating}
+                          uuid={obj.uuid}
+                          url={obj.url}
+                          from={'profile'}
+                        />
+                      ))
+                    )}
+
+                    <br />
+                    <Typography
+                      variant="h4"
+                      style={{ color: '#3E3E3E' }}
+                      gutterBottom
+                      className="reviews-profile"
+                    >
+                      My Reviews
+                    </Typography>
+                    <br />
+                    {this.state.rloading ? (
+                      <p>Loading</p>
+                    ) : this.state.reviews.length > 0 ? (
+                      this.state.reviews.map(data => (
+                        <div key={Math.random()}>
+                          <div className="c-card">
+                            <div className="coursecard-header">
+                              <div>
+                                <Typography
+                                  color="primary"
+                                  style={{ fontWeight: '600' }}
+                                  variant="subtitle2"
+                                  className="hover"
+                                  gutterBottom
+                                >
+                                  {data.course && data.course.university}
+                                </Typography>
+                              </div>
+                              <div></div>
+                            </div>
+                            <Link
+                              to={`/coursedetails/${data.course &&
+                                data.course.provider}/${data.course &&
+                                data.course.uuid}`}
+                            >
+                              <Typography
+                                variant="subtitle1"
+                                style={{
+                                  color: '#3C3C3C',
+                                  fontWeight: '600',
+                                  padding: '0px 15px 0px 15px',
+                                }}
+                                className="hover"
+                                gutterBottom
+                              >
+                                {data.course && data.course.title}
+                              </Typography>
+                            </Link>
+                            <Typography
+                              style={{
+                                padding: '0px 15px 0px 15px',
+                                color: '#968484',
+                              }}
+                              variant="caption"
+                              display="block"
+                              gutterBottom
+                            >
+                              {data.review.provider}
+                            </Typography>
+                            <div>
+                              <Typography
+                                style={{
+                                  padding: '0px 15px 0px 15px',
+                                }}
+                                color="primary"
+                                variant="caption"
+                                display="block"
+                                gutterBottom
+                              >
+                                Review
+                              </Typography>
+                            </div>
+                            <div>
+                              <Typography
+                                style={{
+                                  padding: '0px 15px 0px 15px',
+                                  color: '#000',
+                                }}
+                                variant="caption"
+                                display="block"
+                                gutterBottom
+                              >
+                                {data.review.review}
+                              </Typography>
+                            </div>
+                            <br />
+                            <div>
+                              <div
+                                className={styles.root}
+                                style={{
+                                  background: '#F4F2F2',
+                                  padding: '0px 15px 0px 15px',
+                                  borderRadius: '0px 0px 4px 4px',
+                                }}
+                              ></div>
+                            </div>
+                          </div>
+                        </div>
+                      ))
+                    ) : (
+                      <Paper>
+                        <div className="review-util">
+                          <Typography
+                            variant="h5"
+                            style={{ color: '#9B9B9B' }}
+                            gutterBottom
+                            align="center"
+                          >
+                            You’ve not written any reviews yet
+                          </Typography>
+                        </div>
+                      </Paper>
+                    )}
+                  </Container>
+                </Grid>
               </Grid>
             </div>
           </Container>
