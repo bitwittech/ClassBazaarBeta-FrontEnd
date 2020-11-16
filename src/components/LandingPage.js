@@ -46,7 +46,8 @@ import 'react-animated-slider/build/horizontal.css';
 import Banner1 from '../assets/img/main-banner.jpg'
 import Banner2 from '../assets/img/banner2.png';
 import Banner3 from '../assets/img/banner3.png';
-import DignityHealthWhiteLogo from '../assets/dignityHealthWhiteLogo.jpeg';
+// import DignityHealthWhiteLogo from '../assets/dignityHealthWhiteLogo.jpeg';
+import DignityLogo from '../assets/dignity.png'
 import EduWhite from '../assets/edubuk white.png';
 
 import dataScience from '../assets/subjects/20402.jpg';
@@ -659,7 +660,7 @@ class LandingPage extends Component {
                     {index === 2 ? (
                       <div className="d-flex">
                       <div className="banner-content position-absolute text-white" style={{top:'40%' ,paddingTop: 0, width: '40%', display:"flex", flexDirection: "column", justifyContent: "flex-start"}}>
-                      <img src={DignityHealthWhiteLogo} alt="dignityHealth" style={{width:'175.5px', height: '35.5px', marginLeft:'6rem', marginBottom: '1rem'}} />
+                      <img src={DignityLogo} alt="dignityHealth" style={{width:'175.5px', height: '35.5px', marginLeft:'6rem', marginBottom: '1rem'}} />
                       <div style={{marginLeft:'6rem'}}>
                       <div className="h1" style={{ fontSize: '40px', lineHeight:1.1 }}>
                         WorldClass Health Education for India
