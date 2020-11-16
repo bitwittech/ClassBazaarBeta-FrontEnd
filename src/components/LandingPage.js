@@ -686,7 +686,11 @@ class LandingPage extends Component {
                 ))}
               </Slider>
               <div className="overlay"/>
-              
+              <div class="slider__dots">
+              {content.map((item, index) => (
+                <a href="#" key={index} class="slider__dot" ></a>
+              ))}
+              </div>
             </section>
           </div>
           {/*<div className="landing-page-wrapper">*/}

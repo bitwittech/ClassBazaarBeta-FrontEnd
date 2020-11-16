@@ -193,3 +193,36 @@
     vertical-align: sub;
   }
 }
+
+
+.slider__dots {
+  display: flex;
+  position: absolute;
+  bottom: 1.5em;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2!important;
+}
+
+.slider__dot {
+  display: block;
+  margin: 0 .5em;
+  width: 1em;
+  height: 1em;
+  background: #f15a29;
+  border-radius: 100px;
+}
+
+.slider__indicator {
+  display: block;
+  margin: 0 .5em;
+  width: 1em;
+  height: 1em;
+  background: rgba(255, 255, 255, .5);
+  border-radius: 100px;
+  bottom: 1.5em;
+  left: 50%;
+  transform: translateX(-50%);
+  position: absolute;
+  background: #f15a29;
+}
