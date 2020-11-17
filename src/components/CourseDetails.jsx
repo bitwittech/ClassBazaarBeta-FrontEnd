@@ -112,7 +112,7 @@ const CourseDetails = props => {
           'Content-Type': 'application/json',
         },
       };
-      var url = `https://api.classbazaar.in/api/course?uuid=${uuid}&provider=${provider}`;
+      var url = `https://api.classbazaar.com/api/course?uuid=${uuid}&provider=${provider}`;
       // var url = `http://localhost:8080/api/course?uuid=${uuid}&provider=${provider}`;
       console.log(url, uuid);
       const res = await fetch(url);
@@ -120,7 +120,7 @@ const CourseDetails = props => {
       console.log(data);
 
       const reviews = await axios.post(
-        'https://api.classbazaar.in/api/review/course',
+        'https://api.classbazaar.com/api/review/course',
         body,
         config,
       );

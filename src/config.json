@@ -1,5 +1,5 @@
 {
-  "API": "https://api.classbazaar.in",
+  "API": "https://api.classbazaar.com",
   "API_LOCAL": "http://localhost:8080",
   "API_NGROK": "https://fc7774e6.ngrok.io",
   "fusionAuthURL": "https://auth.classbazaar.in",

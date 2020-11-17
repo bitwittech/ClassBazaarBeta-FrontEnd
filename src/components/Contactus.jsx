@@ -29,7 +29,7 @@ const Contactus = () => {
 
   const handleSubmit = async e => {
     e.preventDefault();
-    const url = 'https://api.classbazaar.in/api/contact';
+    const url = 'https://api.classbazaar.com/api/contact';
     const res = await axios.post(url, data);
     setData({
       ...data,

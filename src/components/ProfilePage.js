@@ -112,7 +112,7 @@ class ProfilePage extends Component {
       if (user.data === undefined) {
         return this.setState({ data: [], reviews: [], loading: false });
       }
-      if (user.data.bookmarks.length === 0) {
+      if (!user.data.bookmarks) {
         return this.setState({ data: [], loading: false });
       }
 
@@ -121,7 +121,7 @@ class ProfilePage extends Component {
       // var url = `http://localhost:8080/api/bookmarks/?data=${JSON.stringify(
       //   data
       // )}`;
-      var url = `https://api.classbazaar.in/api/bookmarks/?data=${JSON.stringify(
+      var url = `https://api.classbazaar.com/api/bookmarks/?data=${JSON.stringify(
         data
       )}`;
 
@@ -147,7 +147,7 @@ class ProfilePage extends Component {
         },
       };
       const res = await axios.post(
-        'https://api.classbazaar.in/api/review/user',
+        'https://api.classbazaar.com/api/review/user',
         body,
         config
       );

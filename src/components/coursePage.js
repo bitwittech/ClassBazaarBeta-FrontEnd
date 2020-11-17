@@ -94,7 +94,7 @@ class CoursePage extends Component {
     }
     console.log(uuid);
 
-    var url = `https://api.classbazaar.in/api/course?uuid=${uuid}&provider=${provider}`;
+    var url = `https://api.classbazaar.com/api/course?uuid=${uuid}&provider=${provider}`;
     fetch(url)
       .then(response => response.json())
       .then(json => {

@@ -96,7 +96,7 @@ const HomeModal = ({
       trackEvent('Homepage PopUp', 'click', 'submit');
 
       try {
-        const res = await axios.post('https://api.classbazaar.in/api/stayupdated', data)
+        const res = await axios.post('https://api.classbazaar.com/api/stayupdated', data)
 
         console.log("RES", res)
 
@@ -283,7 +283,7 @@ const HomeModal = ({
       };
       try {
         const res = await axios.post(
-          'https://api.classbazaar.in/api/review',
+          'https://api.classbazaar.com/api/review',
           body,
           config
         );
