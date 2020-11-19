@@ -1473,3 +1473,10 @@ li {
         fill: #f15a29;
 }
 
+.edu-banner{
+    background-image: url(./assets/edubukBanner.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
+}
+

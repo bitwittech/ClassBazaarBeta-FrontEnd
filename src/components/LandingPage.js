@@ -645,13 +645,18 @@ class LandingPage extends Component {
                       <div className="h1" style={{ fontSize: '13px', letterSpacing: '0.2px' }}>
                         With the most popular and trusted career mapping test for <strong>FREE!</strong>
                       </div>
-                      <Button
+                      <Link
+                        to={{
+                          pathname: '/edubuk',
+                        }}>
+                        <Button
                           variant="outlined"
                           color="primary"
                           className="login-btn signup-btn no-mobile"
                         >
                           See Tests
                         </Button>
+                      </Link>
                       </div>
                     </div>
                     </div>

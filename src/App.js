@@ -7,6 +7,7 @@ import withAnalytics, { initAnalytics } from 'react-with-analytics';
 
 import About from './components/About';
 import Contactus from './components/Contactus';
+import Edubuk from './components/edubuk'
 import CourseDetails from './components/CourseDetails';
 import CoursePage from './components/coursePage';
 import HomePage from './components/HomePage';
@@ -73,6 +74,7 @@ const Root = props => {
         component={CourseDetails}
       />
       <Route exact path="/contact" component={Contactus} />
+      <Route exact path="/edubuk" component={Edubuk} />
     </Switch>
   );
 };
