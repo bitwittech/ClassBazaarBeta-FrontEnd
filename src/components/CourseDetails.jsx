@@ -468,7 +468,7 @@ const CourseDetails = props => {
 
   const coursera = () => {
     return (
-      Gstate.data &&
+      Gstate.data && Gstate.data.additionalDetails &&
       (Gstate.data.additionalDetails.courses.length === 0 ? (
         <div maxwidth="lg" className="ead-sec">
           <div className="cd-container">

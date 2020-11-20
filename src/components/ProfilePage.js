@@ -32,6 +32,8 @@ import AlertSnackbar from './AlertSnackbar';
 import { titleCase } from '../utils/utils';
 import { Redirect, withRouter } from 'react-router';
 import SaveIcon from '@material-ui/icons/Save';
+import bookmarkBanner from '../assets/bookmarkBanner.png';
+
 import {
   updateUser,
   updatePassword,
@@ -567,6 +569,7 @@ class ProfilePage extends Component {
                       </div>
                     </Container>
                   </Paper>
+                      <img src={bookmarkBanner} style={{marginTop: '20px'}} />
                 </Grid>
 
                 <Grid item xs={12} md={8} lg={9}>

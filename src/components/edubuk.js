@@ -4,13 +4,12 @@ import Grid from '@material-ui/core/Grid';
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import { trackEvent } from 'react-with-analytics/lib/utils';
-import bannerImage from '../assets/edubukBanner.png';
 import anyone from '../assets/anyone.png'
 import image1 from '../assets/Image31.png';
-import image2 from '../assets/Image 33.png';
+import image2 from '../assets/image32.png';
 import image3 from '../assets/CLPImage.png';
 import image4 from '../assets/Group3.png';
-import image5 from '../assets/image32.png';
+import image5 from '../assets/Image34.png';
 
 const Edubuk = () => {
   
@@ -71,22 +70,25 @@ const Edubuk = () => {
             </div>
         </div>
 
-        {/* <div style={{backgroundColor: '#e6feff', textAlign: 'center', display: 'flex', justifyContent: 'center'}}> 
+        <div style={{backgroundColor: '#e6feff', padding:'66px 183px 46px 137px', textAlign: 'center', display: 'flex', justifyContent: 'center'}}> 
           <div style={{backgroundColor: '#e6feff'}}>
-            <span>Multiple Intelligence, Interests & Talent (M.I.I.T.)</span>
-            <img src={image5} />
-            <span>Based on Harvard University Professor Howard Gardner’s Multiple Intelligence Theory the M.I.I.T test is trusted world across. 
+            <h4 style={{fontWeight:'600', fontSize:'22px', padding: '0 100px'}}>Multiple Intelligence, Interests & Talent (M.I.I.T.)</h4>
+            <img src={image2} style={{padding: '20px 50px', width:'80%', maxHeight:'340px'}}/>
+            <p style={{padding: '0px 60px'}}>Based on Harvard University Professor Howard Gardner’s Multiple Intelligence Theory the M.I.I.T test is trusted world across. 
               Its objective is to help each learner map their career paths by identifying their dominant types of intelligences and creating a personalised learner profile with 15 career paths in sync with their talents, interests and passion. 
-              There are multiple career paths like becoming a dancer, musician, singer, actor, painter, brand strategist, sportsperson, data scientists, drone pilot, etc.</span>
+              There are multiple career paths like becoming a dancer, musician, singer, actor, painter, brand strategist, sportsperson, data scientists, drone pilot, etc.</p>
+              <button style={{borderRadius: '2px',backgroundColor: '#086065',border: 'none',color: 'white',padding: '14px 36px 14px 36px',fontSize: '19px',fontWeight: '600'}}>Take Test</button>
           </div>
+          <div style={{height: '614px', margin: '50.5px 0 42.5px', border: 'solid 2px #000000'}}></div>
           <div style={{backgroundColor: '#e6feff'}}>
-            <span>Multiple Intelligence, Interests & Talent (M.I.I.T.)</span>
-            <img src={image5} />
-            <span>Based on Harvard University Professor Howard Gardner’s Multiple Intelligence Theory the M.I.I.T test is trusted world across. 
-              Its objective is to help each learner map their career paths by identifying their dominant types of intelligences and creating a personalised learner profile with 15 career paths in sync with their talents, interests and passion. 
-              There are multiple career paths like becoming a dancer, musician, singer, actor, painter, brand strategist, sportsperson, data scientists, drone pilot, etc.</span>
+            <h4 style={{fontWeight:'600',  fontSize:'22px', padding: '0 80px'}}>Intelligence Trigon: Multiple Intelligence Test</h4>
+            <img src={image5} style={{padding: '50px 50px', width:'80%', maxHeight:'340px'}}/>
+            <p style={{padding: '0px 40px'}}>The Interests Trigon further narrows down on the M.I.I.T. learner profile and suggests 3 most relevant career paths
+              for the learner via the widely trusted Edubuk’s deep learning and artificial intelligence system. 
+              Furthermore, users have an option to receive a Customized Learning Plan which will offer a combination of best online-cum-offline resources or courses to pursue the desired career path at the most affordable rate. </p>
+              <button style={{borderRadius: '2px',backgroundColor: '#086065',border: 'none',color: 'white',padding: '14px 36px 14px 36px',fontSize: '19px',fontWeight: '600'}}>Take Test</button>
           </div>
-        </div> */}
+        </div>
 
       
       <div className="orange-band" style={{ padding: '50px 20px' }}>
