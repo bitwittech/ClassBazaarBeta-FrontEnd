@@ -35,7 +35,7 @@ const Edubuk = () => {
             <span>Today learners want to venture into unconventional career paths out of passion and we are here to guide them in the correct path with the most trusted career mapping test and customised online-cum-offline learning paths which enables the learner to acquire skill-sets required to achieve their chosen career path. Did you know there are 9 types of intelligences and each has more than 20 career paths you could pursue?</span>
         </div>
 
-        <div style={{display: 'flex', backgroundColor: '#ebebeb', opacity: '0.6', padding: '50px 140px 67px'}}>
+        <div style={{display: 'flex', backgroundColor: '#ebebeb', padding: '50px 140px 67px'}}>
             <div style={{textAlign: 'center', backgroundColor: '#ffffff', boxShadow: '0 3px 6px 0 rgba(0, 0, 0, 0.16)', borderRadius: '13px', padding: '24px 24px 16px 13px', margin: '0 69px 0 0', width: '778px', height: '632px'}}>
                 {/* <p style={{marginBottom: '450px'}}>Image Needed</p> */}
                 <img src={image1} style={{width:'400px'}} />

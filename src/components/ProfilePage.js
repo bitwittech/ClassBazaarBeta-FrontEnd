@@ -92,6 +92,19 @@ class ProfilePage extends Component {
     };
     this.updateData = this.updateData.bind(this);
   }
+
+  handleRedeem = () => {
+    store.getItem('user').then(user => {
+      if (user == null) {
+        return ;
+      }
+      debugger;
+      const url = `http://redeem.classbazaar.com/authcheck?uname=${user.username}&uemail=${user.email}&umobile=${user.mobilePhone}`;
+      console.log(url);
+      window.open(url, '_self');
+    })
+  }
+
   updateData() {
     store.getItem('user').then(user => {
       if (user == null) {
@@ -569,7 +582,7 @@ class ProfilePage extends Component {
                       </div>
                     </Container>
                   </Paper>
-                      <img src={bookmarkBanner} style={{marginTop: '20px'}} />
+                      <img src={bookmarkBanner} style={{marginTop: '20px'}} onClick={this.handleRedeem} />
                 </Grid>
 
                 <Grid item xs={12} md={8} lg={9}>
