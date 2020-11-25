@@ -39,16 +39,20 @@ const Edubuk = () => {
             <div style={{textAlign: 'center', backgroundColor: '#ffffff', boxShadow: '0 3px 6px 0 rgba(0, 0, 0, 0.16)', borderRadius: '13px', padding: '24px 24px 16px 13px', margin: '0 69px 0 0', width: '778px', height: '632px'}}>
                 {/* <p style={{marginBottom: '450px'}}>Image Needed</p> */}
                 <img src={image1} style={{width:'400px'}} />
+                <div>
                 <span style={{fontSize: '24px', fontWeight: '600', color: '#159fa7'}}>Step 1</span><br />
                 <span style={{fontSize: '16px', color: '#000000', padding: '15px 30px 10px 30px'}}>Identify your core
                     intelligence type in sync with your passion and each has more than 15 career paths you could pursue</span>
+                </div>
             </div>
             <div style={{textAlign: 'center', backgroundColor: '#ffffff', boxShadow: '0 3px 6px 0 rgba(0, 0, 0, 0.16)', borderRadius: '13px', padding: '24px 24px 16px 13px', margin: '0 69px 0 0', width: '778px', height: '632px'}}>
             {/* <p style={{marginBottom: '450px'}}>Image Needed</p> */}
               <img src={image2} style={{width:'400px'}}/>
+              <div>
                 <span style={{fontSize: '24px', fontWeight: '600', color: '#159fa7'}}>Step 2</span><br />
                 <span style={{fontSize: '16px', color: '#000000', padding: '15px 30px 10px 30px'}}>Use Edubuk’s proprietary technology to
                     generate Customized Learning Plans personalized to your learner profile </span>
+              </div>
             </div>
         </div>
 
@@ -73,7 +77,7 @@ const Edubuk = () => {
         <div style={{backgroundColor: '#e6feff', padding:'66px 183px 46px 137px', textAlign: 'center', display: 'flex', justifyContent: 'center'}}> 
           <div style={{backgroundColor: '#e6feff'}}>
             <h4 style={{fontWeight:'600', fontSize:'22px', padding: '0 100px'}}>Multiple Intelligence, Interests & Talent (M.I.I.T.)</h4>
-            <img src={image2} style={{padding: '20px 50px', width:'80%', maxHeight:'340px'}}/>
+            <img src={image2} style={{padding: '20px 50px', width:'80%', maxHeight:'340px', objectFit: 'contain'}}/>
             <p style={{padding: '0px 60px'}}>Based on Harvard University Professor Howard Gardner’s Multiple Intelligence Theory the M.I.I.T test is trusted world across. 
               Its objective is to help each learner map their career paths by identifying their dominant types of intelligences and creating a personalised learner profile with 15 career paths in sync with their talents, interests and passion. 
               There are multiple career paths like becoming a dancer, musician, singer, actor, painter, brand strategist, sportsperson, data scientists, drone pilot, etc.</p>
@@ -82,7 +86,7 @@ const Edubuk = () => {
           <div style={{height: '614px', margin: '50.5px 0 42.5px', border: 'solid 2px #000000'}}></div>
           <div style={{backgroundColor: '#e6feff'}}>
             <h4 style={{fontWeight:'600',  fontSize:'22px', padding: '0 80px'}}>Intelligence Trigon: Multiple Intelligence Test</h4>
-            <img src={image5} style={{padding: '50px 50px', width:'80%', maxHeight:'340px'}}/>
+            <img src={image5} style={{padding: '50px 50px', width:'80%', maxHeight:'340px', objectFit: 'contain'}}/>
             <p style={{padding: '0px 40px'}}>The Interests Trigon further narrows down on the M.I.I.T. learner profile and suggests 3 most relevant career paths
               for the learner via the widely trusted Edubuk’s deep learning and artificial intelligence system. 
               Furthermore, users have an option to receive a Customized Learning Plan which will offer a combination of best online-cum-offline resources or courses to pursue the desired career path at the most affordable rate. </p>
