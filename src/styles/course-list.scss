@@ -1,0 +1,53 @@
+.c-card {
+  border-radius: 7px;
+  overflow: hidden;
+  width: 45%;
+  margin: 12px 1%;
+  display: inline-block;
+  min-height: 280px;
+  position: relative;
+
+  font-size: 18px;
+
+  .c-card-inner {
+    display: flex;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+
+    .expandable {
+      flex: 1;
+    }
+
+    .ratings {
+      margin-bottom: 10px;
+      font-size: 12px;
+    }
+
+    .provider-wrapper {
+      padding: 0 15px;
+      .provider-text {
+        background: #f15a29;
+        color: rgb(255, 255, 255);
+        border-radius: 10px;
+        display: inline;
+        padding: 3px 10px;
+      }
+    }
+    .bottom-section {
+      padding: 10px;
+    }
+  }
+}
+.load-more-button-list {
+  color: black !important;
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  border-bottom: 1px solid !important;
+  border-radius: 0 !important;
+}

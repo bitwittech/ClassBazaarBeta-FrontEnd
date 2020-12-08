@@ -1,0 +1,19 @@
+{
+  "API": "https://api.classbazaar.com",
+  "API_LOCAL": "http://localhost:8080",
+  "API_NGROK": "https://fc7774e6.ngrok.io",
+  "fusionAuthURL": "https://auth.classbazaar.in",
+  "fusionAuthAPIKey": "NiITD64khrkH7jn6PUNYCPdancc2gdiD8oZJDTsXFOA",
+  "fusionAuthApplicationId": "c8682dc3-adbc-4501-b707-9cde8c8ade0f",
+  "GOAUTH": "844357402268-ihn8eo096oqq60irm9sb1gn6n4uh1mf6.apps.googleusercontent.com",
+  "P_redirecturl": "https://www.classbazaar.com",
+  "D_redirecturl": "http://localhost:3000",
+  "fbAppId": "177337936826140",
+  "localForageConfig": {
+    "name": "classBazaar",
+    "version": 1.0,
+    "size": 4980736,
+    "storeName": "store",
+    "description": "Class Bazaar"
+  }
+}
