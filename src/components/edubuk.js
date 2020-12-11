@@ -10,10 +10,7 @@ import image2 from '../assets/image32.png';
 import image3 from '../assets/CLPImage.png';
 import image4 from '../assets/Group3.png';
 import image5 from '../assets/Image34.png';
-<<<<<<< HEAD
-=======
 import '../styles/edubuk.css';
->>>>>>> Release-1.0.1-1220
 
 const Edubuk = () => {
   
@@ -34,29 +31,6 @@ const Edubuk = () => {
         </section>
         </div>
 
-<<<<<<< HEAD
-        <div style={{padding: '60px 140px 41px 140px', color:'#000000'}}>
-            <span style={{color: '#f15a29', fontSize: '22px', lineHeight: '1.25', fontWeight: '600'}}>Science, Arts or Commerce? Gone are the days of pursuing stereotyped career paths and we know one size does not fit all! </span><br />
-            <span>Today learners want to venture into unconventional career paths out of passion and we are here to guide them in the correct path with the most trusted career mapping test and customised online-cum-offline learning paths which enables the learner to acquire skill-sets required to achieve their chosen career path. Did you know there are 9 types of intelligences and each has more than 20 career paths you could pursue?</span>
-        </div>
-
-        <div style={{display: 'flex', backgroundColor: '#ebebeb', padding: '50px 140px 67px'}}>
-            <div style={{textAlign: 'center', backgroundColor: '#ffffff', boxShadow: '0 3px 6px 0 rgba(0, 0, 0, 0.16)', borderRadius: '13px', padding: '24px 24px 16px 13px', margin: '0 69px 0 0', width: '778px', height: '632px'}}>
-                {/* <p style={{marginBottom: '450px'}}>Image Needed</p> */}
-                <img src={image1} style={{width:'400px'}} />
-                <div>
-                <span style={{fontSize: '24px', fontWeight: '600', color: '#159fa7'}}>Step 1</span><br />
-                <span style={{fontSize: '16px', color: '#000000', padding: '15px 30px 10px 30px'}}>Identify your core
-                    intelligence type in sync with your passion and each has more than 15 career paths you could pursue</span>
-                </div>
-            </div>
-            <div style={{textAlign: 'center', backgroundColor: '#ffffff', boxShadow: '0 3px 6px 0 rgba(0, 0, 0, 0.16)', borderRadius: '13px', padding: '24px 24px 16px 13px', margin: '0 69px 0 0', width: '778px', height: '632px'}}>
-            {/* <p style={{marginBottom: '450px'}}>Image Needed</p> */}
-              <img src={image2} style={{width:'400px'}}/>
-              <div>
-                <span style={{fontSize: '24px', fontWeight: '600', color: '#159fa7'}}>Step 2</span><br />
-                <span style={{fontSize: '16px', color: '#000000', padding: '15px 30px 10px 30px'}}>Use Edubuk’s proprietary technology to
-=======
         <div className="contentEdubook">
             <span className="title">Science, Arts or Commerce? Gone are the days of pursuing stereotyped career paths and we know one size does not fit all! </span><br />
             <span>Today learners want to venture into unconventional career paths out of passion and we are here to guide them in the correct path with the most trusted career mapping test and customised online-cum-offline learning paths which enables the learner to acquire skill-sets required to achieve their chosen career path. Did you know there are 9 types of intelligences and each has more than 20 career paths you could pursue?</span>
@@ -78,21 +52,14 @@ const Edubuk = () => {
               <div>
                 <span className="step2">Step 2</span><br />
                 <span className="use">Use Edubuk’s proprietary technology to
->>>>>>> Release-1.0.1-1220
                     generate Customized Learning Plans personalized to your learner profile </span>
               </div>
             </div>
         </div>
 
-<<<<<<< HEAD
-        <div style={{margin: '46px 88px 46px 91px'}}>
-            {/* <p style={{marginBottom: '91px', textAlign: 'center'}}>Image Needed</p> */}
-            <img src={image3} style={{width:'100%'}}/>
-=======
         <div className="maindivcustom">
             {/* <p style={{marginBottom: '91px', textAlign: 'center'}}>Image Needed</p> */}
             <img src={image3} className="customImg"/>
->>>>>>> Release-1.0.1-1220
             <span><span style={{fontWeight: 'bold'}}>Customized Learning Plan</span><span> will include online courses from best universities around the 
             world and offline courses which you can pursue from by enrolling in a university or 
             a skill training centre”. “This will also have courses you need to achieve your dream of 
@@ -100,44 +67,25 @@ const Edubuk = () => {
             actor, sportsperson etc</span></span>
         </div>
 
-<<<<<<< HEAD
-        <div style={{backgroundColor: '#fff3ef', textAlign: 'center', display: 'flex', justifyContent: 'center'}}>
-            <div style={{width: '40%', marginTop: '35px', marginBottom: '35px'}}>
-            {/* <p>Image Needed</p> */}
-            <img src={image4} style={{width:'100%', marginBottom:'40px'}}/>
-=======
         <div className="takeCareer">
             <div className="takeCareerInner">
             {/* <p>Image Needed</p> */}
             <img src={image4} className="careerImg"/>
->>>>>>> Release-1.0.1-1220
             <span>Take your career interest test for <strong>FREE</strong> effectively with 100% rewards vouchers from Class Bazaar to redeem from any 25,000+ products you like!</span>    
             </div>
         </div>
 
-<<<<<<< HEAD
-        <div style={{backgroundColor: '#e6feff', padding:'66px 183px 46px 137px', textAlign: 'center', display: 'flex', justifyContent: 'center'}}> 
-          <div style={{backgroundColor: '#e6feff'}}>
-            <h4 style={{fontWeight:'600', fontSize:'22px', padding: '0 100px'}}>Multiple Intelligence, Interests & Talent (M.I.I.T.)</h4>
-            <img src={image2} style={{padding: '20px 50px', width:'80%', maxHeight:'340px', objectFit: 'contain'}}/>
-=======
         <div className="multiple"> 
           <div style={{backgroundColor: '#e6feff'}}>
             <h4 style={{fontWeight:'600', fontSize:'22px', padding: '0 100px'}}>Multiple Intelligence, Interests & Talent (M.I.I.T.)</h4>
             <img className="multipleImg" src={image2}/>
->>>>>>> Release-1.0.1-1220
             <p style={{padding: '0px 60px'}}>Based on Harvard University Professor Howard Gardner’s Multiple Intelligence Theory the M.I.I.T test is trusted world across. 
               Its objective is to help each learner map their career paths by identifying their dominant types of intelligences and creating a personalised learner profile with 15 career paths in sync with their talents, interests and passion. 
               There are multiple career paths like becoming a dancer, musician, singer, actor, painter, brand strategist, sportsperson, data scientists, drone pilot, etc.</p>
               <button style={{borderRadius: '2px',backgroundColor: '#086065',border: 'none',color: 'white',padding: '14px 36px 14px 36px',fontSize: '19px',fontWeight: '600'}}>Take Test</button>
           </div>
-<<<<<<< HEAD
-          <div style={{height: '614px', margin: '50.5px 0 42.5px', border: 'solid 2px #000000'}}></div>
-          <div style={{backgroundColor: '#e6feff'}}>
-=======
           <div className="intelligence"></div>
           <div style={{backgroundColor: '#e6feff',paddingBottom: '30px'}}>
->>>>>>> Release-1.0.1-1220
             <h4 style={{fontWeight:'600',  fontSize:'22px', padding: '0 80px'}}>Intelligence Trigon: Multiple Intelligence Test</h4>
             <img src={image5} style={{padding: '50px 50px', width:'80%', maxHeight:'340px', objectFit: 'contain'}}/>
             <p style={{padding: '0px 40px'}}>The Interests Trigon further narrows down on the M.I.I.T. learner profile and suggests 3 most relevant career paths
@@ -148,11 +96,7 @@ const Edubuk = () => {
         </div>
 
       
-<<<<<<< HEAD
-      <div className="orange-band" style={{ padding: '50px 20px' }}>
-=======
       <div className="orange-band newsletter">
->>>>>>> Release-1.0.1-1220
         <div className="inner-orange">
           <Typography
             variant="h6"

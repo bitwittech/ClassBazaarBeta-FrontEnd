@@ -637,15 +637,9 @@ class LandingPage extends Component {
                     {index === 1 ? (
                       <div className="d-flex">
                       <div className="banner-content position-absolute text-white" style={{top:'40%', paddingTop: 0, width: '40%', display:"flex", flexDirection: "column", justifyContent: "flex-end"}}>
-<<<<<<< HEAD
-                      <img src={EduWhite} alt="edubuk" style={{width:'69px', height: '62px', marginLeft:'6rem', marginBottom: '1rem'}} />
-                      <div style={{marginLeft:'6rem'}}>
-                      <div className="h1" style={{ fontSize: '40px', lineHeight:1.1 }}>
-=======
                       <img src={EduWhite} alt="edubuk" className="edubuk"  />
                       <div className="edubukmain">
                       <div className="h1 edubukh1">
->>>>>>> Release-1.0.1-1220
                         Discover your true passion and turn it into a career
                       </div>
                       <div className="h1" style={{ fontSize: '13px', letterSpacing: '0.2px' }}>
@@ -658,11 +652,7 @@ class LandingPage extends Component {
                         <Button
                           variant="outlined"
                           color="primary"
-<<<<<<< HEAD
-                          className="login-btn signup-btn no-mobile"
-=======
                           className="login-btn signup-btn"
->>>>>>> Release-1.0.1-1220
                         >
                           See Tests
                         </Button>
@@ -677,27 +667,16 @@ class LandingPage extends Component {
                       <div className="banner-content position-absolute text-white" style={{top:'40%' ,paddingTop: 0, width: '40%', display:"flex", flexDirection: "column", justifyContent: "flex-start"}}>
                       <img src={DignityLogo} alt="dignityHealth" style={{width:'175.5px', height: '35.5px', marginLeft:'6rem', marginBottom: '1rem'}} />
                       <div style={{marginLeft:'6rem'}}>
-<<<<<<< HEAD
-                      <div className="h1" style={{ fontSize: '40px', lineHeight:1.1 }}>
-                        WorldClass Health Education for India
-                      </div>
-                      <div className="h1" style={{ fontSize: '13px', letterSpacing: '0.2px' }}>
-=======
                       <div className="h1 dignityH1">
                         WorldClass Health Education for India
                       </div>
                       <div className="h1 dignitySub">
->>>>>>> Release-1.0.1-1220
                         Coursed from premium medical institutes like Duke CE, Pepperdine Graziadio Business School and more
                       </div>
                       <Button
                           variant="outlined"
                           color="primary"
-<<<<<<< HEAD
-                          className="select-course-btn no-mobile"
-=======
                           className="select-course-btn seeCourse"
->>>>>>> Release-1.0.1-1220
                           onClick={() => this.handleScrollToStats()}
                           style={{ marginTop: '1rem'}}
                         >
@@ -820,11 +799,7 @@ class LandingPage extends Component {
                 </div>
               </div>
               {
-<<<<<<< HEAD
-                !this.state.subjectsExpanded && <div style={{ textAlign: 'right' }}>
-=======
                 !this.state.subjectsExpanded && <div className="browseCourse" >
->>>>>>> Release-1.0.1-1220
                   <figure className="browse-box-wrapper text-right" onClick={() => this.toggleExpand()}>
                     <div className="browse-box">
                             <span className="h2">
@@ -1003,11 +978,7 @@ class LandingPage extends Component {
             routingURL={'/listing'}
           />
         </Grid>
-<<<<<<< HEAD
-        <div className="orange-band" style={{ padding: '50px 20px' }}>
-=======
         <div className="orange-band" >
->>>>>>> Release-1.0.1-1220
           <div className="inner-orange">
             <Typography
               variant="h6"
