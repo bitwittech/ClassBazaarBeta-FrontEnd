@@ -194,8 +194,12 @@ function TopBar(props) {
       <div className="appbar-flex">
         <div className="topbar-cont">
           <div
+<<<<<<< HEAD
             className="no-desktop"
             style={{ width: '100%', backgroundColor: 'white' }}
+=======
+            className="no-desktop logoBackground"
+>>>>>>> Release-1.0.1-1220
           >
             <div className="div" style={{ textAlign: 'center' }}>
               <ImageWithRouter

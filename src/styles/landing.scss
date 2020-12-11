@@ -226,3 +226,51 @@
   position: absolute;
   background: #f15a29;
 }
+<<<<<<< HEAD
+=======
+
+.browseCourse{
+  text-align:right;
+}
+.orange-band
+{
+  padding: 50px 20px;
+}
+@media only screen and (max-width: 600px) {
+.home-grid-wrapper {
+  display: block !important;
+}
+
+.home-grid-wrapper .row-1 {
+  display: block !important;
+}
+.home-grid-wrapper .text-section {
+  padding-right: 0px !important;
+}
+
+.earn-a-degree-wrapper .section-title {
+  font-size: 40px !important;
+}
+
+.browseCourse{
+  text-align:center;
+}
+.orange-band
+{
+  padding: 0px;
+}
+.home-grid-wrapper .box-4 {
+  margin: 0px auto;
+}
+.home-grid-wrapper .right-wrapper {
+  margin:0px auto;
+}
+
+.trending-courses-wrapper .section-title {
+  font-size: 40px !important;
+}
+.exclusive-course-wrapper .section-title {
+  font-size: 40px !important;
+}
+}
+>>>>>>> Release-1.0.1-1220

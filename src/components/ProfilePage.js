@@ -582,7 +582,11 @@ class ProfilePage extends Component {
                       </div>
                     </Container>
                   </Paper>
+<<<<<<< HEAD
                       <img src={bookmarkBanner} style={{marginTop: '20px'}} onClick={this.handleRedeem} />
+=======
+                      <img src={bookmarkBanner} style={{marginTop: '20px'}} className="mobileImage" onClick={this.handleRedeem} />
+>>>>>>> Release-1.0.1-1220
                 </Grid>
 
                 <Grid item xs={12} md={8} lg={9}>

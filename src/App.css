@@ -9,6 +9,14 @@ body {
     pointer-events: none;
 }
 
+<<<<<<< HEAD
+=======
+.logoBackground {
+    width: 100%;
+    background-color: white;
+}
+
+>>>>>>> Release-1.0.1-1220
 /* .MuiBox-root-287{
   border:none !important;
 } */
@@ -16,6 +24,29 @@ body {
     padding-left: 4px;
 }
 
+<<<<<<< HEAD
+=======
+.dignityH1{
+    font-size:40px;
+    line-height: 1.1;
+}
+
+.dignitySub{
+    font-size: 13px !important;
+    letter-spacing: 0.2px;
+}
+
+.edubukmain{
+    margin-left: 6rem;
+}
+
+.edubukh1{
+    font-size: 40px; line-height:1.1; 
+}
+.edubuk{
+    width: 69px; height: 62px; margin-left:6rem; margin-bottom: 1rem;
+}
+>>>>>>> Release-1.0.1-1220
 .r-fw {
     font-weight: 200 !important;
 }
@@ -1161,6 +1192,50 @@ dashboard-options-header {
 }
 
 @media only screen and (max-width: 600px) {
+<<<<<<< HEAD
+=======
+
+    .seeCourse{
+        width:142px;
+    }
+
+    .dignitySub{
+        font-size: 13px !important;
+        letter-spacing: 0.2px;
+        width:150px;
+    }
+
+    .MuiButton-label{
+        margin-left: 12px;
+    }
+
+    .dignityH1{
+        font-size:22px !important;
+    }
+
+    .edubukmain{
+        margin-left: 0rem;
+    }
+
+    .edubukh1{
+        font-size: 22px !important; line-height:1.1; 
+    }
+    
+    .edubuk{
+        width: 69px; height: 62px; margin-left:0rem; margin-bottom: 1rem;
+    }
+
+    .logoBackground {
+        width: 40%;
+        background-color: transparent;
+    }
+    .c-card {
+        width: 100% !important;
+    }
+    .mobileImage{
+        width:100%;
+    }
+>>>>>>> Release-1.0.1-1220
     .branding-image {
         max-height: 40px;
     }
