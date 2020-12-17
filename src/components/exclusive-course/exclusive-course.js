@@ -41,6 +41,9 @@ export const ExclusiveCourseComponent = withRouter(({ history, exclusiveCourse, 
               <div className="university-section">
                 {degree.university}
               </div>
+              <div className="name-section">
+                {degree.name}
+              </div>
             </Link>
           );
 
@@ -50,9 +53,7 @@ export const ExclusiveCourseComponent = withRouter(({ history, exclusiveCourse, 
         {data.map(degree => {
           return (
             <div className="card-wrapper" style={{ paddingTop: 0 }}>
-              <div className="name-section">
-                {degree.name}
-              </div>
+              
             </div>
           );
         })}

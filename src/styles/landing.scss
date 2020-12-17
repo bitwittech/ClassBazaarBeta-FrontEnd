@@ -27,6 +27,15 @@
     border-radius: 0;
   }
 
+  .passionBanner{
+    font-size:38px;
+  }
+
+  .edu{
+    font-size: 13px;
+    letter-spacing: 0.2px;
+  }
+
   .overlay{
     position: absolute;
     z-index: 1;
@@ -237,6 +246,47 @@
 @media only screen and (max-width: 600px) {
 .home-grid-wrapper {
   display: block !important;
+}
+
+.main-banner{
+  // background-image: url(../assets/img/main-banner.jpg);
+  // background-size: cover;
+  // background-repeat: no-repeat;
+  height: 40vh !important;
+}
+.slider {
+  // background-image: url(../assets/img/main-banner.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 40vh !important;
+}
+
+.overlay{
+  background-color:transparent !important;
+}
+
+.dignityH1{
+  display: none;
+}
+
+.dignitySub{
+  display: none;
+}
+
+.passionBanner{
+  font-size:30px !important;
+}
+
+.edu{
+  display:none;
+}
+
+.edubukh1{
+  display: none;
+}
+
+.slider__dots {
+  display: none;
 }
 
 .home-grid-wrapper .row-1 {
