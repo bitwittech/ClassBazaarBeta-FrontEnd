@@ -618,7 +618,7 @@ class LandingPage extends Component {
                       <div className="h5 mt-2" style={{ fontSize: '18px' }}>
                         We believe in
                       </div>
-                      <div className="h1" style={{ fontSize: '38px' }}>
+                      <div className="h1" className="passionBanner">
                         Passion for Learning
                       </div>
                       <form>
@@ -642,7 +642,7 @@ class LandingPage extends Component {
                       <div className="h1 edubukh1">
                         Discover your true passion and turn it into a career
                       </div>
-                      <div className="h1" style={{ fontSize: '13px', letterSpacing: '0.2px' }}>
+                      <div className="h1" className="edu">
                         With the most popular and trusted career mapping test for <strong>FREE!</strong>
                       </div>
                       <Link
