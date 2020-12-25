@@ -127,7 +127,7 @@ body {
 }
 
 .text-field {
-    padding: 12px 2px;
+    /* padding: 12px 2px; */
     width: 45%;
     border: 1px solid #e3e8f0;
     background: #f0f2f7;
@@ -231,6 +231,16 @@ a:hover {
     to {
         transform: rotate(360deg);
     }
+}
+
+
+.select-box{
+    width: 45%;
+    border: 1px solid #e3e8f0;
+    background: #f0f2f7;
+    border-radius: 6px;
+    color: '#B9BED1' !important;
+    font-weight: '600' !important;
 }
 
 .ns-input {

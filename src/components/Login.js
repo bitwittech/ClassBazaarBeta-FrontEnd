@@ -33,13 +33,11 @@ const useStyles = makeStyles(theme => ({
   paper: {
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3),
     borderRadius: '8px',
     width: '40%',
     margin: '0',
   },
   button: {
-    margin: theme.spacing(1),
     padding: '10px 20px',
     textTransform: 'none',
   },
@@ -53,7 +51,6 @@ const useStyles = makeStyles(theme => ({
     display: 'none',
   },
   social: {
-    width: '60%',
     padding: '10px 20px',
     textTransform: 'none',
   },
@@ -195,22 +192,7 @@ const Login = () => {
                   recommendations, track subjects and more.
                 </Typography>
 
-                <LinkedIn
-                  clientId="81vr4cluxkzpau"
-                  onFailure={handleLinkedInFailure}
-                  className="btn-l"
-                  onSuccess={responseLinkedin}
-                  redirectUri="http://localhost:3000"
-                  scope="r_emailaddress"
-                >
-                  <Button
-                    variant="contained"
-                    style={{ background: '#0077B6', color: 'white' }}
-                    className={classes.button}
-                  >
-                    <i class="fab fa-linkedin-in"></i>&nbsp; Connect Linked-In
-                  </Button>
-                </LinkedIn>
+                
 
                 <form onSubmit={handleSubmit}>
                   {loginModal.state === 1 ? (
@@ -243,7 +225,7 @@ const Login = () => {
                     style={{
                       fontWeight: '900',
                       fontSize: '12px',
-                      marginTop: '20px',
+                      marginTop: '6px',
                     }}
                     color="primary"
                     variant="subtitle1"
@@ -268,7 +250,7 @@ const Login = () => {
                         style={{
                           fontWeight: '900',
                           fontSize: '12px',
-                          marginTop: '20px',
+                          marginTop: '6px',
                         }}
                         color="primary"
                         variant="subtitle1"
@@ -293,7 +275,43 @@ const Login = () => {
                     style={{
                       fontWeight: '900',
                       fontSize: '12px',
-                      marginTop: '20px',
+                      marginTop: '6px',
+                    }}
+                    color="primary"
+                    variant="subtitle1"
+                    gutterBottom
+                  >
+                    Gender
+                  </Typography>
+                  <select className="select-box">
+                    <option value="">--Select Gender--</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                  </select>
+
+                  <Typography
+                    style={{
+                      fontWeight: '900',
+                      fontSize: '12px',
+                      marginTop: '6px',
+                    }}
+                    color="primary"
+                    variant="subtitle1"
+                    gutterBottom
+                  >
+                    Class
+                  </Typography>
+                  <select className="select-box">
+                    <option value="">--Select Gender--</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                  </select>
+
+                  <Typography
+                    style={{
+                      fontWeight: '900',
+                      fontSize: '12px',
+                      marginTop: '6px',
                     }}
                     color="primary"
                     variant="subtitle1"
@@ -311,6 +329,50 @@ const Login = () => {
                     minLength={8}
                   />
                   <div className="color-red">{modal.errors.password}</div>
+                  
+
+                  <Typography
+                    style={{
+                      fontWeight: '900',
+                      fontSize: '12px',
+                      marginTop: '6px',
+                    }}
+                    color="primary"
+                    variant="subtitle1"
+                    gutterBottom
+                  >
+                    School Name
+                  </Typography>
+                  <input
+                    name="school"
+                    value={modal.formData.school}
+                    type="text"
+                    className="text-field"
+                    onChange={handleChange}
+                    placeholder="Enter your City"
+                  />
+                  <div className="color-red">{modal.errors.school}</div>
+                  <Typography
+                    style={{
+                      fontWeight: '900',
+                      fontSize: '12px',
+                      marginTop: '6px',
+                    }}
+                    color="primary"
+                    variant="subtitle1"
+                    gutterBottom
+                  >
+                    City
+                  </Typography>
+                  <input
+                    name="city"
+                    value={modal.formData.city}
+                    type="text"
+                    className="text-field"
+                    onChange={handleChange}
+                    placeholder="Enter your City"
+                  />
+                  <div className="color-red">{modal.errors.city}</div>
                   <Typography
                     className="link-button"
                     variant="body2"
@@ -350,7 +412,26 @@ const Login = () => {
                 </form>
 
                 <Grid style={{ marginTop: '20px' }} container spacing={3}>
-                  <Grid item xs={12} sm={6} style={{ textAlign: 'right' }}>
+                <Grid item xs={12} sm={4} style={{ textAlign: 'right' }}>
+                  <LinkedIn
+                  clientId="81vr4cluxkzpau"
+                  onFailure={handleLinkedInFailure}
+                  className="btn-l"
+                  onSuccess={responseLinkedin}
+                  redirectUri="http://localhost:3000"
+                  scope="r_emailaddress"
+                >
+                  <Button
+                    variant="contained"
+                    style={{ background: '#0077B6', color: 'white' }}
+                    className={classes.button}
+                  >
+                    <i class="fab fa-linkedin-in"></i>
+                  </Button>
+                </LinkedIn>
+                </Grid>
+                  <Grid item xs={12} sm={4}>
+                   
                     <FacebookLogin
                       appId={config.fbAppId}
                       autoLoad={false}
@@ -363,12 +444,12 @@ const Login = () => {
                           className={classes.social}
                           onClick={renderProps.onClick}
                         >
-                          <i class="fab fa-facebook-f"></i> &nbsp; Facebook
+                          <i class="fab fa-facebook-f"></i>
                         </Button>
                       )}
                     />
                   </Grid>
-                  <Grid item xs={12} sm={6} style={{ textAlign: 'left' }}>
+                  <Grid item xs={12} sm={4} style={{ textAlign: 'left' }}>
                     <GoogleLogin
                       clientId={config.GOAUTH}
                       render={renderProps => (
@@ -380,7 +461,6 @@ const Login = () => {
                           className={classes.social}
                         >
                           <i class="fab fa-google" aria-hidden="true"></i>
-                          &nbsp;Google
                         </Button>
                       )}
                       onSuccess={responseGoogle}
