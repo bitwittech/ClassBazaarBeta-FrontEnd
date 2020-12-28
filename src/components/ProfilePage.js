@@ -98,7 +98,6 @@ class ProfilePage extends Component {
       if (user == null) {
         return ;
       }
-      debugger;
       const url = `http://redeem.classbazaar.com/authcheck?uname=${user.username}&uemail=${user.email}&umobile=${user.mobilePhone}`;
       console.log(url);
       window.open(url, '_self');

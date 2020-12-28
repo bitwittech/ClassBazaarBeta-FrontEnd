@@ -11,8 +11,13 @@ import image3 from '../assets/CLPImage.png';
 import image4 from '../assets/Group3.png';
 import image5 from '../assets/Image34.png';
 import '../styles/edubuk.css';
+import axios from 'axios';
+import { eduTest } from '../service/commonService'
+
 
 const Edubuk = () => {
+
+  
   
   return (
     <>
@@ -91,7 +96,7 @@ const Edubuk = () => {
             <p style={{padding: '0px 40px'}}>The Interests Trigon further narrows down on the M.I.I.T. learner profile and suggests 3 most relevant career paths
               for the learner via the widely trusted Edubuk’s deep learning and artificial intelligence system. 
               Furthermore, users have an option to receive a Customized Learning Plan which will offer a combination of best online-cum-offline resources or courses to pursue the desired career path at the most affordable rate. </p>
-              <button style={{borderRadius: '2px',backgroundColor: '#086065',border: 'none',color: 'white',padding: '14px 36px 14px 36px',fontSize: '19px',fontWeight: '600'}}>Take Test</button>
+              <button style={{borderRadius: '2px',backgroundColor: '#086065',border: 'none',color: 'white',padding: '14px 36px 14px 36px',fontSize: '19px',fontWeight: '600'}} onClick={() => eduTest()} >Take Test</button>
           </div>
         </div>
 

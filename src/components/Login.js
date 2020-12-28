@@ -67,12 +67,16 @@ const Login = () => {
       password: '',
       phone: '',
       email: '',
+      school: '',
+      city: ''
     },
     errors: {
       username: null,
       password: null,
       phone: null,
       email: null,
+      school: null,
+      city: null
     },
   });
   console.log(loginModal);
@@ -124,7 +128,16 @@ const Login = () => {
       case 'password':
         errors.password =
           value.length < 8 ? 'Password must be 8 characters long' : '';
-
+      case 'city':
+        errors.city = !value.toString().trim().length
+          ? 'City required'
+          : '';
+        break;
+      case 'school':
+        errors.school = !value.toString().trim().length
+          ? 'School required'
+          : '';
+        break;
       default:
         break;
     }
@@ -302,9 +315,19 @@ const Login = () => {
                     Class
                   </Typography>
                   <select className="select-box">
-                    <option value="">--Select Gender--</option>
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
+                    <option value="">--Select Class/Year--</option>
+                    <option value="class_6">Class - 6</option>
+                    <option value="class_7">Class - 7</option>
+                    <option value="class_8">Class - 8</option>
+                    <option value="class_9">Class - 9</option>
+                    <option value="class_10">Class - 10</option>
+                    <option value="class_11">Class - 11</option>
+                    <option value="class_12">Class - 12</option>
+                    <option value="collage_1">Year - 1</option>
+                    <option value="collage_2">Year - 2</option>
+                    <option value="collage_3">Year - 3</option>
+                    <option value="collage_4">Year - 4</option>
+                    <option value="collage_5">Year - 5</option>
                   </select>
 
                   <Typography

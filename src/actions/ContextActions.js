@@ -159,11 +159,25 @@ export const register = async (data, dispatch) => {
         applicationId: config.fusionAuthApplicationId,
       },
     };
+    const newUserDataForReg = {
+        userid: '',
+        name: data.username,
+        password: data.password,
+        email_address: data.email,
+        mobile_no: data.phone,
+        gender: '',
+        school_or_college_name: data.school,
+        class_year: '',
+        city: data.city,
+
+    };
 
     console.log({
       userDataForReg,
       client,
     });
+
+    await client.newregister(undefined, newUserDataForReg).then(res => {console.log('New Registration')}).catch(e => {console.log(e)})
 
     await client
       .register(undefined, userDataForReg)
