@@ -87,7 +87,7 @@ const Edubuk = () => {
             <p style={{padding: '0px 60px'}}>Based on Harvard University Professor Howard Gardner’s Multiple Intelligence Theory the M.I.I.T test is trusted world across. 
               Its objective is to help each learner map their career paths by identifying their dominant types of intelligences and creating a personalised learner profile with 15 career paths in sync with their talents, interests and passion. 
               There are multiple career paths like becoming a dancer, musician, singer, actor, painter, brand strategist, sportsperson, data scientists, drone pilot, etc.</p>
-              <button style={{borderRadius: '2px',backgroundColor: '#086065',border: 'none',color: 'white',padding: '14px 36px 14px 36px',fontSize: '19px',fontWeight: '600'}}>Take Test</button>
+              <button style={{borderRadius: '2px',backgroundColor: '#086065',border: 'none',color: 'white',padding: '14px 36px 14px 36px',fontSize: '19px',fontWeight: '600'}} onClick={() => eduTest()}>Take Test</button>
           </div>
           <div className="intelligence"></div>
           <div style={{backgroundColor: '#e6feff',paddingBottom: '30px'}}>

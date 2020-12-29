@@ -25,3 +25,16 @@ export const eduTest = async () => {
     window.open(url, '_blank');
 
   };
+
+  export const newregister = async (userId, request) => {
+      debugger;
+      const res = await axios.post('/api/newregistration', request).then((res) => {console.log(res)});
+      // return new Promise((resolve, reject) => {
+      //   this._start()
+      //       .uri('/api/newregistration')
+      //       .urlSegment(userId)
+      //       .setJSONBody(request)
+      //       .post()
+      //       .go(this._responseHandler(resolve, reject));
+      // });
+  }

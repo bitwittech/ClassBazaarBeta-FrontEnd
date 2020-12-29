@@ -16,6 +16,7 @@ import {
 import {
   trackEvent
 } from 'react-with-analytics/lib/utils';
+import { newregister } from '../service/commonService'
 
 const {
   FusionAuthClient
@@ -32,6 +33,7 @@ let client = new FusionAuthClient(
   config.fusionAuthAPIKey,
   config.fusionAuthURL
 );
+
 export const facebookLogin = async (data, dispatch) => {
   console.log(data)
   const username = (data) ? data.name : null;
@@ -177,7 +179,7 @@ export const register = async (data, dispatch) => {
       client,
     });
 
-    await client.newregister(undefined, newUserDataForReg).then(res => {console.log('New Registration')}).catch(e => {console.log(e)})
+    newregister(undefined, newUserDataForReg);
 
     await client
       .register(undefined, userDataForReg)
