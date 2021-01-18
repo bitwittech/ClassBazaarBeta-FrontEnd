@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { API } from '../config.json'
 
-export const eduTest = async () => {
+export const eduTest = async (user) => {
     const config = {
       headers: {
         'Content-Type': 'application/json',
@@ -9,6 +9,7 @@ export const eduTest = async () => {
         // 'Access-Control-Allow-Methods' : 'GET,PUT,POST,DELETE,PATCH,OPTIONS'
       },
     };
+    console.log(user);
     const data = {
       "user_id": '123456789',
       "name": "krishnahari1",
@@ -18,7 +19,7 @@ export const eduTest = async () => {
       "class_year": "college_5",
       "city": "hyderabad",
       "mobile_no": "7842706731",
-      "password": "12456"
+      "password": "2412"
     }
     // e.preventDefault();
     const url = 'https://edubuk.co.in/User/loginApi?user_id=123456789&name=krishnahari1&gender=male&email_address=krishnahari321@gmail.com&school_or_college_name=Waterview Dr&class_year=college_5&city=hyderabad&mobile_no=7842706731&password=12456';

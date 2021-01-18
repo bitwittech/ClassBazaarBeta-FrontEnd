@@ -284,6 +284,9 @@ const Login = () => {
                     </>
                   ) : null}
 
+                  {loginModal.state === 1 ? (
+                  <>
+                  {' '}
                   <Typography
                     style={{
                       fontWeight: '900',
@@ -301,7 +304,12 @@ const Login = () => {
                     <option value="Male">Male</option>
                     <option value="Female">Female</option>
                   </select>
+                  </>
+                  ): null}
 
+                  {loginModal.state === 1 ? (
+                                    <>
+                                    {' '}
                   <Typography
                     style={{
                       fontWeight: '900',
@@ -329,6 +337,8 @@ const Login = () => {
                     <option value="collage_4">Year - 4</option>
                     <option value="collage_5">Year - 5</option>
                   </select>
+                                    </>
+                  ): null}
 
                   <Typography
                     style={{
@@ -353,7 +363,9 @@ const Login = () => {
                   />
                   <div className="color-red">{modal.errors.password}</div>
                   
-
+                  {loginModal.state === 1 ? (
+                  <>
+                  {' '}
                   <Typography
                     style={{
                       fontWeight: '900',
@@ -375,27 +387,36 @@ const Login = () => {
                     placeholder="Enter your City"
                   />
                   <div className="color-red">{modal.errors.school}</div>
-                  <Typography
-                    style={{
-                      fontWeight: '900',
-                      fontSize: '12px',
-                      marginTop: '6px',
-                    }}
-                    color="primary"
-                    variant="subtitle1"
-                    gutterBottom
-                  >
-                    City
-                  </Typography>
-                  <input
-                    name="city"
-                    value={modal.formData.city}
-                    type="text"
-                    className="text-field"
-                    onChange={handleChange}
-                    placeholder="Enter your City"
-                  />
-                  <div className="color-red">{modal.errors.city}</div>
+                  </>
+                  ): null}
+
+                  {loginModal.state === 1 ? (
+                                    <>
+                                    {' '}
+                                    <Typography
+                                      style={{
+                                        fontWeight: '900',
+                                        fontSize: '12px',
+                                        marginTop: '6px',
+                                      }}
+                                      color="primary"
+                                      variant="subtitle1"
+                                      gutterBottom
+                                    >
+                                      City
+                                    </Typography>
+                                    <input
+                                      name="city"
+                                      value={modal.formData.city}
+                                      type="text"
+                                      className="text-field"
+                                      onChange={handleChange}
+                                      placeholder="Enter your City"
+                                    />
+                                    <div className="color-red">{modal.errors.city}</div>
+                                    </>
+                  ): null}
+
                   <Typography
                     className="link-button"
                     variant="body2"
