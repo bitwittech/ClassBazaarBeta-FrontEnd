@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { API } from '../config.json'
 
 export const eduTest = async () => {
     const config = {
@@ -28,7 +29,7 @@ export const eduTest = async () => {
 
   export const newregister = async (userId, request) => {
       debugger;
-      const res = await axios.post('/api/newregistration', request).then((res) => {console.log(res)});
+      const res = await axios.post(API + '/api/newregistration', request).then((res) => {console.log(res)});
       // return new Promise((resolve, reject) => {
       //   this._start()
       //       .uri('/api/newregistration')
