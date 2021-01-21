@@ -16,7 +16,7 @@ import {
 import {
   trackEvent
 } from 'react-with-analytics/lib/utils';
-import { newregister } from '../service/commonService'
+import { newLogin, newregister } from '../service/commonService'
 
 const {
   FusionAuthClient
@@ -267,6 +267,7 @@ export const signin = async (data, dispatch) => {
       .then(async response => {
         console.log('LOGIN', response);
         if (response.statusCode === 200) {
+          newLogin(response.successResponse.user.email);
           store.setItem('user', response.successResponse.user);
           ReactGA.set({
             userId: response.successResponse.user.id

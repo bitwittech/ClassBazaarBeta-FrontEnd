@@ -1,7 +1,6 @@
 import AppBar from './AppBar';
 import Footer from './Footer';
-import Grid from '@material-ui/core/Grid';
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import Typography from '@material-ui/core/Typography';
 import { trackEvent } from 'react-with-analytics/lib/utils';
 import anyone from '../assets/anyone.png'
@@ -14,20 +13,34 @@ import '../styles/edubuk.css';
 import axios from 'axios';
 import { eduTest } from '../service/commonService';
 import { store } from '../App';
+import Store from '../store/Context';
+import { LOGIN_MODAL } from '../store/Types';
 
-const getUserDetails = () => {
+const getUserDetails = (dispatch) => {
+  
   store.getItem('user').then(user => {
     if (user == null) {
-      alert('Please login to Give test');
+        dispatch({
+          type: LOGIN_MODAL,
+          payload: {
+            open: true,
+            state: 0,
+          },
+        });
       return ;
     }
-    eduTest(user);
+    store.getItem('newUserLogin').then((val) => {
+      if(val == null) {
+        alert('Please login with new user');
+      }
+      eduTest(user, val);
+    })
   });
 }
 
 
 const Edubuk = () => {
-  
+  const { state, dispatch } = useContext(Store);
   return (
     <>
       <AppBar noHome={true}/>
@@ -96,7 +109,7 @@ const Edubuk = () => {
             <p style={{padding: '0px 60px'}}>Based on Harvard University Professor Howard Gardner’s Multiple Intelligence Theory the M.I.I.T test is trusted world across. 
               Its objective is to help each learner map their career paths by identifying their dominant types of intelligences and creating a personalised learner profile with 15 career paths in sync with their talents, interests and passion. 
               There are multiple career paths like becoming a dancer, musician, singer, actor, painter, brand strategist, sportsperson, data scientists, drone pilot, etc.</p>
-              <button style={{borderRadius: '2px',backgroundColor: '#086065',border: 'none',color: 'white',padding: '14px 36px 14px 36px',fontSize: '19px',fontWeight: '600'}} onClick={() => getUserDetails()}>Take Test</button>
+              <button style={{borderRadius: '2px',backgroundColor: '#086065',border: 'none',color: 'white',padding: '14px 36px 14px 36px',fontSize: '19px',fontWeight: '600'}} onClick={() => getUserDetails(dispatch)}>Take Test</button>
           </div>
           <div className="intelligence"></div>
           <div style={{backgroundColor: '#e6feff',paddingBottom: '30px'}}>
@@ -105,7 +118,7 @@ const Edubuk = () => {
             <p style={{padding: '0px 40px'}}>The Interests Trigon further narrows down on the M.I.I.T. learner profile and suggests 3 most relevant career paths
               for the learner via the widely trusted Edubuk’s deep learning and artificial intelligence system. 
               Furthermore, users have an option to receive a Customized Learning Plan which will offer a combination of best online-cum-offline resources or courses to pursue the desired career path at the most affordable rate. </p>
-              <button style={{borderRadius: '2px',backgroundColor: '#086065',border: 'none',color: 'white',padding: '14px 36px 14px 36px',fontSize: '19px',fontWeight: '600'}} onClick={() => getUserDetails()} >Take Test</button>
+              <button style={{borderRadius: '2px',backgroundColor: '#086065',border: 'none',color: 'white',padding: '14px 36px 14px 36px',fontSize: '19px',fontWeight: '600'}} onClick={() => getUserDetails(dispatch)} >Take Test</button>
           </div>
         </div>
 

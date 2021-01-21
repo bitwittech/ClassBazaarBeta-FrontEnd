@@ -1,7 +1,8 @@
 import axios from 'axios';
+import { store } from '../App';
 import { API } from '../config.json'
 
-export const eduTest = async (user) => {
+export const eduTest = async (user, val) => {
     const config = {
       headers: {
         'Content-Type': 'application/json',
@@ -9,7 +10,7 @@ export const eduTest = async (user) => {
         // 'Access-Control-Allow-Methods' : 'GET,PUT,POST,DELETE,PATCH,OPTIONS'
       },
     };
-    console.log(user);
+    console.log(user, val);
     const data = {
       "user_id": '123456789',
       "name": "krishnahari1",
@@ -22,7 +23,7 @@ export const eduTest = async (user) => {
       "password": "2412"
     }
     // e.preventDefault();
-    const url = 'https://edubuk.co.in/User/loginApi?user_id=123456789&name=krishnahari1&gender=male&email_address=krishnahari321@gmail.com&school_or_college_name=Waterview Dr&class_year=college_5&city=hyderabad&mobile_no=7842706731&password=12456';
+    const url = `https://edubuk.co.in/User/loginApi?user_id=${val.userid}&name=${val.name}&gender=${val.gender}&email_address=${val.email_address}&school_or_college_name=${val.school_or_college_name}&class_year=${val.class_year}&city=${val.city}&mobile_no=${val.mobile_no}&password=${val.password}`;
     // const res = await axios.get(url).then((res) => {console.log(res)})
     window.open(url, '_blank');
 
@@ -38,4 +39,12 @@ export const eduTest = async (user) => {
       //       .post()
       //       .go(this._responseHandler(resolve, reject));
       // });
+  }
+
+  export const newLogin = async (emailVal) => {
+    const res = await axios.post(API + '/api/newLoginDetails', {email: 'qwe@qwe.com'}).then((res) => {
+      console.log(res.data.data)
+      store.setItem('newUserLogin', res.data.data);
+      localStorage.setItem('newLogin', JSON.parse(JSON.stringify(res.data.data)));
+    });
   }
