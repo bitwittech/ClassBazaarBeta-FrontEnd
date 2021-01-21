@@ -42,7 +42,7 @@ export const eduTest = async (user, val) => {
   }
 
   export const newLogin = async (emailVal) => {
-    const res = await axios.post(API + '/api/newLoginDetails', {email: 'qwe@qwe.com'}).then((res) => {
+    const res = await axios.post(API + '/api/newLoginDetails', {email: emailVal}).then((res) => {
       console.log(res.data.data)
       store.setItem('newUserLogin', res.data.data);
       localStorage.setItem('newLogin', JSON.parse(JSON.stringify(res.data.data)));
