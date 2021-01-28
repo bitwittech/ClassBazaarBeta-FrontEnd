@@ -167,9 +167,9 @@ export const register = async (data, dispatch) => {
         password: data.password,
         email_address: data.email,
         mobile_no: data.phone,
-        gender: '',
+        gender: data.gender,
         school_or_college_name: data.school,
-        class_year: '',
+        class_year: data.classYear,
         city: data.city,
 
     };

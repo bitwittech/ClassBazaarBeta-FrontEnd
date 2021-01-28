@@ -68,7 +68,9 @@ const Login = () => {
       phone: '',
       email: '',
       school: '',
-      city: ''
+      city: '',
+      gender: '',
+      classYear: ''
     },
     errors: {
       username: null,
@@ -105,6 +107,15 @@ const Login = () => {
   const handleLinkedInFailure = data => {
     console.log(data);
   };
+
+  const setGender = e => {
+    modal.formData.gender = e.target.value;
+  }
+
+  const setClassYear = e => {
+    modal.formData.classYear = e.target.value;
+    console.log(modal.formData)
+  }
 
   const handleChange = e => {
     const { name, value } = e.target;
@@ -299,7 +310,8 @@ const Login = () => {
                   >
                     Gender
                   </Typography>
-                  <select className="select-box">
+                  <select className="select-box"
+                        onChange={setGender}>
                     <option value="">--Select Gender--</option>
                     <option value="Male">Male</option>
                     <option value="Female">Female</option>
@@ -322,7 +334,8 @@ const Login = () => {
                   >
                     Class
                   </Typography>
-                  <select className="select-box">
+                  <select className="select-box"
+                        onChange={setClassYear}>
                     <option value="">--Select Class/Year--</option>
                     <option value="class_6">Class - 6</option>
                     <option value="class_7">Class - 7</option>
