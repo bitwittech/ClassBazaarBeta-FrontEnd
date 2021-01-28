@@ -397,7 +397,7 @@ const Login = () => {
                     type="text"
                     className="text-field"
                     onChange={handleChange}
-                    placeholder="Enter your City"
+                    placeholder="Enter your School Name"
                   />
                   <div className="color-red">{modal.errors.school}</div>
                   </>
