@@ -344,11 +344,11 @@ const Login = () => {
                     <option value="class_10">Class - 10</option>
                     <option value="class_11">Class - 11</option>
                     <option value="class_12">Class - 12</option>
-                    <option value="collage_1">Year - 1</option>
-                    <option value="collage_2">Year - 2</option>
-                    <option value="collage_3">Year - 3</option>
-                    <option value="collage_4">Year - 4</option>
-                    <option value="collage_5">Year - 5</option>
+                    <option value="college_1">Year - 1</option>
+                    <option value="college_2">Year - 2</option>
+                    <option value="college_3">Year - 3</option>
+                    <option value="college_4">Year - 4</option>
+                    <option value="college_5">Year - 5</option>
                   </select>
                                     </>
                   ): null}
