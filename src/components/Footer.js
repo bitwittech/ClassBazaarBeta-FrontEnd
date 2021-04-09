@@ -45,20 +45,35 @@ const Footer = ({ bgColor }) => {
               <div className="col-md-3 col-sm-12">
                 <div className="footer-group">
                   <div className="footer-group-heading">Subjects</div>
-                  <p><a href="#">Computer Science</a></p>
-                  <p><a href="#">Business</a></p>
-                  <p><a href="#">Arts & Design</a></p>
-                  <p><a href="#">Data Science</a></p>
-                  <p><a href="#">Health & Lifestyle</a></p>
+                  <p><Link to={{
+                    pathname: '/listing',
+                    state: { subject: 'Computer Science' } 
+                  }}>Computer Science</Link></p>
+                  <p><Link to={{
+                    pathname: '/listing',
+                    state: { subject: 'Business' } 
+                  }}>Business</Link></p>
+                  <p><Link to={{
+                    pathname: '/listing',
+                    state: { subject: 'Arts & Design' } 
+                  }}>Arts & Design</Link></p>
+                  <p><Link to={{
+                    pathname: '/listing',
+                    state: { subject: 'Data Science' } 
+                  }}>Data Science</Link></p>
+                  <p><Link to={{
+                    pathname: '/listing',
+                    state: { subject: 'Health & Lifestyle' } 
+                  }}>Health & Lifestyle</Link></p>
                 </div>
               </div>
               <div className="col-md-3 col-sm-12">
                 <div className="footer-group">
                   <div className="font-weight-bolder mb-2">
-                    <a href="#">Privacy Policy</a>
+                    <a href="/privacypolicy">Privacy Policy</a>
                   </div>
                   <div className="font-weight-bolder">
-                    <a href="#">About Us</a>
+                    <a href="/about">About Us</a>
                   </div>
                   <img style={{ width: '100%' }} src={AICImage} alt=""/>
                 </div>
@@ -71,27 +86,27 @@ const Footer = ({ bgColor }) => {
               <div className="col-8 mx-auto">
                 <ul className="list-unstyled d-flex align-items-center justify-content-between mb-0 social-list">
                   <li>
-                    <a href="#">
+                    <a href="https://www.facebook.com/classbazaar/" target="_blank">
                       <img src={FACEBOOK} className="icon"/>
                       FACEBOOK
                     </a>
                   </li>
 
                   <li>
-                    <a href="#">
+                    <a href="https://www.linkedin.com/company/class-bazaar/?originalSubdomain=in" target="_blank">
                       <img src={LINKEDIN} className="icon"/>
                       LINKEDIN
                     </a>
                   </li>
 
-                  <li>
+                  {/* <li>
                     <a href="#">
                       <img src={TWITTER} className="icon"/>
                       TWITTER
                     </a>
-                  </li>
+                  </li> */}
                   <li>
-                    <a href="#">
+                    <a href="https://www.instagram.com/classbazaar/" target="_blank">
                       <img src={INSTAGRAM} className="icon"/>
                       INSTAGRAM
                     </a>
