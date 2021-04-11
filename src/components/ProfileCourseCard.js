@@ -90,7 +90,28 @@ const ProfileCourseCard = withRouter(({ history, ...data }) => {
 
   return (
     <>
-      <div className="c-card">
+      <div className="c-card click-h" onClick={() => {
+                if (data.from === 'profile') {
+                  trackEvent(
+                    'Profile Action',
+                    'click',
+                    'Bookmarked_card_profile',
+                  );
+                }
+                trackEvent(
+                  'Course Card clicked',
+                  'click',
+                  `${data.povider}|${data.courseName}`,
+                );
+                history.push({
+                  pathname: `/coursedetails/${data.provider}/${data.uuid}`,
+                  state: {
+                    uuid: data.uuid,
+                    provider: data.provider,
+                    ...data,
+                  },
+                });
+              }}>
         <div className="c-card-inner">
           <div className="coursecard-header">
 
@@ -216,7 +237,7 @@ const ProfileCourseCard = withRouter(({ history, ...data }) => {
                     />
                   )}
 
-                  <span className="fs-m" style={{fontSize: '14px'}}> {formatDuration(data.duration)}</span>
+                  <span className="fs-m" style={{fontSize: '12px'}}> {formatDuration(data.duration)}</span>
                 </Grid>
                 <Grid item sm={4} style={{textAlign: 'center'}}>
                   <CalendarIcon fontSize="small" className="mb" color="secondary"/>{' '}
