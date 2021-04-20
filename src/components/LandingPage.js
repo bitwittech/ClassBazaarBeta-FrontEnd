@@ -582,9 +582,9 @@ class LandingPage extends Component {
     {
       image: Banner3
     },
-    {
+      {/*  {
       image: Banner2
-    }
+    } */}
   ]
     console.log('popup', this.state.popUp);
     console.log('LANDING', this.state);
@@ -662,7 +662,7 @@ class LandingPage extends Component {
                     </div>
                     ): (<div></div>)}
 
-                    {index === 2 ? (
+                 {/*    {index === 2 ? (
                       <div className="d-flex">
                       <div className="banner-content position-absolute text-white" style={{top:'40%' ,paddingTop: 0, width: '40%', display:"flex", flexDirection: "column", justifyContent: "flex-start"}}>
                       <img src={DignityLogo} alt="dignityHealth" style={{width:'175.5px', height: '35.5px', marginLeft:'6rem', marginBottom: '1rem'}} />
@@ -685,7 +685,7 @@ class LandingPage extends Component {
                       </div>
                     </div>
                     </div>
-                    ): (<div></div>)}
+                    ): (<div></div>)} */}
 
                     
                   </div>
@@ -970,13 +970,13 @@ class LandingPage extends Component {
             trackEvent={trackEvent}
             routingURL={'/listing'}
           />
-          <div ref={this.exclusiveCourseSection}></div>
+{/* <div ref={this.exclusiveCourseSection}></div>
           <ExclusiveCourseComponent
             exclusiveCourse={exclusiveCourses}
             filter={'free'}
             trackEvent={trackEvent}
             routingURL={'/listing'}
-          />
+          /> */}
         </Grid>
         <div className="orange-band" >
           <div className="inner-orange">
