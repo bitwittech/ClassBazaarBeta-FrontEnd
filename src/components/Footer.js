@@ -75,6 +75,9 @@ const Footer = ({ bgColor }) => {
                   <div className="font-weight-bolder">
                     <a href="/about">About Us</a>
                   </div>
+                  <div className="font-weight-bolder">
+                    <a href="https://blog.classbazaar.com/">Blog</a>
+                  </div>
                   <img style={{ width: '100%' }} src={AICImage} alt=""/>
                 </div>
               </div>
