@@ -109,7 +109,7 @@ const Edubuk = () => {
             <p style={{padding: '0px 60px'}}>Based on Harvard University Professor Howard Gardner’s Multiple Intelligence Theory the M.I.I.T test is trusted world across. 
               Its objective is to help each learner map their career paths by identifying their dominant types of intelligences and creating a personalised learner profile with 15 career paths in sync with their talents, interests and passion. 
               There are multiple career paths like becoming a dancer, musician, singer, actor, painter, brand strategist, sportsperson, data scientists, drone pilot, etc.</p>
-              <a href = "https://www.edubuk.co.in/mitest/register"><button style={{borderRadius: '2px',backgroundColor: '#086065',border: 'none',color: 'white',padding: '14px 36px 14px 36px',fontSize: '19px',fontWeight: '600'}}  >Take Test</button></a>
+              <button style={{borderRadius: '2px',backgroundColor: '#086065',border: 'none',color: 'white',padding: '14px 36px 14px 36px',fontSize: '19px',fontWeight: '600'}} onClick={() => getUserDetails(dispatch)}>Take Test</button>
           </div>
           <div className="intelligence"></div>
           <div style={{backgroundColor: '#e6feff',paddingBottom: '30px'}}>
@@ -118,7 +118,7 @@ const Edubuk = () => {
             <p style={{padding: '0px 40px'}}>The Interests Trigon further narrows down on the M.I.I.T. learner profile and suggests 3 most relevant career paths
               for the learner via the widely trusted Edubuk’s deep learning and artificial intelligence system. 
               Furthermore, users have an option to receive a Customized Learning Plan which will offer a combination of best online-cum-offline resources or courses to pursue the desired career path at the most affordable rate. </p>
-              <a href = "https://www.edubuk.co.in/mitest/register"><button style={{borderRadius: '2px',backgroundColor: '#086065',border: 'none',color: 'white',padding: '14px 36px 14px 36px',fontSize: '19px',fontWeight: '600'}}  >Take Test</button></a>
+              <button style={{borderRadius: '2px',backgroundColor: '#086065',border: 'none',color: 'white',padding: '14px 36px 14px 36px',fontSize: '19px',fontWeight: '600'}} onClick={() => getUserDetails(dispatch)}>Take Test</button>
           </div>
         </div>
 
