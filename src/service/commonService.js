@@ -33,7 +33,7 @@ export const eduTest = async (user, val) => {
   export const newregister = async (userId, request) => {
 //       const res = await axios.post(API + '/api/newregistration', request).then((res) => {console.log(res)});
       var emailVal = request.email_address;
-      const res = await axios.post(API + '/api/newregistration', request).then((res) => {console.log('response',res)});
+      const ress = await axios.post(API + '/api/newregistration', request).then((ress) => {console.log('response',ress)});
       const res = await axios.post(API + '/api/newLoginDetails', {email: emailVal}).then((res) => {
         console.log(res.data.data)
         store.setItem('newUserLogin', res.data.data);
