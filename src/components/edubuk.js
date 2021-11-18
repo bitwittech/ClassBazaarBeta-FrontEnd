@@ -24,7 +24,7 @@ const getUserDetails = (dispatch) => {
           type: LOGIN_MODAL,
           payload: {
             open: true,
-            state: 0,
+            state: 1,
           },
         });
       return ;
