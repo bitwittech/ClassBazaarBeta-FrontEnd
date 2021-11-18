@@ -17,9 +17,10 @@ import Store from '../store/Context';
 import { LOGIN_MODAL } from '../store/Types';
 
 const getUserDetails = (dispatch) => {
-  
+  const userr = localStorage.getItem("user");
+console.log('loginString',user);
   store.getItem('user').then(user => {
-    if (user == null) {
+    if (userr == null) {
         dispatch({
           type: LOGIN_MODAL,
           payload: {
