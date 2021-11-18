@@ -34,7 +34,7 @@ console.log('loginString',user);
       if(val == null) {
         alert('Please login with new user');
       }
-      eduTest(user, val);
+      eduTest(userr, val);
     })
   });
 }
