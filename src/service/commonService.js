@@ -37,7 +37,8 @@ export const eduTest = async (user, val) => {
       const res = await axios.post(API + '/api/newLoginDetails', {email: emailVal}).then((res) => {
         console.log(res.data.data)
         store.setItem('newUserLogin', res.data.data);
-        localStorage.setItem('newLogin', JSON.parse(JSON.stringify(res.data.data)));
+        localStorage.setItem('user', JSON.parse(JSON.stringify(res.data.data.email_address)));
+        console.log('consoledata',res.data.data.email_address);
       });
       
       
