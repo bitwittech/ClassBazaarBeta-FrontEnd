@@ -22,6 +22,9 @@ import { logout } from '../actions/ContextActions';
 import { trackEvent } from 'react-with-analytics';
 import { withStyles } from '@material-ui/core/styles';
 
+const user = window.localStorage.getItem("user");
+console.log('loginString',user);
+
 const useStyles = makeStyles(theme => ({
   title: {
     display: 'none',
