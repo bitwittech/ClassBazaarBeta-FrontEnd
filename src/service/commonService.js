@@ -57,5 +57,8 @@ export const eduTest = async (user, val) => {
       console.log(res.data.data)
       store.setItem('newUserLogin', res.data.data);
       localStorage.setItem('newLogin', JSON.parse(JSON.stringify(res.data.data)));
+        const url = `https://edubuk.co.in/mitest/User/loginApi?user_id=${user.id}&name=${val.name}&gender=${val.gender}&email_address=${val.email_address}&school_or_college_name=${val.school_or_college_name}&class_year=${val.class_year}&city=${val.city}&mobile_no=${val.mobile_no}&password=${val.password}`;
+        
+        window.open(url, '_blank');
     });
   }
