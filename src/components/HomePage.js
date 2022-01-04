@@ -33,11 +33,11 @@ import { trackEvent } from 'react-with-analytics/lib/utils';
 import { withStyles } from '@material-ui/core/styles';
 
 const providerData = [
+  'Udemy',
   'Coursera',
   'edX',
   'FutureLearn',
   'SimpliLearn',
-  'Udemy',
   'Udacity',
   'upGrad',
   'Swayam',
@@ -154,7 +154,8 @@ class HomePage extends Component {
       (page + 1) * this.state.perPage,
     ]);
     const subjects = encodeURIComponent(this.state.subjects);
-var url = `${API}/api/v2/courses/?q=${query}&filter=${parsedFilter}&subjects=${subjects}&provider=${this.state.providers}&feeFilter=${feeFilter}&startDateFilter=${startDateFilter}`;
+
+    var url = `${API}/api/v2/courses/?q=${query}&filter=${parsedFilter}&subjects=${subjects}&provider=${this.state.providers}&feeFilter=${feeFilter}&startDateFilter=${startDateFilter}`;
     this.setState({ queryURL: url }, () => {
       const state = this.state;
       store.removeItem('filterData').then(s => {
@@ -166,11 +167,8 @@ var url = `${API}/api/v2/courses/?q=${query}&filter=${parsedFilter}&subjects=${s
   }
 
   handleCourseNumber = count => {
-//     this.setState({
-//       totalCount: count,
-//     });
     this.setState({
-      totalCount: '176537',
+      totalCount: count,
     });
   };
 
