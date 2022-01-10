@@ -37,10 +37,6 @@ const providerData = [
   'Coursera',
   'edX',
   'FutureLearn',
-  'SimpliLearn',
-  'Udacity',
-  'upGrad',
-  'Swayam',
 ];
 let { API, API_LOCAL } = config;
 
