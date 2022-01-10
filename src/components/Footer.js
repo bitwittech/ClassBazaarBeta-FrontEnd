@@ -6,6 +6,7 @@ import { trackEvent } from 'react-with-analytics/lib/utils';
 import FACEBOOK from '../assets/img/facebook.svg';
 import LINKEDIN from '../assets/img/linkedin.svg';
 import AICImage from '../assets/AIC_Logo_png.png';
+import Startup from '../assets/Startup.jpeg';
 import TWITTER from '../assets/img/twitter.svg';
 import INSTAGRAM from '../assets/img/instagram.svg';
 import BlackLOGO from '../assets/img/logo.png';
@@ -23,7 +24,7 @@ const Footer = ({ bgColor }) => {
                 </a>
               </div>
 
-              <div className="col-md-3 col-sm-12">
+              <div className="col-md-4 col-sm-12">
                 <div className="footer-group">
                   <div className="footer-group-heading">Contact Us</div>
                   {/* <p>
@@ -40,9 +41,12 @@ const Footer = ({ bgColor }) => {
                   <p>
                     <a href="mailTo:info@classbazaar.com">Email: info@classbazaar.com</a>
                   </p>
+                  <p>
+                  Address: 522, Zest Business Spaces, MG Road, Ghatkopar East, Mumbai 400077
+                  </p>
                 </div>
               </div>
-              <div className="col-md-3 col-sm-12">
+              {/* <div className="col-md-3 col-sm-12">
                 <div className="footer-group">
                   <div className="footer-group-heading">Subjects</div>
                   <p><Link to={{
@@ -66,8 +70,8 @@ const Footer = ({ bgColor }) => {
                     state: { subject: 'Health & Lifestyle' } 
                   }}>Health & Lifestyle</Link></p>
                 </div>
-              </div>
-              <div className="col-md-3 col-sm-12">
+              </div> */}
+              <div className="col-md-4 col-sm-12">
                 <div className="footer-group">
                   <div className="font-weight-bolder mb-2">
                     <a href="/privacypolicy">Privacy Policy</a>
@@ -78,7 +82,7 @@ const Footer = ({ bgColor }) => {
                   <div className="font-weight-bolder">
                     <a href="https://blog.classbazaar.com/">Blog</a>
                   </div>
-                  <img style={{ width: '100%' }} src={AICImage} alt=""/>
+                  <img style={{ width: '100%' }} src={Startup} alt=""/>
                 </div>
               </div>
             </div>
