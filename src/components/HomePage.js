@@ -97,7 +97,7 @@ class HomePage extends Component {
       startDateFilter: '',
       isStateUpdatedFromProp: false,
       subjects: 'all',
-      providers: 'Udemy',
+      providers: 'all',
       fee: 'all',
       isLevel1CheckedSubjects: false,
       subjecttReset: false,
