@@ -34,6 +34,7 @@ import formatDate from './../utils/dateUtils';
 import getClosestNextRun from './../utils/edxUtils';
 import { trackEvent } from 'react-with-analytics/lib/utils';
 
+let count = 0 
 const formatPrice = price => {
   if (!price || price === null || price === undefined) return 'Free';
   else return Math.round(price);
@@ -46,6 +47,9 @@ const formatDuration = duration => {
 };
 
 const CourseDetails = props => {
+
+  // Gstate stand for globale state 
+
   const [Gstate, setState] = useState({
     data: null,
     summaryData: null,
@@ -55,15 +59,20 @@ const CourseDetails = props => {
     q: '',
     rloading: true,
   });
-  console.log(Gstate);
+  
   const { state, dispatch } = useContext(Store);
+  
   const handleBookmark = (uuid, provider, name) => {
     trackEvent(
       'Bookmarked_details',
       'click',
       `${provider}|${Gstate.data && Gstate.data.title}`,
     );
+
+
     console.log(uuid, provider);
+
+
     if (state.user === null) {
       return dispatch({
         type: 'ALERT',
@@ -73,13 +82,16 @@ const CourseDetails = props => {
         },
       });
     }
+
     const userId = state.user.id;
     const courseId = uuid;
     const user = state.user;
+
     addBookmark(courseId, userId, user, provider, dispatch);
   };
 
   console.log(props,']=============================');
+
   const isBookmarked = uuid => {
     console.log('isbookmarked', uuid);
     if (state.user === null || state.user.data === undefined) {
@@ -95,10 +107,15 @@ const CourseDetails = props => {
 
   // const provider = props.location.pathname.split('/')[2];
   // let uuid = props.location.pathname.split('/')[3];
+
   const uuid = props.match.params.uuid;
+
   const provider = props.match.params.provider;
+  
+  
   useEffect(() => {
     window.scrollTo(0, 0);
+
     const getCourseDetails = async () => {
       const token = localStorage.getItem('cbtoken');
       const body = JSON.stringify({
@@ -112,12 +129,16 @@ const CourseDetails = props => {
           'Content-Type': 'application/json',
         },
       };
+
       var url = `https://api.classbazaar.com/api/course?uuid=${uuid}&provider=${provider}`;
+
       // var url = `http://localhost:8080/api/course?uuid=${uuid}&provider=${provider}`;
+     
       console.log(url, uuid);
+      
       const res = await fetch(url);
       const data = await res.json();
-      console.log(data);
+      console.log('dataUdemy',data.summaryData);
 
       const reviews = await axios.post(
         'https://api.classbazaar.com/api/review/course',
@@ -127,72 +148,84 @@ const CourseDetails = props => {
       setState({
         ...Gstate,
         data: data.data,
-        summaryData: data.summaryData,
         loading: false,
         reviews: reviews.data.data,
         rloading: false,
+        description: data.summaryData.description,
+        isFlexible : data.summaryData.is_flexible,
+        price: data.summaryData.price,
+        price_currency: data.summaryData.price_currency,
+        provider: data.summaryData.provider,
+        time : data.summaryData.start_date,
+        title: data.summaryData.title,
+        url: data.summaryData.url
       });
     };
 
     getCourseDetails();
   }, []);
 
-  const reviewSection = (ratingNumber, noOfReviews) => {
-    console.log({ ratingNumber, noOfReviews });
-    return (
-      <>
-        {isBookmarked(Gstate.data._id) ? (
-          <TurnedInIcon
-            onClick={() => handleBookmark(uuid, provider)}
-            color="primary"
-            className="click-h"
-            fontSize="large"
-          />
-        ) : (
-          <TurnedInNotIcon
-            onClick={() => handleBookmark(uuid, provider)}
-            color="primary"
-            fontSize="large"
-            className="click-h"
-          />
-        )}
+  // review section not in need 
+  // const reviewSection = (ratingNumber, noOfReviews) => {
+  //   console.log({ ratingNumber, noOfReviews });
+  //   return (
+  //     <>
+  //       {isBookmarked(Gstate.data._id) ? (
+  //         <TurnedInIcon
+  //           onClick={() => handleBookmark(uuid, provider)}
+  //           color="primary"
+  //           className="click-h"
+  //           fontSize="large"
+  //         />
+  //       ) : (
+  //         <TurnedInNotIcon
+  //           onClick={() => handleBookmark(uuid, provider)}
+  //           color="primary"
+  //           fontSize="large"
+  //           className="click-h"
+  //         />
+  //       )}
 
-        <Typography
-          variant="caption"
-          display="block"
-          style={{ color: '#898989' }}
-          gutterBottom
-        >
-          {noOfReviews >= 0 && ratingNumber && (
-            <>{`${Math.round(ratingNumber * 10) /
-            10}(${noOfReviews} reviews)`}</>
-          )}
-          {noOfReviews < 0 && ratingNumber && (
-            <>{`${Math.round(ratingNumber * 10) / 10}`}</>
-          )}
-          {noOfReviews >= 0 && !ratingNumber && <>{`${noOfReviews} reviews`}</>}
-        </Typography>
-        {ratingNumber && (
-          <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-            <StarRatings
-              rating={ratingNumber}
-              starRatedColor="#f15a29"
-              numberOfStars={5}
-              starDimension="20px"
-              starSpacing="0px"
-              name="rating"
-            />
-          </div>
-        )}
-      </>
-    );
-  };
-  const handlePopupClose = () => {
-    setState({ ...Gstate, popUp: false });
-  };
+  //       <Typography
+  //         variant="caption"
+  //         display="block"
+  //         style={{ color: '#898989' }}
+  //         gutterBottom
+  //       >
+  //         {noOfReviews >= 0 && ratingNumber && (
+  //           <>{`${Math.round(ratingNumber * 10) /
+  //           10}(${noOfReviews} reviews)`}</>
+  //         )}
+  //         {noOfReviews < 0 && ratingNumber && (
+  //           <>{`${Math.round(ratingNumber * 10) / 10}`}</>
+  //         )}
+  //         {noOfReviews >= 0 && !ratingNumber && <>{`${noOfReviews} reviews`}</>}
+  //       </Typography>
+  //       {ratingNumber && (
+  //         <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+  //           <StarRatings
+  //             rating={ratingNumber}
+  //             starRatedColor="#f15a29"
+  //             numberOfStars={5}
+  //             starDimension="20px"
+  //             starSpacing="0px"
+  //             name="rating"
+  //           />
+  //         </div>
+  //       )}
+  //     </>
+  //   );
+  // };
+  
+  // const handlePopupClose = () => {
+  //   setState({ ...Gstate, popUp: false });
+  // };
 
-  const courseSummary = () =>
-    Gstate.summaryData && (
+//modifyed by Yashwant Sahu
+
+
+const courseSummary = () =>
+    Gstate && (
       <>
         <div
           style={{
@@ -217,42 +250,31 @@ const CourseDetails = props => {
               <div>
                 <QueryBuilderIcon color="secondary"/> &nbsp;
               </div>
-              <div>{Gstate.summaryData.commitment}</div>
-            </div>
-
+              {Gstate.is_Flexible !== null ?<div>Flexible Timing </div>:<div>Null Week</div>}
+           </div>
             <div style={{ display: 'flex', marginTop: '15px' }}>
               <div>
                 <DateRangeIcon color="secondary"/> &nbsp;
               </div>
-              <div>{` Starts on ${formatDate(
-                new Date(Gstate.summaryData.start_date),
-                'MMMM d',
-              )}`}</div>
+              {Gstate.time !== null ?<div>{Gstate.time}</div>:<div>Scheduled</div>}
             </div>
 
             <div style={{ display: 'flex', marginTop: '15px' }}>
               <div>
-                <img src={Rupee} alt="cb-rupee"/> &nbsp;
+                <img src={Rupee} alt="cb-Rupee"/> &nbsp;
               </div>
               <div>
                 {provider === 'Swayam'
                   ? 'Free'
-                  : Gstate.summaryData.price === '' ||
-                  Gstate.summaryData.price === null
+                  : Gstate.price === '' ||
+                  Gstate.price === null
                     ? 'Provider subscription required'
-                    : Gstate.summaryData.price === 0
+                    : Gstate.price === 0
                       ? 'Free'
-                      : formatPrice(Gstate.summaryData.price).toLocaleString(
+                      : formatPrice(Gstate.price).toLocaleString(
                         'en-IN',
                       )}
               </div>
-            </div>
-
-            <div class="pr-pad" style={{ display: 'flex', marginTop: '15px' }}>
-              <div>
-                <ListAltIcon color="secondary"/> &nbsp;
-              </div>
-              <div>{Gstate.summaryData.provider}</div>
             </div>
 
             <div style={{ marginTop: '20px' }}>
@@ -261,16 +283,16 @@ const CourseDetails = props => {
                   trackEvent(
                     'Enroll Now',
                     'click',
-                    `${provider}|${Gstate.data.title}`,
+                    `${provider}|${Gstate.title}`,
                   );
                   window.open(
                     provider === 'Swayam'
-                      ? Gstate.summaryData &&
-                      Gstate.summaryData.url.replace(
+                      ? Gstate.url &&
+                      Gstate.url.replace(
                         'www.swayam.com',
                         'www.swayam.gov.in',
                       )
-                      : Gstate.summaryData && Gstate.summaryData.url,
+                      : Gstate.url && Gstate.url,
                     '_blank',
                   );
                 }}
@@ -298,6 +320,8 @@ const CourseDetails = props => {
         </div>
       </>
     );
+
+
   const courseraSummary = (type, count) => (
     <>
       <div
@@ -359,8 +383,8 @@ const CourseDetails = props => {
 
           <div style={{ display: 'flex', marginTop: '15px',  lineHeight: '35px' }}>
             <div>
-              {/* <img src={Rupee} alt="cb-rupee" /> &nbsp; */}
-              <img src={Rupee} alt="cb-rupee"/> &nbsp;
+              {/* <img src={Rupee} alt="cb-Rupee" /> &nbsp; */}
+              <img src={Rupee} alt="cb-Rupee"/> &nbsp;
               &nbsp;
             </div>
             <div>
@@ -418,53 +442,55 @@ const CourseDetails = props => {
       </div>
     </>
   );
-  const reviews = () => (
-    <>
-      {Gstate.rlaoding ? (
-        <p>Loading</p>
-      ) : Gstate.reviews.length > 0 ? (
-        Gstate.reviews.map(data => (
-          <Grid
-            key={data.course_id}
-            container
-            style={{
-              padding: 20,
-              background: '#00000015',
-              marginTop: '15px',
-            }}
-          >
-            <Grid item xs={3}>
-              <Grid item xs={12}>
-                <Box style={{ padding: '0 10px' }}>
-                  <img
-                    className="review-image"
-                    src="https://www.sketchengine.eu/wp-content/plugins/all-in-one-seo-pack/images/default-user-image.png"
-                    alt="user"
-                  />
-                </Box>
-              </Grid>
-            </Grid>
-            <Grid item xs={9}>
-              <Typography color="primary" variant="h6">
-                {data.username}
-              </Typography>
-              <Box
-                style={{
-                  padding: 30,
-                  paddingTop: 5,
-                  paddingLeft: 5,
-                }}
-              >
-                {data.review}
-              </Box>
-            </Grid>
-          </Grid>
-        ))
-      ) : (
-        <p>No reviews for this course</p>
-      )}
-    </>
-  );
+
+  // this section in not need 
+  // const reviews = () => (
+  //   <>
+  //     {Gstate.rlaoding ? (
+  //       <p>Loading</p>
+  //     ) : Gstate.reviews.length > 0 ? (
+  //       Gstate.reviews.map(data => (
+  //         <Grid
+  //           key={data.course_id}
+  //           container
+  //           style={{
+  //             padding: 20,
+  //             background: '#00000015',
+  //             marginTop: '15px',
+  //           }}
+  //         >
+  //           <Grid item xs={3}>
+  //             <Grid item xs={12}>
+  //               <Box style={{ padding: '0 10px' }}>
+  //                 <img
+  //                   className="review-image"
+  //                   src="https://www.sketchengine.eu/wp-content/plugins/all-in-one-seo-pack/images/default-user-image.png"
+  //                   alt="user"
+  //                 />
+  //               </Box>
+  //             </Grid>
+  //           </Grid>
+  //           <Grid item xs={9}>
+  //             <Typography color="primary" variant="h6">
+  //               {data.username}
+  //             </Typography>
+  //             <Box
+  //               style={{
+  //                 padding: 30,
+  //                 paddingTop: 5,
+  //                 paddingLeft: 5,
+  //               }}
+  //             >
+  //               {data.review}
+  //             </Box>
+  //           </Grid>
+  //         </Grid>
+  //       ))
+  //     ) : (
+  //       <p>No reviews for this course</p>
+  //     )}
+  //   </>
+  // );
 
   const coursera = () => {
     return (
@@ -663,7 +689,6 @@ const CourseDetails = props => {
                         </div>
                       </button>
                     </div>
-                    {reviews()}
                   </div>
                 </div>
               </Grid>
@@ -940,7 +965,7 @@ const CourseDetails = props => {
                         </div>
                       </button>
                     </div>
-                    {reviews()}
+                 {/* {reviews()} */}
                   </div>
                 </div>
               </Grid>
@@ -950,184 +975,71 @@ const CourseDetails = props => {
       ))
     );
   };
-
-  const edX = () =>
-    Gstate.data && (
-      <div maxwidth="lg" className="ead-sec">
-        <div className="cd-container">
-          <Grid container spacing={3} direction="row-reverse">
-            <Grid item xs={12} sm={3}>
-              {courseSummary()}
-            </Grid>
-            <Grid item xs={12} sm={9}>
-              <div className="d-card" style={{ backgroundColor: '#fff3ef', boxShadow: 'none' }}>
-                <div className="cd-head">
-                  <div className="cd-head-o">
-                    <Typography
-                      style={{ fontWeight: '600' }}
-                      color="primary"
-                      variant="subtitle2"
-                      gutterBottom
-                    >
-                      {Gstate.data && Gstate.data.owners[0].name}
-                    </Typography>
-                    <Typography variant="h6" gutterBottom>
-                      {Gstate.data.title}
-                    </Typography>
-                    <Typography
-                      variant="caption"
-                      display="block"
-                      className="provider"
-                      gutterBottom
-                    >
-                      via {provider}
-                    </Typography>
-                  </div>
-                  <div style={{ textAlign: 'right' }} className="cd-head-t">
-                    {reviewSection(
-                      Gstate.data.avg_rating,
-                      Gstate.data.num_reviews,
-                    )}
-                  </div>
-                </div>
-                <br/>
-                <div className="cd-cont">
+  const edX = () =>{
+  // count++;
+  return(
+  Gstate && (
+    <div maxwidth="lg" className="ead-sec">
+      <div className="cd-container">
+        <Grid container spacing={3} direction="row-reverse">
+          <Grid item xs={12} sm={3}>
+            {courseSummary()}
+          </Grid>
+          <Grid item xs={12} sm={9}>
+            <div className="d-card" style={{ backgroundColor: '#fff3ef', boxShadow: 'none' }}>
+              <div className="cd-head">
+                <div className="cd-head-o">
                   <Typography
-                    style={{ fontWeight: '600', fontSize: '22px' }}
+                    style={{ fontWeight: '600' }}
+                    color="primary"
                     variant="subtitle2"
+                    className="u-uni"
                     gutterBottom
                   >
-                    Course Overview
+                    {Gstate.provider}
+                  </Typography>
+                  <Typography variant="h6" className="u-title" gutterBottom>
+                    {Gstate.title}
                   </Typography>
                   <Typography
-                    style={{ fontSize: '16px', fontWeight: '300' }}
-                    variant="body1"
+                    variant="caption"
+                    display="block"
+                    className="provider u-provider"
                     gutterBottom
                   >
-                    {ReactHtmlParser(Gstate.data.full_description, {
-                      transform: node => {
-                        if (node.name === 'h2' || node.name === 'h3') {
-                          // console.log({ node });
-                          return <Box>{node.children[0].children[0].data}</Box>;
-                        }
-                        if (node.name === 'br') {
-                          return null;
-                        }
-                        if (node.name === 'strong') {
-                          console.log({ node });
-                          return <Box>{node.children[0].data}</Box>;
-                        }
-                      },
-                    })}
+                    via {provider}
                   </Typography>
-                  <br/>
-                  {Gstate.data.outcome !== '' && (
-                    <>
-                      <Typography
-                        style={{ fontWeight: '600', fontSize: '22px' }}
-                        variant="subtitle2"
-                        gutterBottom
-                      >
-                        What will you learn?
-                      </Typography>
-                      <Typography
-                        style={{ fontSize: '16px', fontWeight: '300' }}
-                        variant="body1"
-                        gutterBottom
-                      >
-                        {ReactHtmlParser(Gstate.data.outcome, {
-                          transform: node => {
-                            // console.log({ node });
-                            if (node.name === 'h2') {
-                              return <Box>{node.children[0].data}</Box>;
-                            }
-                          },
-                        })}
-                      </Typography>{' '}
-                    </>
-                  )}
-                  {Gstate.data.prerequisites_raw !== '' ? (
-                    <>
-                      {' '}
-                      <Typography
-                        style={{ fontWeight: '600', fontSize: '22px' }}
-                        variant="subtitle2"
-                        gutterBottom
-                      >
-                        Prerequisites
-                      </Typography>
-                      <Typography
-                        style={{ fontSize: '16px', fontWeight: '300' }}
-                        variant="body1"
-                        gutterBottom
-                      >
-                        {ReactHtmlParser(Gstate.data.prerequisites_raw)}
-                      </Typography>
-                    </>
-                  ) : null}
-                  <br/>
-
-                  {Gstate.data.closestRun !== undefined && (
-                    <>
-                      <Typography
-                        style={{ fontWeight: '600', fontSize: '22px' }}
-                        variant="subtitle2"
-                        gutterBottom
-                      >
-                        Professor:{' '}
-                        {this.Gstate.closestRun.staff.map((obj, index) => (
-                          <span key={index} style={{ fontWeight: '300' }}>
-                            {obj.given_name}
-                          </span>
-                        ))}
-                      </Typography>
-                    </>
-                  )}
-
-                  <Typography
-                    style={{ fontWeight: '600', fontSize: '22px' }}
-                    variant="subtitle2"
-                    gutterBottom
-                  >
-                    Reviews
-                  </Typography>
-                  <div>
-                    <button
-                      onClick={() => {
-                        setState({ ...Gstate, popUp: !Gstate.popUp });
-                      }}
-                      className="enroll-btn"
-                    >
-                      <div style={{ display: 'flex', flexDirection: 'row' }}>
-                        <div
-                          style={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            fontWeight: '600',
-                          }}
-                        >
-                          <div>Write Review &nbsp;</div>
-                        </div>
-                        <div>
-                          <RateReviewIcon
-                            style={{ fontSize: '22px', marginTop: '2px' }}
-                          />
-                        </div>
-                      </div>
-                    </button>
-                  </div>
-                  {reviews()}
                 </div>
               </div>
-            </Grid>
+              <br/>
+              <div className="cd-cont">
+                <Typography
+                  style={{ fontWeight: '600', fontSize: '22px' }}
+                  variant="subtitle2"
+                  gutterBottom
+                >
+                  Course Overview
+                </Typography>
+                <Typography
+                  style={{ fontSize: '16px', fontWeight: '300' }}
+                  variant="body1"
+                  gutterBottom
+                >
+                  {ReactHtmlParser(Gstate.description)}
+                </Typography>
+              </div>
+            </div>
           </Grid>
-        </div>
+        </Grid>
       </div>
-    );
+    </div>
+  )
+);
+}
 
   const udemy = () => {
     return (
-      Gstate.data && (
+      Gstate && (
         <div maxwidth="lg" className="ead-sec">
           <div className="cd-container">
             <Grid container spacing={3} direction="row-reverse">
@@ -1145,10 +1057,10 @@ const CourseDetails = props => {
                         className="u-uni"
                         gutterBottom
                       >
-                        {Gstate.summaryData.university}
+                        {Gstate.provider}
                       </Typography>
                       <Typography variant="h6" className="u-title" gutterBottom>
-                        {Gstate.data.title}
+                        {Gstate.title}
                       </Typography>
                       <Typography
                         variant="caption"
@@ -1158,12 +1070,6 @@ const CourseDetails = props => {
                       >
                         via {provider}
                       </Typography>
-                    </div>
-                    <div style={{ textAlign: 'right' }} className="cd-head-t">
-                      {reviewSection(
-                        Gstate.data.avg_rating,
-                        Gstate.data.num_reviews,
-                      )}
                     </div>
                   </div>
                   <br/>
@@ -1180,104 +1086,9 @@ const CourseDetails = props => {
                       variant="body1"
                       gutterBottom
                     >
-                      {ReactHtmlParser(Gstate.data.description)}
+                      {ReactHtmlParser(Gstate.description)}
                     </Typography>
-                    <br/>
-                    {Gstate.data.outcome !== '' && (
-                      <>
-                        <Typography
-                          style={{ fontWeight: '600', fontSize: '22px' }}
-                          variant="subtitle2"
-                          gutterBottom
-                        >
-                          What will you learn?
-                        </Typography>
-                        <Typography
-                          style={{ fontSize: '16px', fontWeight: '300' }}
-                          variant="body1"
-                          gutterBottom
-                        >
-                          {Gstate.data.what_you_will_learn_data.items.map(
-                            (e, i) => (
-                              <li key={i}>{e}</li>
-                            ),
-                          )}
-                        </Typography>{' '}
-                      </>
-                    )}
-                    {Gstate.data.prerequisites_raw !== '' ? (
-                      <>
-                        {' '}
-                        <Typography
-                          style={{ fontWeight: '600', fontSize: '22px' }}
-                          variant="subtitle2"
-                          gutterBottom
-                        >
-                          Prerequisites
-                        </Typography>
-                        <Typography
-                          style={{ fontSize: '16px', fontWeight: '300' }}
-                          variant="body1"
-                          gutterBottom
-                        >
-                          {Gstate.data.prerequisites.map((e, i) => (
-                            <li key={i}>{e}</li>
-                          ))}
-                        </Typography>
-                      </>
-                    ) : null}
-                    <br/>
-                    {Gstate.data.closestRun !== undefined && (
-                      <>
-                        <Typography
-                          style={{ fontWeight: '600', fontSize: '22px' }}
-                          variant="subtitle2"
-                          gutterBottom
-                        >
-                          Professor:{' '}
-                          {this.Gstate.closestRun.staff.map((obj, index) => (
-                            <span key={index} style={{ fontWeight: '300' }}>
-                              {obj.given_name}
-                            </span>
-                          ))}
-                        </Typography>
-                      </>
-                    )}
-                    <br/>
-                    <Typography
-                      style={{ fontWeight: '600', fontSize: '22px' }}
-                      variant="subtitle2"
-                      gutterBottom
-                    >
-                      Reviews
-                    </Typography>
-                    <div>
-                      <button
-                        onClick={() => {
-                          setState({ ...Gstate, popUp: !Gstate.popUp });
-                        }}
-                        className="enroll-btn"
-                      >
-                        <div style={{ display: 'flex', flexDirection: 'row' }}>
-                          <div
-                            style={{
-                              display: 'flex',
-                              alignItems: 'center',
-                              fontWeight: '600',
-                            }}
-                          >
-                            <div>Write Review &nbsp;</div>
-                          </div>
-                          <div>
-                            <RateReviewIcon
-                              style={{ fontSize: '22px', marginTop: '2px' }}
-                            />
-                          </div>
-                        </div>
-                      </button>
-                    </div>
-                    <br/>
-                    {reviews()}
+                   
                   </div>
                 </div>
               </Grid>
@@ -1287,6 +1098,8 @@ const CourseDetails = props => {
       )
     );
   };
+
+ 
 
   const fl = () =>
     Gstate.data && (
@@ -1320,12 +1133,12 @@ const CourseDetails = props => {
                       via {provider}
                     </Typography>
                   </div>
-                  <div style={{ textAlign: 'right' }} className="cd-head-t">
+                  {/* <div style={{ textAlign: 'right' }} className="cd-head-t">
                     {reviewSection(
                       Gstate.data.avg_rating,
                       Gstate.data.num_reviews,
                     )}
-                  </div>
+                  </div> */}
                 </div>
                 <br/>
                 <div className="cd-cont">
@@ -1432,7 +1245,7 @@ const CourseDetails = props => {
                       </div>
                     </button>
                   </div>
-                  {reviews()}
+                  {/* {reviews()} */}
                 </div>
               </div>
             </Grid>
@@ -1473,12 +1286,12 @@ const CourseDetails = props => {
                       via {provider}
                     </Typography>
                   </div>
-                  <div style={{ textAlign: 'right' }}>
+                  {/* <div style={{ textAlign: 'right' }}>
                     {reviewSection(
                       parseFloat(Gstate.data.courseData.fields.star_ratings),
                       -1,
                     )}
-                  </div>
+                  </div> */}
                 </div>
                 <br/>
                 <div className="cd-cont">
@@ -1546,7 +1359,7 @@ const CourseDetails = props => {
                       </div>
                     </button>
                   </div>
-                  {reviews()}
+                  {/* {reviews()} */}
                 </div>
               </div>
             </Grid>
@@ -1587,7 +1400,7 @@ const CourseDetails = props => {
                       via {provider}
                     </Typography>
                   </div>
-                  <div style={{ textAlign: 'right' }}>{reviewSection()}</div>
+                  {/* <div style={{ textAlign: 'right' }}>{reviewSection()}</div> */}
                 </div>
                 <br/>
                 <div className="cd-cont">
@@ -1711,7 +1524,7 @@ const CourseDetails = props => {
                       </div>
                     </button>
                   </div>
-                  {reviews()}
+                  {/* {reviews()} */}
                 </div>
               </div>
             </Grid>
@@ -1752,11 +1565,11 @@ const CourseDetails = props => {
                       via {provider}
                     </Typography>
                   </div>
-                  <div style={{ textAlign: 'right' }}>
+                  {/* <div style={{ textAlign: 'right' }}>
                     {reviewSection(
                       undefined,
                       parseInt(Gstate.data.no_of_reviews),
-                    )}
+                    )} */}
                   </div>
                 </div>
                 <br/>
@@ -1847,14 +1660,14 @@ const CourseDetails = props => {
                   ))}
                 </Typography> */}
                   <br/>
-                  <Typography
+                  {/* <Typography
                     style={{ fontWeight: '600', fontSize: '18px' }}
                     variant="subtitle2"
                     gutterBottom
                   >
                     Reviews
-                  </Typography>
-                  <div>
+                  </Typography> */}
+                  {/* <div>
                     <button
                       onClick={() => {
                         setState({ ...Gstate, popUp: !Gstate.popUp });
@@ -1878,9 +1691,8 @@ const CourseDetails = props => {
                         </div>
                       </div>
                     </button>
-                  </div>
-                  {reviews()}
-                </div>
+                  </div> */}
+                  {/* {reviews()} */}
               </div>
             </Grid>
           </Grid>
@@ -1924,7 +1736,7 @@ const CourseDetails = props => {
                       via {provider}
                     </Typography>
                   </div>
-                  <div style={{ textAlign: 'right' }}>{reviewSection()}</div>
+                  {/* <div style={{ textAlign: 'right' }}>{reviewSection()}</div> */}
                 </div>
                 <br/>
                 <div className="cd-cont">
@@ -2020,7 +1832,7 @@ const CourseDetails = props => {
                     </button>
                   </div>
                   <br/>
-                  {reviews()}
+                  {/* {reviews()} */}
                 </div>
               </div>
             </Grid>
@@ -2061,12 +1873,12 @@ const CourseDetails = props => {
                       via {provider}
                     </Typography>
                   </div>
-                  <div style={{ textAlign: 'right' }} className="cd-head-t">
+                  {/* <div style={{ textAlign: 'right' }} className="cd-head-t">
                     {reviewSection(
                       Gstate.data.avg_rating,
                       Gstate.data.num_reviews,
                     )}
-                  </div>
+                  </div> */}
                 </div>
                 <br/>
                 <div className="cd-cont">
@@ -2194,7 +2006,7 @@ const CourseDetails = props => {
                       </div>
                     </button>
                   </div>
-                  {reviews()}
+                  {/* {reviews()} */}
                 </div>
               </div>
             </Grid>
@@ -2208,6 +2020,7 @@ const CourseDetails = props => {
     console.log('=============');
     switch (provider) {
       case 'edX':
+        count+=1;
         return edX();
       case 'Udemy':
         return udemy();
@@ -2272,7 +2085,7 @@ const CourseDetails = props => {
         openState={Gstate.popUp}
         uuid={uuid}
         provider={provider}
-        handlePopupClose={handlePopupClose}
+        // handlePopupClose={handlePopupClose}
         course={Gstate.data && Gstate.data.title}
         Mstate={1}
         addReviewToCurrentState={addReviewToCurrentState}
@@ -2292,6 +2105,8 @@ const CourseDetails = props => {
       ) : (
         renderSwitch(provider)
       )}
+
+{/* {console.log("Yashwant Sahu printed this Gsatae =>".Gstate)} */}
       <Footer bgColor="white" />
     </>
   );
