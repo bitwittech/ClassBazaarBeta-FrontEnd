@@ -256,7 +256,7 @@ const courseSummary = () =>
               <div>
                 <DateRangeIcon color="secondary"/> &nbsp;
               </div>
-              {Gstate.time !== null ?<div>{Gstate.time}</div>:<div>Scheduled</div>}
+              {Gstate.time !== null ?<div>{Gstate.time.split('T')[0]}</div>:<div>Scheduled</div>}
             </div>
 
             <div style={{ display: 'flex', marginTop: '15px' }}>
@@ -471,7 +471,7 @@ const courseSummary = () =>
   //             </Grid>
   //           </Grid>
   //           <Grid item xs={9}>
-  //             <Typography color="primary" variant="h6">
+  //             <Typography align = "justify"color="primary" variant="h6">
   //               {data.username}
   //             </Typography>
   //             <Box
@@ -519,7 +519,7 @@ const courseSummary = () =>
                           }
                         </span>
                       </Typography>
-                      <Typography variant="h5" style={{ fontWeight: 600 }} gutterBottom>
+                      <Typography align = "justify"variant="h5" style={{ fontWeight: 600 }} gutterBottom>
                         {Gstate.data.additionalDetails.title}
                       </Typography>
                       <Typography
@@ -723,7 +723,7 @@ const courseSummary = () =>
                             .manufacturer_name
                         }
                       </Typography>
-                      <Typography variant="h6" gutterBottom>
+                      <Typography align = "justify"variant="h6" gutterBottom>
                         {CourseraDegree.additionalDetails.title}
                       </Typography>
                       <Typography
@@ -998,7 +998,7 @@ const courseSummary = () =>
                   >
                     {Gstate.provider}
                   </Typography>
-                  <Typography variant="h6" className="u-title" gutterBottom>
+                  <Typography align = "justify"variant="h6" className="u-title" gutterBottom>
                     {Gstate.title}
                   </Typography>
                   <Typography
@@ -1013,14 +1013,14 @@ const courseSummary = () =>
               </div>
               <br/>
               <div className="cd-cont">
-                <Typography
+                <Typography align = "justify"align = "justify"
                   style={{ fontWeight: '600', fontSize: '22px' }}
                   variant="subtitle2"
                   gutterBottom
                 >
                   Course Overview
                 </Typography>
-                <Typography
+                <Typography align = "justify"align = "justify"
                   style={{ fontSize: '16px', fontWeight: '300' }}
                   variant="body1"
                   gutterBottom
@@ -1059,7 +1059,7 @@ const courseSummary = () =>
                       >
                         {Gstate.provider}
                       </Typography>
-                      <Typography variant="h6" className="u-title" gutterBottom>
+                      <Typography align = "justify"variant="h6" className="u-title" gutterBottom>
                         {Gstate.title}
                       </Typography>
                       <Typography
@@ -1074,14 +1074,14 @@ const courseSummary = () =>
                   </div>
                   <br/>
                   <div className="cd-cont">
-                    <Typography
+                    <Typography align = "justify"align = "justify"
                       style={{ fontWeight: '600', fontSize: '22px' }}
                       variant="subtitle2"
                       gutterBottom
                     >
                       Course Overview
                     </Typography>
-                    <Typography
+                    <Typography align = "justify"align = "justify"
                       style={{ fontSize: '16px', fontWeight: '300' }}
                       variant="body1"
                       gutterBottom
@@ -1121,7 +1121,7 @@ const courseSummary = () =>
                     >
                       {Gstate.data.organisation.name}
                     </Typography>
-                    <Typography variant="h6" gutterBottom>
+                    <Typography align = "justify"variant="h6" gutterBottom>
                       {Gstate.data.name}
                     </Typography>
                     <Typography
@@ -1274,7 +1274,7 @@ const courseSummary = () =>
                     >
                       {Gstate.summaryData.university}
                     </Typography>
-                    <Typography variant="h6" gutterBottom>
+                    <Typography align = "justify"variant="h6" gutterBottom>
                       {ReactHtmlParser(Gstate.data.courseData.fields.title)}
                     </Typography>
                     <Typography
@@ -1388,7 +1388,7 @@ const courseSummary = () =>
                     >
                       {Gstate.summaryData.university}
                     </Typography>
-                    <Typography variant="h6" gutterBottom>
+                    <Typography align = "justify"variant="h6" gutterBottom>
                       {ReactHtmlParser(Gstate.data.title)}
                     </Typography>
                     <Typography
@@ -1553,7 +1553,7 @@ const courseSummary = () =>
                     >
                       {Gstate.data.university}
                     </Typography>
-                    <Typography variant="h6" gutterBottom>
+                    <Typography align = "justify"variant="h6" gutterBottom>
                       {Gstate.data.title}
                     </Typography>
                     <Typography
@@ -1724,7 +1724,7 @@ const courseSummary = () =>
                     >
                       {Gstate.summaryData.university}
                     </Typography>
-                    <Typography variant="h6" gutterBottom>
+                    <Typography align = "justify"variant="h6" gutterBottom>
                       {ReactHtmlParser(Gstate.data.title)}
                     </Typography>
                     <Typography
@@ -1861,7 +1861,7 @@ const courseSummary = () =>
                     >
                       {Gstate.data && Gstate.data.owners[0].name}
                     </Typography>
-                    <Typography variant="h6" gutterBottom>
+                    <Typography align = "justify"variant="h6" gutterBottom>
                       {Gstate.data.title}
                     </Typography>
                     <Typography
