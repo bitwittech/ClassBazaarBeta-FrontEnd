@@ -21,7 +21,7 @@ const ProvacyPolicy = () => {
             Privacy Policy
           </Typography>
           <Typography variant="caption" display="block" gutterBottom>
-            Effective as of November 1, 2019
+            Effective as of January 1, 2022
           </Typography>
           <br />
           <div
@@ -319,7 +319,7 @@ const ProvacyPolicy = () => {
           </div>
           <p class="footer-text"> Email: info@classbazaar.com </p>
           <p class="footer-text tsm">
-            © Copyright 2019 <strong>Class Bazaar</strong>, All Right Reserved
+            © Copyright 2022 <strong>Class Bazaar</strong>, All Right Reserved
           </p>
         </div>
       </div>
