@@ -164,8 +164,7 @@ class HomePage extends Component {
 
   handleCourseNumber = count => {
     this.setState({
-//       totalCount: count,
-      totalCount: '171154',
+      totalCount: count,
     });
   };
 
