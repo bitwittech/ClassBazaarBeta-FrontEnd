@@ -1,20 +1,24 @@
 import A from './../assets/A.png';
 import ALTMBA from './../assets/altmba.png';
 import ATTLogo from './../assets/ATTLogo.png';
+import IITKLogo from '../assets/IITKLogo.jpg'
 import B from './../assets/B.png';
+
 import BostonUniLogo from './../assets/BostonUniLogo.png';
+import yaleLOGO from './../assets/yaleLOGO.png';
+import colomboLOGO from './../assets/colomboLOGO.png'
 import CS from './../assets/CS.png';
 import DA from './../assets/DA.png';
 import DEV from './../assets/DEV.png';
 import GeorgiaTechUniLogo from './../assets/GeorgiaTechUniLogo.png';
 import HL from './../assets/HL.png';
 import HarvardUniLogo from './../assets/HarvardUniLogo.png';
-import IIITBLogo from './../assets/IIITBLogo.jpg';
-import IITKLogo from './../assets/IITKLogo.jpg';
+import metaLOGO from './../assets/metaLOGO.png';
+import udemyLOGO from './../assets/udemyLOGO.png';
 import LSH from './../assets/LSH.svg';
 import M from './../assets/M.png';
-import MicaLogo from './../assets/MicaLogo.jpg';
-import NC from '../assets/NC.png';
+import accentureLOGO from './../assets/accentureLOGO.png';
+import awsLOGO from '../assets/awsLOGO.png';
 import O from './../assets/O.png';
 import PMPInstLogo from './../assets/PMPInstLogo.jpg';
 import SENG from './../assets/SENG.png';
@@ -111,67 +115,33 @@ export const subjectsData = [
 
 export const degreeData = [
   {
-    name: 'Master of Science in Machine Learning & AI',
-    university: 'Liverpool John Moores University and IIIT, Bangalore',
-    image: IIITBLogo,
-    provider: 'upGrad',
-    url: '/upGrad/5de5b3af0b4a63ba9b2e9967',
+    name: 'Facebook Marketing Analytics Professional Certificate',
+    university: 'Facebook Meta Course',
+    image: metaLOGO,
+    provider: 'Coursera',
+    url: '/Coursera/a7fdedb3-b7f2-43e0-a279-205ebeb8cdf6',
   },
   {
-    name: 'PG Certification in Digital Marketing and Communication',
-    university: 'MICA, Ahmedabad',
-    provider: 'upGrad',
-    image: MicaLogo,
-    url: '/upGrad/5de5b3af0b4a63ba9b2e9969',
+    name: 'Salesforce Certified Platform Developer I',
+    university: 'Udemy Online Portal',
+    provider: 'Udemy',
+    image: udemyLOGO,
+    url: '/Udemy/33cfdc17-d3b7-4ab1-97d7-0482a97c9ee5',
   },
   {
-    name: 'Bachelor of Arts',
-    university: 'University of Newcastle',
-    provider: 'FutureLearn',
-    image: NC,
-    url: '',
-    data: {
-      name: 'Bachelor of Arts',
-      university: 'University of Newcastle',
-      provider: 'FutureLearn',
-      outcome: `<div>Studying our new Bachelor of Arts degree (online) at UON lets you forge your own path. Tailor your studies and gain core specialisations by choosing from 4 majors and minors.
-
-      Study a range of courses to analyse and deconstruct the world around you. Explore ideas, theories and records of how people process the human experience. You will learn about society, culture, history, media and more. If you’re hungry for knowledge, an arts degree will allow you to turn your interests into meaningful careers.</div><div class="m-fact-sheet__detail"><h2 class="m-fact-sheet__heading">What are the learning outcomes?</h2><div class="m-fact-sheet__text"><ul>
-      <li>Knowledge: The capacity to research, analyse, and apply knowledge from disciplinary and multidisciplinary perspectives within the Bachelor of Arts.</li>
-      <li>Communication: The developed capacity to communicate effectively across written, oral, visual, and digital forms.</li>
-      <li>Critical thinking and research skills: The ability to identify high-quality information and critically analyse it as a user, researcher and producer, with a focus on well-reasoned argumentation.</li>
-      <li>Intercultural competence: The ability to engage with a range of diverse perspectives from which knowledge, beliefs, and values are developed and maintained from the local to the global, regional, and global levels.</li>
-      <li>Work readiness:  A demonstrated capacity to engage in teamwork, initiative, problem solving, ethical decision-making, and to manage projects.</li>
-    </ul>
+    name: 'AWS: Machine Learning Foundations',
+    university: 'AWS Academy',
+    provider: 'Futre Learn',
+    image: awsLOGO,
+    url: '/FutureLearn/19188453-5506-487a-b2fe-9b8075424e96',
     
-    <p>Please note Programs (and/or their titles) listed below may change.</p>
-    </div></div>`,
-      startDate: '',
-      duration: '3 years',
-      price: '',
-      enroll:
-        'https://click.linksynergy.com/deeplink?id=aEDzMt9EP*4&mid=42801&murl=https://www.futurelearn.com/degrees/university-of-newcastle-australia/bachelor-of-arts',
-    },
   },
   {
-    name: 'PMP Certification',
-    university: 'Project Management Institute, Simplilearn',
-    provider: 'SimpliLearn',
-    image: PMPInstLogo,
-    url: '',
-    data: {
-      name: 'PMP Certification',
-      university: 'Project Management Institute, Simplilearn',
-      provider: 'SimpliLearn',
-      outcome: `PMP Certification Course Overview
-
-      The course covers new trends, emerging practices, tailoring considerations, and core competencies required of a Project Management professional. Placing a greater emphasis on strategic and business knowledge, this course also includes a new section on the role of the project manager in both large and small companies.`,
-      prerequisites: `You should have a secondary degree (i.e. high school diploma, associate’s degree or the global equivalent) with 7,500 hours leading and directing projects along with 35 hours of project management education.<br>OR<br>You should have a four-year degree with 4,500 hours leading and directing projects along with 35 hours of project management education.`,
-      startDate: '8th Feb',
-      duration: '29 hours',
-      price: '₹8,999',
-      enroll: '',
-    },
+    name: 'Digital Skills: Digital Marketing',
+    university: 'Accenture Company',
+    provider: 'Futre Learn',
+    image: accentureLOGO,
+    url: '/FutureLearn/2b6213d0-df82-4988-93b4-2d3bd05b331d',
   },
   {
     name: 'Masters in Business Administration',
@@ -388,45 +358,45 @@ export const freeCourses = [
     university: 'Harvard University',
     provider: 'edX',
     image: HarvardUniLogo,
-    url: '/edX/da1b2400-322b-459b-97b0-0c557f05d017',
+    url: '/edX/afbe4cc4-a020-4006-8502-8fd70c3e84a2',
   },
   {
-    name: 'Natural Language Processing',
-    university: 'IIT Kharagpur',
-    provider: 'Swayaam',
-    image: IITKLogo,
-    url: '/Swayam/5de9cf0d148eabdc6d615322',
+    name: 'Introduction to Cryptocurrencies and Blockchain',
+    university: 'Vizitech Solutions, Kiran Vaidya, FTB Courses, Tech Enthusiast',
+    provider: 'Udemy',
+    image: UdemyLogo,
+    url: '/Udemy/cf2360fd-2683-4a79-9ff3-cc728f7ace30',
   },
   {
-    name: 'Intro to JavaScript',
+    name: 'Digital Marketing Fundamentals with Live Projects',
     university: 'Udacity',
     provider: 'Udacity',
-    image: UdacityLogo,
-    url: '/Udacity/5d59f2a947f269dbdfb65ccb',
+    image: UdemyLogo,
+    url: '/Udemy/1f5a2af3-edb6-4bfd-a4b5-5b2b285131a7',
   },
 ];
 
 export const trendingData = [
   {
-    name: 'COVID-19: Tackling the Novel Coronavirus',
-    university: 'London School of Hygiene & Tropical Medicine',
-    provider: 'FutureLearn',
-    image: LSH,
-    url: '/FutureLearn/ef9f5b46-c746-4982-a5c5-f50b03c5f849',
-  },
-  {
-    name: 'Learning Python for Data Analysis and Visualization',
-    university: 'Jose Portilla',
+    name: 'Online MBA Alternative - The modMBA',
+    university: 'COURSE ENVY',
     provider: 'Udemy',
     image: UdemyLogo,
-    url: '/Udemy/5e3509083039aad278e46144',
+    url: '/Udemy/43ff9067-66ab-46cc-9952-4adcc75127c3',
   },
   {
-    name: 'Data to Insight: An Introduction to Data Analysis and Visualisation',
-    university: 'The University of Aukland, New Zealand',
-    provider: 'FuturLearn',
-    image: UniAuklandLogo,
-    url: '/FutureLearn/a005a3aa-74bc-4c98-9df1-8291e83d4585',
+    name: 'Machine Learning for Data Science and Analytics',
+    university: 'Free online courses from Columbia University',
+    provider: 'edX',
+    image: colomboLOGO,
+    url: '/edX/9c7844d5-37e2-412c-85df-40f1f471fd4e',
+  },
+  {
+    name: 'The Science of Well-Being',
+    university: 'Yale University',
+    provider: 'Coursera',
+    image: yaleLOGO,
+    url: '/Coursera/ae886a74-808e-4f30-a8df-9696f23414bc',
   },
 ];
 
