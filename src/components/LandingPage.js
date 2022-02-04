@@ -578,13 +578,13 @@ class LandingPage extends Component {
     const bannerStart = "start";
     const content = [
       {
-      image: OfferBanner
+      image: Banner3
     },
       {
       image: Banner1
     },
     {
-      image: Banner3
+      image: OfferBanner
     },
     // {
     //   image: Banner2
