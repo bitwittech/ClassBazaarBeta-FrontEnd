@@ -14,7 +14,7 @@ import GeorgiaTechUniLogo from './../assets/GeorgiaTechUniLogo.png';
 import HL from './../assets/HL.png';
 import HarvardUniLogo from './../assets/HarvardUniLogo.png';
 import metaLOGO from './../assets/metaLOGO.png';
-import udemyLOGO from './../assets/udemyLOGO.png';
+import udemyLOGO from './../assets/UdemyLogo.png';
 import LSH from './../assets/LSH.svg';
 import M from './../assets/M.png';
 import accentureLOGO from './../assets/accentureLOGO.png';
