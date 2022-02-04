@@ -46,6 +46,7 @@ import 'react-animated-slider/build/horizontal.css';
 import Banner1 from '../assets/img/main-banner.jpg'
 import Banner2 from '../assets/img/banner2.png';
 import Banner3 from '../assets/img/banner3.png';
+import OfferBanner from '../assets/img/offerbanner.png';
 // import DignityHealthWhiteLogo from '../assets/dignityHealthWhiteLogo.jpeg';
 import DignityLogo from '../assets/dignity.png'
 import EduWhite from '../assets/edubuk white.png';
@@ -576,6 +577,9 @@ class LandingPage extends Component {
     const bannerCenter = "center";
     const bannerStart = "start";
     const content = [
+      {
+      image: OfferBanner
+    },
       {
       image: Banner1
     },
