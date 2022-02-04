@@ -20,7 +20,6 @@ import QueryBuilderIcon from '@material-ui/icons/QueryBuilder';
 import RateReviewIcon from '@material-ui/icons/RateReview';
 import ReactGA from 'react-ga';
 import Rupee from '../assets/rupee.svg';
-// import Dollar from '../assets/dollar.svg';
 import SchoolIcon from '@material-ui/icons/School';
 import StarBorderIcon from '@material-ui/icons/StarBorder';
 import StarHalfIcon from '@material-ui/icons/StarHalf';
@@ -131,7 +130,7 @@ const CourseDetails = props => {
         },
       };
 
-      var url = `http://0.0.0.0:8080/api/course?uuid=${uuid}&provider=${provider}`;
+      var url = `https://api.classbazaar.com/api/course?uuid=${uuid}&provider=${provider}`;
 
       // var url = `http://localhost:8080/api/course?uuid=${uuid}&provider=${provider}`;
      
@@ -139,7 +138,6 @@ const CourseDetails = props => {
       
       const res = await fetch(url);
       const data = await res.json();
-      
       console.log('dataUdemy',data.summaryData);
 
       const reviews = await axios.post(
@@ -473,7 +471,7 @@ const courseSummary = () =>
   //             </Grid>
   //           </Grid>
   //           <Grid item xs={9}>
-  //             <Typography color="primary" variant="h6">
+  //             <Typography align = "justify"color="primary" variant="h6">
   //               {data.username}
   //             </Typography>
   //             <Box
@@ -494,553 +492,489 @@ const courseSummary = () =>
   //   </>
   // );
 
-  // const coursera = () => {
-  //   return (
-  //     Gstate.data && Gstate.data.additionalDetails &&
-  //     (Gstate.data.additionalDetails.courses.length === 0 ? (
-  //       <div maxwidth="lg" className="ead-sec">
-  //         <div className="cd-container">
-  //           <Grid container spacing={3} direction="row-reverse">
-  //             <Grid item xs={12} sm={4}>
-  //               {courseraSummary('course', 0)}
-  //             </Grid>
-  //             <Grid item xs={12} sm={8}>
-  //               <div className="d-card" style={{ backgroundColor: '#fff3ef', boxShadow: 'none' }}>
-  //                 <div className="cd-head">
-  //                   <div className="cd-head-o">
-  //                     <Typography
-  //                       style={{ fontWeight: '600' }}
-  //                       color="primary"
-  //                       variant="subtitle2"
-  //                       gutterBottom
-  //                     >
-  //                       <span style={{ color: '#444444' }}>
-  //                         {
-  //                           Gstate.data.rakutenDetails._attributes
-  //                             .manufacturer_name
-  //                         }
-  //                       </span>
-  //                     </Typography>
-  //                     <Typography variant="h5" style={{ fontWeight: 600 }} gutterBottom>
-  //                       {Gstate.data.additionalDetails.title}
-  //                     </Typography>
-  //                     <Typography
-  //                       variant="caption"
-  //                       display="block"
-  //                       className="provider"
-  //                       style={{
-  //                         borderRadius: '10px',
-  //                         padding: '2px 10px 3px 10px',
-  //                         color: 'white',
-  //                         background: '#f15a29',
-  //                         display: 'inline',
-  //                       }}
-  //                       gutterBottom
-  //                     >
-  //                       via Coursera
-  //                     </Typography>
-  //                   </div>
-
-  //                   <div style={{ textAlign: 'right' }} className="cd-head-t">
-  //                     {/* {reviewSection(
-  //                  Gstate.data.avg_rating,
-  //                  Gstate.data.num_reviews
-  //                )} */}
-  //                   </div>
-  //                 </div>
-  //                 <br/>
-  //                 <div className="cd-cont">
-  //                   <Typography
-  //                     style={{ fontWeight: '600', fontSize: '22px' }}
-  //                     variant="subtitle2"
-  //                     gutterBottom
-  //                   >
-  //                     Course Level:&nbsp;
-  //                     <span className="r-fw">
-  //                       {' '}
-  //                       {
-  //                         Gstate.data.additionalDetails.levelOfCourse.split(
-  //                           ' ',
-  //                         )[0]
-  //                       }
-  //                     </span>
-  //                   </Typography>
-  //                   <Typography
-  //                     style={{ fontWeight: '600', fontSize: '22px' }}
-  //                     variant="subtitle2"
-  //                     gutterBottom
-  //                   >
-  //                     Course Overview
-  //                   </Typography>
-  //                   <Typography
-  //                     style={{ fontSize: '16px', fontWeight: '300' }}
-  //                     variant="body1"
-  //                     gutterBottom
-  //                   >
-  //                     {/* {ReactHtmlParser(Gstate.data.full_description, {
-  //                  transform: node => {
-  //                    if (node.name === 'h2' || node.name === 'h3') {
-  //                      // console.log({ node });
-  //                      return <Box>{node.children[0].children[0].data}</Box>;
-  //                    }
-  //                    if (node.name === 'br') {
-  //                      return null;
-  //                    }
-  //                    if (node.name === 'strong') {
-  //                      console.log({ node });
-  //                      return <Box>{node.children[0].data}</Box>;
-  //                    }
-  //                  },
-  //                })} */}
-  //                     {Gstate.data.rakutenDetails.description.long._text}
-  //                   </Typography>
-  //                   <br/>
-  //                   <Typography
-  //                     style={{ fontWeight: '600', fontSize: '22px' }}
-  //                     variant="subtitle2"
-  //                     gutterBottom
-  //                   >
-  //                     Syllabus
-  //                   </Typography>
-  //                   {Gstate.data.additionalDetails.syllabus.map(
-  //                     (item, index) => {
-  //                       return (
-  //                         <>
-  //                           <Typography
-  //                             key={index}
-  //                             style={{ fontSize: '16px', fontWeight: '300' }}
-  //                             variant="body1"
-  //                             gutterBottom
-  //                           >
-  //                             <p>
-  //                               {item.title} &nbsp; (
-  //                               {
-  //                                 Gstate.data.additionalDetails.hoursToComplete[
-  //                                   index
-  //                                   ].text.split(' to')[0]
-  //                               }
-  //                               )
-  //                             </p>
-  //                             <p className="mt-n mt-1">{item.content}</p>
-  //                           </Typography>
-  //                         </>
-  //                       );
-  //                     },
-  //                   )}
-  //                   <br/>
-  //                   <Typography
-  //                     style={{ fontWeight: '600', fontSize: '22px' }}
-  //                     variant="subtitle2"
-  //                     gutterBottom
-  //                   >
-  //                     Students Enrolled:&nbsp;{' '}
-  //                     {/* {this.Gstate.closestRun.staff.map((obj, index) => (
-  //                      <span key={index} style={{ fontWeight: '300' }}>
-  //                        {obj.given_name}
-  //                      </span>
-  //                    ))} */}
-  //                     <span className="r-fw">
-  //                       {Gstate.data.additionalDetails.instructorsLearnerCount.toLocaleString()}
-  //                     </span>
-  //                   </Typography>
-  //                   <Typography
-  //                     style={{ fontWeight: '600', fontSize: '22px' }}
-  //                     variant="subtitle2"
-  //                     gutterBottom
-  //                   >
-  //                     Professor:&nbsp;{' '}
-  //                     {/* {this.Gstate.closestRun.staff.map((obj, index) => (
-  //                      <span key={index} style={{ fontWeight: '300' }}>
-  //                        {obj.given_name}
-  //                      </span>
-  //                    ))} */}
-  //                     <span className="r-fw">
-  //                       {Gstate.data.additionalDetails.instructorName}
-  //                     </span>
-  //                   </Typography>
-
-  //                   <Typography
-  //                     style={{ fontWeight: '600', fontSize: '22px' }}
-  //                     variant="subtitle2"
-  //                     gutterBottom
-  //                   >
-  //                     Reviews
-  //                   </Typography>
-  //                   <div>
-  //                     <button
-  //                       onClick={() => {
-  //                         setState({ ...Gstate, popUp: !Gstate.popUp });
-  //                       }}
-  //                       className="enroll-btn"
-  //                     >
-  //                       <div style={{ display: 'flex', flexDirection: 'row' }}>
-  //                         <div
-  //                           style={{
-  //                             display: 'flex',
-  //                             alignItems: 'center',
-  //                             fontWeight: '600',
-  //                           }}
-  //                         >
-  //                           <div>Write Review &nbsp;</div>
-  //                         </div>
-  //                         <div>
-  //                           <RateReviewIcon
-  //                             style={{ fontSize: '22px', marginTop: '2px' }}
-  //                           />
-  //                         </div>
-  //                       </div>
-  //                     </button>
-  //                   </div>
-  //                 </div>
-  //               </div>
-  //             </Grid>
-  //           </Grid>
-  //         </div>
-  //       </div>
-  //     ) : (
-  //       <div maxwidth="lg" className="ead-sec">
-  //         <div className="cd-container">
-  //           <Grid container spacing={3} direction="row-reverse">
-  //             <Grid item xs={12} sm={3}>
-  //               {courseraSummary('degree', 0)}
-  //             </Grid>
-  //             <Grid item xs={12} sm={9}>
-  //               <div className="orange-band1">
-  //                 <div> This course is professional certificate</div>
-  //                 <div className="iconSchool">
-  //                   <SchoolIcon/>
-  //                 </div>
-  //               </div>
-  //               <div className="d-card">
-  //                 <div className="cd-head">
-  //                   <div className="cd-head-o">
-  //                     <Typography
-  //                       style={{ fontWeight: '600' }}
-  //                       color="primary"
-  //                       variant="subtitle2"
-  //                       gutterBottom
-  //                     >
-  //                       {
-  //                         CourseraDegree.rakutenDetails._attributes
-  //                           .manufacturer_name
-  //                       }
-  //                     </Typography>
-  //                     <Typography variant="h6" gutterBottom>
-  //                       {CourseraDegree.additionalDetails.title}
-  //                     </Typography>
-  //                     <Typography
-  //                       variant="caption"
-  //                       display="block"
-  //                       className="provider"
-  //                       gutterBottom
-  //                     >
-  //                       via Coursera
-  //                     </Typography>
-  //                   </div>
-
-  //                   <div style={{ textAlign: 'right' }} className="cd-head-t">
-  //                     {/* {reviewSection(
-  //                     Gstate.data.avg_rating,
-  //                     Gstate.data.num_reviews
-  //                   )} */}
-  //                   </div>
-  //                 </div>
-  //                 <br/>
-  //                 <div className="cd-cont">
-  //                   <Typography
-  //                     style={{ fontWeight: '600', fontSize: '22px' }}
-  //                     variant="subtitle2"
-  //                     gutterBottom
-  //                   >
-  //                     Course Level:&nbsp;
-  //                     <span className="r-fw">
-  //                       {
-  //                         CourseraDegree.additionalDetails.levelOfCourse.split(
-  //                           ' ',
-  //                         )[0]
-  //                       }
-  //                     </span>
-  //                   </Typography>
-  //                   <Typography
-  //                     style={{ fontWeight: '600', fontSize: '22px' }}
-  //                     variant="subtitle2"
-  //                     gutterBottom
-  //                   >
-  //                     About the Course
-  //                   </Typography>
-  //                   <Typography
-  //                     style={{ fontSize: '16px', fontWeight: '300' }}
-  //                     variant="body1"
-  //                     gutterBottom
-  //                   >
-  //                     {/* {ReactHtmlParser(Gstate.data.full_description, {
-  //                     transform: node => {
-  //                       if (node.name === 'h2' || node.name === 'h3') {
-  //                         // console.log({ node });
-  //                         return <Box>{node.children[0].children[0].data}</Box>;
-  //                       }
-  //                       if (node.name === 'br') {
-  //                         return null;
-  //                       }
-  //                       if (node.name === 'strong') {
-  //                         console.log({ node });
-  //                         return <Box>{node.children[0].data}</Box>;
-  //                       }
-  //                     },
-  //                   })} */}
-  //                     {CourseraDegree.rakutenDetails.description.long._text}
-  //                   </Typography>
-  //                   <br/>
-  //                   <Typography
-  //                     style={{ fontWeight: '600', fontSize: '22px' }}
-  //                     variant="subtitle2"
-  //                     gutterBottom
-  //                   >
-  //                     What is a Professional Certificate?
-  //                   </Typography>
-  //                   <Typography
-  //                     style={{ fontWeight: '600', fontSize: '16px' }}
-  //                     variant="subtitle2"
-  //                     gutterBottom
-  //                   >
-  //                     Build the job to get job ready
-  //                   </Typography>
-  //                   <Typography
-  //                     style={{ fontSize: '16px', fontWeight: '300' }}
-  //                     variant="body1"
-  //                     gutterBottom
-  //                   >
-  //                     Whether you're looking to start a new career. or change
-  //                     your current one, Professional Certificates on Coursera
-  //                     help you become job ready. Learn at your own pace,
-  //                     whenever and whereever it's most convenient for you.
-  //                     Enroll today and explore a new career path with a 7 day
-  //                     free trial. You can pause your learning and your
-  //                     subscription at any time.
-  //                   </Typography>
-  //                   <br/>
-  //                   <Typography
-  //                     style={{ fontWeight: '600', fontSize: '16px' }}
-  //                     variant="subtitle2"
-  //                     gutterBottom
-  //                   >
-  //                     Hands-On Projects
-  //                   </Typography>
-  //                   <Typography
-  //                     style={{ fontSize: '16px', fontWeight: '300' }}
-  //                     variant="body1"
-  //                     gutterBottom
-  //                   >
-  //                     Apply your skills with hands-on projects and build a
-  //                     portfolio that showcases your job readiness to potential
-  //                     employers. You'll need to successfully finish the
-  //                     project(s) to earn your Certificate.
-  //                   </Typography>
-  //                   <br/>
-  //                   <Typography
-  //                     style={{ fontWeight: '600', fontSize: '16px' }}
-  //                     variant="subtitle2"
-  //                     gutterBottom
-  //                   >
-  //                     Earn a Career Credential
-  //                   </Typography>
-  //                   <Typography
-  //                     style={{ fontSize: '16px', fontWeight: '300' }}
-  //                     variant="body1"
-  //                     gutterBottom
-  //                   >
-  //                     When you complete all of the courses in the program,
-  //                     you'll earn a Certificate to share with oyur professional
-  //                     network as well as unlock access to career support
-  //                     resources to help you kickstart your new career. Many
-  //                     Professional Certificates have hiring partners that
-  //                     recignize the Professional Certificate credfential and
-  //                     others can help prepare you for a certification exam. You
-  //                     can find more information on individual Professional
-  //                     Certificate pages where it applies.
-  //                   </Typography>
-  //                   <br/>
-  //                   <Typography
-  //                     style={{ fontWeight: '600', fontSize: '17px' }}
-  //                     variant="subtitle2"
-  //                     color="primary"
-  //                     gutterBottom
-  //                   >
-  //                     4 Courses in the MasterTrack<sup>TM</sup> Certificate
-  //                   </Typography>
-  //                   <div className="courses-list">
-  //                     {CourseraDegree.additionalDetails.courses.map(
-  //                       (item, index) => {
-  //                         return (
-  //                           <div className="course-item">
-  //                             <div className="c-left-item">
-  //                               <div>
-  //                                 <Typography
-  //                                   style={{
-  //                                     fontWeight: '600',
-  //                                     fontSize: '17px',
-  //                                   }}
-  //                                   variant="subtitle2"
-  //                                   color="primary"
-  //                                   gutterBottom
-  //                                 >
-  //                                   Course
-  //                                 </Typography>
-  //                               </div>
-  //                               <div className="mt-n2">
-  //                                 <Typography
-  //                                   style={{
-  //                                     fontWeight: '600',
-  //                                     fontSize: '65px',
-  //                                   }}
-  //                                   variant="subtitle2"
-  //                                   color="primary"
-  //                                   gutterBottom
-  //                                 >
-  //                                   {index + 1}
-  //                                 </Typography>
-  //                               </div>
-  //                             </div>
-  //                             <div className="c-right-item">
-  //                               <div>
-  //                                 <Typography
-  //                                   style={{
-  //                                     fontWeight: '600',
-  //                                     fontSize: '16px',
-  //                                   }}
-  //                                   variant="subtitle2"
-  //                                   gutterBottom
-  //                                 >
-  //                                   {item.name}
-  //                                 </Typography>
-  //                                 <p>{item.details}</p>
-  //                               </div>
-  //                             </div>
-  //                           </div>
-  //                         );
-  //                       },
-  //                     )}
-  //                   </div>
-  //                   <br/>
-  //                   <br/>
-  //                   <Typography
-  //                     style={{ fontWeight: '600', fontSize: '22px' }}
-  //                     variant="subtitle2"
-  //                     gutterBottom
-  //                   >
-  //                     Offered By:&nbsp;{' '}
-  //                     <span className="r-fw">
-  //                       {' '}
-  //                       {CourseraDegree.additionalDetails.instructorName}
-  //                     </span>
-  //                   </Typography>
-  //                   <br/> <br/>
-  //                   <Typography
-  //                     style={{ fontWeight: '600', fontSize: '22px' }}
-  //                     variant="subtitle2"
-  //                     gutterBottom
-  //                   >
-  //                     Reviews
-  //                   </Typography>
-  //                   <div>
-  //                     <button
-  //                       onClick={() => {
-  //                         setState({ ...Gstate, popUp: !Gstate.popUp });
-  //                       }}
-  //                       className="enroll-btn"
-  //                     >
-  //                       <div style={{ display: 'flex', flexDirection: 'row' }}>
-  //                         <div
-  //                           style={{
-  //                             display: 'flex',
-  //                             alignItems: 'center',
-  //                             fontWeight: '600',
-  //                           }}
-  //                         >
-  //                           <div>Write Review &nbsp;</div>
-  //                         </div>
-  //                         <div>
-  //                           <RateReviewIcon
-  //                             style={{ fontSize: '22px', marginTop: '2px' }}
-  //                           />
-  //                         </div>
-  //                       </div>
-  //                     </button>
-  //                   </div>
-  //                {/* {reviews()} */}
-  //                 </div>
-  //               </div>
-  //             </Grid>
-  //           </Grid>
-  //         </div>
-  //       </div>
-  //     ))
-  //   );
-  // };
-
-
   const coursera = () => {
     return (
-        Gstate && (
-          <div maxwidth="lg" className="ead-sec">
-            <div className="cd-container">
-              <Grid container spacing={3} direction="row-reverse">
-                <Grid item xs={12} sm={3}>
-                  {courseSummary()}
-                </Grid>
-                <Grid item xs={12} sm={9}>
-                  <div className="d-card" style={{ backgroundColor: '#fff3ef', boxShadow: 'none' }}>
-                    <div className="cd-head">
-                      <div className="cd-head-o">
-                        <Typography
-                          style={{ fontWeight: '600' }}
-                          color="primary"
-                          variant="subtitle2"
-                          className="u-uni"
-                          gutterBottom
-                        >
-                          {Gstate.provider}
-                        </Typography>
-                        <Typography variant="h6" className="u-title" gutterBottom>
-                          {Gstate.title}
-                        </Typography>
-                        <Typography
-                          variant="caption"
-                          display="block"
-                          className="provider u-provider"
-                          gutterBottom
-                        >
-                          via {provider}
-                        </Typography>
-                      </div>
-                    </div>
-                    <br/>
-                    <div className="cd-cont">
-                      <Typography align = "justify"
-                        style={{ fontWeight: '600', fontSize: '22px' }}
+      Gstate.data && Gstate.data.additionalDetails &&
+      (Gstate.data.additionalDetails.courses.length === 0 ? (
+        <div maxwidth="lg" className="ead-sec">
+          <div className="cd-container">
+            <Grid container spacing={3} direction="row-reverse">
+              <Grid item xs={12} sm={4}>
+                {courseraSummary('course', 0)}
+              </Grid>
+              <Grid item xs={12} sm={8}>
+                <div className="d-card" style={{ backgroundColor: '#fff3ef', boxShadow: 'none' }}>
+                  <div className="cd-head">
+                    <div className="cd-head-o">
+                      <Typography
+                        style={{ fontWeight: '600' }}
+                        color="primary"
                         variant="subtitle2"
                         gutterBottom
                       >
-                        Course Overview
+                        <span style={{ color: '#444444' }}>
+                          {
+                            Gstate.data.rakutenDetails._attributes
+                              .manufacturer_name
+                          }
+                        </span>
                       </Typography>
-                      <Typography align = "justify"
-                        style={{ fontSize: '16px', fontWeight: '300' }}
-                        variant="body1"
+                      <Typography align = "justify"variant="h5" style={{ fontWeight: 600 }} gutterBottom>
+                        {Gstate.data.additionalDetails.title}
+                      </Typography>
+                      <Typography
+                        variant="caption"
+                        display="block"
+                        className="provider"
+                        style={{
+                          borderRadius: '10px',
+                          padding: '2px 10px 3px 10px',
+                          color: 'white',
+                          background: '#f15a29',
+                          display: 'inline',
+                        }}
                         gutterBottom
                       >
-                        {ReactHtmlParser(Gstate.description)}
+                        via Coursera
                       </Typography>
                     </div>
+
+                    <div style={{ textAlign: 'right' }} className="cd-head-t">
+                      {/* {reviewSection(
+                   Gstate.data.avg_rating,
+                   Gstate.data.num_reviews
+                 )} */}
+                    </div>
                   </div>
-                </Grid>
+                  <br/>
+                  <div className="cd-cont">
+                    <Typography
+                      style={{ fontWeight: '600', fontSize: '22px' }}
+                      variant="subtitle2"
+                      gutterBottom
+                    >
+                      Course Level:&nbsp;
+                      <span className="r-fw">
+                        {' '}
+                        {
+                          Gstate.data.additionalDetails.levelOfCourse.split(
+                            ' ',
+                          )[0]
+                        }
+                      </span>
+                    </Typography>
+                    <Typography
+                      style={{ fontWeight: '600', fontSize: '22px' }}
+                      variant="subtitle2"
+                      gutterBottom
+                    >
+                      Course Overview
+                    </Typography>
+                    <Typography
+                      style={{ fontSize: '16px', fontWeight: '300' }}
+                      variant="body1"
+                      gutterBottom
+                    >
+                      {/* {ReactHtmlParser(Gstate.data.full_description, {
+                   transform: node => {
+                     if (node.name === 'h2' || node.name === 'h3') {
+                       // console.log({ node });
+                       return <Box>{node.children[0].children[0].data}</Box>;
+                     }
+                     if (node.name === 'br') {
+                       return null;
+                     }
+                     if (node.name === 'strong') {
+                       console.log({ node });
+                       return <Box>{node.children[0].data}</Box>;
+                     }
+                   },
+                 })} */}
+                      {Gstate.data.rakutenDetails.description.long._text}
+                    </Typography>
+                    <br/>
+                    <Typography
+                      style={{ fontWeight: '600', fontSize: '22px' }}
+                      variant="subtitle2"
+                      gutterBottom
+                    >
+                      Syllabus
+                    </Typography>
+                    {Gstate.data.additionalDetails.syllabus.map(
+                      (item, index) => {
+                        return (
+                          <>
+                            <Typography
+                              key={index}
+                              style={{ fontSize: '16px', fontWeight: '300' }}
+                              variant="body1"
+                              gutterBottom
+                            >
+                              <p>
+                                {item.title} &nbsp; (
+                                {
+                                  Gstate.data.additionalDetails.hoursToComplete[
+                                    index
+                                    ].text.split(' to')[0]
+                                }
+                                )
+                              </p>
+                              <p className="mt-n mt-1">{item.content}</p>
+                            </Typography>
+                          </>
+                        );
+                      },
+                    )}
+                    <br/>
+                    <Typography
+                      style={{ fontWeight: '600', fontSize: '22px' }}
+                      variant="subtitle2"
+                      gutterBottom
+                    >
+                      Students Enrolled:&nbsp;{' '}
+                      {/* {this.Gstate.closestRun.staff.map((obj, index) => (
+                       <span key={index} style={{ fontWeight: '300' }}>
+                         {obj.given_name}
+                       </span>
+                     ))} */}
+                      <span className="r-fw">
+                        {Gstate.data.additionalDetails.instructorsLearnerCount.toLocaleString()}
+                      </span>
+                    </Typography>
+                    <Typography
+                      style={{ fontWeight: '600', fontSize: '22px' }}
+                      variant="subtitle2"
+                      gutterBottom
+                    >
+                      Professor:&nbsp;{' '}
+                      {/* {this.Gstate.closestRun.staff.map((obj, index) => (
+                       <span key={index} style={{ fontWeight: '300' }}>
+                         {obj.given_name}
+                       </span>
+                     ))} */}
+                      <span className="r-fw">
+                        {Gstate.data.additionalDetails.instructorName}
+                      </span>
+                    </Typography>
+
+                    <Typography
+                      style={{ fontWeight: '600', fontSize: '22px' }}
+                      variant="subtitle2"
+                      gutterBottom
+                    >
+                      Reviews
+                    </Typography>
+                    <div>
+                      <button
+                        onClick={() => {
+                          setState({ ...Gstate, popUp: !Gstate.popUp });
+                        }}
+                        className="enroll-btn"
+                      >
+                        <div style={{ display: 'flex', flexDirection: 'row' }}>
+                          <div
+                            style={{
+                              display: 'flex',
+                              alignItems: 'center',
+                              fontWeight: '600',
+                            }}
+                          >
+                            <div>Write Review &nbsp;</div>
+                          </div>
+                          <div>
+                            <RateReviewIcon
+                              style={{ fontSize: '22px', marginTop: '2px' }}
+                            />
+                          </div>
+                        </div>
+                      </button>
+                    </div>
+                  </div>
+                </div>
               </Grid>
-            </div>
+            </Grid>
           </div>
-        )
-      );
+        </div>
+      ) : (
+        <div maxwidth="lg" className="ead-sec">
+          <div className="cd-container">
+            <Grid container spacing={3} direction="row-reverse">
+              <Grid item xs={12} sm={3}>
+                {courseraSummary('degree', 0)}
+              </Grid>
+              <Grid item xs={12} sm={9}>
+                <div className="orange-band1">
+                  <div> This course is professional certificate</div>
+                  <div className="iconSchool">
+                    <SchoolIcon/>
+                  </div>
+                </div>
+                <div className="d-card">
+                  <div className="cd-head">
+                    <div className="cd-head-o">
+                      <Typography
+                        style={{ fontWeight: '600' }}
+                        color="primary"
+                        variant="subtitle2"
+                        gutterBottom
+                      >
+                        {
+                          CourseraDegree.rakutenDetails._attributes
+                            .manufacturer_name
+                        }
+                      </Typography>
+                      <Typography align = "justify"variant="h6" gutterBottom>
+                        {CourseraDegree.additionalDetails.title}
+                      </Typography>
+                      <Typography
+                        variant="caption"
+                        display="block"
+                        className="provider"
+                        gutterBottom
+                      >
+                        via Coursera
+                      </Typography>
+                    </div>
+
+                    <div style={{ textAlign: 'right' }} className="cd-head-t">
+                      {/* {reviewSection(
+                      Gstate.data.avg_rating,
+                      Gstate.data.num_reviews
+                    )} */}
+                    </div>
+                  </div>
+                  <br/>
+                  <div className="cd-cont">
+                    <Typography
+                      style={{ fontWeight: '600', fontSize: '22px' }}
+                      variant="subtitle2"
+                      gutterBottom
+                    >
+                      Course Level:&nbsp;
+                      <span className="r-fw">
+                        {
+                          CourseraDegree.additionalDetails.levelOfCourse.split(
+                            ' ',
+                          )[0]
+                        }
+                      </span>
+                    </Typography>
+                    <Typography
+                      style={{ fontWeight: '600', fontSize: '22px' }}
+                      variant="subtitle2"
+                      gutterBottom
+                    >
+                      About the Course
+                    </Typography>
+                    <Typography
+                      style={{ fontSize: '16px', fontWeight: '300' }}
+                      variant="body1"
+                      gutterBottom
+                    >
+                      {/* {ReactHtmlParser(Gstate.data.full_description, {
+                      transform: node => {
+                        if (node.name === 'h2' || node.name === 'h3') {
+                          // console.log({ node });
+                          return <Box>{node.children[0].children[0].data}</Box>;
+                        }
+                        if (node.name === 'br') {
+                          return null;
+                        }
+                        if (node.name === 'strong') {
+                          console.log({ node });
+                          return <Box>{node.children[0].data}</Box>;
+                        }
+                      },
+                    })} */}
+                      {CourseraDegree.rakutenDetails.description.long._text}
+                    </Typography>
+                    <br/>
+                    <Typography
+                      style={{ fontWeight: '600', fontSize: '22px' }}
+                      variant="subtitle2"
+                      gutterBottom
+                    >
+                      What is a Professional Certificate?
+                    </Typography>
+                    <Typography
+                      style={{ fontWeight: '600', fontSize: '16px' }}
+                      variant="subtitle2"
+                      gutterBottom
+                    >
+                      Build the job to get job ready
+                    </Typography>
+                    <Typography
+                      style={{ fontSize: '16px', fontWeight: '300' }}
+                      variant="body1"
+                      gutterBottom
+                    >
+                      Whether you're looking to start a new career. or change
+                      your current one, Professional Certificates on Coursera
+                      help you become job ready. Learn at your own pace,
+                      whenever and whereever it's most convenient for you.
+                      Enroll today and explore a new career path with a 7 day
+                      free trial. You can pause your learning and your
+                      subscription at any time.
+                    </Typography>
+                    <br/>
+                    <Typography
+                      style={{ fontWeight: '600', fontSize: '16px' }}
+                      variant="subtitle2"
+                      gutterBottom
+                    >
+                      Hands-On Projects
+                    </Typography>
+                    <Typography
+                      style={{ fontSize: '16px', fontWeight: '300' }}
+                      variant="body1"
+                      gutterBottom
+                    >
+                      Apply your skills with hands-on projects and build a
+                      portfolio that showcases your job readiness to potential
+                      employers. You'll need to successfully finish the
+                      project(s) to earn your Certificate.
+                    </Typography>
+                    <br/>
+                    <Typography
+                      style={{ fontWeight: '600', fontSize: '16px' }}
+                      variant="subtitle2"
+                      gutterBottom
+                    >
+                      Earn a Career Credential
+                    </Typography>
+                    <Typography
+                      style={{ fontSize: '16px', fontWeight: '300' }}
+                      variant="body1"
+                      gutterBottom
+                    >
+                      When you complete all of the courses in the program,
+                      you'll earn a Certificate to share with oyur professional
+                      network as well as unlock access to career support
+                      resources to help you kickstart your new career. Many
+                      Professional Certificates have hiring partners that
+                      recignize the Professional Certificate credfential and
+                      others can help prepare you for a certification exam. You
+                      can find more information on individual Professional
+                      Certificate pages where it applies.
+                    </Typography>
+                    <br/>
+                    <Typography
+                      style={{ fontWeight: '600', fontSize: '17px' }}
+                      variant="subtitle2"
+                      color="primary"
+                      gutterBottom
+                    >
+                      4 Courses in the MasterTrack<sup>TM</sup> Certificate
+                    </Typography>
+                    <div className="courses-list">
+                      {CourseraDegree.additionalDetails.courses.map(
+                        (item, index) => {
+                          return (
+                            <div className="course-item">
+                              <div className="c-left-item">
+                                <div>
+                                  <Typography
+                                    style={{
+                                      fontWeight: '600',
+                                      fontSize: '17px',
+                                    }}
+                                    variant="subtitle2"
+                                    color="primary"
+                                    gutterBottom
+                                  >
+                                    Course
+                                  </Typography>
+                                </div>
+                                <div className="mt-n2">
+                                  <Typography
+                                    style={{
+                                      fontWeight: '600',
+                                      fontSize: '65px',
+                                    }}
+                                    variant="subtitle2"
+                                    color="primary"
+                                    gutterBottom
+                                  >
+                                    {index + 1}
+                                  </Typography>
+                                </div>
+                              </div>
+                              <div className="c-right-item">
+                                <div>
+                                  <Typography
+                                    style={{
+                                      fontWeight: '600',
+                                      fontSize: '16px',
+                                    }}
+                                    variant="subtitle2"
+                                    gutterBottom
+                                  >
+                                    {item.name}
+                                  </Typography>
+                                  <p>{item.details}</p>
+                                </div>
+                              </div>
+                            </div>
+                          );
+                        },
+                      )}
+                    </div>
+                    <br/>
+                    <br/>
+                    <Typography
+                      style={{ fontWeight: '600', fontSize: '22px' }}
+                      variant="subtitle2"
+                      gutterBottom
+                    >
+                      Offered By:&nbsp;{' '}
+                      <span className="r-fw">
+                        {' '}
+                        {CourseraDegree.additionalDetails.instructorName}
+                      </span>
+                    </Typography>
+                    <br/> <br/>
+                    <Typography
+                      style={{ fontWeight: '600', fontSize: '22px' }}
+                      variant="subtitle2"
+                      gutterBottom
+                    >
+                      Reviews
+                    </Typography>
+                    <div>
+                      <button
+                        onClick={() => {
+                          setState({ ...Gstate, popUp: !Gstate.popUp });
+                        }}
+                        className="enroll-btn"
+                      >
+                        <div style={{ display: 'flex', flexDirection: 'row' }}>
+                          <div
+                            style={{
+                              display: 'flex',
+                              alignItems: 'center',
+                              fontWeight: '600',
+                            }}
+                          >
+                            <div>Write Review &nbsp;</div>
+                          </div>
+                          <div>
+                            <RateReviewIcon
+                              style={{ fontSize: '22px', marginTop: '2px' }}
+                            />
+                          </div>
+                        </div>
+                      </button>
+                    </div>
+                 {/* {reviews()} */}
+                  </div>
+                </div>
+              </Grid>
+            </Grid>
+          </div>
+        </div>
+      ))
+    );
   };
-
-
   const edX = () =>{
   // count++;
   return(
@@ -1064,7 +998,7 @@ const courseSummary = () =>
                   >
                     {Gstate.provider}
                   </Typography>
-                  <Typography variant="h6" className="u-title" gutterBottom>
+                  <Typography align = "justify"variant="h6" className="u-title" gutterBottom>
                     {Gstate.title}
                   </Typography>
                   <Typography
@@ -1079,14 +1013,14 @@ const courseSummary = () =>
               </div>
               <br/>
               <div className="cd-cont">
-                <Typography align = "justify"
+                <Typography align = "justify"align = "justify"
                   style={{ fontWeight: '600', fontSize: '22px' }}
                   variant="subtitle2"
                   gutterBottom
                 >
                   Course Overview
                 </Typography>
-                <Typography align = "justify"
+                <Typography align = "justify"align = "justify"
                   style={{ fontSize: '16px', fontWeight: '300' }}
                   variant="body1"
                   gutterBottom
@@ -1125,7 +1059,7 @@ const courseSummary = () =>
                       >
                         {Gstate.provider}
                       </Typography>
-                      <Typography variant="h6" className="u-title" gutterBottom>
+                      <Typography align = "justify"variant="h6" className="u-title" gutterBottom>
                         {Gstate.title}
                       </Typography>
                       <Typography
@@ -1140,14 +1074,14 @@ const courseSummary = () =>
                   </div>
                   <br/>
                   <div className="cd-cont">
-                    <Typography align = "justify"
+                    <Typography align = "justify"align = "justify"
                       style={{ fontWeight: '600', fontSize: '22px' }}
                       variant="subtitle2"
                       gutterBottom
                     >
                       Course Overview
                     </Typography>
-                    <Typography align = "justify"
+                    <Typography align = "justify"align = "justify"
                       style={{ fontSize: '16px', fontWeight: '300' }}
                       variant="body1"
                       gutterBottom
@@ -1167,68 +1101,158 @@ const courseSummary = () =>
 
  
 
-  const fl = () =>{
-    return (
-      Gstate && (
-        <div maxwidth="lg" className="ead-sec">
-          <div className="cd-container">
-            <Grid container spacing={3} direction="row-reverse">
-              <Grid item xs={12} sm={3}>
-                {courseSummary()}
-              </Grid>
-              <Grid item xs={12} sm={9}>
-                <div className="d-card" style={{ backgroundColor: '#fff3ef', boxShadow: 'none' }}>
-                  <div className="cd-head">
-                    <div className="cd-head-o">
-                      <Typography
-                        style={{ fontWeight: '600' }}
-                        color="primary"
-                        variant="subtitle2"
-                        className="u-uni"
-                        gutterBottom
-                      >
-                        {Gstate.provider}
-                      </Typography>
-                      <Typography variant="h6" className="u-title" gutterBottom>
-                        {Gstate.title}
-                      </Typography>
-                      <Typography
-                        variant="caption"
-                        display="block"
-                        className="provider u-provider"
-                        gutterBottom
-                      >
-                        via {provider}
-                      </Typography>
-                    </div>
-                  </div>
-                  <br/>
-                  <div className="cd-cont">
-                    <Typography align = "justify"
-                      style={{ fontWeight: '600', fontSize: '22px' }}
+  const fl = () =>
+    Gstate.data && (
+      <div maxWidth="lg" className="ead-sec">
+        <div className="cd-container">
+          <Grid container spacing={3} direction="row-reverse">
+            <Grid item xs={12} sm={3}>
+              {courseSummary()}
+            </Grid>
+            <Grid item xs={12} sm={9}>
+              <div className="d-card" style={{ backgroundColor: '#fff3ef', boxShadow: 'none' }}>
+                <div className="cd-head">
+                  <div className="cd-head-o">
+                    <Typography
+                      style={{ fontWeight: '600' }}
+                      color="primary"
                       variant="subtitle2"
                       gutterBottom
                     >
-                      Course Overview
+                      {Gstate.data.organisation.name}
                     </Typography>
-                    <Typography align = "justify"
-                      style={{ fontSize: '16px', fontWeight: '300' }}
-                      variant="body1"
+                    <Typography align = "justify"variant="h6" gutterBottom>
+                      {Gstate.data.name}
+                    </Typography>
+                    <Typography
+                      variant="caption"
+                      display="block"
+                      className="provider"
                       gutterBottom
                     >
-                      {ReactHtmlParser(Gstate.description)}
+                      via {provider}
                     </Typography>
-                   
                   </div>
+                  {/* <div style={{ textAlign: 'right' }} className="cd-head-t">
+                    {reviewSection(
+                      Gstate.data.avg_rating,
+                      Gstate.data.num_reviews,
+                    )}
+                  </div> */}
                 </div>
-              </Grid>
-            </Grid>
-          </div>
-        </div>
-      )
-    );
-  };
+                <br/>
+                <div className="cd-cont">
+                  <Typography
+                    style={{ fontWeight: '600', fontSize: '22px' }}
+                    variant="subtitle2"
+                    gutterBottom
+                  >
+                    Course Overview
+                  </Typography>
+                  <Typography
+                    style={{ fontSize: '16px', fontWeight: '300' }}
+                    variant="body1"
+                    gutterBottom
+                  >
+                    {ReactHtmlParser(Gstate.data.description)}
+                  </Typography>
+                  <br/>
+                  {Gstate.data.learning_outcomes !== '' && (
+                    <>
+                      <Typography
+                        style={{ fontWeight: '600', fontSize: '22px' }}
+                        variant="subtitle2"
+                        gutterBottom
+                      >
+                        What will you learn?
+                      </Typography>
+                      <Typography
+                        style={{ fontSize: '16px', fontWeight: '300' }}
+                        variant="body1"
+                        gutterBottom
+                      >
+                        {Gstate.data.learning_outcomes.map((e, i) => (
+                          <li key={i}>{e}</li>
+                        ))}
+                      </Typography>{' '}
+                    </>
+                  )}
+                  {Gstate.data.requirements !== '' && (
+                    <>
+                      <Typography
+                        style={{ fontWeight: '600', fontSize: '22px' }}
+                        variant="subtitle2"
+                        gutterBottom
+                      >
+                        Who is this course for?
+                      </Typography>
+                      <Typography
+                        style={{ fontSize: '16px', fontWeight: '300' }}
+                        variant="body1"
+                        gutterBottom
+                      >
+                        {Gstate.data.requirements}
+                      </Typography>{' '}
+                    </>
+                  )}
 
+                  <br/>
+
+                  {Gstate.data.educator !== '' && (
+                    <>
+                      <Typography
+                        style={{ fontWeight: '600', fontSize: '22px' }}
+                        variant="subtitle2"
+                        gutterBottom
+                      >
+                        Professor:{' '}
+                        <span style={{ fontWeight: '300' }}>
+                          {Gstate.data.educator}
+                        </span>
+                      </Typography>
+                    </>
+                  )}
+                  <br/>
+                  <Typography
+                    style={{ fontWeight: '600', fontSize: '22px' }}
+                    variant="subtitle2"
+                    gutterBottom
+                  >
+                    Reviews
+                  </Typography>
+                  <div>
+                    <button
+                      onClick={() => {
+                        setState({ ...Gstate, popUp: !Gstate.popUp });
+                      }}
+                      className="enroll-btn"
+                    >
+                      <div style={{ display: 'flex', flexDirection: 'row' }}>
+                        <div
+                          style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            fontWeight: '600',
+                          }}
+                        >
+                          <div>Write Review &nbsp;</div>
+                        </div>
+                        <div>
+                          <RateReviewIcon
+                            style={{ fontSize: '22px', marginTop: '2px' }}
+                          />
+                        </div>
+                      </div>
+                    </button>
+                  </div>
+                  {/* {reviews()} */}
+                </div>
+              </div>
+            </Grid>
+          </Grid>
+        </div>
+      </div>
+    );
 
   const sl = () =>
     Gstate.data && (
@@ -1250,7 +1274,7 @@ const courseSummary = () =>
                     >
                       {Gstate.summaryData.university}
                     </Typography>
-                    <Typography variant="h6" gutterBottom>
+                    <Typography align = "justify"variant="h6" gutterBottom>
                       {ReactHtmlParser(Gstate.data.courseData.fields.title)}
                     </Typography>
                     <Typography
@@ -1364,7 +1388,7 @@ const courseSummary = () =>
                     >
                       {Gstate.summaryData.university}
                     </Typography>
-                    <Typography variant="h6" gutterBottom>
+                    <Typography align = "justify"variant="h6" gutterBottom>
                       {ReactHtmlParser(Gstate.data.title)}
                     </Typography>
                     <Typography
@@ -1529,7 +1553,7 @@ const courseSummary = () =>
                     >
                       {Gstate.data.university}
                     </Typography>
-                    <Typography variant="h6" gutterBottom>
+                    <Typography align = "justify"variant="h6" gutterBottom>
                       {Gstate.data.title}
                     </Typography>
                     <Typography
@@ -1700,7 +1724,7 @@ const courseSummary = () =>
                     >
                       {Gstate.summaryData.university}
                     </Typography>
-                    <Typography variant="h6" gutterBottom>
+                    <Typography align = "justify"variant="h6" gutterBottom>
                       {ReactHtmlParser(Gstate.data.title)}
                     </Typography>
                     <Typography
@@ -1837,7 +1861,7 @@ const courseSummary = () =>
                     >
                       {Gstate.data && Gstate.data.owners[0].name}
                     </Typography>
-                    <Typography variant="h6" gutterBottom>
+                    <Typography align = "justify"variant="h6" gutterBottom>
                       {Gstate.data.title}
                     </Typography>
                     <Typography
