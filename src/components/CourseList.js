@@ -71,6 +71,7 @@ const defaultProps = {
 const perPage = 10;
 // 35.224.4.2
 const ADDED_NETWORK_DELAY = 1500;
+
 class CourseList extends Component {
   constructor(props) {
     super(props);
@@ -129,6 +130,7 @@ class CourseList extends Component {
               duration={obj.commitment}
               startingOn={obj.start_date}
               price={obj.price}
+              price_currency={obj.price_currency}
               rating={obj.rating}
               uuid={obj.uuid}
               url={obj.url}
