@@ -131,7 +131,7 @@ const CourseDetails = props => {
         },
       };
 
-      var url = `https://www.classbazaar.com/api/course?uuid=${uuid}&provider=${provider}`;
+      var url = `https://api.classbazaar.com/api/course?uuid=${uuid}&provider=${provider}`;
 
       // var url = `http://localhost:8080/api/course?uuid=${uuid}&provider=${provider}`;
      
