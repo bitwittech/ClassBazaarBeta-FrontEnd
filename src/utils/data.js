@@ -369,8 +369,8 @@ export const freeCourses = [
   },
   {
     name: 'Digital Marketing Fundamentals with Live Projects',
-    university: 'Udacity',
-    provider: 'Udacity',
+    university: 'Udemy',
+    provider: 'Udemy',
     image: UdemyLogo,
     url: '/Udemy/1f5a2af3-edb6-4bfd-a4b5-5b2b285131a7',
   },
