@@ -131,7 +131,7 @@ export const degreeData = [
   {
     name: 'AWS: Machine Learning Foundations',
     university: 'AWS Academy',
-    provider: 'Futre Learn',
+    provider: 'Future Learn',
     image: awsLOGO,
     url: '/FutureLearn/19188453-5506-487a-b2fe-9b8075424e96',
     
@@ -139,7 +139,7 @@ export const degreeData = [
   {
     name: 'Digital Skills: Digital Marketing',
     university: 'Accenture Company',
-    provider: 'Futre Learn',
+    provider: 'Future Learn',
     image: accentureLOGO,
     url: '/FutureLearn/2b6213d0-df82-4988-93b4-2d3bd05b331d',
   },
