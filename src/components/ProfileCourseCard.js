@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, {useState, useContext } from 'react';
 
 import { ALERT } from '../store/Types';
 import CalendarIcon from '@material-ui/icons/CalendarToday';
@@ -18,6 +18,7 @@ import { addBookmark } from '../actions/ContextActions';
 import formatDate from './../utils/dateUtils';
 import { trackEvent } from 'react-with-analytics/lib/utils';
 import { withRouter } from 'react-router-dom';
+import Converter from './converter.js'
 
 const styles = {
   grid: {
@@ -44,19 +45,18 @@ const styles = {
   },
 };
 
-const formatPrice = price => {
-  if (!price || price === null || price === undefined) return 'Free';
-  else return Math.round(price);
-};
 
 const formatDuration = duration => {
   if (!duration || duration === null || duration === undefined)
-    return 'Self Paced';
+  return 'Self Paced';
   else return duration;
 };
 
+
+
 const ProfileCourseCard = withRouter(({ history, ...data }) => {
   const { state, dispatch } = useContext(Store);
+  const [price,setPrice] = useState(null);
 
   const handleBookmark = (uuid, provider, name) => {
     trackEvent('Bookmarked_lisitng', 'click', `${provider}|${name}`);
@@ -249,10 +249,12 @@ const ProfileCourseCard = withRouter(({ history, ...data }) => {
                 </span>
                 </Grid>
                 <Grid item sm={4} style={{textAlign: 'center'}}>
-                  <i className="fas fa-rupee-sign" style={{ color: '#086065' }}/>
-                  <span className="fs-m" style={{fontSize: '14px'}}>{` ${formatPrice(
-                    data.price,
-                  ).toLocaleString('en-IN')}`}</span>
+                  {/* // modifies by Yashwant sahu */}
+                  
+                  <i className="fas fa-rupee-sign" style={{ color: '#086065' }}/>&nbsp;
+                   <span className="fs-m" style={{fontSize: '14px'}}>{data.price === null ?"Free":<Converter price = {data.price} currency = {data.price_currency} /> }</span>
+                
+                  
                 </Grid>
               </Grid>
             </div>
