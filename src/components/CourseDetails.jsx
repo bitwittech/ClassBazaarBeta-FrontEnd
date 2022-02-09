@@ -280,7 +280,7 @@ const courseSummary = () =>
             </div>
 
             <div style={{ marginTop: '20px' }}>
-              <button
+              <button id="SubmitEnroll"
                 onClick={() => {
                   trackEvent(
                     'Enroll Now',
