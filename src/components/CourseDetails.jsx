@@ -62,7 +62,9 @@ const CourseDetails = props => {
   });
   
   const { state, dispatch } = useContext(Store);
-  
+  const trackPixel = () =>{
+    fbq('track', 'SubmitApplication');
+  }
   const handleBookmark = (uuid, provider, name) => {
     trackEvent(
       'Bookmarked_details',
@@ -297,6 +299,7 @@ const courseSummary = () =>
                       : Gstate.url && Gstate.url,
                     '_blank',
                   );
+                  trackPixel();
                 }}
                 className="enroll-btn"
               >
