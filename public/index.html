@@ -115,6 +115,12 @@ Our catalog has 1,50,000+ courses from world’s leading universities and organi
   </head>
 
   <body>
+    <script>
+      document.getElementById("SubmitEnroll").onclick = function(){
+          fbq('track', 'SubmitApplication');
+      }
+    </script>
+    
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
     <script type="text/javascript">
