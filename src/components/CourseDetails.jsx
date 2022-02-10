@@ -228,6 +228,9 @@ const CourseDetails = props => {
 //modifyed by Yashwant Sahu
 
 
+// this var is calling the function expicitlly form index.html
+let trackPixel = 'trackPixel';
+
 const courseSummary = () =>
     Gstate && (
       <>
@@ -282,24 +285,26 @@ const courseSummary = () =>
             </div>
 
             <div style={{ marginTop: '20px' }}>
-              <button id="SubmitEnroll"
+              <button
                 onClick={() => {
                   trackEvent(
                     'Enroll Now',
                     'click',
                     `${provider}|${Gstate.title}`,
                   );
+                  
                   window.open(
                     provider === 'Swayam'
-                      ? Gstate.url &&
-                      Gstate.url.replace(
-                        'www.swayam.com',
-                        'www.swayam.gov.in',
+                    ? Gstate.url &&
+                    Gstate.url.replace(
+                      'www.swayam.com',
+                      'www.swayam.gov.in',
                       )
                       : Gstate.url && Gstate.url,
-                    '_blank',
-                  );
-                  trackPixel();
+                      '_blank',
+                      );
+                      // button tracker function added
+                      window[trackPixel]();
                 }}
                 className="enroll-btn"
               >
