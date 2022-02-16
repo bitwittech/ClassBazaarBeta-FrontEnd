@@ -1,14 +1,35 @@
-import React from 'react';
+import React ,{useContext} from 'react';
 import Grid from '@material-ui/core/Grid';
 import { withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
+import { Pre_LOG_Box } from '../../store/Types';
+import Store from '../../store/Context';
+
+
 
 export const EarnADegreeComponent = withRouter(({ history, degreeData, trackEvent, filter, routingURL }) => {
+  const { state, dispatch } = useContext(Store);
+  const {isAuth} = state;
   const data = degreeData.slice(0, 4);
+   // Append by yashwant sahu 
+  
+   const OpenLogin = () => {
+
+    if(isAuth === false)
+    {
+      return dispatch({
+        type: Pre_LOG_Box,
+        payload: {
+          state: 1,
+          open: true,
+        },
+      });
+    }
+  }
   return (
     <div className={'earn-a-degree-wrapper'}>
       <div className="section-title">
-        Earn a Degree
+        Earn a Certificate
         <div className="bottom-border"/>
       </div>
       <div className="section-sub-title">
@@ -19,20 +40,21 @@ export const EarnADegreeComponent = withRouter(({ history, degreeData, trackEven
       <div className="card-section">
         {data.map(degree => {
           return (
-            <Link to={degree.url ? ('/coursedetails' + degree.url) : {
+            <Link  to={degree.url ? ('/coursedetails' + degree.url) : {
               pathname: '/coursedetail',
               state: {
                 data: degree.data,
               },
             }}
                   className="card-wrapper" onClick={() => {
+                    OpenLogin()
               trackEvent(
                 'Degree_course',
                 'click',
                 `${degree.name}`,
               );
             }}>
-              <div className="card-inner">
+              <div className="card-inner" >
                 <div className="head-section">
                   via {degree.provider}
                 </div>
