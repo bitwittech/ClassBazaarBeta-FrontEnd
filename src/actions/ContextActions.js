@@ -3,6 +3,7 @@ import {
   FETCH_USER,
   LOADING,
   LOGIN,
+  Pre_LOG_Box,
   LOGIN_MODAL,
   LOGOUT,
   REMOVE_TOKEN,
@@ -143,6 +144,8 @@ export const register = async (data, dispatch) => {
     payload: true,
   });
 
+  console.log(data);
+
   try {
     function handleResponse(clientResponse) {
       console.info(
@@ -155,7 +158,7 @@ export const register = async (data, dispatch) => {
         username: data.username,
         password: data.password,
         email: data.email,
-        mobilePhone: data.phone,
+        mobilePhone: data.phone
       },
       registration: {
         applicationId: config.fusionAuthApplicationId,
@@ -167,16 +170,17 @@ export const register = async (data, dispatch) => {
         password: data.password,
         email_address: data.email,
         mobile_no: data.phone,
-        gender: data.gender,
-        school_or_college_name: data.school,
-        class_year: data.classYear,
-        city: data.city,
+        gender: null,
+        school_or_college_name: null,
+        class_year: null,
+        city: null,
+        refferral : null
 
     };
 
     console.log({
+      newUserDataForReg,
       userDataForReg,
-      client,
     });
 
     newregister(undefined, newUserDataForReg);
