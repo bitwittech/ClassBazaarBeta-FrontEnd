@@ -1,12 +1,36 @@
-import React from 'react';
+import React ,{useContext} from 'react';
+
 import Grid from '@material-ui/core/Grid';
 import { trendingData } from '../../utils/data';
 import { withRouter } from 'react-router';
+// import { Link } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import { Pre_LOG_Box } from '../../store/Types';
+import Store from '../../store/Context';
+
 
 export const LearnForFreeComponent = withRouter(
   ({ history, trendingData, trackEvent, routingURL, filter }) => {
+    const { state, dispatch } = useContext(Store);
+    const {isAuth} = state;
     const data = trendingData.slice(0, 3);
+
+
+      // Append by yashwant sahu 
+  
+   const OpenLogin = () => {
+
+    if(isAuth === false)
+    {
+      return dispatch({
+        type: Pre_LOG_Box,
+        payload: {
+          state: 1,
+          open: true,
+        },
+      });
+    }
+  }
     return (
       <div
         className={'trending-courses-wrapper'}
@@ -26,6 +50,8 @@ export const LearnForFreeComponent = withRouter(
                 },
               }}
                     className="card-wrapper" onClick={() => {
+                    OpenLogin()
+
                 trackEvent(
                   'Free_course',
                   'click',
