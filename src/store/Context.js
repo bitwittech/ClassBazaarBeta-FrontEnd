@@ -5,6 +5,10 @@ let initialState = {
     state: 0,
     open: false,
   },
+  preLogBox:{
+    state:0,
+    open:false
+  },
   token: localStorage.getItem('cbtoken')
     ? localStorage.getItem('cbtoken')
     : null,
