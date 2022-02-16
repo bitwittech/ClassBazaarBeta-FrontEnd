@@ -19,6 +19,8 @@ import formatDate from './../utils/dateUtils';
 import { trackEvent } from 'react-with-analytics/lib/utils';
 import { withRouter } from 'react-router-dom';
 import Converter from './converter.js'
+import { Pre_LOG_Box } from '../store/Types';
+
 
 const styles = {
   grid: {
@@ -56,6 +58,7 @@ const formatDuration = duration => {
 
 const ProfileCourseCard = withRouter(({ history, ...data }) => {
   const { state, dispatch } = useContext(Store);
+  const {isAuth} = state;
   const [price,setPrice] = useState(null);
 
   const handleBookmark = (uuid, provider, name) => {
@@ -76,21 +79,40 @@ const ProfileCourseCard = withRouter(({ history, ...data }) => {
     addBookmark(courseId, userId, user, provider, dispatch, data.from);
   };
 
-  const isBookmarked = uuid => {
-    if (state.user === null || state.user.data === undefined) {
-      return false;
+
+  // Append by yashwant sahu 
+  
+  const OpenLogin = () => {
+
+    if(isAuth === false)
+    {
+      return dispatch({
+        type: Pre_LOG_Box,
+        payload: {
+          state: 1,
+          open: true,
+        },
+      });
     }
-    const globalBookmarks = state.user.data.bookmarks;
-    if (globalBookmarks.find(e => e.id === uuid) === undefined) {
-      return false;
-    } else {
-      return true;
-    }
-  };
+  }
+// turn off by Yashwant Sahu
+  // const isBookmarked = uuid => {
+  //   if (state.user === null || state.user.data === undefined) {
+  //     return false;
+  //   }
+  //   // const globalBookmarks = state.user.data.bookmarks;
+  //   // if (globalBookmarks.find(e => e.id === uuid) === undefined) {
+  //   //   return false;
+  //   // } else {
+  //     return false;
+  //   // }
+  // };
 
   return (
     <>
       <div className="c-card click-h" onClick={() => {
+            OpenLogin();
+             
                 if (data.from === 'profile') {
                   trackEvent(
                     'Profile Action',
@@ -115,7 +137,7 @@ const ProfileCourseCard = withRouter(({ history, ...data }) => {
         <div className="c-card-inner">
           <div className="coursecard-header">
 
-            <div>
+            {/* <div>
               {isBookmarked(data.uuid) ? (
                 <TurnedInIcon
                   className="click-h"
@@ -133,7 +155,7 @@ const ProfileCourseCard = withRouter(({ history, ...data }) => {
                   color="primary"
                 />
               )}
-            </div>
+            </div> */}
 
           </div>
           <div style={{ padding: '0 15px' }}>
@@ -143,6 +165,7 @@ const ProfileCourseCard = withRouter(({ history, ...data }) => {
               variant="subtitle2"
               className="hover"
               onClick={() => {
+
                 if (data.from === 'profile') {
                   trackEvent(
                     'Profile Action',
@@ -252,7 +275,7 @@ const ProfileCourseCard = withRouter(({ history, ...data }) => {
                   {/* // modifies by Yashwant sahu */}
                   
                   <i className="fas fa-rupee-sign" style={{ color: '#086065' }}/>&nbsp;
-                   <span className="fs-m" style={{fontSize: '14px'}}>{data.price === null ?"Free":<Converter price = {data.price} currency = {data.price_currency} /> }</span>
+                   <span className="fs-m" style={{fontSize: '14px'}}>{data.price === null ?`Free`:<Converter price = {data.price} currency = {data.price_currency} /> }</span>
                 
                   
                 </Grid>
