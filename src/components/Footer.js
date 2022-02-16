@@ -76,13 +76,13 @@ const Footer = ({ bgColor }) => {
                   <div className="font-weight-bolder mb-2">
                     <a href="/privacypolicy">Privacy Policy</a>
                   </div>
-                  <div className="font-weight-bolder">
+                  <div className="font-weight-bolder mb-2">
                     <a href="/about">About Us</a>
                   </div>
-                  <div className="font-weight-bolder">
+                  <div className="font-weight-bolder mb-4">
                     <a href="https://blog.classbazaar.com/">Blog</a>
                   </div>
-                  <img style={{ width: '100%' }} src={Startup} alt=""/>
+                  <img style={{ width: '70%' }} src={Startup} alt=""/>
                 </div>
               </div>
             </div>
