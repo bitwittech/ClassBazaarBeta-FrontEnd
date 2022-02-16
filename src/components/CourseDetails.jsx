@@ -62,7 +62,7 @@ const CourseDetails = props => {
   });
   
   const { state, dispatch } = useContext(Store);
- 
+  
   const handleBookmark = (uuid, provider, name) => {
     trackEvent(
       'Bookmarked_details',
@@ -112,6 +112,11 @@ const CourseDetails = props => {
   const uuid = props.match.params.uuid;
 
   const provider = props.match.params.provider;
+
+  // Added by yashwant sahu
+
+  const officialURL = "https://api.classbazaar.com/";
+  const localURL = "http://0.0.0.0:8080/";
   
   
   useEffect(() => {
@@ -131,9 +136,8 @@ const CourseDetails = props => {
         },
       };
 
-      var url = `https://api.classbazaar.com/api/course?uuid=${uuid}&provider=${provider}`;
+      var url = `${officialURL}api/course?uuid=${uuid}&provider=${provider}`;
 
-      // var url = `http://localhost:8080/api/course?uuid=${uuid}&provider=${provider}`;
      
       console.log(url, uuid);
       
@@ -160,7 +164,8 @@ const CourseDetails = props => {
         provider: data.summaryData.provider,
         time : data.summaryData.start_date,
         title: data.summaryData.title,
-        url: data.summaryData.url
+        url: data.summaryData.url,
+        uuid : data.summaryData.uuid
       });
     };
 
@@ -229,7 +234,7 @@ const CourseDetails = props => {
 // this var is calling the function expicitlly form index.html
 let trackPixel = 'trackPixel';
 
-const courseSummary = () =>
+const courseSummary =  () =>
     Gstate && (
       <>
         <div
@@ -284,13 +289,15 @@ const courseSummary = () =>
 
             <div style={{ marginTop: '20px' }}>
               <button
-                onClick={() => {
+                onClick={async () => {
                   trackEvent(
                     'Enroll Now',
                     'click',
                     `${provider}|${Gstate.title}`,
                   );
-                  
+                 // for tracker added 
+                  const res = await fetch(`${officialURL}api/track/?title=${Gstate.title}`)
+
                   window.open(
                     provider === 'Swayam'
                     ? Gstate.url &&
@@ -301,7 +308,7 @@ const courseSummary = () =>
                       : Gstate.url && Gstate.url,
                       '_blank',
                       );
-                      // button tracker function added
+                    // button tracker function added
                       window[trackPixel]();
                 }}
                 className="enroll-btn"
