@@ -690,14 +690,15 @@ class LandingPage extends Component {
                       <div className="banner-content position-absolute text-white" style={{top:'40%',left:'50%' ,paddingTop: 0, width: '40%', display:"flex", flexDirection: "column", justifyContent: "flex-start"}}>
                       <div  style={{marginLeft:'4rem', marginTop:'11rem'}}> 
                       <Button
-                          variant="outlined"
-                          color="primary"
-                          className="select-course-btn seeCourse"
+                           variant="outlined"
+                           color="primary"
+                           className="login-btn signup-btn"
                           style={{ marginTop: '1rem'}}
                           onClick={() => this.props.history.push({
                             pathname: '/listing',
                             state: {
                               filter: 'free',
+                              feeFilter : 'Free',
                               providers: 'all',
                             }
                           })}
