@@ -259,7 +259,6 @@ function TopBar(props) {
                   className="no-desktop"
                 />
               ) : null}
-              {state.isAuth ? <IconWithRouter routingURL={'/profile'} /> : null}
               {!state.isAuth ? (
                 <>
                   <Link
@@ -355,6 +354,67 @@ function TopBar(props) {
                   </Button>
                 </>
               ) : (
+                <>
+                <Link
+                    to={'/'}
+                    variant="outlined"
+                    color="primary"
+                    className="signup-btn no-mobile header-links"
+                  >
+                    Home
+                  </Link>
+                  <Link
+                    to={'/listing'}
+                    variant="outlined"
+                    color="primary"
+                    className="signup-btn no-mobile header-links"
+                  >
+                    Courses
+                  </Link>
+                  <Link
+
+                    to={'/about'}
+                    variant="outlined"
+                    color="primary"
+                    className="signup-btn no-mobile header-links"
+                  >
+                    About Us
+                  </Link>
+                  <Link
+                    to={'/contact'}
+                    style={{ marginRight: '10px' }}
+                    variant="outlined"
+                    color="primary"
+                    className="signup-btn no-mobile header-links"
+                  >
+                    Contact
+                  </Link>
+                  {props.isSearchIncluded && (
+                    <div
+                      className="no-mobile"
+                      style={{ display: 'inline-block' }}
+                    >
+                      <div className="s-bar">
+                        <div className="s-b">
+                          <DebounceInput
+                            minLength={2}
+                            className="s-input"
+                            debounceTimeout={500}
+                            onChange={props.onChange}
+                            onKeyPress={props.onKeyPress}
+                            placeholder="Search for a course"
+                            value={props.initialSearchValue}
+                          />
+                        </div>
+                        <div className="s-a">
+                          <div>
+                            {' '}
+                            <SearchIcon className="mt-2 pd" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 <Button
                   onClick={() => handleLogout()}
                   variant="outlined"
@@ -363,7 +423,9 @@ function TopBar(props) {
                 >
                   Logout
                 </Button>
+                </>
               )}
+              {state.isAuth ? <IconWithRouter routingURL={'/profile'} /> : null}
             </div>
           </div>
         </div>
