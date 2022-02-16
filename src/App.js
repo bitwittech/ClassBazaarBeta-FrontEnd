@@ -27,6 +27,7 @@ import { fetchUser } from './actions/ContextActions';
 import localForage from 'localforage';
 import { trackPage } from 'react-with-analytics/lib/utils';
 import AltMBA from './components/AltMBA';
+import PreLogBox from './components/PreLogBox';
 const theme = createMuiTheme({
   typography: {
     fontFamily: ['Poppins'],
@@ -99,6 +100,7 @@ function App() {
                   crossOrigin="anonymous"/>
             <Snackbar />
             <Login />
+            <PreLogBox />
             <AppWithRouter />
           </div>
         </Store.Provider>
