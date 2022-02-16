@@ -37,6 +37,10 @@ const providerData = [
   'Coursera',
   'edX',
   'FutureLearn',
+  'SimpliLearn',
+  'Udacity',
+  'upGrad',
+  'Swayam',
 ];
 let { API, API_LOCAL } = config;
 
@@ -99,6 +103,8 @@ class HomePage extends Component {
       subjects: 'all',
       providers: 'all',
       fee: 'all',
+      isLevel1CheckedFree : false,
+      FreeCheck :[],
       isLevel1CheckedSubjects: false,
       subjecttReset: false,
       feeReset: false,
@@ -121,9 +127,7 @@ class HomePage extends Component {
     this.onStartFilterChange = this.onStartFilterChange.bind(this);
     this.onProviderFilterChange = this.onProviderFilterChange.bind(this);
     this.setupDefaultFilters = this.setupDefaultFilters.bind(this);
-    this.getCheckedProvidersFromString = this.getCheckedProvidersFromString.bind(
-      this
-    );
+    this.getCheckedProvidersFromString = this.getCheckedProvidersFromString.bind(this);
     this.udpateOffsets = this.udpateOffsets.bind(this);
   }
 
@@ -164,7 +168,8 @@ class HomePage extends Component {
 
   handleCourseNumber = count => {
     this.setState({
-      totalCount: count,
+      // totalCount: count,
+      totalCount: '171154',
     });
   };
 
@@ -256,7 +261,7 @@ class HomePage extends Component {
         startReset: true,
         subjects: 'all',
         providers: 'all',
-        fee: 'all',
+        fee: 'Free',
         isLevel1CheckedSubjects: false,
         checkedLevel2Subjects: subjectsData.map(s => false),
       },
@@ -293,13 +298,26 @@ class HomePage extends Component {
     console.log('componentDidMount Call', this.state, this.props);
     let query = '';
     let subjects = 'all';
+    let isLevel1CheckedFree = false;
+    let FreeCheck = []
     let isLevel1CheckedSubjects = false;
     let checkedLevel2Subjects = subjectsData.map(s => false);
-    let filterValue = '';
+    let filterValue = '';  
+    let index = 0;
+    let feeFilter = "all";
 
+    
     if (this.props.location.state !== undefined) {
+      
       if (this.props.location.state.query !== undefined)
         query = this.props.location.state.query;
+
+        if (this.props.location.state.feeFilter !== undefined) {
+          console.log(this.props.location.state.feeFilter)
+          feeFilter = this.props.location.state.feeFilter;
+          isLevel1CheckedFree = true;
+        FreeCheck[index] = true
+      }
       if (this.props.location.state.subject !== undefined) {
         subjects = this.props.location.state.subject;
         isLevel1CheckedSubjects = true;
@@ -321,7 +339,10 @@ class HomePage extends Component {
           isStateUpdatedFromProp: true,
           subjects,
           isLevel1CheckedSubjects,
+          isLevel1CheckedFree,
+          FreeCheck,
           checkedLevel2Subjects,
+          feeFilter,
           filterValue,
         },
         () => {
@@ -411,9 +432,11 @@ class HomePage extends Component {
                     onChangeOptions={s => this.onProviderFilterChange(s)}
                   />
                   <NestedMenu
+                    id = "fees"
                     shouldReset={this.state.feeReset}
-                    shouldUpdate={false}
-                    isLevel1Checked={false}
+                    shouldUpdate={true}
+                    isLevel1Checked={this.state.isLevel1CheckedFree}
+                    checkedLevel2={this.state.FreeCheck}
                     isOnlyOneAllowed={true}
                     level1Name={'Fees'}
                     level2List={[
@@ -516,10 +539,11 @@ class HomePage extends Component {
                       level2List={this.state.providerData}
                       onChangeOptions={s => this.onProviderFilterChange(s)}
                     />
-                    <NestedMenu
+                    <NestedMenu 
                       shouldReset={this.state.feeReset}
-                      shouldUpdate={false}
-                      isLevel1Checked={false}
+                      shouldUpdate={true}
+                      isLevel1Checked={this.state.isLevel1CheckedFree}
+                      checkedLevel2={this.state.FreeCheck}
                       isOnlyOneAllowed={true}
                       level1Name={'Fees'}
                       level2List={[
