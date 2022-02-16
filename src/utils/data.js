@@ -14,7 +14,7 @@ import GeorgiaTechUniLogo from './../assets/GeorgiaTechUniLogo.png';
 import HL from './../assets/HL.png';
 import HarvardUniLogo from './../assets/HarvardUniLogo.png';
 import metaLOGO from './../assets/metaLOGO.png';
-import udemyLOGO from './../assets/UdemyLogo.png';
+import udemyLOGO from './../assets/udemyLOGO.png';
 import LSH from './../assets/LSH.svg';
 import M from './../assets/M.png';
 import accentureLOGO from './../assets/accentureLOGO.png';
@@ -131,7 +131,7 @@ export const degreeData = [
   {
     name: 'AWS: Machine Learning Foundations',
     university: 'AWS Academy',
-    provider: 'Future Learn',
+    provider: 'Futre Learn',
     image: awsLOGO,
     url: '/FutureLearn/19188453-5506-487a-b2fe-9b8075424e96',
     
@@ -139,7 +139,7 @@ export const degreeData = [
   {
     name: 'Digital Skills: Digital Marketing',
     university: 'Accenture Company',
-    provider: 'Future Learn',
+    provider: 'Futre Learn',
     image: accentureLOGO,
     url: '/FutureLearn/2b6213d0-df82-4988-93b4-2d3bd05b331d',
   },
