@@ -6,6 +6,7 @@ import {
     LOGIN,
     LOGOUT,
     FETCH_USER,
+    Pre_LOG_Box,
     UPDATE_BOOKMARK,
     REMOVE_TOKEN
 } from './Types';
@@ -53,6 +54,12 @@ export default function reducer(state, action) {
             return {
                 ...state,
                 loginModal: payload
+            };
+        case Pre_LOG_Box:
+            console.log("call", payload)
+            return {
+                ...state,
+                preLogBox: payload
             };
         case LOADING:
             return {
