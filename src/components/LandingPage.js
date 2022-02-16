@@ -44,9 +44,9 @@ import { withStyles } from '@material-ui/core/styles';
 import Slider from 'react-animated-slider';
 import 'react-animated-slider/build/horizontal.css';
 import Banner1 from '../assets/img/main-banner.jpg'
-import Banner2 from '../assets/img/banner2.png';
+import Banner2 from '../assets/img/offerbanner.png';
 import Banner3 from '../assets/img/banner3.png';
-import OfferBanner from '../assets/img/offerbanner.png';
+import { useState } from 'react';
 // import DignityHealthWhiteLogo from '../assets/dignityHealthWhiteLogo.jpeg';
 import DignityLogo from '../assets/dignity.png'
 import EduWhite from '../assets/edubuk white.png';
@@ -60,6 +60,7 @@ import business from '../assets/subjects/Image-4.jpg';
 import mathImage from '../assets/subjects/Image-16.jpg';
 import developer from '../assets/subjects/person-looking-at-phone-and-at-macbook-pro-1181244.jpg';
 import health from '../assets/subjects/photo-of-woman-practicing-yoga-3820320.jpg';
+
 
 const styles = theme => ({
   dashboardLink: {
@@ -564,13 +565,14 @@ class LandingPage extends Component {
     this.setState({ subjectsExpanded: !this.state.subjectsExpanded });
   };
 
-  handleScrollToStats = () => {
-    console.log('scroll this t exclusive course',this.exclusiveCourseSection);
-    window.scrollTo({
-        top: this.exclusiveCourseSection.current.offsetTop,
-        behavior: 'smooth'
-    })
-  }
+  // turn off by yashwant sahu
+  // handleScrollToStats = () => {
+  //   console.log('scroll this t exclusive course',this.exclusiveCourseSection);
+  //   window.scrollTo({
+  //       top: this.exclusiveCourseSection.current.offsetTop,
+  //       behavior: 'smooth'
+  //   })
+  // }
 
   render() {
     const { classes, theme } = this.props;
@@ -578,17 +580,14 @@ class LandingPage extends Component {
     const bannerStart = "start";
     const content = [
       {
-      image: Banner3
-    },
-      {
       image: Banner1
     },
     {
-      image: OfferBanner
+      image: Banner3
     },
-    // {
-    //   image: Banner2
-    // }
+    {
+      image: Banner2
+    }
   ]
     console.log('popup', this.state.popUp);
     console.log('LANDING', this.state);
@@ -607,7 +606,7 @@ class LandingPage extends Component {
           <AuthProvider/>
           <div className={'landing-page-wrapper'}>
             <section className="main-banner posiition-relative">
-              <Slider autoplay={3000}>
+              <Slider autoplay={3000} >
                 {content.map((item, index) => (
                   <div
                     key={index}
@@ -617,7 +616,8 @@ class LandingPage extends Component {
                             alignItems: "center"}}
                   >
                     {index === 0 ? (
-                      <div className="d-flex align-items-center justify-content-center">
+                      <>
+                      <div className="d-flex align-items-center justify-content-center"  id = "0">
                       <div className="banner-content text-center position-absolute text-white">
                       <div className="h5 mt-2" style={{ fontSize: '18px' }}>
                         We believe in
@@ -635,11 +635,21 @@ class LandingPage extends Component {
                         />
                       </form>
                     </div>
+                
                     </div>
+                    <div className="slider__dots">
+                       {content.map((item, index1) => (
+                         (index == index1)?
+                         <a href= {"#"+index} key={index} className = "slider__dot" style={{background: "white"}} ></a>
+                         :<a href= {"#"+index} key={index} className = "slider__dot" style={{background: "#f15a29"}} ></a>
+                       ))}
+                       </div>
+                  </>
                     ): (null)}
 
                     {index === 1 ? (
-                      <div className="d-flex">
+                      <>
+                      <div className="d-flex"  id = "1">
                       <div className="banner-content position-absolute text-white" style={{top:'40%', paddingTop: 0, width: '40%', display:"flex", flexDirection: "column", justifyContent: "flex-end"}}>
                       <img src={EduWhite} alt="edubuk" className="edubuk"  />
                       <div className="edubukmain">
@@ -664,43 +674,55 @@ class LandingPage extends Component {
                       </div>
                     </div>
                     </div>
+                    <div className="slider__dots">
+                       {content.map((item, index1) => (
+                         (index == index1)?
+                         <a href= {"#"+index} key={index} className = "slider__dot" style={{background: "white"}} ></a>
+                         :<a href= {"#"+index} key={index} className = "slider__dot" style={{background: "#f15a29"}} ></a>
+                       ))}
+                       </div>
+                       </>
                     ): (<div></div>)}
 
-                    {/* {index === 2 ? (
-                      <div className="d-flex">
-                      <div className="banner-content position-absolute text-white" style={{top:'40%' ,paddingTop: 0, width: '40%', display:"flex", flexDirection: "column", justifyContent: "flex-start"}}>
-                      <img src={DignityLogo} alt="dignityHealth" style={{width:'175.5px', height: '35.5px', marginLeft:'6rem', marginBottom: '1rem'}} />
-                      <div style={{marginLeft:'6rem'}}>
-                      <div className="h1 dignityH1">
-                        WorldClass Health Education for India
-                      </div>
-                      <div className="h1 dignitySub">
-                        Coursed from premium medical institutes like Duke CE, Pepperdine Graziadio Business School and more
-                      </div>
+                    {index === 2 ? (
+                      <>
+                      <div className="d-flex" id = "2">
+                      <div className="banner-content position-absolute text-white" style={{top:'40%',left:'50%' ,paddingTop: 0, width: '40%', display:"flex", flexDirection: "column", justifyContent: "flex-start"}}>
+                      <div  style={{marginLeft:'4rem', marginTop:'11rem'}}> 
                       <Button
                           variant="outlined"
                           color="primary"
                           className="select-course-btn seeCourse"
-                          onClick={() => this.handleScrollToStats()}
                           style={{ marginTop: '1rem'}}
+                          onClick={() => this.props.history.push({
+                            pathname: '/listing',
+                            state: {
+                              filter: 'free',
+                              providers: 'all',
+                            }
+                          })}
                         >
-                          See Courses
+                          Enroll Today
                         </Button>
                       </div>
                     </div>
                     </div>
-                    ): (<div></div>)} */}
+                    <div className="slider__dots">
+                       {content.map((item, index1) => (
+                         (index == index1)?
+                         <a href= {"#"+index} key={index} className = "slider__dot" style={{background: "white"}} ></a>
+                         :<a href= {"#"+index} key={index} className = "slider__dot" style={{background: "#f15a29"}} ></a>
+                       ))}
+                       </div>
+                    </>
+                    ): (<div></div>)}
 
                     
                   </div>
                 ))}
               </Slider>
               <div className="overlay"/>
-              <div class="slider__dots">
-              {content.map((item, index) => (
-                <a href="#" key={index} class="slider__dot" ></a>
-              ))}
-              </div>
+             
             </section>
           </div>
           {/*<div className="landing-page-wrapper">*/}
@@ -794,8 +816,10 @@ class LandingPage extends Component {
                          state: {
                            subject: subjectsData[3]['name'],
                            filter: 'subject',
-                         },
-                       })}>
+                           providers: 'all',
+                         }
+                       })
+                       }>
                     <div className="label">
                       {subjectsData[3]['name']}
                     </div>
@@ -839,6 +863,7 @@ class LandingPage extends Component {
                              state: {
                                subject: subjectsData[4]['name'],
                                filter: 'subject',
+                               providers: 'all',
                              },
                            })}>
                         <div className="label">
@@ -853,6 +878,7 @@ class LandingPage extends Component {
                              state: {
                                subject: subjectsData[8]['name'],
                                filter: 'subject',
+                               providers: 'all',
                              },
                            })}>
                         <div className="label">
@@ -869,6 +895,7 @@ class LandingPage extends Component {
                              state: {
                                subject: subjectsData[5]['name'],
                                filter: 'subject',
+                               providers: 'all',
                              },
                            })}>
                         <div className="label">
@@ -883,6 +910,7 @@ class LandingPage extends Component {
                              state: {
                                subject: subjectsData[6]['name'],
                                filter: 'subject',
+                               providers: 'all',
                              },
                            })}>
                         <div className="label">
@@ -897,6 +925,7 @@ class LandingPage extends Component {
                              state: {
                                subject: subjectsData[7]['name'],
                                filter: 'subject',
+                               providers: 'all',
                              },
                            })}>
                         <div className="label">
@@ -917,6 +946,7 @@ class LandingPage extends Component {
                        state: {
                          subject: subjectsData[0]['name'],
                          filter: 'subject',
+                         providers: 'all',
                        },
                      })}>
                   <div className="label">
@@ -931,6 +961,7 @@ class LandingPage extends Component {
                        state: {
                          subject: subjectsData[1]['name'],
                          filter: 'subject',
+                         providers: 'all',
                        },
                      })}>
                   <div className="label">
@@ -946,6 +977,7 @@ class LandingPage extends Component {
                          state: {
                            subject: subjectsData[2]['name'],
                            filter: 'subject',
+                           providers: 'all',
                          },
                        })}>
                     <div className="label">
