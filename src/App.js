@@ -100,7 +100,6 @@ function App() {
                   crossOrigin="anonymous"/>
             <Snackbar />
             <Login />
-            <PreLogBox />
             <AppWithRouter />
           </div>
         </Store.Provider>
