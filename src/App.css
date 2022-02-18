@@ -36,10 +36,11 @@ body {
 }
 
 .edubukh1{
-    font-size: 40px; line-height:1.1; 
+    font-size: 3vw; line-height:1.1; 
 }
 .edubuk{
-    width: 69px; height: 62px; margin-left:6rem; margin-bottom: 1rem;
+    /* yashwant edited */
+    width: 5.5vw; margin-left:6rem; margin-bottom: 1rem;
 }
 .r-fw {
     font-weight: 200 !important;
@@ -190,6 +191,7 @@ body {
     font-weight: 600 !important;
     margin-left: 20px;
     text-transform: none !important;
+    text-align: center;
 }
 
 .signup-btn:hover {
@@ -201,10 +203,9 @@ body {
     background: #f15a29 !important;
     border-radius: 0px !important;
     font-weight: 600 !important;
-    padding: 3px 20px !important;
+    padding: 2px 5px !important;
     text-transform: none !important;
 }
-
 
 .login-btn:hover {
     background: rgb(255, 187, 62) !important;
@@ -1208,7 +1209,7 @@ dashboard-options-header {
     }
 
     .MuiButton-label{
-        margin-left: 12px;
+        /* margin-left: 12px; */
     }
 
     .dignityH1{
@@ -1216,11 +1217,11 @@ dashboard-options-header {
     }
 
     .edubukmain{
-        margin-left: 0rem;
+        margin-left: 0rem !important;
     }
 
     .edubukh1{
-        font-size: 22px !important; line-height:1.1; 
+        font-size: 4vw !important; line-height:1.1; 
     }
     
     .edubuk{
@@ -1500,7 +1501,7 @@ li {
 
 .select-course-btn {
     color: white !important;
-    background: #0d9ca4 !important;
+    background: #f15a29 !important;
     border-radius: 0px !important;
     font-weight: 600 !important;
     padding: 3px 20px !important;
