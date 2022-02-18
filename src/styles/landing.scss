@@ -36,15 +36,7 @@
     letter-spacing: 0.2px;
   }
 
-  .overlay{
-    position: absolute;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0,0,0,.38);
-  }
+ 
 
 
   .logo{
@@ -73,22 +65,45 @@
     top: 27.5%;
     height: 45%;
   }
+
+  .overlay{
+    position: absolute;
+    height: 50vw;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,.38);
+  }
+
   .main-banner{
     // background-image: url(../assets/img/main-banner.jpg);
     // background-size: cover;
     // background-repeat: no-repeat;
-    height: 100vh;
+    height: 50vw;
   }
   .slider {
     // background-image: url(../assets/img/main-banner.jpg);
     background-size: cover;
     background-repeat: no-repeat;
-    height: 100vh;
+    height: 100%;
   }
 
+  .main-banner .banner-1{
+    z-index: 2;
+    padding-top: 20px;
+    top:25%;
+      width: 45%; 
+      display:"flex";
+       flex-direction: column;
+       justify-content: "flex-start";
+  }
+
+// edited Yashwant 
   .main-banner .banner-content{
     z-index: 2;
-    padding-top: 70px;
+    padding-top: 50px;
   }
   .main-banner .banner-content img.logo2{
     max-height: 65px;
@@ -218,9 +233,9 @@
   margin: 0 .5em;
   width: 1em;
   height: 1em;
-  background: #f15a29;
   border-radius: 100px;
 }
+
 
 .slider__indicator {
   display: block;
@@ -236,6 +251,17 @@
   background: #f15a29;
 }
 
+.banner-3{
+  position: absolute;
+    top:20%;
+    left:50%;
+    padding-top: 0px;
+     border : 2px solid black;
+     display:flex;
+     flex-direction: column;
+     justify-content: flex-start;
+}
+
 .browseCourse{
   text-align:right;
 }
@@ -243,6 +269,29 @@
 {
   padding: 50px 20px;
 }
+
+@media only screen and (max-width: 1000px) {
+ .banner-1{
+      top:0;
+      width: 45%;
+  }
+
+  .banner-3{
+       top:22%;
+   }
+
+  .overlay{
+    height: 60vh !important;
+  }
+  .main-banner{
+    height: 60vh !important;
+  }
+
+}
+
+
+
+
 @media only screen and (max-width: 600px) {
 .home-grid-wrapper {
   display: block !important;
@@ -252,13 +301,13 @@
   // background-image: url(../assets/img/main-banner.jpg);
   // background-size: cover;
   // background-repeat: no-repeat;
-  height: 40vh !important;
+  height: 70vh !important;
 }
 .slider {
   // background-image: url(../assets/img/main-banner.jpg);
   background-size: cover;
   background-repeat: no-repeat;
-  height: 40vh !important;
+  height: 100%;
 }
 
 .overlay{
@@ -278,9 +327,14 @@
 }
 
 .edu{
-  display:none;
-}
+  width: 70%;
 
+}
+.banner-1{
+  top:30% !important;
+  left: 60%;
+  width: 30%; 
+}
 .edubukh1{
   display: none;
 }
@@ -320,4 +374,11 @@
 .exclusive-course-wrapper .section-title {
   font-size: 40px !important;
 }
+}
+
+@media only screen and (max-width: 450px) {
+  .main-banner{
+    height: 40vh !important;
+  }
+
 }
