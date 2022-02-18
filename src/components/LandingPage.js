@@ -606,11 +606,11 @@ class LandingPage extends Component {
           <AuthProvider/>
           <div className={'landing-page-wrapper'}>
             <section className="main-banner posiition-relative">
-              <Slider autoplay={3000} >
+              <Slider  autoplay={300} >
                 {content.map((item, index) => (
                   <div
                     key={index}
-                    style={{ backgroundImage: `url('${item.image}')`,backgroundSize: "cover", backgroundRepeat: "no-repeat", 
+                    style={{ backgroundImage: `url('${item.image}')`,backgroundSize: "100vw 100%", backgroundRepeat: "no-repeat", 
                             display: "flex",
                             justifyContent: `${index !==2 ? bannerCenter: bannerStart}`,
                             alignItems: "center"}}
@@ -650,10 +650,10 @@ class LandingPage extends Component {
                     {index === 1 ? (
                       <>
                       <div className="d-flex"  id = "1">
-                      <div className="banner-content position-absolute text-white" style={{top:'40%', paddingTop: 0, width: '40%', display:"flex", flexDirection: "column", justifyContent: "flex-end"}}>
+                      <div className=" position-absolute text-white banner-1" >
                       <img src={EduWhite} alt="edubuk" className="edubuk"  />
                       <div className="edubukmain">
-                      <div className="h1 edubukh1">
+                      <div className=" edubukh1"> 
                         Discover your true passion and turn it into a career
                       </div>
                       <div className="h1" className="edu">
@@ -666,9 +666,9 @@ class LandingPage extends Component {
                         <Button
                           variant="outlined"
                           color="primary"
-                          className="login-btn signup-btn"
+                          className="login-btn "
                         >
-                          See Tests
+                       See Tests
                         </Button>
                       </Link>
                       </div>
@@ -686,14 +686,11 @@ class LandingPage extends Component {
 
                     {index === 2 ? (
                       <>
-                      <div className="d-flex" id = "2">
-                      <div className="banner-content position-absolute text-white" style={{top:'40%',left:'50%' ,paddingTop: 0, width: '40%', display:"flex", flexDirection: "column", justifyContent: "flex-start"}}>
-                      <div  style={{marginLeft:'4rem', marginTop:'11rem'}}> 
                       <Button
                            variant="outlined"
                            color="primary"
-                           className="login-btn signup-btn"
-                          style={{ marginTop: '1rem'}}
+                           className="login-btn banner-content banner-3"
+
                           onClick={() => this.props.history.push({
                             pathname: '/listing',
                             state: {
@@ -705,9 +702,6 @@ class LandingPage extends Component {
                         >
                           Enroll Today
                         </Button>
-                      </div>
-                    </div>
-                    </div>
                     <div className="slider__dots">
                        {content.map((item, index1) => (
                          (index == index1)?
