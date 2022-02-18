@@ -469,7 +469,7 @@ const Login = () => {
                 </form>
 
                 <Grid style={{ marginTop: '20px' }} container spacing={3}>
-                  { /*<Grid item xs={12} sm={4} style={{ textAlign: 'right' }}>
+                  <Grid item xs={12} sm={4} style={{ textAlign: 'right' }}>
                   <LinkedIn
                   clientId="81vr4cluxkzpau"
                   onFailure={handleLinkedInFailure}
@@ -536,7 +536,7 @@ const Login = () => {
                       autoLoad={false}
                       cookiePolicy={'single_host_origin'}
                     />
-                  </Grid> */}
+                  </Grid>
                 </Grid>
                 {loginModal.state === 0 ? (
                   <Typography
