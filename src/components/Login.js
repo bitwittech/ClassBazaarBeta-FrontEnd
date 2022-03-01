@@ -18,7 +18,6 @@ import Modal from '@material-ui/core/Modal';
 import Store from '../store/Context';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-import { googleClient, facebookClient } from '../utils/oauth';
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
 import { trackEvent } from 'react-with-analytics';
 import { GoogleLogin } from 'react-google-login';
@@ -29,6 +28,7 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    'overflow-y':'scroll'
   },
   paper: {
     backgroundColor: theme.palette.background.paper,
@@ -70,7 +70,8 @@ const Login = () => {
       school: '',
       city: '',
       gender: '',
-      classYear: ''
+      classYear: '',
+      refferral : '',
     },
     errors: {
       username: null,
@@ -86,6 +87,8 @@ const Login = () => {
     setModal({ ...modal, state: loginModal.state });
   }, []);
   console.log(modal.state);
+
+  
   const handleClose = () => {
     dispatch({
       type: LOGIN_MODAL,
@@ -159,15 +162,21 @@ const Login = () => {
         [e.target.name]: e.target.value,
       },
     });
+    // console.log("==="+modal.formData.refferral);
+
   };
 
   const handleSubmit = async e => {
     e.preventDefault();
+   
+   
+
     if (loginModal.state === 0) {
       await signin(modal.formData, dispatch);
     }
     if (loginModal.state === 1) {
       await register(modal.formData, dispatch);
+      await signin(modal.formData, dispatch);
     }
 
     setModal({
@@ -180,8 +189,11 @@ const Login = () => {
       },
     });
   };
+
+  
   console.log('STATE', state.loading);
   const responseGoogle = res => {
+    console.log(res)
     googleLogin(res, dispatch);
     trackEvent('social-icon', 'click', 'google');
   };
@@ -430,6 +442,34 @@ const Login = () => {
                                     </>
                   ): null}
 
+                  {loginModal.state === 1 ? (
+                                    <>
+                                    {/* aDDEDD by yashwant sahu */}
+                                    {' '}
+                                    <Typography
+                                      style={{
+                                        fontWeight: '900',
+                                        fontSize: '12px',
+                                        marginTop: '6px',
+                                      }}
+                                      color="primary"
+                                      variant="subtitle1"
+                                      gutterBottom
+                                    >
+                                      Referral Code
+                                    </Typography>
+                                    <input
+                                      name="refferral"
+                                      value={modal.formData.refferral}
+                                      type="text"
+                                      className="text-field"
+                                      onChange={handleChange}
+                                      placeholder="Referral Code..."
+                                    />
+                                    <div className="color-red">{modal.errors.refferral}</div>
+                                    </>
+                  ): null}
+
                   <Typography
                     className="link-button"
                     variant="body2"
@@ -469,7 +509,7 @@ const Login = () => {
                 </form>
 
                 <Grid style={{ marginTop: '20px' }} container spacing={3}>
-                  <Grid item xs={12} sm={4} style={{ textAlign: 'right' }}>
+                  {/* <Grid item xs={12} sm={4} style={{ textAlign: 'right' }}>
                   <LinkedIn
                   clientId="81vr4cluxkzpau"
                   onFailure={handleLinkedInFailure}
@@ -486,7 +526,7 @@ const Login = () => {
                     <i class="fab fa-linkedin-in"></i>
                   </Button>
                 </LinkedIn>
-                </Grid>
+                </Grid> */}
                   <Grid item xs={12} sm={4}>
                    
                     <FacebookLogin
@@ -506,7 +546,7 @@ const Login = () => {
                       )}
                     />
                   </Grid>
-                  <Grid item xs={12} sm={4} style={{ textAlign: 'left' }}>
+                  {/* <Grid item xs={12} sm={4} style={{ textAlign: 'left' }}>
                     <GoogleLogin
                       clientId={config.GOAUTH}
                       render={renderProps => (
@@ -536,8 +576,8 @@ const Login = () => {
                       autoLoad={false}
                       cookiePolicy={'single_host_origin'}
                     />
-                  </Grid>
-                </Grid>
+                  </Grid> */}
+                </Grid> 
                 {loginModal.state === 0 ? (
                   <Typography
                     className="link-button"
