@@ -56,6 +56,8 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+
+
 const PreLogBox = () => {
   const { state, dispatch } = useContext(Store);
  
@@ -93,6 +95,11 @@ const PreLogBox = () => {
         open: false,
       },
     });
+  };
+
+  const responseFacebook = res => {
+    facebookLogin(res, dispatch);
+    trackEvent('social-icon', 'click', 'facebook');
   };
 
  
@@ -170,7 +177,7 @@ const PreLogBox = () => {
         aria-describedby="transition-modal-description"
         className={classes.modal}
         open={preLogBox.open}
-//         onClose={handleClose}
+        onClose = {handleClose}
         closeAfterTransition
         BackdropComponent={Backdrop}
         BackdropProps={{
@@ -273,10 +280,6 @@ const PreLogBox = () => {
                     </>
                   ) : null}
 
-                  
-
-                 
-
                   <Typography
                     style={{
                       fontWeight: '900',
@@ -299,12 +302,6 @@ const PreLogBox = () => {
                     minLength={8}
                   />
                   <div className="color-red">{modal.errors.password}</div>
-                  
-                  
-
-                  
-
-                  
 
                   <Typography
                     className="link-button"
@@ -344,9 +341,26 @@ const PreLogBox = () => {
                   ) : null}
                 </form>
 
-                <Grid style={{ marginTop: '20px' }} container spacing={3}>
-                 
-                </Grid>
+                <Grid item xs={12} sm={4}>
+                   
+                    <FacebookLogin
+                      appId={config.fbAppId}
+                      autoLoad={false}
+                      callback={responseFacebook}
+                      scope="public_profile"
+                      fields="name,email,picture"
+                      render={renderProps => (
+                        <Button
+                          variant="contained"
+                          style={{ background: '#4267B3', color: 'white' }}
+                          className={classes.social}
+                          onClick={renderProps.onClick}
+                        >
+                          <i class="fab fa-facebook-f"></i>
+                        </Button>
+                      )}
+                    />
+                  </Grid>
                 {preLogBox.state === 0 ? (
                   <Typography
                     className="link-button"
