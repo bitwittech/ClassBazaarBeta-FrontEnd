@@ -8,7 +8,7 @@ import {
 } from '../utils/data';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import ReactHtmlParser, { convertNodeToElement } from 'react-html-parser';
-
+import Envelope_Box from "./Envelope_Box"
 import AuthProvider from './authProvider';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
@@ -34,6 +34,8 @@ import Smicon from '../assets/smicon.svg';
 import Snackbar from '@material-ui/core/Snackbar';
 import StaticCourseDetails from './StaticCourseDetails';
 import TopAppBar from './AppBar';
+import Page_Loader from './PageLoader';
+
 import { TrendingCoursesComponent } from './trending-cources/trending-cources';
 import { ExclusiveCourseComponent } from './exclusive-course/exclusive-course';
 import Typography from '@material-ui/core/Typography';
@@ -257,7 +259,10 @@ const SubjectCard = withRouter(({ history, ...data }) => {
 
 class LandingPage extends Component {
   constructor(props) {
+
     super(props);
+    
+    
     this.exclusiveCourseSection = React.createRef();
     this.state = {
       data: [],
@@ -272,6 +277,8 @@ class LandingPage extends Component {
       popUp: localStorage.getItem('cbpop'),
       nsEmail: '',
       user: null,
+      IsLoading:true,
+      openModal:false
     };
     console.log('landing', this.state);
     console.log('onrender', localStorage.getItem('cbpop'));
@@ -282,6 +289,7 @@ class LandingPage extends Component {
     this.getQuery = this.getQuery.bind(this);
     this.trackScrolling = this.trackScrolling.bind(this);
     this.isBottom = this.isBottom.bind(this);
+    this.handelModal = this.handelModal.bind(this);
   }
 
   onFilterChange(event) {
@@ -290,6 +298,7 @@ class LandingPage extends Component {
   }
 
   componentDidMount() {
+   
     trackEvent('Homepage', 'page', 'opened');
     store.getItem('user').then(res => {
       this.setState({ user: res });
@@ -302,6 +311,14 @@ class LandingPage extends Component {
       }, 5000);
     }
     document.addEventListener('scroll', this.trackScrolling);
+
+    setTimeout(() => {
+      this.setState({IsLoading:false}) 
+      
+    }, 10000);
+
+    
+    
   }
 
   isBottom(el) {
@@ -318,8 +335,10 @@ class LandingPage extends Component {
   };
 
   componentWillUnmount() {
+    
     this.clearTimeouts();
     document.removeEventListener('scroll', this.trackScrolling);
+    
   }
 
   clearTimeouts = () => {
@@ -359,6 +378,7 @@ class LandingPage extends Component {
     const padding = { paddingTop: 6, paddingBottom: 6 };
     if (degree.url) {
       return (
+        
         <Grid container className="c-card">
           <Grid item xs={12}>
             <Box display="flex" style={{ height: '149px', margin: '30' }}>
@@ -555,6 +575,11 @@ class LandingPage extends Component {
     );
   }
 
+  handelModal = ()=>{
+    console.log("Handel Called")
+    this.setState({openModal:!this.state.openModal})
+  }
+
   handlePopupClose = () => {
     trackEvent('Homepage PopUp', 'click', 'side-close');
     this.setState({ popUp: false });
@@ -589,12 +614,18 @@ class LandingPage extends Component {
       image: Banner2
     }
   ]
+
+  
+  
     console.log('popup', this.state.popUp);
     console.log('LANDING', this.state);
     console.log('session', localStorage.getItem('cbpop'));
     return (
       <>
-        <Grid style={{ margin: 0, width: '100%' }}>
+      {this.state.IsLoading === true ? <Page_Loader/>: 
+        
+      <>
+       <Grid style={{ margin: 0, width: '100%' }}>
           <TopAppBarWithRouter
             onLoginClick={this.onLoginClick}
             getQuery={this.getQuery}
@@ -606,7 +637,7 @@ class LandingPage extends Component {
           <AuthProvider/>
           <div className={'landing-page-wrapper'}>
             <section className="main-banner posiition-relative">
-              <Slider  autoplay={300} >
+              <Slider  autoplay={3000} >
                 {content.map((item, index) => (
                   <div
                     key={index}
@@ -691,14 +722,20 @@ class LandingPage extends Component {
                            color="primary"
                            className="login-btn banner-content banner-3"
 
-                          onClick={() => this.props.history.push({
-                            pathname: '/listing',
-                            state: {
-                              filter: 'free',
-                              feeFilter : 'Free',
-                              providers: 'all',
-                            }
-                          })}
+                           onClick = {()=>{
+                              
+                              this.setState({openModal : true})
+                              console.log(this.state.openModal)
+                           }}
+
+                          // onClick={() => this.props.history.push({
+                          //   pathname: '/listing',
+                          //   state: {
+                          //     filter: 'free',
+                          //     feeFilter : 'Free',
+                          //     providers: 'all',
+                          //   }
+                          // })}
                         >
                           Enroll Today
                         </Button>
@@ -717,9 +754,11 @@ class LandingPage extends Component {
                 ))}
               </Slider>
               <div className="overlay"/>
-             
             </section>
           </div>
+          {/* {console.log(this.state.openModal)} */}
+          
+          {this.state.openModal === true ? <Envelope_Box close = {this.handelModal} />:null}
           {/*<div className="landing-page-wrapper">*/}
           {/*  <section className="tiles-section py-5">*/}
           {/*    <div className="container">*/}
@@ -1042,6 +1081,9 @@ class LandingPage extends Component {
         </div>
         <Footer bgColor={'#FFF'}/>
       </>
+       }
+    </>
+      
     );
   }
 }
