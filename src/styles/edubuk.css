@@ -121,14 +121,16 @@
     padding: 50px 20px;
 }
 
-@media only screen and (max-width: 600px) {
-
+@media only screen and (max-width: 1000px) {
+    .edu-banner{
+        height: 60vh;
+    }
     .stepMain1 {
         display: block;
         background-color: #ebebeb;
         padding:0px;
     }
-
+   
     .stepSub1 {
         text-align: center;
         background-color: #ffffff;
@@ -150,6 +152,12 @@
         width:100%;
         height:auto;
     }
+
+
+}
+
+@media only screen and (max-width: 600px) {
+
 
     .multiple {
         background-color: #e6feff;
