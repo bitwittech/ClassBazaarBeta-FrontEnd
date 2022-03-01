@@ -315,7 +315,7 @@ class LandingPage extends Component {
     setTimeout(() => {
       this.setState({IsLoading:false}) 
       
-    }, 10000);
+    }, 5000);
 
     
     
