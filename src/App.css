@@ -429,6 +429,7 @@ a:hover {
 
     .no-mobile {
         display: none !important;
+    
     }
 
     .footer-text-m {
@@ -1009,7 +1010,7 @@ dashboard-options-header {
         margin-bottom: 0 !important;
         width: 100% !important;
     }
-
+  
     .scrolltop {
         right: 19px;
     }
@@ -1209,12 +1210,12 @@ dashboard-options-header {
     }
 
     .MuiButton-label{
-        /* margin-left: 12px; */
+        margin-left: 12px;
     }
 
-    .dignityH1{
+    /* .dignityH1{
         font-size:22px !important;
-    }
+    } */
 
     .edubukmain{
         margin-left: 0rem !important;
@@ -1228,16 +1229,16 @@ dashboard-options-header {
         width: 69px; height: 62px; margin-left:0rem; margin-bottom: 1rem;
     }
 
-    .logoBackground {
+    /* .logoBackground {
         width: 40%;
         background-color: transparent;
-    }
+    } */
     .c-card {
         width: 100% !important;
     }
-    .mobileImage{
+    /* .mobileImage{
         width:100%;
-    }
+    } */
     .branding-image {
         max-height: 40px;
     }
@@ -1246,6 +1247,9 @@ dashboard-options-header {
         max-height: 65px;
     }
 }
+
+
+
 
 .cd-container {
     padding-top: 100px;
@@ -1551,9 +1555,12 @@ li {
 }
 
 .edu-banner{
+    display: flex;
     background-image: url(./assets/edubukBanner.png);
-    background-size: cover;
+    /* background-size: cover; */
+    background-size: 100vw 100%;
     background-repeat: no-repeat;
+    width: 100vw;
     height: 100vh;
 }
 
