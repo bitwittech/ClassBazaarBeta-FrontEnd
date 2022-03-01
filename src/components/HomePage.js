@@ -37,10 +37,10 @@ const providerData = [
   'Coursera',
   'edX',
   'FutureLearn',
-  'SimpliLearn',
-  'Udacity',
-  'upGrad',
-  'Swayam',
+  // 'SimpliLearn',
+  // 'Udacity',
+  // 'upGrad',
+  // 'Swayam',
 ];
 let { API, API_LOCAL } = config;
 
@@ -104,7 +104,6 @@ class HomePage extends Component {
       providers: 'all',
       fee: 'all',
       isLevel1CheckedFree : false,
-      FreeCheck :[],
       isLevel1CheckedSubjects: false,
       subjecttReset: false,
       feeReset: false,
@@ -168,8 +167,8 @@ class HomePage extends Component {
 
   handleCourseNumber = count => {
     this.setState({
-      // totalCount: count,
-      totalCount: '171154',
+      totalCount: count,
+      // totalCount: '171154',
     });
   };
 
@@ -201,12 +200,44 @@ class HomePage extends Component {
   onFeeFilterChange = feeType => {
     console.log({ feeType });
     let filterValue;
-    if (feeType[0] === true) filterValue = 'free';
-    else if (feeType[1] === true) filterValue = 'paid';
+    let isLevel1CheckedFree = true;
+    let FreeCheck  = [];
+    
+    if (feeType[0] === true) 
+    {
+      FreeCheck[0] = true;
+      FreeCheck[1] = false;
+      FreeCheck[2] = false;
+
+      filterValue = 'free'; 
+    }
+
+    else if (feeType[1] === true) 
+    {
+      FreeCheck[0] = false;
+      FreeCheck[1] = true;
+      FreeCheck[2] = false;
+
+      filterValue = 'paid';
+    }
     else if (feeType[2] === true)
+    {
+      FreeCheck[0] = false;
+      FreeCheck[1] = false;
+      FreeCheck[2] = true;
       filterValue = 'Provider subscription required';
-    else filterValue = '';
-    this.setState({ filterValue }, async () => {
+    }
+    else
+    {
+      FreeCheck[0] = false;
+      FreeCheck[1] = false;
+      FreeCheck[2] = false;
+      isLevel1CheckedFree = false;
+      filterValue = '';
+    }
+
+
+    this.setState({ filterValue, isLevel1CheckedFree,FreeCheck},  () => {
       this.updateData();
     });
   };
@@ -317,6 +348,8 @@ class HomePage extends Component {
           feeFilter = this.props.location.state.feeFilter;
           isLevel1CheckedFree = true;
         FreeCheck[index] = true
+        FreeCheck[1] = false
+        FreeCheck[2] = false
       }
       if (this.props.location.state.subject !== undefined) {
         subjects = this.props.location.state.subject;
