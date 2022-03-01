@@ -135,7 +135,7 @@ export const googleLogin = async (data, dispatch) => {
           payload: false,
         });
       }
-    });
+    }).catch(err=>console.log("+++++++",err));
 };
 
 export const register = async (data, dispatch) => {
@@ -164,17 +164,21 @@ export const register = async (data, dispatch) => {
         applicationId: config.fusionAuthApplicationId,
       },
     };
+
+    // yaha par feilds null jaa rahi thi 😃
+  
+
     const newUserDataForReg = {
         userid: '',
         name: data.username,
         password: data.password,
         email_address: data.email,
         mobile_no: data.phone,
-        gender: null,
-        school_or_college_name: null,
-        class_year: null,
-        city: null,
-        refferral : null
+        gender: data.gender,
+        school_or_college_name: data.school,
+        class_year: data.classYear,
+        city: data.city,
+        refferral : data.refferral
 
     };
 
@@ -225,8 +229,17 @@ export const register = async (data, dispatch) => {
           });
         }
       })
+      // edited by Yashwant sahu
       .catch(e => {
-        console.error(e);
+        localStorage.clear();
+        console.error(">>>>>>>>",Object.values(e.errorResponse.fieldErrors)[0][0].message);
+        dispatch({
+          type: ALERT,
+          payload: {
+            varient: 'error',
+            message: Object.values(e.errorResponse.fieldErrors)[0][0].message,
+          }
+        });
       });
     dispatch({
       type: LOADING,
@@ -236,8 +249,8 @@ export const register = async (data, dispatch) => {
       type: LOGIN_MODAL,
       payload: false,
     });
-  } catch (error) {
-    console.log(error);
+  } catch (errMsg){
+
     dispatch({
       type: LOADING,
       payload: false,
@@ -246,13 +259,14 @@ export const register = async (data, dispatch) => {
       type: ALERT,
       payload: {
         varient: 'error',
-        message: 'Registration failed',
+        message: "Invalid credentials",
       },
     });
     dispatch({
       type: LOGIN_MODAL,
       payload: false,
     });
+
   }
 };
 
@@ -271,6 +285,7 @@ export const signin = async (data, dispatch) => {
       .then(async response => {
         console.log('LOGIN', response);
         if (response.statusCode === 200) {
+          localStorage.setItem('user',data.email);
           newLogin(response.successResponse.user.email);
           store.setItem('user', response.successResponse.user);
           ReactGA.set({
@@ -347,6 +362,7 @@ export const fetchUser = async (token, dispatch) => {
 };
 
 export const logout = async dispatch => {
+  localStorage.clear()
   dispatch({
     type: LOGOUT,
   });
