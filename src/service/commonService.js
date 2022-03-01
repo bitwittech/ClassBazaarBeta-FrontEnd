@@ -11,21 +11,9 @@ export const eduTest = async (user, val) => {
       },
     };
     console.log(user, val);
-    const data = {
-      "user_id": '123456789',
-      "name": "krishnahari1",
-      "gender": "male",
-      "email_address": "krishnahari321@gmail.com",
-      "school_or_college_name": "Waterview Dr",
-      "class_year": "college_5",
-      "city": "hyderabad",
-      "mobile_no": "7842706731",
-      "password": "2412"
-    }
-    // e.preventDefault();
     const url = `https://edubuk.co.in/mitest/User/loginApi?user_id=${user.id}&name=${val.name}&gender=${val.gender}&email_address=${val.email_address}&school_or_college_name=${val.school_or_college_name}&class_year=${val.class_year}&city=${val.city}&mobile_no=${val.mobile_no}&password=${val.password}`;
 //     const url = `https://edubuk.co.in/User/loginApi?user_id=${user.id}&name=${val.name}&gender=${val.gender}&email_address=${val.email_address}&school_or_college_name=${val.school_or_college_name}&class_year=${val.class_year}&city=${val.city}&mobile_no=${val.mobile_no}&password=${val.password}`;
-    // const res = await axios.get(url).then((res) => {console.log(res)})
+    const res = await axios.get(url).then((res) => {console.log(res)})
     window.open(url, '_blank');
 
   };
@@ -33,20 +21,32 @@ export const eduTest = async (user, val) => {
   export const newregister = async (userId, request) => {
 //       const res = await axios.post(API + '/api/newregistration', request).then((res) => {console.log(res)});
       var emailVal = request.email_address;
+      console.log('Hit up ')
       const ress = await axios.post(API + '/api/newregistration', request).then((ress) => {console.log('response',ress)});
       const res = await axios.post(API + '/api/newLoginDetails', {email: emailVal}).then((res) => {
         console.log(res.data.data)
         store.setItem('newUserLogin', res.data.data);
         localStorage.setItem('user', JSON.parse(JSON.stringify(res.data.data.email_address)));
         console.log('consoledata',res.data.data.email_address);
+
+        // Edubuk commented by yashwant 
+
+        console.log("EDU DATA :: ",res.data.data)
+
         let val = res.data.data;
-        var id = "id" + Math.random().toString(16).slice(2);
-        const url = `https://edubuk.co.in/mitest/User/loginApi?user_id=${id}&name=${val.name}&gender=${val.gender}&email_address=${val.email_address}&school_or_college_name=${val.school_or_college_name}&class_year=${val.class_year}&city=${val.city}&mobile_no=${val.mobile_no}&password=${val.password}`;
-        window.open(url, '_blank');
+        if(val.school_or_college_name !== null)
+        {
+          var id = "id" + Math.random().toString(16).slice(2);
+          const url = `https://edubuk.co.in/mitest/User/loginApi?user_id=${id}&name=${val.name}&gender=${val.gender}&email_address=${val.email_address}&school_or_college_name=${val.school_or_college_name}&class_year=${val.class_year}&city=${val.city}&mobile_no=${val.mobile_no}&password=${val.password}`;
+          window.open(url, '_blank');
+          // window.location = "http://localhost:3000/edubuk"
+
+        }
+        
+
           
       });
-      
-      
+       
       // return new Promise((resolve, reject) => {
       //   this._start()
       //       .uri('/api/newregistration')
