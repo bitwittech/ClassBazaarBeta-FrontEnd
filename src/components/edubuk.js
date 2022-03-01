@@ -15,6 +15,8 @@ import { eduTest } from '../service/commonService';
 import { store } from '../App';
 import Store from '../store/Context';
 import { LOGIN_MODAL } from '../store/Types';
+import { Pre_LOG_Box } from '../store/Types';
+
 
 const getUserDetails = (dispatch) => {
   const userr = localStorage.getItem("user");
@@ -48,11 +50,11 @@ const Edubuk = () => {
         <section className="edu-banner posiition-relative d-flex align-items-center">
             <div className="overlay"/>
             <div className="banner-content position-relative text-white" style={{zIndex: '2'}}>
-            <div style={{ fontSize: '26px', marginLeft: '60px', marginBottom: '18px' }}>
+            <div style={{ fontSize: '26px', marginLeft: '40px', marginBottom: '18px' }}>
                 Powered by Edubuk
             </div>
-            <div style={{ marginLeft: '60px' }}>
-                <img src={anyone} style={{width: '80%'}} />
+            <div style={{ marginLeft: '40px' }}>
+                <img src={anyone}  style={{width: '50vw'}} />
             </div>
             </div>
         </section>
