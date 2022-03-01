@@ -2,8 +2,9 @@ import { Container, Grid, Typography } from '@material-ui/core';
 import { CourseraCourse, CourseraDegree } from '../utils/Coursera';
 import React, { useContext, useEffect, useState } from 'react';
 import ReactHtmlParser, { convertNodeToElement } from 'react-html-parser';
-
+import '../styles/course-list.scss'
 import AppBar from './AppBar';
+import userImg from '../assets/userImg.svg'
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import Box from '@material-ui/core/Box';
 import { CircularProgress } from '@material-ui/core';
@@ -93,18 +94,18 @@ const CourseDetails = props => {
 
   console.log(props,']=============================');
 
-  const isBookmarked = uuid => {
-    console.log('isbookmarked', uuid);
-    if (state.user === null || state.user.data === undefined) {
-      return false;
-    }
-    const globalBookmarks = state.user.data.bookmarks;
-    if (globalBookmarks.find(e => e.id === uuid) === undefined) {
-      return false;
-    } else {
-      return true;
-    }
-  };
+  // const isBookmarked = uuid => {
+  //   console.log('isbookmarked', uuid);
+  //   if (state.user === null || state.user.data === undefined) {
+  //     return false;
+  //   }
+  //   const globalBookmarks = state.user.data.bookmarks;
+  //   if (globalBookmarks.find(e => e.id === uuid) === undefined) {
+  //     return false;
+  //   } else {
+  //     return true;
+  //   }
+  // };
 
   // const provider = props.location.pathname.split('/')[2];
   // let uuid = props.location.pathname.split('/')[3];
@@ -112,8 +113,6 @@ const CourseDetails = props => {
   const uuid = props.match.params.uuid;
 
   const provider = props.match.params.provider;
-
-  // Added by yashwant sahu
 
   const officialURL = "https://api.classbazaar.com/";
   const localURL = "http://0.0.0.0:8080/";
@@ -136,7 +135,7 @@ const CourseDetails = props => {
         },
       };
 
-      var url = `${officialURL}api/course?uuid=${uuid}&provider=${provider}`;
+      var url = `${localURL}api/course?uuid=${uuid}&provider=${provider}`;
 
      
       console.log(url, uuid);
@@ -157,9 +156,14 @@ const CourseDetails = props => {
         loading: false,
         reviews: reviews.data.data,
         rloading: false,
+        index : data.summaryData.index,
+        ranking_points:data.summaryData.ranking_points,
         description: data.summaryData.description,
         isFlexible : data.summaryData.is_flexible,
         price: data.summaryData.price,
+        subjects:data.summaryData.subjects,
+        instructors: data .summaryData.instructors,
+        university: data.summaryData.university,
         price_currency: data.summaryData.price_currency,
         provider: data.summaryData.provider,
         time : data.summaryData.start_date,
@@ -173,60 +177,60 @@ const CourseDetails = props => {
   }, []);
 
   // review section not in need 
-  // const reviewSection = (ratingNumber, noOfReviews) => {
-  //   console.log({ ratingNumber, noOfReviews });
-  //   return (
-  //     <>
-  //       {isBookmarked(Gstate.data._id) ? (
-  //         <TurnedInIcon
-  //           onClick={() => handleBookmark(uuid, provider)}
-  //           color="primary"
-  //           className="click-h"
-  //           fontSize="large"
-  //         />
-  //       ) : (
-  //         <TurnedInNotIcon
-  //           onClick={() => handleBookmark(uuid, provider)}
-  //           color="primary"
-  //           fontSize="large"
-  //           className="click-h"
-  //         />
-  //       )}
+  const reviewSection = (ratingNumber, noOfReviews) => {
+    console.log({ ratingNumber, noOfReviews });
+    return (
+      <>
+        {/* {isBookmarked(Gstate.index) ? (
+          <TurnedInIcon
+            onClick={() => handleBookmark(uuid, provider)}
+            color="primary"
+            className="click-h"
+            fontSize="large"
+          />
+        ) : (
+          <TurnedInNotIcon
+            onClick={() => handleBookmark(uuid, provider)}
+            color="primary"
+            fontSize="large"
+            className="click-h"
+          />
+        )} */}
 
-  //       <Typography
-  //         variant="caption"
-  //         display="block"
-  //         style={{ color: '#898989' }}
-  //         gutterBottom
-  //       >
-  //         {noOfReviews >= 0 && ratingNumber && (
-  //           <>{`${Math.round(ratingNumber * 10) /
-  //           10}(${noOfReviews} reviews)`}</>
-  //         )}
-  //         {noOfReviews < 0 && ratingNumber && (
-  //           <>{`${Math.round(ratingNumber * 10) / 10}`}</>
-  //         )}
-  //         {noOfReviews >= 0 && !ratingNumber && <>{`${noOfReviews} reviews`}</>}
-  //       </Typography>
-  //       {ratingNumber && (
-  //         <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-  //           <StarRatings
-  //             rating={ratingNumber}
-  //             starRatedColor="#f15a29"
-  //             numberOfStars={5}
-  //             starDimension="20px"
-  //             starSpacing="0px"
-  //             name="rating"
-  //           />
-  //         </div>
-  //       )}
-  //     </>
-  //   );
-  // };
+        <Typography
+          variant="caption"
+          display="block"
+          style={{ color: '#898989' }}
+          gutterBottom
+        >
+          {/* {noOfReviews >= 0 && ratingNumber && (
+            <>{`${Math.round(ratingNumber * 10) /
+            10}(${noOfReviews} reviews)`}</>
+          )} */}
+          {noOfReviews < 0 && ratingNumber && (
+            <>{`${Math.round(ratingNumber * 100)} reviews`}</>
+          )}
+          {noOfReviews >= 0 && !ratingNumber && <>{`${noOfReviews} reviews`}</>}
+        </Typography>
+        {ratingNumber && (
+          <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+            <StarRatings
+              rating={ratingNumber}
+              starRatedColor="#f15a29"
+              numberOfStars={7}
+              starDimension="15px"
+              starSpacing="0px"
+              name="rating"
+            />
+          </div>
+        )}
+      </>
+    );
+  };
   
-  // const handlePopupClose = () => {
-  //   setState({ ...Gstate, popUp: false });
-  // };
+  const handlePopupClose = () => {
+    setState({ ...Gstate, popUp: false });
+  };
 
 //modifyed by Yashwant Sahu
 
@@ -295,8 +299,8 @@ const courseSummary =  () =>
                     'click',
                     `${provider}|${Gstate.title}`,
                   );
-                 // for tracker added 
-                  const res = await fetch(`${officialURL}api/track/?title=${Gstate.title}`)
+
+                  const res = await fetch(`${localURL}api/track/?title=${Gstate.title}`)
 
                   window.open(
                     provider === 'Swayam'
@@ -459,53 +463,57 @@ const courseSummary =  () =>
   );
 
   // this section in not need 
-  // const reviews = () => (
-  //   <>
-  //     {Gstate.rlaoding ? (
-  //       <p>Loading</p>
-  //     ) : Gstate.reviews.length > 0 ? (
-  //       Gstate.reviews.map(data => (
-  //         <Grid
-  //           key={data.course_id}
-  //           container
-  //           style={{
-  //             padding: 20,
-  //             background: '#00000015',
-  //             marginTop: '15px',
-  //           }}
-  //         >
-  //           <Grid item xs={3}>
-  //             <Grid item xs={12}>
-  //               <Box style={{ padding: '0 10px' }}>
-  //                 <img
-  //                   className="review-image"
-  //                   src="https://www.sketchengine.eu/wp-content/plugins/all-in-one-seo-pack/images/default-user-image.png"
-  //                   alt="user"
-  //                 />
-  //               </Box>
-  //             </Grid>
-  //           </Grid>
-  //           <Grid item xs={9}>
-  //             <Typography color="primary" variant="h6">
-  //               {data.username}
-  //             </Typography>
-  //             <Box
-  //               style={{
-  //                 padding: 30,
-  //                 paddingTop: 5,
-  //                 paddingLeft: 5,
-  //               }}
-  //             >
-  //               {data.review}
-  //             </Box>
-  //           </Grid>
-  //         </Grid>
-  //       ))
-  //     ) : (
-  //       <p>No reviews for this course</p>
-  //     )}
-  //   </>
-  // );
+  const reviews = () => (
+    <>
+      {Gstate.rlaoding ? (
+        <p>Loading</p>
+      ) : Gstate.reviews.length > 0 ? (
+        Gstate.reviews.map(data => (
+          <Grid
+            key={data.course_id}
+            container
+            style={{
+              padding: 20,
+              background: '#00000015',
+              marginTop: '15px',
+            }}
+          >
+            <Grid item xs={3}>
+              <Grid item xs={12}>
+          
+                <Box style={{ padding: '0 10px' }}>
+                  <img
+                    className="review-image"
+                    src={userImg}
+                    alt="user"
+                  />
+                </Box>
+              </Grid>
+            </Grid>
+            <Grid item xs={9}>
+              <Typography color="primary" variant="h6">
+                {data.username}
+              </Typography>
+              <Box
+                style={{
+                  padding: 30,
+                  paddingTop: 5,
+                  paddingLeft: 5,
+                }}
+              >
+                {data.review}
+              </Box>
+            </Grid>
+          </Grid>
+        ))
+      ) : (
+        <>
+        <br/>
+        <p>No reviews for this course</p>
+        </>
+      )}
+    </>
+  );
 
   // const coursera = () => {
   //   return (
@@ -1054,68 +1062,6 @@ const courseSummary =  () =>
   };
 
 
-  const edX = () =>{
-  // count++;
-  return(
-  Gstate && (
-    <div maxwidth="lg" className="ead-sec">
-      <div className="cd-container">
-        <Grid container spacing={3} direction="row-reverse">
-          <Grid item xs={12} sm={3}>
-            {courseSummary()}
-          </Grid>
-          <Grid item xs={12} sm={9}>
-            <div className="d-card" style={{ backgroundColor: '#fff3ef', boxShadow: 'none' }}>
-              <div className="cd-head">
-                <div className="cd-head-o">
-                  <Typography
-                    style={{ fontWeight: '600' }}
-                    color="primary"
-                    variant="subtitle2"
-                    className="u-uni"
-                    gutterBottom
-                  >
-                    {Gstate.provider}
-                  </Typography>
-                  <Typography variant="h6" className="u-title" gutterBottom>
-                    {Gstate.title}
-                  </Typography>
-                  <Typography
-                    variant="caption"
-                    display="block"
-                    className="provider u-provider"
-                    gutterBottom
-                  >
-                    via {provider}
-                  </Typography>
-                </div>
-              </div>
-              <br/>
-              <div className="cd-cont">
-                <Typography align = "justify"
-                  style={{ fontWeight: '600', fontSize: '22px' }}
-                  variant="subtitle2"
-                  gutterBottom
-                >
-                  Course Overview
-                </Typography>
-                <Typography align = "justify"
-                  style={{ fontSize: '16px', fontWeight: '300' }}
-                  variant="body1"
-                  gutterBottom
-                >
-                  {ReactHtmlParser(Gstate.description)}
-                </Typography>
-              </div>
-            </div>
-          </Grid>
-        </Grid>
-      </div>
-    </div>
-  )
-);
-}
-
   const udemy = () => {
     return (
       Gstate && (
@@ -1178,9 +1124,142 @@ const courseSummary =  () =>
     );
   };
 
- 
+  const fl = () =>
+  Gstate && (
+    <div maxwidth="lg" className="ead-sec">
+      <div className="cd-container">
+        <Grid container spacing={3} direction="row-reverse">
+          <Grid item xs={12} sm={3}>
+            {courseSummary()}
+          </Grid>
+          <Grid item xs={12} sm={9}>
+            <div className="d-card" style={{ backgroundColor: '#fff3ef', boxShadow: 'none' }}>
+              <div className="cd-head">
+                <div>
+                  <Typography
+                    style={{ fontWeight: '600' }}
+                    color="primary"
+                    variant="subtitle2"
+                    gutterBottom
+                  >
+                    {Gstate.university}
+                  </Typography>
+                  <Typography variant="h6" gutterBottom>
+                    {ReactHtmlParser(Gstate.title)}
+                  </Typography>
 
-  const fl = () =>{
+                  <Typography
+                    variant="caption"
+                    display="block"
+                    className="provider"
+                    gutterBottom
+                  >
+                    via {provider}
+                  </Typography>
+                </div>
+                <div style={{ textAlign: 'right' }}>
+                  {reviewSection(
+                    parseFloat(Gstate.ranking_points),
+                    -1,
+                  )}
+                </div>
+              </div>
+              <br/>
+              <div className="cd-cont">
+                <Typography
+                  style={{ fontWeight: '600', fontSize: '22px' }}
+                  variant="subtitle2"
+                  gutterBottom
+                >
+                  Course Overview
+                </Typography>
+                <Typography
+                  style={{ fontSize: '16px', fontWeight: '300' }}
+                  variant="body1"
+                  gutterBottom
+                >
+                  {ReactHtmlParser(Gstate.description)}
+                </Typography>
+
+                {Gstate.instructors !== undefined && (
+                  <>
+                    <Typography
+                      style={{ fontWeight: '600', fontSize: '22px' }}
+                      variant="subtitle2"
+                      gutterBottom
+                    >
+                      Subjects:&nbsp; {' '}
+                      {Gstate.subjects.map((obj, index) => (
+                        <span key={index} style={{ fontWeight: '300' }}>
+                          {obj}
+                        </span>
+                      ))}
+                    </Typography>
+                  </>
+                )}
+
+                <br />
+
+                {Gstate.instructors !== undefined && (
+                  <>
+                    <Typography
+                      style={{ fontWeight: '600', fontSize: '22px' }}
+                      variant="subtitle2"
+                      gutterBottom
+                    >
+                      Professor:&nbsp;{' '}
+                      {Gstate.instructors.map((obj, index) => (
+                        <span key={index} style={{ fontWeight: '300' }}>
+                          {obj}
+                        </span>
+                      ))}
+                    </Typography>
+                  </>
+                )}
+                <br/>
+                <Typography
+                  style={{ fontWeight: '600', fontSize: '22px' }}
+                  variant="subtitle2"
+                  gutterBottom
+                >
+                  Reviews
+                </Typography>
+                <div>
+                  <button
+                    onClick={() => {
+                      setState({ ...Gstate, popUp: !Gstate.popUp });
+                    }}
+                    className="enroll-btn"
+                  >
+                    <div style={{ display: 'flex', flexDirection: 'row' }}>
+                      <div
+                        style={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          fontWeight: '600',
+                        }}
+                      >
+                        <div>Write Review &nbsp;</div>
+                      </div>
+                      <div>
+                        <RateReviewIcon
+                          style={{ fontSize: '22px', marginTop: '2px' }}
+                        />
+                      </div>
+                    </div>
+                  </button>
+                </div>
+                {reviews()}
+              </div>
+            </div>
+          </Grid>
+        </Grid>
+      </div>
+    </div>
+  );
+
+
+  const flOLD = () =>{
     return (
       Gstate && (
         <div maxwidth="lg" className="ead-sec">
@@ -1242,9 +1321,9 @@ const courseSummary =  () =>
     );
   };
 
-
-  const sl = () =>
-    Gstate.data && (
+// new Edx Formed By Yashwant Sahu
+  const edX = () =>
+    Gstate && (
       <div maxwidth="lg" className="ead-sec">
         <div className="cd-container">
           <Grid container spacing={3} direction="row-reverse">
@@ -1261,11 +1340,12 @@ const courseSummary =  () =>
                       variant="subtitle2"
                       gutterBottom
                     >
-                      {Gstate.summaryData.university}
+                      {Gstate.university}
                     </Typography>
                     <Typography variant="h6" gutterBottom>
-                      {ReactHtmlParser(Gstate.data.courseData.fields.title)}
+                      {ReactHtmlParser(Gstate.title)}
                     </Typography>
+
                     <Typography
                       variant="caption"
                       display="block"
@@ -1275,12 +1355,12 @@ const courseSummary =  () =>
                       via {provider}
                     </Typography>
                   </div>
-                  {/* <div style={{ textAlign: 'right' }}>
+                  <div style={{ textAlign: 'right' }}>
                     {reviewSection(
-                      parseFloat(Gstate.data.courseData.fields.star_ratings),
+                      parseFloat(Gstate.ranking_points),
                       -1,
                     )}
-                  </div> */}
+                  </div>
                 </div>
                 <br/>
                 <div className="cd-cont">
@@ -1296,20 +1376,39 @@ const courseSummary =  () =>
                     variant="body1"
                     gutterBottom
                   >
-                    {ReactHtmlParser(Gstate.data.courseData.highlights.content)}
+                    {ReactHtmlParser(Gstate.description)}
                   </Typography>
 
-                  {Gstate.data.closestRun !== undefined && (
+                  {Gstate.instructors !== undefined && (
                     <>
                       <Typography
                         style={{ fontWeight: '600', fontSize: '22px' }}
                         variant="subtitle2"
                         gutterBottom
                       >
-                        Professor:{' '}
-                        {this.Gstate.closestRun.staff.map((obj, index) => (
+                        Subjects:&nbsp; {' '}
+                        {Gstate.subjects.map((obj, index) => (
                           <span key={index} style={{ fontWeight: '300' }}>
-                            {obj.given_name}
+                            {obj}
+                          </span>
+                        ))}
+                      </Typography>
+                    </>
+                  )}
+
+                  <br />
+
+                  {Gstate.instructors !== undefined && (
+                    <>
+                      <Typography
+                        style={{ fontWeight: '600', fontSize: '22px' }}
+                        variant="subtitle2"
+                        gutterBottom
+                      >
+                        Professor:&nbsp;{' '}
+                        {Gstate.instructors.map((obj, index) => (
+                          <span key={index} style={{ fontWeight: '300' }}>
+                            {obj}
                           </span>
                         ))}
                       </Typography>
@@ -1348,7 +1447,7 @@ const courseSummary =  () =>
                       </div>
                     </button>
                   </div>
-                  {/* {reviews()} */}
+                  {reviews()}
                 </div>
               </div>
             </Grid>
@@ -2016,7 +2115,7 @@ const courseSummary =  () =>
       case 'FutureLearn':
         return fl();
       case 'SimpliLearn':
-        return sl();
+        // return sl();
       case 'upGrad':
         return upGrad();
       case 'Udacity':
@@ -2074,7 +2173,7 @@ const courseSummary =  () =>
         openState={Gstate.popUp}
         uuid={uuid}
         provider={provider}
-        // handlePopupClose={handlePopupClose}
+        handlePopupClose={handlePopupClose}
         course={Gstate.data && Gstate.data.title}
         Mstate={1}
         addReviewToCurrentState={addReviewToCurrentState}
