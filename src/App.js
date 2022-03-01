@@ -1,7 +1,7 @@
 import './App.css';
 import './index.scss';
 import { BrowserRouter, Route, Switch, withRouter } from 'react-router-dom';
-import { MuiThemeProvider, createTheme } from '@material-ui/core/styles';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import React, { useContext, useEffect, useReducer } from 'react';
 import withAnalytics, { initAnalytics } from 'react-with-analytics';
 
@@ -31,7 +31,7 @@ import { fetchUser } from './actions/ContextActions';
 import localForage from 'localforage';
 import { trackPage } from 'react-with-analytics/lib/utils';
 import AltMBA from './components/AltMBA';
-const theme = createTheme({
+const theme = createMuiTheme({
   typography: {
     fontFamily: ['Poppins'],
   },
