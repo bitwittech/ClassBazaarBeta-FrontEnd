@@ -1,9 +1,10 @@
 import './App.css';
 import './index.scss';
 import { BrowserRouter, Route, Switch, withRouter } from 'react-router-dom';
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import { MuiThemeProvider, createTheme } from '@material-ui/core/styles';
 import React, { useContext, useEffect, useReducer } from 'react';
 import withAnalytics, { initAnalytics } from 'react-with-analytics';
+
 
 import About from './components/About';
 import Contactus from './components/Contactus';
@@ -13,6 +14,9 @@ import CoursePage from './components/coursePage';
 import HomePage from './components/HomePage';
 import LandingPage from './components/LandingPage';
 import Login from './components/Login';
+// prelogbox added by Yashwant Sahu
+import PreLogBox from './components/PreLogBox';
+
 import MobileAuth from './components/MobileAuth';
 import PrivacyPolicy from './components/PrivacyPolicy';
 import ProfilePage from './components/ProfilePage';
@@ -27,8 +31,7 @@ import { fetchUser } from './actions/ContextActions';
 import localForage from 'localforage';
 import { trackPage } from 'react-with-analytics/lib/utils';
 import AltMBA from './components/AltMBA';
-import PreLogBox from './components/PreLogBox';
-const theme = createMuiTheme({
+const theme = createTheme({
   typography: {
     fontFamily: ['Poppins'],
   },
@@ -79,6 +82,7 @@ const Root = props => {
     </Switch>
   );
 };
+
 var store = localForage.createInstance(config.localForage);
 const AppWithRouter = withRouter(withAnalytics(Root));
 
