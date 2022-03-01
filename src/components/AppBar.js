@@ -8,6 +8,9 @@ import { DebounceInput } from 'react-debounce-input';
 import IconButton from '@material-ui/core/IconButton';
 import InputBase from '@material-ui/core/InputBase';
 import { LOGIN_MODAL } from '../store/Types';
+
+// edited by yashwant sahu
+import { Pre_LOG_Box } from '../store/Types';
 import Logo from './../assets/logo.png';
 import BlackLogo from './../assets/img/logo.png'
 import MenuIcon from '@material-ui/icons/Menu';
@@ -21,6 +24,8 @@ import Typography from '@material-ui/core/Typography';
 import { logout } from '../actions/ContextActions';
 import { trackEvent } from 'react-with-analytics';
 import { withStyles } from '@material-ui/core/styles';
+
+import HamMenu from './Hamburgur';
 
 const user = window.localStorage.getItem("user");
 console.log('loginString',user);
@@ -175,9 +180,9 @@ function TopBar(props) {
           setToggleAppBarTheme(true);
           return;
         }
-        if (window.scrollY > window.innerHeight && !toggleAppBarTheme) {
+        else if (window.scrollY >= window.innerHeight && !toggleAppBarTheme) {
           setToggleAppBarTheme(true);
-        } else if (window.scrollY < window.innerHeight && toggleAppBarTheme) {
+        } else if (window.scrollY <= window.innerHeight+5 && toggleAppBarTheme) {
           setToggleAppBarTheme(false);
         }
       });
@@ -186,7 +191,7 @@ function TopBar(props) {
   return (
     <AppBar
       position="static"
-      style={{ padding: '10px 10px', boxShadow: 'none' }}
+      style={{ boxShadow: 'none' }}
       color="inherit"
       className={`sticky ${
         !toggleAppBarTheme && shouldSwitch
@@ -194,6 +199,7 @@ function TopBar(props) {
           : 'app-bar-colored'
       }`}
     >
+      <HamMenu props = {props}/>
       <div className="appbar-flex">
         <div className="topbar-cont">
           <div
@@ -326,7 +332,7 @@ function TopBar(props) {
                     className="signup-btn no-mobile header-links"
                     onClick={() =>
                       dispatch({
-                        type: LOGIN_MODAL,
+                        type: Pre_LOG_Box,
                         payload: {
                           open: true,
                           state: 1,
@@ -419,7 +425,7 @@ function TopBar(props) {
                   onClick={() => handleLogout()}
                   variant="outlined"
                   color="primary"
-                  className="signup-btn"
+                  className="signup-btn log-ham"
                 >
                   Logout
                 </Button>
