@@ -177,7 +177,6 @@ const PreLogBox = () => {
         aria-describedby="transition-modal-description"
         className={classes.modal}
         open={preLogBox.open}
-        onClose = {handleClose}
         closeAfterTransition
         BackdropComponent={Backdrop}
         BackdropProps={{
