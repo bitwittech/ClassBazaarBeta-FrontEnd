@@ -135,7 +135,7 @@ const CourseDetails = props => {
         },
       };
 
-      var url = `${localURL}api/course?uuid=${uuid}&provider=${provider}`;
+      var url = `${officialURL}api/course?uuid=${uuid}&provider=${provider}`;
 
      
       console.log(url, uuid);
@@ -300,7 +300,7 @@ const courseSummary =  () =>
                     `${provider}|${Gstate.title}`,
                   );
 
-                  const res = await fetch(`${localURL}api/track/?title=${Gstate.title}`)
+                  const res = await fetch(`${officialURL}api/track/?title=${Gstate.title}`)
 
                   window.open(
                     provider === 'Swayam'
