@@ -1,5 +1,6 @@
 {
-  "API": "https://api.classbazaar.com",
+  "API_Web": "https://api.classbazaar.com",
+  "API": "http://0.0.0.0:8080",
   "API_LOCAL": "http://localhost:8080",
   "API_NGROK": "https://fc7774e6.ngrok.io",
   "fusionAuthURL": "https://auth.classbazaar.in",
@@ -8,7 +9,7 @@
   "GOAUTH": "844357402268-ihn8eo096oqq60irm9sb1gn6n4uh1mf6.apps.googleusercontent.com",
   "P_redirecturl": "https://www.classbazaar.com",
   "D_redirecturl": "http://localhost:3000",
-  "fbAppId": "177337936826140",
+  "fbAppId": "653851102344051",
   "localForageConfig": {
     "name": "classBazaar",
     "version": 1.0,
