@@ -71,7 +71,7 @@ const Login = () => {
       city: '',
       gender: '',
       classYear: '',
-      refferral : '',
+      // refferral : '',
     },
     errors: {
       username: null,
@@ -100,6 +100,7 @@ const Login = () => {
   };
 
   const responseFacebook = res => {
+    console.log(res)
     facebookLogin(res, dispatch);
     trackEvent('social-icon', 'click', 'facebook');
   };
@@ -442,10 +443,10 @@ const Login = () => {
                                     </>
                   ): null}
 
-                  {loginModal.state === 1 ? (
+                  {/* {loginModal.state === 1 ? (
                                     <>
                                     {/* aDDEDD by yashwant sahu */}
-                                    {' '}
+                                    {/* {' '}
                                     <Typography
                                       style={{
                                         fontWeight: '900',
@@ -467,8 +468,8 @@ const Login = () => {
                                       placeholder="Referral Code..."
                                     />
                                     <div className="color-red">{modal.errors.refferral}</div>
-                                    </>
-                  ): null}
+                                    </> }
+                  ): null} */}
 
                   <Typography
                     className="link-button"
@@ -509,8 +510,8 @@ const Login = () => {
                 </form>
 
                 <Grid style={{ marginTop: '20px' }} container spacing={3}>
-                  {/* <Grid item xs={12} sm={4} style={{ textAlign: 'right' }}>
-                  <LinkedIn
+                  <Grid item xs={12} sm={4} style={{ textAlign: 'right' }}>
+                  {/* <LinkedIn
                   clientId="81vr4cluxkzpau"
                   onFailure={handleLinkedInFailure}
                   className="btn-l"
@@ -525,15 +526,15 @@ const Login = () => {
                   >
                     <i class="fab fa-linkedin-in"></i>
                   </Button>
-                </LinkedIn>
-                </Grid> */}
-                  <Grid item xs={12} sm={4}>
+                </LinkedIn> */}
+                </Grid>
+                  <Grid item xs={12} sm={4} >
                    
                     <FacebookLogin
                       appId={config.fbAppId}
                       autoLoad={false}
                       callback={responseFacebook}
-                      scope="public_profile"
+                      scope="public_profile,email"
                       render={renderProps => (
                         <Button
                           variant="contained"
@@ -546,8 +547,8 @@ const Login = () => {
                       )}
                     />
                   </Grid>
-                  {/* <Grid item xs={12} sm={4} style={{ textAlign: 'left' }}>
-                    <GoogleLogin
+                  {<Grid item xs={12} sm={4} style={{ textAlign: 'left' }}>
+                    {/* <GoogleLogin
                       clientId={config.GOAUTH}
                       render={renderProps => (
                         <Button
@@ -575,8 +576,8 @@ const Login = () => {
                       }}
                       autoLoad={false}
                       cookiePolicy={'single_host_origin'}
-                    />
-                  </Grid> */}
+                    /> */}
+                  </Grid> }
                 </Grid> 
                 {loginModal.state === 0 ? (
                   <Typography
