@@ -902,6 +902,10 @@ dashboard-options-header {
         margin-bottom: 10px;
     }
 
+    .makeStyles-paper-8{
+        width: 55vw !important;
+    }
+
     .topbar-cont {
         display: flex;
         align-items: center;
@@ -1199,6 +1203,10 @@ dashboard-options-header {
 
 @media only screen and (max-width: 600px) {
 
+    .makeStyles-paper-8{
+        width: 90vw !important;
+    }
+
     .seeCourse{
         width:142px;
     }
@@ -1210,7 +1218,8 @@ dashboard-options-header {
     }
 
     .MuiButton-label{
-        margin-left: 12px;
+        /* margin-left: 12px; */
+        
     }
 
     /* .dignityH1{
@@ -1564,3 +1573,11 @@ li {
     height: 100vh;
 }
 
+/* // edited by yashwant sahu */
+
+@media (max-width: 400px) {
+    .makeStyles-paper-8{
+        width: 100vw !important;
+    }
+
+}
