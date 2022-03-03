@@ -1,5 +1,5 @@
 import { Link, withRouter } from 'react-router-dom';
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { fade, makeStyles } from '@material-ui/core/styles';
 
 import AppBar from '@material-ui/core/AppBar';
@@ -109,6 +109,7 @@ const useStyles = makeStyles(theme => ({
     position: 'absolute',
     left: '50%',
     top: '50%',
+    backgroundColor : 'red',
     transform: 'translate(-50%, -50%)',
   },
 
@@ -160,6 +161,35 @@ const IconWithRouter = withRouter(({ history, ...props }) => (
 function TopBar(props) {
   const { state, dispatch } = useContext(Store);
   const classes = useStyles();
+  const {isAuth} = state;
+
+
+
+  const OpenLogin = () => {
+    let show= sessionStorage.getItem('ShowBox');
+    console.log("I am on ",isAuth,show)
+    if(isAuth === false && show === 'true')
+    {
+      console.log("I am on ",isAuth,show)
+      return dispatch({
+        type: Pre_LOG_Box,
+        payload: {
+          state: 1,
+          open: true,
+        },
+      });
+    }
+    else{
+      return 0;
+    }
+  }
+
+
+
+  useEffect(() => {
+    OpenLogin();
+  }, []);
+
   const handleLogout = () => {
     props.history.push('/');
     logout(dispatch);
@@ -182,7 +212,7 @@ function TopBar(props) {
         }
         else if (window.scrollY >= window.innerHeight && !toggleAppBarTheme) {
           setToggleAppBarTheme(true);
-        } else if (window.scrollY <= window.innerHeight+5 && toggleAppBarTheme) {
+        } else if (window.scrollY <= window.innerHeight && toggleAppBarTheme) {
           setToggleAppBarTheme(false);
         }
       });
