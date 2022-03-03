@@ -334,7 +334,7 @@ class HomePage extends Component {
     let isLevel1CheckedSubjects = false;
     let checkedLevel2Subjects = subjectsData.map(s => false);
     let filterValue = '';  
-    let index = 0;
+    let index = 1;
     let feeFilter = "all";
 
     
@@ -348,7 +348,7 @@ class HomePage extends Component {
           feeFilter = this.props.location.state.feeFilter;
           isLevel1CheckedFree = true;
         FreeCheck[index] = true
-        FreeCheck[1] = false
+        FreeCheck[0] = false
         FreeCheck[2] = false
       }
       if (this.props.location.state.subject !== undefined) {
