@@ -83,6 +83,7 @@ const PreLogBox = () => {
 
   useEffect(() => {
     setModal({ ...modal, state: preLogBox.state });
+    
   }, []);
   console.log(modal.state);
 
@@ -146,7 +147,7 @@ const PreLogBox = () => {
 
   const handleSubmit = async e => {
     e.preventDefault();
-   
+    sessionStorage.removeItem("ShowBox");
   
     if (preLogBox.state === 1) {
       await register(modal.formData, dispatch);
@@ -177,6 +178,7 @@ const PreLogBox = () => {
         aria-describedby="transition-modal-description"
         className={classes.modal}
         open={preLogBox.open}
+        onClose = {handleClose}
         closeAfterTransition
         BackdropComponent={Backdrop}
         BackdropProps={{
@@ -339,15 +341,32 @@ const PreLogBox = () => {
                     </Button>
                   ) : null}
                 </form>
-
-                <Grid item xs={12} sm={4}>
+                <Grid style={{ marginTop: '20px' }} container spacing={3}>
+                  <Grid item xs={12} sm={4} style={{ textAlign: 'right' }}>
+                  {/* <LinkedIn
+                  clientId="81vr4cluxkzpau"
+                  onFailure={handleLinkedInFailure}
+                  className="btn-l"
+                  onSuccess={responseLinkedin}
+                  redirectUri="http://localhost:3000"
+                  scope="r_emailaddress"
+                >
+                  <Button
+                    variant="contained"
+                    style={{ background: '#0077B6', color: 'white' }}
+                    className={classes.button}
+                  >
+                    <i class="fab fa-linkedin-in"></i>
+                  </Button>
+                </LinkedIn> */}
+                </Grid>
+                  <Grid item xs={12} sm={4} >
                    
                     <FacebookLogin
                       appId={config.fbAppId}
                       autoLoad={false}
                       callback={responseFacebook}
-                      scope="public_profile"
-                      fields="name,email,picture"
+                      scope="public_profile,email"
                       render={renderProps => (
                         <Button
                           variant="contained"
@@ -360,6 +379,38 @@ const PreLogBox = () => {
                       )}
                     />
                   </Grid>
+                  {<Grid item xs={12} sm={4} style={{ textAlign: 'left' }}>
+                    {/* <GoogleLogin
+                      clientId={config.GOAUTH}
+                      render={renderProps => (
+                        <Button
+                          variant="contained"
+                          style={{ background: '#DD6D5C', color: 'white' }}
+                          onClick={renderProps.onClick}
+                          disabled={renderProps.disabled}
+                          className={classes.social}
+                        >
+                          <i class="fab fa-google" aria-hidden="true"></i>
+                        </Button>
+                      )}
+                      onSuccess={responseGoogle}
+                      onFailure={() => {
+                        dispatch({
+                          type: 'ALERT',
+                          payload: {
+                            varient: 'error',
+                            message: 'Login failed',
+                          },
+                        });
+                        dispatch({
+                          type: 'LOGOUT',
+                        });
+                      }}
+                      autoLoad={false}
+                      cookiePolicy={'single_host_origin'}
+                    /> */}
+                  </Grid> }
+                </Grid> 
                 {preLogBox.state === 0 ? (
                   <Typography
                     className="link-button"
