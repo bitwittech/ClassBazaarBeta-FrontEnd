@@ -722,22 +722,22 @@ class LandingPage extends Component {
                            color="primary"
                            className="login-btn banner-content banner-3"
 
-                           onClick = {()=>{
+                          //  onClick = {()=>{
                               
-                              this.setState({openModal : true})
-                              console.log(this.state.openModal)
-                           }}
+                          //     this.setState({openModal : true})
+                          //     console.log(this.state.openModal)
+                          //  }}
 
-                          // onClick={() => this.props.history.push({
-                          //   pathname: '/listing',
-                          //   state: {
-                          //     filter: 'free',
-                          //     feeFilter : 'Free',
-                          //     providers: 'all',
-                          //   }
-                          // })}
+                          onClick={() => this.props.history.push({
+                            pathname: '/listing',
+                            state: {
+                              filter: 'paid',
+                              feeFilter : 'Paid',
+                              providers: 'all',
+                            }
+                          })}
                         >
-                          Enroll Today
+                          Explore Now
                         </Button>
                     <div className="slider__dots">
                        {content.map((item, index1) => (
