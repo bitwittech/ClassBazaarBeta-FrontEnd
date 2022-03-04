@@ -330,11 +330,11 @@ class HomePage extends Component {
     let query = '';
     let subjects = 'all';
     let isLevel1CheckedFree = false;
-    let FreeCheck = []
+    let FreeCheck = [false,false,false]
     let isLevel1CheckedSubjects = false;
     let checkedLevel2Subjects = subjectsData.map(s => false);
     let filterValue = '';  
-    let index = 1;
+    let index = 0;
     let feeFilter = "all";
 
     
@@ -347,9 +347,9 @@ class HomePage extends Component {
           console.log(this.props.location.state.feeFilter)
           feeFilter = this.props.location.state.feeFilter;
           isLevel1CheckedFree = true;
+          index = feeFilter
         FreeCheck[index] = true
-        FreeCheck[0] = false
-        FreeCheck[2] = false
+
       }
       if (this.props.location.state.subject !== undefined) {
         subjects = this.props.location.state.subject;
