@@ -16,7 +16,7 @@ export const TrendingCoursesComponent = withRouter(({ history, trendingData, tra
         // Append by yashwant sahu 
   
         const OpenLogin = () => {
-          sessionStorage.setItem('ShowBox',true);
+          // sessionStorage.setItem('ShowBox',true);
 
           if(isAuth === false)
           {
