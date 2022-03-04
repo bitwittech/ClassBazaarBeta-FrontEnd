@@ -48,6 +48,7 @@ import 'react-animated-slider/build/horizontal.css';
 import Banner1 from '../assets/img/main-banner.jpg'
 import Banner2 from '../assets/img/offerbanner.png';
 import Banner3 from '../assets/img/banner3.png';
+import Banner4 from '../assets/img/offerbannerOLD.jpg';
 import { useState } from 'react';
 // import DignityHealthWhiteLogo from '../assets/dignityHealthWhiteLogo.jpeg';
 import DignityLogo from '../assets/dignity.png'
@@ -608,10 +609,13 @@ class LandingPage extends Component {
       image: Banner1
     },
     {
+      image: Banner2
+    },
+    {
       image: Banner3
     },
     {
-      image: Banner2
+      image: Banner4
     }
   ]
 
@@ -641,9 +645,9 @@ class LandingPage extends Component {
                 {content.map((item, index) => (
                   <div
                     key={index}
-                    style={{ backgroundImage: `url('${item.image}')`,backgroundSize: "100vw 100%", backgroundRepeat: "no-repeat", 
+                    style={{ backgroundImage: `url('${item.image}')`,backgroundSize: "100vw 98%", backgroundRepeat: "no-repeat", 
                             display: "flex",
-                            justifyContent: `${index !==2 ? bannerCenter: bannerStart}`,
+                            justifyContent: `${index !==1 ? bannerCenter: bannerStart}`,
                             alignItems: "center"}}
                   >
                     {index === 0 ? (
@@ -680,6 +684,40 @@ class LandingPage extends Component {
 
                     {index === 1 ? (
                       <>
+                      <Button
+                           variant="outlined"
+                           color="primary"
+                           className="login-btn banner-content banner-3"
+
+                            onClick={() =>{
+                              
+                            // this.setState({openModal : true})
+                            // console.log(this.state.openModal)
+                              this.props.history.push({
+                            pathname: '/listing',
+                            state: {
+                              filter: 'paid',
+                              feeFilter : 1,
+                              providers: 'all',
+                            }
+                          })
+                        }
+                        }
+                        >
+                          Explore Now
+                        </Button>
+                    <div className="slider__dots">
+                       {content.map((item, index1) => (
+                         (index == index1)?
+                         <a href= {"#"+index} key={index} className = "slider__dot" style={{background: "white"}} ></a>
+                         :<a href= {"#"+index} key={index} className = "slider__dot" style={{background: "#f15a29"}} ></a>
+                       ))}
+                       </div>
+                    </>
+                    ): (<div></div>)}
+
+                    {index === 2 ? (
+                      <>
                       <div className="d-flex"  id = "1">
                       <div className=" position-absolute text-white banner-1" >
                       <img src={EduWhite} alt="edubuk" className="edubuk"  />
@@ -714,30 +752,30 @@ class LandingPage extends Component {
                        </div>
                        </>
                     ): (<div></div>)}
-
-                    {index === 2 ? (
+                    {index === 3 ? (
                       <>
                       <Button
                            variant="outlined"
                            color="primary"
-                           className="login-btn banner-content banner-3"
+                           className="login-btn banner-content banner-4"
 
-                          //  onClick = {()=>{
+                        
+                            onClick={() =>{
                               
-                          //     this.setState({openModal : true})
-                          //     console.log(this.state.openModal)
-                          //  }}
-
-                          onClick={() => this.props.history.push({
+                            // this.setState({openModal : true})
+                            // console.log(this.state.openModal)
+                              this.props.history.push({
                             pathname: '/listing',
                             state: {
-                              filter: 'paid',
-                              feeFilter : 'Paid',
+                              filter: 'free',
+                              feeFilter : 0,
                               providers: 'all',
                             }
-                          })}
+                          })
+                        }
+                        }
                         >
-                          Explore Now
+                          Enroll Today
                         </Button>
                     <div className="slider__dots">
                        {content.map((item, index1) => (
