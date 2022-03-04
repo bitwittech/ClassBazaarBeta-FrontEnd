@@ -23,6 +23,8 @@ import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props
 import { trackEvent } from 'react-with-analytics';
 import { GoogleLogin } from 'react-google-login';
 import { LinkedIn } from 'react-linkedin-login-oauth2';
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
 
 const useStyles = makeStyles(theme => ({
   modal: {
@@ -34,7 +36,7 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
     borderRadius: '8px',
-    width: '40%',
+    width: '30vw',
     margin: '0',
   },
   button: {
@@ -54,6 +56,12 @@ const useStyles = makeStyles(theme => ({
     padding: '10px 20px',
     textTransform: 'none',
   },
+  closeButton: {
+    position: 'relative',
+    left : '90%',
+    color: theme.palette.grey[500],
+   
+  }
 }));
 
 
@@ -100,6 +108,8 @@ const PreLogBox = () => {
 
   const responseFacebook = res => {
     facebookLogin(res, dispatch);
+    // register(res,dispatch)
+    signin(res,dispatch)
     trackEvent('social-icon', 'click', 'facebook');
   };
 
@@ -186,8 +196,12 @@ const PreLogBox = () => {
         }}
       >
         <Fade in={preLogBox.open}>
-          <div className={classes.paper}>
+          <div className={classes.paper} className = "paperModal">
             <Container maxWidth="sm">
+            <IconButton aria-label="close" className={classes.closeButton} onClick={ ()=>{ handleClose() }}>
+                <CloseIcon />
+              </IconButton>
+              <br/>
               <Typography component="div" align="center">
                 <Typography
                   style={{
@@ -366,7 +380,8 @@ const PreLogBox = () => {
                       appId={config.fbAppId}
                       autoLoad={false}
                       callback={responseFacebook}
-                      scope="public_profile,email"
+                      fields="first_name, last_name, email, picture,name"
+                      scope="email,public_profile"
                       render={renderProps => (
                         <Button
                           variant="contained"
