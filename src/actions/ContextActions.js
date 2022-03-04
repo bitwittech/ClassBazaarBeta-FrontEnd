@@ -37,52 +37,182 @@ let client = new FusionAuthClient(
 
 export const facebookLogin = async (data, dispatch) => {
   console.log(data)
-  const username = (data) ? data.name : null;
-  let user;
-  client
-    .identityProviderLogin({
-      applicationId: 'c8682dc3-adbc-4501-b707-9cde8c8ade0f',
-      identityProviderId: '56abdcc7-8bd9-4321-9621-4e9bbebae494',
-      data: {
-        token: data.accessToken,
-        redirect_uri: `${config.P_redirecturl}`,
+
+  try {
+    function handleResponse(clientResponse) {
+      console.info(
+        JSON.stringify(clientResponse.successResponse.user, null, 2)
+      );
+    }
+
+    const userDataForReg = {
+      user: {
+        username: data.name ,
+        password: data.id,
+        email: data.email,
+        mobilePhone: data.phone
       },
-    })
-    .then(resp => {
-      console.log(resp)
-      user = {
-        ...resp.successResponse.user,
-        username
-      }
-      store.setItem('user', user);
-      dispatch({
-        type: LOGIN,
-        payload: {
-          token: resp.successResponse.token,
-          user,
-        },
+      registration: {
+        applicationId: config.fusionAuthApplicationId,
+      },
+    };
+
+    // yaha par feilds null jaa rahi thi 😃
+  
+
+    const newUserDataForReg = {
+        userid: '',
+        name: data.name ,
+        password: data.id,
+        email_address: data.email,
+        mobile_no: data.phone,
+        gender: data.gender,
+        school_or_college_name: data.school,
+        class_year: data.classYear,
+        city: data.city,
+
+    };
+
+    console.log({
+      newUserDataForReg,
+      userDataForReg,
+    });
+
+    newregister(undefined, newUserDataForReg);
+
+    await client
+      .register(undefined, userDataForReg)
+      .then(response => {
+        console.log('Response', response);
+        if (response.statusCode === 200) {
+          console.log(response);
+          dispatch({
+            type: ALERT,
+            payload: {
+              varient: 'success',
+              message: 'Registration successful. Please login',
+            },
+          });
+          if (localStorage.getItem('GA-track')) {
+            trackEvent('SignUp', 'register', 'Bookmarked_account')
+            localStorage.removeItem('GA-track')
+          }
+          if (localStorage.getItem('GA-track-review')) {
+            trackEvent('SignUp', 'register', 'Review_account')
+            localStorage.removeItem('GA-track-review')
+          }
+          trackEvent('SignUp', 'click', 'manually');
+          dispatch({
+            type: LOGIN_MODAL,
+            payload: false,
+          });
+        } else {
+          dispatch({
+            type: ALERT,
+            payload: {
+              varient: 'error',
+              message: 'Registration failed',
+            },
+          });
+          dispatch({
+            type: LOGIN_MODAL,
+            payload: false,
+          });
+          dispatch({
+            type: Pre_LOG_Box,
+            payload: false,
+          });
+        }
+      })
+      // edited by Yashwant sahu
+      .catch(e => {
+        localStorage.clear();
+        console.error(">>>>>>>>",Object.values(e.errorResponse.fieldErrors)[0][0].message);
+        dispatch({
+          type: ALERT,
+          payload: {
+            varient: 'error',
+            message: Object.values(e.errorResponse.fieldErrors)[0][0].message,
+          }
+        });
       });
-      dispatch({
-        type: ALERT,
-        payload: {
-          varient: 'success',
-          message: 'Login successful',
-        },
-      });
-      dispatch({
-        type: LOGIN_MODAL,
-        payload: false,
-      });
-    }).catch(err => {
-      console.log(err)
-      dispatch({
-        type: ALERT,
-        payload: {
-          varient: 'error',
-          message: 'Login failed',
-        },
-      });
-    })
+    dispatch({
+      type: LOADING,
+      payload: false,
+    });
+    dispatch({
+      type: LOGIN_MODAL,
+      payload: false,
+    });
+  } catch (errMsg){
+
+    dispatch({
+      type: LOADING,
+      payload: false,
+    });
+    // dispatch({
+    //   type: ALERT,
+    //   payload: {
+    //     varient: 'error',
+    //     message: "Invalid credentials",
+    //   },
+    // });
+    dispatch({
+      type: LOGIN_MODAL,
+      payload: false,
+    });
+    dispatch({
+      type: Pre_LOG_Box,
+      payload: false,
+    });
+
+  }
+
+
+  // client
+  //   .identityProviderLogin({
+  //     applicationId: 'c8682dc3-adbc-4501-b707-9cde8c8ade0f',
+  //     identityProviderId: '56abdcc7-8bd9-4321-9621-4e9bbebae494',
+  //     data: {
+  //       token: data.accessToken,
+  //       redirect_uri: `${config.P_redirecturl}`,
+  //     },
+  //   })
+  //   .then(resp => {
+  //     console.log(resp)
+  //     user = {
+  //       ...resp.successResponse.user,
+  //       username
+  //     }
+  //     store.setItem('user', user);
+  //     dispatch({
+  //       type: LOGIN,
+  //       payload: {
+  //         token: resp.successResponse.token,
+  //         user,
+  //       },
+  //     });
+  //     dispatch({
+  //       type: ALERT,
+  //       payload: {
+  //         varient: 'success',
+  //         message: 'Login successful',
+  //       },
+  //     });
+  //     dispatch({
+  //       type: LOGIN_MODAL,
+  //       payload: false,
+  //     });
+  //   }).catch(err => {
+  //     console.log(err)
+  //     dispatch({
+  //       type: ALERT,
+  //       payload: {
+  //         varient: 'error',
+  //         message: 'Login failed',
+  //       },
+  //     });
+  //   })
 }
 export const googleLogin = async (data, dispatch) => {
 
@@ -144,7 +274,10 @@ export const register = async (data, dispatch) => {
     payload: true,
   });
 
-  console.log(data);
+  console.log(data)
+
+  
+
 
   try {
     function handleResponse(clientResponse) {
@@ -155,7 +288,7 @@ export const register = async (data, dispatch) => {
 
     const userDataForReg = {
       user: {
-        username: data.username,
+        username: data.username ,
         password: data.password,
         email: data.email,
         mobilePhone: data.phone
@@ -170,7 +303,7 @@ export const register = async (data, dispatch) => {
 
     const newUserDataForReg = {
         userid: '',
-        name: data.username,
+        name: data.username ,
         password: data.password,
         email_address: data.email,
         mobile_no: data.phone,
@@ -276,11 +409,18 @@ export const signin = async (data, dispatch) => {
     payload: true,
   });
   console.log(data);
+
+  let password = data.password;
+  if(password === undefined)
+  {
+    password = data.id
+
+  }
   try {
     client
       .login({
         loginId: data.email,
-        password: data.password,
+        password: password,
       })
       .then(async response => {
         console.log('LOGIN', response);
