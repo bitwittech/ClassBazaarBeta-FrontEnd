@@ -22,6 +22,9 @@ import { subjectsData } from './../utils/data';
 import { trackEvent } from 'react-with-analytics/lib/utils';
 import { withStyles } from '@material-ui/core/styles';
 
+import Envelope_Box from "./Envelope_Box"
+
+
 const providerData = [
   'edX',
   'FutureLearn',
@@ -90,6 +93,8 @@ class CourseList extends Component {
       isFirstResultFetched: false,
       isFromLoadMore: false,
       offset: [0, 0, 0, 0, 0, 0, 0],
+      openModal:true
+
     };
     this.getUniversityForUdemy = this.getUniversityForUdemy.bind(this);
     this.buildElements = this.buildElements.bind(this);
@@ -97,6 +102,12 @@ class CourseList extends Component {
     this.handleInfiniteLoad = this.handleInfiniteLoad.bind(this);
     this.getElements = this.getElements.bind(this);
     this.isInViewport = this.isInViewport.bind(this);
+    this.handelModal = this.handelModal.bind(this);
+
+  }
+  handelModal = ()=>{
+    console.log("Handel Called")
+    this.setState({openModal:!this.state.openModal})
   }
 
   async buildElements() {
@@ -303,6 +314,8 @@ class CourseList extends Component {
         style={{ backgroundColor: '#fff3ef', padding: '0 10px' }}
         className="c-list"
       >
+          {this.state.openModal === true && sessionStorage.getItem('show') === null ? <Envelope_Box close = {this.handelModal} />:null}
+
         <Grid container spacing={1}>
           <Grid item xs={12} sm={12}>
             {this.state.loading ? (
