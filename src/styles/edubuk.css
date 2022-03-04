@@ -1,99 +1,191 @@
-import React ,{useContext} from 'react';
-import Grid from '@material-ui/core/Grid';
-import { withRouter } from 'react-router';
-import { Link } from 'react-router-dom';
-import { Pre_LOG_Box } from '../../store/Types';
-import Store from '../../store/Context';
+.contentEdubook{
+    padding: 60px 140px 41px 140px;
+    color:#000000;
+}
 
+.title{
+    color: #f15a29;
+    font-size: 22px;
+    line-height: 1.25;
+    font-weight: 600;
+}
 
+.stepMain1{
+    display: flex;
+    background-color: #ebebeb;
+    padding: 50px 140px 67px;
+}
 
-export const EarnADegreeComponent = withRouter(({ history, degreeData, trackEvent, filter, routingURL }) => {
-  const { state, dispatch } = useContext(Store);
-  const {isAuth} = state;
-  const data = degreeData.slice(0, 4);
-   // Append by yashwant sahu 
-  
-   const OpenLogin = () => {
-    // sessionStorage.setItem('ShowBox',true);
+.stepSub1{
+    text-align: center;
+    background-color: #ffffff;
+    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+    border-radius: 13px;
+    padding: 24px 24px 16px 13px;
+    margin: 0 69px 0 0;
+    width: 778px;
+    height: 632px;
+}
 
-    if(isAuth === false)
-    {
-      return dispatch({
-        type: Pre_LOG_Box,
-        payload: {
-          state: 1,
-          open: true,
-        },
-      });
+.stepImg1{
+    width:400px;
+}
+
+.step1{
+    font-size: 24px;
+    font-weight: 600;
+    color: #159fa7;
+}
+
+.identity{
+    font-size: 16px; 
+    color: #000000;
+    padding: 15px 30px 10px 30px;
+}
+
+.stepMain2{
+    text-align: center;
+    background-color: #ffffff;
+    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+    border-radius: 13px;
+    padding: 24px 24px 16px 13px;
+    margin: 0 69px 0 0;
+    width: 778px;
+    height: 632px;
+}
+
+.stepImg2{
+    width:400px;
+}
+
+.step2{
+    font-size: 24px;
+    font-weight: 600;
+    color: #159fa7;
+}
+
+.use{
+    fonts-size: 16px;
+    color: #000000;
+    padding: 15px 30px 10px 30px;
+}
+
+.maindivcustom{
+    margin: 46px 88px 46px 91px;
+}
+
+.customImg{
+    width:100%;
+}
+
+.takeCareer{
+    background-color: #fff3ef;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+
+.takeCareerInner{
+    width: 40%;
+    margin-top: 35px;
+    margin-bottom: 35px;
+}
+
+.careerImg{
+    width:100%;
+    margin-bottom:40px;
+}
+
+.multiple{
+    background-color: #e6feff;
+    padding:66px 183px 46px 137px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+
+.multipleImg{
+    padding: 20px 50px;
+    width:80%;
+    max-height:340px;
+    object-fit: contain;
+}
+
+.intelligence{
+    height: 614px;
+    margin: 50.5px 0 42.5px;
+    border: solid 2px #000000;
+}
+
+.newsletter{
+    padding: 50px 20px;
+}
+
+@media only screen and (max-width: 1000px) {
+    .edu-banner{
+        height: 60vh;
     }
-  }
-  return (
-    <div className={'earn-a-degree-wrapper'}>
-      <div className="section-title">
-        Earn a Certificate
-        <div className="bottom-border"/>
-      </div>
-      <div className="section-sub-title">
-        Launch yourself in your career with an online degree. Did you know many
-        of the universities’ issue certificates which don’t even mention “taken
-        online” on them.
-      </div>
-      <div className="card-section">
-        {data.map(degree => {
-          return (
-            <Link  to={degree.url ? ('/coursedetails' + degree.url) : {
-              pathname: '/coursedetail',
-              state: {
-                data: degree.data,
-              },
-            }}
-                  className="card-wrapper" onClick={() => {
-                    OpenLogin()
-              trackEvent(
-                'Degree_course',
-                'click',
-                `${degree.name}`,
-              );
-            }}>
-              <div className="card-inner" >
-                <div className="head-section">
-                  via {degree.provider}
-                </div>
-                <img src={degree.image}/>
-              </div>
-              <div className="university-section">
-                {degree.university}
-              </div>
-              <div className="name-section">
-                {degree.name}
-              </div>
-            </Link>
-          );
+    .stepMain1 {
+        display: block;
+        background-color: #ebebeb;
+        padding:0px;
+    }
+   
+    .stepSub1 {
+        text-align: center;
+        background-color: #ffffff;
+        box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+        border-radius: 13px;
+        padding: 24px 24px 16px 13px;
+        margin: 0; 
+        width: auto;
+        height:auto;
+    }
 
-        })}
-      </div>
-      <div className="card-section" style={{ marginTop: 0 }}>
-        {data.map(degree => {
-          return (
-            <div className="card-wrapper" style={{ paddingTop: 0 }}>
-              
-            </div>
-          );
-        })}
-      </div>
-      <div className="show-more-section">
-        <div className="text" onClick={() => {
-          trackEvent('showmore', 'click', 'Degree_showmore');
-          history.push({
-            pathname: routingURL,
-            state: {
-              filter: filter,
-            },
-          });
-        }}>
-          Show More
-        </div>
-      </div>
-    </div>
-  );
-});
+    .stepMain2 {
+        text-align: center;
+        background-color: #ffffff;
+        box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+        border-radius: 13px;
+        padding: 24px 24px 16px 13px;
+        margin: 0;
+        width:100%;
+        height:auto;
+    }
+
+
+}
+
+@media only screen and (max-width: 600px) {
+
+
+    .multiple {
+        background-color: #e6feff;
+        padding: 0px;
+        text-align: center;
+        display: block;
+        justify-content: center;
+    }
+
+    .intelligence{
+        display: none;
+    }
+
+    .contentEdubook {
+        padding: 51px 40px 20px 40px;
+        color: #000000;
+    }
+
+    .stepImg1 {
+        width: 250px;
+    }
+
+    .stepImg2 {
+        width: 250px;
+    }
+
+    .newsletter{
+        padding: 20px 20px;
+    }
+
+}
