@@ -35,8 +35,13 @@ import axios from 'axios';
 import formatDate from './../utils/dateUtils';
 import getClosestNextRun from './../utils/edxUtils';
 import { trackEvent } from 'react-with-analytics/lib/utils';
+import { Pre_LOG_Box } from '../store/Types';
+
 
 let count = 0 
+
+
+
 const formatPrice = price => {
   if (!price || price === null || price === undefined) return 'Free';
   else return Math.round(price);
@@ -64,6 +69,8 @@ const CourseDetails = props => {
   
   const { state, dispatch } = useContext(Store);
   
+const {isAuth} = state;
+
   const handleBookmark = (uuid, provider, name) => {
     trackEvent(
       'Bookmarked_details',
@@ -238,6 +245,24 @@ const CourseDetails = props => {
 // this var is calling the function expicitlly form index.html
 let trackPixel = 'trackPixel';
 
+
+ // Append by yashwant sahu 
+  
+ const OpenLogin = () => {
+  // sessionStorage.setItem('ShowBox',true);
+
+  if(isAuth === false)
+  {
+    return dispatch({
+      type: Pre_LOG_Box,
+      payload: {
+        state: 1,
+        open: true,
+      },
+    });
+  }
+}
+
 const courseSummary =  () =>
     Gstate && (
       <>
@@ -294,26 +319,31 @@ const courseSummary =  () =>
             <div style={{ marginTop: '20px' }}>
               <button
                 onClick={async () => {
-                  trackEvent(
-                    'Enroll Now',
-                    'click',
-                    `${provider}|${Gstate.title}`,
-                  );
+                  OpenLogin();
+                  if(isAuth === true){
+                    trackEvent(
+                      'Enroll Now',
+                      'click',
+                      `${provider}|${Gstate.title}`,
+                    );
+  
+                    const res = await fetch(`${officialURL}api/track/?title=${Gstate.title}`)
+  
+                    window.open(
+                      provider === 'Swayam'
+                      ? Gstate.url &&
+                      Gstate.url.replace(
+                        'www.swayam.com',
+                        'www.swayam.gov.in',
+                        )
+                        : Gstate.url && Gstate.url,
+                        '_blank',
+                        );
+                      // button tracker function added
+                        window[trackPixel]();
+                  }
 
-                  const res = await fetch(`${officialURL}api/track/?title=${Gstate.title}`)
-
-                  window.open(
-                    provider === 'Swayam'
-                    ? Gstate.url &&
-                    Gstate.url.replace(
-                      'www.swayam.com',
-                      'www.swayam.gov.in',
-                      )
-                      : Gstate.url && Gstate.url,
-                      '_blank',
-                      );
-                    // button tracker function added
-                      window[trackPixel]();
+                  
                 }}
                 className="enroll-btn"
               >
