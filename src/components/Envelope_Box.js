@@ -12,7 +12,11 @@ import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
 import Fade from '@material-ui/core/Fade';
 import Modal from '@material-ui/core/Modal';
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
 import { makeStyles } from '@material-ui/core/styles';
+import pop from '../assets/img/popUp.jpg';
+
 
 
 const useStyles = makeStyles(theme => ({
@@ -20,31 +24,21 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    
+                          
   },
   paper: {
-    backgroundColor: theme.palette.background.paper,
+    // backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
     borderRadius: '8px',
-    width: '40%',
-    margin: '0',
+    width: '40vw',
+    margin: '0%',
+    padding:'0%'
   },
-  button: {
-    padding: '10px 20px',
-    textTransform: 'none',
-  },
-  loginButton: {
-    margin: theme.spacing(1),
-    padding: '10px 20px',
-    width: '30%',
-    textTransform: 'none',
-  },
-  input: {
-    display: 'none',
-  },
-  social: {
-    padding: '10px 20px',
-    textTransform: 'none',
-  },
+ 
+  Img:{
+    width : '100%'
+  }
 }));
 
 const Envelope_Box = (props) => {
@@ -64,8 +58,8 @@ const Envelope_Box = (props) => {
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
         className={classes.modal}
-        open={open}
-        onClose = {()=>{    setopen(false); props.close();}}
+        open={open} 
+        onClose = {()=>{    setopen(false);  sessionStorage.setItem('show',true); props.close();}}
         closeAfterTransition
         BackdropComponent={Backdrop}
         BackdropProps={{
@@ -74,9 +68,15 @@ const Envelope_Box = (props) => {
       >
 
         <Fade in={open}>
-          <div className={classes.paper}>
-            <Container maxWidth="sm">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non, in. Nulla exercitationem provident sequi, qui sunt reprehenderit, consequuntur beatae, eos corrupti laborum nobis architecto voluptas a consectetur itaque atque! Id!
+          <div className={classes.paper}  className  = 'paperModal'>
+           
+            <Container maxWidth="sm" className = "resetContainer">
+          {/* <IconButton aria-label="close" className={classes.closeButton} onClick={ ()=>{setopen(false);  sessionStorage.setItem('show',true); props.close();}}>
+          <CloseIcon />
+        </IconButton>
+        <br/> */}
+        <img src={pop} className = {classes.Img} alt="Offer Banner " srcset="" />
+
             </Container>
           </div>
         </Fade>
