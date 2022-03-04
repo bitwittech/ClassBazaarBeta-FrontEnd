@@ -83,7 +83,7 @@ const ProfileCourseCard = withRouter(({ history, ...data }) => {
   // Append by yashwant sahu 
   
   const OpenLogin = () => {
-    sessionStorage.setItem('ShowBox',true);
+    // sessionStorage.setItem('ShowBox',true);
 
     if(isAuth === false)
     {
@@ -111,29 +111,35 @@ const ProfileCourseCard = withRouter(({ history, ...data }) => {
 
   return (
     <>
+   
       <div className="c-card click-h" onClick={() => {
-            OpenLogin();
-             
-                if (data.from === 'profile') {
-                  trackEvent(
-                    'Profile Action',
-                    'click',
-                    'Bookmarked_card_profile',
-                  );
-                }
+
+
+          OpenLogin();
+          if(isAuth === true)
+          {
+              if (data.from === 'profile') {
                 trackEvent(
-                  'Course Card clicked',
+                  'Profile Action',
                   'click',
-                  `${data.povider}|${data.courseName}`,
+                  'Bookmarked_card_profile',
                 );
-                history.push({
-                  pathname: `/coursedetails/${data.provider}/${data.uuid}`,
-                  state: {
-                    uuid: data.uuid,
-                    provider: data.provider,
-                    ...data,
-                  },
-                });
+              }
+              trackEvent(
+                'Course Card clicked',
+                'click',
+                `${data.povider}|${data.courseName}`,
+              );
+              history.push({
+                pathname: `/coursedetails/${data.provider}/${data.uuid}`,
+                state: {
+                  uuid: data.uuid,
+                  provider: data.provider,
+                  ...data,
+                },
+              });
+             }
+               
               }}>
         <div className="c-card-inner">
           <div className="coursecard-header">
@@ -166,7 +172,8 @@ const ProfileCourseCard = withRouter(({ history, ...data }) => {
               variant="subtitle2"
               className="hover"
               onClick={() => {
-
+                if(isAuth === true)
+                {
                 if (data.from === 'profile') {
                   trackEvent(
                     'Profile Action',
@@ -186,7 +193,7 @@ const ProfileCourseCard = withRouter(({ history, ...data }) => {
                     provider: data.provider,
                     ...data,
                   },
-                });
+                });}
               }}
               gutterBottom
             >
@@ -203,7 +210,9 @@ const ProfileCourseCard = withRouter(({ history, ...data }) => {
                 padding: '0px 15px 0px 15px',
               }}
               className="hover"
-              onClick={() =>
+              onClick={() =>{
+                if(isAuth === true)
+                {
                 history.push({
                   pathname: `/coursedetails/${data.provider}/${data.uuid.replace(
                     /[`~!",.<>\{\}\[\]\\\/]/gi,
@@ -214,7 +223,7 @@ const ProfileCourseCard = withRouter(({ history, ...data }) => {
                     provider: data.provider,
                     ...data,
                   },
-                })
+                })}}
               }
               gutterBottom
             >
