@@ -68,7 +68,7 @@
 
   .overlay{
     position: absolute;
-    height: 50vw;
+    height: 49vw;
     z-index: 1;
     left: 0;
     top: 0;
@@ -262,6 +262,19 @@
      justify-content: flex-start;
 }
 
+.banner-4{
+  position: absolute;
+    top:8%;
+    left:4%;
+    padding-top: 0px;
+     border : 2px solid black;
+     display:flex;
+     flex-direction: column;
+     justify-content: flex-start;
+}
+
+
+
 .browseCourse{
   text-align:right;
 }
@@ -279,9 +292,13 @@
   .banner-3{
        top:22%;
    }
+  .banner-4{
+       top:10%;
+       left: 7% !important;
+   }
 
   .overlay{
-    height: 60vh !important;
+    height: 59vh !important;
   }
   .main-banner{
     height: 60vh !important;
@@ -309,7 +326,9 @@
   background-repeat: no-repeat;
   height: 100%;
 }
-
+.banner-4{
+  left: 10% !important;
+}
 .overlay{
   background-color:transparent !important;
 }
@@ -378,7 +397,21 @@
 
 @media only screen and (max-width: 450px) {
   .main-banner{
-    height: 40vh !important;
+    height: 50vh !important;
+  }
+  // .edu{
+  //   // display : none !important;
+  // }
+
+  .banner-1{
+    top:20% !important;
+    left: 60%;
+    width: 30%; 
+  }
+
+  .banner-4{
+    // top:22%;
+    left: 11% !important;
   }
 
 }
