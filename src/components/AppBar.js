@@ -161,34 +161,30 @@ const IconWithRouter = withRouter(({ history, ...props }) => (
 function TopBar(props) {
   const { state, dispatch } = useContext(Store);
   const classes = useStyles();
-  const {isAuth} = state;
+  // const {isAuth} = state;
 
 
 
-  const OpenLogin = () => {
-    let show= sessionStorage.getItem('ShowBox');
-    console.log("I am on ",isAuth,show)
-    if(isAuth === false && show === 'true')
-    {
-      console.log("I am on ",isAuth,show)
-      return dispatch({
-        type: Pre_LOG_Box,
-        payload: {
-          state: 1,
-          open: true,
-        },
-      });
-    }
-    else{
-      return 0;
-    }
-  }
+  // const OpenLogin = () => {
+  //   let show= sessionStorage.getItem('ShowBox');
+  //   console.log("I am on ",isAuth,show)
+  //   if(isAuth === false && show === 'true')
+  //   {
+  //     console.log("I am on ",isAuth,show)
+  //     return dispatch({
+  //       type: Pre_LOG_Box,
+  //       payload: {
+  //         state: 1,
+  //         open: true,
+  //       },
+  //     });
+  //   }
+  //   else{
+  //     return 0;
+  //   }
+  // }
 
 
-
-  useEffect(() => {
-    OpenLogin();
-  }, []);
 
   const handleLogout = () => {
     props.history.push('/');
