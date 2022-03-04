@@ -1,3 +1,5 @@
+
+
 body {
     font-family: 'Poppins', sans-serif !important;
     background: #f8f8f8;
@@ -129,7 +131,7 @@ body {
 
 .text-field {
     /* padding: 12px 2px; */
-    width: 45%;
+    width: 50%;
     border: 1px solid #e3e8f0;
     background: #f0f2f7;
     border-radius: 6px;
@@ -203,7 +205,7 @@ body {
     background: #f15a29 !important;
     border-radius: 0px !important;
     font-weight: 600 !important;
-    padding: 2px 5px !important;
+    padding: 2px 2px !important;
     text-transform: none !important;
 }
 
@@ -714,6 +716,7 @@ body {
     color: white;
 }
 
+
 @media only screen and (max-height: 700px) {
     .route-link {
         background: #4e4e4e !important;
@@ -725,6 +728,7 @@ body {
         align-items: center;
     }
 
+   
     .dashboard-options-header {
         font-size: 1rem !important;
     }
@@ -896,14 +900,33 @@ dashboard-options-header {
     line-height: 8px;
 }
 
+.paperModal{
+    background-color: white;
+    border-radius: 10px;
+    border:'none !important';
+    outline: none !important ;
+
+}
+
 @media (max-width: 800px) {
     .mt-no {
         margin-top: -30px !important;
         margin-bottom: 10px;
     }
 
-    .makeStyles-paper-8{
+    .paperModal{
+        width: 60vw !important;
+        background-color: white;
+    }
+    .makeStyles-paper-2{
         width: 55vw !important;
+    }
+    
+    .jss8{
+        width: 55vw !important;
+    }
+    .jss2{
+    width: 55vw !important;
     }
 
     .topbar-cont {
@@ -1201,11 +1224,28 @@ dashboard-options-header {
     margin-top: 50px;
 }
 
+@media  (min-height: 700px) {
+    .home-grid-wrapper {
+        display: block !important;
+    }
+}
+
 @media only screen and (max-width: 600px) {
 
-    .makeStyles-paper-8{
+    .paperModal{
         width: 90vw !important;
     }
+    .makeStyles-paper-2{
+        width: 90vw !important;
+    }
+
+    .jss8{
+        width: 90vw !important;
+    }
+    .jss2{
+    width: 90vw !important;
+
+        }
 
     .seeCourse{
         width:142px;
@@ -1576,8 +1616,14 @@ li {
 /* // edited by yashwant sahu */
 
 @media (max-width: 400px) {
-    .makeStyles-paper-8{
-        width: 100vw !important;
+    .paperModal{
+        width: 90vw !important;
     }
+   
 
+}
+
+.resetContainer{
+    padding : 0% !important ;
+    magin: 0% !important ;
 }
