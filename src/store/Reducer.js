@@ -8,7 +8,8 @@ import {
     FETCH_USER,
     Pre_LOG_Box,
     UPDATE_BOOKMARK,
-    REMOVE_TOKEN
+    REMOVE_TOKEN,
+    EdubukFrom
 } from './Types';
 import {
     store
@@ -60,6 +61,12 @@ export default function reducer(state, action) {
             return {
                 ...state,
                 preLogBox: payload
+            };
+        case EdubukFrom:
+            console.log("call", payload)
+            return {
+                ...state,
+                edubukFrom: payload
             };
         case LOADING:
             return {
