@@ -65,6 +65,8 @@ const MobileAuth = () => {
 
   const responseFacebook = res => {
     facebookLogin(res, global.dispatch);
+  signin(res, global.dispatch)
+
     trackEvent('social-icon', 'click', 'facebook');
   };
 
@@ -135,7 +137,7 @@ const MobileAuth = () => {
             Signup
           </Typography>
         )}
-        <Typography
+        {/* <Typography
           style={{
             fontWeight: '600',
             fontSize: '12px',
@@ -161,7 +163,7 @@ const MobileAuth = () => {
           }}
         >
           <i class="fab fa-linkedin-in"></i>&nbsp; Connect Linked-In
-        </Button>
+        </Button> */}
         <form onSubmit={handleSubmit}>
           {state.state === 1 ? (
             <>
@@ -320,11 +322,12 @@ const MobileAuth = () => {
             </Button>
           ) : null}
         </form>
-        <Grid container spacing={2}>
-          <Grid item xs={6} align="right">
+        <Grid container >
+          <Grid item xs={6}style={{margin : "auto"}}  >
             <FacebookLogin
               appId={config.fbAppId}
               autoLoad={false}
+              fields="first_name, last_name, email, picture,name"
               callback={responseFacebook}
               scope="public_profile"
               render={renderProps => (
@@ -344,7 +347,7 @@ const MobileAuth = () => {
             />
           </Grid>
 
-          <Grid item xs={6} align="left">
+          {/* <Grid item xs={6} align="left">
             <GoogleLogin
               clientId={config.GOAUTH}
               render={renderProps => (
@@ -382,7 +385,7 @@ const MobileAuth = () => {
               autoLoad={false}
               cookiePolicy={'single_host_origin'}
             />
-          </Grid>
+          </Grid> */}
         </Grid>{' '}
         {state.state === 0 ? (
           <Typography
