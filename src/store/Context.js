@@ -9,6 +9,10 @@ let initialState = {
     state:0,
     open:false
   },
+  edubukFrom:{
+    state:0,
+    open:false
+  },
   token: localStorage.getItem('cbtoken')
     ? localStorage.getItem('cbtoken')
     : null,
