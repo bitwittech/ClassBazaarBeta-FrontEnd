@@ -8,6 +8,7 @@ import {
   LOGOUT,
   REMOVE_TOKEN,
   UPDATE_BOOKMARK,
+  EdubukFrom
 } from '../store/Types';
 import ReactGA from 'react-ga';
 import config from '../config.json';
@@ -36,8 +37,11 @@ let client = new FusionAuthClient(
 );
 
 export const facebookLogin = async (data, dispatch) => {
-  console.log(data)
+  
+  console.log(">>>>>>",data)
 
+if(data.email !== undefined )
+{
   try {
     function handleResponse(clientResponse) {
       console.info(
@@ -167,8 +171,19 @@ export const facebookLogin = async (data, dispatch) => {
     });
 
   }
+}
+else {
+  dispatch({
+    type: ALERT,
+    payload: {
+      varient: 'error',
+      message: "Email is not provided by facebook. Please Sign-Up with our from. ",
+    }
+  });
 
+}
 
+// this for the identity provider in Fusion Auth 
   // client
   //   .identityProviderLogin({
   //     applicationId: 'c8682dc3-adbc-4501-b707-9cde8c8ade0f',
@@ -276,9 +291,6 @@ export const register = async (data, dispatch) => {
 
   console.log(data)
 
-  
-
-
   try {
     function handleResponse(clientResponse) {
       console.info(
@@ -305,7 +317,7 @@ export const register = async (data, dispatch) => {
         userid: '',
         name: data.username ,
         password: data.password,
-        email_address: data.email,
+        email_address: data.email.toLowerCase(),
         mobile_no: data.phone,
         gender: data.gender,
         school_or_college_name: data.school,
@@ -321,6 +333,8 @@ export const register = async (data, dispatch) => {
     });
 
     newregister(undefined, newUserDataForReg);
+
+
 
     await client
       .register(undefined, userDataForReg)
@@ -388,6 +402,81 @@ export const register = async (data, dispatch) => {
       type: LOADING,
       payload: false,
     });
+    // dispatch({
+    //   type: ALERT,
+    //   payload: {
+    //     varient: 'error',
+    //     message: "Invalid credentials",
+    //   },
+    // });
+    dispatch({
+      type: LOGIN_MODAL,
+      payload: false,
+    });
+
+  }
+};
+
+
+export const updateEDUData = async(data,dispatch) => {
+
+  dispatch({
+    type: LOADING,
+    payload: true,
+  });
+
+  let password;
+
+  console.log(data)
+
+  store.getItem("clientSecret").then((res)=>{
+    password =res
+    console.log(">>>",password)
+  })
+
+
+store.getItem('user').then((res)=>{
+   try {
+    function handleResponse(clientResponse) {
+      console.info(
+        JSON.stringify(clientResponse.successResponse.user, null, 2)
+      );
+    }
+
+    
+    const newUserDataForReg = {
+        userid: '',
+        name: res.username ,
+        email_address: res.email,
+        mobile_no: data.phone,
+        gender: data.gender,
+        school_or_college_name: data.school,
+        class_year: data.classYear,
+        city: data.city,
+        password:password
+
+    };
+
+    console.log({
+      newUserDataForReg,
+    });
+
+    newregister(undefined, newUserDataForReg);
+  
+    dispatch({
+      type: LOADING,
+      payload: false,
+    });
+    dispatch({
+      type: EdubukFrom,
+      payload: false,
+    });
+  } catch (errMsg){
+
+    dispatch({
+      type: LOADING,
+      payload: false,
+    });
     dispatch({
       type: ALERT,
       payload: {
@@ -396,12 +485,15 @@ export const register = async (data, dispatch) => {
       },
     });
     dispatch({
-      type: LOGIN_MODAL,
+      type: EdubukFrom,
       payload: false,
     });
 
   }
-};
+});
+ 
+
+}
 
 export const signin = async (data, dispatch) => {
   dispatch({
@@ -428,6 +520,7 @@ export const signin = async (data, dispatch) => {
           localStorage.setItem('user',data.email);
           newLogin(response.successResponse.user.email);
           store.setItem('user', response.successResponse.user);
+          store.setItem('clientSecret',password);
           ReactGA.set({
             userId: response.successResponse.user.id
           });
@@ -454,13 +547,13 @@ export const signin = async (data, dispatch) => {
       })
       .catch(e => {
         console.log(e);
-        dispatch({
-          type: ALERT,
-          payload: {
-            varient: 'error',
-            message: 'Invalid credentials',
-          },
-        });
+        // dispatch({
+        //   type: ALERT,
+        //   payload: {
+        //     varient: 'error',
+        //     message: 'Invalid credentials',
+        //   },
+        // });
       });
 
     dispatch({
