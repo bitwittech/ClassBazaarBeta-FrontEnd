@@ -693,6 +693,9 @@ class LandingPage extends Component {
                               
                             // this.setState({openModal : true})
                             // console.log(this.state.openModal)
+
+                            trackEvent('Banner-Button', 'click' , 'User clicked on the banner no. 2. Button name : "Explore Now"')
+
                               this.props.history.push({
                             pathname: '/listing',
                             state: {
@@ -736,6 +739,8 @@ class LandingPage extends Component {
                           variant="outlined"
                           color="primary"
                           className="login-btn "
+                            
+                          onClick = {()=>trackEvent('Banner-Button', 'click' , 'User clicked on the banner no. 3. Button name : "See Test"')}
                         >
                        See Tests
                         </Button>
@@ -761,7 +766,7 @@ class LandingPage extends Component {
 
                         
                             onClick={() =>{
-                              
+                              trackEvent('Banner-Button', 'click' , 'User clicked on the banner no. 2. Button name : "Enroll Today"')
                             // this.setState({openModal : true})
                             // console.log(this.state.openModal)
                               this.props.history.push({
