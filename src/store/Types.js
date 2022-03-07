@@ -1,5 +1,6 @@
 export const LOGIN_MODAL = 'LOGIN_MODAL';
 export const Pre_LOG_Box = 'Pre_LOG_Box';
+export const EdubukFrom = 'EdubukFrom';
 export const LOADING = 'LOADING';
 export const ALERT = 'ALERT';
 export const REMOVE_ALERT = 'REMOVE_ALERT';
