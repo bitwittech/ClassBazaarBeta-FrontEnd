@@ -2,7 +2,10 @@ import axios from 'axios';
 import { store } from '../App';
 import { API } from '../config.json'
 
+import { LOGIN_MODAL } from '../store/Types';
+
 export const eduTest = async (user, val) => {
+
     const config = {
       headers: {
         'Content-Type': 'application/json',
@@ -11,10 +14,19 @@ export const eduTest = async (user, val) => {
       },
     };
     console.log(user, val);
+    
+
+    if(val.school_or_college_name !== null && val.gender !== null && val.email_address !== null && val.mobile_no !== null && val.class_year !== null && val.password !== null)
+    {
     const url = `https://edubuk.co.in/mitest/User/loginApi?user_id=${user.id}&name=${val.name}&gender=${val.gender}&email_address=${val.email_address}&school_or_college_name=${val.school_or_college_name}&class_year=${val.class_year}&city=${val.city}&mobile_no=${val.mobile_no}&password=${val.password}`;
-//     const url = `https://edubuk.co.in/User/loginApi?user_id=${user.id}&name=${val.name}&gender=${val.gender}&email_address=${val.email_address}&school_or_college_name=${val.school_or_college_name}&class_year=${val.class_year}&city=${val.city}&mobile_no=${val.mobile_no}&password=${val.password}`;
+//  const url = `https://edubuk.co.in/User/loginApi?user_id=${user.id}&name=${val.name}&gender=${val.gender}&email_address=${val.email_address}&school_or_college_name=${val.school_or_college_name}&class_year=${val.class_year}&city=${val.city}&mobile_no=${val.mobile_no}&password=${val.password}`;
     const res = await axios.get(url).then((res) => {console.log(res)})
     window.open(url, '_blank');
+  }
+  else {
+return false;
+
+  }
 
   };
 
@@ -58,10 +70,12 @@ export const eduTest = async (user, val) => {
   }
 
   export const newLogin = async (emailVal) => {
+
+    console.log(API)
     const res = await axios.post(API + '/api/newLoginDetails', {email: emailVal}).then((res) => {
       console.log(res.data.data)
       store.setItem('newUserLogin', res.data.data);
       localStorage.setItem('newLogin', JSON.parse(JSON.stringify(res.data.data)));
         
-    });
+    }).catch((err)=>{console.log(JSON.stringify(err))});
   }
