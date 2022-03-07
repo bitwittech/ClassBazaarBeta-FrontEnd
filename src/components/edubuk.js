@@ -15,6 +15,7 @@ import { eduTest } from '../service/commonService';
 import { store } from '../App';
 import Store from '../store/Context';
 import { LOGIN_MODAL } from '../store/Types';
+import { EdubukFrom } from '../store/Types';
 import { Pre_LOG_Box } from '../store/Types';
 
 
@@ -32,10 +33,25 @@ const getUserDetails = (dispatch) => {
       return ;
     }
     store.getItem('newUserLogin').then((val) => {
-      if(val == null) {
-        alert('Please login with new user');
-      }
-      eduTest(userr, val);
+
+      // if(val == null) {
+      //   console.log(val)
+      //   // alert('Please login with new user');
+      // }
+      eduTest(userr, val).then((res)=>{
+
+        if(res === false)
+        {
+          dispatch({
+            type: EdubukFrom,
+            payload: {
+              open: true,
+              state: 1,
+            },
+          });
+        }
+
+      });
     })
   });
 }
