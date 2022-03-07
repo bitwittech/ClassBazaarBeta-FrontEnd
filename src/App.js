@@ -16,6 +16,7 @@ import LandingPage from './components/LandingPage';
 import Login from './components/Login';
 // prelogbox added by Yashwant Sahu
 import PreLogBox from './components/PreLogBox';
+import EdubukForm from './components/EdubukFrom';
 
 import MobileAuth from './components/MobileAuth';
 import PrivacyPolicy from './components/PrivacyPolicy';
@@ -31,6 +32,8 @@ import { fetchUser } from './actions/ContextActions';
 import localForage from 'localforage';
 import { trackPage } from 'react-with-analytics/lib/utils';
 import AltMBA from './components/AltMBA';
+import { Pre_LOG_Box } from './store/Types';
+
 const theme = createMuiTheme({
   typography: {
     fontFamily: ['Poppins'],
@@ -89,7 +92,9 @@ const AppWithRouter = withRouter(withAnalytics(Root));
 function App() {
   const initialState = useContext(Store);
   const [state, dispatch] = useReducer(Reducer, initialState);
+
   useEffect(() => {
+    // OpenLogin();
     if (state.token) {
       fetchUser(state.token, dispatch);
     }
@@ -105,6 +110,7 @@ function App() {
             <Snackbar />
             <Login />
             <PreLogBox />
+            <EdubukForm />
             <AppWithRouter />
           </div>
         </Store.Provider>
