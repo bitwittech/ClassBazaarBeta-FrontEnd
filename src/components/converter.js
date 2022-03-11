@@ -9,10 +9,10 @@ function Converter(props)
     const data = () => {
   
         
-        let  url = `https://freecurrencyapi.net/api/v2/latest?apikey=45f68830-84f3-11ec-8258-811245eebca2&base_currency=${props.currency}`;
+        let  url = `https://api.currencyapi.com/v3/latest?apikey=45f68830-84f3-11ec-8258-811245eebca2&base_currency=${props.currency}`;
         axios.get(url).then((response)=>{
 
-            let p = props.price * response.data.data.INR;
+            let p = props.price * response.data.data.INR.value;
             p = Math.round(p)
             setPrice(p)
         })
