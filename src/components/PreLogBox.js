@@ -164,6 +164,11 @@ const PreLogBox = () => {
       await signin(modal.formData, dispatch);
       handleClose();
     }
+    else {
+      await signin(modal.formData, dispatch);
+    handleClose();
+
+    }
 
     setModal({
       ...modal,
