@@ -609,9 +609,6 @@ class LandingPage extends Component {
       image: Banner1
     },
     {
-      image: Banner2
-    },
-    {
       image: Banner3
     },
     {
