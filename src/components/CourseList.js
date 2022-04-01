@@ -314,7 +314,7 @@ class CourseList extends Component {
         style={{ backgroundColor: '#fff3ef', padding: '0 10px' }}
         className="c-list"
       >
-          {this.state.openModal === true && sessionStorage.getItem('show') === null ? <Envelope_Box close = {this.handelModal} />:null}
+          {/* {this.state.openModal === true && sessionStorage.getItem('show') === null ? <Envelope_Box close = {this.handelModal} />:null} */}
 
         <Grid container spacing={1}>
           <Grid item xs={12} sm={12}>
