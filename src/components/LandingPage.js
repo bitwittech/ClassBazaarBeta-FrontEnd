@@ -645,7 +645,7 @@ class LandingPage extends Component {
                     key={index}
                     style={{ backgroundImage: `url('${item.image}')`,backgroundSize: "100vw 98%", backgroundRepeat: "no-repeat", 
                             display: "flex",
-                            justifyContent: `${index !==1 ? bannerCenter: bannerStart}`,
+                            justifyContent: `${index !==3 ? bannerCenter: bannerStart}`,
                             alignItems: "center"}}
                   >
                     {index === 0 ? (
