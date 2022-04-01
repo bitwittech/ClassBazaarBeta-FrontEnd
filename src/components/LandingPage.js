@@ -608,6 +608,7 @@ class LandingPage extends Component {
       {
       image: Banner1
     },
+    
     {
       image: Banner3
     },
@@ -679,7 +680,7 @@ class LandingPage extends Component {
                   </>
                     ): (null)}
 
-                    {index === 1 ? (
+                    {/* {index === 1 ? (
                       <>
                       <Button
                            variant="outlined"
@@ -714,9 +715,9 @@ class LandingPage extends Component {
                        ))}
                        </div>
                     </>
-                    ): (<div></div>)}
+                    ): (<div></div>)} */}
 
-                    {index === 2 ? (
+                    {index === 1 ? (
                       <>
                       <div className="d-flex"  id = "1">
                       <div className=" position-absolute text-white banner-1" >
@@ -754,7 +755,7 @@ class LandingPage extends Component {
                        </div>
                        </>
                     ): (<div></div>)}
-                    {index === 3 ? (
+                    {index === 2 ? (
                       <>
                       <Button
                            variant="outlined"
