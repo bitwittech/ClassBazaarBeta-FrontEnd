@@ -41,20 +41,25 @@ export const EarnADegreeComponent = withRouter(({ history, degreeData, trackEven
       <div className="card-section">
         {data.map(degree => {
           return (
-            <Link  to={degree.url ? ('/coursedetails' + degree.url) : {
-              pathname: '/coursedetail',
-              state: {
-                data: degree.data,
-              },
-            }}
+            <div  
                   className="card-wrapper" onClick={() => {
-                    OpenLogin()
-              trackEvent(
-                'Degree_course',
-                'click',
-                `${degree.name}`,
-              );
-            }}>
+
+                    if(isAuth !== true)
+                    {
+                      
+                                          OpenLogin()
+                                    trackEvent(
+                                      'Degree_course',
+                                      'click',
+                                      `${degree.name}`,
+                                    );
+
+                                  }
+              else {history.push({
+                pathname: '/coursedetails' + degree.url,
+                
+              });}
+                                }}>
               <div className="card-inner" >
                 <div className="head-section">
                   via {degree.provider}
@@ -67,7 +72,7 @@ export const EarnADegreeComponent = withRouter(({ history, degreeData, trackEven
               <div className="name-section">
                 {degree.name}
               </div>
-            </Link>
+            </div>
           );
 
         })}
