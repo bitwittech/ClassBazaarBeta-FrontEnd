@@ -215,7 +215,7 @@ const Login = () => {
         aria-describedby="transition-modal-description"
         className={classes.modal}
         open={loginModal.open}
-        onClose={handleClose}
+        // onClose={handleClose}
         closeAfterTransition
         BackdropComponent={Backdrop}
         BackdropProps={{
@@ -522,7 +522,8 @@ const Login = () => {
                     </Button>
                   ) : null}
                 </form>
-
+            
+                {loginModal.state === 0 ?
                 <Grid style={{ marginTop: '20px' }} container spacing={3}>
                   <Grid item xs={12} sm={4} style={{ textAlign: 'right' }}>
                   {/* <LinkedIn
@@ -593,7 +594,8 @@ const Login = () => {
                       cookiePolicy={'single_host_origin'}
                     /> */}
                   </Grid> }
-                </Grid> 
+
+                </Grid>:null} 
                 {loginModal.state === 0 ? (
                   <Typography
                     className="link-button"
