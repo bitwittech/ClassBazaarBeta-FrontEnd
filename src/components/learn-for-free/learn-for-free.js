@@ -19,7 +19,7 @@ export const LearnForFreeComponent = withRouter(
       // Append by yashwant sahu 
   
    const OpenLogin = () => {
-    sessionStorage.setItem('ShowBox',true);
+    // sessionStorage.setItem('ShowBox',true);
 
     if(isAuth === false)
     {
@@ -44,28 +44,44 @@ export const LearnForFreeComponent = withRouter(
         <div className="card-section">
           {data.map(degree => {
             return (
-              <Link to={degree.url ? ('/coursedetails' + degree.url) : {
-                pathname: '/coursedetails',
-                state: {
-                  data: degree.data,
-                },
-              }}
-                    className="card-wrapper" onClick={() => {
-                    OpenLogin()
+              <div  
+                  className="card-wrapper" onClick={() => {
 
+                    if(isAuth === false)
+                    {
+                      
+                                          OpenLogin()
+                                    trackEvent(
+                                      'Degree_course',
+                                      'click',
+                                      `${degree.name}`,
+                                    );
+
+                                  }
+              else {
                 trackEvent(
-                  'Free_course',
+                  'Degree_course',
                   'click',
                   `${degree.name}`,
                 );
-              }}>
-                <div className="card-inner">
-                  <div className="head-section">via {degree.provider}</div>
-                  <img src={degree.image}/>
-                  <div className="university-section">{degree.university}</div>
-                  <div className="name-section">{degree.name}</div>
+                history.push({
+                pathname: '/coursedetails' + degree.url,
+                
+              });}
+                                }}>
+              <div className="card-inner" >
+                <div className="head-section">
+                  via {degree.provider}
                 </div>
-              </Link>
+                <img src={degree.image}/>
+              </div>
+              <div className="university-section">
+                {degree.university}
+              </div>
+              <div className="name-section">
+                {degree.name}
+              </div>
+            </div>
             );
           })}
         </div>
