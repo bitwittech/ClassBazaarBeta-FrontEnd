@@ -12,7 +12,7 @@ import { LOGIN_MODAL } from '../store/Types';
 // edited by yashwant sahu
 import { Pre_LOG_Box } from '../store/Types';
 import Logo from './../assets/logo.png';
-import BlackLogo from './../assets/img/logo.png'
+import BlackLogo from './../assets/img/logo.png';
 import MenuIcon from '@material-ui/icons/Menu';
 import PermIdentityIcon from '@material-ui/icons/PermIdentity';
 import ProfileIcon from '@material-ui/icons/Person';
@@ -24,13 +24,14 @@ import Typography from '@material-ui/core/Typography';
 import { logout } from '../actions/ContextActions';
 import { trackEvent } from 'react-with-analytics';
 import { withStyles } from '@material-ui/core/styles';
+import { UserTrack } from '../App.js';
 
 import HamMenu from './Hamburgur';
 
-const user = window.localStorage.getItem("user");
-console.log('loginString',user);
+const user = window.localStorage.getItem('user');
+console.log('loginString', user);
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   title: {
     display: 'none',
     [theme.breakpoints.up('sm')]: {
@@ -109,7 +110,7 @@ const useStyles = makeStyles(theme => ({
     position: 'absolute',
     left: '50%',
     top: '50%',
-    backgroundColor : 'red',
+    backgroundColor: 'red',
     transform: 'translate(-50%, -50%)',
   },
 
@@ -160,10 +161,9 @@ const IconWithRouter = withRouter(({ history, ...props }) => (
 
 function TopBar(props) {
   const { state, dispatch } = useContext(Store);
+  const track = useContext(UserTrack);
   const classes = useStyles();
   // const {isAuth} = state;
-
-
 
   // const OpenLogin = () => {
   //   let show= sessionStorage.getItem('ShowBox');
@@ -184,7 +184,19 @@ function TopBar(props) {
   //   }
   // }
 
+  const handleTracker = () => {
+    track.setTracker((tracker) => [
+      ...tracker,
+      {
+        path: window.location.pathname,
+        time: new Date().toLocaleString(),
+      },
+    ]);
+  };
 
+  useEffect(() => {
+    handleTracker();
+  }, []);
 
   const handleLogout = () => {
     props.history.push('/');
@@ -198,15 +210,19 @@ function TopBar(props) {
   const [toggleAppBarTheme, setToggleAppBarTheme] = useState(false);
 
   if (typeof window != 'undefined') {
-    if (window.location.pathname !== '/' && window.location.pathname !== '/contact' && window.location.pathname !== '/edubuk') {
+    if (
+      window.location.pathname !== '/' &&
+      window.location.pathname !== '/contact' &&
+      window.location.pathname !== '/career' &&
+      window.location.pathname !== '/edubuk'
+    ) {
       shouldSwitch = false;
     } else {
-      window.addEventListener('scroll', function(event) {
+      window.addEventListener('scroll', function (event) {
         if (window.innerWidth < 800) {
           setToggleAppBarTheme(true);
           return;
-        }
-        else if (window.scrollY >= window.innerHeight && !toggleAppBarTheme) {
+        } else if (window.scrollY >= window.innerHeight && !toggleAppBarTheme) {
           setToggleAppBarTheme(true);
         } else if (window.scrollY <= window.innerHeight && toggleAppBarTheme) {
           setToggleAppBarTheme(false);
@@ -225,19 +241,17 @@ function TopBar(props) {
           : 'app-bar-colored'
       }`}
     >
-      <HamMenu props = {props}/>
+      {localStorage.setItem('path', JSON.stringify(track.tracker))}
+      {console.log(track.tracker)}
+
+      <HamMenu props={props} />
       <div className="appbar-flex">
         <div className="topbar-cont">
-          <div
-            className="no-desktop logoBackground"
-          >
+          <div className="no-desktop logoBackground">
             <div className="div" style={{ textAlign: 'center' }}>
               <ImageWithRouter
                 image={`${
-                  !toggleAppBarTheme && shouldSwitch
-                    ? Logo
-                    : BlackLogo
-
+                  !toggleAppBarTheme && shouldSwitch ? Logo : BlackLogo
                 }`}
                 routingURL={'/'}
                 clazzNames={`${classes.logo} click-h adj-i`}
@@ -261,10 +275,7 @@ function TopBar(props) {
               {' '}
               <ImageWithRouter
                 image={`${
-                  !toggleAppBarTheme && shouldSwitch
-                    ? Logo
-                    : BlackLogo
-                    
+                  !toggleAppBarTheme && shouldSwitch ? Logo : BlackLogo
                 }`}
                 routingURL={'/'}
                 clazzNames={`${classes.logo} click-h adj-i`}
@@ -325,6 +336,15 @@ function TopBar(props) {
                     className="signup-btn no-mobile header-links"
                   >
                     Contact
+                  </Link>
+                  <Link
+                    to={'/career'}
+                    style={{ marginRight: '10px' }}
+                    variant="outlined"
+                    color="primary"
+                    className="signup-btn no-mobile header-links"
+                  >
+                    Career
                   </Link>
                   {props.isSearchIncluded && (
                     <div
@@ -387,7 +407,7 @@ function TopBar(props) {
                 </>
               ) : (
                 <>
-                <Link
+                  <Link
                     to={'/'}
                     variant="outlined"
                     color="primary"
@@ -404,7 +424,6 @@ function TopBar(props) {
                     Courses
                   </Link>
                   <Link
-
                     to={'/about'}
                     variant="outlined"
                     color="primary"
@@ -420,6 +439,15 @@ function TopBar(props) {
                     className="signup-btn no-mobile header-links"
                   >
                     Contact
+                  </Link>
+                  <Link
+                    to={'/career'}
+                    style={{ marginRight: '10px' }}
+                    variant="outlined"
+                    color="primary"
+                    className="signup-btn no-mobile header-links"
+                  >
+                    Career
                   </Link>
                   {props.isSearchIncluded && (
                     <div
@@ -447,14 +475,14 @@ function TopBar(props) {
                       </div>
                     </div>
                   )}
-                <Button
-                  onClick={() => handleLogout()}
-                  variant="outlined"
-                  color="primary"
-                  className="signup-btn log-ham"
-                >
-                  Logout
-                </Button>
+                  <Button
+                    onClick={() => handleLogout()}
+                    variant="outlined"
+                    color="primary"
+                    className="signup-btn log-ham"
+                  >
+                    Logout
+                  </Button>
                 </>
               )}
               {state.isAuth ? <IconWithRouter routingURL={'/profile'} /> : null}

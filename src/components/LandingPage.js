@@ -1,14 +1,15 @@
+/* eslint-disable default-case */
 import React, { Component } from 'react';
 import {
   degreeData,
   freeCourses,
   subjectsData,
   trendingData,
-  exclusiveCourses
+  exclusiveCourses,
 } from '../utils/data';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import ReactHtmlParser, { convertNodeToElement } from 'react-html-parser';
-import Envelope_Box from "./Envelope_Box"
+import Envelope_Box from './Envelope_Box';
 import AuthProvider from './authProvider';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
@@ -45,13 +46,13 @@ import { withRouter } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 import Slider from 'react-animated-slider';
 import 'react-animated-slider/build/horizontal.css';
-import Banner1 from '../assets/img/main-banner.jpg'
+import Banner1 from '../assets/img/main-banner.jpg';
 import Banner2 from '../assets/img/offerbanner.png';
 import Banner3 from '../assets/img/banner3.png';
 import Banner4 from '../assets/img/offerbannerOLD.jpg';
 import { useState } from 'react';
 // import DignityHealthWhiteLogo from '../assets/dignityHealthWhiteLogo.jpeg';
-import DignityLogo from '../assets/dignity.png'
+import DignityLogo from '../assets/dignity.png';
 import EduWhite from '../assets/edubuk white.png';
 
 import dataScience from '../assets/subjects/20402.jpg';
@@ -63,9 +64,9 @@ import business from '../assets/subjects/Image-4.jpg';
 import mathImage from '../assets/subjects/Image-16.jpg';
 import developer from '../assets/subjects/person-looking-at-phone-and-at-macbook-pro-1181244.jpg';
 import health from '../assets/subjects/photo-of-woman-practicing-yoga-3820320.jpg';
+import axios from 'axios';
 
-
-const styles = theme => ({
+const styles = (theme) => ({
   dashboardLink: {
     color: 'white',
   },
@@ -163,7 +164,7 @@ const Search = withRouter(({ history, ...data }) => {
         onChange={data.onSearchChange}
         onKeyPress={onSearchPressed(data, history)}
       />
-      <img src={SEARCH_THEMED} className="search-icon2"/>
+      <img src={SEARCH_THEMED} className="search-icon2" />
     </div>
   );
 });
@@ -201,7 +202,7 @@ const ShowMore = withRouter(({ history, ...data }) => {
         <div style={{ alignSelf: 'center' }}>Show More</div>
         <div className="flex">
           <div style={{ alignSelf: 'center', height: '25px' }}>
-            <img className="smicon no-desktop" src={Smicon} alt="sm-icon"/>
+            <img className="smicon no-desktop" src={Smicon} alt="sm-icon" />
           </div>
         </div>
       </div>
@@ -260,10 +261,8 @@ const SubjectCard = withRouter(({ history, ...data }) => {
 
 class LandingPage extends Component {
   constructor(props) {
-
     super(props);
-    
-    
+
     this.exclusiveCourseSection = React.createRef();
     this.state = {
       data: [],
@@ -278,8 +277,8 @@ class LandingPage extends Component {
       popUp: localStorage.getItem('cbpop'),
       nsEmail: '',
       user: null,
-      IsLoading:true,
-      openModal:false
+      IsLoading: true,
+      openModal: false,
     };
     console.log('landing', this.state);
     console.log('onrender', localStorage.getItem('cbpop'));
@@ -291,6 +290,7 @@ class LandingPage extends Component {
     this.trackScrolling = this.trackScrolling.bind(this);
     this.isBottom = this.isBottom.bind(this);
     this.handelModal = this.handelModal.bind(this);
+    this.handleUnload = this.handleUnload.bind(this);
   }
 
   onFilterChange(event) {
@@ -299,9 +299,8 @@ class LandingPage extends Component {
   }
 
   componentDidMount() {
-   
     trackEvent('Homepage', 'page', 'opened');
-    store.getItem('user').then(res => {
+    store.getItem('user').then((res) => {
       this.setState({ user: res });
     });
     // window.addEventListener('scroll', this.handleScroll);
@@ -314,12 +313,8 @@ class LandingPage extends Component {
     document.addEventListener('scroll', this.trackScrolling);
 
     setTimeout(() => {
-      this.setState({IsLoading:false}) 
-      
+      this.setState({ IsLoading: false });
     }, 5000);
-
-    
-    
   }
 
   isBottom(el) {
@@ -336,10 +331,8 @@ class LandingPage extends Component {
   };
 
   componentWillUnmount() {
-    
     this.clearTimeouts();
     document.removeEventListener('scroll', this.trackScrolling);
-    
   }
 
   clearTimeouts = () => {
@@ -352,8 +345,20 @@ class LandingPage extends Component {
     });
   }
 
+  handleUnload(q) {
+    const user_email = localStorage.getItem('user') || 'User Not Loged In';
+
+    let start_time = new Date().toLocaleString();
+    console.log('Card_track');
+
+    axios.get(
+      `https://api.classbazaar.com/api/searchTrack?user_email=${user_email}&event_time=${start_time}&search_query=${q}`
+    );
+  }
+
   onSearchChange(query) {
     console.log('onSearchChange', { q: query.target.value });
+    this.handleUnload(query.target.value);
     this.setState({ q: query.target.value });
   }
 
@@ -379,7 +384,6 @@ class LandingPage extends Component {
     const padding = { paddingTop: 6, paddingBottom: 6 };
     if (degree.url) {
       return (
-        
         <Grid container className="c-card">
           <Grid item xs={12}>
             <Box display="flex" style={{ height: '149px', margin: '30' }}>
@@ -396,19 +400,19 @@ class LandingPage extends Component {
                         return trackEvent(
                           'Degree_course',
                           'click',
-                          `${degree.name}`,
+                          `${degree.name}`
                         );
                       case 'trending':
                         return trackEvent(
                           'Trending_course',
                           'click',
-                          `${degree.name}`,
+                          `${degree.name}`
                         );
                       case 'free':
                         return trackEvent(
                           'Free_course',
                           'click',
-                          `${degree.name}`,
+                          `${degree.name}`
                         );
                     }
                   }}
@@ -484,19 +488,19 @@ class LandingPage extends Component {
                         return trackEvent(
                           'Degree_course',
                           'click',
-                          `${degree.name}`,
+                          `${degree.name}`
                         );
                       case 'trending':
                         return trackEvent(
                           'Trending_course',
                           'click',
-                          `${degree.name}`,
+                          `${degree.name}`
                         );
                       case 'free':
                         return trackEvent(
                           'Free_course',
                           'click',
-                          `${degree.name}`,
+                          `${degree.name}`
                         );
                     }
                   }}
@@ -576,10 +580,10 @@ class LandingPage extends Component {
     );
   }
 
-  handelModal = ()=>{
-    console.log("Handel Called")
-    this.setState({openModal:!this.state.openModal})
-  }
+  handelModal = () => {
+    console.log('Handel Called');
+    this.setState({ openModal: !this.state.openModal });
+  };
 
   handlePopupClose = () => {
     trackEvent('Homepage PopUp', 'click', 'side-close');
@@ -602,85 +606,107 @@ class LandingPage extends Component {
 
   render() {
     const { classes, theme } = this.props;
-    const bannerCenter = "center";
-    const bannerStart = "start";
+    const bannerCenter = 'center';
+    const bannerStart = 'start';
     const content = [
       {
-      image: Banner1
-    },
-    
-    {
-      image: Banner3
-    },
-    {
-      image: Banner4
-    }
-  ]
+        image: Banner1,
+      },
 
-  
-  
+      {
+        image: Banner3,
+      },
+      {
+        image: Banner4,
+      },
+    ];
+
     console.log('popup', this.state.popUp);
     console.log('LANDING', this.state);
     console.log('session', localStorage.getItem('cbpop'));
     return (
       <>
-      {this.state.IsLoading === true ? <Page_Loader/>: 
-        
-      <>
-       <Grid style={{ margin: 0, width: '100%' }}>
-          <TopAppBarWithRouter
-            onLoginClick={this.onLoginClick}
-            getQuery={this.getQuery}
-            onSearchChange={this.onSearchChange}
-            classes={classes}
-            props={this.props}
-            routingURL={'/listing'}
-          />
-          <AuthProvider/>
-          <div className={'landing-page-wrapper'}>
-            <section className="main-banner posiition-relative">
-              <Slider  autoplay={3000} >
-                {content.map((item, index) => (
-                  <div
-                    key={index}
-                    style={{ backgroundImage: `url('${item.image}')`,backgroundSize: "100vw 98%", backgroundRepeat: "no-repeat", 
-                            display: "flex",
-                            justifyContent: `${index !==3 ? bannerCenter: bannerStart}`,
-                            alignItems: "center"}}
-                  >
-                    {index === 0 ? (
-                      <>
-                      <div className="d-flex align-items-center justify-content-center"  id = "0">
-                      <div className="banner-content text-center position-absolute text-white">
-                      <div className="h5 mt-2" style={{ fontSize: '18px' }}>
-                        We believe in
-                      </div>
-                      <div className="h1" className="passionBanner">
-                        Passion for Learning
-                      </div>
-                      <form>
-                        <Search
-                          getQuery={this.getQuery}
-                          onSearchChange={this.onSearchChange}
-                          classes={classes}
-                          props={this.props}
-                          routingURL={'/listing'}
-                        />
-                      </form>
-                    </div>
-                
-                    </div>
-                    <div className="slider__dots">
-                       {content.map((item, index1) => (
-                         (index == index1)?
-                         <a href= {"#"+index} key={index} className = "slider__dot" style={{background: "white"}} ></a>
-                         :<a href= {"#"+index} key={index} className = "slider__dot" style={{background: "#f15a29"}} ></a>
-                       ))}
-                       </div>
-                  </>
-                    ): (null)}
+        {this.state.IsLoading === true ? (
+          <Page_Loader />
+        ) : (
+          <>
+            <Grid style={{ margin: 0, width: '100%' }}>
+              <TopAppBarWithRouter
+                onLoginClick={this.onLoginClick}
+                getQuery={this.getQuery}
+                onSearchChange={this.onSearchChange}
+                classes={classes}
+                props={this.props}
+                routingURL={'/listing'}
+              />
+              <AuthProvider />
+              <div className={'landing-page-wrapper'}>
+                <section className="main-banner posiition-relative">
+                  <Slider autoplay={3000}>
+                    {content.map((item, index) => (
+                      <div
+                        key={index}
+                        style={{
+                          backgroundImage: `url('${item.image}')`,
+                          backgroundSize: '100vw 98%',
+                          backgroundRepeat: 'no-repeat',
+                          display: 'flex',
+                          justifyContent: `${
+                            index !== 3 ? bannerCenter : bannerStart
+                          }`,
+                          alignItems: 'center',
+                        }}
+                      >
+                        {index === 0 ? (
+                          <>
+                            <div
+                              className="d-flex align-items-center justify-content-center"
+                              id="0"
+                            >
+                              <div className="banner-content text-center position-absolute text-white">
+                                <div
+                                  className="h5 mt-2"
+                                  style={{ fontSize: '18px' }}
+                                >
+                                  We believe in
+                                </div>
+                                <div className="h1" className="passionBanner">
+                                  Passion for Learning
+                                </div>
+                                <form>
+                                  <Search
+                                    getQuery={this.getQuery}
+                                    onSearchChange={this.onSearchChange}
+                                    classes={classes}
+                                    props={this.props}
+                                    routingURL={'/listing'}
+                                  />
+                                </form>
+                              </div>
+                            </div>
+                            <div className="slider__dots">
+                              {content.map((item, index1) =>
+                                index == index1 ? (
+                                  <a
+                                    href={'#' + index}
+                                    key={index}
+                                    className="slider__dot"
+                                    style={{ background: 'white' }}
+                                  ></a>
+                                ) : (
+                                  <a
+                                    href={'#' + index}
+                                    key={index}
+                                    className="slider__dot"
+                                    style={{ background: '#f15a29' }}
+                                  ></a>
+                                )
+                              )}
+                            </div>
+                          </>
+                        ) : null}
 
-                    {/* {index === 1 ? (
+                        {/* {index === 1 ? (
                       <>
                       <Button
                            variant="outlined"
@@ -717,414 +743,520 @@ class LandingPage extends Component {
                     </>
                     ): (<div></div>)} */}
 
-                    {index === 1 ? (
-                      <>
-                      <div className="d-flex"  id = "1">
-                      <div className=" position-absolute text-white banner-1" >
-                      <img src={EduWhite} alt="edubuk" className="edubuk"  />
-                      <div className="edubukmain">
-                      <div className=" edubukh1"> 
-                        Discover your true passion and turn it into a career
+                        {index === 1 ? (
+                          <>
+                            <div className="d-flex" id="1">
+                              <div className=" position-absolute text-white banner-1">
+                                <img
+                                  src={EduWhite}
+                                  alt="edubuk"
+                                  className="edubuk"
+                                />
+                                <div className="edubukmain">
+                                  <div className=" edubukh1">
+                                    Discover your true passion and turn it into
+                                    a career
+                                  </div>
+                                  <div className="h1" className="edu">
+                                    With the most popular and trusted career
+                                    mapping test for <strong>FREE!</strong>
+                                  </div>
+                                  <Link
+                                    to={{
+                                      pathname: '/edubuk',
+                                    }}
+                                  >
+                                    <Button
+                                      variant="outlined"
+                                      color="primary"
+                                      className="login-btn "
+                                      onClick={() =>
+                                        trackEvent(
+                                          'Banner-Button',
+                                          'click',
+                                          'User clicked on the banner no. 3. Button name : "See Test"'
+                                        )
+                                      }
+                                    >
+                                      See Tests
+                                    </Button>
+                                  </Link>
+                                </div>
+                              </div>
+                            </div>
+                            <div className="slider__dots">
+                              {content.map((item, index1) =>
+                                index == index1 ? (
+                                  <a
+                                    href={'#' + index}
+                                    key={index}
+                                    className="slider__dot"
+                                    style={{ background: 'white' }}
+                                  ></a>
+                                ) : (
+                                  <a
+                                    href={'#' + index}
+                                    key={index}
+                                    className="slider__dot"
+                                    style={{ background: '#f15a29' }}
+                                  ></a>
+                                )
+                              )}
+                            </div>
+                          </>
+                        ) : (
+                          <div></div>
+                        )}
+                        {index === 2 ? (
+                          <>
+                            <Button
+                              variant="outlined"
+                              color="primary"
+                              className="login-btn banner-content banner-4"
+                              onClick={() => {
+                                trackEvent(
+                                  'Banner-Button',
+                                  'click',
+                                  'User clicked on the banner no. 2. Button name : "Enroll Today"'
+                                );
+                                // this.setState({openModal : true})
+                                // console.log(this.state.openModal)
+                                this.props.history.push({
+                                  pathname: '/listing',
+                                  state: {
+                                    filter: 'free',
+                                    feeFilter: 0,
+                                    providers: 'all',
+                                  },
+                                });
+                              }}
+                            >
+                              Enroll Today
+                            </Button>
+                            <div className="slider__dots">
+                              {content.map((item, index1) =>
+                                index == index1 ? (
+                                  <a
+                                    href={'#' + index}
+                                    key={index}
+                                    className="slider__dot"
+                                    style={{ background: 'white' }}
+                                  ></a>
+                                ) : (
+                                  <a
+                                    href={'#' + index}
+                                    key={index}
+                                    className="slider__dot"
+                                    style={{ background: '#f15a29' }}
+                                  ></a>
+                                )
+                              )}
+                            </div>
+                          </>
+                        ) : (
+                          <div></div>
+                        )}
                       </div>
-                      <div className="h1" className="edu">
-                        With the most popular and trusted career mapping test for <strong>FREE!</strong>
-                      </div>
-                      <Link
-                        to={{
-                          pathname: '/edubuk',
-                        }}>
-                        <Button
-                          variant="outlined"
-                          color="primary"
-                          className="login-btn "
-                            
-                          onClick = {()=>trackEvent('Banner-Button', 'click' , 'User clicked on the banner no. 3. Button name : "See Test"')}
-                        >
-                       See Tests
-                        </Button>
-                      </Link>
-                      </div>
-                    </div>
-                    </div>
-                    <div className="slider__dots">
-                       {content.map((item, index1) => (
-                         (index == index1)?
-                         <a href= {"#"+index} key={index} className = "slider__dot" style={{background: "white"}} ></a>
-                         :<a href= {"#"+index} key={index} className = "slider__dot" style={{background: "#f15a29"}} ></a>
-                       ))}
-                       </div>
-                       </>
-                    ): (<div></div>)}
-                    {index === 2 ? (
-                      <>
-                      <Button
-                           variant="outlined"
-                           color="primary"
-                           className="login-btn banner-content banner-4"
+                    ))}
+                  </Slider>
+                  <div className="overlay" />
+                </section>
+              </div>
+              {/* {console.log(this.state.openModal)} */}
 
-                        
-                            onClick={() =>{
-                              trackEvent('Banner-Button', 'click' , 'User clicked on the banner no. 2. Button name : "Enroll Today"')
-                            // this.setState({openModal : true})
-                            // console.log(this.state.openModal)
-                              this.props.history.push({
+              {this.state.openModal === true ? (
+                <Envelope_Box close={this.handelModal} />
+              ) : null}
+              {/*<div className="landing-page-wrapper">*/}
+              {/*  <section className="tiles-section py-5">*/}
+              {/*    <div className="container">*/}
+              {/*      <div className="row">*/}
+              {/*        <div className="col-md-6 col-sm-12">*/}
+              {/*          <div className="tiles-content">*/}
+              {/*            <div className="tiles-heading">*/}
+              {/*              Find courses on any topic*/}
+              {/*            </div>*/}
+              {/*            <p>*/}
+              {/*              Discover best online courses from top universities*/}
+              {/*              around the world like MIT, Stanford, Harvard, IIT and*/}
+              {/*              many more*/}
+              {/*            </p>*/}
+              {/*            <span*/}
+              {/*              style={{*/}
+              {/*                borderBottom: '1px solid #000',*/}
+              {/*                paddingBottom: '3px',*/}
+              {/*                cursor: 'pointer',*/}
+              {/*              }}*/}
+              {/*            >*/}
+              {/*              Show More*/}
+              {/*            </span>*/}
+              {/*          </div>*/}
+              {/*        </div>*/}
+              {/*        <div className="col-md-6 col-sm-12">*/}
+              {/*          <div className="row">*/}
+              {/*            <div className="col-6">*/}
+              {/*              <figure className="position-relative d-flex align-items-end justify-content-center tile tile1">*/}
+              {/*                <div className="title">Computer Science</div>*/}
+              {/*              </figure>*/}
+              {/*              <figure className="browse-box-wrapper text-right">*/}
+              {/*                <div className="browse-box">*/}
+              {/*                  <span className="h2" onClick={() => this.toggleExpand()}>*/}
+              {/*                    Browse by <br/>*/}
+              {/*                    Subject*/}
+              {/*                  </span>*/}
+              {/*                </div>*/}
+              {/*              </figure>*/}
+              {/*            </div>*/}
+              {/*            <div className="col-6">*/}
+              {/*              <figure className="position-relative d-flex align-items-end justify-content-center tile tile2">*/}
+              {/*                <div className="title">Arts & Design</div>*/}
+              {/*              </figure>*/}
+              {/*              <figure className="position-relative d-flex align-items-end justify-content-center tile tile3">*/}
+              {/*                <div className="title">Business</div>*/}
+              {/*              </figure>*/}
+              {/*            </div>*/}
+              {/*          </div>*/}
+              {/*        </div>*/}
+              {/*      </div>*/}
+              {/*    </div>*/}
+              {/*  </section>*/}
+              {/*</div>*/}
+
+              <div
+                className="home-grid-wrapper container"
+                style={{ marginTop: '100px' }}
+              >
+                <div className="left-wrapper">
+                  <div className="row-1">
+                    <div className="text-section">
+                      <div className="tiles-content">
+                        <div className="tiles-heading">
+                          Find courses on any topic
+                        </div>
+                        <p>
+                          Discover best online courses from top universities
+                          around the world like MIT, Stanford, Harvard, IIT and
+                          many more
+                        </p>
+                        <span
+                          onClick={() =>
+                            this.props.history.push({
+                              pathname: '/listing',
+                              state: {},
+                            })
+                          }
+                          style={{
+                            borderBottom: '1px solid #000',
+                            paddingBottom: '3px',
+                            cursor: 'pointer',
+                          }}
+                        >
+                          Show More
+                        </span>
+                      </div>
+                    </div>
+                    <div className="box box-4">
+                      <div
+                        className="inner-box"
+                        style={{
+                          backgroundImage: `url(${subjectsData[3].tile})`,
+                        }}
+                        onClick={() =>
+                          this.props.history.push({
                             pathname: '/listing',
                             state: {
-                              filter: 'free',
-                              feeFilter : 0,
+                              subject: subjectsData[3]['name'],
+                              filter: 'subject',
                               providers: 'all',
-                            }
+                            },
                           })
                         }
-                        }
+                      >
+                        <div className="label">{subjectsData[3]['name']}</div>
+                      </div>
+                    </div>
+                  </div>
+                  {!this.state.subjectsExpanded && (
+                    <div className="browseCourse">
+                      <figure
+                        className="browse-box-wrapper text-right"
+                        onClick={() => this.toggleExpand()}
+                      >
+                        <div className="browse-box">
+                          <span className="h2">
+                            Browse by <br />
+                            Subject
+                          </span>
+                        </div>
+                      </figure>
+                    </div>
+                  )}
+                  {this.state.subjectsExpanded && (
+                    <div className={'row-2'}>
+                      <div className="row-row-1">
+                        <figure
+                          className="browse-box-wrapper text-right"
+                          onClick={() => {
+                            this.props.history.push({
+                              pathname: '/listing',
+                              state: {},
+                            });
+                          }}
+                          style={{
+                            marginTop: '100px',
+                            paddingTop: '60px',
+                            height: '120px',
+                          }}
                         >
-                          Enroll Today
-                        </Button>
-                    <div className="slider__dots">
-                       {content.map((item, index1) => (
-                         (index == index1)?
-                         <a href= {"#"+index} key={index} className = "slider__dot" style={{background: "white"}} ></a>
-                         :<a href= {"#"+index} key={index} className = "slider__dot" style={{background: "#f15a29"}} ></a>
-                       ))}
-                       </div>
-                    </>
-                    ): (<div></div>)}
-
-                    
-                  </div>
-                ))}
-              </Slider>
-              <div className="overlay"/>
-            </section>
-          </div>
-          {/* {console.log(this.state.openModal)} */}
-          
-          {this.state.openModal === true ? <Envelope_Box close = {this.handelModal} />:null}
-          {/*<div className="landing-page-wrapper">*/}
-          {/*  <section className="tiles-section py-5">*/}
-          {/*    <div className="container">*/}
-          {/*      <div className="row">*/}
-          {/*        <div className="col-md-6 col-sm-12">*/}
-          {/*          <div className="tiles-content">*/}
-          {/*            <div className="tiles-heading">*/}
-          {/*              Find courses on any topic*/}
-          {/*            </div>*/}
-          {/*            <p>*/}
-          {/*              Discover best online courses from top universities*/}
-          {/*              around the world like MIT, Stanford, Harvard, IIT and*/}
-          {/*              many more*/}
-          {/*            </p>*/}
-          {/*            <span*/}
-          {/*              style={{*/}
-          {/*                borderBottom: '1px solid #000',*/}
-          {/*                paddingBottom: '3px',*/}
-          {/*                cursor: 'pointer',*/}
-          {/*              }}*/}
-          {/*            >*/}
-          {/*              Show More*/}
-          {/*            </span>*/}
-          {/*          </div>*/}
-          {/*        </div>*/}
-          {/*        <div className="col-md-6 col-sm-12">*/}
-          {/*          <div className="row">*/}
-          {/*            <div className="col-6">*/}
-          {/*              <figure className="position-relative d-flex align-items-end justify-content-center tile tile1">*/}
-          {/*                <div className="title">Computer Science</div>*/}
-          {/*              </figure>*/}
-          {/*              <figure className="browse-box-wrapper text-right">*/}
-          {/*                <div className="browse-box">*/}
-          {/*                  <span className="h2" onClick={() => this.toggleExpand()}>*/}
-          {/*                    Browse by <br/>*/}
-          {/*                    Subject*/}
-          {/*                  </span>*/}
-          {/*                </div>*/}
-          {/*              </figure>*/}
-          {/*            </div>*/}
-          {/*            <div className="col-6">*/}
-          {/*              <figure className="position-relative d-flex align-items-end justify-content-center tile tile2">*/}
-          {/*                <div className="title">Arts & Design</div>*/}
-          {/*              </figure>*/}
-          {/*              <figure className="position-relative d-flex align-items-end justify-content-center tile tile3">*/}
-          {/*                <div className="title">Business</div>*/}
-          {/*              </figure>*/}
-          {/*            </div>*/}
-          {/*          </div>*/}
-          {/*        </div>*/}
-          {/*      </div>*/}
-          {/*    </div>*/}
-          {/*  </section>*/}
-          {/*</div>*/}
-
-          <div className="home-grid-wrapper container" style={{ marginTop: '100px' }}>
-            <div className="left-wrapper">
-              <div className="row-1">
-                <div className="text-section">
-                  <div className="tiles-content">
-                    <div className="tiles-heading">
-                      Find courses on any topic
-                    </div>
-                    <p>
-                      Discover best online courses from top universities
-                      around the world like MIT, Stanford, Harvard, IIT and
-                      many more
-                    </p>
-                    <span
-                      onClick={() => this.props.history.push({
-                        pathname: '/listing',
-                        state: {
-                        },
-                      })}
-                      style={{
-                        borderBottom: '1px solid #000',
-                        paddingBottom: '3px',
-                        cursor: 'pointer',
-                      }}
-                    >
-                        Show More
-                      </span>
-                  </div>
-                </div>
-                <div className="box box-4">
-                  <div className="inner-box" style={{ backgroundImage: `url(${subjectsData[3].tile})` }}
-                       onClick={() => this.props.history.push({
-                         pathname: '/listing',
-                         state: {
-                           subject: subjectsData[3]['name'],
-                           filter: 'subject',
-                           providers: 'all',
-                         }
-                       })
-                       }>
-                    <div className="label">
-                      {subjectsData[3]['name']}
-                    </div>
-                  </div>
-                </div>
-              </div>
-              {
-                !this.state.subjectsExpanded && <div className="browseCourse" >
-                  <figure className="browse-box-wrapper text-right" onClick={() => this.toggleExpand()}>
-                    <div className="browse-box">
-                            <span className="h2">
-                              Browse by <br/>
-                              Subject
-                            </span>
-                    </div>
-                  </figure>
-                </div>
-              }
-              {
-                this.state.subjectsExpanded && <div className={'row-2'}>
-                  <div className="row-row-1">
-                    <figure className="browse-box-wrapper text-right"
-                            onClick={() => {
+                          <div className="browse-box">
+                            <span className="h2">Others</span>
+                          </div>
+                        </figure>
+                        <div className="box box-5">
+                          <div
+                            className="inner-box"
+                            style={{
+                              backgroundImage: `url(${subjectsData[4].tile})`,
+                            }}
+                            onClick={() =>
                               this.props.history.push({
                                 pathname: '/listing',
                                 state: {
+                                  subject: subjectsData[4]['name'],
+                                  filter: 'subject',
+                                  providers: 'all',
                                 },
-                              });
+                              })
+                            }
+                          >
+                            <div className="label">
+                              {subjectsData[4]['name']}
+                            </div>
+                          </div>
+                        </div>
+                        <div className="box box-7">
+                          <div
+                            className="inner-box"
+                            style={{
+                              backgroundImage: `url(${subjectsData[8].tile})`,
                             }}
-                            style={{ marginTop: '100px', paddingTop: '60px', height: '120px' }}>
-                      <div className="browse-box">
-                            <span className="h2">
-                             Others
-                            </span>
+                            onClick={() =>
+                              this.props.history.push({
+                                pathname: '/listing',
+                                state: {
+                                  subject: subjectsData[8]['name'],
+                                  filter: 'subject',
+                                  providers: 'all',
+                                },
+                              })
+                            }
+                          >
+                            <div className="label">
+                              {subjectsData[8]['name']}
+                            </div>
+                          </div>
+                        </div>
                       </div>
-                    </figure>
-                    <div className="box box-5">
-                      <div className="inner-box" style={{ backgroundImage: `url(${subjectsData[4].tile})` }}
-                           onClick={() => this.props.history.push({
-                             pathname: '/listing',
-                             state: {
-                               subject: subjectsData[4]['name'],
-                               filter: 'subject',
-                               providers: 'all',
-                             },
-                           })}>
-                        <div className="label">
-                          {subjectsData[4]['name']}
+                      <div className="row-row-2">
+                        <div className="box box-6">
+                          <div
+                            className="inner-box"
+                            style={{
+                              backgroundImage: `url(${subjectsData[5].tile})`,
+                            }}
+                            onClick={() =>
+                              this.props.history.push({
+                                pathname: '/listing',
+                                state: {
+                                  subject: subjectsData[5]['name'],
+                                  filter: 'subject',
+                                  providers: 'all',
+                                },
+                              })
+                            }
+                          >
+                            <div className="label">
+                              {subjectsData[5]['name']}
+                            </div>
+                          </div>
+                        </div>
+                        <div className="box box-7">
+                          <div
+                            className="inner-box"
+                            style={{
+                              backgroundImage: `url(${subjectsData[6].tile})`,
+                            }}
+                            onClick={() =>
+                              this.props.history.push({
+                                pathname: '/listing',
+                                state: {
+                                  subject: subjectsData[6]['name'],
+                                  filter: 'subject',
+                                  providers: 'all',
+                                },
+                              })
+                            }
+                          >
+                            <div className="label">
+                              {subjectsData[6]['name']}
+                            </div>
+                          </div>
+                        </div>
+                        <div className="box box-8">
+                          <div
+                            className="inner-box"
+                            style={{
+                              backgroundImage: `url(${subjectsData[7].tile})`,
+                            }}
+                            onClick={() =>
+                              this.props.history.push({
+                                pathname: '/listing',
+                                state: {
+                                  subject: subjectsData[7]['name'],
+                                  filter: 'subject',
+                                  providers: 'all',
+                                },
+                              })
+                            }
+                          >
+                            <div className="label">
+                              {subjectsData[7]['name']}
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
-                    <div className="box box-7">
-                      <div className="inner-box" style={{ backgroundImage: `url(${subjectsData[8].tile})` }}
-                           onClick={() => this.props.history.push({
-                             pathname: '/listing',
-                             state: {
-                               subject: subjectsData[8]['name'],
-                               filter: 'subject',
-                               providers: 'all',
-                             },
-                           })}>
-                        <div className="label">
-                          {subjectsData[8]['name']}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="row-row-2">
-                    <div className="box box-6">
-                      <div className="inner-box" style={{ backgroundImage: `url(${subjectsData[5].tile})` }}
-                           onClick={() => this.props.history.push({
-                             pathname: '/listing',
-                             state: {
-                               subject: subjectsData[5]['name'],
-                               filter: 'subject',
-                               providers: 'all',
-                             },
-                           })}>
-                        <div className="label">
-                          {subjectsData[5]['name']}
-                        </div>
-                      </div>
-                    </div>
-                    <div className="box box-7">
-                      <div className="inner-box" style={{ backgroundImage: `url(${subjectsData[6].tile})` }}
-                           onClick={() => this.props.history.push({
-                             pathname: '/listing',
-                             state: {
-                               subject: subjectsData[6]['name'],
-                               filter: 'subject',
-                               providers: 'all',
-                             },
-                           })}>
-                        <div className="label">
-                          {subjectsData[6]['name']}
-                        </div>
-                      </div>
-                    </div>
-                    <div className="box box-8">
-                      <div className="inner-box" style={{ backgroundImage: `url(${subjectsData[7].tile})` }}
-                           onClick={() => this.props.history.push({
-                             pathname: '/listing',
-                             state: {
-                               subject: subjectsData[7]['name'],
-                               filter: 'subject',
-                               providers: 'all',
-                             },
-                           })}>
-                        <div className="label">
-                          {subjectsData[7]['name']}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                  )}
                 </div>
-
-              }
-            </div>
-            <div className="right-wrapper">
-              <div className="box-1 box">
-                <div className="inner-box" style={{ backgroundImage: `url(${subjectsData[0].tile})` }}
-                     onClick={() => this.props.history.push({
-                       pathname: '/listing',
-                       state: {
-                         subject: subjectsData[0]['name'],
-                         filter: 'subject',
-                         providers: 'all',
-                       },
-                     })}>
-                  <div className="label">
-                    {subjectsData[0]['name']}
+                <div className="right-wrapper">
+                  <div className="box-1 box">
+                    <div
+                      className="inner-box"
+                      style={{
+                        backgroundImage: `url(${subjectsData[0].tile})`,
+                      }}
+                      onClick={() =>
+                        this.props.history.push({
+                          pathname: '/listing',
+                          state: {
+                            subject: subjectsData[0]['name'],
+                            filter: 'subject',
+                            providers: 'all',
+                          },
+                        })
+                      }
+                    >
+                      <div className="label">{subjectsData[0]['name']}</div>
+                    </div>
                   </div>
+                  <div className="box box-2">
+                    <div
+                      className="inner-box"
+                      style={{
+                        backgroundImage: `url(${subjectsData[1].tile})`,
+                      }}
+                      onClick={() =>
+                        this.props.history.push({
+                          pathname: '/listing',
+                          state: {
+                            subject: subjectsData[1]['name'],
+                            filter: 'subject',
+                            providers: 'all',
+                          },
+                        })
+                      }
+                    >
+                      <div className="label">{subjectsData[1]['name']}</div>
+                    </div>
+                  </div>
+                  {this.state.subjectsExpanded && (
+                    <div className="box box-3">
+                      <div
+                        className="inner-box"
+                        style={{
+                          backgroundImage: `url(${subjectsData[2].tile})`,
+                        }}
+                        onClick={() =>
+                          this.props.history.push({
+                            pathname: '/listing',
+                            state: {
+                              subject: subjectsData[2]['name'],
+                              filter: 'subject',
+                              providers: 'all',
+                            },
+                          })
+                        }
+                      >
+                        <div className="label">{subjectsData[2]['name']}</div>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
-              <div className="box box-2">
-                <div className="inner-box" style={{ backgroundImage: `url(${subjectsData[1].tile})` }}
-                     onClick={() => this.props.history.push({
-                       pathname: '/listing',
-                       state: {
-                         subject: subjectsData[1]['name'],
-                         filter: 'subject',
-                         providers: 'all',
-                       },
-                     })}>
-                  <div className="label">
-                    {subjectsData[1]['name']}
-                  </div>
-                </div>
-              </div>
-              {
-                this.state.subjectsExpanded && <div className="box box-3">
-                  <div className="inner-box" style={{ backgroundImage: `url(${subjectsData[2].tile})` }}
-                       onClick={() => this.props.history.push({
-                         pathname: '/listing',
-                         state: {
-                           subject: subjectsData[2]['name'],
-                           filter: 'subject',
-                           providers: 'all',
-                         },
-                       })}>
-                    <div className="label">
-                      {subjectsData[2]['name']}
-                    </div>
-                  </div>
-                </div>}
-            </div>
-          </div>
 
-          <EarnADegreeComponent
-            trackEvent={trackEvent}
-            degreeData={degreeData}
-            filter={'trending'}
-            routingURL={'/listing'}
-          />
-          <TrendingCoursesComponent
-            trendingData={trendingData}
-            filter={'trending'}
-            trackEvent={trackEvent}
-            routingURL={'/listing'}
-          />
-          <LearnForFreeComponent
-            trendingData={freeCourses}
-            filter={'free'}
-            trackEvent={trackEvent}
-            routingURL={'/listing'}
-          />
-          {/* <div ref={this.exclusiveCourseSection}></div>
+              <EarnADegreeComponent
+                trackEvent={trackEvent}
+                degreeData={degreeData}
+                filter={'trending'}
+                routingURL={'/listing'}
+              />
+              <TrendingCoursesComponent
+                trendingData={trendingData}
+                filter={'trending'}
+                trackEvent={trackEvent}
+                routingURL={'/listing'}
+              />
+              <LearnForFreeComponent
+                trendingData={freeCourses}
+                filter={'free'}
+                trackEvent={trackEvent}
+                routingURL={'/listing'}
+              />
+              {/* <div ref={this.exclusiveCourseSection}></div>
           <ExclusiveCourseComponent
             exclusiveCourse={exclusiveCourses}
             filter={'free'}
             trackEvent={trackEvent}
             routingURL={'/listing'}
           /> */}
-        </Grid>
-        <div className="orange-band" >
-          <div className="inner-orange">
-            <Typography
-              variant="h6"
-              style={{
-                color: 'white',
-                fontWeight: '500',
-                marginBottom: '20px',
-              }}
-            >
-              Never stop learning. Subscribe to our newsletter
-            </Typography>
-            <div style={{ marginTop: '10px', width: '90%', margin: 'auto' }}>
-              <input
-                type="email"
-                placeholder="Your email"
-                className="ns-input"
-              />
-              <button
-                onClick={() => {
-                  if (this.state.nsEmail !== '') {
-                    trackEvent('Newsletter', 'click', 'Newsletter Email');
-                  }
-                }}
-                className="ns-submit click-h"
-              >
-                Submit
-              </button>
+            </Grid>
+            <div className="orange-band">
+              <div className="inner-orange">
+                <Typography
+                  variant="h6"
+                  style={{
+                    color: 'white',
+                    fontWeight: '500',
+                    marginBottom: '20px',
+                  }}
+                >
+                  Never stop learning. Subscribe to our newsletter
+                </Typography>
+                <div
+                  style={{ marginTop: '10px', width: '90%', margin: 'auto' }}
+                >
+                  <input
+                    type="email"
+                    placeholder="Your email"
+                    className="ns-input"
+                  />
+                  <button
+                    onClick={() => {
+                      if (this.state.nsEmail !== '') {
+                        trackEvent('Newsletter', 'click', 'Newsletter Email');
+                      }
+                    }}
+                    className="ns-submit click-h"
+                  >
+                    Submit
+                  </button>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-        <Footer bgColor={'#FFF'}/>
+            <Footer bgColor={'#FFF'} />
+          </>
+        )}
       </>
-       }
-    </>
-      
     );
   }
 }
@@ -1134,7 +1266,7 @@ LandingPage.propTypes = {};
 export default withRouter(withStyles(styles, { withTheme: true })(LandingPage));
 
 function onSearchPressed(data, history) {
-  return ev => {
+  return (ev) => {
     if (ev.key === 'Enter') {
       const query = data.getQuery;
       trackEvent('search', 'onSearch', 'Search_homepage');

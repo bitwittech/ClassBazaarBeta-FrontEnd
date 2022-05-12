@@ -5,13 +5,13 @@ let initialState = {
     state: 0,
     open: false,
   },
-  preLogBox:{
-    state:0,
-    open:false
+  preLogBox: {
+    state: 0,
+    open: false,
   },
-  edubukFrom:{
-    state:0,
-    open:false
+  edubukFrom: {
+    state: 0,
+    open: false,
   },
   token: localStorage.getItem('cbtoken')
     ? localStorage.getItem('cbtoken')
@@ -22,6 +22,9 @@ let initialState = {
   alerts: [],
 };
 
+const UserTrack = createContext();
+
 const Store = createContext(initialState);
 
 export default Store;
+export { UserTrack };

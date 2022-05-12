@@ -20,6 +20,7 @@ import { trackEvent } from 'react-with-analytics/lib/utils';
 import { withRouter } from 'react-router-dom';
 import Converter from './converter.js'
 import { Pre_LOG_Box } from '../store/Types';
+import axios from 'axios';
 
 
 const styles = {
@@ -109,12 +110,24 @@ const ProfileCourseCard = withRouter(({ history, ...data }) => {
   //   // }
   // };
 
+
+  const handleUnload = async (ev) => {
+
+    const user_email = localStorage.getItem('user') || 'User Not Loged In'
+ 
+    let start_time = new Date().toLocaleString();
+    console.log('Card_track')
+
+    await axios.get(`http://0.0.0.0:8080/api/cardTrack?user_email=${user_email}&event_time=${start_time}&card_title=${data.courseName}&card_uuid=${data.uuid}&provider=${data.provider}`);
+    
+  };
+
   return (
     <>
    
       <div className="c-card click-h" onClick={() => {
 
-
+          handleUnload();
           OpenLogin();
           if(isAuth === true)
           {

@@ -1,17 +1,14 @@
 import AppBar from './AppBar';
-import Container from '@material-ui/core/Container';
 import Footer from './Footer';
 import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
 import React, { useState, useContext } from 'react';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
 import Store from '../store/Context';
 import axios from 'axios';
 import { trackEvent } from 'react-with-analytics/lib/utils';
-import bannerImage from '../assets/contact-image.jpg';
+import bannerImage from '../assets/carrer.png';
 
-const Contactus = () => {
+const Career = () => {
   const [data, setData] = useState({
     name: '',
     email: '',
@@ -79,7 +76,7 @@ const Contactus = () => {
             variant="h6"
             gutterBottom
           >
-            Contact Us
+            Join Us
           </Typography>
           <Typography
             variant="h6"
@@ -247,4 +244,4 @@ const Contactus = () => {
   );
 };
 
-export default Contactus;
+export default Career;

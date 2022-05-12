@@ -1,7 +1,7 @@
 {
-  "API": "https://api.classbazaar.com",
+  "API": "http://0.0.0.0:8080",
   "API_Local": "http://0.0.0.0:8080",
-  "API_LOCAL": "http://localhost:8080",
+  "API_LOCAL": "https://api.classbazaar.com",
   "API_NGROK": "https://fc7774e6.ngrok.io",
   "fusionAuthURL": "https://auth.classbazaar.in",
   "fusionAuthAPIKey": "NiITD64khrkH7jn6PUNYCPdancc2gdiD8oZJDTsXFOA",

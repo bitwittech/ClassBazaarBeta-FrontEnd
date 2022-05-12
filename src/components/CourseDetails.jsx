@@ -2,9 +2,9 @@ import { Container, Grid, Typography } from '@material-ui/core';
 import { CourseraCourse, CourseraDegree } from '../utils/Coursera';
 import React, { useContext, useEffect, useState } from 'react';
 import ReactHtmlParser, { convertNodeToElement } from 'react-html-parser';
-import '../styles/course-list.scss'
+import '../styles/course-list.scss';
 import AppBar from './AppBar';
-import userImg from '../assets/userImg.svg'
+import userImg from '../assets/userImg.svg';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import Box from '@material-ui/core/Box';
 import { CircularProgress } from '@material-ui/core';
@@ -37,25 +37,21 @@ import getClosestNextRun from './../utils/edxUtils';
 import { trackEvent } from 'react-with-analytics/lib/utils';
 import { Pre_LOG_Box } from '../store/Types';
 
+let count = 0;
 
-let count = 0 
-
-
-
-const formatPrice = price => {
+const formatPrice = (price) => {
   if (!price || price === null || price === undefined) return 'Free';
   else return Math.round(price);
 };
 
-const formatDuration = duration => {
+const formatDuration = (duration) => {
   if (!duration || duration === null || duration === undefined)
     return 'Self Paced';
   else return duration;
 };
 
-const CourseDetails = props => {
-
-  // Gstate stand for globale state 
+const CourseDetails = (props) => {
+  // Gstate stand for globale state
 
   const [Gstate, setState] = useState({
     data: null,
@@ -66,21 +62,19 @@ const CourseDetails = props => {
     q: '',
     rloading: true,
   });
-  
+
   const { state, dispatch } = useContext(Store);
-  
-const {isAuth} = state;
+
+  const { isAuth } = state;
 
   const handleBookmark = (uuid, provider, name) => {
     trackEvent(
       'Bookmarked_details',
       'click',
-      `${provider}|${Gstate.data && Gstate.data.title}`,
+      `${provider}|${Gstate.data && Gstate.data.title}`
     );
 
-
     console.log(uuid, provider);
-
 
     if (state.user === null) {
       return dispatch({
@@ -99,7 +93,7 @@ const {isAuth} = state;
     addBookmark(courseId, userId, user, provider, dispatch);
   };
 
-  console.log(props,']=============================');
+  console.log(props, ']=============================');
 
   // const isBookmarked = uuid => {
   //   console.log('isbookmarked', uuid);
@@ -121,10 +115,9 @@ const {isAuth} = state;
 
   const provider = props.match.params.provider;
 
-  const officialURL = "https://api.classbazaar.com/";
-  const localURL = "http://0.0.0.0:8080/";
-  
-  
+  const officialURL = 'https://api.classbazaar.com/';
+  const localURL = 'http://0.0.0.0:8080/';
+
   useEffect(() => {
     window.scrollTo(0, 0);
 
@@ -142,20 +135,19 @@ const {isAuth} = state;
         },
       };
 
-      var url = `${officialURL}api/course?uuid=${uuid}&provider=${provider}`;
+      var url = `${localURL}api/course?uuid=${uuid}&provider=${provider}`;
 
-     
       console.log(url, uuid);
-      
+
       const res = await fetch(url);
       const data = await res.json();
-      
-      console.log('dataUdemy',data.summaryData);
+
+      console.log('dataUdemy', data.summaryData);
 
       const reviews = await axios.post(
         'https://api.classbazaar.com/api/review/course',
         body,
-        config,
+        config
       );
       setState({
         ...Gstate,
@@ -163,27 +155,27 @@ const {isAuth} = state;
         loading: false,
         reviews: reviews.data.data,
         rloading: false,
-        index : data.summaryData.index,
-        ranking_points:data.summaryData.ranking_points,
+        index: data.summaryData.index,
+        ranking_points: data.summaryData.ranking_points,
         description: data.summaryData.description,
-        isFlexible : data.summaryData.is_flexible,
+        isFlexible: data.summaryData.is_flexible,
         price: data.summaryData.price,
-        subjects:data.summaryData.subjects,
-        instructors: data .summaryData.instructors,
+        subjects: data.summaryData.subjects,
+        instructors: data.summaryData.instructors,
         university: data.summaryData.university,
         price_currency: data.summaryData.price_currency,
         provider: data.summaryData.provider,
-        time : data.summaryData.start_date,
+        time: data.summaryData.start_date,
         title: data.summaryData.title,
         url: data.summaryData.url,
-        uuid : data.summaryData.uuid
+        uuid: data.summaryData.uuid,
       });
     };
 
     getCourseDetails();
-  }, []);
+  }, [Gstate, provider, uuid]);
 
-  // review section not in need 
+  // review section not in need
   const reviewSection = (ratingNumber, noOfReviews) => {
     console.log({ ratingNumber, noOfReviews });
     return (
@@ -234,36 +226,44 @@ const {isAuth} = state;
       </>
     );
   };
-  
+
   const handlePopupClose = () => {
     setState({ ...Gstate, popUp: false });
   };
 
-//modifyed by Yashwant Sahu
+  //modifyed by Yashwant Sahu
 
+  // this var is calling the function expicitlly form index.html
+  let trackPixel = 'trackPixel';
 
-// this var is calling the function expicitlly form index.html
-let trackPixel = 'trackPixel';
+  // Append by yashwant sahu
 
+  const OpenLogin = () => {
+    // sessionStorage.setItem('ShowBox',true);
 
- // Append by yashwant sahu 
-  
- const OpenLogin = () => {
-  // sessionStorage.setItem('ShowBox',true);
+    if (isAuth === false) {
+      return dispatch({
+        type: Pre_LOG_Box,
+        payload: {
+          state: 1,
+          open: true,
+        },
+      });
+    }
+  };
 
-  if(isAuth === false)
-  {
-    return dispatch({
-      type: Pre_LOG_Box,
-      payload: {
-        state: 1,
-        open: true,
-      },
-    });
-  }
-}
+  const handleUnload = async (ev) => {
+    const user_email = localStorage.getItem('user') || 'User Not Loged In';
 
-const courseSummary =  () =>
+    let start_time = new Date().toLocaleString();
+    console.log('Card_track');
+
+    await axios.get(
+      `${localURL}api/cardEnrollTrack?user_email=${user_email}&event_time=${start_time}&card_title=${Gstate.title}&card_uuid=${Gstate.uuid}&provider=${Gstate.provider}`
+    );
+  };
+
+  const courseSummary = () =>
     Gstate && (
       <>
         <div
@@ -280,70 +280,87 @@ const courseSummary =  () =>
             color="primary"
             gutterBottom
           >
-            <div style={{ color: '#444444', borderBottom: '2px solid #f15a29', padding: '5px', display: 'inline' }}>
+            <div
+              style={{
+                color: '#444444',
+                borderBottom: '2px solid #f15a29',
+                padding: '5px',
+                display: 'inline',
+              }}
+            >
               At a Glance
             </div>
           </Typography>
-          <div className="d-flex" style={{ flexDirection: 'column', marginTop: '25px' }}>
+          <div
+            className="d-flex"
+            style={{ flexDirection: 'column', marginTop: '25px' }}
+          >
             <div style={{ display: 'flex' }}>
               <div>
-                <QueryBuilderIcon color="secondary"/> &nbsp;
+                <QueryBuilderIcon color="secondary" /> &nbsp;
               </div>
-              {Gstate.is_Flexible !== null ?<div>Flexible Timing </div>:<div>Null Week</div>}
-           </div>
+              {Gstate.is_Flexible !== null ? (
+                <div>Flexible Timing </div>
+              ) : (
+                <div>Null Week</div>
+              )}
+            </div>
             <div style={{ display: 'flex', marginTop: '15px' }}>
               <div>
-                <DateRangeIcon color="secondary"/> &nbsp;
+                <DateRangeIcon color="secondary" /> &nbsp;
               </div>
-              {Gstate.time !== null ?<div>{Gstate.time.split('T')[0]}</div>:<div>Scheduled</div>}
+              {Gstate.time !== null ? (
+                <div>{Gstate.time.split('T')[0]}</div>
+              ) : (
+                <div>Scheduled</div>
+              )}
             </div>
 
             <div style={{ display: 'flex', marginTop: '15px' }}>
               <div>
-                <img src={Rupee} alt="cb-Rupee"/> &nbsp;
+                <img src={Rupee} alt="cb-Rupee" /> &nbsp;
               </div>
               <div>
                 {provider === 'Swayam'
                   ? 'Free'
-                  : Gstate.price === '' ||
-                  Gstate.price === null
-                    ? 'Provider subscription required'
-                    : Gstate.price === 0
-                      ? 'Free'
-                      : formatPrice(Gstate.price).toLocaleString(
-                        'en-IN',
-                      )}
+                  : Gstate.price === '' || Gstate.price === null
+                  ? 'Provider subscription required'
+                  : Gstate.price === 0
+                  ? 'Free'
+                  : formatPrice(Gstate.price).toLocaleString('en-IN')}
               </div>
             </div>
 
             <div style={{ marginTop: '20px' }}>
               <button
                 onClick={async () => {
+                  handleUnload();
+
                   OpenLogin();
-                  if(isAuth === true){
+                  if (isAuth === true) {
                     trackEvent(
                       'Enroll Now',
                       'click',
-                      `${provider}|${Gstate.title}`,
+                      `${provider}|${Gstate.title}`
                     );
-  
-                    const res = await fetch(`${officialURL}api/track/?title=${Gstate.title}`)
-  
+
+                    const res = await fetch(
+                      `${localURL}api/track/?title=${Gstate.title}`
+                    );
+
                     window.open(
                       provider === 'Swayam'
-                      ? Gstate.url &&
-                      Gstate.url.replace(
-                        'www.swayam.com',
-                        'www.swayam.gov.in',
-                        )
+                        ? Gstate.url &&
+                            Gstate.url.replace(
+                              'www.swayam.com',
+                              'www.swayam.gov.in'
+                            )
                         : Gstate.url && Gstate.url,
-                        '_blank',
-                        );
-                      // button tracker function added
-                        window[trackPixel]();
+                      '_blank'
+                    );
+                    // button tracker function added
+                    window[trackPixel]();
                   }
-
-                  
                 }}
                 className="enroll-btn"
               >
@@ -370,7 +387,6 @@ const courseSummary =  () =>
       </>
     );
 
-
   const courseraSummary = (type, count) => (
     <>
       <div
@@ -387,14 +403,28 @@ const courseSummary =  () =>
           color="primary"
           gutterBottom
         >
-          <div style={{ color: '#444444', borderBottom: '2px solid #f15a29', padding: '5px', display: 'inline' }}>
+          <div
+            style={{
+              color: '#444444',
+              borderBottom: '2px solid #f15a29',
+              padding: '5px',
+              display: 'inline',
+            }}
+          >
             At a Glance
           </div>
         </Typography>
-        <div className="d-flex" style={{ flexDirection: 'column', marginTop: '25px',  lineHeight: '35px' }}>
+        <div
+          className="d-flex"
+          style={{
+            flexDirection: 'column',
+            marginTop: '25px',
+            lineHeight: '35px',
+          }}
+        >
           <div style={{ display: 'flex' }}>
             <div>
-              <QueryBuilderIcon color="secondary"/> &nbsp;
+              <QueryBuilderIcon color="secondary" /> &nbsp;
             </div>
             <div>{Gstate.summaryData.commitment}</div>
             {/* <div>
@@ -407,51 +437,57 @@ const courseSummary =  () =>
           </div>
 
           {type === 'degree' ? (
-            <div style={{ display: 'flex', marginTop: '15px',  lineHeight: '35px' }}>
+            <div
+              style={{ display: 'flex', marginTop: '15px', lineHeight: '35px' }}
+            >
               <div>
-                <MoveToInboxIcon color="secondary"/> &nbsp;
+                <MoveToInboxIcon color="secondary" /> &nbsp;
               </div>
               <div>{` Starts on ${formatDate(
                 new Date(Gstate.summaryData.start_date),
-                'MMMM d',
+                'MMMM d'
               )}`}</div>
               {/* <div>{Gstate.data.additionalDetails.courses.length} courses</div> */}
             </div>
           ) : (
             <div style={{ display: 'flex', marginTop: '15px' }}>
               <div>
-                <DateRangeIcon color="secondary"/> &nbsp;
+                <DateRangeIcon color="secondary" /> &nbsp;
               </div>
               <div>{` Starts on ${formatDate(
                 new Date(Gstate.summaryData.start_date),
-                'MMMM d',
+                'MMMM d'
               )}`}</div>
               <div></div>
             </div>
           )}
 
-          <div style={{ display: 'flex', marginTop: '15px',  lineHeight: '35px' }}>
+          <div
+            style={{ display: 'flex', marginTop: '15px', lineHeight: '35px' }}
+          >
             <div>
               {/* <img src={Rupee} alt="cb-Rupee" /> &nbsp; */}
-              <img src={Rupee} alt="cb-Rupee"/> &nbsp;
-              &nbsp;
+              <img src={Rupee} alt="cb-Rupee" /> &nbsp; &nbsp;
             </div>
             <div>
               {provider === 'Swayam'
                 ? 'Free'
                 : Gstate.summaryData.price === '' ||
-                Gstate.summaryData.price === null
-                  ? 'Provider subscription required'
-                  : Gstate.summaryData.price === 0
-                    ? 'Free'
-                    : formatPrice(Gstate.summaryData.price).toLocaleString('en-IN')}
+                  Gstate.summaryData.price === null
+                ? 'Provider subscription required'
+                : Gstate.summaryData.price === 0
+                ? 'Free'
+                : formatPrice(Gstate.summaryData.price).toLocaleString('en-IN')}
               {/* {Gstate.data.rakutenDetails.price.retail._text} */}
             </div>
           </div>
 
-          <div class="pr-pad" style={{ display: 'flex', marginTop: '15px',  lineHeight: '35px' }}>
+          <div
+            class="pr-pad"
+            style={{ display: 'flex', marginTop: '15px', lineHeight: '35px' }}
+          >
             <div>
-              <ListAltIcon color="secondary"/> &nbsp;
+              <ListAltIcon color="secondary" /> &nbsp;
             </div>
             {/* <div>{Gstate.summaryData.provider}</div> */}
             <div>Coursera</div>
@@ -463,7 +499,7 @@ const courseSummary =  () =>
                 trackEvent(
                   'Enroll Now',
                   'click',
-                  `${provider}|${Gstate.data.title}`,
+                  `${provider}|${Gstate.data.title}`
                 );
                 window.open(Gstate.data.rakutenDetails.URL.product._text);
               }}
@@ -492,13 +528,13 @@ const courseSummary =  () =>
     </>
   );
 
-  // this section in not need 
+  // this section in not need
   const reviews = () => (
     <>
       {Gstate.rlaoding ? (
         <p>Loading</p>
       ) : Gstate.reviews.length > 0 ? (
-        Gstate.reviews.map(data => (
+        Gstate.reviews.map((data) => (
           <Grid
             key={data.course_id}
             container
@@ -510,13 +546,8 @@ const courseSummary =  () =>
           >
             <Grid item xs={3}>
               <Grid item xs={12}>
-          
                 <Box style={{ padding: '0 10px' }}>
-                  <img
-                    className="review-image"
-                    src={userImg}
-                    alt="user"
-                  />
+                  <img className="review-image" src={userImg} alt="user" />
                 </Box>
               </Grid>
             </Grid>
@@ -538,8 +569,8 @@ const courseSummary =  () =>
         ))
       ) : (
         <>
-        <br/>
-        <p>No reviews for this course</p>
+          <br />
+          <p>No reviews for this course</p>
         </>
       )}
     </>
@@ -1029,68 +1060,71 @@ const courseSummary =  () =>
   //   );
   // };
 
-
   const coursera = () => {
     return (
-        Gstate && (
-          <div maxwidth="lg" className="ead-sec">
-            <div className="cd-container">
-              <Grid container spacing={3} direction="row-reverse">
-                <Grid item xs={12} sm={3}>
-                  {courseSummary()}
-                </Grid>
-                <Grid item xs={12} sm={9}>
-                  <div className="d-card" style={{ backgroundColor: '#fff3ef', boxShadow: 'none' }}>
-                    <div className="cd-head">
-                      <div className="cd-head-o">
-                        <Typography
-                          style={{ fontWeight: '600' }}
-                          color="primary"
-                          variant="subtitle2"
-                          className="u-uni"
-                          gutterBottom
-                        >
-                          {Gstate.provider}
-                        </Typography>
-                        <Typography variant="h6" className="u-title" gutterBottom>
-                          {Gstate.title}
-                        </Typography>
-                        <Typography
-                          variant="caption"
-                          display="block"
-                          className="provider u-provider"
-                          gutterBottom
-                        >
-                          via {provider}
-                        </Typography>
-                      </div>
-                    </div>
-                    <br/>
-                    <div className="cd-cont">
-                      <Typography align = "justify"
-                        style={{ fontWeight: '600', fontSize: '22px' }}
+      Gstate && (
+        <div maxwidth="lg" className="ead-sec">
+          <div className="cd-container">
+            <Grid container spacing={3} direction="row-reverse">
+              <Grid item xs={12} sm={3}>
+                {courseSummary()}
+              </Grid>
+              <Grid item xs={12} sm={9}>
+                <div
+                  className="d-card"
+                  style={{ backgroundColor: '#fff3ef', boxShadow: 'none' }}
+                >
+                  <div className="cd-head">
+                    <div className="cd-head-o">
+                      <Typography
+                        style={{ fontWeight: '600' }}
+                        color="primary"
                         variant="subtitle2"
+                        className="u-uni"
                         gutterBottom
                       >
-                        Course Overview
+                        {Gstate.provider}
                       </Typography>
-                      <Typography align = "justify"
-                        style={{ fontSize: '16px', fontWeight: '300' }}
-                        variant="body1"
+                      <Typography variant="h6" className="u-title" gutterBottom>
+                        {Gstate.title}
+                      </Typography>
+                      <Typography
+                        variant="caption"
+                        display="block"
+                        className="provider u-provider"
                         gutterBottom
                       >
-                        {ReactHtmlParser(Gstate.description)}
+                        via {provider}
                       </Typography>
                     </div>
                   </div>
-                </Grid>
+                  <br />
+                  <div className="cd-cont">
+                    <Typography
+                      align="justify"
+                      style={{ fontWeight: '600', fontSize: '22px' }}
+                      variant="subtitle2"
+                      gutterBottom
+                    >
+                      Course Overview
+                    </Typography>
+                    <Typography
+                      align="justify"
+                      style={{ fontSize: '16px', fontWeight: '300' }}
+                      variant="body1"
+                      gutterBottom
+                    >
+                      {ReactHtmlParser(Gstate.description)}
+                    </Typography>
+                  </div>
+                </div>
               </Grid>
-            </div>
+            </Grid>
           </div>
-        )
-      );
+        </div>
+      )
+    );
   };
-
 
   const udemy = () => {
     return (
@@ -1102,7 +1136,10 @@ const courseSummary =  () =>
                 {courseSummary()}
               </Grid>
               <Grid item xs={12} sm={9}>
-                <div className="d-card" style={{ backgroundColor: '#fff3ef', boxShadow: 'none' }}>
+                <div
+                  className="d-card"
+                  style={{ backgroundColor: '#fff3ef', boxShadow: 'none' }}
+                >
                   <div className="cd-head">
                     <div className="cd-head-o">
                       <Typography
@@ -1127,23 +1164,24 @@ const courseSummary =  () =>
                       </Typography>
                     </div>
                   </div>
-                  <br/>
+                  <br />
                   <div className="cd-cont">
-                    <Typography align = "justify"
+                    <Typography
+                      align="justify"
                       style={{ fontWeight: '600', fontSize: '22px' }}
                       variant="subtitle2"
                       gutterBottom
                     >
                       Course Overview
                     </Typography>
-                    <Typography align = "justify"
+                    <Typography
+                      align="justify"
                       style={{ fontSize: '16px', fontWeight: '300' }}
                       variant="body1"
                       gutterBottom
                     >
                       {ReactHtmlParser(Gstate.description)}
                     </Typography>
-                   
                   </div>
                 </div>
               </Grid>
@@ -1155,204 +1193,6 @@ const courseSummary =  () =>
   };
 
   const fl = () =>
-  Gstate && (
-    <div maxwidth="lg" className="ead-sec">
-      <div className="cd-container">
-        <Grid container spacing={3} direction="row-reverse">
-          <Grid item xs={12} sm={3}>
-            {courseSummary()}
-          </Grid>
-          <Grid item xs={12} sm={9}>
-            <div className="d-card" style={{ backgroundColor: '#fff3ef', boxShadow: 'none' }}>
-              <div className="cd-head">
-                <div>
-                  <Typography
-                    style={{ fontWeight: '600' }}
-                    color="primary"
-                    variant="subtitle2"
-                    gutterBottom
-                  >
-                    {Gstate.university}
-                  </Typography>
-                  <Typography variant="h6" gutterBottom>
-                    {ReactHtmlParser(Gstate.title)}
-                  </Typography>
-
-                  <Typography
-                    variant="caption"
-                    display="block"
-                    className="provider"
-                    gutterBottom
-                  >
-                    via {provider}
-                  </Typography>
-                </div>
-                <div style={{ textAlign: 'right' }}>
-                  {reviewSection(
-                    parseFloat(Gstate.ranking_points),
-                    -1,
-                  )}
-                </div>
-              </div>
-              <br/>
-              <div className="cd-cont">
-                <Typography
-                  style={{ fontWeight: '600', fontSize: '22px' }}
-                  variant="subtitle2"
-                  gutterBottom
-                >
-                  Course Overview
-                </Typography>
-                <Typography
-                  style={{ fontSize: '16px', fontWeight: '300' }}
-                  variant="body1"
-                  gutterBottom
-                >
-                  {ReactHtmlParser(Gstate.description)}
-                </Typography>
-
-                {Gstate.instructors !== undefined && (
-                  <>
-                    <Typography
-                      style={{ fontWeight: '600', fontSize: '22px' }}
-                      variant="subtitle2"
-                      gutterBottom
-                    >
-                      Subjects:&nbsp; {' '}
-                      {Gstate.subjects.map((obj, index) => (
-                        <span key={index} style={{ fontWeight: '300' }}>
-                          {obj}
-                        </span>
-                      ))}
-                    </Typography>
-                  </>
-                )}
-
-                <br />
-
-                {Gstate.instructors !== undefined && (
-                  <>
-                    <Typography
-                      style={{ fontWeight: '600', fontSize: '22px' }}
-                      variant="subtitle2"
-                      gutterBottom
-                    >
-                      Professor:&nbsp;{' '}
-                      {Gstate.instructors.map((obj, index) => (
-                        <span key={index} style={{ fontWeight: '300' }}>
-                          {obj}
-                        </span>
-                      ))}
-                    </Typography>
-                  </>
-                )}
-                <br/>
-                <Typography
-                  style={{ fontWeight: '600', fontSize: '22px' }}
-                  variant="subtitle2"
-                  gutterBottom
-                >
-                  Reviews
-                </Typography>
-                <div>
-                  <button
-                    onClick={() => {
-                      setState({ ...Gstate, popUp: !Gstate.popUp });
-                    }}
-                    className="enroll-btn"
-                  >
-                    <div style={{ display: 'flex', flexDirection: 'row' }}>
-                      <div
-                        style={{
-                          display: 'flex',
-                          alignItems: 'center',
-                          fontWeight: '600',
-                        }}
-                      >
-                        <div>Write Review &nbsp;</div>
-                      </div>
-                      <div>
-                        <RateReviewIcon
-                          style={{ fontSize: '22px', marginTop: '2px' }}
-                        />
-                      </div>
-                    </div>
-                  </button>
-                </div>
-                {reviews()}
-              </div>
-            </div>
-          </Grid>
-        </Grid>
-      </div>
-    </div>
-  );
-
-
-  const flOLD = () =>{
-    return (
-      Gstate && (
-        <div maxwidth="lg" className="ead-sec">
-          <div className="cd-container">
-            <Grid container spacing={3} direction="row-reverse">
-              <Grid item xs={12} sm={3}>
-                {courseSummary()}
-              </Grid>
-              <Grid item xs={12} sm={9}>
-                <div className="d-card" style={{ backgroundColor: '#fff3ef', boxShadow: 'none' }}>
-                  <div className="cd-head">
-                    <div className="cd-head-o">
-                      <Typography
-                        style={{ fontWeight: '600' }}
-                        color="primary"
-                        variant="subtitle2"
-                        className="u-uni"
-                        gutterBottom
-                      >
-                        {Gstate.provider}
-                      </Typography>
-                      <Typography variant="h6" className="u-title" gutterBottom>
-                        {Gstate.title}
-                      </Typography>
-                      <Typography
-                        variant="caption"
-                        display="block"
-                        className="provider u-provider"
-                        gutterBottom
-                      >
-                        via {provider}
-                      </Typography>
-                    </div>
-                  </div>
-                  <br/>
-                  <div className="cd-cont">
-                    <Typography align = "justify"
-                      style={{ fontWeight: '600', fontSize: '22px' }}
-                      variant="subtitle2"
-                      gutterBottom
-                    >
-                      Course Overview
-                    </Typography>
-                    <Typography align = "justify"
-                      style={{ fontSize: '16px', fontWeight: '300' }}
-                      variant="body1"
-                      gutterBottom
-                    >
-                      {ReactHtmlParser(Gstate.description)}
-                    </Typography>
-                   
-                  </div>
-                </div>
-              </Grid>
-            </Grid>
-          </div>
-        </div>
-      )
-    );
-  };
-
-// new Edx Formed By Yashwant Sahu
-  const edX = () =>
     Gstate && (
       <div maxwidth="lg" className="ead-sec">
         <div className="cd-container">
@@ -1361,7 +1201,10 @@ const courseSummary =  () =>
               {courseSummary()}
             </Grid>
             <Grid item xs={12} sm={9}>
-              <div className="d-card" style={{ backgroundColor: '#fff3ef', boxShadow: 'none' }}>
+              <div
+                className="d-card"
+                style={{ backgroundColor: '#fff3ef', boxShadow: 'none' }}
+              >
                 <div className="cd-head">
                   <div>
                     <Typography
@@ -1386,13 +1229,10 @@ const courseSummary =  () =>
                     </Typography>
                   </div>
                   <div style={{ textAlign: 'right' }}>
-                    {reviewSection(
-                      parseFloat(Gstate.ranking_points),
-                      -1,
-                    )}
+                    {reviewSection(parseFloat(Gstate.ranking_points), -1)}
                   </div>
                 </div>
-                <br/>
+                <br />
                 <div className="cd-cont">
                   <Typography
                     style={{ fontWeight: '600', fontSize: '22px' }}
@@ -1416,7 +1256,7 @@ const courseSummary =  () =>
                         variant="subtitle2"
                         gutterBottom
                       >
-                        Subjects:&nbsp; {' '}
+                        Subjects:&nbsp;{' '}
                         {Gstate.subjects.map((obj, index) => (
                           <span key={index} style={{ fontWeight: '300' }}>
                             {obj}
@@ -1444,7 +1284,208 @@ const courseSummary =  () =>
                       </Typography>
                     </>
                   )}
-                  <br/>
+                  <br />
+                  <Typography
+                    style={{ fontWeight: '600', fontSize: '22px' }}
+                    variant="subtitle2"
+                    gutterBottom
+                  >
+                    Reviews
+                  </Typography>
+                  <div>
+                    <button
+                      onClick={() => {
+                        setState({ ...Gstate, popUp: !Gstate.popUp });
+                      }}
+                      className="enroll-btn"
+                    >
+                      <div style={{ display: 'flex', flexDirection: 'row' }}>
+                        <div
+                          style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            fontWeight: '600',
+                          }}
+                        >
+                          <div>Write Review &nbsp;</div>
+                        </div>
+                        <div>
+                          <RateReviewIcon
+                            style={{ fontSize: '22px', marginTop: '2px' }}
+                          />
+                        </div>
+                      </div>
+                    </button>
+                  </div>
+                  {reviews()}
+                </div>
+              </div>
+            </Grid>
+          </Grid>
+        </div>
+      </div>
+    );
+
+  const flOLD = () => {
+    return (
+      Gstate && (
+        <div maxwidth="lg" className="ead-sec">
+          <div className="cd-container">
+            <Grid container spacing={3} direction="row-reverse">
+              <Grid item xs={12} sm={3}>
+                {courseSummary()}
+              </Grid>
+              <Grid item xs={12} sm={9}>
+                <div
+                  className="d-card"
+                  style={{ backgroundColor: '#fff3ef', boxShadow: 'none' }}
+                >
+                  <div className="cd-head">
+                    <div className="cd-head-o">
+                      <Typography
+                        style={{ fontWeight: '600' }}
+                        color="primary"
+                        variant="subtitle2"
+                        className="u-uni"
+                        gutterBottom
+                      >
+                        {Gstate.provider}
+                      </Typography>
+                      <Typography variant="h6" className="u-title" gutterBottom>
+                        {Gstate.title}
+                      </Typography>
+                      <Typography
+                        variant="caption"
+                        display="block"
+                        className="provider u-provider"
+                        gutterBottom
+                      >
+                        via {provider}
+                      </Typography>
+                    </div>
+                  </div>
+                  <br />
+                  <div className="cd-cont">
+                    <Typography
+                      align="justify"
+                      style={{ fontWeight: '600', fontSize: '22px' }}
+                      variant="subtitle2"
+                      gutterBottom
+                    >
+                      Course Overview
+                    </Typography>
+                    <Typography
+                      align="justify"
+                      style={{ fontSize: '16px', fontWeight: '300' }}
+                      variant="body1"
+                      gutterBottom
+                    >
+                      {ReactHtmlParser(Gstate.description)}
+                    </Typography>
+                  </div>
+                </div>
+              </Grid>
+            </Grid>
+          </div>
+        </div>
+      )
+    );
+  };
+
+  // new Edx Formed By Yashwant Sahu
+  const edX = () =>
+    Gstate && (
+      <div maxwidth="lg" className="ead-sec">
+        <div className="cd-container">
+          <Grid container spacing={3} direction="row-reverse">
+            <Grid item xs={12} sm={3}>
+              {courseSummary()}
+            </Grid>
+            <Grid item xs={12} sm={9}>
+              <div
+                className="d-card"
+                style={{ backgroundColor: '#fff3ef', boxShadow: 'none' }}
+              >
+                <div className="cd-head">
+                  <div>
+                    <Typography
+                      style={{ fontWeight: '600' }}
+                      color="primary"
+                      variant="subtitle2"
+                      gutterBottom
+                    >
+                      {Gstate.university}
+                    </Typography>
+                    <Typography variant="h6" gutterBottom>
+                      {ReactHtmlParser(Gstate.title)}
+                    </Typography>
+
+                    <Typography
+                      variant="caption"
+                      display="block"
+                      className="provider"
+                      gutterBottom
+                    >
+                      via {provider}
+                    </Typography>
+                  </div>
+                  <div style={{ textAlign: 'right' }}>
+                    {reviewSection(parseFloat(Gstate.ranking_points), -1)}
+                  </div>
+                </div>
+                <br />
+                <div className="cd-cont">
+                  <Typography
+                    style={{ fontWeight: '600', fontSize: '22px' }}
+                    variant="subtitle2"
+                    gutterBottom
+                  >
+                    Course Overview
+                  </Typography>
+                  <Typography
+                    style={{ fontSize: '16px', fontWeight: '300' }}
+                    variant="body1"
+                    gutterBottom
+                  >
+                    {ReactHtmlParser(Gstate.description)}
+                  </Typography>
+
+                  {Gstate.instructors !== undefined && (
+                    <>
+                      <Typography
+                        style={{ fontWeight: '600', fontSize: '22px' }}
+                        variant="subtitle2"
+                        gutterBottom
+                      >
+                        Subjects:&nbsp;{' '}
+                        {Gstate.subjects.map((obj, index) => (
+                          <span key={index} style={{ fontWeight: '300' }}>
+                            {obj}
+                          </span>
+                        ))}
+                      </Typography>
+                    </>
+                  )}
+
+                  <br />
+
+                  {Gstate.instructors !== undefined && (
+                    <>
+                      <Typography
+                        style={{ fontWeight: '600', fontSize: '22px' }}
+                        variant="subtitle2"
+                        gutterBottom
+                      >
+                        Professor:&nbsp;{' '}
+                        {Gstate.instructors.map((obj, index) => (
+                          <span key={index} style={{ fontWeight: '300' }}>
+                            {obj}
+                          </span>
+                        ))}
+                      </Typography>
+                    </>
+                  )}
+                  <br />
                   <Typography
                     style={{ fontWeight: '600', fontSize: '22px' }}
                     variant="subtitle2"
@@ -1495,7 +1536,10 @@ const courseSummary =  () =>
               {courseSummary()}
             </Grid>
             <Grid item xs={12} sm={9}>
-              <div className="d-card" style={{ backgroundColor: '#fff3ef', boxShadow: 'none' }}>
+              <div
+                className="d-card"
+                style={{ backgroundColor: '#fff3ef', boxShadow: 'none' }}
+              >
                 <div className="cd-head">
                   <div>
                     <Typography
@@ -1520,7 +1564,7 @@ const courseSummary =  () =>
                   </div>
                   {/* <div style={{ textAlign: 'right' }}>{reviewSection()}</div> */}
                 </div>
-                <br/>
+                <br />
                 <div className="cd-cont">
                   <Typography
                     style={{ fontWeight: '600', fontSize: '22px' }}
@@ -1535,7 +1579,7 @@ const courseSummary =  () =>
                     gutterBottom
                   >
                     {ReactHtmlParser(Gstate.data.sections[0], {
-                      transform: node => {
+                      transform: (node) => {
                         if (node.name === 'b') {
                           return (
                             <Typography
@@ -1563,7 +1607,7 @@ const courseSummary =  () =>
                     gutterBottom
                   >
                     {ReactHtmlParser(Gstate.data.sections[2], {
-                      transform: node => {
+                      transform: (node) => {
                         if (node.name === 'h3') {
                           return null;
                         }
@@ -1609,7 +1653,7 @@ const courseSummary =  () =>
                       </Typography>
                     </>
                   )}
-                  <br/>
+                  <br />
                   <Typography
                     style={{ fontWeight: '600', fontSize: '22px' }}
                     variant="subtitle2"
@@ -1660,7 +1704,10 @@ const courseSummary =  () =>
               {courseSummary()}
             </Grid>
             <Grid item xs={12} sm={9}>
-              <div className="d-card" style={{ backgroundColor: '#fff3ef', boxShadow: 'none' }}>
+              <div
+                className="d-card"
+                style={{ backgroundColor: '#fff3ef', boxShadow: 'none' }}
+              >
                 <div className="cd-head">
                   <div>
                     <Typography
@@ -1688,84 +1735,84 @@ const courseSummary =  () =>
                       undefined,
                       parseInt(Gstate.data.no_of_reviews),
                     )} */}
-                  </div>
                 </div>
-                <br/>
-                <div className="cd-cont">
-                  <Typography
-                    style={{ fontWeight: '600', fontSize: '18px' }}
-                    variant="subtitle2"
-                    gutterBottom
-                  >
-                    Course Overview
-                  </Typography>
-                  <Typography
-                    style={{ fontSize: '16px', fontWeight: '300' }}
-                    variant="body1"
-                    gutterBottom
-                  >
-                    {Gstate.data.short_description}
-                  </Typography>
-                  <Typography
-                    style={{ fontWeight: '600', fontSize: '18px' }}
-                    variant="subtitle2"
-                    gutterBottom
-                  >
-                    Whos is this course for?
-                  </Typography>
-                  <Typography
-                    style={{ fontSize: '16px', fontWeight: '300' }}
-                    variant="body1"
-                    gutterBottom
-                  >
-                    {Gstate.data.who_is_this_program_for}
-                  </Typography>
-                  <Typography
-                    style={{ fontWeight: '600', fontSize: '18px' }}
-                    variant="subtitle2"
-                    gutterBottom
-                  >
-                    What will you learn?
-                  </Typography>
-                  <Typography
-                    style={{ fontSize: '16px', fontWeight: '300' }}
-                    variant="body1"
-                    gutterBottom
-                  >
-                    {Gstate.data.top_Skills}
-                  </Typography>
+              </div>
+              <br />
+              <div className="cd-cont">
+                <Typography
+                  style={{ fontWeight: '600', fontSize: '18px' }}
+                  variant="subtitle2"
+                  gutterBottom
+                >
+                  Course Overview
+                </Typography>
+                <Typography
+                  style={{ fontSize: '16px', fontWeight: '300' }}
+                  variant="body1"
+                  gutterBottom
+                >
+                  {Gstate.data.short_description}
+                </Typography>
+                <Typography
+                  style={{ fontWeight: '600', fontSize: '18px' }}
+                  variant="subtitle2"
+                  gutterBottom
+                >
+                  Whos is this course for?
+                </Typography>
+                <Typography
+                  style={{ fontSize: '16px', fontWeight: '300' }}
+                  variant="body1"
+                  gutterBottom
+                >
+                  {Gstate.data.who_is_this_program_for}
+                </Typography>
+                <Typography
+                  style={{ fontWeight: '600', fontSize: '18px' }}
+                  variant="subtitle2"
+                  gutterBottom
+                >
+                  What will you learn?
+                </Typography>
+                <Typography
+                  style={{ fontSize: '16px', fontWeight: '300' }}
+                  variant="body1"
+                  gutterBottom
+                >
+                  {Gstate.data.top_Skills}
+                </Typography>
 
-                  <Typography
-                    style={{ fontWeight: '600', fontSize: '18px' }}
-                    variant="subtitle2"
-                    gutterBottom
-                  >
-                    Minimum Eligibility
-                  </Typography>
-                  <Typography
-                    style={{ fontSize: '16px', fontWeight: '300' }}
-                    variant="body1"
-                    gutterBottom
-                  >
-                    {Gstate.data['Minimum Eligibility']}
-                  </Typography>
+                <Typography
+                  style={{ fontWeight: '600', fontSize: '18px' }}
+                  variant="subtitle2"
+                  gutterBottom
+                >
+                  Minimum Eligibility
+                </Typography>
+                <Typography
+                  style={{ fontSize: '16px', fontWeight: '300' }}
+                  variant="body1"
+                  gutterBottom
+                >
+                  {Gstate.data['Minimum Eligibility']}
+                </Typography>
 
-                  <Typography
-                    style={{ fontWeight: '600', fontSize: '18px' }}
-                    variant="subtitle2"
-                    gutterBottom
-                  >
-                    Job Opportunities
-                  </Typography>
-                  <Typography
-                    style={{ fontSize: '16px', fontWeight: '300' }}
-                    variant="body1"
-                    gutterBottom
-                  >
-                    {Gstate.data['job_opportunities\n']}
-                  </Typography>
+                <Typography
+                  style={{ fontWeight: '600', fontSize: '18px' }}
+                  variant="subtitle2"
+                  gutterBottom
+                >
+                  Job Opportunities
+                </Typography>
+                <Typography
+                  style={{ fontSize: '16px', fontWeight: '300' }}
+                  variant="body1"
+                  gutterBottom
+                >
+                  {Gstate.data['job_opportunities\n']}
+                </Typography>
 
-                  {/* <Typography
+                {/* <Typography
                   style={{ fontWeight: '600', fontSize: '18px' }}
                   variant="subtitle2"
                   gutterBottom
@@ -1777,15 +1824,15 @@ const courseSummary =  () =>
                     </span>
                   ))}
                 </Typography> */}
-                  <br/>
-                  {/* <Typography
+                <br />
+                {/* <Typography
                     style={{ fontWeight: '600', fontSize: '18px' }}
                     variant="subtitle2"
                     gutterBottom
                   >
                     Reviews
                   </Typography> */}
-                  {/* <div>
+                {/* <div>
                     <button
                       onClick={() => {
                         setState({ ...Gstate, popUp: !Gstate.popUp });
@@ -1810,7 +1857,7 @@ const courseSummary =  () =>
                       </div>
                     </button>
                   </div> */}
-                  {/* {reviews()} */}
+                {/* {reviews()} */}
               </div>
             </Grid>
           </Grid>
@@ -1831,7 +1878,10 @@ const courseSummary =  () =>
               {courseSummary()}
             </Grid>
             <Grid item xs={12} sm={9} className="bgwhite">
-              <div className="d-card" style={{ backgroundColor: '#fff3ef', boxShadow: 'none' }}>
+              <div
+                className="d-card"
+                style={{ backgroundColor: '#fff3ef', boxShadow: 'none' }}
+              >
                 <div className="cd-head">
                   <div>
                     <Typography
@@ -1856,7 +1906,7 @@ const courseSummary =  () =>
                   </div>
                   {/* <div style={{ textAlign: 'right' }}>{reviewSection()}</div> */}
                 </div>
-                <br/>
+                <br />
                 <div className="cd-cont">
                   <Typography
                     style={{ fontWeight: '600', fontSize: '18px' }}
@@ -1885,7 +1935,7 @@ const courseSummary =  () =>
                     gutterBottom
                   >
                     {ReactHtmlParser(Gstate.data.syllabus, {
-                      transform: node => {
+                      transform: (node) => {
                         if (node.name === 'h1') {
                           return (
                             <Typography
@@ -1916,7 +1966,7 @@ const courseSummary =  () =>
                       </Typography>
                     </>
                   )}
-                  <br/>
+                  <br />
                   <Typography
                     style={{ fontWeight: '600', fontSize: '22px' }}
                     variant="subtitle2"
@@ -1949,7 +1999,7 @@ const courseSummary =  () =>
                       </div>
                     </button>
                   </div>
-                  <br/>
+                  <br />
                   {/* {reviews()} */}
                 </div>
               </div>
@@ -1958,8 +2008,8 @@ const courseSummary =  () =>
         </div>
       </div>
     );
-  
-    const digitalHealth = () =>
+
+  const digitalHealth = () =>
     Gstate.data && (
       <div maxwidth="lg" className="ead-sec">
         <div className="cd-container">
@@ -1968,7 +2018,10 @@ const courseSummary =  () =>
               {courseSummary()}
             </Grid>
             <Grid item xs={12} sm={9}>
-              <div className="d-card" style={{ backgroundColor: '#fff3ef', boxShadow: 'none' }}>
+              <div
+                className="d-card"
+                style={{ backgroundColor: '#fff3ef', boxShadow: 'none' }}
+              >
                 <div className="cd-head">
                   <div className="cd-head-o">
                     <Typography
@@ -1998,7 +2051,7 @@ const courseSummary =  () =>
                     )}
                   </div> */}
                 </div>
-                <br/>
+                <br />
                 <div className="cd-cont">
                   <Typography
                     style={{ fontWeight: '600', fontSize: '22px' }}
@@ -2013,7 +2066,7 @@ const courseSummary =  () =>
                     gutterBottom
                   >
                     {ReactHtmlParser(Gstate.data.full_description, {
-                      transform: node => {
+                      transform: (node) => {
                         if (node.name === 'h2' || node.name === 'h3') {
                           // console.log({ node });
                           return <Box>{node.children[0].children[0].data}</Box>;
@@ -2028,7 +2081,7 @@ const courseSummary =  () =>
                       },
                     })}
                   </Typography>
-                  <br/>
+                  <br />
                   {Gstate.data.outcome !== '' && (
                     <>
                       <Typography
@@ -2044,7 +2097,7 @@ const courseSummary =  () =>
                         gutterBottom
                       >
                         {ReactHtmlParser(Gstate.data.outcome, {
-                          transform: node => {
+                          transform: (node) => {
                             // console.log({ node });
                             if (node.name === 'h2') {
                               return <Box>{node.children[0].data}</Box>;
@@ -2073,7 +2126,7 @@ const courseSummary =  () =>
                       </Typography>
                     </>
                   ) : null}
-                  <br/>
+                  <br />
 
                   {Gstate.data.closestRun !== undefined && (
                     <>
@@ -2133,19 +2186,19 @@ const courseSummary =  () =>
       </div>
     );
 
-  const renderSwitch = provider => {
+  const renderSwitch = (provider) => {
     console.log(provider);
     console.log('=============');
     switch (provider) {
       case 'edX':
-        count+=1;
+        count += 1;
         return edX();
       case 'Udemy':
         return udemy();
       case 'FutureLearn':
         return fl();
       case 'SimpliLearn':
-        // return sl();
+      // return sl();
       case 'upGrad':
         return upGrad();
       case 'Udacity':
@@ -2161,7 +2214,7 @@ const courseSummary =  () =>
     }
   };
 
-  const addReviewToCurrentState = data => {
+  const addReviewToCurrentState = (data) => {
     console.log('HIT HERE', data);
     setState({
       ...Gstate,
@@ -2169,13 +2222,13 @@ const courseSummary =  () =>
     });
   };
 
-  const searchChange = e => {
+  const searchChange = (e) => {
     setState({
       ...Gstate,
       q: e.target.value,
     });
   };
-  const onKeyPress = e => {
+  const onKeyPress = (e) => {
     if (e.key === 'Enter') {
       trackEvent('search', 'onSearch', 'Search_homepage');
       ReactGA.ga('send', 'pageview', `/homepage?q=${Gstate.q}`);
@@ -2198,7 +2251,7 @@ const courseSummary =  () =>
         onChange={searchChange}
         onKeyPress={onKeyPress}
       />
-      <MobileTopbar onlySearch={true}/>
+      <MobileTopbar onlySearch={true} />
       <HomeModal
         openState={Gstate.popUp}
         uuid={uuid}
@@ -2218,13 +2271,13 @@ const courseSummary =  () =>
             marginTop: '100px',
           }}
         >
-          <CircularProgress color="primary"/>
+          <CircularProgress color="primary" />
         </Grid>
       ) : (
         renderSwitch(provider)
       )}
 
-{/* {console.log("Yashwant Sahu printed this Gsatae =>".Gstate)} */}
+      {/* {console.log("Yashwant Sahu printed this Gsatae =>".Gstate)} */}
       <Footer bgColor="white" />
     </>
   );

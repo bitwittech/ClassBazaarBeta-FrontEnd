@@ -22,8 +22,7 @@ import { subjectsData } from './../utils/data';
 import { trackEvent } from 'react-with-analytics/lib/utils';
 import { withStyles } from '@material-ui/core/styles';
 
-import Envelope_Box from "./Envelope_Box"
-
+import Envelope_Box from './Envelope_Box';
 
 const providerData = [
   'edX',
@@ -93,8 +92,7 @@ class CourseList extends Component {
       isFirstResultFetched: false,
       isFromLoadMore: false,
       offset: [0, 0, 0, 0, 0, 0, 0],
-      openModal:true
-
+      openModal: true,
     };
     this.getUniversityForUdemy = this.getUniversityForUdemy.bind(this);
     this.buildElements = this.buildElements.bind(this);
@@ -103,12 +101,11 @@ class CourseList extends Component {
     this.getElements = this.getElements.bind(this);
     this.isInViewport = this.isInViewport.bind(this);
     this.handelModal = this.handelModal.bind(this);
-
   }
-  handelModal = ()=>{
-    console.log("Handel Called")
-    this.setState({openModal:!this.state.openModal})
-  }
+  handelModal = () => {
+    console.log('Handel Called');
+    this.setState({ openModal: !this.state.openModal });
+  };
 
   async buildElements() {
     console.log('buildElements called');
@@ -121,12 +118,12 @@ class CourseList extends Component {
       this.state.queryURL + `&providerOffset=${this.state.offset.join('::')}`;
     console.log(url);
     return fetch(url)
-      .then(response => response.json())
-      .then(json => {
+      .then((response) => response.json())
+      .then((json) => {
         console.log('COURSE LIST', json);
         this.props.handleCourseNumber(json.total);
         this.setState({ offset: json.offset });
-        return json.data.map(obj => {
+        return json.data.map((obj) => {
           let uni = obj.university;
           if (obj.provider === 'Udemy') {
             uni = obj.instructors.join(', ');
@@ -197,7 +194,7 @@ class CourseList extends Component {
   }
 
   update(that) {
-    that.buildElements().then(newElements => {
+    that.buildElements().then((newElements) => {
       // console.log({ newElements: newElements.map(e => e.key) });
       that.setState({
         isInfiniteLoading: false,
@@ -231,13 +228,13 @@ class CourseList extends Component {
   }
 
   getUniversityForUdemy(obj) {
-    let names = obj.visible_instructors.map(i => i.name + ', ').join('');
+    let names = obj.visible_instructors.map((i) => i.name + ', ').join('');
     return names.slice(0, names.length - 2);
   }
 
   getCheckedProvidersFromString() {
     const selectedProviders = this.state.providers.split('::');
-    const checkedData = this.state.providerData.map(s => {
+    const checkedData = this.state.providerData.map((s) => {
       return selectedProviders.indexOf(s) > -1;
     });
     return checkedData;
@@ -273,7 +270,7 @@ class CourseList extends Component {
     ) {
       console.log('Case 1');
       return (
-        <Grid align="center" ref={el => (this.progressBar = el)}>
+        <Grid align="center" ref={(el) => (this.progressBar = el)}>
           <Button
             variant="contained"
             className={'load-more-button-list'}
@@ -300,7 +297,7 @@ class CourseList extends Component {
     } else {
       console.log('Case 2');
       return (
-        <Grid align="center" ref={el => (this.progressBar = el)}>
+        <Grid align="center" ref={(el) => (this.progressBar = el)}>
           <CircularProgress />
         </Grid>
       );
@@ -314,7 +311,7 @@ class CourseList extends Component {
         style={{ backgroundColor: '#fff3ef', padding: '0 10px' }}
         className="c-list"
       >
-          {/* {this.state.openModal === true && sessionStorage.getItem('show') === null ? <Envelope_Box close = {this.handelModal} />:null} */}
+        {/* {this.state.openModal === true && sessionStorage.getItem('show') === null ? <Envelope_Box close = {this.handelModal} />:null} */}
 
         <Grid container spacing={1}>
           <Grid item xs={12} sm={12}>
