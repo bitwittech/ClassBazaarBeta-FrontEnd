@@ -16,6 +16,8 @@ import { trackEvent } from 'react-with-analytics/lib/utils';
 import bannerImage from '../assets/carrer.png';
 import meetUp from '../assets/img/formImage.svg';
 import { makeStyles } from '@material-ui/core/styles';
+import AssignmentIndIcon from '@material-ui/icons/AssignmentInd';
+import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 
 const useStyles = makeStyles(() => ({
   cardGrid: {
@@ -28,8 +30,12 @@ const useStyles = makeStyles(() => ({
   formGrid: {
     justifyContent: 'center',
     alignItems: 'center',
-    gap: '5px',
-    display : 'grid',
+    gap: '10px',
+    display: 'grid',
+  },
+  buttonGrid: {
+    gap: '10px',
+    display: 'grid',
   },
   card: {
     borderTop: '5px solid orange',
@@ -40,6 +46,9 @@ const useStyles = makeStyles(() => ({
   },
   img: {
     maxWidth: '-webkit-fill-available',
+  },
+  uploadBtn: {
+    display: 'contents',
   },
 }));
 
@@ -60,7 +69,12 @@ const Career = () => {
   ];
 
   const [profile, setProfile] = useState();
+  const [file, setFile] = useState(' ');
 
+  const handleFileChange = (e) => {
+    console.log(e.target.files);
+    setFile(e.target.files[0].name);
+  };
   const handleChangeProfile = (e) => {
     setProfile(e.target.value);
   };
@@ -207,7 +221,7 @@ const Career = () => {
 
       <Grid container className={`${styles.cardGrid}`}>
         <Grid item xs={12} className={`${styles.topHeading}`}>
-          <Typography variant={'h4'}>Meet Up</Typography>
+          <Typography variant={'h4'}>Apply Now</Typography>
         </Grid>
 
         <Grid item xs={8} md={4}>
@@ -216,91 +230,147 @@ const Career = () => {
 
         {/* // Feilds  */}
         <Grid item xs={12} md={4}>
-          <Grid container className={`${styles.formGrid}`}>
-            {/* name,email,phone no, experience, profile, upload resume */}
-            <Grid item xs={12}>
-              <TextField
-                id="filled-basic"
-                small
-                name="applicant_name"
-                label="Name"
-                type="text"
-                variant="filled"
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                id="filled-basic"
-                small
-                label="Email"
-                name="applicant_email"
-                type="email"
-                variant="filled"
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                id="filled-basic"
-                small
-                name="applicant_number"
-                type="number"
-                label="Phone Number"
-                variant="filled"
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                id="filled-basic"
-                small
-                name="applicant_experience"
-                type="number"
-                label="experience"
-                variant="filled"
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                id="filled"
-                variant="filled"
-                select
-                label="Profile"
-                value={profile}
-                onChange={handleChangeProfile}
-                helperText="Please select the post for which you are applying !!!"
-              >
-                {profileCatelog.map((option) => (
-                  <MenuItem key={option.value} value={option.value}>
-                    {option.label}
-                  </MenuItem>
-                ))}
-              </TextField>
-            </Grid>
-            {/* <Grid item xs={12}>
-              <input
-                accept="image/*"
-                className={styles.input}
-                style={{ display: 'none' }}
-                id="raised-button-file"
-                multiple
-                type="file"
-              />
-               <TextField
-                id="filled"
-                variant="filled"
-                fullwidth
-                label="Profile"
-                value={profile}
-                onChange={handleChangeProfile}
-                helperText="Please select the post for which you are applying !!!"
-              ></TextField>
-
-              <label htmlFor="raised-button-file">
-                <Button color="primary" variant="contained" component="span">
-                  Upload Resume
+          <form action="">
+            <Grid container className={`${styles.formGrid}`}>
+              {/* name,email,phone no, experience, profile, upload resume */}
+              <Grid item xs={12}>
+                <TextField
+                  id="filled-basic"
+                  small
+                  name="applicant_name"
+                  label="Name"
+                  type="text"
+                  variant="filled"
+                  inputProps={{
+                    style: {
+                      padding: '17px 10px 10px',
+                    },
+                  }}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  id="filled-basic"
+                  small
+                  label="Email"
+                  name="applicant_email"
+                  type="email"
+                  variant="filled"
+                  inputProps={{
+                    style: {
+                      padding: '17px 10px 10px',
+                    },
+                  }}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  id="filled-basic"
+                  small
+                  name="applicant_number"
+                  type="number"
+                  label="Phone Number"
+                  variant="filled"
+                  inputProps={{
+                    style: {
+                      padding: '17px 10px 10px',
+                    },
+                  }}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  id="filled-basic"
+                  small
+                  name="applicant_experience"
+                  type="number"
+                  label="experience"
+                  variant="filled"
+                  inputProps={{
+                    style: {
+                      padding: '17px 10px 10px',
+                    },
+                  }}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  id="filled"
+                  variant="filled"
+                  inputProps={{
+                    style: {
+                      padding: '17px 10px 10px',
+                    },
+                  }}
+                  select
+                  label="Profile"
+                  value={profile}
+                  onChange={handleChangeProfile}
+                  helperText="Please select the post for which you are applying ."
+                >
+                  {profileCatelog.map((option) => (
+                    <MenuItem key={option.value} value={option.value}>
+                      {option.label}
+                    </MenuItem>
+                  ))}
+                </TextField>
+              </Grid>
+              <Grid item xs={12}>
+                <Grid container className={`${styles.buttonGrid}`}>
+                  <input
+                    accept="application/pdf"
+                    className={styles.input}
+                    style={{ display: 'none' }}
+                    id="raised-button-file"
+                    onChange={handleFileChange}
+                    type="file"
+                  />
+                  <Grid item xs={12}>
+                    <TextField
+                      id="filled"
+                      variant="filled"
+                      inputProps={{
+                        style: {
+                          padding: '17px 10px 10px',
+                        },
+                      }}
+                      small
+                      label="Resume"
+                      value={file || 'PDF format is acceptable only !!!'}
+                    ></TextField>
+                  </Grid>
+                  <Grid item xs={12} className={styles.uploadBtn}>
+                    <label
+                      color="success"
+                      fullWidth
+                      htmlFor="raised-button-file"
+                    >
+                      <Button
+                        fullWidth
+                        startIcon={<AssignmentIndIcon />}
+                        color="success"
+                        variant="contained"
+                        component="span"
+                      >
+                        Upload Resume
+                      </Button>
+                    </label>
+                  </Grid>
+                </Grid>
+              </Grid>
+              <Grid item xs={12}>
+                <Button
+                  fullWidth
+                  startIcon={<CheckCircleIcon />}
+                  color="primary"
+                  variant="contained"
+                  type="submit"
+                >
+                  Submit
                 </Button>
-              </label>
-            </Grid> */}
-          </Grid>
+              </Grid>
+            </Grid>
+          </form>
         </Grid>
       </Grid>
 
