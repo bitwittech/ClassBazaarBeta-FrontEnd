@@ -1,4 +1,4 @@
-import React, {useState, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 
 import { ALERT } from '../store/Types';
 import CalendarIcon from '@material-ui/icons/CalendarToday';
@@ -18,10 +18,9 @@ import { addBookmark } from '../actions/ContextActions';
 import formatDate from './../utils/dateUtils';
 import { trackEvent } from 'react-with-analytics/lib/utils';
 import { withRouter } from 'react-router-dom';
-import Converter from './converter.js'
+import Converter from './converter.js';
 import { Pre_LOG_Box } from '../store/Types';
 import axios from 'axios';
-
 
 const styles = {
   grid: {
@@ -48,19 +47,16 @@ const styles = {
   },
 };
 
-
-const formatDuration = duration => {
+const formatDuration = (duration) => {
   if (!duration || duration === null || duration === undefined)
-  return 'Self Paced';
+    return 'Self Paced';
   else return duration;
 };
 
-
-
 const ProfileCourseCard = withRouter(({ history, ...data }) => {
   const { state, dispatch } = useContext(Store);
-  const {isAuth} = state;
-  const [price,setPrice] = useState(null);
+  const { isAuth } = state;
+  const [price, setPrice] = useState(null);
 
   const handleBookmark = (uuid, provider, name) => {
     trackEvent('Bookmarked_lisitng', 'click', `${provider}|${name}`);
@@ -80,14 +76,12 @@ const ProfileCourseCard = withRouter(({ history, ...data }) => {
     addBookmark(courseId, userId, user, provider, dispatch, data.from);
   };
 
+  // Append by yashwant sahu
 
-  // Append by yashwant sahu 
-  
   const OpenLogin = () => {
     // sessionStorage.setItem('ShowBox',true);
 
-    if(isAuth === false)
-    {
+    if (isAuth === false) {
       return dispatch({
         type: Pre_LOG_Box,
         payload: {
@@ -96,8 +90,8 @@ const ProfileCourseCard = withRouter(({ history, ...data }) => {
         },
       });
     }
-  }
-// turn off by Yashwant Sahu
+  };
+  // turn off by Yashwant Sahu
   // const isBookmarked = uuid => {
   //   if (state.user === null || state.user.data === undefined) {
   //     return false;
@@ -109,54 +103,48 @@ const ProfileCourseCard = withRouter(({ history, ...data }) => {
   //     return false;
   //   // }
   // };
-
+  const officialURL = 'https://api.classbazaar.com/';
+  const localURL = 'http://0.0.0.0:8080/';
 
   const handleUnload = async (ev) => {
+    const user_email = localStorage.getItem('user') || 'User Not Loged In';
 
-    const user_email = localStorage.getItem('user') || 'User Not Loged In'
- 
-    let start_time = new Date().toLocaleString();
-    console.log('Card_track')
+    console.log('Card_track');
 
-    await axios.get(`http://0.0.0.0:8080/api/cardTrack?user_email=${user_email}&event_time=${start_time}&card_title=${data.courseName}&card_uuid=${data.uuid}&provider=${data.provider}`);
-    
+    await axios.get(
+      `${officialURL}api/cardTrack?user_email=${user_email}&card_title=${data.courseName}&card_uuid=${data.uuid}&provider=${data.provider}`
+    );
   };
 
   return (
     <>
-   
-      <div className="c-card click-h" onClick={() => {
-
+      <div
+        className="c-card click-h"
+        onClick={() => {
           handleUnload();
           OpenLogin();
-          if(isAuth === true)
-          {
-              if (data.from === 'profile') {
-                trackEvent(
-                  'Profile Action',
-                  'click',
-                  'Bookmarked_card_profile',
-                );
-              }
-              trackEvent(
-                'Course Card clicked',
-                'click',
-                `${data.povider}|${data.courseName}`,
-              );
-              history.push({
-                pathname: `/coursedetails/${data.provider}/${data.uuid}`,
-                state: {
-                  uuid: data.uuid,
-                  provider: data.provider,
-                  ...data,
-                },
-              });
-             }
-               
-              }}>
+          if (isAuth === true) {
+            if (data.from === 'profile') {
+              trackEvent('Profile Action', 'click', 'Bookmarked_card_profile');
+            }
+            trackEvent(
+              'Course Card clicked',
+              'click',
+              `${data.povider}|${data.courseName}`
+            );
+            history.push({
+              pathname: `/coursedetails/${data.provider}/${data.uuid}`,
+              state: {
+                uuid: data.uuid,
+                provider: data.provider,
+                ...data,
+              },
+            });
+          }
+        }}
+      >
         <div className="c-card-inner">
           <div className="coursecard-header">
-
             {/* <div>
               {isBookmarked(data.uuid) ? (
                 <TurnedInIcon
@@ -176,7 +164,6 @@ const ProfileCourseCard = withRouter(({ history, ...data }) => {
                 />
               )}
             </div> */}
-
           </div>
           <div style={{ padding: '0 15px' }}>
             <Typography
@@ -185,28 +172,28 @@ const ProfileCourseCard = withRouter(({ history, ...data }) => {
               variant="subtitle2"
               className="hover"
               onClick={() => {
-                if(isAuth === true)
-                {
-                if (data.from === 'profile') {
+                if (isAuth === true) {
+                  if (data.from === 'profile') {
+                    trackEvent(
+                      'Profile Action',
+                      'click',
+                      'Bookmarked_card_profile'
+                    );
+                  }
                   trackEvent(
-                    'Profile Action',
+                    'Course Card clicked',
                     'click',
-                    'Bookmarked_card_profile',
+                    `${data.povider}|${data.courseName}`
                   );
+                  history.push({
+                    pathname: `/coursedetails/${data.provider}/${data.uuid}`,
+                    state: {
+                      uuid: data.uuid,
+                      provider: data.provider,
+                      ...data,
+                    },
+                  });
                 }
-                trackEvent(
-                  'Course Card clicked',
-                  'click',
-                  `${data.povider}|${data.courseName}`,
-                );
-                history.push({
-                  pathname: `/coursedetails/${data.provider}/${data.uuid}`,
-                  state: {
-                    uuid: data.uuid,
-                    provider: data.provider,
-                    ...data,
-                  },
-                });}
               }}
               gutterBottom
             >
@@ -223,21 +210,20 @@ const ProfileCourseCard = withRouter(({ history, ...data }) => {
                 padding: '0px 15px 0px 15px',
               }}
               className="hover"
-              onClick={() =>{
-                if(isAuth === true)
-                {
-                history.push({
-                  pathname: `/coursedetails/${data.provider}/${data.uuid.replace(
-                    /[`~!",.<>\{\}\[\]\\\/]/gi,
-                    '',
-                  )}`,
-                  state: {
-                    uuid: data.uuid.replace(/[`~!",.<>\{\}\[\]\\\/]/gi, ''),
-                    provider: data.provider,
-                    ...data,
-                  },
-                })}}
-              }
+              onClick={() => {
+                if (isAuth === true) {
+                  history.push({
+                    pathname: `/coursedetails/${
+                      data.provider
+                    }/${data.uuid.replace(/[`~!",.<>\{\}\[\]\\\/]/gi, '')}`,
+                    state: {
+                      uuid: data.uuid.replace(/[`~!",.<>\{\}\[\]\\\/]/gi, ''),
+                      provider: data.provider,
+                      ...data,
+                    },
+                  });
+                }
+              }}
               gutterBottom
             >
               {data.provider !== 'SimpliLearn'
@@ -266,15 +252,17 @@ const ProfileCourseCard = withRouter(({ history, ...data }) => {
           justo eget tempor aliquam. Etiam bibendum in massa vehicula sagittis.
           Proin varius nisi mauris, id semper nulla rhoncus at.
         </Typography> */}
-          <br/>
+          <br />
           <div className={'bottom-section'}>
-            <div
-              className={styles.root}
-            >
+            <div className={styles.root}>
               <Grid container align="left" spacing={1}>
-                <Grid item sm={4} style={{textAlign: 'center'}}>
+                <Grid item sm={4} style={{ textAlign: 'center' }}>
                   {data.provider === 'Udemy' ? (
-                    <MovieIcon fontSize="small" className="mb" color="secondary"/>
+                    <MovieIcon
+                      fontSize="small"
+                      className="mb"
+                      color="secondary"
+                    />
                   ) : (
                     <WatchLaterIcon
                       fontSize="small"
@@ -283,24 +271,41 @@ const ProfileCourseCard = withRouter(({ history, ...data }) => {
                     />
                   )}
 
-                  <span className="fs-m" style={{fontSize: '12px'}}> {formatDuration(data.duration)}</span>
+                  <span className="fs-m" style={{ fontSize: '12px' }}>
+                    {' '}
+                    {formatDuration(data.duration)}
+                  </span>
                 </Grid>
-                <Grid item sm={4} style={{textAlign: 'center'}}>
-                  <CalendarIcon fontSize="small" className="mb" color="secondary"/>{' '}
-                  <span className="fs-m" style={{fontSize: '14px'}}>
-                  {' '}
+                <Grid item sm={4} style={{ textAlign: 'center' }}>
+                  <CalendarIcon
+                    fontSize="small"
+                    className="mb"
+                    color="secondary"
+                  />{' '}
+                  <span className="fs-m" style={{ fontSize: '14px' }}>
+                    {' '}
                     {data.startingOn == null
                       ? 'Flexible'
                       : formatDate(new Date(data.startingOn), 'MMMM d, yyyy')}
-                </span>
+                  </span>
                 </Grid>
-                <Grid item sm={4} style={{textAlign: 'center'}}>
+                <Grid item sm={4} style={{ textAlign: 'center' }}>
                   {/* // modifies by Yashwant sahu */}
-                  
-                  <i className="fas fa-rupee-sign" style={{ color: '#086065' }}/>&nbsp;
-                   <span className="fs-m" style={{fontSize: '14px'}}>{data.price === null ?`Free`:<Converter price = {data.price} currency = {data.price_currency} /> }</span>
-                
-                  
+                  <i
+                    className="fas fa-rupee-sign"
+                    style={{ color: '#086065' }}
+                  />
+                  &nbsp;
+                  <span className="fs-m" style={{ fontSize: '14px' }}>
+                    {data.price === null ? (
+                      `Free`
+                    ) : (
+                      <Converter
+                        price={data.price}
+                        currency={data.price_currency}
+                      />
+                    )}
+                  </span>
                 </Grid>
               </Grid>
             </div>

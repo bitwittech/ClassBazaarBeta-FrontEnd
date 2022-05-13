@@ -135,7 +135,7 @@ const CourseDetails = (props) => {
         },
       };
 
-      var url = `${localURL}api/course?uuid=${uuid}&provider=${provider}`;
+      var url = `${officialURL}api/course?uuid=${uuid}&provider=${provider}`;
 
       console.log(url, uuid);
 
@@ -259,7 +259,7 @@ const CourseDetails = (props) => {
     console.log('Card_track');
 
     await axios.get(
-      `${localURL}api/cardEnrollTrack?user_email=${user_email}&event_time=${start_time}&card_title=${Gstate.title}&card_uuid=${Gstate.uuid}&provider=${Gstate.provider}`
+      `${officialURL}api/cardEnrollTrack?user_email=${user_email}&card_title=${Gstate.title}&card_uuid=${Gstate.uuid}&provider=${Gstate.provider}`
     );
   };
 
@@ -345,7 +345,7 @@ const CourseDetails = (props) => {
                     );
 
                     const res = await fetch(
-                      `${localURL}api/track/?title=${Gstate.title}`
+                      `${officialURL}api/track/?title=${Gstate.title}`
                     );
 
                     window.open(

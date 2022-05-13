@@ -97,6 +97,9 @@ function App() {
   const [tracker, setTracker] = useState([]);
   const [state, dispatch] = useReducer(Reducer, initialState);
 
+  const officialURL = 'https://api.classbazaar.com/';
+  const localURL = 'http://0.0.0.0:8080/';
+
   const handleUnload = async (ev) => {
     ev.preventDefault();
 
@@ -106,7 +109,7 @@ function App() {
     const path = localStorage.getItem('path');
 
     await axios.get(
-      `http://0.0.0.0:8080/api/userTrack?user_email=${user_email}&time_stamp=${start_time}&path=${path}&event_location=${localStorage.getItem(
+      `${officialURL}api/userTrack?user_email=${user_email}&time_stamp=${start_time}&path=${path}&event_location=${localStorage.getItem(
         'location'
       )}`
     );
