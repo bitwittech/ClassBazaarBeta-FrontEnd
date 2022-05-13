@@ -68,6 +68,22 @@ const Career = () => {
     },
   ];
 
+  const [jobPost, setJobPost] = useState([
+    {
+      title: 'UI/UX designer',
+      siniority: '0-5',
+      location: 'Jaipur, Rajsthan',
+      package: '2-5',
+    },
+
+    {
+      title: 'Business Dev Associate',
+      siniority: '0-5',
+      location: 'Jaipur, Rajsthan',
+      package: '2-5',
+    },
+  ]);
+
   const [profile, setProfile] = useState();
   const [file, setFile] = useState(' ');
 
@@ -189,32 +205,25 @@ const Career = () => {
           <Typography variant={'h4'}>Opportunities</Typography>
         </Grid>
 
-        <Grid item xs={8} md={3}>
-          <CardContent className={`${styles.card}`}>
-            <Typography variant={'Button'}>Opportunities 1</Typography>
-          </CardContent>
-          {/* <CardActions>
-                  <Button size="small">Learn More</Button>
-                </CardActions> */}
-        </Grid>
-
-        <Grid item xs={8} md={3}>
-          <CardContent className={`${styles.card}`}>
-            <Typography variant={'Button'}>Opportunities 1</Typography>
-          </CardContent>
-          {/* <CardActions>
-                  <Button size="small">Learn More</Button>
-                </CardActions> */}
-        </Grid>
-
-        <Grid item xs={8} md={3}>
-          <CardContent className={`${styles.card}`}>
-            <Typography variant={'Button'}>Opportunities 1</Typography>
-          </CardContent>
-          {/* <CardActions>
-                  <Button size="small">Learn More</Button>
-                </CardActions> */}
-        </Grid>
+        {jobPost.map((post) => (
+          <Grid item xs={8} md={3}>
+            <CardContent className={`${styles.card}`}>
+              <Typography variant={'h5'}>{post.title}</Typography>
+              <br></br>
+              <Typography variant={'button'}>
+                Siniority : {post.siniority} years
+              </Typography>
+              <br></br>
+              <Typography variant={'button'}>
+                Package : {post.package} LPA
+              </Typography>
+              <br></br>
+              <Typography variant={'button'}>
+                Location : {post.location}
+              </Typography>
+            </CardContent>
+          </Grid>
+        ))}
       </Grid>
 
       {/* Form Section ==================================================  */}
