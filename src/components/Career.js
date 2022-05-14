@@ -18,6 +18,7 @@ import meetUp from '../assets/img/formImage.svg';
 import { makeStyles } from '@material-ui/core/styles';
 import AssignmentIndIcon from '@material-ui/icons/AssignmentInd';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
+import { submitResume } from '../service/commonService';
 
 const useStyles = makeStyles(() => ({
   cardGrid: {
@@ -87,6 +88,45 @@ const Career = () => {
   const [profile, setProfile] = useState();
   const [file, setFile] = useState(' ');
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const FD = new FormData();
+
+    FD.append('name', e.target.applicant_name.value);
+    FD.append('email', e.target.applicant_email.value);
+    FD.append('contact', e.target.applicant_number.value);
+    FD.append('profile', profile);
+    FD.append('experience', e.target.applicant_experience.value);
+    FD.append('resume', e.target.resume.files[0]);
+
+    for (var value of FD.values()) {
+      console.log(value);
+    }
+
+    const res = submitResume(FD);
+
+    res
+      .then((res) => {
+        dispatch({
+          type: 'ALERT',
+          payload: {
+            varient: 'success',
+            message: 'Message sent',
+          },
+        });
+      })
+      .catch((err) => {
+        dispatch({
+          type: 'ALERT',
+          payload: {
+            varient: 'info',
+            message: 'Unable to deliver your message',
+          },
+        });
+      });
+  };
+
   const handleFileChange = (e) => {
     console.log(e.target.files);
     setFile(e.target.files[0].name);
@@ -112,53 +152,14 @@ const Career = () => {
     });
   };
 
-  const bull = (
-    <Box
-      component="span"
-      sx={{ display: 'inline-block', mx: '2px', transform: 'scale(0.8)' }}
-    >
-      •
-    </Box>
-  );
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const url = 'https://api.classbazaar.com/api/contact';
-    const res = await axios.post(url, data);
-    setData({
-      ...data,
-      name: '',
-      email: '',
-      message: '',
-      subject: '',
-    });
-    if (res.status === 200) {
-      dispatch({
-        type: 'ALERT',
-        payload: {
-          varient: 'success',
-          message: 'Message sent',
-        },
-      });
-    } else {
-      dispatch({
-        type: 'ALERT',
-        payload: {
-          varient: 'info',
-          message: 'Unable to deliver your message',
-        },
-      });
-    }
-  };
-
   return (
     <>
       <AppBar noHome={true} />
       <div
         style={{
           height: '70vh',
-          backgroundPosition: 'center',
-          background: `linear-gradient(rgb(72 0 72 / 15%), rgb(255 114 0 / 28%)), url(${bannerImage})`,
+          backgroundPosition: 'cover',
+          background: `linear-gradient(rgb(72 0 72 / 15%), rgb(255 114 0 / 28%)), url(${bannerImage}), no-repeat`,
           paddingTop: '150px',
         }}
         className={'contact-banner'}
@@ -239,12 +240,19 @@ const Career = () => {
 
         {/* // Feilds  */}
         <Grid item xs={12} md={4}>
-          <form action="">
+          <form
+            action=""
+            onSubmit={handleSubmit}
+            enctype="multipart/form-data"
+            method="post"
+          >
             <Grid container className={`${styles.formGrid}`}>
               {/* name,email,phone no, experience, profile, upload resume */}
               <Grid item xs={12}>
                 <TextField
+                  fullWidth
                   id="filled-basic"
+                  required
                   small
                   name="applicant_name"
                   label="Name"
@@ -252,66 +260,76 @@ const Career = () => {
                   variant="filled"
                   inputProps={{
                     style: {
-                      padding: '17px 10px 10px',
+                      padding: '25px 10px 10px',
                     },
                   }}
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
+                  fullWidth
                   id="filled-basic"
                   small
+                  required
                   label="Email"
                   name="applicant_email"
                   type="email"
                   variant="filled"
                   inputProps={{
                     style: {
-                      padding: '17px 10px 10px',
+                      padding: '25px 10px 10px',
                     },
                   }}
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
+                  fullWidth
                   id="filled-basic"
                   small
+                  error={false}
+                  required
                   name="applicant_number"
                   type="number"
                   label="Phone Number"
                   variant="filled"
                   inputProps={{
                     style: {
-                      padding: '17px 10px 10px',
+                      padding: '25px 10px 10px',
                     },
                   }}
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
+                  fullWidth
                   id="filled-basic"
                   small
+                  required
                   name="applicant_experience"
                   type="number"
                   label="experience"
                   variant="filled"
                   inputProps={{
                     style: {
-                      padding: '17px 10px 10px',
+                      padding: '25px 10px 10px',
                     },
                   }}
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
+                  fullWidth
                   id="filled"
                   variant="filled"
                   inputProps={{
                     style: {
-                      padding: '17px 10px 10px',
+                      padding: '25px 10px 10px',
                     },
                   }}
                   select
+                  required
+                  name="profile"
                   label="Profile"
                   value={profile}
                   onChange={handleChangeProfile}
@@ -331,18 +349,22 @@ const Career = () => {
                     className={styles.input}
                     style={{ display: 'none' }}
                     id="raised-button-file"
+                    name="resume"
+                    required
                     onChange={handleFileChange}
                     type="file"
                   />
                   <Grid item xs={12}>
                     <TextField
+                  fullWidth
                       id="filled"
                       variant="filled"
                       inputProps={{
                         style: {
-                          padding: '17px 10px 10px',
+                          padding: '25px 10px 10px',
                         },
                       }}
+                      disabled
                       small
                       label="Resume"
                       value={file || 'PDF format is acceptable only !!!'}
