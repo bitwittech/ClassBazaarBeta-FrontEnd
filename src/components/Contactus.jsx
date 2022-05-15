@@ -63,8 +63,10 @@ const Contactus = () => {
         style={{
           height: '70vh',
           backgroundPosition: 'center',
-          backgroundImage: `url(${bannerImage})`,
+          background: `linear-gradient(rgb(72 0 72 / 15%), rgb(255 114 0 / 28%)), url(${bannerImage})`,
           paddingTop: '150px',
+          backgroundSize: '100% 100%',
+          backgroundRepeat: 'no-repeat',
         }}
         className={'contact-banner'}
       >

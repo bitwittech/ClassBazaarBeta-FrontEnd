@@ -33,6 +33,7 @@ const useStyles = makeStyles(() => ({
     alignItems: 'center',
     gap: '10px',
     display: 'grid',
+    padding: '5px 20px 0px 20px',
   },
   buttonGrid: {
     gap: '10px',
@@ -56,16 +57,12 @@ const useStyles = makeStyles(() => ({
 const Career = () => {
   const profileCatelog = [
     {
-      value: 'React Developer',
-      label: 'React Developer',
+      value: 'UI/UX Designer',
+      label: 'UI/UX Designer',
     },
     {
-      value: 'BlockChain Developer',
-      label: 'BlockChain Developer',
-    },
-    {
-      value: 'Human Resource Manage',
-      label: 'Human Resource Manage',
+      value: 'Business Development Associate',
+      label: 'Business Development Associate',
     },
   ];
 
@@ -112,16 +109,19 @@ const Career = () => {
           type: 'ALERT',
           payload: {
             varient: 'success',
-            message: 'Message sent',
+            message: 'Your has been submitted !!!',
           },
         });
+        setFile('');
+        setProfile('');
+        document.getElementById('form').reset();
       })
       .catch((err) => {
         dispatch({
           type: 'ALERT',
           payload: {
-            varient: 'info',
-            message: 'Unable to deliver your message',
+            varient: 'error',
+            message: 'Somthing went worang !!!',
           },
         });
       });
@@ -158,9 +158,11 @@ const Career = () => {
       <div
         style={{
           height: '70vh',
-          backgroundPosition: 'cover',
-          background: `linear-gradient(rgb(72 0 72 / 15%), rgb(255 114 0 / 28%)), url(${bannerImage}), no-repeat`,
+          backgroundPosition: 'center',
+          background: `linear-gradient(rgb(72 0 72 / 15%), rgb(255 114 0 / 28%)), url(${bannerImage})`,
           paddingTop: '150px',
+          backgroundSize: '100% 100%',
+          backgroundRepeat: 'no-repeat',
         }}
         className={'contact-banner'}
       >
@@ -187,8 +189,8 @@ const Career = () => {
             }}
             gutterBottom
           >
-            You can leave us a message below and our team will get back to you
-            or you can directly email us at{' '}
+            You can leave us a application below and our team will get back to
+            you or you can directly email us at{' '}
             <a
               href="mailto:info@classbazaar.com?"
               style={{ color: 'white !important' }}
@@ -211,15 +213,15 @@ const Career = () => {
             <CardContent className={`${styles.card}`}>
               <Typography variant={'h5'}>{post.title}</Typography>
               <br></br>
-              <Typography variant={'button'}>
+              <Typography variant={'caption'}>
                 Siniority : {post.siniority} years
               </Typography>
               <br></br>
-              <Typography variant={'button'}>
+              <Typography variant={'caption'}>
                 Package : {post.package} LPA
               </Typography>
               <br></br>
-              <Typography variant={'button'}>
+              <Typography variant={'caption'}>
                 Location : {post.location}
               </Typography>
             </CardContent>
@@ -241,6 +243,7 @@ const Career = () => {
         {/* // Feilds  */}
         <Grid item xs={12} md={4}>
           <form
+            id="form"
             action=""
             onSubmit={handleSubmit}
             enctype="multipart/form-data"
@@ -356,7 +359,7 @@ const Career = () => {
                   />
                   <Grid item xs={12}>
                     <TextField
-                  fullWidth
+                      fullWidth
                       id="filled"
                       variant="filled"
                       inputProps={{

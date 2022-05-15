@@ -96,6 +96,6 @@ export const newLogin = async (emailVal) => {
 //  Apis for resume and Carieer Page
 
 export const submitResume = async (data) => {
-  console.log(data)
+  // console.log(data)
   return await axios.post('http://0.0.0.0:8080/api/meetUp', data);
 };

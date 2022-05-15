@@ -347,12 +347,8 @@ class LandingPage extends Component {
 
   handleUnload(q) {
     const user_email = localStorage.getItem('user') || 'User Not Loged In';
-
-    let start_time = new Date().toLocaleString();
-    console.log('Card_track');
-
     axios.get(
-      `https://api.classbazaar.com/api/searchTrack?user_email=${user_email}&event_time=${start_time}&search_query=${q}`
+      `https://api.classbazaar.com/api/searchTrack?user_email=${user_email}&search_query=${q}`
     );
   }
 
