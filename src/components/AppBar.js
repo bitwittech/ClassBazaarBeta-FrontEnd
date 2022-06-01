@@ -136,11 +136,10 @@ const SearchInput = () => {
 
 const ImageWithRouter = withRouter(({ history, ...props }) => (
   <img
-    style={{ align: 'center' }}
     className={props.clazzNames}
     src={props.image}
     alt="samarthLogo"
-    style={{ maxHeight: '45px', marginTop: '10px' }}
+    style={{ maxHeight: '45px', marginTop: '10px', align: 'center' }}
     onClick={() => {
       history.push(props.routingURL);
     }}
@@ -278,7 +277,7 @@ function TopBar(props) {
                   !toggleAppBarTheme && shouldSwitch ? Logo : BlackLogo
                 }`}
                 routingURL={'/'}
-                clazzNames={`${classes.logo} click-h adj-i`}
+                classNames={`${classes.logo} click-h adj-i`}
                 alt="logo"
                 onClick={() => {
                   trackEvent(
