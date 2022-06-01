@@ -1,5 +1,3 @@
-
-
 body {
     font-family: 'Poppins', sans-serif !important;
     background: #f8f8f8;
@@ -16,34 +14,41 @@ body {
     background-color: white;
 }
 
+
 /* .MuiBox-root-287{
   border:none !important;
 } */
+
 .iconSchool {
     padding-left: 4px;
 }
 
-.dignityH1{
-    font-size:40px;
+.dignityH1 {
+    font-size: 40px;
     line-height: 1.1;
 }
 
-.dignitySub{
+.dignitySub {
     font-size: 13px !important;
     letter-spacing: 0.2px;
 }
 
-.edubukmain{
+.edubukmain {
     margin-left: 6rem;
 }
 
-.edubukh1{
-    font-size: 3vw; line-height:1.1; 
+.edubukh1 {
+    font-size: 3vw;
+    line-height: 1.1;
 }
-.edubuk{
+
+.edubuk {
     /* yashwant edited */
-    width: 5.5vw; margin-left:6rem; margin-bottom: 1rem;
+    width: 5.5vw;
+    margin-left: 6rem;
+    margin-bottom: 1rem;
 }
+
 .r-fw {
     font-weight: 200 !important;
 }
@@ -230,14 +235,12 @@ a:hover {
     from {
         transform: rotate(0deg);
     }
-
     to {
         transform: rotate(360deg);
     }
 }
 
-
-.select-box{
+.select-box {
     width: 45%;
     border: 1px solid #e3e8f0;
     background: #f0f2f7;
@@ -372,139 +375,107 @@ a:hover {
         width: 50px;
         height: 50px;
     }
-
     .MuiInputBase-input {
         color: #000 !important;
     }
-
     .cd-head-o {
         width: 60%;
     }
-
     .u-uni {
         font-size: 0.8em !important;
     }
-
     .u-provider {
         font-size: 0.6em !important;
     }
-
     .u-title {
         font-size: 0.9em !important;
     }
-
     .cd-head-t {
         width: 40%;
     }
-
     .c-logo {
         margin-left: 0 !important;
     }
-
     .contact-cont {
         font-size: 1em !important;
     }
-
     .contact-container {
         width: 70% !important;
     }
-
     .w-m {
         width: 240px !important;
     }
-
     .review-modal {
         width: 60%;
     }
-
     body {
         overflow-x: hidden;
     }
-
     .ns-input {
         width: 150px;
     }
-
     .main-search {
         margin-left: 0 !important;
     }
-
     .no-mobile {
         display: none !important;
-    
     }
-
     .footer-text-m {
         color: #3e3e3e;
         font-size: 12px;
     }
-
     .footer-text {
         font-size: 0.8em;
         font-weight: 300;
     }
-
     .bold {
         font-weight: 800;
     }
-
     .mt-2 {
         margin-top: 20px !important;
     }
-
     .no-desktop {
         display: block !important;
     }
-
     .bg-change {
         background: white;
     }
-
     .card-content {
         padding-left: 30px !important;
     }
-
     .card-uni {
         font-weight: 900 !important;
         font-size: 0.8em !important;
         padding-top: 5px !important;
     }
-
     .card-course {
         padding-top: 6px;
         padding-bottom: 6px;
         font-weight: 500 !important;
         font-size: 0.75em !important;
     }
-
     .card-provider {
         font-size: 12px !important;
     }
-
     .home-modal {
         width: 100% !important;
         margin: auto !important;
         padding: 0 !important;
     }
-
     .home-modal-paper {
         width: 70%;
         padding: 20px;
     }
-
     .home-modal-text {
         font-size: 0.8em !important;
         font-weight: 600 !important;
     }
-
     .home-modal-field {
         margin-top: 10px !important;
     }
-
     .w-l {
         width: 200px;
     }
-
     .btn-mobile {
         width: 100px;
         box-shadow: none !important;
@@ -513,15 +484,12 @@ a:hover {
         text-transform: none !important;
         border-radius: 6px !important;
     }
-
     .pr-pad {
         margin-right: 100px;
     }
-
     .signup-btn {
         padding-left: 0px !important;
     }
-
     .c-logo {
         width: 120px !important;
     }
@@ -573,7 +541,7 @@ a:hover {
     justify-content: center;
 }
 
-.footer-links > * {
+.footer-links>* {
     padding-left: 10px;
 }
 
@@ -716,7 +684,6 @@ body {
     color: white;
 }
 
-
 @media only screen and (max-height: 700px) {
     .route-link {
         background: #4e4e4e !important;
@@ -727,12 +694,9 @@ body {
         justify-content: center;
         align-items: center;
     }
-
-   
     .dashboard-options-header {
         font-size: 1rem !important;
     }
-
     .dashboard-link-title {
         color: white !important;
         font-size: 1rem !important;
@@ -900,12 +864,11 @@ dashboard-options-header {
     line-height: 8px;
 }
 
-.paperModal{
+.paperModal {
     background-color: white;
     border-radius: 10px;
-    border:'none !important';
-    outline: none !important ;
-
+    border: 'none !important';
+    outline: none !important;
 }
 
 @media (max-width: 800px) {
@@ -913,148 +876,120 @@ dashboard-options-header {
         margin-top: -30px !important;
         margin-bottom: 10px;
     }
-
-    .paperModal{
+    .paperModal {
         width: 60vw !important;
         background-color: white;
     }
-    .makeStyles-paper-2{
+    .makeStyles-paper-2 {
         width: 55vw !important;
     }
-    
-    .jss8{
+    .jss8 {
         width: 55vw !important;
     }
-    .jss2{
-    width: 55vw !important;
+    .jss2 {
+        width: 55vw !important;
     }
-
     .topbar-cont {
         display: flex;
         align-items: center;
     }
-
     .adj-i {
         margin-left: -50px !important;
     }
-
     .smicon {
         transform: rotate(90deg);
         width: 10px;
         margin-left: 10px;
     }
-
     .smicon2 {
         transform: rotate(270deg);
         width: 10px;
         margin-left: 10px;
     }
-
     .top-push {
         margin-top: 30px;
     }
-
     .margin-toper {
         margin-top: 80px;
     }
-
     .user-m-icon {
         margin-right: 65px !important;
         font-size: 1.8em !important;
     }
-
     .mobile-break {
         display: inherit !important;
     }
-
     .d-card {
         padding-left: 15px;
         padding: 15px;
     }
-
     .cd-card {
         box-shadow: 0 3px 6px rgba(0, 0, 0, 0.02), 0 3px 6px rgba(0, 0, 0, 0.23);
         border-radius: 4px;
     }
-
     .d-flex {
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
         font-size: 0.8em;
     }
-
-    .d-flex > div {
+    .d-flex>div {
         margin-top: 0px !important;
         padding-right: 10px;
     }
-
     .cat-sub {
         font-size: 12px !important;
         color: #7c7c7c;
         margin-left: 5px !important;
     }
-
     .show-only-mobile {
         display: block;
     }
-
     .sub-text-landing {
         color: #7c7c7c;
         margin-top: 10px !important;
         font-size: 12px !important;
         width: 90% !important;
     }
-
     .LandingPage-search-11 {
         width: 250px !important;
         background: transparent !important;
     }
-
     .course-options {
         margin-left: 0 !important;
     }
-
     .course-cat-icon-sm {
         width: 50px !important;
         height: 50px !important;
         text-align: right !important;
     }
-
     .course-cat-text-sm {
         text-align: left !important;
         font-size: 13px !important;
         margin-left: 5px !important;
     }
-
     .width {
         width: 80% !important;
         margin-left: 0 !important;
         margin-right: 0 !important;
     }
-
     .bt-m-no {
         margin-bottom: 0 !important;
         width: 100% !important;
     }
-  
     .scrolltop {
         right: 19px;
     }
-
     .bg2 {
         width: 100% !important;
         background-color: #fafafa !important;
     }
-
     .landing-2bar {
         flex-direction: column;
     }
-
     .bar-item {
         width: 100% !important;
     }
-
     .landing-showmore {
         background: white !important;
         border: #f15a29 1px solid !important;
@@ -1067,25 +1002,21 @@ dashboard-options-header {
         padding-right: 12px !important;
         padding-bottom: 3px !important;
     }
-
     .landing-showmore:hover {
         background: #f15a29 !important;
         border: #f15a29 1px solid !important;
         color: white !important;
         transition: 0.6s;
     }
-
     .card-flow {
         width: 90%;
         margin: auto;
     }
-
     .Bookmark-profile-title {
         padding-top: 10px;
         text-align: center;
         font-size: 1.5em !important;
     }
-
     .cont-profile {
         width: 90%;
         margin: auto;
@@ -1095,40 +1026,31 @@ dashboard-options-header {
         display: flex;
         justify-content: space-between;
     }
-
     .profile-topbar-text {
         margin-left: -20px;
         font-family: 2em !important;
     }
-
     .background {
         margin-top: 10px !important;
     }
-
     .searchicon {
         color: #d1d1d1;
     }
-
     .search-icon {
         width: 20%;
     }
-
     .reviews-profile {
         font-size: 1.5em !important;
     }
-
     .c-list {
         padding-left: 0px !important;
     }
-
     .profile-topbar-text {
         margin-left: -40px;
     }
-
     .search-input {
         width: 100%;
     }
-
     .searchField {
         width: 90%;
         height: 75%;
@@ -1137,25 +1059,20 @@ dashboard-options-header {
         color: #7c7c7c;
         transition: 0.5s;
     }
-
     .searchField::placeholder {
         color: rgb(100, 100, 100);
         font-size: 1em;
         opacity: 0.3;
     }
-
     .filter-overlay {
         margin-top: 12px;
     }
-
     .hidef {
         display: none !important;
     }
-
     .border-right {
         border-right: 1px transparent solid !important;
     }
-
     .filter-close {
         position: relative;
         float: right;
@@ -1164,27 +1081,21 @@ dashboard-options-header {
         font-size: 1.3rem;
         margin: 0px 10px;
     }
-
     .ead-sec {
         background-color: #fff !important;
     }
-
     .ead-bg {
         background-color: #fafafa !important;
     }
-
     .bgwhite {
         background-color: #fff !important;
     }
-
     .cd-container {
         padding-top: 0px;
     }
-
     .searchinput-1 {
         width: 89%;
     }
-
     .search-in {
         width: 90%;
         height: 75%;
@@ -1193,23 +1104,18 @@ dashboard-options-header {
         color: #7c7c7c;
         transition: 0.5s;
     }
-
     .cd-container {
         padding-top: 10px !important;
     }
-
     .mt-ad {
         padding-top: 60px;
     }
-
     .contact-container {
         margin-top: 25px !important;
     }
-
     .mg {
         margin-top: 20px !important;
     }
-
     .user-mn-icon {
         margin-left: auto;
         margin-right: -12px;
@@ -1224,60 +1130,52 @@ dashboard-options-header {
     margin-top: 50px;
 }
 
-@media  (min-height: 700px) {
+@media (min-height: 700px) {
     .home-grid-wrapper {
         display: block !important;
     }
 }
 
 @media only screen and (max-width: 600px) {
-
-    .paperModal{
+    .paperModal {
         width: 90vw !important;
     }
-    .makeStyles-paper-2{
+    .makeStyles-paper-2 {
         width: 90vw !important;
     }
-
-    .jss8{
+    .jss8 {
         width: 90vw !important;
     }
-    .jss2{
-    width: 90vw !important;
-
-        }
-
-    .seeCourse{
-        width:142px;
+    .jss2 {
+        width: 90vw !important;
     }
-
-    .dignitySub{
+    .seeCourse {
+        width: 142px;
+    }
+    .dignitySub {
         font-size: 13px !important;
         letter-spacing: 0.2px;
-        width:150px;
+        width: 150px;
     }
-
-    .MuiButton-label{
+    .MuiButton-label {
         /* margin-left: 12px; */
-        
     }
-
     /* .dignityH1{
         font-size:22px !important;
     } */
-
-    .edubukmain{
+    .edubukmain {
         margin-left: 0rem !important;
     }
-
-    .edubukh1{
-        font-size: 4vw !important; line-height:1.1; 
+    .edubukh1 {
+        font-size: 4vw !important;
+        line-height: 1.1;
     }
-    
-    .edubuk{
-        width: 69px; height: 62px; margin-left:0rem; margin-bottom: 1rem;
+    .edubuk {
+        width: 69px;
+        height: 62px;
+        margin-left: 0rem;
+        margin-bottom: 1rem;
     }
-
     /* .logoBackground {
         width: 40%;
         background-color: transparent;
@@ -1291,14 +1189,10 @@ dashboard-options-header {
     .branding-image {
         max-height: 40px;
     }
-
     .branding-image2 {
         max-height: 65px;
     }
 }
-
-
-
 
 .cd-container {
     padding-top: 100px;
@@ -1346,9 +1240,7 @@ body {
 
 .s-bar {
     margin-top: 10px;
-
     border: #f15a29 1px solid;
-
     align-items: center;
     width: 230px;
     display: flex;
@@ -1444,14 +1336,14 @@ select:focus {
 }
 
 .c__uniName>span {
-  font-size: 15px;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 0.67;
-  letter-spacing: normal;
-  text-align: left;
-  color: #000000;
+    font-size: 15px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 0.67;
+    letter-spacing: normal;
+    text-align: left;
+    color: #000000;
 }
 
 .c__cert {
@@ -1459,14 +1351,14 @@ select:focus {
 }
 
 .c__cert>span {
-  font-size: 25px;
-  font-weight: 600;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 0.94;
-  letter-spacing: normal;
-  text-align: left;
-  color: #000000;
+    font-size: 25px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 0.94;
+    letter-spacing: normal;
+    text-align: left;
+    color: #000000;
 }
 
 .c__lvl {
@@ -1474,23 +1366,23 @@ select:focus {
 }
 
 .c__lvl_key {
-  font-size: 15px;
-  font-weight: 600;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1;
-  letter-spacing: normal;
-  text-align: left;
-  color: #000000;
+    font-size: 15px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1;
+    letter-spacing: normal;
+    text-align: left;
+    color: #000000;
 }
 
 .c__lvl_val {
     font-size: 12px;
     font-stretch: normal;
-  font-style: normal;
-  line-height: 1;
-  letter-spacing: normal;
-  text-align: left;
+    font-style: normal;
+    line-height: 1;
+    letter-spacing: normal;
+    text-align: left;
 }
 
 .c__ovr {
@@ -1510,13 +1402,13 @@ select:focus {
 
 .c__ovr__des {
     font-size: 12px;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1.25;
-  letter-spacing: normal;
-  text-align: left;
-  color: #000000;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.25;
+    letter-spacing: normal;
+    text-align: left;
+    color: #000000;
 }
 
 li {
@@ -1549,7 +1441,7 @@ li {
 
 .digi__Logo>img {
     -webkit-backdrop-filter: blur(25px);
-  backdrop-filter: blur(25px);
+    backdrop-filter: blur(25px);
 }
 
 .select-course-btn {
@@ -1560,7 +1452,6 @@ li {
     padding: 3px 20px !important;
     text-transform: none !important;
 }
-
 
 .login-btn:hover {
     background: rgb(255, 187, 62) !important;
@@ -1583,6 +1474,7 @@ li {
     color: #000000;
 }
 
+
 /* .previousButton, .nextButton {
 		position: absolute;
 		top: 50%;
@@ -1595,15 +1487,17 @@ li {
 		cursor: pointer;
 } */
 
-.slider a.previousButton, .slider a.nextButton {
+.slider a.previousButton,
+.slider a.nextButton {
     z-index: 2!important;
 }
 
-.previousButton svg polygon, .nextButton svg polygon {
-        fill: #f15a29;
+.previousButton svg polygon,
+.nextButton svg polygon {
+    fill: #f15a29;
 }
 
-.edu-banner{
+.edu-banner {
     display: flex;
     background-image: url(./assets/edubukBanner.png);
     /* background-size: cover; */
@@ -1613,17 +1507,16 @@ li {
     height: 100vh;
 }
 
+
 /* // edited by yashwant sahu */
 
 @media (max-width: 400px) {
-    .paperModal{
+    .paperModal {
         width: 90vw !important;
     }
-   
-
 }
 
-.resetContainer{
-    padding : 0% !important ;
-    magin: 0% !important ;
+.resetContainer {
+    padding: 0% !important;
+    magin: 0% !important;
 }

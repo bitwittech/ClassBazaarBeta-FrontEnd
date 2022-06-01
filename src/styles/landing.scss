@@ -236,8 +236,7 @@
 
 .banner-4 {
     position: absolute;
-    top: 8%;
-    left: 4%;
+    top: 40%;
     padding-top: 0px;
     border: 2px solid black;
     display: flex;
@@ -253,6 +252,20 @@
     padding: 50px 20px;
 }
 
+.offer-btn {
+    color: #f15a29 !important;
+    background: white !important;
+    border-radius: 0px !important;
+    font-weight: 600 !important;
+    padding: 2px 2px !important;
+    text-transform: none !important;
+}
+
+.offer-btn:hover {
+    background: #f15a29 !important;
+    color: white !important;
+}
+
 @media only screen and (max-width: 1000px) {
     .banner-1 {
         top: 0;
@@ -261,9 +274,8 @@
     .banner-3 {
         top: 22%;
     }
-    .banner-4 {
-        top: 10%;
-        left: 7% !important;
+    .offer-btn {
+        padding: 0x !important;
     }
     .overlay {
         height: 59vh !important;
@@ -296,7 +308,7 @@
         height: 100%;
     }
     .banner-4 {
-        left: 10% !important;
+        // left: 10% !important;
     }
     .overlay {
         background-color: transparent !important;
@@ -367,10 +379,6 @@
         top: 20% !important;
         left: 60%;
         width: 30%;
-    }
-    .banner-4 {
-        // top:22%;
-        left: 11% !important;
     }
 }
 

@@ -199,6 +199,7 @@ function TopBar(props) {
 
   const handleLogout = () => {
     props.history.push('/');
+    localStorage.setItem('user',null);
     logout(dispatch);
   };
   const handleUserMobile = () => {

@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-has-content */
 /* eslint-disable default-case */
 import React, { Component } from 'react';
 import {
@@ -49,7 +50,7 @@ import 'react-animated-slider/build/horizontal.css';
 import Banner1 from '../assets/img/main-banner.jpg';
 import Banner2 from '../assets/img/offerbanner.png';
 import Banner3 from '../assets/img/banner3.png';
-import Banner4 from '../assets/img/offerbannerOLD.jpg';
+import Banner4 from '../assets/img/offerBanner.png';
 import { useState } from 'react';
 // import DignityHealthWhiteLogo from '../assets/dignityHealthWhiteLogo.jpeg';
 import DignityLogo from '../assets/dignity.png';
@@ -808,7 +809,7 @@ class LandingPage extends Component {
                             <Button
                               variant="outlined"
                               color="primary"
-                              className="login-btn banner-content banner-4"
+                              className="offer-btn banner-content banner-4"
                               onClick={() => {
                                 trackEvent(
                                   'Banner-Button',
@@ -831,7 +832,7 @@ class LandingPage extends Component {
                             </Button>
                             <div className="slider__dots">
                               {content.map((item, index1) =>
-                                index == index1 ? (
+                                index === index1 ? (
                                   <a
                                     href={'#' + index}
                                     key={index}

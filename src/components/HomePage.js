@@ -31,6 +31,7 @@ import { store } from '../App';
 import { subjectsData } from '../utils/data';
 import { trackEvent } from 'react-with-analytics/lib/utils';
 import { withStyles } from '@material-ui/core/styles';
+import axios from 'axios';
 
 const providerData = [
   'Udemy',
@@ -128,6 +129,7 @@ class HomePage extends Component {
     this.setupDefaultFilters = this.setupDefaultFilters.bind(this);
     this.getCheckedProvidersFromString = this.getCheckedProvidersFromString.bind(this);
     this.udpateOffsets = this.udpateOffsets.bind(this);
+    this.handleUnload = this.handleUnload.bind(this);
   }
 
   updateData() {
@@ -399,8 +401,19 @@ class HomePage extends Component {
     });
   }
 
+  handleUnload(q) {
+    const user_email = localStorage.getItem('user') || 'User Not Loged In';
+    axios.get(
+      `https://api.classbazaar.com/api/searchTrack?user_email=${user_email}&search_query=${q}`
+    );
+  }
+
   onSearchChange(query) {
     console.log('onSearchChange', { q: query.target.value });
+
+    this.handleUnload(query.target.value);
+
+
     ReactGA.ga('send', 'pageview', `/listing?q=${query.target.value}`);
     trackEvent('search', 'onSearch', 'Search_rest');
 
