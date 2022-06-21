@@ -1,12 +1,12 @@
 import A from './../assets/A.png';
 import ALTMBA from './../assets/altmba.png';
 import ATTLogo from './../assets/ATTLogo.png';
-import IITKLogo from '../assets/IITKLogo.jpg'
+import IITKLogo from '../assets/IITKLogo.jpg';
 import B from './../assets/B.png';
 
 import BostonUniLogo from './../assets/BostonUniLogo.png';
 import yaleLOGO from './../assets/yaleLOGO.png';
-import colomboLOGO from './../assets/colomboLOGO.png'
+import colomboLOGO from './../assets/colomboLOGO.png';
 import CS from './../assets/CS.png';
 import DA from './../assets/DA.png';
 import DEV from './../assets/DEV.png';
@@ -25,8 +25,10 @@ import SENG from './../assets/SENG.png';
 import SO from './../assets/SO.png';
 import UdacityLogo from './../assets/UdacityLogo.png';
 import UdemyLogo from './../assets/UdemyLogo.png';
+import UL from './../assets/UL.svg';
 import UniAuklandLogo from './../assets/UniAuklandLogo.jpg';
 import UniNewcastleLogo from './../assets/UniNewcastleLogo.jpeg';
+import GT from './../assets/gatech.png';
 import dataScience from '../assets/subjects/20402.jpg';
 import scienceAndEngin from '../assets/subjects/female-engineer-in-laboratory-3861449.jpg';
 import socialStudies from '../assets/subjects/happy-ethnic-woman-sitting-at-table-with-laptop-3769021.jpg';
@@ -37,9 +39,9 @@ import mathImage from '../assets/subjects/Image-16.jpg';
 import developer from '../assets/subjects/person-looking-at-phone-and-at-macbook-pro-1181244.jpg';
 import health from '../assets/subjects/photo-of-woman-practicing-yoga-3820320.jpg';
 import PepGra from '../assets/PepGra.png';
+import CU from '../assets/coventryUniversity.svg';
 import Duke from '../assets/Duke.png';
 import ThunderLogo from '../assets/ThunderLogo.png';
-
 
 export const subjectsData = [
   {
@@ -113,6 +115,58 @@ export const subjectsData = [
   },
 ];
 
+export const FRD = [
+  {
+    name: 'Data Visualization: Data Dashboards and Storytelling with Tableau',
+    university: 'Coventry University',
+    image: CU,
+    provider: 'Future Learn',
+    url: '/FutureLearn/f79e010c-4b42-45e4-8a71-0b47142cd953',
+  },
+  {
+    name: 'The Complete Guide to Partnership Marketing Course',
+    university: 'Udemy',
+    image: UdemyLogo,
+    provider: 'Udemy',
+    url: '/Udemy/f966445c-9ec6-4772-9fee-7fff9307d17c',
+  },
+  {
+    name: 'How to Create Great Online Content',
+    university: 'University of Leeds',
+    image: UL,
+    provider: 'Future Learn',
+    url: '/FutureLearn/ec353cf3-935a-4f45-bcd7-3eedda8d4a0b',
+  },
+  {
+    name: 'Improve Communication: Speak Smoothly, Clearly & Confidently',
+    university: 'Udemy',
+    image: UdemyLogo,
+    provider: 'Udemy',
+    url: '/Udemy/88d4bd0e-c21d-4143-9006-682e61ad2979',
+  },
+  {
+    name: 'Introduction to User Experience Design',
+    university: 'Georgia Institute of Technology',
+    image: GT,
+    provider: 'Coursera',
+    url: '/Coursera/ed0fb229-794c-47b1-afa0-b02a59b71781',
+  },
+  {
+    name: 'Video Production: 10 Ways to Instantly Improve Your Videos',
+    university: 'Udemy',
+    image: UdemyLogo,
+    provider: 'Udemy',
+    url: '/Udemy/e96fb258-fd65-4d11-8fe3-1c3f52b80c15',
+  },
+  {
+    name: 'Managing Emotions in Times of Uncertainty & Stress',
+    university: 'Yale University',
+    image: yaleLOGO,
+    provider: 'Coursera',
+    url: '/Coursera/667ff468-f4ee-41bf-b555-7b0913256202',
+  },
+];
+
 export const degreeData = [
   {
     name: 'Facebook Marketing Analytics Professional Certificate',
@@ -134,7 +188,6 @@ export const degreeData = [
     provider: 'Futre Learn',
     image: awsLOGO,
     url: '/FutureLearn/19188453-5506-487a-b2fe-9b8075424e96',
-    
   },
   {
     name: 'Digital Skills: Digital Marketing',
@@ -354,7 +407,7 @@ export const degreeData = [
 
 export const freeCourses = [
   {
-    name: 'CS50\'s Introduction to Computer Science',
+    name: "CS50's Introduction to Computer Science",
     university: 'Harvard University',
     provider: 'edX',
     image: HarvardUniLogo,
@@ -362,7 +415,8 @@ export const freeCourses = [
   },
   {
     name: 'Introduction to Cryptocurrencies and Blockchain',
-    university: 'Vizitech Solutions, Kiran Vaidya, FTB Courses, Tech Enthusiast',
+    university:
+      'Vizitech Solutions, Kiran Vaidya, FTB Courses, Tech Enthusiast',
     provider: 'Udemy',
     image: UdemyLogo,
     url: '/Udemy/cf2360fd-2683-4a79-9ff3-cc728f7ace30',
@@ -475,7 +529,7 @@ export const exclusiveCourses = [
               <p>years of educating students in the field of business</p>
           </td>
       </tr>
-      </tbody></table>`,            
+      </tbody></table>`,
       curriculum: `The Certificate in Healthcare Leadership focuses on all leadership functions. It is split into the following three pillars.`,
       curriculumDetails: `<p></p>
                           <ul style="font-size:12px">
@@ -517,7 +571,7 @@ export const exclusiveCourses = [
       price: '2,24,625',
       enroll:
         'https://dhge.org/our-programs/healthcare-analytics-certificate-pepperdine-graziadio',
-    }
+    },
   },
   {
     name: 'Certificate in Healthcare Leadership',
@@ -579,7 +633,7 @@ export const exclusiveCourses = [
           </td>
       </tr>
     </tbody></table>`,
-      
+
       curriculum: `The Certificate in Healthcare Leadership focuses on all leadership functions. It is split into the following three pillars.`,
       curriculumDetails: `<p></p>
                             <p style="font-size:12px">Module 1: Leading Self</p>
@@ -629,7 +683,6 @@ export const exclusiveCourses = [
       enroll:
         'https://dhge.org/our-programs/certificate-in-healthcare-leadership',
     },
-
   },
   {
     name: 'Certificate in Healthcare Marketing',
@@ -691,7 +744,7 @@ export const exclusiveCourses = [
           </td>
       </tr>
       </tbody></table>`,
-      
+
       curriculum: `In nine weeks, the certificate covers the following topics in a context of healthcare marketing and medical marketing:`,
       curriculumDetails: `<p></p><ul style="font-size:12px">
                             <li>Unit 1: Introduction to Healthcare Marketing</li>
@@ -732,7 +785,8 @@ export const exclusiveCourses = [
   },
   {
     name: 'Certificate in Innovation in Healthcare Management',
-    university: 'Thunderbird School of Global Management, a unit of Arizona State University Knowledge Enterprise',
+    university:
+      'Thunderbird School of Global Management, a unit of Arizona State University Knowledge Enterprise',
     provider: 'DHGE',
     image: ThunderLogo,
     url: '',

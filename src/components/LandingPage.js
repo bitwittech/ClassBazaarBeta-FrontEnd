@@ -7,7 +7,9 @@ import {
   subjectsData,
   trendingData,
   exclusiveCourses,
+  FRD
 } from '../utils/data';
+import {FutureReadyCourse} from  './future-ready-carsoule/future-ready-course'
 import { fade, makeStyles } from '@material-ui/core/styles';
 import ReactHtmlParser, { convertNodeToElement } from 'react-html-parser';
 import Envelope_Box from './Envelope_Box';
@@ -667,7 +669,7 @@ class LandingPage extends Component {
                                 >
                                   We believe in
                                 </div>
-                                <div className="h1" className="passionBanner">
+                                <div className="h1 passionBanner">
                                   Passion for Learning
                                 </div>
                                 <form>
@@ -754,7 +756,7 @@ class LandingPage extends Component {
                                     Discover your true passion and turn it into
                                     a career
                                   </div>
-                                  <div className="h1" className="edu">
+                                  <div className="h1 edu">
                                     With the most popular and trusted career
                                     mapping test for <strong>FREE!</strong>
                                   </div>
@@ -1190,25 +1192,33 @@ class LandingPage extends Component {
                   )}
                 </div>
               </div>
-
+              {/* <TrendingCoursesComponent
+                trendingData={trendingData}
+                filter={'trending'}
+                trackEvent={trackEvent}
+                routingURL={'/listing'}
+              /> */}
+              {console.log(FRD)}
+               <FutureReadyCourse
+                trackEvent={trackEvent}
+                degreeData={FRD}
+                filter={'trending'}
+                routingURL={'/listing'}
+              />
+               <LearnForFreeComponent
+                trendingData={freeCourses}
+                filter={'free'}
+                trackEvent={trackEvent}
+                routingURL={'/listing'}
+              />
               <EarnADegreeComponent
                 trackEvent={trackEvent}
                 degreeData={degreeData}
                 filter={'trending'}
                 routingURL={'/listing'}
               />
-              <TrendingCoursesComponent
-                trendingData={trendingData}
-                filter={'trending'}
-                trackEvent={trackEvent}
-                routingURL={'/listing'}
-              />
-              <LearnForFreeComponent
-                trendingData={freeCourses}
-                filter={'free'}
-                trackEvent={trackEvent}
-                routingURL={'/listing'}
-              />
+              
+             
               {/* <div ref={this.exclusiveCourseSection}></div>
           <ExclusiveCourseComponent
             exclusiveCourse={exclusiveCourses}

@@ -192,6 +192,19 @@
     }
 }
 
+.react-multiple-carousel__arrow {
+    top: 20% !important;
+    background-color: #ff3a09ec !important;
+}
+
+.react-multiple-carousel__arrow--right {
+    right: calc(1% + 1px) !important;
+}
+
+.react-multiple-carousel__arrow--left {
+    left: calc(1% + 1px) !important;
+}
+
 .slider__dots {
     display: flex;
     position: absolute;

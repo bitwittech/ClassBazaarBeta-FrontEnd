@@ -1,15 +1,18 @@
 import React, { useContext } from 'react';
-import Grid from '@material-ui/core/Grid';
+import { Grid, Typography } from '@material-ui/core';
 import { withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
 import { Pre_LOG_Box } from '../../store/Types';
 import Store from '../../store/Context';
 
-export const EarnADegreeComponent = withRouter(
+import Carousel from 'react-multi-carousel';
+import 'react-multi-carousel/lib/styles.css';
+
+export const FutureReadyCourse = withRouter(
   ({ history, degreeData, trackEvent, filter, routingURL }) => {
     const { state, dispatch } = useContext(Store);
     const { isAuth } = state;
-    const data = degreeData.slice(0, 4);
+    const data = degreeData;
     // Append by yashwant sahu
 
     const OpenLogin = () => {
@@ -25,10 +28,27 @@ export const EarnADegreeComponent = withRouter(
         });
       }
     };
+
+    const responsive = {
+      desktop: {
+        breakpoint: { max: 3000, min: 1024 },
+        items: 3,
+      },
+      tablet: {
+        breakpoint: { max: 800, min: 600 },
+        items: 1,
+      },
+      mobile: {
+        breakpoint: { max: 600, min: 0 },
+        items: 1,
+      },
+    };
+
     return (
       <div className={'earn-a-degree-wrapper'}>
+        {console.log(data)}
         <div className="section-title">
-          Earn a Certificate
+          Future Ready Courses
           <div className="bottom-border" />
         </div>
         <div className="section-sub-title">
@@ -36,10 +56,19 @@ export const EarnADegreeComponent = withRouter(
           many of the universities’ issue certificates which don’t even mention
           “taken online” on them.
         </div>
-        <div className="card-section">
-          {data.map((degree) => {
+     
+        <Carousel
+          className="card-section"
+          dotListClass="custom-dot-list-style"
+          keyBoardControl={true}
+          autoPlaySpeed={1000}
+          ssr={true}
+          responsive={responsive}
+        >
+          {data.map((degree, key) => {
             return (
               <div
+                key={key}
                 className="card-wrapper"
                 onClick={() => {
                   if (isAuth !== true) {
@@ -54,21 +83,15 @@ export const EarnADegreeComponent = withRouter(
               >
                 <div className="card-inner">
                   <div className="head-section">via {degree.provider}</div>
-                  <img src={degree.image} />
+                  <img src={degree.image} alt = {key}/>
                 </div>
                 <div className="university-section">{degree.university}</div>
                 <div className="name-section">{degree.name}</div>
               </div>
             );
           })}
-        </div>
-        <div className="card-section" style={{ marginTop: 0 }}>
-          {data.map((degree) => {
-            return (
-              <div className="card-wrapper" style={{ paddingTop: 0 }}></div>
-            );
-          })}
-        </div>
+        </Carousel>
+
         <div className="show-more-section">
           <div
             className="text"
