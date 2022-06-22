@@ -103,15 +103,13 @@ function App() {
   const handleUnload = async (ev) => {
     ev.preventDefault();
 
-    const user_email = localStorage.getItem('user') || 'User Not Loged In';
+    const user_email = localStorage.getItem('user') || 'User Not Logged In';
 
     const start_time = localStorage.getItem('start_time');
     const path = localStorage.getItem('path');
 
     await axios.get(
-      `${localURL}api/userTrack?user_email=${user_email}&time_stamp=${start_time}&path=${path}&event_location=${localStorage.getItem(
-        'location'
-      )}`
+      `${localURL}api/userTrack?user_email=${user_email}&time_stamp=${start_time}&path=${path}`
     );
   };
 
@@ -120,15 +118,15 @@ function App() {
     let start_time = new Date().toLocaleString();
     localStorage.setItem('start_time', start_time);
 
-    navigator.geolocation.getCurrentPosition(function (position) {
-      let lat = position.coords.latitude;
-      let long = position.coords.longitude;
+    // navigator.geolocation.getCurrentPosition(function (position) {
+    //   let lat = position.coords.latitude;
+    //   let long = position.coords.longitude;
 
-      localStorage.setItem(
-        'location',
-        JSON.stringify({ latitude: lat.toFixed(2), longitude: long.toFixed(2) })
-      );
-    });
+    //   localStorage.setItem(
+    //     'location',
+    //     JSON.stringify({ latitude: lat.toFixed(2), longitude: long.toFixed(2) })
+    //   );
+    // });
 
     window.addEventListener('beforeunload', handleUnload, true);
 

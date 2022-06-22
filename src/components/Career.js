@@ -5,6 +5,7 @@ import {
   CardContent,
   Typography,
   Box,
+  Link,
   TextField,
   MenuItem,
   Button,
@@ -19,6 +20,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import AssignmentIndIcon from '@material-ui/icons/AssignmentInd';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import { submitResume } from '../service/commonService';
+import { black } from 'material-ui/styles/colors';
 
 const useStyles = makeStyles(() => ({
   cardGrid: {
@@ -52,6 +54,14 @@ const useStyles = makeStyles(() => ({
   uploadBtn: {
     display: 'contents',
   },
+  link: {
+    color: 'black',
+    textDecoration: 'none',
+    '&:hover': {
+      color: '#000000c4',
+      textDecoration: 'none',
+    },
+  },
 }));
 
 const Career = () => {
@@ -68,17 +78,20 @@ const Career = () => {
 
   const [jobPost, setJobPost] = useState([
     {
+      title: 'SaaS Sales Specialist',
+      seniority: '5 or Above',
+      location: 'Mumbai, Rajasthan',
+    },
+    {
       title: 'UI/UX designer',
-      siniority: '0-5',
-      location: 'Jaipur, Rajsthan',
-      package: '2-5',
+      seniority: '0-5',
+      location: 'Remote + In Office',
     },
 
     {
       title: 'Business Dev Associate',
-      siniority: '0-5',
-      location: 'Jaipur, Rajsthan',
-      package: '2-5',
+      seniority: '0-5',
+      location: 'Mumbai, Rajasthan',
     },
   ]);
 
@@ -210,28 +223,26 @@ const Career = () => {
 
         {jobPost.map((post) => (
           <Grid item xs={8} md={3}>
-            <CardContent className={`${styles.card}`}>
-              <Typography variant={'h5'}>{post.title}</Typography>
-              <br></br>
-              <Typography variant={'caption'}>
-                Siniority : {post.siniority} years
-              </Typography>
-              <br></br>
-              <Typography variant={'caption'}>
-                Package : {post.package} LPA
-              </Typography>
-              <br></br>
-              <Typography variant={'caption'}>
-                Location : {post.location}
-              </Typography>
-            </CardContent>
+            <Link href="#form" className={styles.link}>
+              <CardContent className={`${styles.card}`}>
+                <Typography variant={'h5'}>{post.title}</Typography>
+                <br></br>
+                <Typography variant={'caption'}>
+                  Seniority : {post.seniority} years
+                </Typography>
+                <br></br>
+                <Typography variant={'caption'}>
+                  Location : {post.location}
+                </Typography>
+              </CardContent>
+            </Link>
           </Grid>
         ))}
       </Grid>
 
       {/* Form Section ==================================================  */}
 
-      <Grid container className={`${styles.cardGrid}`}>
+      <Grid container id="form" className={`${styles.cardGrid}`}>
         <Grid item xs={12} className={`${styles.topHeading}`}>
           <Typography variant={'h4'}>Apply Now</Typography>
         </Grid>

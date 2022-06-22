@@ -1,401 +1,492 @@
-.landing-page-wrapper {
-    a,
-    a:hover,
-    .btn-link,
-    .btn-link:hover {
-        text-decoration: none;
+    .landing-page-wrapper {
+        a,
+        a:hover,
+        .btn-link,
+        .btn-link:hover {
+            text-decoration: none;
+        }
+         ::placeholder {
+            color: #fff !important;
+            opacity: 1 !important;
+        }
+         :-ms-input-placeholder {
+            color: #fff !important;
+        }
+         ::-ms-input-placeholder {
+            color: #fff !important;
+        }
+        .btn.focus,
+        .btn:focus {
+            box-shadow: none;
+            text-decoration: none;
+        }
+        .btn-theme {
+            background-color: #f15a29;
+            border-color: #f15a29;
+            border-radius: 0;
+        }
+        .passionBanner {
+            font-size: 38px;
+        }
+        .edu {
+            font-size: 13px;
+            letter-spacing: 0.2px;
+        }
+        .logo {
+            max-height: 38px;
+        }
+        .custom-navbar .btn-link:hover {
+            color: #f15a29 !important;
+        }
+        .custom-navbar .navbar-searchbar-wrapper {
+            margin-left: 2.2rem;
+            margin-right: 2rem;
+            position: relative;
+        }
+        .custom-navbar .navbar-searchbar {
+            color: #fff;
+            background-color: transparent;
+            box-shadow: none;
+            padding-right: 37px !important;
+        }
+        .custom-navbar .navbar-searchbar-wrapper .search-icon {
+            position: absolute;
+            right: 12px;
+            top: 27.5%;
+            height: 45%;
+        }
+        .overlay {
+            position: absolute;
+            height: 49vw;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.096);
+        }
+        .main-banner {
+            // background-image: url(../assets/img/main-banner.jpg);
+            // background-size: cover;
+            // background-repeat: no-repeat;
+            height: 50vw;
+        }
+        .slider {
+            // background-image: url(../assets/img/main-banner.jpg);
+            background-size: cover;
+            background-repeat: no-repeat;
+            height: 100%;
+        }
+        .main-banner .banner-1 {
+            z-index: 2;
+            padding-top: 20px;
+            top: 25%;
+            width: 45%;
+            display: "flex";
+            flex-direction: column;
+            justify-content: "flex-start";
+        }
+        // edited Yashwant 
+        .main-banner .banner-content {
+            z-index: 2;
+            padding-top: 50px;
+        }
+        .main-banner .banner-content img.logo2 {
+            max-height: 65px;
+        }
+        .main-searchbar-wrapper {
+            border: 2px solid #e95a40;
+            position: relative;
+            width: 75%;
+            margin: 0 auto;
+        }
+        .main-searchbar-wrapper .search-icon2 {
+            position: absolute;
+            right: 10px;
+            top: 20%;
+            height: 60%;
+            cursor: pointer;
+        }
+        .main-searchbar-wrapper input {
+            padding-left: 5px;
+            padding-right: 5px;
+            color: #fff;
+        }
+        .main-searchbar-wrapper input:focus {
+            outline: none;
+        }
+        .tiles-section .tiles-content {
+            padding-right: 7rem;
+        }
+        .tiles-section .tiles-content .tiles-heading {
+            font-size: 4rem;
+            font-weight: 700;
+            line-height: 1;
+            margin-bottom: 1.5rem;
+        }
+        .tiles-section .tile1 {
+            background-image: url(../assets/img/tile1.jpg);
+            background-size: cover;
+            height: 310px;
+        }
+        .tiles-section .tile2 {
+            background-image: url(../assets/img/tile2.jpg);
+            background-size: cover;
+            height: 200px;
+            margin-top: 40px;
+        }
+        .tiles-section .tile3 {
+            background-image: url(../assets/img/tile3.jpg);
+            background-size: cover;
+            height: 290px;
+            width: 85%;
+            background-position: right;
+        }
+        .tiles-section figure .title {
+            background-color: #e6feff;
+            padding: 0.5rem 1rem;
+            text-align: center;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            color: #086065;
+        }
+        .tiles-section .browse-box {
+            background-color: #0d9ca4;
+            color: #fff;
+            text-align: right;
+            display: inline-block;
+            padding: 15px;
+            padding-top: 100px;
+            padding-left: 40px;
+        }
+        footer {
+            font-size: 14px;
+        }
+        footer a {
+            color: #000;
+            text-decoration: none;
+        }
+        footer p {
+            margin-bottom: 0.7rem;
+        }
+        footer .footer-group .footer-group-heading {
+            font-weight: 600;
+            position: relative;
+            margin-bottom: 15px;
+            display: inline-block;
+        }
+        footer .footer-group .footer-group-heading::after {
+            content: '';
+            display: block;
+            width: 40%;
+            height: 2px;
+            background-color: #f15a29;
+            position: absolute;
+            left: 0;
+            top: 100%;
+        }
+        footer .social-list .icon {
+            max-height: 18px;
+            margin-right: 6px;
+            vertical-align: sub;
+        }
     }
-     ::placeholder {
-        color: #fff !important;
-        opacity: 1 !important;
-    }
-     :-ms-input-placeholder {
-        color: #fff !important;
-    }
-     ::-ms-input-placeholder {
-        color: #fff !important;
-    }
-    .btn.focus,
-    .btn:focus {
-        box-shadow: none;
-        text-decoration: none;
-    }
-    .btn-theme {
-        background-color: #f15a29;
-        border-color: #f15a29;
-        border-radius: 0;
-    }
-    .passionBanner {
-        font-size: 38px;
-    }
-    .edu {
-        font-size: 13px;
-        letter-spacing: 0.2px;
-    }
-    .logo {
-        max-height: 38px;
-    }
-    .custom-navbar .btn-link:hover {
-        color: #f15a29 !important;
-    }
-    .custom-navbar .navbar-searchbar-wrapper {
-        margin-left: 2.2rem;
-        margin-right: 2rem;
-        position: relative;
-    }
-    .custom-navbar .navbar-searchbar {
-        color: #fff;
-        background-color: transparent;
-        box-shadow: none;
-        padding-right: 37px !important;
-    }
-    .custom-navbar .navbar-searchbar-wrapper .search-icon {
-        position: absolute;
-        right: 12px;
-        top: 27.5%;
-        height: 45%;
-    }
-    .overlay {
-        position: absolute;
-        height: 49vw;
-        z-index: 1;
-        left: 0;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        background-color: rgba(0, 0, 0, 0.096);
-    }
-    .main-banner {
-        // background-image: url(../assets/img/main-banner.jpg);
-        // background-size: cover;
-        // background-repeat: no-repeat;
-        height: 50vw;
-    }
-    .slider {
-        // background-image: url(../assets/img/main-banner.jpg);
-        background-size: cover;
-        background-repeat: no-repeat;
-        height: 100%;
-    }
-    .main-banner .banner-1 {
-        z-index: 2;
-        padding-top: 20px;
-        top: 25%;
-        width: 45%;
-        display: "flex";
-        flex-direction: column;
-        justify-content: "flex-start";
-    }
-    // edited Yashwant 
-    .main-banner .banner-content {
-        z-index: 2;
-        padding-top: 50px;
-    }
-    .main-banner .banner-content img.logo2 {
-        max-height: 65px;
-    }
-    .main-searchbar-wrapper {
-        border: 2px solid #e95a40;
-        position: relative;
-        width: 75%;
-        margin: 0 auto;
-    }
-    .main-searchbar-wrapper .search-icon2 {
-        position: absolute;
-        right: 10px;
-        top: 20%;
-        height: 60%;
-        cursor: pointer;
-    }
-    .main-searchbar-wrapper input {
-        padding-left: 5px;
-        padding-right: 5px;
-        color: #fff;
-    }
-    .main-searchbar-wrapper input:focus {
-        outline: none;
-    }
-    .tiles-section .tiles-content {
-        padding-right: 7rem;
-    }
-    .tiles-section .tiles-content .tiles-heading {
-        font-size: 4rem;
-        font-weight: 700;
-        line-height: 1;
-        margin-bottom: 1.5rem;
-    }
-    .tiles-section .tile1 {
-        background-image: url(../assets/img/tile1.jpg);
-        background-size: cover;
-        height: 310px;
-    }
-    .tiles-section .tile2 {
-        background-image: url(../assets/img/tile2.jpg);
-        background-size: cover;
-        height: 200px;
-        margin-top: 40px;
-    }
-    .tiles-section .tile3 {
-        background-image: url(../assets/img/tile3.jpg);
-        background-size: cover;
-        height: 290px;
-        width: 85%;
-        background-position: right;
-    }
-    .tiles-section figure .title {
-        background-color: #e6feff;
-        padding: 0.5rem 1rem;
+    
+    .future-ready-courses {
+        background: whitesmoke;
+        padding: 50px 20px;
         text-align: center;
-        text-transform: uppercase;
-        margin-bottom: 15px;
-        color: #086065;
+        .section-title {
+            font-size: 60px;
+            color: #f15a29;
+            font-weight: 600;
+            .bottom-border {
+                border: 2px solid #f15a29;
+                width: 200px;
+                margin: 20px auto;
+            }
+        }
+        .section-sub-title {
+            color: rgba(0, 0, 0, 0.808);
+            font-size: 18px;
+            text-align: center;
+            line-height: 25px;
+            font-weight: 400;
+            max-width: 600px;
+            padding: 0% 3%;
+            margin: auto;
+        }
+        .card-section {
+            display: flex;
+            margin-top: 50px;
+            position: relative;
+            max-width: 1360px;
+            margin-left: auto;
+            margin-right: auto;
+            @media (max-width: 1100px) {
+                flex-direction: column;
+            }
+            .card-wrapper {
+                padding: 15px;
+                flex: 1;
+                position: relative;
+                .card-inner {
+                    max-width: 260px;
+                    background: white;
+                    margin: auto;
+                    border-radius: 4px;
+                    padding: 15px 10px;
+                    height: 160px;
+                    align-items: center;
+                    justify-content: center;
+                    display: flex;
+                    position: relative;
+                    flex-direction: column;
+                    .head-section {
+                        background: #f15a29;
+                        color: rgb(255, 255, 255);
+                        padding: 0px 10px;
+                        border-radius: 18px;
+                        position: absolute;
+                        top: -10px;
+                    }
+                    img {
+                        max-height: 100px;
+                    }
+                }
+                .university-section {
+                    font-size: 12px;
+                    color: #000000;
+                    padding: 10px;
+                    text-align: center;
+                }
+                .name-section {
+                    font-size: 18px;
+                    color: #000000;
+                    padding: 0 10px;
+                    font-weight: 500;
+                    text-align: center;
+                }
+            }
+        }
+        .show-more-section {
+            margin: 60px 0;
+            .text {
+                color: rgb(0, 0, 0);
+                font-size: 18px;
+                cursor: pointer;
+                line-height: 40px;
+                margin: auto;
+                border-bottom: 2px solid #f15a29;
+                max-width: 100px;
+            }
+        }
     }
-    .tiles-section .browse-box {
-        background-color: #0d9ca4;
-        color: #fff;
-        text-align: right;
-        display: inline-block;
-        padding: 15px;
-        padding-top: 100px;
-        padding-left: 40px;
-    }
-    footer {
-        font-size: 14px;
-    }
-    footer a {
-        color: #000;
-        text-decoration: none;
-    }
-    footer p {
-        margin-bottom: 0.7rem;
-    }
-    footer .footer-group .footer-group-heading {
-        font-weight: 600;
-        position: relative;
-        margin-bottom: 15px;
-        display: inline-block;
-    }
-    footer .footer-group .footer-group-heading::after {
-        content: '';
-        display: block;
-        width: 40%;
-        height: 2px;
-        background-color: #f15a29;
-        position: absolute;
-        left: 0;
-        top: 100%;
-    }
-    footer .social-list .icon {
-        max-height: 18px;
-        margin-right: 6px;
-        vertical-align: sub;
-    }
-}
-
-.react-multiple-carousel__arrow {
-    top: 20% !important;
-    background-color: #ff3a09ec !important;
-}
-
-.react-multiple-carousel__arrow--right {
-    right: calc(1% + 1px) !important;
-}
-
-.react-multiple-carousel__arrow--left {
-    left: calc(1% + 1px) !important;
-}
-
-.slider__dots {
-    display: flex;
-    position: absolute;
-    bottom: 1.5em;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 2!important;
-}
-
-.slider__dot {
-    display: block;
-    margin: 0 .5em;
-    width: 1em;
-    height: 1em;
-    border-radius: 100px;
-}
-
-.slider__indicator {
-    display: block;
-    margin: 0 .5em;
-    width: 1em;
-    height: 1em;
-    background: rgba(255, 255, 255, .5);
-    border-radius: 100px;
-    bottom: 1.5em;
-    left: 50%;
-    transform: translateX(-50%);
-    position: absolute;
-    background: #f15a29;
-}
-
-.banner-3 {
-    position: absolute;
-    top: 20%;
-    left: 6%;
-    padding-top: 0px;
-    border: 2px solid black;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-}
-
-.banner-4 {
-    position: absolute;
-    top: 40%;
-    padding-top: 0px;
-    border: 2px solid black;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-}
-
-.browseCourse {
-    text-align: right;
-}
-
-.orange-band {
-    padding: 50px 20px;
-}
-
-.offer-btn {
-    color: #f15a29 !important;
-    background: white !important;
-    border-radius: 0px !important;
-    font-weight: 600 !important;
-    padding: 2px 2px !important;
-    text-transform: none !important;
-}
-
-.offer-btn:hover {
-    background: #f15a29 !important;
-    color: white !important;
-}
-
-@media only screen and (max-width: 1000px) {
-    .banner-1 {
-        top: 0;
-        width: 45%;
-    }
-    .banner-3 {
-        top: 22%;
-    }
-    .offer-btn {
-        padding: 0x !important;
-    }
-    .overlay {
-        height: 59vh !important;
-    }
-    .main-banner {
-        height: 60vh !important;
-    }
-    .contact-banner {
-        height: 60vh !important;
-    }
-}
-
-@media only screen and (max-width: 600px) {
-    .home-grid-wrapper {
-        display: block !important;
-    }
-    .main-banner {
-        // background-image: url(../assets/img/main-banner.jpg);
-        // background-size: cover;
-        // background-repeat: no-repeat;
-        height: 55vh !important;
-    }
-    .contact-banner {
-        height: 55vh !important;
-    }
-    .slider {
-        // background-image: url(../assets/img/main-banner.jpg);
-        background-size: cover;
-        background-repeat: no-repeat;
-        height: 100%;
-    }
-    .banner-4 {
-        // left: 10% !important;
-    }
-    .overlay {
-        background-color: transparent !important;
-    }
-    .dignityH1 {
-        display: none;
-    }
-    .dignitySub {
-        display: none;
-    }
-    .passionBanner {
-        font-size: 30px !important;
-    }
-    .edu {
-        width: 70%;
-    }
-    .banner-1 {
-        top: 30% !important;
-        left: 60%;
-        width: 30%;
-    }
-    .edubukh1 {
-        display: none;
-    }
-    .slider__dots {
-        display: none;
-    }
-    .home-grid-wrapper .row-1 {
-        display: block !important;
-    }
-    .home-grid-wrapper .text-section {
-        padding-right: 0px !important;
-    }
-    .earn-a-degree-wrapper .section-title {
-        font-size: 40px !important;
-    }
-    .browseCourse {
-        text-align: center;
-    }
-    .orange-band {
-        padding: 0px;
-    }
-    .home-grid-wrapper .box-4 {
-        margin: 0px auto;
-    }
-    .home-grid-wrapper .right-wrapper {
-        margin: 0px auto;
-    }
-    .trending-courses-wrapper .section-title {
-        font-size: 40px !important;
-    }
-    .exclusive-course-wrapper .section-title {
-        font-size: 40px !important;
-    }
-}
-
-@media only screen and (max-width: 450px) {
-    .main-banner {
-        height: 40vh !important;
-    }
-    .contact-banner {
-        height: 40vh !important;
-    }
-    // .edu{
-    //   // display : none !important;
-    // }
-    .banner-1 {
+    
+    .react-multiple-carousel__arrow {
         top: 20% !important;
-        left: 60%;
-        width: 30%;
+        background-color: #ff3a09ec !important;
     }
-}
-
-// Yashwant Sahu added
-.carieerBanner {
-    height: 50vh;
-}
+    
+    .react-multiple-carousel__arrow--right {
+        right: calc(1% + 1px) !important;
+    }
+    
+    .react-multiple-carousel__arrow--left {
+        left: calc(1% + 1px) !important;
+    }
+    
+    .slider__dots {
+        display: flex;
+        position: absolute;
+        bottom: 1.5em;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 2!important;
+    }
+    
+    .slider__dot {
+        display: block;
+        margin: 0 .5em;
+        width: 1em;
+        height: 1em;
+        border-radius: 100px;
+    }
+    
+    .slider__indicator {
+        display: block;
+        margin: 0 .5em;
+        width: 1em;
+        height: 1em;
+        background: rgba(255, 255, 255, .5);
+        border-radius: 100px;
+        bottom: 1.5em;
+        left: 50%;
+        transform: translateX(-50%);
+        position: absolute;
+        background: #f15a29;
+    }
+    
+    .banner-3 {
+        position: absolute;
+        top: 20%;
+        left: 6%;
+        padding-top: 0px;
+        border: 2px solid black;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+    
+    .banner-4 {
+        position: absolute;
+        top: 40%;
+        padding-top: 0px;
+        border: 2px solid black;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+    
+    .browseCourse {
+        text-align: right;
+    }
+    
+    .orange-band {
+        padding: 50px 20px;
+    }
+    
+    .offer-btn {
+        color: #f15a29 !important;
+        background: white !important;
+        border-radius: 0px !important;
+        font-weight: 600 !important;
+        padding: 2px 2px !important;
+        text-transform: none !important;
+    }
+    
+    .offer-btn:hover {
+        background: #f15a29 !important;
+        color: white !important;
+    }
+    
+    @media only screen and (max-width: 1000px) {
+        .banner-1 {
+            top: 0;
+            width: 45%;
+        }
+        .banner-3 {
+            top: 22%;
+        }
+        .offer-btn {
+            padding: 0x !important;
+        }
+        .overlay {
+            height: 59vh !important;
+        }
+        .main-banner {
+            height: 60vh !important;
+        }
+        .contact-banner {
+            height: 60vh !important;
+        }
+    }
+    
+    @media only screen and (max-width: 600px) {
+        .home-grid-wrapper {
+            display: block !important;
+        }
+        .main-banner {
+            // background-image: url(../assets/img/main-banner.jpg);
+            // background-size: cover;
+            // background-repeat: no-repeat;
+            height: 55vh !important;
+        }
+        .contact-banner {
+            height: 55vh !important;
+        }
+        .slider {
+            // background-image: url(../assets/img/main-banner.jpg);
+            background-size: cover;
+            background-repeat: no-repeat;
+            height: 100%;
+        }
+        .banner-4 {
+            // left: 10% !important;
+        }
+        .overlay {
+            background-color: transparent !important;
+        }
+        .dignityH1 {
+            display: none;
+        }
+        .dignitySub {
+            display: none;
+        }
+        .passionBanner {
+            font-size: 30px !important;
+        }
+        .edu {
+            width: 70%;
+        }
+        .banner-1 {
+            top: 30% !important;
+            left: 60%;
+            width: 30%;
+        }
+        .edubukh1 {
+            display: none;
+        }
+        .slider__dots {
+            display: none;
+        }
+        .home-grid-wrapper .row-1 {
+            display: block !important;
+        }
+        .home-grid-wrapper .text-section {
+            padding-right: 0px !important;
+        }
+        .earn-a-degree-wrapper .section-title {
+            font-size: 40px !important;
+        }
+        .browseCourse {
+            text-align: center;
+        }
+        .orange-band {
+            padding: 0px;
+        }
+        .home-grid-wrapper .box-4 {
+            margin: 0px auto;
+        }
+        .home-grid-wrapper .right-wrapper {
+            margin: 0px auto;
+        }
+        .trending-courses-wrapper .section-title {
+            font-size: 40px !important;
+        }
+        .exclusive-course-wrapper .section-title {
+            font-size: 40px !important;
+        }
+    }
+    
+    @media only screen and (max-width: 450px) {
+        .main-banner {
+            height: 40vh !important;
+        }
+        .contact-banner {
+            height: 40vh !important;
+        }
+        // .edu{
+        //   // display : none !important;
+        // }
+        .banner-1 {
+            top: 20% !important;
+            left: 60%;
+            width: 30%;
+        }
+    }
+    
+    // Yashwant Sahu added
+    .carieerBanner {
+        height: 50vh;
+    }
