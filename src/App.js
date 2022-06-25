@@ -101,8 +101,7 @@ function App() {
   const localURL = 'http://0.0.0.0:8080/';
 
   const handleUnload = async (ev) => {
-    ev.preventDefault();
-
+    // ev.preventDefault();
     const user_email = localStorage.getItem('user') || 'User Not Logged In';
 
     const start_time = localStorage.getItem('start_time');
@@ -128,7 +127,7 @@ function App() {
     //   );
     // });
 
-    window.addEventListener('beforeunload', handleUnload, true);
+    window.addEventListener('beforeunload', handleUnload);
 
     if (state.token) {
       fetchUser(state.token, dispatch);

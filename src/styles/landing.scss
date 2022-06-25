@@ -193,12 +193,13 @@
     }
     
     .future-ready-courses {
+        align-items: center;
         background: whitesmoke;
         padding: 50px 20px;
         text-align: center;
         .section-title {
             font-size: 60px;
-            color: #f15a29;
+            color: #000000;
             font-weight: 600;
             .bottom-border {
                 border: 2px solid #f15a29;

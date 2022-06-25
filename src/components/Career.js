@@ -49,8 +49,8 @@ const useStyles = makeStyles(() => ({
     textAlign: 'center',
   },
   img: {
-    maxWidth: '-webkit-fill-available',
-  },
+    maxWidth: '100%',
+     },
   uploadBtn: {
     display: 'contents',
   },

@@ -46,19 +46,19 @@ export const FutureReadyCourse = withRouter(
 
     return (
       <Grid container className={'future-ready-courses'}>
-        <Grid Item xs={12} md = {5}>
+        <Grid Item xs={12} md={5}>
           <div className="section-title">
             Future Ready Courses
             <div className="bottom-border" />
           </div>
-          <div className="section-sub-title">
+          {/* <div className="section-sub-title">
             Launch yourself in your career with an online degree. Did you know
             many of the universities’ issue certificates which don’t even
             mention “taken online” on them.
-          </div>
+          </div> */}
         </Grid>
 
-        <Grid Item xs={12} md = {7}>
+        <Grid Item xs={12} md={7}>
           <Carousel
             className="card-section"
             dotListClass="custom-dot-list-style"
@@ -95,7 +95,7 @@ export const FutureReadyCourse = withRouter(
           </Carousel>
         </Grid>
 
-        <Grid Item xs = {12} className="show-more-section">
+        <Grid Item xs={12} className="show-more-section">
           <div
             className="text"
             onClick={() => {
