@@ -15,12 +15,7 @@ export const eduTest = async (user, val) => {
   console.log(user, val);
 
   if (
-    val.school_or_college_name !== null &&
-    val.gender !== null &&
-    val.email_address !== null &&
-    val.mobile_no !== null &&
-    val.class_year !== null &&
-    val.password !== null
+    val !== null 
   ) {
     const url = `https://edubuk.co.in/mitest/User/loginApi?user_id=${user.id}&name=${val.name}&gender=${val.gender}&email_address=${val.email_address}&school_or_college_name=${val.school_or_college_name}&class_year=${val.class_year}&city=${val.city}&mobile_no=${val.mobile_no}&password=${val.password}`;
     //  const url = `https://edubuk.co.in/User/loginApi?user_id=${user.id}&name=${val.name}&gender=${val.gender}&email_address=${val.email_address}&school_or_college_name=${val.school_or_college_name}&class_year=${val.class_year}&city=${val.city}&mobile_no=${val.mobile_no}&password=${val.password}`;
