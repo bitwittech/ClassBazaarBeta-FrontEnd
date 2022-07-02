@@ -118,62 +118,62 @@ const CourseDetails = (props) => {
   const officialURL = 'https://api.classbazaar.com/';
   const localURL = 'http://0.0.0.0:8080/';
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-
-    const getCourseDetails = async () => {
-      const token = localStorage.getItem('cbtoken');
-      const body = JSON.stringify({
-        token: token,
-        courseID: uuid,
-        provider,
-      });
-      console.log('TOKEN', token);
-      const config = {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      };
-
-      var url = `${officialURL}api/course?uuid=${uuid}&provider=${provider}`;
-
-      console.log(url, uuid);
-
-      const res = await fetch(url);
-      const data = await res.json();
-
-      console.log('dataUdemy', data.summaryData);
-
-      const reviews = await axios.post(
-        'https://api.classbazaar.com/api/review/course',
-        body,
-        config
-      );
-      setState({
-        ...Gstate,
-        data: data.data,
-        loading: false,
-        reviews: reviews.data.data,
-        rloading: false,
-        index: data.summaryData.index,
-        ranking_points: data.summaryData.ranking_points,
-        description: data.summaryData.description,
-        isFlexible: data.summaryData.is_flexible,
-        price: data.summaryData.price,
-        subjects: data.summaryData.subjects,
-        instructors: data.summaryData.instructors,
-        university: data.summaryData.university,
-        price_currency: data.summaryData.price_currency,
-        provider: data.summaryData.provider,
-        time: data.summaryData.start_date,
-        title: data.summaryData.title,
-        url: data.summaryData.url,
-        uuid: data.summaryData.uuid,
-      });
+  const getCourseDetails = async () => {
+    const token = localStorage.getItem('cbtoken');
+    const body = JSON.stringify({
+      token: token,
+      courseID: uuid,
+      provider,
+    });
+    console.log('TOKEN', token);
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
     };
 
+    var url = `${localURL}api/course?uuid=${uuid}&provider=${provider}`;
+
+    console.log(url, uuid);
+
+    const res = await fetch(url);
+    const data = await res.json();
+
+    console.log('dataUdemy', data.summaryData);
+
+    const reviews = await axios.post(
+      'https://api.classbazaar.com/api/review/course',
+      body,
+      config
+    );
+    setState({
+      ...Gstate,
+      data: data.data,
+      loading: false,
+      reviews: reviews.data.data,
+      rloading: false,
+      index: data.summaryData.index,
+      ranking_points: data.summaryData.ranking_points,
+      description: data.summaryData.description,
+      isFlexible: data.summaryData.is_flexible,
+      price: data.summaryData.price,
+      subjects: data.summaryData.subjects,
+      instructors: data.summaryData.instructors,
+      university: data.summaryData.university,
+      price_currency: data.summaryData.price_currency,
+      provider: data.summaryData.provider,
+      time: data.summaryData.start_date,
+      title: data.summaryData.title,
+      url: data.summaryData.url,
+      uuid: data.summaryData.uuid,
+    });
+  };
+
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
     getCourseDetails();
-  }, [Gstate, provider, uuid]);
+  }, []);
 
   // review section not in need
   const reviewSection = (ratingNumber, noOfReviews) => {
@@ -259,7 +259,7 @@ const CourseDetails = (props) => {
     console.log('Card_track');
 
     await axios.get(
-      `${officialURL}api/cardEnrollTrack?user_email=${user_email}&card_title=${Gstate.title}&card_uuid=${Gstate.uuid}&provider=${Gstate.provider}`
+      `${localURL}api/cardEnrollTrack?user_email=${user_email}&card_title=${Gstate.title}&card_uuid=${Gstate.uuid}&provider=${Gstate.provider}`
     );
   };
 
@@ -345,7 +345,7 @@ const CourseDetails = (props) => {
                     );
 
                     const res = await fetch(
-                      `${officialURL}api/track/?title=${Gstate.title}`
+                      `${localURL}api/track/?title=${Gstate.title}`
                     );
 
                     window.open(

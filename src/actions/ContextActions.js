@@ -8,28 +8,17 @@ import {
   LOGOUT,
   REMOVE_TOKEN,
   UPDATE_BOOKMARK,
-  EdubukFrom
+  EdubukFrom,
 } from '../store/Types';
 import ReactGA from 'react-ga';
 import config from '../config.json';
-import {
-  store
-} from './../App';
-import {
-  trackEvent
-} from 'react-with-analytics/lib/utils';
-import { newLogin, newregister } from '../service/commonService'
+import { store } from './../App';
+import { trackEvent } from 'react-with-analytics/lib/utils';
+import { newLogin, newregister, verifyToken } from '../service/commonService';
 
-const {
-  FusionAuthClient
-} = require('@fusionauth/node-client');
+const { FusionAuthClient } = require('@fusionauth/node-client');
 
-const {
-  API,
-  API_NGROK,
-  API_LOCAL,
-  fusionAuthURL
-} = config;
+const { API, API_NGROK, API_LOCAL, fusionAuthURL } = config;
 
 let client = new FusionAuthClient(
   config.fusionAuthAPIKey,
@@ -37,36 +26,33 @@ let client = new FusionAuthClient(
 );
 
 export const facebookLogin = async (data, dispatch) => {
-  
-  console.log(">>>>>>",data)
+  console.log('>>>>>>', data);
 
-if(data.email !== undefined )
-{
-  try {
-    function handleResponse(clientResponse) {
-      console.info(
-        JSON.stringify(clientResponse.successResponse.user, null, 2)
-      );
-    }
+  if (data.email !== undefined) {
+    try {
+      function handleResponse(clientResponse) {
+        console.info(
+          JSON.stringify(clientResponse.successResponse.user, null, 2)
+        );
+      }
 
-    const userDataForReg = {
-      user: {
-        username: data.name ,
-        password: data.id,
-        email: data.email,
-        mobilePhone: data.phone
-      },
-      registration: {
-        applicationId: config.fusionAuthApplicationId,
-      },
-    };
+      const userDataForReg = {
+        user: {
+          username: data.name,
+          password: data.id,
+          email: data.email,
+          mobilePhone: data.phone,
+        },
+        registration: {
+          applicationId: config.fusionAuthApplicationId,
+        },
+      };
 
-    // yaha par feilds null jaa rahi thi 😃
-  
+      // yaha par feilds null jaa rahi thi 😃
 
-    const newUserDataForReg = {
+      const newUserDataForReg = {
         userid: '',
-        name: data.name ,
+        name: data.name,
         password: data.id,
         email_address: data.email,
         mobile_no: data.phone,
@@ -74,116 +60,115 @@ if(data.email !== undefined )
         school_or_college_name: data.school,
         class_year: data.classYear,
         city: data.city,
+      };
 
-    };
+      console.log({
+        newUserDataForReg,
+        userDataForReg,
+      });
 
-    console.log({
-      newUserDataForReg,
-      userDataForReg,
-    });
+      newregister(undefined, newUserDataForReg);
 
-    newregister(undefined, newUserDataForReg);
-
-    await client
-      .register(undefined, userDataForReg)
-      .then(response => {
-        console.log('Response', response);
-        if (response.statusCode === 200) {
-          console.log(response);
-          dispatch({
-            type: ALERT,
-            payload: {
-              varient: 'success',
-              message: 'Registration successful. Please login',
-            },
-          });
-          if (localStorage.getItem('GA-track')) {
-            trackEvent('SignUp', 'register', 'Bookmarked_account')
-            localStorage.removeItem('GA-track')
+      await client
+        .register(undefined, userDataForReg)
+        .then((response) => {
+          console.log('Response', response);
+          if (response.statusCode === 200) {
+            console.log(response);
+            dispatch({
+              type: ALERT,
+              payload: {
+                varient: 'success',
+                message: 'Registration successful. Please login',
+              },
+            });
+            if (localStorage.getItem('GA-track')) {
+              trackEvent('SignUp', 'register', 'Bookmarked_account');
+              localStorage.removeItem('GA-track');
+            }
+            if (localStorage.getItem('GA-track-review')) {
+              trackEvent('SignUp', 'register', 'Review_account');
+              localStorage.removeItem('GA-track-review');
+            }
+            trackEvent('SignUp', 'click', 'manually');
+            dispatch({
+              type: LOGIN_MODAL,
+              payload: false,
+            });
+          } else {
+            dispatch({
+              type: ALERT,
+              payload: {
+                varient: 'error',
+                message: 'Registration failed',
+              },
+            });
+            dispatch({
+              type: LOGIN_MODAL,
+              payload: false,
+            });
+            dispatch({
+              type: Pre_LOG_Box,
+              payload: false,
+            });
           }
-          if (localStorage.getItem('GA-track-review')) {
-            trackEvent('SignUp', 'register', 'Review_account')
-            localStorage.removeItem('GA-track-review')
-          }
-          trackEvent('SignUp', 'click', 'manually');
-          dispatch({
-            type: LOGIN_MODAL,
-            payload: false,
-          });
-        } else {
+        })
+        // edited by Yashwant sahu
+        .catch((e) => {
+          localStorage.clear();
+          console.error(
+            '>>>>>>>>',
+            Object.values(e.errorResponse.fieldErrors)[0][0].message
+          );
           dispatch({
             type: ALERT,
             payload: {
               varient: 'error',
-              message: 'Registration failed',
+              message: Object.values(e.errorResponse.fieldErrors)[0][0].message,
             },
           });
-          dispatch({
-            type: LOGIN_MODAL,
-            payload: false,
-          });
-          dispatch({
-            type: Pre_LOG_Box,
-            payload: false,
-          });
-        }
-      })
-      // edited by Yashwant sahu
-      .catch(e => {
-        localStorage.clear();
-        console.error(">>>>>>>>",Object.values(e.errorResponse.fieldErrors)[0][0].message);
-        dispatch({
-          type: ALERT,
-          payload: {
-            varient: 'error',
-            message: Object.values(e.errorResponse.fieldErrors)[0][0].message,
-          }
         });
+      dispatch({
+        type: LOADING,
+        payload: false,
       });
-    dispatch({
-      type: LOADING,
-      payload: false,
-    });
-    dispatch({
-      type: LOGIN_MODAL,
-      payload: false,
-    });
-  } catch (errMsg){
-
-    dispatch({
-      type: LOADING,
-      payload: false,
-    });
-    // dispatch({
-    //   type: ALERT,
-    //   payload: {
-    //     varient: 'error',
-    //     message: "Invalid credentials",
-    //   },
-    // });
-    dispatch({
-      type: LOGIN_MODAL,
-      payload: false,
-    });
-    dispatch({
-      type: Pre_LOG_Box,
-      payload: false,
-    });
-
-  }
-}
-else {
-  dispatch({
-    type: ALERT,
-    payload: {
-      varient: 'error',
-      message: "Email is not provided by facebook. Please Sign-Up with our from. ",
+      dispatch({
+        type: LOGIN_MODAL,
+        payload: false,
+      });
+    } catch (errMsg) {
+      dispatch({
+        type: LOADING,
+        payload: false,
+      });
+      // dispatch({
+      //   type: ALERT,
+      //   payload: {
+      //     varient: 'error',
+      //     message: "Invalid credentials",
+      //   },
+      // });
+      dispatch({
+        type: LOGIN_MODAL,
+        payload: false,
+      });
+      dispatch({
+        type: Pre_LOG_Box,
+        payload: false,
+      });
     }
-  });
+  } else {
+    dispatch({
+      type: ALERT,
+      payload: {
+        varient: 'error',
+        message:
+          'Email is not provided by facebook. Please Sign-Up with our from. ',
+      },
+    });
+  }
 
-}
-
-// this for the identity provider in Fusion Auth 
+  // this for the identity provider in Fusion Auth
   // client
   //   .identityProviderLogin({
   //     applicationId: 'c8682dc3-adbc-4501-b707-9cde8c8ade0f',
@@ -228,9 +213,8 @@ else {
   //       },
   //     });
   //   })
-}
+};
 export const googleLogin = async (data, dispatch) => {
-
   client
     .identityProviderLogin({
       applicationId: 'c8682dc3-adbc-4501-b707-9cde8c8ade0f',
@@ -240,24 +224,24 @@ export const googleLogin = async (data, dispatch) => {
         redirect_uri: `${config.D_redirecturl}`,
       },
     })
-    .then(async resp => {
-      console.log("Identity Provider Response ", resp)
+    .then(async (resp) => {
+      console.log('Identity Provider Response ', resp);
       if (resp.statusCode === 200) {
         const user = resp.successResponse.user;
         if (!user.username) {
           // Need to fetch details from google and update the user.
           await fetch(
-              `https://www.googleapis.com/oauth2/v1/userinfo?access_token=${data.access_token}`
-            )
-            .then(resp => resp.json())
-            .then(googleDetails => {
+            `https://www.googleapis.com/oauth2/v1/userinfo?access_token=${data.access_token}`
+          )
+            .then((resp) => resp.json())
+            .then((googleDetails) => {
               user.name = googleDetails.name;
               user.username = googleDetails.email;
               updateUser('name', user.id, googleDetails.name);
               updateUser('username', user.id, googleDetails.email);
             })
-            .catch(err => {
-              console.error("ERROR", err);
+            .catch((err) => {
+              console.error('ERROR', err);
             });
         }
         store.setItem('user', user);
@@ -280,7 +264,8 @@ export const googleLogin = async (data, dispatch) => {
           payload: false,
         });
       }
-    }).catch(err=>console.log("+++++++",err));
+    })
+    .catch((err) => console.log('+++++++', err));
 };
 
 export const register = async (data, dispatch) => {
@@ -289,56 +274,48 @@ export const register = async (data, dispatch) => {
     payload: true,
   });
 
-  console.log(data)
+  console.log(data);
 
   try {
-    function handleResponse(clientResponse) {
-      console.info(
-        JSON.stringify(clientResponse.successResponse.user, null, 2)
-      );
-    }
+    // function handleResponse(clientResponse) {
+    //   console.info(
+    //     JSON.stringify(clientResponse.successResponse.user, null, 2)
+    //   );
+    // }
 
-    const userDataForReg = {
-      user: {
-        username: data.username ,
-        password: data.password,
-        email: data.email,
-        mobilePhone: data.phone
-      },
-      registration: {
-        applicationId: config.fusionAuthApplicationId,
-      },
-    };
+    // const userDataForReg = {
+    //   user: {
+    //     username: data.username,
+    //     password: data.password,
+    //     email: data.email,
+    //     mobilePhone: data.phone,
+    //   },
+    //   registration: {
+    //     applicationId: config.fusionAuthApplicationId,
+    //   },
+    // };
 
     // yaha par feilds null jaa rahi thi 😃
-  
 
     const newUserDataForReg = {
-        userid: '',
-        name: data.username ,
-        password: data.password,
-        email_address: data.email.toLowerCase(),
-        mobile_no: data.phone,
-        gender: data.gender,
-        school_or_college_name: data.school,
-        class_year: data.classYear,
-        city: data.city,
-        refferral : data.refferral
-
+      userid: '',
+      name: data.username,
+      password: data.password,
+      email_address: data.email.toLowerCase(),
+      mobile_no: data.phone,
+      gender: data.gender,
+      school_or_college_name: data.school,
+      class_year: data.classYear,
+      city: data.city,
+      refferral: data.refferral,
     };
 
     console.log({
       newUserDataForReg,
-      userDataForReg,
     });
 
-    newregister(undefined, newUserDataForReg);
-
-
-
-    await client
-      .register(undefined, userDataForReg)
-      .then(response => {
+    await newregister(newUserDataForReg)
+      .then((response) => {
         console.log('Response', response);
         if (response.statusCode === 200) {
           console.log(response);
@@ -350,12 +327,12 @@ export const register = async (data, dispatch) => {
             },
           });
           if (localStorage.getItem('GA-track')) {
-            trackEvent('SignUp', 'register', 'Bookmarked_account')
-            localStorage.removeItem('GA-track')
+            trackEvent('SignUp', 'register', 'Bookmarked_account');
+            localStorage.removeItem('GA-track');
           }
           if (localStorage.getItem('GA-track-review')) {
-            trackEvent('SignUp', 'register', 'Review_account')
-            localStorage.removeItem('GA-track-review')
+            trackEvent('SignUp', 'register', 'Review_account');
+            localStorage.removeItem('GA-track-review');
           }
           trackEvent('SignUp', 'click', 'manually');
           dispatch({
@@ -377,15 +354,18 @@ export const register = async (data, dispatch) => {
         }
       })
       // edited by Yashwant sahu
-      .catch(e => {
+      .catch((e) => {
         localStorage.clear();
-        console.error(">>>>>>>>",Object.values(e.errorResponse.fieldErrors)[0][0].message);
+        console.error(
+          '>>>>>>>>',
+          Object.values(e.errorResponse.fieldErrors)[0][0].message
+        );
         dispatch({
           type: ALERT,
           payload: {
             varient: 'error',
             message: Object.values(e.errorResponse.fieldErrors)[0][0].message,
-          }
+          },
         });
       });
     dispatch({
@@ -396,8 +376,7 @@ export const register = async (data, dispatch) => {
       type: LOGIN_MODAL,
       payload: false,
     });
-  } catch (errMsg){
-
+  } catch (errMsg) {
     dispatch({
       type: LOADING,
       payload: false,
@@ -413,13 +392,10 @@ export const register = async (data, dispatch) => {
       type: LOGIN_MODAL,
       payload: false,
     });
-
   }
 };
 
-
-export const updateEDUData = async(data,dispatch) => {
-
+export const updateEDUData = async (data, dispatch) => {
   dispatch({
     type: LOADING,
     payload: true,
@@ -427,75 +403,66 @@ export const updateEDUData = async(data,dispatch) => {
 
   let password;
 
-  console.log(data)
+  console.log(data);
 
-  store.getItem("clientSecret").then((res)=>{
-    password =res
-    console.log(">>>",password)
-  })
+  store.getItem('clientSecret').then((res) => {
+    password = res;
+    console.log('>>>', password);
+  });
 
+  store.getItem('user').then((res) => {
+    try {
+      console.log(res);
 
-store.getItem('user').then((res)=>{
-   try {
-    function handleResponse(clientResponse) {
-      console.info(
-        JSON.stringify(clientResponse.successResponse.user, null, 2)
-      );
-    }
-
-    
-    const newUserDataForReg = {
+      const newUserDataForReg = {
         userid: '',
-        name: res.username ,
-        email_address: res.email,
+        name: res.name,
+        email_address: res.email_address,
         mobile_no: data.phone,
         gender: data.gender,
         school_or_college_name: data.school,
         class_year: data.classYear,
         city: data.city,
-        password:password
+        password: password,
+      };
 
-    };
+      console.log({
+        newUserDataForReg,
+      });
 
-    console.log({
-      newUserDataForReg,
-    });
+      newregister(newUserDataForReg);
 
-    newregister(undefined, newUserDataForReg);
-  
-    dispatch({
-      type: LOADING,
-      payload: false,
-    });
-    dispatch({
-      type: EdubukFrom,
-      payload: false,
-    });
-  } catch (errMsg){
-
-    dispatch({
-      type: LOADING,
-      payload: false,
-    });
-    dispatch({
-      type: ALERT,
-      payload: {
-        varient: 'error',
-        message: "Invalid credentials",
-      },
-    });
-    dispatch({
-      type: EdubukFrom,
-      payload: false,
-    });
-
-  }
-});
- 
-
-}
+      dispatch({
+        type: LOADING,
+        payload: false,
+      });
+      dispatch({
+        type: EdubukFrom,
+        payload: false,
+      });
+    } catch (errMsg) {
+      dispatch({
+        type: LOADING,
+        payload: false,
+      });
+      dispatch({
+        type: ALERT,
+        payload: {
+          varient: 'error',
+          message: 'Invalid credentials',
+        },
+      });
+      dispatch({
+        type: EdubukFrom,
+        payload: false,
+      });
+    }
+  });
+};
 
 export const signin = async (data, dispatch) => {
+  // newLogin(data);
+
   dispatch({
     type: LOADING,
     payload: true,
@@ -503,32 +470,30 @@ export const signin = async (data, dispatch) => {
   console.log(data);
 
   let password = data.password;
-  if(password === undefined)
-  {
-    password = data.id
-
+  if (password === undefined) {
+    password = data.id;
   }
   try {
-    client
-      .login({
-        loginId: data.email,
-        password: password,
-      })
-      .then(async response => {
-        console.log('LOGIN', response);
-        if (response.statusCode === 200) {
-          localStorage.setItem('user',data.email);
-          newLogin(response.successResponse.user.email);
-          store.setItem('user', response.successResponse.user);
-          store.setItem('clientSecret',password);
-          ReactGA.set({
-            userId: response.successResponse.user.id
-          });
+    newLogin(data)
+      .then(async (response) => {
+        if (response.status === 200) {
+          localStorage.setItem('user', data.email);
+
+          store.setItem('user', response.data.user);
+          store.setItem('clientSecret', password);
+          store.setItem('newUserLogin', response.data.user);
+          localStorage.setItem(
+            'newLogin',
+            JSON.parse(JSON.stringify(response.data.user))
+          );
+          // ReactGA.set({
+          //   userId: response.successResponse.user.id,
+          // });
           dispatch({
             type: LOGIN,
             payload: {
-              token: response.successResponse.token,
-              user: response.successResponse.user,
+              token: response.data.token,
+              user: response.data.user,
             },
           });
           dispatch({
@@ -545,15 +510,15 @@ export const signin = async (data, dispatch) => {
           });
         }
       })
-      .catch(e => {
+      .catch((e) => {
         console.log(e);
-        // dispatch({
-        //   type: ALERT,
-        //   payload: {
-        //     varient: 'error',
-        //     message: 'Invalid credentials',
-        //   },
-        // });
+        dispatch({
+          type: ALERT,
+          payload: {
+            varient: 'error',
+            message: 'Invalid credentials',
+          },
+        });
       });
 
     dispatch({
@@ -575,18 +540,38 @@ export const signin = async (data, dispatch) => {
   }
 };
 
+// export const fetchUser = async (token, dispatch) => {
+//   console.log('hey');
+//   try {
+//     const res = await client.retrieveUserUsingJWT(token);
+//     console.log('USER', res.successResponse.user.id);
+//     ReactGA.set({
+//       userId: res.successResponse.user.id,
+//     });
+//     dispatch({
+//       type: FETCH_USER,
+//       payload: res.successResponse.user,
+//     });
+//   } catch (error) {
+//     dispatch({
+//       type: REMOVE_TOKEN,
+//     });
+//   }
+// };
 export const fetchUser = async (token, dispatch) => {
   console.log('hey');
   try {
-    const res = await client.retrieveUserUsingJWT(token);
-    console.log("USER", res.successResponse.user.id)
-    ReactGA.set({
-      userId: res.successResponse.user.id
+    verifyToken({ token: token }).then((data) => {
+      console.log(data);
+      dispatch({
+        type: FETCH_USER,
+        payload: data.data.user,
+      });
     });
-    dispatch({
-      type: FETCH_USER,
-      payload: res.successResponse.user,
-    });
+    // console.log('USER', res.successResponse.user.id);
+    // ReactGA.set({
+    //   userId: res.successResponse.user.id,
+    // });
   } catch (error) {
     dispatch({
       type: REMOVE_TOKEN,
@@ -594,8 +579,8 @@ export const fetchUser = async (token, dispatch) => {
   }
 };
 
-export const logout = async dispatch => {
-  localStorage.clear()
+export const logout = async (dispatch) => {
+  localStorage.clear();
   dispatch({
     type: LOGOUT,
   });
@@ -608,7 +593,14 @@ export const logout = async dispatch => {
   });
 };
 
-export const addBookmark = async (uuid, userId, user, provider, dispatch, fromWhere) => {
+export const addBookmark = async (
+  uuid,
+  userId,
+  user,
+  provider,
+  dispatch,
+  fromWhere
+) => {
   console.log(uuid, userId, user, provider);
 
   //check if it is already there if then remove and dispatch update
@@ -621,10 +613,12 @@ export const addBookmark = async (uuid, userId, user, provider, dispatch, fromWh
       const res = await client.patchUser(userId, {
         user: {
           data: {
-            bookmarks: [{
-              id: uuid,
-              provider,
-            }, ],
+            bookmarks: [
+              {
+                id: uuid,
+                provider,
+              },
+            ],
           },
         },
       });
@@ -640,17 +634,17 @@ export const addBookmark = async (uuid, userId, user, provider, dispatch, fromWh
   } else {
     //already bookmarked?
     console.log('UUID', uuid);
-    const isAlreadyPresent = user.data.bookmarks.find(e => e.id === uuid);
+    const isAlreadyPresent = user.data.bookmarks.find((e) => e.id === uuid);
     console.log('PRESENT', isAlreadyPresent);
 
     if (isAlreadyPresent) {
       if (fromWhere === 'listing') {
-        trackEvent('Profile Action', 'click', 'Unbookmarked_listing')
+        trackEvent('Profile Action', 'click', 'Unbookmarked_listing');
       }
       if (fromWhere === 'profile') {
-        trackEvent('Profile Action', 'click', 'Unbookmarked_profile')
+        trackEvent('Profile Action', 'click', 'Unbookmarked_profile');
       }
-      const newBookmarks = user.data.bookmarks.filter(e => e.id !== uuid);
+      const newBookmarks = user.data.bookmarks.filter((e) => e.id !== uuid);
       const res = await client.patchUser(userId, {
         user: {
           data: {

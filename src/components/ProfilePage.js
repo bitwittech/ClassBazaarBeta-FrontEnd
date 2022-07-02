@@ -94,25 +94,25 @@ class ProfilePage extends Component {
   }
 
   handleRedeem = () => {
-    store.getItem('user').then(user => {
+    store.getItem('user').then((user) => {
       if (user == null) {
-        return ;
+        return;
       }
       const url = `http://redeem.classbazaar.com/authcheck?uname=${user.username}&uemail=${user.email}&umobile=${user.mobilePhone}`;
       console.log(url);
       window.open(url, '_self');
-    })
-  }
+    });
+  };
 
   updateData() {
-    store.getItem('user').then(user => {
+    store.getItem('user').then((user) => {
       if (user == null) {
         return this.props.history.push('/');
       }
       this.setState({
         user,
-        phone: user.mobilePhone,
-        email: user.email,
+        phone: user.mobile_no,
+        email: user.email_address,
         userImage:
           user.data && user.data.image
             ? user.data && user.data.image
@@ -140,8 +140,8 @@ class ProfilePage extends Component {
       )}`;
 
       return fetch(url)
-        .then(response => response.json())
-        .then(json => {
+        .then((response) => response.json())
+        .then((json) => {
           console.log('BOOKMARK DATA', json);
           this.setState({ data: json.data, loading: false });
         });
@@ -258,7 +258,7 @@ class ProfilePage extends Component {
                                 ) : (
                                   <input
                                     value={this.state.location}
-                                    onChange={e =>
+                                    onChange={(e) =>
                                       this.setState({
                                         location: e.target.value,
                                       })
@@ -335,7 +335,7 @@ class ProfilePage extends Component {
                                 ) : (
                                   <input
                                     value={this.state.phone}
-                                    onChange={e =>
+                                    onChange={(e) =>
                                       this.setState({ phone: e.target.value })
                                     }
                                     style={{
@@ -408,7 +408,7 @@ class ProfilePage extends Component {
                                   </Typography>
                                 ) : (
                                   <input
-                                    onChange={e =>
+                                    onChange={(e) =>
                                       this.setState({ email: e.target.value })
                                     }
                                     value={this.state.email}
@@ -491,7 +491,7 @@ class ProfilePage extends Component {
                                   <>
                                     <input
                                       value={this.state.password}
-                                      onChange={e =>
+                                      onChange={(e) =>
                                         this.setState({
                                           curPassword: e.target.value,
                                         })
@@ -509,7 +509,7 @@ class ProfilePage extends Component {
                                     />
                                     <input
                                       value={this.state.password}
-                                      onChange={e =>
+                                      onChange={(e) =>
                                         this.setState({
                                           newPassword: e.target.value,
                                         })
@@ -542,10 +542,8 @@ class ProfilePage extends Component {
                                     className="click-h"
                                     onClick={async () => {
                                       try {
-                                        const {
-                                          curPassword,
-                                          newPassword,
-                                        } = this.state;
+                                        const { curPassword, newPassword } =
+                                          this.state;
 
                                         const res = await updatePassword(
                                           curPassword,
@@ -581,7 +579,12 @@ class ProfilePage extends Component {
                       </div>
                     </Container>
                   </Paper>
-                      <img src={bookmarkBanner} style={{marginTop: '20px'}} className="mobileImage" onClick={this.handleRedeem} />
+                  <img
+                    src={bookmarkBanner}
+                    style={{ marginTop: '20px' }}
+                    className="mobileImage"
+                    onClick={this.handleRedeem}
+                  />
                 </Grid>
 
                 <Grid item xs={12} md={8} lg={9}>
@@ -607,7 +610,7 @@ class ProfilePage extends Component {
                         </Typography>
                       </Grid>
                     ) : (
-                      this.state.data.map(obj => (
+                      this.state.data.map((obj) => (
                         <ProfileCourseCard
                           key={obj.title}
                           isInstructor={true}
@@ -638,7 +641,7 @@ class ProfilePage extends Component {
                     {this.state.rloading ? (
                       <p>Loading</p>
                     ) : this.state.reviews.length > 0 ? (
-                      this.state.reviews.map(data => (
+                      this.state.reviews.map((data) => (
                         <div key={Math.random()}>
                           <div className="c-card">
                             <div className="coursecard-header">
@@ -656,9 +659,9 @@ class ProfilePage extends Component {
                               <div></div>
                             </div>
                             <Link
-                              to={`/coursedetails/${data.course &&
-                                data.course.provider}/${data.course &&
-                                data.course.uuid}`}
+                              to={`/coursedetails/${
+                                data.course && data.course.provider
+                              }/${data.course && data.course.uuid}`}
                             >
                               <Typography
                                 variant="subtitle1"

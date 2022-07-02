@@ -25,12 +25,12 @@ import { LinkedIn } from 'react-linkedin-login-oauth2';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   modal: {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    'overflow-y':'scroll'
+    'overflow-y': 'scroll',
   },
   paper: {
     backgroundColor: theme.palette.background.paper,
@@ -58,10 +58,9 @@ const useStyles = makeStyles(theme => ({
   },
   closeButton: {
     position: 'relative',
-    left : '90%',
+    left: '90%',
     color: theme.palette.grey[500],
-   
-  }
+  },
 }));
 
 const EdubukForm = () => {
@@ -88,17 +87,17 @@ const EdubukForm = () => {
       email: null,
       school: null,
       city: null,
-      gender : null,
-      class : null
+      gender: null,
+      class: null,
     },
   });
   console.log(edubukFrom);
+
   useEffect(() => {
     setModal({ ...modal, state: edubukFrom.state });
   }, []);
   console.log(modal.state);
 
-  
   const handleClose = () => {
     dispatch({
       type: EdubukFrom,
@@ -109,19 +108,16 @@ const EdubukForm = () => {
     });
   };
 
- 
-  
-
-  const setGender = e => {
+  const setGender = (e) => {
     modal.formData.gender = e.target.value;
-  }
+  };
 
-  const setClassYear = e => {
+  const setClassYear = (e) => {
     modal.formData.classYear = e.target.value;
-    console.log(modal.formData)
-  }
+    console.log(modal.formData);
+  };
 
-  const handleChange = e => {
+  const handleChange = (e) => {
     const { name, value } = e.target;
     const errors = modal.errors;
     const validEmailRegex = RegExp(
@@ -129,23 +125,20 @@ const EdubukForm = () => {
     );
     const phoneRegex = RegExp(/^(\+\d{1,3}[- ]?)?\d{10}$/);
     switch (name) {
-      
       case 'phone':
         errors.phone = phoneRegex.test(value) ? '' : 'Invalid phone';
         break;
-      
+
       case 'gender':
         errors.gender = !value.toString() ? '' : 'Gender required';
         break;
-      
+
       case 'classYear':
-        errors.classYear = !value.toString()  ? '' : 'Class required';
+        errors.classYear = !value.toString() ? '' : 'Class required';
         break;
-      
+
       case 'city':
-        errors.city = !value.toString().trim().length
-          ? 'City required'
-          : '';
+        errors.city = !value.toString().trim().length ? 'City required' : '';
         break;
 
       case 'school':
@@ -164,14 +157,12 @@ const EdubukForm = () => {
       },
     });
     // console.log("==="+modal.formData.refferral);
-
   };
 
-  const handleSubmit = async e => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-      await updateEDUData(modal.formData, dispatch);
-
+    await updateEDUData(modal.formData, dispatch);
 
     setModal({
       ...modal,
@@ -184,10 +175,9 @@ const EdubukForm = () => {
     });
   };
 
-  
   console.log('STATE', state.loading);
-  const responseGoogle = res => {
-    console.log(res)
+  const responseGoogle = (res) => {
+    console.log(res);
     googleLogin(res, dispatch);
     trackEvent('social-icon', 'click', 'google');
   };
@@ -206,12 +196,18 @@ const EdubukForm = () => {
         }}
       >
         <Fade in={edubukFrom.open}>
-          <div className={classes.paper} className = "paperModal">
+          <div className={classes.paper} className="paperModal">
             <Container maxWidth="sm">
-            <IconButton aria-label="close" className={classes.closeButton} onClick={ ()=>{ handleClose() }}>
+              <IconButton
+                aria-label="close"
+                className={classes.closeButton}
+                onClick={() => {
+                  handleClose();
+                }}
+              >
                 <CloseIcon />
               </IconButton>
-              <br/>
+              <br />
               <Typography component="div" align="center">
                 <Typography
                   style={{
@@ -222,162 +218,152 @@ const EdubukForm = () => {
                   variant="subtitle1"
                   gutterBottom
                 >
-                  Please enter all the required feilds to attempt following test.
+                  Please enter all the required feilds to attempt following
+                  test.
                 </Typography>
 
-                
-
                 <form onSubmit={handleSubmit}>
-                  
-                  
-                    <>
-                      {' '}
-                      <Typography
-                        style={{
-                          fontWeight: '900',
-                          fontSize: '12px',
-                          marginTop: '6px',
-                        }}
-                        color="primary"
-                        variant="subtitle1"
-                        gutterBottom
-                      >
-                        Mobile Number
-                      </Typography>
-                      <input
-                        type="text"
-                        name="phone"
-                        value={modal.formData.phone}
-                        onChange={handleChange}
-                        className="text-field"
-                        placeholder="Enter your number"
-                        required
-                      />
-                      <div className="color-red">{modal.errors.phone}</div>
-                    </>
-                  
                   <>
-                  {' '}
-                  <Typography
-                    style={{
-                      fontWeight: '900',
-                      fontSize: '12px',
-                      marginTop: '6px',
-                    }}
-                    color="primary"
-                    variant="subtitle1"
-                    gutterBottom
-                  >
-                    Gender
-                  </Typography>
-                  <select className="select-box"
-                        onChange={setGender}>
-                    <option value="">--Select Gender--</option>
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                  </select>
-                  </>
-                  
-                                    <>
-                                    {' '}
-                  <Typography
-                    style={{
-                      fontWeight: '900',
-                      fontSize: '12px',
-                      marginTop: '6px',
-                    }}
-                    color="primary"
-                    variant="subtitle1"
-                    gutterBottom
-                  >
-                    Class
-                  </Typography>
-                  <select className="select-box"
-                        onChange={setClassYear}>
-                    <option value="">--Select Class/Year--</option>
-                    <option value="class_6">Class - 6</option>
-                    <option value="class_7">Class - 7</option>
-                    <option value="class_8">Class - 8</option>
-                    <option value="class_9">Class - 9</option>
-                    <option value="class_10">Class - 10</option>
-                    <option value="class_11">Class - 11</option>
-                    <option value="class_12">Class - 12</option>
-                    <option value="college_1">Year - 1</option>
-                    <option value="college_2">Year - 2</option>
-                    <option value="college_3">Year - 3</option>
-                    <option value="college_4">Year - 4</option>
-                    <option value="college_5">Year - 5</option>
-                  </select>
-                                    </>
-                
-                 
-                  <>
-                  {' '}
-                  <Typography
-                    style={{
-                      fontWeight: '900',
-                      fontSize: '12px',
-                      marginTop: '6px',
-                    }}
-                    color="primary"
-                    variant="subtitle1"
-                    gutterBottom
-                  >
-                    School Name
-                  </Typography>
-                  <input
-                    name="school"
-                    value={modal.formData.school}
-                    type="text"
-                    className="text-field"
-                    onChange={handleChange}
-                    placeholder="Enter your School Name"
-                  />
-                  <div className="color-red">{modal.errors.school}</div>
-                  </>
-                
-                                    <>
-                                    {' '}
-                                    <Typography
-                                      style={{
-                                        fontWeight: '900',
-                                        fontSize: '12px',
-                                        marginTop: '6px',
-                                      }}
-                                      color="primary"
-                                      variant="subtitle1"
-                                      gutterBottom
-                                    >
-                                      City
-                                    </Typography>
-                                    <input
-                                      name="city"
-                                      value={modal.formData.city}
-                                      type="text"
-                                      className="text-field"
-                                      onChange={handleChange}
-                                      placeholder="Enter your City"
-                                    />
-                                    <div className="color-red">{modal.errors.city}</div>
-                                    </>
-                
-                  
-                    <Button
-                      variant="contained"
-                      type="submit"
+                    {' '}
+                    <Typography
+                      style={{
+                        fontWeight: '900',
+                        fontSize: '12px',
+                        marginTop: '6px',
+                      }}
                       color="primary"
-                      className={classes.loginButton}
+                      variant="subtitle1"
+                      gutterBottom
                     >
-                      {!state.loading ? (
-                        'Register'
-                      ) : (
-                          <CircularProgress color="white" size={'1.5rem'} />
-                        )}
-                    </Button>
+                      Mobile Number
+                    </Typography>
+                    <input
+                      type="text"
+                      name="phone"
+                      value={modal.formData.phone}
+                      onChange={handleChange}
+                      className="text-field"
+                      placeholder="Enter your number"
+                      required
+                    />
+                    <div className="color-red">{modal.errors.phone}</div>
+                  </>
+
+                  <>
+                    {' '}
+                    <Typography
+                      style={{
+                        fontWeight: '900',
+                        fontSize: '12px',
+                        marginTop: '6px',
+                      }}
+                      color="primary"
+                      variant="subtitle1"
+                      gutterBottom
+                    >
+                      Gender
+                    </Typography>
+                    <select className="select-box" onChange={setGender}>
+                      <option value="">--Select Gender--</option>
+                      <option value="Male">Male</option>
+                      <option value="Female">Female</option>
+                    </select>
+                  </>
+
+                  <>
+                    {' '}
+                    <Typography
+                      style={{
+                        fontWeight: '900',
+                        fontSize: '12px',
+                        marginTop: '6px',
+                      }}
+                      color="primary"
+                      variant="subtitle1"
+                      gutterBottom
+                    >
+                      Class
+                    </Typography>
+                    <select className="select-box" onChange={setClassYear}>
+                      <option value="">--Select Class/Year--</option>
+                      <option value="class_6">Class - 6</option>
+                      <option value="class_7">Class - 7</option>
+                      <option value="class_8">Class - 8</option>
+                      <option value="class_9">Class - 9</option>
+                      <option value="class_10">Class - 10</option>
+                      <option value="class_11">Class - 11</option>
+                      <option value="class_12">Class - 12</option>
+                      <option value="college_1">Year - 1</option>
+                      <option value="college_2">Year - 2</option>
+                      <option value="college_3">Year - 3</option>
+                      <option value="college_4">Year - 4</option>
+                      <option value="college_5">Year - 5</option>
+                    </select>
+                  </>
+
+                  <>
+                    {' '}
+                    <Typography
+                      style={{
+                        fontWeight: '900',
+                        fontSize: '12px',
+                        marginTop: '6px',
+                      }}
+                      color="primary"
+                      variant="subtitle1"
+                      gutterBottom
+                    >
+                      School Name
+                    </Typography>
+                    <input
+                      name="school"
+                      value={modal.formData.school}
+                      type="text"
+                      className="text-field"
+                      onChange={handleChange}
+                      placeholder="Enter your School Name"
+                    />
+                    <div className="color-red">{modal.errors.school}</div>
+                  </>
+
+                  <>
+                    {' '}
+                    <Typography
+                      style={{
+                        fontWeight: '900',
+                        fontSize: '12px',
+                        marginTop: '6px',
+                      }}
+                      color="primary"
+                      variant="subtitle1"
+                      gutterBottom
+                    >
+                      City
+                    </Typography>
+                    <input
+                      name="city"
+                      value={modal.formData.city}
+                      type="text"
+                      className="text-field"
+                      onChange={handleChange}
+                      placeholder="Enter your City"
+                    />
+                    <div className="color-red">{modal.errors.city}</div>
+                  </>
+
+                  <Button
+                    variant="contained"
+                    type="submit"
+                    color="primary"
+                    className={classes.loginButton}
+                  >
+                    {!state.loading ? (
+                      'Register'
+                    ) : (
+                      <CircularProgress color="white" size={'1.5rem'} />
+                    )}
+                  </Button>
                 </form>
-            
-                 
-                
               </Typography>
             </Container>
           </div>
