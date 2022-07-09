@@ -42,6 +42,16 @@ import PepGra from '../assets/PepGra.png';
 import CU from '../assets/coventryUniversity.svg';
 import Duke from '../assets/Duke.png';
 import ThunderLogo from '../assets/ThunderLogo.png';
+// icons 
+import affiliate from '../assets/furimg/affiliate.png';
+import dataAnalyst from '../assets/furimg/dataAnalyst.png';
+import leadership from '../assets/furimg/leadership.png';
+import software from '../assets/furimg/software.png';
+import ux from '../assets/furimg/ux.png';
+import video from '../assets/furimg/video.png';
+import basic from '../assets/furimg/basic.png';
+import communication from '../assets/furimg/communication.png';
+import contentCreation from '../assets/furimg/content-creation.png';
 
 export const subjectsData = [
   {
@@ -119,51 +129,65 @@ export const FRD = [
   {
     name: 'Data Visualization: Data Dashboards and Storytelling with Tableau',
     university: 'Coventry University',
-    image: CU,
-    provider: 'Future Learn',
+    provider: "Future Learn",
+    icon: dataAnalyst,
     url: '/FutureLearn/f79e010c-4b42-45e4-8a71-0b47142cd953',
   },
   {
     name: 'The Complete Guide to Partnership Marketing Course',
     university: 'Udemy',
-    image: UdemyLogo,
-    provider: 'Udemy',
+    provider: "Udemy",
+    icon: affiliate,
     url: '/Udemy/f966445c-9ec6-4772-9fee-7fff9307d17c',
   },
   {
     name: 'How to Create Great Online Content',
     university: 'University of Leeds',
-    image: UL,
-    provider: 'Future Learn',
+    provider: "Future Learn",
+    icon : contentCreation,
     url: '/FutureLearn/ec353cf3-935a-4f45-bcd7-3eedda8d4a0b',
   },
   {
     name: 'Improve Communication: Speak Smoothly, Clearly & Confidently',
     university: 'Udemy',
-    image: UdemyLogo,
-    provider: 'Udemy',
+    provider: "Udemy",
+    icon : communication,
     url: '/Udemy/88d4bd0e-c21d-4143-9006-682e61ad2979',
   },
   {
     name: 'Introduction to User Experience Design',
     university: 'Georgia Institute of Technology',
-    image: GT,
-    provider: 'Coursera',
+    provider: "Coursera",
+    icon : ux,
     url: '/Coursera/ed0fb229-794c-47b1-afa0-b02a59b71781',
   },
   {
     name: 'Video Production: 10 Ways to Instantly Improve Your Videos',
     university: 'Udemy',
-    image: UdemyLogo,
     provider: 'Udemy',
+    icon : video,
     url: '/Udemy/e96fb258-fd65-4d11-8fe3-1c3f52b80c15',
   },
   {
     name: 'Managing Emotions in Times of Uncertainty & Stress',
     university: 'Yale University',
-    image: yaleLOGO,
-    provider: 'Coursera',
+    provider: "Coursera",
+    icon : basic,
     url: '/Coursera/667ff468-f4ee-41bf-b555-7b0913256202',
+  },
+  {
+    name: 'Complete Google Workspace (G Suite), Beginner - Advanced',
+    university: 'Udemy',
+    provider: 'Udemy',
+    icon : basic,
+    url: '/Udemy/90ff991e-98db-4478-8424-ec220657a5b5',
+  },
+  {
+    name: 'Excel for Everyone: Core Foundations',
+    university: 'edX',
+    provider: 'edX',
+    icon : basic,
+    url: '/edX/059e2756-221c-4433-8d80-7041aee7a83d',
   },
 ];
 

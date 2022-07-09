@@ -196,15 +196,19 @@
         align-items: center;
         background: whitesmoke;
         padding: 50px 20px;
-        text-align: center;
+        text-align: left;
         .section-title {
-            font-size: 60px;
+            font-size: 65px;
+            padding-left: 10%;
             color: #000000;
             font-weight: 600;
             .bottom-border {
-                border: 2px solid #f15a29;
-                width: 200px;
+                // border: 2px solid #f15a29;
+                // width: 200px;
                 margin: 20px auto;
+            }
+            span {
+                color: #f15a29;
             }
         }
         .section-sub-title {
@@ -228,12 +232,12 @@
                 flex-direction: column;
             }
             .card-wrapper {
-                padding: 15px;
+                padding: 20px;
                 flex: 1;
                 position: relative;
                 .card-inner {
                     max-width: 260px;
-                    background: white;
+                    background: #f15a29;
                     margin: auto;
                     border-radius: 4px;
                     padding: 15px 10px;
@@ -244,15 +248,20 @@
                     position: relative;
                     flex-direction: column;
                     .head-section {
-                        background: #f15a29;
-                        color: rgb(255, 255, 255);
+                        background: #ffffff;
+                        color: #000000;
                         padding: 0px 10px;
                         border-radius: 18px;
                         position: absolute;
                         top: -10px;
                     }
+                    .head-section img {
+                        width: 100%;
+                        background: white !important;
+                    }
                     img {
                         max-height: 100px;
+                        background-color: #f15a29;
                     }
                 }
                 .university-section {
@@ -286,7 +295,11 @@
     
     .react-multiple-carousel__arrow {
         top: 20% !important;
-        background-color: #ff3a09ec !important;
+        background-color: #ffffffec !important;
+    }
+    
+    .react-multiple-carousel__arrow::before {
+        color: #ff4000 !important;
     }
     
     .react-multiple-carousel__arrow--right {
@@ -390,6 +403,20 @@
         }
         .contact-banner {
             height: 60vh !important;
+        }
+    }
+    
+    @media only screen and (max-width: 600px) {
+        .future-ready-courses {
+            text-align: center !important;
+        }
+        .future-ready-courses .section-title {
+            font-size: 40px !important;
+        }
+        .bottom-border {
+            border: 2px solid #f15a29;
+            width: 200px;
+            margin: 20px auto;
         }
     }
     

@@ -33,6 +33,7 @@ import { titleCase } from '../utils/utils';
 import { Redirect, withRouter } from 'react-router';
 import SaveIcon from '@material-ui/icons/Save';
 import bookmarkBanner from '../assets/bookmarkBanner.png';
+import avatar from '../assets/userImg.svg';
 
 import {
   updateUser,
@@ -116,7 +117,7 @@ class ProfilePage extends Component {
         userImage:
           user.data && user.data.image
             ? user.data && user.data.image
-            : 'https://www.sketchengine.eu/wp-content/plugins/all-in-one-seo-pack/images/default-user-image.png',
+            : avatar,
         location:
           user.data && user.data.location
             ? user.data && user.data.location
@@ -231,7 +232,7 @@ class ProfilePage extends Component {
                                 fontWeight: '600',
                               }}
                             >
-                              {this.state.user.username}
+                              {this.state.user.name}
                             </Typography>
                           </Grid>
                           <Grid

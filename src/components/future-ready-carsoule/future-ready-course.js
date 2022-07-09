@@ -32,7 +32,7 @@ export const FutureReadyCourse = withRouter(
     const responsive = {
       desktop: {
         breakpoint: { max: 3000, min: 1024 },
-        items: 2,
+        items: 3,
       },
       tablet: {
         breakpoint: { max: 800, min: 600 },
@@ -46,9 +46,9 @@ export const FutureReadyCourse = withRouter(
 
     return (
       <Grid container className={'future-ready-courses'}>
-        <Grid Item xs={12} md={5}>
+        <Grid Item xs={12} md={3}>
           <div className="section-title">
-            Future Ready Courses
+             Future  Ready <span>Courses</span>  
             <div className="bottom-border" />
           </div>
           {/* <div className="section-sub-title">
@@ -58,13 +58,14 @@ export const FutureReadyCourse = withRouter(
           </div> */}
         </Grid>
 
-        <Grid Item xs={12} md={7}>
+        <Grid Item xs={12} md={9}>
           <Carousel
             className="card-section"
             dotListClass="custom-dot-list-style"
             keyBoardControl={true}
             autoPlaySpeed={1000}
             ssr={true}
+            infinite = {true}
             responsive={responsive}
           >
             {data.map((degree, key) => {
@@ -83,9 +84,10 @@ export const FutureReadyCourse = withRouter(
                     }
                   }}
                 >
+                      {/* <img src={degree.image} alt={key} /> */}
                   <div className="card-inner">
-                    <div className="head-section">via {degree.provider}</div>
-                    <img src={degree.image} alt={key} />
+                  <div className="head-section">via {degree.provider}</div>
+                    <img src={degree.icon} alt={key} />
                   </div>
                   <div className="university-section">{degree.university}</div>
                   <div className="name-section">{degree.name}</div>
