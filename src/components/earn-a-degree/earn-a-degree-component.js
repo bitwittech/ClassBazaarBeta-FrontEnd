@@ -42,10 +42,11 @@ export const EarnADegreeComponent = withRouter(
               <div
                 className="card-wrapper"
                 onClick={() => {
-                  if (isAuth !== true) {
+                  if (isAuth === false) {
                     OpenLogin();
                     trackEvent('Degree_course', 'click', `${degree.name}`);
                   } else {
+                    trackEvent('Degree_course', 'click', `${degree.name}`);
                     history.push({
                       pathname: '/coursedetails' + degree.url,
                     });

@@ -108,7 +108,7 @@ function App() {
     const path = localStorage.getItem('path');
 
     await axios.get(
-      `${localURL}api/userTrack?user_email=${user_email}&time_stamp=${start_time}&path=${path}`
+      `${officialURL}api/userTrack?user_email=${user_email}&time_stamp=${start_time}&path=${path}`
     );
   };
 

@@ -48,7 +48,7 @@ export const FutureReadyCourse = withRouter(
       <Grid container className={'future-ready-courses'}>
         <Grid Item xs={12} md={3}>
           <div className="section-title">
-             Future  Ready <span>Courses</span>  
+            Future Ready <span>Courses</span>
             <div className="bottom-border" />
           </div>
           {/* <div className="section-sub-title">
@@ -65,7 +65,7 @@ export const FutureReadyCourse = withRouter(
             keyBoardControl={true}
             autoPlaySpeed={1000}
             ssr={true}
-            infinite = {true}
+            infinite={true}
             responsive={responsive}
           >
             {data.map((degree, key) => {
@@ -74,19 +74,20 @@ export const FutureReadyCourse = withRouter(
                   key={key}
                   className="card-wrapper"
                   onClick={() => {
-                    if (isAuth !== true) {
+                    if (isAuth === false) {
                       OpenLogin();
-                      trackEvent('Degree_course', 'click', `${degree.name}`);
+                      trackEvent('Future_Learn_Course', 'click', `${degree.name}`);
                     } else {
+                      trackEvent('Future_Learn_Course', 'click', `${degree.name}`);
                       history.push({
                         pathname: '/coursedetails' + degree.url,
                       });
                     }
                   }}
                 >
-                      {/* <img src={degree.image} alt={key} /> */}
+                  {/* <img src={degree.image} alt={key} /> */}
                   <div className="card-inner">
-                  <div className="head-section">via {degree.provider}</div>
+                    <div className="head-section">via {degree.provider}</div>
                     <img src={degree.icon} alt={key} />
                   </div>
                   <div className="university-section">{degree.university}</div>
