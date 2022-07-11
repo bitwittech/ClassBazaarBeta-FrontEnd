@@ -232,6 +232,7 @@
                 flex-direction: column;
             }
             .card-wrapper {
+                cursor: pointer;
                 padding: 20px;
                 flex: 1;
                 position: relative;
@@ -418,6 +419,10 @@
             width: 200px;
             margin: 20px auto;
         }
+    }
+    
+    .trending-courses-wrapper .card-wrapper {
+        cursor: pointer;
     }
     
     @media only screen and (max-width: 600px) {
