@@ -277,26 +277,6 @@ export const register = async (data, dispatch) => {
   console.log(data);
 
   try {
-    // function handleResponse(clientResponse) {
-    //   console.info(
-    //     JSON.stringify(clientResponse.successResponse.user, null, 2)
-    //   );
-    // }
-
-    // const userDataForReg = {
-    //   user: {
-    //     username: data.username,
-    //     password: data.password,
-    //     email: data.email,
-    //     mobilePhone: data.phone,
-    //   },
-    //   registration: {
-    //     applicationId: config.fusionAuthApplicationId,
-    //   },
-    // };
-
-    // yaha par feilds null jaa rahi thi 😃
-
     const newUserDataForReg = {
       userid: '',
       name: data.username,
@@ -307,23 +287,22 @@ export const register = async (data, dispatch) => {
       school_or_college_name: data.school,
       class_year: data.classYear,
       city: data.city,
-      refferral: data.refferral,
+      eduTest: false,
     };
 
-    console.log({
-      newUserDataForReg,
-    });
+    console.log('hello ');
 
-    await newregister(newUserDataForReg)
+    newregister(newUserDataForReg)
       .then((response) => {
         console.log('Response', response);
-        if (response.statusCode === 200) {
+        if (response.status === 200) {
+          localStorage.setItem('flag', 1);
           console.log(response);
           dispatch({
             type: ALERT,
             payload: {
               varient: 'success',
-              message: 'Registration successful. Please login',
+              message: response.data.message,
             },
           });
           if (localStorage.getItem('GA-track')) {
@@ -340,11 +319,13 @@ export const register = async (data, dispatch) => {
             payload: false,
           });
         } else {
+          localStorage.clear();
+          localStorage.clear('flag');
           dispatch({
             type: ALERT,
             payload: {
               varient: 'error',
-              message: 'Registration failed',
+              message: response.data.message,
             },
           });
           dispatch({
@@ -356,10 +337,7 @@ export const register = async (data, dispatch) => {
       // edited by Yashwant sahu
       .catch((e) => {
         localStorage.clear();
-        console.error(
-          '>>>>>>>>',
-          Object.values(e.errorResponse.fieldErrors)[0][0].message
-        );
+        localStorage.clear('flag');
         dispatch({
           type: ALERT,
           payload: {
@@ -379,17 +357,6 @@ export const register = async (data, dispatch) => {
   } catch (errMsg) {
     dispatch({
       type: LOADING,
-      payload: false,
-    });
-    // dispatch({
-    //   type: ALERT,
-    //   payload: {
-    //     varient: 'error',
-    //     message: "Invalid credentials",
-    //   },
-    // });
-    dispatch({
-      type: LOGIN_MODAL,
       payload: false,
     });
   }
@@ -418,12 +385,13 @@ export const updateEDUData = async (data, dispatch) => {
         userid: '',
         name: res.name,
         email_address: res.email_address,
-        mobile_no: data.phone,
+        mobile_no: res.mobile_no,
         gender: data.gender,
         school_or_college_name: data.school,
         class_year: data.classYear,
         city: data.city,
         password: password,
+        eduTest: true,
       };
 
       console.log({

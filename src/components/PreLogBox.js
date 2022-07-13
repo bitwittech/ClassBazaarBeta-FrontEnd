@@ -26,7 +26,7 @@ import { LinkedIn } from 'react-linkedin-login-oauth2';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   modal: {
     display: 'flex',
     alignItems: 'center',
@@ -58,19 +58,16 @@ const useStyles = makeStyles(theme => ({
   },
   closeButton: {
     position: 'relative',
-    left : '90%',
+    left: '90%',
     color: theme.palette.grey[500],
-   
-  }
+  },
 }));
-
-
 
 const PreLogBox = () => {
   const { state, dispatch } = useContext(Store);
- 
+
   const { preLogBox } = state;
- 
+
   const classes = useStyles();
 
   const [modal, setModal] = useState({
@@ -79,23 +76,21 @@ const PreLogBox = () => {
       username: '',
       password: '',
       phone: '',
-      email: ''
+      email: '',
     },
     errors: {
       username: null,
       password: null,
       phone: null,
-      email: null
+      email: null,
     },
   });
 
   useEffect(() => {
     setModal({ ...modal, state: preLogBox.state });
-    
   }, []);
   console.log(modal.state);
 
-  
   const handleClose = () => {
     return dispatch({
       type: Pre_LOG_Box,
@@ -106,25 +101,22 @@ const PreLogBox = () => {
     });
   };
 
-  const responseFacebook = res => {
+  const responseFacebook = (res) => {
     facebookLogin(res, dispatch);
     // register(res,dispatch)
-    signin(res,dispatch)
+    signin(res, dispatch);
     trackEvent('social-icon', 'click', 'facebook');
   };
 
- 
-
-  const handleChange = e => {
-
+  const handleChange = (e) => {
     const { name, value } = e.target;
-    
+
     const errors = modal.errors;
 
     const validEmailRegex = RegExp(
       /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
     );
-    
+
     const phoneRegex = RegExp(/^(\+\d{1,3}[- ]?)?\d{10}$/);
     switch (name) {
       case 'username':
@@ -152,37 +144,57 @@ const PreLogBox = () => {
       },
     });
     // console.log("==="+modal.formData.refferral);
-
   };
 
-  const handleSubmit = async e => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    sessionStorage.removeItem("ShowBox");
-  
+    sessionStorage.removeItem('ShowBox');
+
     if (preLogBox.state === 1) {
       await register(modal.formData, dispatch);
-      await signin(modal.formData, dispatch);
+      console.log(localStorage.getItem('flag'));
+      if (localStorage.getItem('flag')) {
+        await signin(modal.formData, dispatch);
+
+        handleClose();
+
+        setModal({
+          ...modal,
+          formData: {
+            username: '',
+            password: '',
+            phone: '',
+            email: '',
+          },
+        });
+      }
+    } else {
+      signin(modal.formData, dispatch);
       handleClose();
+      setModal({
+        ...modal,
+        formData: {
+          username: '',
+          password: '',
+          phone: '',
+          email: '',
+        },
+      });
     }
-    else {
-      await signin(modal.formData, dispatch);
-    handleClose();
 
-    }
-
-    setModal({
-      ...modal,
-      formData: {
-        username: '',
-        password: '',
-        phone: '',
-        email: '',
-      },
-    });
+    // setModal({
+    //   ...modal,
+    //   formData: {
+    //     username: '',
+    //     password: '',
+    //     phone: '',
+    //     email: '',
+    //   },
+    // });
   };
-  
+
   console.log('STATE', state.loading);
-  const responseGoogle = res => {
+  const responseGoogle = (res) => {
     googleLogin(res, dispatch);
     trackEvent('social-icon', 'click', 'google');
   };
@@ -201,12 +213,18 @@ const PreLogBox = () => {
         }}
       >
         <Fade in={preLogBox.open}>
-          <div className={classes.paper} className = "paperModal">
+          <div className={classes.paper} className="paperModal">
             <Container maxWidth="sm">
-            <IconButton aria-label="close" className={classes.closeButton} onClick={ ()=>{ handleClose() }}>
+              <IconButton
+                aria-label="close"
+                className={classes.closeButton}
+                onClick={() => {
+                  handleClose();
+                }}
+              >
                 <CloseIcon />
               </IconButton>
-              <br/>
+              <br />
               <Typography component="div" align="center">
                 <Typography
                   style={{
@@ -220,8 +238,6 @@ const PreLogBox = () => {
                   Stay ahead of the curve! Get personalized course
                   recommendations, track subjects and more.
                 </Typography>
-
-                
 
                 <form onSubmit={handleSubmit}>
                   {preLogBox.state === 1 ? (
@@ -341,8 +357,8 @@ const PreLogBox = () => {
                       {!state.loading ? (
                         'Login'
                       ) : (
-                          <CircularProgress color="white" size={'1.5rem'} />
-                        )}
+                        <CircularProgress color="white" size={'1.5rem'} />
+                      )}
                     </Button>
                   ) : null}
                   {preLogBox.state === 1 ? (
@@ -355,14 +371,14 @@ const PreLogBox = () => {
                       {!state.loading ? (
                         'Register'
                       ) : (
-                          <CircularProgress color="white" size={'1.5rem'} />
-                        )}
+                        <CircularProgress color="white" size={'1.5rem'} />
+                      )}
                     </Button>
                   ) : null}
                 </form>
                 <Grid style={{ marginTop: '20px' }} container spacing={3}>
                   <Grid item xs={12} sm={4} style={{ textAlign: 'right' }}>
-                  {/* <LinkedIn
+                    {/* <LinkedIn
                   clientId="81vr4cluxkzpau"
                   onFailure={handleLinkedInFailure}
                   className="btn-l"
@@ -378,16 +394,15 @@ const PreLogBox = () => {
                     <i class="fab fa-linkedin-in"></i>
                   </Button>
                 </LinkedIn> */}
-                </Grid>
-                  <Grid item xs={12} sm={4} >
-                   
+                  </Grid>
+                  <Grid item xs={12} sm={4}>
                     <FacebookLogin
                       appId={config.fbAppId}
                       autoLoad={false}
                       callback={responseFacebook}
                       fields="first_name, last_name, email, picture,name"
                       scope="email,public_profile"
-                      render={renderProps => (
+                      render={(renderProps) => (
                         <Button
                           variant="contained"
                           style={{ background: '#4267B3', color: 'white' }}
@@ -399,8 +414,9 @@ const PreLogBox = () => {
                       )}
                     />
                   </Grid>
-                  {<Grid item xs={12} sm={4} style={{ textAlign: 'left' }}>
-                    {/* <GoogleLogin
+                  {
+                    <Grid item xs={12} sm={4} style={{ textAlign: 'left' }}>
+                      {/* <GoogleLogin
                       clientId={config.GOAUTH}
                       render={renderProps => (
                         <Button
@@ -429,8 +445,9 @@ const PreLogBox = () => {
                       autoLoad={false}
                       cookiePolicy={'single_host_origin'}
                     /> */}
-                  </Grid> }
-                </Grid> 
+                    </Grid>
+                  }
+                </Grid>
                 {preLogBox.state === 0 ? (
                   <Typography
                     className="link-button"

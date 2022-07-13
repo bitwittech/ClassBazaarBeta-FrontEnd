@@ -78,7 +78,6 @@ const EdubukForm = () => {
       city: '',
       gender: '',
       classYear: '',
-      // refferral : '',
     },
     errors: {
       username: null,
@@ -120,15 +119,8 @@ const EdubukForm = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     const errors = modal.errors;
-    const validEmailRegex = RegExp(
-      /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
-    );
-    const phoneRegex = RegExp(/^(\+\d{1,3}[- ]?)?\d{10}$/);
-    switch (name) {
-      case 'phone':
-        errors.phone = phoneRegex.test(value) ? '' : 'Invalid phone';
-        break;
 
+    switch (name) {
       case 'gender':
         errors.gender = !value.toString() ? '' : 'Gender required';
         break;
@@ -176,11 +168,7 @@ const EdubukForm = () => {
   };
 
   console.log('STATE', state.loading);
-  const responseGoogle = (res) => {
-    console.log(res);
-    googleLogin(res, dispatch);
-    trackEvent('social-icon', 'click', 'google');
-  };
+
   return (
     <>
       <Modal
@@ -218,37 +206,11 @@ const EdubukForm = () => {
                   variant="subtitle1"
                   gutterBottom
                 >
-                  Please enter all the required feilds to attempt following
+                  Please enter all the required felids to attempt following
                   test.
                 </Typography>
 
                 <form onSubmit={handleSubmit}>
-                  <>
-                    {' '}
-                    <Typography
-                      style={{
-                        fontWeight: '900',
-                        fontSize: '12px',
-                        marginTop: '6px',
-                      }}
-                      color="primary"
-                      variant="subtitle1"
-                      gutterBottom
-                    >
-                      Mobile Number
-                    </Typography>
-                    <input
-                      type="text"
-                      name="phone"
-                      value={modal.formData.phone}
-                      onChange={handleChange}
-                      className="text-field"
-                      placeholder="Enter your number"
-                      required
-                    />
-                    <div className="color-red">{modal.errors.phone}</div>
-                  </>
-
                   <>
                     {' '}
                     <Typography
