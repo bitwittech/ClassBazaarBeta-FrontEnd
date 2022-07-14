@@ -296,7 +296,7 @@ export const register = async (data, dispatch) => {
       .then((response) => {
         console.log('Response', response);
         if (response.status === 200) {
-          localStorage.setItem('flag', 1);
+          localStorage.setItem('flag', '1');
           console.log(response);
           dispatch({
             type: ALERT,
@@ -320,7 +320,6 @@ export const register = async (data, dispatch) => {
           });
         } else {
           localStorage.clear();
-          localStorage.clear('flag');
           dispatch({
             type: ALERT,
             payload: {

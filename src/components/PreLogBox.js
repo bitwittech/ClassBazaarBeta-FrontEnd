@@ -153,7 +153,7 @@ const PreLogBox = () => {
     if (preLogBox.state === 1) {
       await register(modal.formData, dispatch);
       console.log(localStorage.getItem('flag'));
-      if (localStorage.getItem('flag')) {
+      if (localStorage.getItem('flag') === '1') {
         await signin(modal.formData, dispatch);
 
         handleClose();
