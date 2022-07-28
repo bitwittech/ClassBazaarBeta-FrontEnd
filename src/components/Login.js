@@ -79,7 +79,7 @@ const Login = () => {
       city: '',
       gender: '',
       classYear: '',
-      // refferral : '',
+      eduTest : true
     },
     errors: {
       username: null,
@@ -177,29 +177,64 @@ const Login = () => {
 
   };
 
-  const handleSubmit = async e => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-   
-   
 
-    if (loginModal.state === 0) {
-      await signin(modal.formData, dispatch);
-    }
     if (loginModal.state === 1) {
       await register(modal.formData, dispatch);
       await signin(modal.formData, dispatch);
-    }
 
-    setModal({
-      ...modal,
-      formData: {
-        username: '',
-        password: '',
-        phone: '',
-        email: '',
-      },
-    });
-  };
+        handleClose();
+
+        setModal({
+          ...modal,
+          formData: {
+            username: '',
+            password: '',
+            phone: '',
+            email: '',
+          },
+        });
+    
+    } else {
+      signin(modal.formData, dispatch);
+      handleClose();
+      setModal({
+        ...modal,
+        formData: {
+          username: '',
+          password: '',
+          phone: '',
+          email: '',
+        },
+      });
+    }
+  }
+
+  // const handleSubmit = async e => {
+  //   e.preventDefault();
+   
+   
+
+  //   if (loginModal.state === 0) {
+  //     await signin(modal.formData, dispatch);
+  //   }
+  //   if (loginModal.state === 1) {
+  //     await register(modal.formData, dispatch);
+  //     await signin(modal.formData, dispatch);
+  //   }
+
+
+  //   setModal({
+  //     ...modal,
+  //     formData: {
+  //       username: '',
+  //       password: '',
+  //       phone: '',
+  //       email: '',
+  //     },
+  //   });
+  // };
 
   
   console.log('STATE', state.loading);

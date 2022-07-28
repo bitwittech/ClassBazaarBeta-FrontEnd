@@ -287,7 +287,7 @@ export const register = async (data, dispatch) => {
       school_or_college_name: data.school,
       class_year: data.classYear,
       city: data.city,
-      eduTest: false,
+      eduTest: data.eduTest,
     };
 
     console.log('hello ');
@@ -296,7 +296,7 @@ export const register = async (data, dispatch) => {
       .then((response) => {
         console.log('Response', response);
         if (response.status === 200) {
-          localStorage.setItem('flag', '1');
+          localStorage.setItem('flag', 1);
           console.log(response);
           dispatch({
             type: ALERT,
@@ -336,7 +336,7 @@ export const register = async (data, dispatch) => {
       // edited by Yashwant sahu
       .catch((e) => {
         localStorage.clear();
-        localStorage.clear('flag');
+        localStorage.removeItem('flag');
         dispatch({
           type: ALERT,
           payload: {

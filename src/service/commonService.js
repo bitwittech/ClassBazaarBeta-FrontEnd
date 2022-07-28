@@ -36,7 +36,7 @@ export const newregister = async (request) => {
   await axios.post(API + '/api/newregistration', request);
 
   var emailVal = request.email_address;
-  await axios
+  return await axios
     .post(API + '/api/newLoginDetails', { email: emailVal })
     .then((res) => {
       console.log(res.data.data);

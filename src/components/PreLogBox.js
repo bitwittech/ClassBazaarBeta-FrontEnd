@@ -77,6 +77,7 @@ const PreLogBox = () => {
       password: '',
       phone: '',
       email: '',
+      eduTest : false
     },
     errors: {
       username: null,
@@ -146,14 +147,15 @@ const PreLogBox = () => {
     // console.log("==="+modal.formData.refferral);
   };
 
+
+  
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     sessionStorage.removeItem('ShowBox');
 
     if (preLogBox.state === 1) {
       await register(modal.formData, dispatch);
-      console.log(localStorage.getItem('flag'));
-      if (localStorage.getItem('flag') === '1') {
         await signin(modal.formData, dispatch);
 
         handleClose();
@@ -167,7 +169,6 @@ const PreLogBox = () => {
             email: '',
           },
         });
-      }
     } else {
       signin(modal.formData, dispatch);
       handleClose();
