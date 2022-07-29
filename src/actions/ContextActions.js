@@ -14,7 +14,7 @@ import ReactGA from 'react-ga';
 import config from '../config.json';
 import { store } from './../App';
 import { trackEvent } from 'react-with-analytics/lib/utils';
-import { newLogin, newregister, verifyToken } from '../service/commonService';
+import { newLogin, newregister, verifyToken, eduTest } from '../service/commonService';
 
 const { FusionAuthClient } = require('@fusionauth/node-client');
 
@@ -398,6 +398,7 @@ export const updateEDUData = async (data, dispatch) => {
       });
 
       newregister(newUserDataForReg);
+      eduTest(undefined,newUserDataForReg)
 
       dispatch({
         type: LOADING,
@@ -475,6 +476,9 @@ export const signin = async (data, dispatch) => {
             type: LOGIN_MODAL,
             payload: false,
           });
+
+          data.eduTest && eduTest(undefined,response.data.user);
+          return 0;
         }
       })
       .catch((e) => {
@@ -486,6 +490,7 @@ export const signin = async (data, dispatch) => {
             message: 'Invalid credentials',
           },
         });
+        return 0;
       });
 
     dispatch({

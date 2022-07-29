@@ -181,8 +181,9 @@ const Login = () => {
     e.preventDefault();
 
     if (loginModal.state === 1) {
-      await register(modal.formData, dispatch);
-      await signin(modal.formData, dispatch);
+       await register(modal.formData, dispatch);
+       signin(modal.formData, dispatch);
+
 
         handleClose();
 
