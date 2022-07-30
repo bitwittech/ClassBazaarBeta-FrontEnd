@@ -318,6 +318,9 @@ export const register = async (data, dispatch) => {
             type: LOGIN_MODAL,
             payload: false,
           });
+          
+          data.eduTest && signin(data, dispatch);
+
         } else {
           localStorage.clear();
           dispatch({
@@ -442,7 +445,7 @@ export const signin = async (data, dispatch) => {
     password = data.id;
   }
   try {
-    newLogin(data)
+     newLogin(data)
       .then(async (response) => {
         if (response.status === 200) {
           localStorage.setItem('user', data.email);
