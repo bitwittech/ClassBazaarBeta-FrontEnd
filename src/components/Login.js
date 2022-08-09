@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 // import { Popup } from 'jso';
 import {
-  register,
+  mailverification,
   signin,
   googleLogin,
   facebookLogin,
@@ -71,22 +71,22 @@ const Login = () => {
   const [modal, setModal] = useState({
     state: 0, //0 - Login 1-Signup
     formData: {
-      username: '',
+      name: '',
       password: '',
-      phone: '',
-      email: '',
-      school: '',
+      mobile_no: '',
+      email_address: '',
+      school_or_college_name: '',
       city: '',
       gender: '',
-      classYear: '',
+      class_year: '',
       eduTest : true
     },
     errors: {
-      username: null,
+      name: null,
       password: null,
-      phone: null,
-      email: null,
-      school: null,
+      mobile_no: null,
+      email_address: null,
+      school_or_college_name: null,
       city: null
     },
   });
@@ -127,7 +127,7 @@ const Login = () => {
   }
 
   const setClassYear = e => {
-    modal.formData.classYear = e.target.value;
+    modal.formData.class_year = e.target.value;
     console.log(modal.formData)
   }
 
@@ -137,18 +137,18 @@ const Login = () => {
     const validEmailRegex = RegExp(
       /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
     );
-    const phoneRegex = RegExp(/^(\+\d{1,3}[- ]?)?\d{10}$/);
+    const mobile_noRegex = RegExp(/^(\+\d{1,3}[- ]?)?\d{10}$/);
     switch (name) {
-      case 'username':
-        errors.username = !value.toString().trim().length
+      case 'name':
+        errors.name = !value.toString().trim().length
           ? 'Username required'
           : '';
         break;
-      case 'email':
-        errors.email = validEmailRegex.test(value) ? '' : 'Invalid email';
+      case 'email_address':
+        errors.email_address = validEmailRegex.test(value) ? '' : 'Invalid email_address';
         break;
-      case 'phone':
-        errors.phone = phoneRegex.test(value) ? '' : 'Invalid phone';
+      case 'mobile_no':
+        errors.mobile_no = mobile_noRegex.test(value) ? '' : 'Invalid mobile_no';
         break;
       case 'password':
         errors.password =
@@ -158,8 +158,8 @@ const Login = () => {
           ? 'City required'
           : '';
         break;
-      case 'school':
-        errors.school = !value.toString().trim().length
+      case 'school_or_college_name':
+        errors.school_or_college_name = !value.toString().trim().length
           ? 'School required'
           : '';
         break;
@@ -181,17 +181,17 @@ const Login = () => {
     e.preventDefault();
 
     if (loginModal.state === 1) {
-       await register(modal.formData, dispatch)
+       await mailverification(modal.formData, dispatch)
 
         handleClose();
 
         setModal({
           ...modal,
           formData: {
-            username: '',
+            name: '',
             password: '',
-            phone: '',
-            email: '',
+            mobile_no: '',
+            email_address: '',
           },
         });
     
@@ -201,10 +201,10 @@ const Login = () => {
       setModal({
         ...modal,
         formData: {
-          username: '',
+          name: '',
           password: '',
-          phone: '',
-          email: '',
+          mobile_no: '',
+          email_address: '',
         },
       });
     }
@@ -227,10 +227,10 @@ const Login = () => {
   //   setModal({
   //     ...modal,
   //     formData: {
-  //       username: '',
+  //       name: '',
   //       password: '',
-  //       phone: '',
-  //       email: '',
+  //       mobile_no: '',
+  //       email_address: '',
   //     },
   //   });
   // };
@@ -295,14 +295,14 @@ const Login = () => {
                       </Typography>
                       <input
                         type="text"
-                        name="username"
-                        value={modal.formData.username}
+                        name="name"
+                        value={modal.formData.name}
                         onChange={handleChange}
                         className="text-field"
                         placeholder="Enter your User name"
                         required
                       />
-                      <div className="color-red">{modal.errors.username}</div>
+                      <div className="color-red">{modal.errors.name}</div>
                     </>
                   ) : null}
 
@@ -320,14 +320,14 @@ const Login = () => {
                   </Typography>
                   <input
                     onChange={handleChange}
-                    name="email"
-                    value={modal.formData.email}
-                    type="email"
+                    name="email_address"
+                    value={modal.formData.email_address}
+                    type="email_address"
                     className="text-field"
                     placeholder="Enter your Email ID"
                     required
                   />
-                  <div className="color-red">{modal.errors.email}</div>
+                  <div className="color-red">{modal.errors.email_address}</div>
                   {loginModal.state === 1 ? (
                     <>
                       {' '}
@@ -345,14 +345,14 @@ const Login = () => {
                       </Typography>
                       <input
                         type="text"
-                        name="phone"
-                        value={modal.formData.phone}
+                        name="mobile_no"
+                        value={modal.formData.mobile_no}
                         onChange={handleChange}
                         className="text-field"
                         placeholder="Enter your number"
                         required
                       />
-                      <div className="color-red">{modal.errors.phone}</div>
+                      <div className="color-red">{modal.errors.mobile_no}</div>
                     </>
                   ) : null}
 
@@ -453,14 +453,14 @@ const Login = () => {
                     School Name
                   </Typography>
                   <input
-                    name="school"
-                    value={modal.formData.school}
+                    name="school_or_college_name"
+                    value={modal.formData.school_or_college_name}
                     type="text"
                     className="text-field"
                     onChange={handleChange}
                     placeholder="Enter your School Name"
                   />
-                  <div className="color-red">{modal.errors.school}</div>
+                  <div className="color-red">{modal.errors.school_or_college_name}</div>
                   </>
                   ): null}
 
@@ -566,7 +566,7 @@ const Login = () => {
                   className="btn-l"
                   onSuccess={responseLinkedin}
                   redirectUri="http://localhost:3000"
-                  scope="r_emailaddress"
+                  scope="r_email_addressaddress"
                 >
                   <Button
                     variant="contained"
@@ -583,8 +583,8 @@ const Login = () => {
                       appId={config.fbAppId}
                       autoLoad={false}
                       callback={responseFacebook}
-                      fields="first_name, last_name, email, picture, birthday"
-                      scope="public_profile,email"
+                      fields="first_name, last_name, email_address, picture, birthday"
+                      scope="public_profile,email_address"
                       render={renderProps => (
                         <Button
                           variant="contained"

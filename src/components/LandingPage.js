@@ -472,6 +472,7 @@ class LandingPage extends Component {
     } else {
       return (
         <Grid container className="c-card">
+          
           <Grid item xs={12}>
             <Box display="flex" style={{ height: '149px', margin: '30' }}>
               <Grid

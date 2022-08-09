@@ -3,8 +3,8 @@ import { store } from '../App';
 import { API } from '../config.json';
 import { LOGIN_MODAL } from '../store/Types';
 
-const officialURL = 'https://api.classbazaar.com/';
-const localURL = 'http://0.0.0.0:8080/';
+const officialURL = 'https://api.classbazaar.com';
+const localURL = 'http://0.0.0.0:8080';
 
 export const eduTest = async (user, val) => {
   const config = {
@@ -21,7 +21,7 @@ export const eduTest = async (user, val) => {
 
     const url = `https://edubuk.co.in/mitest/User/loginApi?user_id=${id}&name=${val.name}&gender=${val.gender}&email_address=${val.email_address}&school_or_college_name=${val.school_or_college_name}&class_year=${val.class_year}&city=${val.city}&mobile_no=${val.mobile_no}&password=${val.password}`;
     const res = await axios.get(url).then((res) => {
-      console.log(res)
+      console.log(res);
       window.open(url, '_blank');
     });
     
@@ -70,10 +70,10 @@ export const newregister = async (request) => {
 };
 
 export const newLogin = async (data) => {
-  // console.log(data);
+  console.log(data);
 
   return await axios.post(API + '/api/loginJWT', {
-    email: data.email,
+    email: data.email || data.email_address,
     password: data.password,
   });
 };
@@ -87,5 +87,13 @@ export const verifyToken = async (token) => {
 
 export const submitResume = async (data) => {
   // console.log(data)
-  return await axios.post(`${officialURL}/api/meetUp`, data);
+  return await axios.post(`${localURL}/api/meetUp`, data);
 };
+
+//  Apis for resume and Carieer Page
+
+export const verifyEmail = async (data) => {
+  console.log(data);
+  return await axios.post(`${localURL}/api/verificationMail`, data);
+};
+

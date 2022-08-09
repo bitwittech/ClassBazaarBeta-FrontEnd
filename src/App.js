@@ -1,6 +1,6 @@
 import './App.css';
 import './index.scss';
-import { BrowserRouter, Route, Switch, withRouter } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, withRouter, useLocation } from 'react-router-dom';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import React, { useContext, useEffect, useReducer, useState } from 'react';
 import withAnalytics, { initAnalytics } from 'react-with-analytics';
@@ -13,6 +13,7 @@ import CourseDetails from './components/CourseDetails';
 import CoursePage from './components/coursePage';
 import HomePage from './components/HomePage';
 import LandingPage from './components/LandingPage';
+import Verified from './components/Verified';
 import Login from './components/Login';
 // prelogbox added by Yashwant Sahu
 import PreLogBox from './components/PreLogBox';
@@ -63,11 +64,13 @@ ReactGA.initialize(GA_TRACKING_ID, {
 
 const Root = (props) => {
   useEffect(() => {
+    localStorage.setItem('parameter',props.history.location.search);
     props.history.listen((location) => trackPage(location.pathname));
   }, [props.history]);
   return (
     <Switch>
       <Route exact path="/" component={LandingPage} />
+      <Route exact path="/verified" component={Verified} />
       <Route exact path="/listing" component={HomePage} />
       <Route exact path="/course" component={CoursePage} />
       <Route exact path="/career" component={Career} />

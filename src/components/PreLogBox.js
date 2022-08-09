@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from 'react';
 // import { Popup } from 'jso';
 import {
   register,
+  mailverification,
   signin,
   googleLogin,
   facebookLogin,
@@ -73,17 +74,17 @@ const PreLogBox = () => {
   const [modal, setModal] = useState({
     state: 0, //0 - Login 1-Signup
     formData: {
-      username: '',
+      name: '',
       password: '',
-      phone: '',
-      email: '',
+      mobile_no: '',
+      email_address: '',
       eduTest : false
     },
     errors: {
-      username: null,
+      name: null,
       password: null,
-      phone: null,
-      email: null,
+      mobile_no: null,
+      email_address: null,
     },
   });
 
@@ -118,18 +119,18 @@ const PreLogBox = () => {
       /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
     );
 
-    const phoneRegex = RegExp(/^(\+\d{1,3}[- ]?)?\d{10}$/);
+    const mobile_noRegex = RegExp(/^(\+\d{1,3}[- ]?)?\d{10}$/);
     switch (name) {
-      case 'username':
-        errors.username = !value.toString().trim().length
+      case 'name':
+        errors.name = !value.toString().trim().length
           ? 'Username required'
           : '';
         break;
-      case 'email':
-        errors.email = validEmailRegex.test(value) ? '' : 'Invalid email';
+      case 'email_address':
+        errors.email_address = validEmailRegex.test(value) ? '' : 'Invalid email_address';
         break;
-      case 'phone':
-        errors.phone = phoneRegex.test(value) ? '' : 'Invalid phone';
+      case 'mobile_no':
+        errors.mobile_no = mobile_noRegex.test(value) ? '' : 'Invalid mobile_no';
         break;
       case 'password':
         errors.password =
@@ -155,18 +156,17 @@ const PreLogBox = () => {
     sessionStorage.removeItem('ShowBox');
 
     if (preLogBox.state === 1) {
-      await register(modal.formData, dispatch);
-        await signin(modal.formData, dispatch);
-
+      let res =  await mailverification(modal.formData, dispatch);
+     
         handleClose();
 
         setModal({
           ...modal,
           formData: {
-            username: '',
+            name: '',
             password: '',
-            phone: '',
-            email: '',
+            mobile_no: '',
+            email_address: '',
           },
         });
     } else {
@@ -175,10 +175,10 @@ const PreLogBox = () => {
       setModal({
         ...modal,
         formData: {
-          username: '',
+          name: '',
           password: '',
-          phone: '',
-          email: '',
+          mobile_no: '',
+          email_address: '',
         },
       });
     }
@@ -186,10 +186,10 @@ const PreLogBox = () => {
     // setModal({
     //   ...modal,
     //   formData: {
-    //     username: '',
+    //     name: '',
     //     password: '',
-    //     phone: '',
-    //     email: '',
+    //     mobile_no: '',
+    //     email_address: '',
     //   },
     // });
   };
@@ -256,14 +256,14 @@ const PreLogBox = () => {
                       </Typography>
                       <input
                         type="text"
-                        name="username"
-                        value={modal.formData.username}
+                        name="name"
+                        value={modal.formData.name}
                         onChange={handleChange}
                         className="text-field"
                         placeholder="Enter your User name"
                         required
                       />
-                      <div className="color-red">{modal.errors.username}</div>
+                      <div className="color-red">{modal.errors.name}</div>
                     </>
                   ) : null}
 
@@ -281,14 +281,14 @@ const PreLogBox = () => {
                   </Typography>
                   <input
                     onChange={handleChange}
-                    name="email"
-                    value={modal.formData.email}
-                    type="email"
+                    name="email_address"
+                    value={modal.formData.email_address}
+                    type="email_address"
                     className="text-field"
                     placeholder="Enter your Email ID"
                     required
                   />
-                  <div className="color-red">{modal.errors.email}</div>
+                  <div className="color-red">{modal.errors.email_address}</div>
                   {preLogBox.state === 1 ? (
                     <>
                       {' '}
@@ -306,14 +306,14 @@ const PreLogBox = () => {
                       </Typography>
                       <input
                         type="text"
-                        name="phone"
-                        value={modal.formData.phone}
+                        name="mobile_no"
+                        value={modal.formData.mobile_no}
                         onChange={handleChange}
                         className="text-field"
                         placeholder="Enter your number"
                         required
                       />
-                      <div className="color-red">{modal.errors.phone}</div>
+                      <div className="color-red">{modal.errors.mobile_no}</div>
                     </>
                   ) : null}
 
@@ -385,7 +385,7 @@ const PreLogBox = () => {
                   className="btn-l"
                   onSuccess={responseLinkedin}
                   redirectUri="http://localhost:3000"
-                  scope="r_emailaddress"
+                  scope="r_email_addressaddress"
                 >
                   <Button
                     variant="contained"
@@ -401,8 +401,8 @@ const PreLogBox = () => {
                       appId={config.fbAppId}
                       autoLoad={false}
                       callback={responseFacebook}
-                      fields="first_name, last_name, email, picture,name"
-                      scope="email,public_profile"
+                      fields="first_name, last_name, email_address, picture,name"
+                      scope="email_address,public_profile"
                       render={(renderProps) => (
                         <Button
                           variant="contained"

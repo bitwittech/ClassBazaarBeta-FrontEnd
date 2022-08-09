@@ -14,7 +14,7 @@ import ReactGA from 'react-ga';
 import config from '../config.json';
 import { store } from './../App';
 import { trackEvent } from 'react-with-analytics/lib/utils';
-import { newLogin, newregister, verifyToken, eduTest } from '../service/commonService';
+import { newLogin, newregister, verifyToken, eduTest, verifyEmail } from '../service/commonService';
 
 const { FusionAuthClient } = require('@fusionauth/node-client');
 
@@ -433,7 +433,6 @@ export const updateEDUData = async (data, dispatch) => {
 
 export const signin = async (data, dispatch) => {
   // newLogin(data);
-
   dispatch({
     type: LOADING,
     payload: true,
@@ -456,6 +455,10 @@ export const signin = async (data, dispatch) => {
           localStorage.setItem(
             'newLogin',
             JSON.parse(JSON.stringify(response.data.user))
+          );
+          localStorage.setItem(
+            'cbtoken',
+            response.data.token
           );
           // ReactGA.set({
           //   userId: response.successResponse.user.id,
@@ -514,6 +517,44 @@ export const signin = async (data, dispatch) => {
     });
   }
 };
+
+export const mailverification  = async (data,dispatch)=>{
+  console.log(data);
+  try {
+
+    verifyEmail(data).then((response)=>{
+
+      console.log(response);
+     if (response.status === 200)
+      {
+        dispatch({
+        type: ALERT,
+        payload: {
+          varient: 'success',
+          message: response.data.message,
+        },
+      });
+    }
+      else{
+        dispatch({
+          type: ALERT,
+          payload: {
+            varient: 'error',
+            message: response.data.message,
+          },
+        });
+      }
+
+    })
+    .catch((err)=>{
+      console.log(err)
+    })
+  }
+  catch(err){
+   console.log(err);
+  }
+
+}
 
 // export const fetchUser = async (token, dispatch) => {
 //   console.log('hey');
