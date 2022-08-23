@@ -1,9 +1,11 @@
 import './App.css';
 import './index.scss';
+import './styles/SearchBar.css'
 import { BrowserRouter, Route, Switch, withRouter, useLocation } from 'react-router-dom';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import React, { useContext, useEffect, useReducer, useState } from 'react';
 import withAnalytics, { initAnalytics } from 'react-with-analytics';
+// import data from './components/searchData/data.json'
 
 import About from './components/About';
 import Contactus from './components/Contactus';

@@ -5,9 +5,14 @@ import { fade, makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
 import { DebounceInput } from 'react-debounce-input';
+// import Searchbar from './Searchbar';
 import IconButton from '@material-ui/core/IconButton';
 import InputBase from '@material-ui/core/InputBase';
 import { LOGIN_MODAL } from '../store/Types';
+import coursedata from './searchData/data.json';
+import axios from 'axios';
+import {TextField,InputAdornment} from '@material-ui/core'
+import CloseIcon from "@material-ui/icons/Close";
 
 // edited by yashwant sahu
 import { Pre_LOG_Box } from '../store/Types';
@@ -162,6 +167,53 @@ function TopBar(props) {
   const { state, dispatch } = useContext(Store);
   const track = useContext(UserTrack);
   const classes = useStyles();
+
+  const [filteredData, setFilteredData] = useState([]);
+  const [wordEntered, setWordEntered] = useState('');
+
+  const handleFilter = async (event) => {
+    console.log(event.target.value,event.target.innerText)
+
+    const searchWord = event.target.value === undefined ? event.target.innerText : event.target.value; 
+    setWordEntered(searchWord);
+
+    event.target.value =searchWord 
+
+    if (searchWord.length < 4) {
+      setFilteredData([]);
+      return 0;
+    }
+    console.log(coursedata);
+    const newFilter = coursedata.data.filter((value) => {
+      return value.title.toLowerCase().includes(searchWord.toLowerCase());
+    });
+
+    // for fetching the data
+    // const newFilter = await axios.get(`http://0.0.0.0:8080/api/createSearchOBJ?search=${searchWord}`)
+    // .then((res)=>res.data.data)
+    // .catch((err)=>{
+
+    //     console.log(err)
+    //     setFilteredData([]);
+    // })
+
+    console.log(newFilter);
+
+    if (searchWord === '') {
+      setFilteredData([]);
+    } else {
+      setFilteredData(newFilter);
+    }
+
+    return props.onChange(event);
+
+  };
+
+  const clearInput = () => {
+    setFilteredData([]);
+    setWordEntered('');
+  };
+
   // const {isAuth} = state;
 
   // const OpenLogin = () => {
@@ -200,7 +252,7 @@ function TopBar(props) {
   const handleLogout = () => {
     props.history.push('/');
     localStorage.clear();
-    localStorage.setItem('user',null);
+    localStorage.setItem('user', null);
     logout(dispatch);
   };
   const handleUserMobile = () => {
@@ -352,7 +404,54 @@ function TopBar(props) {
                       className="no-mobile"
                       style={{ display: 'inline-block' }}
                     >
-                      <div className="s-bar">
+                      <div className="searchBox">
+                        <div className="input">
+                          <TextField
+                            size={'small'}
+                            className="s-input"
+                            type="text"
+                            id = 'searchInput'
+                            color="white"
+                            placeholder="Search for courses..."
+                            value={wordEntered}
+                            onChange={handleFilter}
+                            onKeyPress={props.onKeyPress}
+                            InputProps={{
+                              endAdornment: (
+                                <InputAdornment position="end">
+                                  <SearchIcon></SearchIcon>
+                                </InputAdornment>
+                              ),
+                            }}
+                          />
+                        </div>
+                        {filteredData.length != 0 && (
+                          <div className="dataResult">
+                            {filteredData
+                              .slice(
+                                0,
+                                Math.floor(Math.random() * filteredData.length)
+                              )
+                              .map((value, key) => {
+                                return (
+                                  <p
+                                    key={key}
+                                    className="dataItem"
+                                    onClick={(e) => {
+                                      console.log(e.target.innerText);
+                                      document.getElementById("searchInput").value = e.target.value; 
+                                      setWordEntered(e.target.innerText);
+                                    }}
+                                  >
+                                    {value.title}{' '}
+                                  </p>
+                                );
+                              })}
+                          </div>
+                        )}
+                      </div>
+
+                      {/* <div className="s-bar">
                         <div className="s-b">
                           <DebounceInput
                             minLength={2}
@@ -370,7 +469,7 @@ function TopBar(props) {
                             <SearchIcon className="mt-2 pd" />
                           </div>
                         </div>
-                      </div>
+                      </div> */}
                     </div>
                   )}
                   <Button
@@ -452,10 +551,53 @@ function TopBar(props) {
                   </Link>
                   {props.isSearchIncluded && (
                     <div
-                      className="no-mobile"
+                      // className="no-mobile"
                       style={{ display: 'inline-block' }}
                     >
-                      <div className="s-bar">
+                      <div className="searchBox">
+                        <div className="input">
+                          <TextField
+                            size={'small'}
+                            className="s-input"
+                            type="text"
+                            color="white"
+                            placeholder="Search for courses..."
+                            value={wordEntered}
+                            onChange={handleFilter}
+                            id = {'searchInput'}
+                            onKeyPress={props.onKeyPress}
+                            InputProps={{
+                              endAdornment: (
+                                <InputAdornment position="end">
+                                  <SearchIcon></SearchIcon>
+                                </InputAdornment>
+                              ),
+                            }}
+                          />
+                        </div>
+                        {filteredData.length != 0 && (
+                          <div className="dataResult">
+                            {filteredData
+                              .slice(
+                                0,
+                                Math.floor(Math.random() * filteredData.length)
+                              )
+                              .map((value, key) => {
+                                return (
+                                  <p
+                                    key={key}
+                                    className="dataItem"
+                                    onClick={handleFilter}
+                                  >
+                                    {value.title}{' '}
+                                  </p>
+                                );
+                              })}
+                          </div>
+                        )}
+                      </div>
+
+                      {/* <div className="s-bar">
                         <div className="s-b">
                           <DebounceInput
                             minLength={2}
@@ -463,8 +605,8 @@ function TopBar(props) {
                             debounceTimeout={500}
                             onChange={props.onChange}
                             onKeyPress={props.onKeyPress}
-                            placeholder="Search for a course"
                             value={props.initialSearchValue}
+                            placeholder="Search for a course"
                           />
                         </div>
                         <div className="s-a">
@@ -473,7 +615,7 @@ function TopBar(props) {
                             <SearchIcon className="mt-2 pd" />
                           </div>
                         </div>
-                      </div>
+                      </div> */}
                     </div>
                   )}
                   <Button

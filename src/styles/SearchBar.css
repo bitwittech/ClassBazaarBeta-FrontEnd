@@ -1,0 +1,38 @@
+.dataResult {
+    position: absolute;
+    overflow-y: scroll;
+    height: 300px;
+    width: 250px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    margin-top: 0.5%;
+    padding: 0.5%;
+}
+
+.dataItem {
+    border-bottom: 1px solid black;
+    padding: 0.5%;
+}
+
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+
+.dataResult::-webkit-scrollbar {
+    display: none;
+}
+
+
+/* Hide scrollbar for IE, Edge and Firefox */
+
+.dataResult {
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+}
+
+@media screen and (max-width: 800px) {
+    .searchBox {
+        display: none;
+    }
+}

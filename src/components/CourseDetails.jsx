@@ -132,11 +132,16 @@ const CourseDetails = (props) => {
       },
     };
 
-    var url = `${officialURL}api/course?uuid=${uuid}&provider=${provider}`;
+    var url = `${localURL}api/course?uuid=${uuid}&provider=${provider}`;
 
     console.log(url, uuid);
 
-    const res = await fetch(url);
+    const res = await fetch(url, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+      }});
     const data = await res.json();
 
     console.log('dataUdemy', data.summaryData);
