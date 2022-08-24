@@ -10,8 +10,13 @@
 }
 
 .dataItem {
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid rgba(112, 112, 112, 0.301);
     padding: 0.5%;
+    color: black !important;
+}
+
+.search-bar input {
+    color: aliceblue !important;
 }
 
 

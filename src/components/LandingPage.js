@@ -57,7 +57,7 @@ import { useState } from 'react';
 // import DignityHealthWhiteLogo from '../assets/dignityHealthWhiteLogo.jpeg';
 import DignityLogo from '../assets/dignity.png';
 import EduWhite from '../assets/edubuk white.png';
-
+import Searchbar from './Searchbar';
 import dataScience from '../assets/subjects/20402.jpg';
 import scienceAndEngin from '../assets/subjects/female-engineer-in-laboratory-3861449.jpg';
 import socialStudies from '../assets/subjects/happy-ethnic-woman-sitting-at-table-with-laptop-3769021.jpg';
@@ -176,6 +176,19 @@ const TopAppBarWithRouter = withRouter(({ history, ...data }) => {
   const classes = data.classes;
   return (
     <TopAppBar
+      onChange={data.onSearchChange}
+      isSearchIncluded={true}
+      onLoginClick={data.onLoginClick}
+      onKeyPress={onSearchPressed(data, history)}
+      noHome={true}
+    />
+  );
+});
+
+const SearchBarWithRouter = withRouter(({ history, ...data }) => {
+  const classes = data.classes;
+  return (
+    <Searchbar
       onChange={data.onSearchChange}
       isSearchIncluded={true}
       onLoginClick={data.onLoginClick}
@@ -674,13 +687,19 @@ class LandingPage extends Component {
                                   Passion for Learning
                                 </div>
                                 <form>
-                                  <Search
+                                <SearchBarWithRouter 
+                                getQuery={this.getQuery}
+                                onSearchChange={this.onSearchChange}
+                                classes={classes}
+                                props={this.props}
+                                routingURL={'/listing'} />
+                                  {/* <Search
                                     getQuery={this.getQuery}
                                     onSearchChange={this.onSearchChange}
                                     classes={classes}
                                     props={this.props}
                                     routingURL={'/listing'}
-                                  />
+                                  /> */}
                                 </form>
                               </div>
                             </div>

@@ -437,11 +437,8 @@ function TopBar(props) {
                                   <p
                                     key={key}
                                     className="dataItem"
-                                    onClick={(e) => {
-                                      console.log(e.target.innerText);
-                                      document.getElementById("searchInput").value = e.target.value; 
-                                      setWordEntered(e.target.innerText);
-                                    }}
+                                    
+                                      onClick={handleFilter}
                                   >
                                     {value.title}{' '}
                                   </p>

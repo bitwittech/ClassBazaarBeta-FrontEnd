@@ -1240,7 +1240,7 @@ body {
 
 .s-bar {
     margin-top: 10px;
-    border: #f15a29 1px solid;
+    border: #ff0000 1px solid;
     align-items: center;
     width: 230px;
     display: flex;
@@ -1274,7 +1274,7 @@ select:focus {
 .s-input {
     border: none;
     border: none;
-    color: #7c7c7c;
+    color: #ff0000 ;
     font-size: 1em;
     width: 190px;
 }
@@ -1312,6 +1312,10 @@ select:focus {
     padding-bottom: 9px;
     padding-left: 18.5px;
     padding-right: 11.6px;
+}
+
+.search-bar svg {
+   color :#ff0000;
 }
 
 .cd__header>span {
