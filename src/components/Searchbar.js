@@ -11,21 +11,32 @@ function SearchBar(props) {
   const [wordEntered, setWordEntered] = useState("");
 
   
+ 
   const handleFilter = async (event) => {
     console.log(event.target.value,event.target.innerText)
+    
+        const searchWord = event.target.value === undefined ? event.target.innerText : event.target.value; 
+        setWordEntered(searchWord);
 
-    const searchWord = event.target.value === undefined ? event.target.innerText : event.target.value; 
-    setWordEntered(searchWord);
+    if (event.target.value === undefined) 
+    {
+      event.target.value = searchWord;
+      event.key = 'Enter';
 
+       await props.onChange(event);
+      return props.onKeyPress(event);
+    
+    }
     event.target.value =searchWord 
 
     if (searchWord.length < 4) {
       setFilteredData([]);
       return 0;
     }
-    console.log(coursedata);
+
     const newFilter = coursedata.data.filter((value) => {
       return value.title.toLowerCase().includes(searchWord.toLowerCase());
+      
     });
 
     // for fetching the data
@@ -37,6 +48,7 @@ function SearchBar(props) {
     //     setFilteredData([]);
     // })
 
+    console.log(newFilter);
 
     if (searchWord === '') {
       setFilteredData([]);

@@ -173,19 +173,29 @@ function TopBar(props) {
 
   const handleFilter = async (event) => {
     console.log(event.target.value,event.target.innerText)
+    
+        const searchWord = event.target.value === undefined ? event.target.innerText : event.target.value; 
+        setWordEntered(searchWord);
 
-    const searchWord = event.target.value === undefined ? event.target.innerText : event.target.value; 
-    setWordEntered(searchWord);
+    if (event.target.value === undefined) 
+    {
+      event.target.value = searchWord;
+      event.key = 'Enter';
 
+       await props.onChange(event);
+      return props.onKeyPress(event);
+    
+    }
     event.target.value =searchWord 
 
     if (searchWord.length < 4) {
       setFilteredData([]);
       return 0;
     }
-    console.log(coursedata);
+
     const newFilter = coursedata.data.filter((value) => {
       return value.title.toLowerCase().includes(searchWord.toLowerCase());
+      
     });
 
     // for fetching the data
@@ -298,7 +308,7 @@ function TopBar(props) {
       {console.log(track.tracker)}
 
       <HamMenu props={props} />
-      <div className="appbar-flex">
+      <div className="appbar-flex app-box">
         <div className="topbar-cont">
           <div className="no-desktop logoBackground">
             <div className="div" style={{ textAlign: 'center' }}>
@@ -348,7 +358,7 @@ function TopBar(props) {
           </div>
 
           <div className="end-flex">
-            <div>
+            <div className='app-box'>
               {!state.isAuth ? (
                 <PermIdentityIcon
                   onClick={handleUserMobile}
@@ -410,7 +420,13 @@ function TopBar(props) {
                             size={'small'}
                             className="s-input"
                             type="text"
+         size = {'small'}
+
                             id = 'searchInput'
+                            sx = {{
+                              color : 'white !important'
+                            }}
+                            variant="outlined"
                             color="white"
                             placeholder="Search for courses..."
                             value={wordEntered}
@@ -426,7 +442,7 @@ function TopBar(props) {
                           />
                         </div>
                         {filteredData.length != 0 && (
-                          <div className="dataResult">
+                          <div className="dataResult" id="list">
                             {filteredData
                               .slice(
                                 0,
@@ -555,9 +571,13 @@ function TopBar(props) {
                         <div className="input">
                           <TextField
                             size={'small'}
-                            className="s-input"
+                            className="s-input search-bar"
                             type="text"
+                            variant="outlined"
                             color="white"
+                            sx = {{
+                              color : 'white !important'
+                            }}
                             placeholder="Search for courses..."
                             value={wordEntered}
                             onChange={handleFilter}
@@ -566,14 +586,14 @@ function TopBar(props) {
                             InputProps={{
                               endAdornment: (
                                 <InputAdornment position="end">
-                                  <SearchIcon></SearchIcon>
+                                  <SearchIcon ></SearchIcon>
                                 </InputAdornment>
                               ),
                             }}
                           />
                         </div>
                         {filteredData.length != 0 && (
-                          <div className="dataResult">
+                          <div className="dataResult" id="list">
                             {filteredData
                               .slice(
                                 0,
