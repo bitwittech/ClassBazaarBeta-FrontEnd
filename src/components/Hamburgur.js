@@ -5,6 +5,7 @@ import { Link, withRouter } from 'react-router-dom';
 import { DebounceInput } from 'react-debounce-input';
 import Searchbar from './Searchbar';
 
+
 import SearchIcon from '@material-ui/icons/Search';
 import Button from '@material-ui/core/Button';
 import { logout } from '../actions/ContextActions';
@@ -20,11 +21,9 @@ export default (props) => {
     <>
       <Menu className="showHam">
         <>
-          <div className="sbar menu" style={{ display: 'inline-block' }}>
-          <DebounceInput
-              minLength={2}
-              className="s-input"
-              debounceTimeout={500}
+          <div className="sbar menu" >
+          <Searchbar
+              display = {true}
               onChange={props.props.onChange}
               onKeyPress={props.props.onKeyPress}
               placeholder="Search for a course"

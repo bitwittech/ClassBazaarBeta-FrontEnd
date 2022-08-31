@@ -1318,6 +1318,20 @@ select:focus {
     color: #ff0000;
 }
 
+.search-in-app input {
+    color: black !important;
+}
+
+.app-bar-data-result {
+    width: 200px !important;
+}
+
+.ham-data-result {
+    width: 260px !important;
+    height: 150px !important;
+    background-color: rgba(230, 230, 230, 0.87) !important;
+}
+
 .cd__header>span {
     font-size: 16px;
     font-weight: bold;

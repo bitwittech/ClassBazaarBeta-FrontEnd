@@ -67,11 +67,11 @@ function SearchBar(props) {
   };
 
   return (
-    <div className="searchBox">
+    <div className={!props.display && 'searchBox'}>
       <div className="input" >
         <TextField
         size = {'large'}
-         className="s-input search-bar"
+         className={props.display ? " s-input  search-in-app " : 's-input search-bar'}
          type="text"
          fullWidth
          color = 'primary'
@@ -90,7 +90,9 @@ function SearchBar(props) {
         />
       </div>
       {filteredData.length != 0 && (
-        <div className="dataResult">
+        <div 
+        className={props.display ? "dataResult ham-data-result" : 'dataResult'}
+        >
           {filteredData.slice(0,Math.floor(Math.random() * filteredData.length)).map((value, key) => {
             return (
               <p key = {key} className="dataItem" onClick = {handleFilter} >

@@ -11,7 +11,7 @@ import InputBase from '@material-ui/core/InputBase';
 import { LOGIN_MODAL } from '../store/Types';
 import coursedata from './searchData/data.json';
 import axios from 'axios';
-import {TextField,InputAdornment} from '@material-ui/core'
+import { TextField, InputAdornment } from '@material-ui/core'
 import CloseIcon from "@material-ui/icons/Close";
 
 // edited by yashwant sahu
@@ -172,21 +172,20 @@ function TopBar(props) {
   const [wordEntered, setWordEntered] = useState('');
 
   const handleFilter = async (event) => {
-    console.log(event.target.value,event.target.innerText)
-    
-        const searchWord = event.target.value === undefined ? event.target.innerText : event.target.value; 
-        setWordEntered(searchWord);
+    console.log(event.target.value, event.target.innerText)
 
-    if (event.target.value === undefined) 
-    {
+    const searchWord = event.target.value === undefined ? event.target.innerText : event.target.value;
+    setWordEntered(searchWord);
+
+    if (event.target.value === undefined) {
       event.target.value = searchWord;
       event.key = 'Enter';
 
-       await props.onChange(event);
+      await props.onChange(event);
       return props.onKeyPress(event);
-    
+
     }
-    event.target.value =searchWord 
+    event.target.value = searchWord
 
     if (searchWord.length < 4) {
       setFilteredData([]);
@@ -195,7 +194,7 @@ function TopBar(props) {
 
     const newFilter = coursedata.data.filter((value) => {
       return value.title.toLowerCase().includes(searchWord.toLowerCase());
-      
+
     });
 
     // for fetching the data
@@ -298,11 +297,10 @@ function TopBar(props) {
       position="static"
       style={{ boxShadow: 'none' }}
       color="inherit"
-      className={`sticky ${
-        !toggleAppBarTheme && shouldSwitch
+      className={`sticky ${!toggleAppBarTheme && shouldSwitch
           ? 'app-bar-transparent'
           : 'app-bar-colored'
-      }`}
+        }`}
     >
       {localStorage.setItem('path', JSON.stringify(track.tracker))}
       {console.log(track.tracker)}
@@ -313,9 +311,8 @@ function TopBar(props) {
           <div className="no-desktop logoBackground">
             <div className="div" style={{ textAlign: 'center' }}>
               <ImageWithRouter
-                image={`${
-                  !toggleAppBarTheme && shouldSwitch ? Logo : BlackLogo
-                }`}
+                image={`${!toggleAppBarTheme && shouldSwitch ? Logo : BlackLogo
+                  }`}
                 routingURL={'/'}
                 clazzNames={`${classes.logo} click-h adj-i`}
                 alt="logo"
@@ -337,9 +334,8 @@ function TopBar(props) {
             <div>
               {' '}
               <ImageWithRouter
-                image={`${
-                  !toggleAppBarTheme && shouldSwitch ? Logo : BlackLogo
-                }`}
+                image={`${!toggleAppBarTheme && shouldSwitch ? Logo : BlackLogo
+                  }`}
                 routingURL={'/'}
                 classNames={`${classes.logo} click-h adj-i`}
                 alt="logo"
@@ -420,14 +416,11 @@ function TopBar(props) {
                             size={'small'}
                             className="s-input"
                             type="text"
-         size = {'small'}
+                            size={'small'}
 
-                            id = 'searchInput'
-                            sx = {{
-                              color : 'white !important'
-                            }}
+                            id='searchInput'
+      
                             variant="outlined"
-                            color="white"
                             placeholder="Search for courses..."
                             value={wordEntered}
                             onChange={handleFilter}
@@ -442,7 +435,7 @@ function TopBar(props) {
                           />
                         </div>
                         {filteredData.length != 0 && (
-                          <div className="dataResult" id="list">
+                          <div className="dataResult app-bar-data-result" id="list">
                             {filteredData
                               .slice(
                                 0,
@@ -453,8 +446,8 @@ function TopBar(props) {
                                   <p
                                     key={key}
                                     className="dataItem"
-                                    
-                                      onClick={handleFilter}
+
+                                    onClick={handleFilter}
                                   >
                                     {value.title}{' '}
                                   </p>
@@ -571,17 +564,16 @@ function TopBar(props) {
                         <div className="input">
                           <TextField
                             size={'small'}
-                            className="s-input search-bar"
+                            className="s-input search-bar search-in-app"
                             type="text"
                             variant="outlined"
-                            color="white"
-                            sx = {{
-                              color : 'white !important'
+                            sx={{
+                              color: 'white !important'
                             }}
                             placeholder="Search for courses..."
                             value={wordEntered}
                             onChange={handleFilter}
-                            id = {'searchInput'}
+                            id={'searchInput'}
                             onKeyPress={props.onKeyPress}
                             InputProps={{
                               endAdornment: (
@@ -593,7 +585,7 @@ function TopBar(props) {
                           />
                         </div>
                         {filteredData.length != 0 && (
-                          <div className="dataResult" id="list">
+                          <div className="dataResult app-bar-data-result" id="list">
                             {filteredData
                               .slice(
                                 0,

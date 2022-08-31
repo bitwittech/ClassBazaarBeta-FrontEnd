@@ -2,11 +2,13 @@
     position: absolute;
     overflow-y: scroll;
     height: 300px;
-    width: 250px;
+    width: inherit;
     background-color: rgba(255, 255, 255, 0.596);
     border-radius: 10px;
     margin-top: 0.5%;
     padding: 0.5%;
+    text-align: left !important;
+    z-index: 50;
 }
 
 .dataItem {
@@ -16,7 +18,7 @@
 }
 
 .search-bar input {
-    color: aliceblue !important;
+    color: rgb(255, 255, 255) !important;
 }
 
 .MuiInputAdornment-positionEnd {
