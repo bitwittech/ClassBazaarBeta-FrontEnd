@@ -97,3 +97,8 @@ export const verifyEmail = async (data) => {
   return await axios.post(`${localURL}/api/verificationMail`, data);
 };
 
+// Welcome email APIs 
+export const welcome = async (data)=>{
+  console.log(data)
+  return await axios.get(`${localURL}/api/welcome?email_address=${data}`);
+}
