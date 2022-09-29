@@ -15,10 +15,10 @@ const Verified = withRouter(({ history }) => {
       password: data[1].split('=')[1],
     };
 
+    welcome(data.email_address)
     await signin(data, dispatch);
-    await welcome(data.email_address)
     
-    history.push('/');
+    return history.push('/');
   };
 
   return (
