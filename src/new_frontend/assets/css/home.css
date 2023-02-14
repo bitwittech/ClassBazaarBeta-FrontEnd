@@ -1,0 +1,338 @@
+.topContainer {
+    display: flex;
+    padding: 1%;
+    align-items: center;
+    padding: 0% 3% 0% 3%;
+    transition: all 500ms;
+}
+
+.topTextContainer {
+    text-align: center;
+    padding-left: 2%;
+    padding-right: 2%;
+}
+
+.topGradient {
+    background: linear-gradient(90deg, #FF5C00 0%, #EE09D0 98.52%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.heading {
+    font-size: 2rem !important;
+    font-weight: bold !important;
+}
+
+.searchContainer {
+    display: flex;
+    padding: 4% 2% 2% 2%;
+    width: 98%;
+    margin: auto;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.searchBar {
+    flex-grow: 1;
+    border-radius: 50px;
+    position: relative;
+    background: linear-gradient(90deg, #FF5C00 0%, #EE09D0 98.52%);
+}
+
+.searchBar input {
+    background: #fff;
+    border-radius: 25px;
+    padding: 13px !important;
+}
+
+.css-1kxbtff-MuiAutocomplete-root .MuiOutlinedInput-root {
+    padding: 2px !important;
+}
+
+.searchButton {
+    background: linear-gradient(90deg, #FF5C00 0%, #EE09D0 98.52%);
+    border-radius: 10px !important;
+    color: aliceblue !important;
+}
+
+.extraButton {
+    width: 90%;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 2% 3% 0% 3%;
+    justify-content: center;
+    color: aliceblue;
+    gap: 1.5rem;
+}
+
+.searchBtn {
+    color: rgb(255, 255, 255) !important;
+    background: linear-gradient(0deg, #D9D9D9, #D9D9D9), linear-gradient(90deg, #EE09D0 0%, #F15A29 100%), linear-gradient(90deg, #EE09D0 0%, #F15A29 100%) !important;
+    border-radius: 20px !important;
+    box-shadow: none !important;
+}
+
+.topBannerContainer {
+    padding: 0% 2% 0% 2%;
+}
+
+.topBannerContainer img {
+    width: 100%;
+}
+
+
+/* //// media quires for Top Section ====================================== */
+
+@media screen and (width <=950px) {
+    .topContainer {
+        margin-top: 5%;
+    }
+}
+
+@media screen and (width <=800px) {
+    .topContainer {
+        margin-top: 10%;
+    }
+    .extraButton {
+        display: none;
+    }
+}
+
+@media screen and (width <=550px) {
+    .topBannerContainer {
+        display: none;
+    }
+    .topContainer {
+        margin-top: 20%;
+    }
+}
+
+
+/* =============== // Second Section CSS ========================= */
+
+.secondContainer {
+    margin-top: 5%;
+    text-align: center;
+    color: #C4C4C4 !important;
+}
+
+.secGradient {
+    font-weight: bolder !important;
+    font-size: 2.8rem !important;
+    /* identical to box height */
+    text-transform: uppercase;
+    background: linear-gradient(90deg, #E2F75E 36.46%, #7BF1AB 60.42%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.secondImageSection {
+    display: flex;
+    /* flex-direction: column; */
+    gap: 0.5rem;
+    justify-content: center;
+    align-items: center;
+    padding: 2% 3% 0% 3%;
+    flex-wrap: wrap;
+}
+
+.secCard {
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    font-size: 1rem;
+}
+
+
+/* ///////////// Section Third ===========================  */
+
+.secGradient {
+    margin-top: 5%;
+    justify-content: center;
+    /* align-items: center; */
+    padding: 0% 4% 0% 4%;
+}
+
+.FRC_container {
+    padding: 3%;
+}
+
+.FRC_title {
+    padding: 6%;
+    font-weight: 600 !important;
+    font-size: 2.8rem !important;
+    line-height: 112px;
+    background: linear-gradient(133.13deg, #6BEAAF 39.62%, #287BF9 63.39%);
+    text-transform: uppercase;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.card-section button {
+    top: 33% !important;
+    background: linear-gradient(180deg, #6BEAAF 0%, #287BF9 100%) !important;
+}
+
+.card-section button::before {
+    color: #fff !important;
+}
+
+.outer_card {
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* width: 100%; */
+    text-align: center;
+    gap: 10px;
+    font-size: 1rem;
+    color: #a1a1a1;
+}
+
+.card_img {
+    display: flex;
+    /* height: 180px; */
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    background: linear-gradient(180deg, rgba(107, 234, 175, 0.23) 0%, rgba(40, 123, 249, 0.35) 99.99%, rgba(217, 217, 217, 0) 100%);
+    padding: 3%;
+    min-width: 230px;
+    min-height: 250px;
+    padding: 5%;
+}
+
+.card_img img {
+    width: 80%;
+}
+
+.FRC_show_more {
+    padding: 3% 2% 1% 2%;
+    text-align: right;
+    background: linear-gradient(90deg, #6BEAAF 0%, #287BF9 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-decoration: underline;
+}
+
+
+/* /////////// media quires ==========  */
+
+@media screen and (width <=800px) {
+    .FRC_title {
+        text-align: center;
+    }
+}
+
+
+/* ///////// section fourth ========================= */
+
+.fourthContainer {
+    margin-top: 5%;
+    padding: 3% 3% 0% 3%;
+    text-align: center;
+}
+
+.fourthHeading {
+    font-weight: 600 !important;
+    font-size: 2.8rem !important;
+    background: linear-gradient(90deg, #6BEAAF 28.65%, #287BF9 63.54%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.listSection {
+    padding: 2% 4% 0% 4%;
+    justify-content: center;
+    align-items: center;
+}
+
+.listContainer {
+    display: flex;
+    /* flex-direction: column; */
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
+    text-align: left;
+    gap: 3rem;
+}
+
+.listBox {
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+    justify-content: center;
+    text-align: left;
+}
+
+.list {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    margin-top: 3%;
+}
+
+.list img {
+    width: 40px;
+}
+
+@media screen and (width <=950px) {
+    .listContainer {
+        flex-direction: column;
+        margin-top: 5%;
+    }
+    .listBox {
+        align-items: center;
+    }
+}
+
+
+/* /////////// fifth section css  ====================*/
+
+.fifthContainer {
+    margin-top: 5%;
+    padding: 3% 4% 0% 4%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.fifthHeading {
+    text-align: center;
+    font-weight: 600 !important;
+    font-size: 2.8rem !important;
+    background: linear-gradient(99.5deg, #509FB5 25.17%, #7789EB 49.13%, #ED495D 74.09%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.fifthImage {
+    display: flex;
+    justify-content: center;
+}
+
+.fifthImage img {
+    width: 50%;
+    margin: auto;
+}
+
+.subFifthHeading {
+    color: #C4C4C4;
+    text-align: center;
+}
+
+.fifthContainer button {
+    background: linear-gradient(90deg, #509FB5 0%, #945EC0 51.56%, #FF8181 100%) !important;
+    border-radius: 10px;
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-top: 1%;
+}

@@ -1,7 +1,14 @@
 import './App.css';
 import './index.scss';
-import './styles/SearchBar.css'
-import { BrowserRouter, Route, Switch, withRouter, useLocation } from 'react-router-dom';
+import './styles/SearchBar.css';
+import {
+  BrowserRouter,
+  Route,
+  Switch,
+  withRouter,
+  useLocation,
+  useHistory,
+} from 'react-router-dom';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import React, { useContext, useEffect, useReducer, useState } from 'react';
 import withAnalytics, { initAnalytics } from 'react-with-analytics';
@@ -11,11 +18,11 @@ import About from './components/About';
 import Contactus from './components/Contactus';
 import Career from './components/Career';
 import Edubuk from './components/edubuk';
-import CourseDetails from './components/CourseDetails';
+// import CourseDetails from './components/CourseDetails';
 import CoursePage from './components/coursePage';
 import HomePage from './components/HomePage';
 import LandingPage from './components/LandingPage';
-import Verified from './components/Verified';
+// import Verified from './components/Verified';
 import Login from './components/Login';
 // prelogbox added by Yashwant Sahu
 import PreLogBox from './components/PreLogBox';
@@ -37,6 +44,15 @@ import { trackPage } from 'react-with-analytics/lib/utils';
 import AltMBA from './components/AltMBA';
 // import { Pre_LOG_Box } from './store/Types';
 import axios from 'axios';
+
+// new frontend components
+import Home from './new_frontend/components/home/Home';
+import Signup from './new_frontend/components/log_signup/Signup';
+import Log_In from './new_frontend/components/log_signup/Login';
+import CourseList from './new_frontend/components/courses/CourseList';
+import Details from './new_frontend/components/courses/Details';
+import NewSnack from './new_frontend/components/utils/NewSnack';
+import Verified from './new_frontend/components/utils/Verification';
 
 const theme = createMuiTheme({
   typography: {
@@ -64,37 +80,68 @@ ReactGA.initialize(GA_TRACKING_ID, {
   debug: true,
 });
 
-const Root = (props) => {
+// const Root = (props) => {
+//   useEffect(() => {
+//     localStorage.setItem('parameter', props.history.location.search);
+//     props.history.listen((location) => trackPage(location.pathname));
+//   }, [props.history]);
+//   return (
+//     <Switch>
+//       {/* <Route exact path="/" component={LandingPage} /> */}
+//       <Route exact path="/listing" component={HomePage} />
+//       <Route exact path="/listing/:search" component={HomePage} />
+//       <Route exact path="/course" component={CoursePage} />
+//       <Route exact path="/career" component={Career} />
+//       <Route exact path="/profile" component={ProfilePage} />
+//       <Route exact path="/about" component={About} />
+//       <Route exact path="/privacypolicy" component={PrivacyPolicy} />
+//       <Route exact path="/mobileauth" component={MobileAuth} />
+//       <Route exact path="/coursedetail" component={StaticCourseDetails} />
+//       <Route exact path="/coursedetails/altmba" component={AltMBA} />
+//       {/* <Route
+//         exact
+//         path="/coursedetails/:provider/:uuid"
+//         component={CourseDetails}
+//       /> */}
+//       <Route exact path="/contact" component={Contactus} />
+//       <Route exact path="/edubuk" component={Edubuk} />
+//       {/* // new components */}
+//       {/* <Route exact path="/" component={Home} />
+//       <Route exact path="/signup" component={Signup} />
+//       <Route exact path="/login" component={Log_In} /> */}
+//     </Switch>
+//   );
+// };
+const NewRoot = (props) => {
+  const history = useHistory();
+
   useEffect(() => {
-    localStorage.setItem('parameter',props.history.location.search);
+    window.scrollTo(0, 0);
+  }, [history.location]);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    localStorage.setItem('parameter', props.history.location.search);
     props.history.listen((location) => trackPage(location.pathname));
   }, [props.history]);
   return (
     <Switch>
-      <Route exact path="/" component={LandingPage} />
-      <Route exact path="/verified" component={Verified} />
-      <Route exact path="/listing" component={HomePage} />
-      <Route exact path="/course" component={CoursePage} />
+      <Route exact path="/" component={Home} />
+      <Route exact path="/signup" component={Signup} />
+      <Route exact path="/login" component={Log_In} />
+      <Route exact path="/listing" component={CourseList} />
+      <Route exact path="/listing/:search" component={CourseList} />
+      <Route exact path="/courseDetails/:provider/:uuid" component={Details} />
+      <Route exact path="/contact" component={Contactus} />
+      <Route exact path="/about" component={About} />
       <Route exact path="/career" component={Career} />
       <Route exact path="/profile" component={ProfilePage} />
-      <Route exact path="/about" component={About} />
-      <Route exact path="/privacypolicy" component={PrivacyPolicy} />
-      <Route exact path="/mobileauth" component={MobileAuth} />
-      <Route exact path="/coursedetail" component={StaticCourseDetails} />
-      <Route exact path="/coursedetails/altmba" component={AltMBA} />
-      <Route
-        exact
-        path="/coursedetails/:provider/:uuid"
-        component={CourseDetails}
-      />
-      <Route exact path="/contact" component={Contactus} />
-      <Route exact path="/edubuk" component={Edubuk} />
+      <Route exact path="/verified" component={Verified} />
     </Switch>
   );
 };
 
 var store = localForage.createInstance(config.localForage);
-const AppWithRouter = withRouter(withAnalytics(Root));
+const AppWithRouter = withRouter(withAnalytics(NewRoot));
 
 function App() {
   const initialState = useContext(Store);
@@ -151,6 +198,7 @@ function App() {
                 crossOrigin="anonymous"
               />
               <Snackbar />
+              <NewSnack />
               <Login />
               <PreLogBox />
               <EdubukForm />

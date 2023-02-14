@@ -1,0 +1,138 @@
+.courseListHeading {
+    display: inline-block;
+    font-size: 1.5rem !important;
+    background: linear-gradient(270deg, #EE09D0 0%, #F15A29 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 7% !important;
+}
+
+.filterBtn {
+    float: right;
+    margin-bottom: 7% !important;
+    display: inline-block;
+    color: white !important;
+    font-weight: 600 !important;
+    background: linear-gradient(270deg, #EE09D0 0%, #F15A29 100%);
+    cursor: pointer;
+    /* -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent; */
+}
+
+.cardContainer {
+    margin-top: 4%;
+    padding: 5%;
+    /* gap: 1.5rem; */
+    /* border: 2px solid black; */
+}
+
+.cardContainer_inner {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.cardImage {
+    position: absolute;
+}
+
+.card_otter {
+    cursor: pointer;
+    width: 350px;
+    overflow: hidden;
+    min-height: 220px;
+    max-height: 220px;
+    box-shadow: 0px 1px 6px 0px #cbcbcb;
+    border-radius: 15px;
+}
+
+.card_otter {
+    text-decoration : none !important ;
+    color: #626161da !important;
+} 
+
+.course_card {
+    position: relative;
+    height: 100%;
+    padding: 1%;
+    gap: 1rem;
+    top: 0%;
+}
+
+.card_title {
+    overflow: hidden;
+    color: #626161;
+    display: -webkit-box;
+    max-width: 100%;
+    height: 40%;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+}
+
+.infoIcon {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 7px;
+}
+
+.infoIcon img {
+    width: 22px;
+    height: 22px;
+}
+
+.thirdSec {
+    height: 20%;
+}
+
+.secSec {
+    height: 20%;
+}
+
+.allPad {
+    padding: 4% 3% 0% 3%;
+}
+
+.universityClip {
+    overflow: hidden;
+    display: -webkit-box;
+    max-width: 100%;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+}
+
+.price {
+    text-align: end;
+}
+
+.filterTitle {
+    display: inline-block;
+    font-weight: 600 !important;
+    font-size: 1.5rem !important;
+    background: linear-gradient(270deg, #EE09D0 0%, #F15A29 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 7% !important;
+}
+
+.filterBox {
+    width: 800px;
+    height: 500px;
+    border-radius: 15px;
+    gap: 1rem;
+}
+
+.filterInner {
+    padding: 5%;
+}
+
+.filterLable span {
+    font-size: 0.8rem !important;
+    color: #626161da !important;
+}

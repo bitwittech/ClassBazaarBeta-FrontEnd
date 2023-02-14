@@ -104,7 +104,7 @@ class HomePage extends Component {
       subjects: 'all',
       providers: 'all',
       fee: 'all',
-      isLevel1CheckedFree : false,
+      isLevel1CheckedFree: false,
       isLevel1CheckedSubjects: false,
       subjecttReset: false,
       feeReset: false,
@@ -127,7 +127,8 @@ class HomePage extends Component {
     this.onStartFilterChange = this.onStartFilterChange.bind(this);
     this.onProviderFilterChange = this.onProviderFilterChange.bind(this);
     this.setupDefaultFilters = this.setupDefaultFilters.bind(this);
-    this.getCheckedProvidersFromString = this.getCheckedProvidersFromString.bind(this);
+    this.getCheckedProvidersFromString =
+      this.getCheckedProvidersFromString.bind(this);
     this.udpateOffsets = this.udpateOffsets.bind(this);
     this.handleUnload = this.handleUnload.bind(this);
   }
@@ -159,29 +160,29 @@ class HomePage extends Component {
     var url = `${API}/api/v2/courses/?q=${query}&filter=${parsedFilter}&subjects=${subjects}&provider=${this.state.providers}&feeFilter=${feeFilter}&startDateFilter=${startDateFilter}`;
     this.setState({ queryURL: url }, () => {
       const state = this.state;
-      store.removeItem('filterData').then(s => {
-        store.setItem('filterData', this.state).then(d => {
+      store.removeItem('filterData').then((s) => {
+        store.setItem('filterData', this.state).then((d) => {
           console.log('Data updated in localstorage');
         });
       });
     });
   }
 
-  handleCourseNumber = count => {
+  handleCourseNumber = (count) => {
     this.setState({
       totalCount: count,
       // totalCount: '171154',
     });
   };
 
-  udpateOffsets = offsets => {
+  udpateOffsets = (offsets) => {
     console.log('Updating offsets', offsets);
     this.setState({
       providerOffset: offsets,
     });
   };
 
-  onSubjectFilterChange = subjectList => {
+  onSubjectFilterChange = (subjectList) => {
     let subjectFilter = '';
     subjectsData.forEach((obj, index) => {
       if (subjectList[index]) {
@@ -199,38 +200,30 @@ class HomePage extends Component {
     });
   };
 
-  onFeeFilterChange = feeType => {
+  onFeeFilterChange = (feeType) => {
     console.log({ feeType });
     let filterValue;
     let isLevel1CheckedFree = true;
-    let FreeCheck  = [];
-    
-    if (feeType[0] === true) 
-    {
+    let FreeCheck = [];
+
+    if (feeType[0] === true) {
       FreeCheck[0] = true;
       FreeCheck[1] = false;
       FreeCheck[2] = false;
 
-      filterValue = 'free'; 
-    }
-
-    else if (feeType[1] === true) 
-    {
+      filterValue = 'free';
+    } else if (feeType[1] === true) {
       FreeCheck[0] = false;
       FreeCheck[1] = true;
       FreeCheck[2] = false;
 
       filterValue = 'paid';
-    }
-    else if (feeType[2] === true)
-    {
+    } else if (feeType[2] === true) {
       FreeCheck[0] = false;
       FreeCheck[1] = false;
       FreeCheck[2] = true;
       filterValue = 'Provider subscription required';
-    }
-    else
-    {
+    } else {
       FreeCheck[0] = false;
       FreeCheck[1] = false;
       FreeCheck[2] = false;
@@ -238,12 +231,11 @@ class HomePage extends Component {
       filterValue = '';
     }
 
-
-    this.setState({ filterValue, isLevel1CheckedFree,FreeCheck},  () => {
+    this.setState({ filterValue, isLevel1CheckedFree, FreeCheck }, () => {
       this.updateData();
     });
   };
-  onStartFilterChange = startDateType => {
+  onStartFilterChange = (startDateType) => {
     console.log({ startDateType });
     let filterValue;
     if (startDateType[2] === true) filterValue = 'flexible';
@@ -257,7 +249,7 @@ class HomePage extends Component {
     });
   };
 
-  onProviderFilterChange = async providerList => {
+  onProviderFilterChange = async (providerList) => {
     let providerFilter = '';
     this.state.providerData.forEach((obj, index) => {
       if (providerList[index]) {
@@ -296,7 +288,7 @@ class HomePage extends Component {
         providers: 'all',
         fee: 'Free',
         isLevel1CheckedSubjects: false,
-        checkedLevel2Subjects: subjectsData.map(s => false),
+        checkedLevel2Subjects: subjectsData.map((s) => false),
       },
       async () => {
         await this.updateData();
@@ -316,7 +308,7 @@ class HomePage extends Component {
   componentDidMount() {
     if (this.props.history.action === 'POP') {
       console.log('From back button');
-      return store.getItem('filterData').then(data => {
+      return store.getItem('filterData').then((data) => {
         console.log('Data from localForage', data);
         this.setState(
           {
@@ -332,33 +324,30 @@ class HomePage extends Component {
     let query = '';
     let subjects = 'all';
     let isLevel1CheckedFree = false;
-    let FreeCheck = [false,false,false]
+    let FreeCheck = [false, false, false];
     let isLevel1CheckedSubjects = false;
-    let checkedLevel2Subjects = subjectsData.map(s => false);
-    let filterValue = '';  
+    let checkedLevel2Subjects = subjectsData.map((s) => false);
+    let filterValue = '';
     let index = 0;
-    let feeFilter = "all";
+    let feeFilter = 'all';
 
-    
     if (this.props.location.state !== undefined) {
-      
       if (this.props.location.state.query !== undefined)
         query = this.props.location.state.query;
 
-        if (this.props.location.state.feeFilter !== undefined) {
-          console.log(this.props.location.state.feeFilter)
-          feeFilter = this.props.location.state.feeFilter;
-          isLevel1CheckedFree = true;
-          index = feeFilter
-        FreeCheck[index] = true
-
+      if (this.props.location.state.feeFilter !== undefined) {
+        console.log(this.props.location.state.feeFilter);
+        feeFilter = this.props.location.state.feeFilter;
+        isLevel1CheckedFree = true;
+        index = feeFilter;
+        FreeCheck[index] = true;
       }
       if (this.props.location.state.subject !== undefined) {
         subjects = this.props.location.state.subject;
         isLevel1CheckedSubjects = true;
         checkedLevel2Subjects[
           subjectsData
-            .map(s => s.name)
+            .map((s) => s.name)
             .indexOf(this.props.location.state.subject)
         ] = true;
       }
@@ -391,7 +380,7 @@ class HomePage extends Component {
   }
 
   getUniversityForUdemy(obj) {
-    let names = obj.visible_instructors.map(i => i.name + ', ').join('');
+    let names = obj.visible_instructors.map((i) => i.name + ', ').join('');
     return names.slice(0, names.length - 2);
   }
 
@@ -413,7 +402,6 @@ class HomePage extends Component {
 
     this.handleUnload(query.target.value);
 
-
     ReactGA.ga('send', 'pageview', `/listing?q=${query.target.value}`);
     trackEvent('search', 'onSearch', 'Search_rest');
 
@@ -424,7 +412,7 @@ class HomePage extends Component {
 
   getCheckedProvidersFromString() {
     const selectedProviders = this.state.providers.split('::');
-    const checkedData = this.state.providerData.map(s => {
+    const checkedData = this.state.providerData.map((s) => {
       return selectedProviders.indexOf(s) > -1;
     });
     console.log({ checkedData });
@@ -475,10 +463,10 @@ class HomePage extends Component {
                     isOnlyOneAllowed={false}
                     level1Name={'Providers'}
                     level2List={this.state.providerData}
-                    onChangeOptions={s => this.onProviderFilterChange(s)}
+                    onChangeOptions={(s) => this.onProviderFilterChange(s)}
                   />
                   <NestedMenu
-                    id = "fees"
+                    id="fees"
                     shouldReset={this.state.feeReset}
                     shouldUpdate={true}
                     isLevel1Checked={this.state.isLevel1CheckedFree}
@@ -490,7 +478,7 @@ class HomePage extends Component {
                       'Paid',
                       'Provider subscription required',
                     ]}
-                    onChangeOptions={s => this.onFeeFilterChange(s)}
+                    onChangeOptions={(s) => this.onFeeFilterChange(s)}
                   />
                   <NestedMenu
                     shouldReset={this.state.startReset}
@@ -503,7 +491,7 @@ class HomePage extends Component {
                       'Starts after 30 days',
                       'Flexible',
                     ]}
-                    onChangeOptions={s => this.onStartFilterChange(s)}
+                    onChangeOptions={(s) => this.onStartFilterChange(s)}
                   />
                   <NestedMenu
                     shouldReset={this.state.subjecttReset}
@@ -512,8 +500,8 @@ class HomePage extends Component {
                     checkedLevel2={this.state.checkedLevel2Subjects}
                     isOnlyOneAllowed={false}
                     level1Name={'Subject'}
-                    level2List={subjectsData.map(s => s.name)}
-                    onChangeOptions={s => this.onSubjectFilterChange(s)}
+                    level2List={subjectsData.map((s) => s.name)}
+                    onChangeOptions={(s) => this.onSubjectFilterChange(s)}
                   />
                 </RadioGroup>
               </FormControl>
@@ -583,9 +571,9 @@ class HomePage extends Component {
                       isOnlyOneAllowed={false}
                       level1Name={'Providers'}
                       level2List={this.state.providerData}
-                      onChangeOptions={s => this.onProviderFilterChange(s)}
+                      onChangeOptions={(s) => this.onProviderFilterChange(s)}
                     />
-                    <NestedMenu 
+                    <NestedMenu
                       shouldReset={this.state.feeReset}
                       shouldUpdate={true}
                       isLevel1Checked={this.state.isLevel1CheckedFree}
@@ -597,7 +585,7 @@ class HomePage extends Component {
                         'Paid',
                         'Provider subscription required',
                       ]}
-                      onChangeOptions={s => this.onFeeFilterChange(s)}
+                      onChangeOptions={(s) => this.onFeeFilterChange(s)}
                     />
                     <NestedMenu
                       shouldReset={this.state.startReset}
@@ -610,7 +598,7 @@ class HomePage extends Component {
                         'Starts after 30 days',
                         'Flexible',
                       ]}
-                      onChangeOptions={s => this.onStartFilterChange(s)}
+                      onChangeOptions={(s) => this.onStartFilterChange(s)}
                     />
                     <NestedMenu
                       shouldReset={this.state.subjecttReset}
@@ -619,8 +607,8 @@ class HomePage extends Component {
                       checkedLevel2={this.state.checkedLevel2Subjects}
                       isOnlyOneAllowed={false}
                       level1Name={'Subject'}
-                      level2List={subjectsData.map(s => s.name)}
-                      onChangeOptions={s => this.onSubjectFilterChange(s)}
+                      level2List={subjectsData.map((s) => s.name)}
+                      onChangeOptions={(s) => this.onSubjectFilterChange(s)}
                     />
                   </RadioGroup>
                 </FormControl>

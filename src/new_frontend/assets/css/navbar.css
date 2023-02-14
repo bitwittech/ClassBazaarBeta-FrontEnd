@@ -1,0 +1,120 @@
+.navContainer {
+    display: flex;
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    gap: 1.5rem;
+    padding: 2.5% 4% 1% 4%;
+    align-items: center;
+    margin-bottom: 1%;
+    flex-wrap: wrap;
+    z-index: 1;
+    justify-content: center;
+    transition: all 500ms;
+    /* box-shadow: 5px -1px 5px 1px #706e6e; */
+}
+
+.bgWhite {
+    background-color: white;
+}
+
+.logo {
+    min-width: 140px;
+    max-width: 140px;
+}
+
+.logo img {
+    width: 100%;
+}
+
+.links {
+    display: flex;
+    flex: 1;
+    gap: 1.5rem;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.links a {
+    color: black;
+}
+
+.button {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.hamLinkContainer {
+    width: 200px;
+    padding: 10%;
+}
+
+.ul_formate {
+    margin-top: 10%;
+    display: flex;
+    font-size: 1.5rem;
+    gap: 1.2rem;
+    align-items: center;
+    flex-direction: column;
+    padding: 0% !important;
+}
+
+
+/* .li_formate {
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background: linear-gradient(90deg, #FF5C00 0%, #EE09D0 98.52%) !important;
+} */
+
+.logOutBtn {
+    font-weight: 700 !important;
+    color: white !important;
+    background: linear-gradient(90deg, #509FB5 0%, #945EC0 51.56%, #FF8181 100%) !important;
+}
+
+.closeBTN {
+    display: flex;
+    align-self: flex-end;
+    width: 25px;
+    height: 25px;
+    margin: 3% !important;
+    font-weight: 700 !important;
+    color: white !important;
+    background: linear-gradient(90deg, #509FB5 0%, #945EC0 51.56%, #FF8181 100%) !important;
+}
+
+.hamIcon {
+    display: none !important;
+    position: absolute !important;
+    align-self: flex-start;
+    width: 30px;
+    height: 30px;
+    color: white !important;
+    background: linear-gradient(90deg, #FF5C00 0%, #EE09D0 98.52%);
+}
+
+
+/* MEdia quires  ==============================================*/
+
+@media screen and (width <=800px) {
+    .links {
+        display: none;
+    }
+    .logo {
+        margin: auto;
+        flex-grow: 1;
+    }
+    /* .button {
+        display: none;
+    } */
+    .searchBTN {
+        display: none !important;
+    }
+    .navContainer {
+        justify-content: flex-start;
+    }
+    .hamIcon {
+        display: flex !important;
+    }
+}

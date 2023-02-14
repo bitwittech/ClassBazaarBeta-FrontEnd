@@ -1,0 +1,51 @@
+.courseDetailsContainer {
+    padding: 3%;
+    width: 90% !important;
+    background-color: #e5e5e588;
+    margin: auto;
+    margin-top: 7%;
+}
+
+.colorTitle {
+    background: linear-gradient(90deg, #FF5C00 0%, #EE09D0 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.universityTitle {
+    font-size: 1rem !important;
+    font-weight: 500 !important;
+}
+
+.courseTitle {
+    font-size: 2rem !important;
+    font-weight: 600 !important;
+}
+
+.courseOverview {
+    font-size: 1.3rem !important;
+    font-weight: 600 !important;
+}
+
+.otherDetails {
+    padding: 1%;
+}
+
+.enrollBTN {
+    float: right;
+    background: linear-gradient(270deg, #EE09D0 0%, #F15A29 100%);
+    color: aliceblue !important;
+    font-weight: 700 !important;
+    border-radius: 15px !important;
+}
+
+.description {
+    padding: 1%;
+}
+
+.progress {
+    display: flex;
+    justify-content: center;
+    padding: 3%;
+}

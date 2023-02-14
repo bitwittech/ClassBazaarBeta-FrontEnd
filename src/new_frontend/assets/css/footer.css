@@ -1,0 +1,37 @@
+.footerContainer {
+    margin-top: 5%;
+    padding: 6%;
+    justify-content: center;
+    gap: 20px;
+}
+
+.footerHeading {
+    font-size: 1.2rem !important;
+    background: linear-gradient(270deg, #EE09D0 0%, #FF5C00 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.copywriter {
+    padding: 0.3%;
+    color: darkgrey;
+    text-align: center !important;
+}
+
+.footerItem {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    color: #C4C4C4 !important;
+}
+
+.social_icons {
+    display: flex;
+    justify-content: flex-start;
+    gap: 0.8rem;
+}
+
+.divider {
+    background: linear-gradient(270deg, #EE09D0 0%, #FF5C00 100%);
+}

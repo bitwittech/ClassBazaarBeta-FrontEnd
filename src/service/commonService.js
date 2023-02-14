@@ -24,7 +24,6 @@ export const eduTest = async (user, val) => {
       console.log(res);
       window.open(url, '_blank');
     });
-    
   } else {
     return false;
   }
@@ -40,7 +39,7 @@ export const newregister = async (request) => {
   // else{
   //   return await axios.post(API + '/api/newregistration', request);
   // }
-  
+
   return await axios.post(API + '/api/newregistration', request);
 
   // var emailVal = request.email_address;
@@ -97,8 +96,14 @@ export const verifyEmail = async (data) => {
   return await axios.post(`${localURL}/api/verificationMail`, data);
 };
 
-// Welcome email APIs 
-export const welcome = async (data)=>{
-  console.log(data)
+// Welcome email APIs
+export const welcome = async (data) => {
+  console.log(data);
   return await axios.get(`${localURL}/api/welcome?email_address=${data}`);
-}
+};
+
+// search
+export const search = async (search) => {
+  let response = await axios.get(`${localURL}/api/search?search=${search}`);
+  return response;
+};
