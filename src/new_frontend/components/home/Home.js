@@ -10,7 +10,7 @@ import {
 // import { AutoComplete } from '@material-ui/core';
 import { Autocomplete, Stack } from '@mui/material';
 import React, { useCallback, useState } from 'react';
-// import {  } from 'react-router-dom';
+// import {Link} from 'react-router-dom';
 // css
 import '../../assets/css/home.css';
 // images
@@ -28,7 +28,14 @@ import science from '../../assets/images/science-loader.png';
 import goggle from '../../assets/images/google-logo-icon-png-transparent-background-osteopathy.png';
 import harward from '../../assets/images/Harvard_shield_wreath.png';
 import coursera from '../../assets/images/coursera-logo.png';
-import comic from '../../assets/images/comic.png';
+import img1 from '../../assets/edubuk/1.png';
+import img2 from '../../assets/edubuk/2.png';
+import img3 from '../../assets/edubuk/3.png';
+import img4 from '../../assets/edubuk/4.png';
+import text1 from '../../assets/edubuk/text1.png';
+import text3 from '../../assets/edubuk/text3.png';
+import text4 from '../../assets/edubuk/text4.png';
+import text5 from '../../assets/edubuk/text5.png';
 // component
 import Navbar from '../utils/Navbar';
 import Footer from '../utils/Footer';
@@ -218,7 +225,7 @@ export default function Home(props) {
       {/* fourth section  ends*/}
 
       {/* fifth section  */}
-      {/* <TakeTest /> */}
+      <TakeTest />
       {/* fifth section ends */}
 
       {/* footer  */}
@@ -356,22 +363,45 @@ function TakeTest() {
     <>
       <Grid container className="fifthContainer">
         <Grid item xs={12} className="fifthImage">
-          <img src={comic} alt="comic" />
+          <Box className="eduImageCOntainer">
+            <Box className="itemIMG">
+              <img src={img1} alt="img1" />
+              <img className="textImg img1 " src={text1} alt="img1" />
+            </Box>
+            <Box className="itemIMG">
+              <img src={img2} alt="img2" />
+            </Box>
+            <Box className="itemIMG">
+              <img src={img3} alt="img3" />
+              <img className="textImg img3 " src={text3} alt="img3" />
+            </Box>
+            <Box className="itemIMG">
+              <img src={img4} alt="img4" />
+              <img className="textImg img4" src={text4} alt="img3" />
+            </Box>
+            <Box className="itemIMG">
+              <img src={img3} alt="img5" />
+              <img className="textImg img5 " src={text5} alt="img5" />
+            </Box>
+          </Box>
         </Grid>
+        <br></br>
         <Grid item xs={12}>
           <Typography className="fifthHeading">
-            Discover your true passion and turn it into a career
+            Skills you need to be ready for the next wave of emerging
+            technology.
           </Typography>
           <center>
             <Typography className="subFifthHeading" variant="button">
-              With the most popular and trusted career mappingtest for{' '}
-              <strong>FREE!</strong>
+              With the most popular and trusted career mappingtest for FREE!
             </Typography>
           </center>
         </Grid>
-        <Grid item xs={12}>
+        <Grid item xs={12} className="fifthContainer">
           <center>
-            <Button variant="contained">Take Test</Button>
+            <Button component={Link} to={'/edubuk'} variant="contained">
+              See Test
+            </Button>
           </center>
         </Grid>
       </Grid>

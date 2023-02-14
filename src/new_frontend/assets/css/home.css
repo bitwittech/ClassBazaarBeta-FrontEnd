@@ -328,11 +328,58 @@
     text-align: center;
 }
 
-.fifthContainer button {
+.fifthContainer a {
+    cursor: pointer;
     background: linear-gradient(90deg, #509FB5 0%, #945EC0 51.56%, #FF8181 100%) !important;
     border-radius: 10px;
     color: white;
     font-size: 1rem;
     font-weight: 600;
     margin-top: 1%;
+}
+
+.eduImageCOntainer {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.itemIMG {
+    position: relative;
+    min-width: 300px;
+    max-width: 300px;
+}
+
+.itemIMG img {
+    width: 100%;
+}
+
+.textImg {
+    position: absolute;
+    top: 0%;
+    left: 0%;
+}
+
+.img1 {
+    padding: 3%;
+    width: 70% !important;
+}
+
+.img3 {
+    padding: 3%;
+    left: 43%;
+    width: 55% !important;
+}
+
+.img5 {
+    width: 50% !important;
+    left: 50%;
+    padding: 3%;
+}
+
+.img4 {
+    width: 60% !important;
+    padding: 3%;
 }

@@ -136,6 +136,7 @@ const NewRoot = (props) => {
       <Route exact path="/career" component={Career} />
       <Route exact path="/profile" component={ProfilePage} />
       <Route exact path="/verified" component={Verified} />
+      <Route exact path="/edubuk" component={Edubuk} />
     </Switch>
   );
 };
