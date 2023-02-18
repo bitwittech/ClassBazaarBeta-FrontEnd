@@ -7,6 +7,7 @@
 }
 
 .topTextContainer {
+    width: 50%;
     text-align: center;
     padding-left: 2%;
     padding-right: 2%;
@@ -74,6 +75,7 @@
 }
 
 .topBannerContainer {
+    width: 50%;
     padding: 0% 2% 0% 2%;
 }
 
@@ -94,6 +96,11 @@
     .topContainer {
         margin-top: 10%;
     }
+
+    .topTextContainer {
+        width: 100%;
+    }
+
     .extraButton {
         display: none;
     }
@@ -103,6 +110,7 @@
     .topBannerContainer {
         display: none;
     }
+
     .topContainer {
         margin-top: 20%;
     }
@@ -140,6 +148,7 @@
 
 .secCard {
     cursor: pointer;
+    width: 220px;
     display: flex;
     flex-direction: column;
     font-size: 1rem;
@@ -287,6 +296,7 @@
         flex-direction: column;
         margin-top: 5%;
     }
+
     .listBox {
         align-items: center;
     }

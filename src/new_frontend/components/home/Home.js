@@ -14,17 +14,18 @@ import React, { useCallback, useState } from 'react';
 // css
 import '../../assets/css/home.css';
 // images
-import banner from '../../assets/images/home_banner.png';
+import banner from '../../assets/images/newBanner.png';
 import SearchIcon from '@mui/icons-material/Search';
-import colors from '../../assets/images/colors-fork.png';
-import computer from '../../assets/images/computer-science.png';
-import data from '../../assets/images/data-analysis.png';
-import earth from '../../assets/images/earth-globe-rotating-with-seamless-loop-animation.png';
-import green from '../../assets/images/green-calculator.png';
-import health from '../../assets/images/health-and-fitness.png';
-import javascript from '../../assets/images/javascript.png';
-import puzzle from '../../assets/images/puzzle.png';
-import science from '../../assets/images/science-loader.png';
+import colors from '../../assets/images/colors.gif';
+import computer from '../../assets/images/computerScience.gif';
+import data from '../../assets/images/data-analysis.gif';
+import earth from '../../assets/images/earth.gif';
+import green from '../../assets/images/green-calculator.gif';
+import health from '../../assets/images/health-and-fitness.gif';
+import javascript from '../../assets/images/javascript.gif';
+import puzzle from '../../assets/images/puzzle.gif';
+import business from '../../assets/images/open-business.gif';
+import science from '../../assets/images/science-loader.gif';
 import goggle from '../../assets/images/google-logo-icon-png-transparent-background-osteopathy.png';
 import harward from '../../assets/images/Harvard_shield_wreath.png';
 import coursera from '../../assets/images/coursera-logo.png';
@@ -57,28 +58,28 @@ export default function Home(props) {
   // const history = useHistory();
 
   const secondSectionImages = [
-    colors,
-    computer,
     data,
-    earth,
     green,
     health,
+    science,
+    earth,
     javascript,
+    computer,
+    business,
+    colors,
     puzzle,
-    science,
-    science,
   ];
   const secondSectionLabel = [
-    'colors',
-    'computer',
-    'data',
-    'earth',
-    'green',
-    'health',
-    'javascript',
-    'puzzle',
-    'science',
-    'science',
+    'Data Science',
+    'Maths',
+    'Health & LifeStyle',
+    'Science',
+    'Social Media',
+    'Programing',
+    'Computer Science',
+    'Business',
+    'Arts $ Design',
+    'Other',
   ];
 
   const debounce = (func) => {
